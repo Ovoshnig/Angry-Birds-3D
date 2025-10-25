@@ -7,6 +7,13 @@ using VContainer.Unity;
 
 public class SceneSwitch : IInitializable, IDisposable
 {
+    public enum SceneType
+    {
+        MainMenu,
+        GameLevel,
+        Credits
+    }
+
     private readonly ReactiveProperty<bool> _isSceneLoading = new(true);
     private readonly CancellationTokenSource _cts = new();
 
