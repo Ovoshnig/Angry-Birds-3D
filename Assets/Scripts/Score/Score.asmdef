@@ -1,0 +1,23 @@
+{
+    "name": "Score",
+    "rootNamespace": "",
+    "references": [
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:fa11c0068837bb3478f7546fa7c41f32",
+        "GUID:0200b5e7c37305d49adde3e1e1b6bd1d",
+        "GUID:785f5caf9cb6a99439d9ede9378ece1f",
+        "GUID:4acad0699fa20214f91a5d89cd146a6b",
+        "GUID:94979904a431e474c9760b42a4f9545d",
+        "GUID:a1dea5630b950224295dabac061c4f98"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

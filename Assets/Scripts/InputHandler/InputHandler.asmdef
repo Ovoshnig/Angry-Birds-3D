@@ -1,0 +1,19 @@
+{
+    "name": "InputHandler",
+    "rootNamespace": "",
+    "references": [
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:0a95190ee70e8314cb369bce93401afb",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:3e45438da6e583745af8890138470615"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
