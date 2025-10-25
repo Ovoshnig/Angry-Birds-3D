@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f052a82553564f49a319e8b23892e8f, type: 3}
+  m_Name: GameSettings
+  m_EditorClassIdentifier: 
+  <SceneSettings>k__BackingField:
+    <FirstGameplayLevel>k__BackingField: 1
+    <GameplayLevelsCount>k__BackingField: 1
+    <LevelTransitionDuration>k__BackingField: 5
+  <FieldSettings>k__BackingField:
+    <MeshRenderer>k__BackingField: {fileID: 4566743946723200125, guid: f674d9dba23a2da4f9a5066e3b5cc5be, type: 3}
+  <PlayerSettings>k__BackingField:
+    <MovementSpeed>k__BackingField: 10
+    <ExplosionDuration>k__BackingField: 1
+    <InitialHealth>k__BackingField: 3
+    <BulletSpeed>k__BackingField: 30
+  <InvaderSettings>k__BackingField:
+    <InvaderSpawnSettings>k__BackingField:
+      <MeshRenderer>k__BackingField: {fileID: 1757354549830319017, guid: 89084bd4dabfccd4bb98578495bba0bc, type: 3}
+      <UpMarginRatioZ>k__BackingField: 0.15
+      <DownMarginRatioZ>k__BackingField: 0.2
+      <SpacingRatioX>k__BackingField: 0.35
+      <SpacingRatioZ>k__BackingField: 1
+      <SpawnPositionY>k__BackingField: 0.1
+      <ColumnCount>k__BackingField: 11
+      <RowIndices>k__BackingField: 0000000000000000010000000100000002000000
+      <Delay>k__BackingField: 0.03
+    <InvaderMovementSettings>k__BackingField:
+      <MeshRenderer>k__BackingField: {fileID: -7511558181221131132, guid: c4d590d729eb0b3439b0080c5f85745a, type: 3}
+      <StepRatioX>k__BackingField: 0.2
+      <StepRatioZ>k__BackingField: 0.8
+      <StartDelay>k__BackingField: 1
+      <EndDelay>k__BackingField: 0.005
+    <InvaderShootingSettings>k__BackingField:
+      <StartDelay>k__BackingField: 1.5
+      <EndDelay>k__BackingField: 0.5
+      <MaxActive>k__BackingField: 3
+      <BulletSpeed>k__BackingField: 20
+    <InvaderPointsSettings>k__BackingField:
+      <Invader1Points>k__BackingField: 10
+      <Invader2Points>k__BackingField: 20
+      <Invader3Points>k__BackingField: 30
+      <UFOPointsVariants>k__BackingField: 3200000064000000960000002c010000
+  <UFOMovementSettings>k__BackingField:
+    <MeshRenderer>k__BackingField: {fileID: 7099206728451125035, guid: 0b4230b04d1b80043805e965790c51d2, type: 3}
+    <FirstShotCount>k__BackingField: 23
+    <NextShotCount>k__BackingField: 15
+    <Speed>k__BackingField: 8
+  <AudioSettings>k__BackingField:
+    <MinVolume>k__BackingField: -80
+    <MaxVolume>k__BackingField: 0
+    <SnapshotTransitionDuration>k__BackingField: 0

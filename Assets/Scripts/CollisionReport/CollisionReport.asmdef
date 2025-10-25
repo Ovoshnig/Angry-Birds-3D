@@ -1,0 +1,16 @@
+{
+    "name": "CollisionReport",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fa11c0068837bb3478f7546fa7c41f32"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
