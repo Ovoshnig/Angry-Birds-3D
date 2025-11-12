@@ -3,7 +3,22 @@ guid: 2fafceabefbbbd94697354c258ddf1f2
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Ear
+    second: {fileID: 2800000, guid: f701fcd199d06c948a7108aa680c40e7, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2800000, guid: 37eeac4151a7157448a12ebb82f87a3e, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Nose
+    second: {fileID: 2800000, guid: 7d4e7e73f65f9cd44a350fde07428b42, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
