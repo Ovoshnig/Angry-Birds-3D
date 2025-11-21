@@ -1,9 +1,14 @@
 fileFormatVersion: 2
-guid: fd0e0f6527422b3468fcf4d951d3a2b7
+guid: 0bd630faad34d234d9f87d76a6db891e
 ModelImporter:
   serializedVersion: 24200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Eye
+    second: {fileID: 2800000, guid: 9e31cc5194ec20041a32149438abbcbf, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
