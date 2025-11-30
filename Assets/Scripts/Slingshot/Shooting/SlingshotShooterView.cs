@@ -1,3 +1,4 @@
+using R3;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -10,12 +11,10 @@ public class SlingshotShooterView : MonoBehaviour
     [SerializeField] private Transform _centerPoint;
     [SerializeField] private LineRenderer _leftRubber;
     [SerializeField] private LineRenderer _rightRubber;
-    [SerializeField] private Rigidbody _currentBird;
 
     [SerializeField] private LayerMask _slingshotLayer;
     [SerializeField] private float _launchForce = 8f;
     [SerializeField] private float _maxDragDistance = 3f;
-    [SerializeField] private float _birdRadius = 0.5f;
     [SerializeField] private float _inputInteractionRadius = 2.5f;
 
     [SerializeField, Range(0, 0.5f)] private float _skinOffset = 0.18f;
@@ -26,11 +25,16 @@ public class SlingshotShooterView : MonoBehaviour
     [SerializeField] private float _rotationSpeedThreshold = 0.5f;
 
     private readonly Collider[] _collisionBuffer = new Collider[4];
+    private readonly Subject<Unit> _birdCollided = new();
 
     private Camera _mainCamera;
+    private Rigidbody _currentBird;
     private SlingshotState _currentState = SlingshotState.Idle;
 
+    private float _birdRadius = 0.5f;
     private bool _hasCollided = false;
+
+    public Observable<Unit> BirdCollided => _birdCollided;
 
     private void Start()
     {
@@ -38,9 +42,6 @@ public class SlingshotShooterView : MonoBehaviour
 
         _leftRubber.useWorldSpace = true;
         _rightRubber.useWorldSpace = true;
-
-        if (_currentBird != null)
-            ResetBird();
     }
 
     private void Update()
@@ -89,6 +90,15 @@ public class SlingshotShooterView : MonoBehaviour
                 HandleFlight();
                 break;
         }
+    }
+
+    public void SetCurrentBird(BirdFlyerView birdFlyerView)
+    {
+        SphereCollider birdCollider = birdFlyerView.GetComponent<SphereCollider>();
+        _currentBird = birdCollider.attachedRigidbody;
+        _birdRadius = birdCollider.radius;
+
+        ResetBird();
     }
 
     private void HandleDrag()
@@ -195,6 +205,8 @@ public class SlingshotShooterView : MonoBehaviour
                 continue;
 
             _hasCollided = true;
+            _currentBird = null;
+            _birdCollided.OnNext(Unit.Default);
             break;
         }
     }
