@@ -1,6 +1,8 @@
 using R3;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using VContainer;
 
 public class SlingshotShooterView : MonoBehaviour
 {
@@ -27,6 +29,7 @@ public class SlingshotShooterView : MonoBehaviour
     private readonly Collider[] _collisionBuffer = new Collider[4];
     private readonly Subject<Unit> _birdCollided = new();
 
+    private SlingshotInputHandler _pointerInputHandler;
     private Camera _mainCamera;
     private Rigidbody _currentBird;
     private SlingshotState _currentState = SlingshotState.Idle;
@@ -35,6 +38,23 @@ public class SlingshotShooterView : MonoBehaviour
     private bool _hasCollided = false;
 
     public Observable<Unit> BirdCollided => _birdCollided;
+
+    [Inject]
+    public void Construct(SlingshotInputHandler pointerInputHandler) =>
+        _pointerInputHandler = pointerInputHandler;
+
+    private void Awake()
+    {
+        _pointerInputHandler.LeftButtonPressed
+            .Subscribe(isPressed =>
+            {
+                if (isPressed)
+                    OnPointerPressed();
+                else
+                    OnPointerReleased();
+            })
+            .AddTo(this);
+    }
 
     private void Start()
     {
@@ -52,41 +72,14 @@ public class SlingshotShooterView : MonoBehaviour
             return;
         }
 
-        if (Pointer.current == null)
-            return;
-
-        bool isInputPressed = Pointer.current.press.isPressed;
-        bool wasPressed = Pointer.current.press.wasPressedThisFrame;
-        bool wasReleased = Pointer.current.press.wasReleasedThisFrame;
-
         switch (_currentState)
         {
-            case SlingshotState.Idle:
-                UpdateRubberGeometry();
-
-                if (wasPressed && IsPointerNear())
-                {
-                    _currentState = SlingshotState.Dragging;
-                    _currentBird.isKinematic = true;
-                }
-
-                break;
-
             case SlingshotState.Dragging:
-                if (isInputPressed)
-                {
-                    HandleDrag();
-                    UpdateRubberGeometry();
-                }
-                else if (wasReleased)
-                {
-                    Shoot();
-                }
-
+                HandleDrag();
+                UpdateRubberGeometry();
                 break;
 
             case SlingshotState.Flying:
-                SetLinesActive(false);
                 HandleFlight();
                 break;
         }
@@ -99,6 +92,25 @@ public class SlingshotShooterView : MonoBehaviour
         _birdRadius = birdCollider.radius;
 
         ResetBird();
+    }
+
+    private void OnPointerPressed()
+    {
+        if (_currentState == SlingshotState.Idle && IsPointerNear())
+        {
+            _currentState = SlingshotState.Dragging;
+            _currentBird.isKinematic = true;
+        }
+    }
+
+    private void OnPointerReleased()
+    {
+        if (_currentState == SlingshotState.Dragging)
+        {
+            _currentState = SlingshotState.Flying;
+            Shoot();
+            SetLinesActive(false);
+        }
     }
 
     private void HandleDrag()

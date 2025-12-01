@@ -8,6 +8,11 @@ public class SlingshotInstaller : IInstaller
 {
     [SerializeField] private SlingshotShooterView _slingshotShooterView;
 
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterInstance(_slingshotShooterView);
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterEntryPoint<SlingshotInputHandler>(Lifetime.Singleton)
+            .AsSelf();
+
+        builder.RegisterComponent(_slingshotShooterView);
+    }
 }
