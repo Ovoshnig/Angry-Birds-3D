@@ -1,36 +1,37 @@
 using R3;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using VContainer;
+using VContainer.Unity;
 
-public class SlingshotShooterView : MonoBehaviour
+public class SlingshotShooter : IInitializable, IDisposable, ITickable
 {
     public enum SlingshotState { Idle, Dragging, Flying }
 
-    [SerializeField] private Transform _leftAnchor;
-    [SerializeField] private Transform _rightAnchor;
-    [SerializeField] private Transform _centerPoint;
-    [SerializeField] private LineRenderer _leftRubber;
-    [SerializeField] private LineRenderer _rightRubber;
-
+    private readonly SlingshotInputHandler _slingshotInputHandler;
+    private readonly SlingshotSettings _slingshotSettings;
+    private readonly BirdSettings _birdSettings;
     private readonly Collider[] _collisionBuffer = new Collider[4];
     private readonly Subject<Unit> _birdCollided = new();
+    private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
 
-    private SlingshotInputHandler _slingshotInputHandler;
-    private SlingshotSettings _slingshotSettings;
-    private BirdSettings _birdSettings;
+    private SlingshotState _currentState = SlingshotState.Idle;
     private Camera _mainCamera;
     private Rigidbody _currentBird;
-    private SlingshotState _currentState = SlingshotState.Idle;
+    private LineRenderer _leftRubber;
+    private LineRenderer _rightRubber;
+    private Transform _centerAnchorTransform;
+    private Vector3 _leftAnchorPosition;
+    private Vector3 _rightAnchorPosition;
+    private Vector3 _centerAnchorPosition;
 
     private float _birdRadius = 0.5f;
     private bool _hasCollided = false;
 
     public Observable<Unit> BirdCollided => _birdCollided;
 
-    [Inject]
-    public void Construct(SlingshotInputHandler pointerInputHandler,
+    public SlingshotShooter(SlingshotInputHandler pointerInputHandler,
         SlingshotSettings slingshotSettings,
         BirdSettings birdSettings)
     {
@@ -39,8 +40,10 @@ public class SlingshotShooterView : MonoBehaviour
         _birdSettings = birdSettings;
     }
 
-    private void Awake()
+    public void Initialize()
     {
+        _mainCamera = Camera.main;
+
         _slingshotInputHandler.LeftButtonPressed
             .Subscribe(isPressed =>
             {
@@ -49,20 +52,16 @@ public class SlingshotShooterView : MonoBehaviour
                 else
                     OnPointerReleased();
             })
-            .AddTo(this);
+            .AddTo(_leftButtonDisposable);
     }
 
-    private void Start()
+    public void Dispose()
     {
-        _mainCamera = Camera.main;
-
-        _leftRubber.useWorldSpace = true;
-        _rightRubber.useWorldSpace = true;
+        _leftButtonDisposable.Dispose();
+        _dragDisposable.Dispose();
     }
 
-    private void OnDestroy() => _dragDisposable.Dispose();
-
-    private void Update()
+    public void Tick()
     {
         if (_currentBird == null)
         {
@@ -72,6 +71,22 @@ public class SlingshotShooterView : MonoBehaviour
 
         if (_currentState == SlingshotState.Flying)
             HandleFlight();
+    }
+
+    public void SetAnchorPositions(Vector3 left, Vector3 right, Vector3 center)
+    {
+        _leftAnchorPosition = left;
+        _rightAnchorPosition = right;
+        _centerAnchorPosition = center;
+    }
+
+    public void SetCenterAnchorTransform(Transform transform) =>
+        _centerAnchorTransform = transform;
+
+    public void SetRubbers(LineRenderer left, LineRenderer right)
+    {
+        _leftRubber = left;
+        _rightRubber = right;
     }
 
     public void SetCurrentBird(BirdFlyerView birdFlyerView)
@@ -115,9 +130,9 @@ public class SlingshotShooterView : MonoBehaviour
     private void HandleDrag()
     {
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
-        mouseWorldPosition.x = _centerPoint.position.x;
+        mouseWorldPosition.x = _centerAnchorPosition.x;
 
-        Vector3 pullVector = mouseWorldPosition - _centerPoint.position;
+        Vector3 pullVector = mouseWorldPosition - _centerAnchorPosition;
         float distance = pullVector.magnitude;
 
         if (distance > _slingshotSettings.MaxDragDistance)
@@ -126,7 +141,7 @@ public class SlingshotShooterView : MonoBehaviour
             distance = _slingshotSettings.MaxDragDistance;
         }
 
-        if (Physics.Raycast(_centerPoint.position,
+        if (Physics.Raycast(_centerAnchorPosition,
             pullVector.normalized,
             out RaycastHit hit,
             distance,
@@ -137,7 +152,7 @@ public class SlingshotShooterView : MonoBehaviour
             pullVector = pullVector.normalized * safeDistance;
         }
 
-        _currentBird.transform.position = _centerPoint.position + pullVector;
+        _currentBird.transform.position = _centerAnchorPosition + pullVector;
         _currentBird.transform.forward = -pullVector.normalized;
     }
 
@@ -146,14 +161,13 @@ public class SlingshotShooterView : MonoBehaviour
         SetLinesActive(true);
 
         Vector3 birdPosition = _currentBird.transform.position;
-        Vector3 anchorCenter = _centerPoint.position;
 
-        Vector3 pullDirection = (birdPosition - anchorCenter);
+        Vector3 pullDirection = (birdPosition - _centerAnchorPosition);
         pullDirection.Normalize();
 
         Vector3 rubberRight = Vector3.Cross(pullDirection, Vector3.up).normalized;
 
-        if (Vector3.Dot(rubberRight, _centerPoint.right) < 0)
+        if (Vector3.Dot(rubberRight, _centerAnchorTransform.right) < 0)
             rubberRight = -rubberRight;
 
         Vector3 rubberLeft = -rubberRight;
@@ -167,8 +181,8 @@ public class SlingshotShooterView : MonoBehaviour
         Vector3 leftControl = birdPosition + (scaleOffset * rubberLeft) + wrapOffsetVector;
         Vector3 rightControl = birdPosition + (scaleOffset * rubberRight) + wrapOffsetVector;
 
-        DrawTightCurve(_leftRubber, _leftAnchor.position, pouchPoint, leftControl);
-        DrawTightCurve(_rightRubber, _rightAnchor.position, pouchPoint, rightControl);
+        DrawTightCurve(_leftRubber, _leftAnchorPosition, pouchPoint, leftControl);
+        DrawTightCurve(_rightRubber, _rightAnchorPosition, pouchPoint, rightControl);
     }
 
     private void DrawTightCurve(LineRenderer lineRenderer, Vector3 start, Vector3 end, Vector3 control)
@@ -193,7 +207,7 @@ public class SlingshotShooterView : MonoBehaviour
 
         SetLinesActive(false);
 
-        Vector3 force = _centerPoint.position - _currentBird.transform.position;
+        Vector3 force = _centerAnchorPosition - _currentBird.transform.position;
         _currentBird.AddForce(force * _slingshotSettings.LaunchForce, ForceMode.Impulse);
     }
 
@@ -227,21 +241,21 @@ public class SlingshotShooterView : MonoBehaviour
     {
         _currentState = SlingshotState.Idle;
         _currentBird.isKinematic = true;
-        _currentBird.transform.SetPositionAndRotation(_centerPoint.position, Quaternion.identity);
+        _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
 
     private Vector3 GetMouseWorldPosition()
     {
         Vector2 pointerPosition = Pointer.current.position.ReadValue();
-        float z = _mainCamera.WorldToScreenPoint(_centerPoint.position).z;
+        float z = _mainCamera.WorldToScreenPoint(_centerAnchorPosition).z;
         return _mainCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, z));
     }
 
     private bool IsPointerNear()
     {
         Vector3 mousePosition = GetMouseWorldPosition();
-        mousePosition.x = _centerPoint.position.x;
-        return Vector3.Distance(mousePosition, _centerPoint.position)
+        mousePosition.x = _centerAnchorPosition.x;
+        return Vector3.Distance(mousePosition, _centerAnchorPosition)
             <= _slingshotSettings.InputInteractionRadius;
     }
 
