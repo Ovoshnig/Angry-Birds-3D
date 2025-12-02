@@ -1,4 +1,5 @@
 using R3;
+using UnityEngine;
 
 public class SlingshotShooterBirdQueueMediator : Mediator
 {
@@ -15,7 +16,11 @@ public class SlingshotShooterBirdQueueMediator : Mediator
     public override void Initialize()
     {
         _birdQueue.BirdDequeued
-            .Subscribe(birdFlyerView => _slingshotShooter.SetCurrentBird(birdFlyerView))
+            .Subscribe(birdFlyerView =>
+            {
+                Rigidbody birdRigidbody = birdFlyerView.GetComponent<Rigidbody>();
+                _slingshotShooter.SetCurrentBird(birdRigidbody);
+            })
             .AddTo(CompositeDisposable);
     }
 }

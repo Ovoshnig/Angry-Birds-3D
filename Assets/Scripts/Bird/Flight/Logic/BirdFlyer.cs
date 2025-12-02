@@ -11,15 +11,15 @@ public class BirdFlyer
 
     public Observable<Unit> BirdCollided => _birdCollided;
 
-    public void StartFlight(BirdFlyerView birdFlyerView) => 
-        FlyAsync(birdFlyerView).Forget();
+    public void StartFlight(Rigidbody birdRigidbody) => 
+        FlyAsync(birdRigidbody).Forget();
 
-    public async UniTask FlyAsync(BirdFlyerView birdFlyerView)
+    public async UniTask FlyAsync(Rigidbody birdRigidbody)
     {
-        if (birdFlyerView == null)
+        if (birdRigidbody == null)
             return;
 
-        Rigidbody birdRigidbody = birdFlyerView.GetComponent<Rigidbody>();
+        BirdFlyerView birdFlyerView = birdRigidbody.GetComponent<BirdFlyerView>();
 
         while (!birdFlyerView.Collided.CurrentValue)
         {

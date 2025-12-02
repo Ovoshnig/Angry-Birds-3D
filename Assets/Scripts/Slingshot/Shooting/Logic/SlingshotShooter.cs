@@ -10,7 +10,7 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private readonly SlingshotInputHandler _slingshotInputHandler;
     private readonly SlingshotSettings _slingshotSettings;
-    private readonly Subject<BirdFlyerView> _shot = new();
+    private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
 
@@ -33,7 +33,7 @@ public class SlingshotShooter : IInitializable, IDisposable
         _slingshotSettings = slingshotSettings;
     }
 
-    public Observable<BirdFlyerView> Shot => _shot;
+    public Observable<Rigidbody> Shot => _shot;
 
     public void Initialize()
     {
@@ -72,11 +72,10 @@ public class SlingshotShooter : IInitializable, IDisposable
         _rightRubber = right;
     }
 
-    public void SetCurrentBird(BirdFlyerView birdFlyerView)
+    public void SetCurrentBird(Rigidbody birdRigidbody)
     {
-        SphereCollider birdCollider = birdFlyerView.GetComponent<SphereCollider>();
-        _currentBird = birdCollider.attachedRigidbody;
-        _birdRadius = birdCollider.radius;
+        _currentBird = birdRigidbody;
+        _birdRadius = birdRigidbody.GetComponent<SphereCollider>().radius;
 
         ResetBird();
     }
@@ -191,7 +190,7 @@ public class SlingshotShooter : IInitializable, IDisposable
         Vector3 force = _centerAnchorPosition - _currentBird.transform.position;
         _currentBird.AddForce(force * _slingshotSettings.LaunchForce, ForceMode.Impulse);
 
-        _shot.OnNext(_currentBird.GetComponent<BirdFlyerView>());
+        _shot.OnNext(_currentBird);
         _currentBird = null;
     }
 
