@@ -5,6 +5,7 @@ using VContainer.Unity;
 [Serializable]
 public class LevelStateInstaller : IInstaller
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.Register<LevelStateLogic>(Lifetime.Singleton);
+    public void Install(IContainerBuilder builder)
+    { 
+    }
 }
