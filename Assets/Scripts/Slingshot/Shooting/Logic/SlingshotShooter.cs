@@ -4,21 +4,19 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-public class SlingshotShooter : IInitializable, IDisposable, ITickable
+public class SlingshotShooter : IInitializable, IDisposable
 {
     public enum SlingshotState { Idle, Dragging, Flying }
 
     private readonly SlingshotInputHandler _slingshotInputHandler;
     private readonly SlingshotSettings _slingshotSettings;
-    private readonly BirdSettings _birdSettings;
-    private readonly Collider[] _collisionBuffer = new Collider[4];
-    private readonly Subject<Unit> _birdCollided = new();
+    private readonly Subject<BirdFlyerView> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
 
     private SlingshotState _currentState = SlingshotState.Idle;
     private Camera _mainCamera;
-    private Rigidbody _currentBird;
+    private Rigidbody _currentBird = null;
     private LineRenderer _leftRubber;
     private LineRenderer _rightRubber;
     private Transform _centerAnchorTransform;
@@ -27,18 +25,15 @@ public class SlingshotShooter : IInitializable, IDisposable, ITickable
     private Vector3 _centerAnchorPosition;
 
     private float _birdRadius = 0.5f;
-    private bool _hasCollided = false;
-
-    public Observable<Unit> BirdCollided => _birdCollided;
 
     public SlingshotShooter(SlingshotInputHandler pointerInputHandler,
-        SlingshotSettings slingshotSettings,
-        BirdSettings birdSettings)
+        SlingshotSettings slingshotSettings)
     {
         _slingshotInputHandler = pointerInputHandler;
         _slingshotSettings = slingshotSettings;
-        _birdSettings = birdSettings;
     }
+
+    public Observable<BirdFlyerView> Shot => _shot;
 
     public void Initialize()
     {
@@ -59,18 +54,6 @@ public class SlingshotShooter : IInitializable, IDisposable, ITickable
     {
         _leftButtonDisposable.Dispose();
         _dragDisposable.Dispose();
-    }
-
-    public void Tick()
-    {
-        if (_currentBird == null)
-        {
-            SetLinesActive(false);
-            return;
-        }
-
-        if (_currentState == SlingshotState.Flying)
-            HandleFlight();
     }
 
     public void SetAnchorPositions(Vector3 left, Vector3 right, Vector3 center)
@@ -203,38 +186,13 @@ public class SlingshotShooter : IInitializable, IDisposable, ITickable
         _currentState = SlingshotState.Flying;
         _currentBird.isKinematic = false;
 
-        _hasCollided = false;
-
         SetLinesActive(false);
 
         Vector3 force = _centerAnchorPosition - _currentBird.transform.position;
         _currentBird.AddForce(force * _slingshotSettings.LaunchForce, ForceMode.Impulse);
-    }
 
-    private void HandleFlight()
-    {
-        if (_currentBird == null || _hasCollided)
-            return;
-
-        if (_currentBird.linearVelocity.sqrMagnitude > _birdSettings.RotationSpeedThreshold)
-            _currentBird.transform.forward = _currentBird.linearVelocity.normalized;
-
-        int hitCount = Physics.OverlapSphereNonAlloc(_currentBird.transform.position,
-            _birdRadius,
-            _collisionBuffer);
-
-        for (int i = 0; i < hitCount; i++)
-        {
-            Collider hit = _collisionBuffer[i];
-
-            if (hit.transform == _currentBird.transform || hit.isTrigger)
-                continue;
-
-            _hasCollided = true;
-            _currentBird = null;
-            _birdCollided.OnNext(Unit.Default);
-            break;
-        }
+        _shot.OnNext(_currentBird.GetComponent<BirdFlyerView>());
+        _currentBird = null;
     }
 
     private void ResetBird()
