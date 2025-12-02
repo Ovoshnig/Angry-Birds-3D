@@ -3,67 +3,22 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Player",
+            "name": "Slingshot",
             "id": "b5f27395-9b66-4c9d-9e35-e20fbd5c257c",
             "actions": [
                 {
-                    "name": "Walk",
+                    "name": "LeftButton",
+                    "type": "Button",
+                    "id": "02a5285e-e57a-4709-8c8c-c43fb9783785",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drag",
                     "type": "Value",
-                    "id": "5a638295-529c-4ed3-81e2-64796ff6972a",
-                    "expectedControlType": "Axis",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "c2512b0a-d411-4995-a2b0-8df1048a0e5d",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Look",
-                    "type": "Value",
-                    "id": "d61d4c00-f797-4df2-8fe8-8daacd290585",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                },
-                {
-                    "name": "Jump",
-                    "type": "Button",
-                    "id": "b8deef5d-7f49-4e6f-9c2e-7839d651e13c",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Run",
-                    "type": "Button",
-                    "id": "4496a6bb-c913-40fb-b8e7-a9d239cdcbf2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "TogglePerspective",
-                    "type": "Button",
-                    "id": "c9b3e105-a3e7-4f6a-a270-641362b97fda",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Zoom",
-                    "type": "Value",
-                    "id": "8ed71a8d-b969-409e-b9c4-5ba37c86d7d0",
+                    "id": "369b26c0-4ae7-4e73-b19d-5efb3635be83",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -72,85 +27,56 @@
             ],
             "bindings": [
                 {
-                    "name": "1D Axis",
-                    "id": "4b84db05-6832-4238-a5b3-52fa55db2a9b",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "3e5e197c-5f88-4576-9220-f30420852f2b",
-                    "path": "<Keyboard>/a",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "eb93f9f5-374c-421f-8cb9-7b4474fe5cc2",
-                    "path": "<Keyboard>/d",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "1D Axis",
-                    "id": "efafcabb-3701-4361-8ab5-8531c6079c19",
-                    "path": "1DAxis",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "negative",
-                    "id": "aaed6c24-c217-4898-919f-6352e65d3d31",
-                    "path": "<Keyboard>/leftArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "positive",
-                    "id": "745db0ec-9505-42b5-b21d-a8e65c284e80",
-                    "path": "<Keyboard>/rightArrow",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Walk",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
                     "name": "",
-                    "id": "ce792fae-ea7f-4834-a065-ae762c7510dc",
-                    "path": "<Keyboard>/space",
+                    "id": "9f0d7a46-904a-4a56-999f-75e29e7d4fac",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Jump",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "LeftButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "4901a589-fdd8-4d20-a958-96fe02b2e995",
+                    "id": "3f89f065-2e61-4f15-b9dd-8b7480971c8a",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Camera",
+            "id": "d4ff12c5-45a9-4f41-97ff-02b9768165bd",
+            "actions": [
+                {
+                    "name": "Look",
+                    "type": "Value",
+                    "id": "9dfd7fd3-1cea-4868-8f83-e41088400ca1",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Zoom",
+                    "type": "Value",
+                    "id": "ea45d1e1-91ed-497a-b7ad-4d8db75cd300",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "19264a2a-4648-4d35-81e0-dfb3b7c47739",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
@@ -161,45 +87,12 @@
                 },
                 {
                     "name": "",
-                    "id": "4894aae8-540b-4489-9c5d-c342e7bde184",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard and Mouse",
-                    "action": "Run",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "6df3f7a2-ada2-4740-927b-2f19910c6fe9",
-                    "path": "<Keyboard>/r",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard and Mouse",
-                    "action": "TogglePerspective",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cc26b17d-4e90-42fa-9c41-45a20947a080",
+                    "id": "c39bec39-cb75-4068-86e5-2e7394c26629",
                     "path": "<Mouse>/scroll",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": ";Keyboard and Mouse",
                     "action": "Zoom",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c45449b9-5a40-4dec-9fc7-28f93b6a534b",
-                    "path": "<Keyboard>/space",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
