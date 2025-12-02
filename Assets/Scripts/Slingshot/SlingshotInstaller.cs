@@ -13,6 +13,8 @@ public class SlingshotInstaller : IInstaller
         builder.RegisterEntryPoint<SlingshotInputHandler>(Lifetime.Singleton)
             .AsSelf();
 
-        builder.RegisterComponent(_slingshotShooterView);
+        builder.RegisterEntryPoint<SlingshotShooter>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<SlingshotShooterMediator>(Lifetime.Singleton);
+        builder.RegisterInstance(_slingshotShooterView);
     }
 }

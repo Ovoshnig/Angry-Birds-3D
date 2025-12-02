@@ -535,13 +535,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.042270094, y: -0.651738, z: 0.06760009, w: 0.75424206}
+  m_LocalRotation: {x: -0.05771814, y: 0.6505541, z: -0.049691916, w: -0.7556314}
   m_LocalPosition: {x: 92.893196, y: 8.112027, z: 83.38118}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 5.78, y: 280.1, z: 0.291}
+  m_LocalEulerAnglesHint: {x: 8.736, y: 278.547, z: 0}
 --- !u!114 &330585547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1009,26 +1009,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 507049035}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7a449aba121ad414caea923fc700f865, type: 3}
+  m_Script: {fileID: 11500000, guid: 2294a21a78624054a93de7c5139b2593, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::SlingshotHandler
-  _leftAnchor: {fileID: 692429126}
-  _rightAnchor: {fileID: 1453943853}
-  _centerPoint: {fileID: 767803370}
-  _leftRubber: {fileID: 1730957285}
-  _rightRubber: {fileID: 1419284772}
-  _slingshotLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  _launchForce: 8
-  _maxDragDistance: 3
-  _inputInteractionRadius: 2
-  _skinOffset: 0.18
-  _segmentCount: 30
-  _tangentScale: 1.6
-  _rubberWrapOffset: 0.6
-  _slingshotCollisionOffset: 0.3
-  _rotationSpeedThreshold: 0.5
+  <LeftAnchor>k__BackingField: {fileID: 692429126}
+  <RightAnchor>k__BackingField: {fileID: 1453943853}
+  <CenterAnchor>k__BackingField: {fileID: 767803370}
+  <LeftRubber>k__BackingField: {fileID: 1730957285}
+  <RightRubber>k__BackingField: {fileID: 1419284772}
 --- !u!1001 &511467330
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1249,7 +1237,7 @@ GameObject:
   m_Component:
   - component: {fileID: 767803370}
   m_Layer: 7
-  m_Name: CenterPoint
+  m_Name: CenterAnchor
   m_TagString: Untagged
   m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0

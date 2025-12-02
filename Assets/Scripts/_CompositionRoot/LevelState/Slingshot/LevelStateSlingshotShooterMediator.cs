@@ -3,18 +3,18 @@
 public class LevelStateSlingshotShooterMediator : Mediator
 {
     private readonly LevelStateLogic _levelStateLogic;
-    private readonly SlingshotShooterView _slingshotShooterView;
+    private readonly SlingshotShooter _slingshotShooter;
 
     public LevelStateSlingshotShooterMediator(LevelStateLogic levelStateLogic,
-        SlingshotShooterView slingshotShooterView)
+        SlingshotShooter slingshotShooter)
     {
         _levelStateLogic = levelStateLogic;
-        _slingshotShooterView = slingshotShooterView;
+        _slingshotShooter = slingshotShooter;
     }
 
     public override void Initialize()
     {
-        _slingshotShooterView.BirdCollided
+        _slingshotShooter.BirdCollided
             .Subscribe(_ => _levelStateLogic.SetState(LevelState.Idle))
             .AddTo(CompositeDisposable);
     }
