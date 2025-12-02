@@ -1,5 +1,4 @@
 using R3;
-using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer;
@@ -14,23 +13,13 @@ public class SlingshotShooterView : MonoBehaviour
     [SerializeField] private LineRenderer _leftRubber;
     [SerializeField] private LineRenderer _rightRubber;
 
-    [SerializeField] private LayerMask _slingshotLayer;
-    [SerializeField] private float _launchForce = 8f;
-    [SerializeField] private float _maxDragDistance = 3f;
-    [SerializeField] private float _inputInteractionRadius = 2.5f;
-
-    [SerializeField, Range(0, 0.5f)] private float _skinOffset = 0.18f;
-    [SerializeField, Range(1, 40)] private int _segmentCount = 30;
-    [SerializeField, Range(1f, 2f)] private float _tangentScale = 1.7f;
-    [SerializeField, Range(0f, 1f)] private float _rubberWrapOffset = 0.3f;
-    [SerializeField] private float _slingshotCollisionOffset = 0.3f;
-    [SerializeField] private float _rotationSpeedThreshold = 0.5f;
-
     private readonly Collider[] _collisionBuffer = new Collider[4];
     private readonly Subject<Unit> _birdCollided = new();
     private readonly CompositeDisposable _dragDisposable = new();
 
     private SlingshotInputHandler _slingshotInputHandler;
+    private SlingshotSettings _slingshotSettings;
+    private BirdSettings _birdSettings;
     private Camera _mainCamera;
     private Rigidbody _currentBird;
     private SlingshotState _currentState = SlingshotState.Idle;
@@ -41,8 +30,14 @@ public class SlingshotShooterView : MonoBehaviour
     public Observable<Unit> BirdCollided => _birdCollided;
 
     [Inject]
-    public void Construct(SlingshotInputHandler pointerInputHandler) =>
+    public void Construct(SlingshotInputHandler pointerInputHandler,
+        SlingshotSettings slingshotSettings,
+        BirdSettings birdSettings)
+    {
         _slingshotInputHandler = pointerInputHandler;
+        _slingshotSettings = slingshotSettings;
+        _birdSettings = birdSettings;
+    }
 
     private void Awake()
     {
@@ -125,19 +120,20 @@ public class SlingshotShooterView : MonoBehaviour
         Vector3 pullVector = mouseWorldPosition - _centerPoint.position;
         float distance = pullVector.magnitude;
 
-        if (distance > _maxDragDistance)
+        if (distance > _slingshotSettings.MaxDragDistance)
         {
-            pullVector = pullVector.normalized * _maxDragDistance;
-            distance = _maxDragDistance;
+            pullVector = pullVector.normalized * _slingshotSettings.MaxDragDistance;
+            distance = _slingshotSettings.MaxDragDistance;
         }
 
         if (Physics.Raycast(_centerPoint.position,
             pullVector.normalized,
             out RaycastHit hit,
             distance,
-            _slingshotLayer))
+            _slingshotSettings.SlingshotLayer))
         {
-            float safeDistance = Mathf.Max(0, hit.distance - (_birdRadius + _slingshotCollisionOffset));
+            float safeDistance = Mathf.Max(0,
+                hit.distance - (_birdRadius + _slingshotSettings.SlingshotCollisionOffset));
             pullVector = pullVector.normalized * safeDistance;
         }
 
@@ -162,11 +158,11 @@ public class SlingshotShooterView : MonoBehaviour
 
         Vector3 rubberLeft = -rubberRight;
 
-        float totalRadius = _birdRadius + _skinOffset;
+        float totalRadius = _birdRadius + _slingshotSettings.SkinOffset;
         Vector3 pouchPoint = birdPosition + (pullDirection * totalRadius);
 
-        Vector3 wrapOffsetVector = _rubberWrapOffset * totalRadius * pullDirection;
-        float scaleOffset = _tangentScale * totalRadius;
+        Vector3 wrapOffsetVector = _slingshotSettings.RubberWrapOffset * totalRadius * pullDirection;
+        float scaleOffset = _slingshotSettings.TangentScale * totalRadius;
 
         Vector3 leftControl = birdPosition + (scaleOffset * rubberLeft) + wrapOffsetVector;
         Vector3 rightControl = birdPosition + (scaleOffset * rubberRight) + wrapOffsetVector;
@@ -177,11 +173,11 @@ public class SlingshotShooterView : MonoBehaviour
 
     private void DrawTightCurve(LineRenderer lineRenderer, Vector3 start, Vector3 end, Vector3 control)
     {
-        lineRenderer.positionCount = _segmentCount;
+        lineRenderer.positionCount = _slingshotSettings.SegmentCount;
 
-        for (int i = 0; i < _segmentCount; i++)
+        for (int i = 0; i < _slingshotSettings.SegmentCount; i++)
         {
-            float t = (float)i / (_segmentCount - 1);
+            float t = (float)i / (_slingshotSettings.SegmentCount - 1);
             float u = 1 - t;
             Vector3 point = (u * u * start) + (2 * u * t * control) + (t * t * end);
             lineRenderer.SetPosition(i, point);
@@ -198,7 +194,7 @@ public class SlingshotShooterView : MonoBehaviour
         SetLinesActive(false);
 
         Vector3 force = _centerPoint.position - _currentBird.transform.position;
-        _currentBird.AddForce(force * _launchForce, ForceMode.Impulse);
+        _currentBird.AddForce(force * _slingshotSettings.LaunchForce, ForceMode.Impulse);
     }
 
     private void HandleFlight()
@@ -206,7 +202,7 @@ public class SlingshotShooterView : MonoBehaviour
         if (_currentBird == null || _hasCollided)
             return;
 
-        if (_currentBird.linearVelocity.sqrMagnitude > _rotationSpeedThreshold)
+        if (_currentBird.linearVelocity.sqrMagnitude > _birdSettings.RotationSpeedThreshold)
             _currentBird.transform.forward = _currentBird.linearVelocity.normalized;
 
         int hitCount = Physics.OverlapSphereNonAlloc(_currentBird.transform.position,
@@ -245,7 +241,8 @@ public class SlingshotShooterView : MonoBehaviour
     {
         Vector3 mousePosition = GetMouseWorldPosition();
         mousePosition.x = _centerPoint.position.x;
-        return Vector3.Distance(mousePosition, _centerPoint.position) <= _inputInteractionRadius;
+        return Vector3.Distance(mousePosition, _centerPoint.position)
+            <= _slingshotSettings.InputInteractionRadius;
     }
 
     private void SetLinesActive(bool active)
