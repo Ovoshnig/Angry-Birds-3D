@@ -7,9 +7,11 @@ using VContainer.Unity;
 public class BirdInstaller : IInstaller
 {
     [SerializeField] private BirdQueueInstaller _birdQueueInstaller;
+    [SerializeField] private BirdFlightInstaller _birdFlightInstaller;
 
     public void Install(IContainerBuilder builder)
     {
         _birdQueueInstaller.Install(builder);
+        _birdFlightInstaller.Install(builder);
     }
 }
