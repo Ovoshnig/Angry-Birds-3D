@@ -14,6 +14,6 @@ public class BirdQueueInstaller : IInstaller
         BirdFlyerView[] birdFlyerViews = _birdQueue.GetComponentsInChildren<BirdFlyerView>().ToArray();
         builder.RegisterInstance(birdFlyerViews);
 
-        builder.Register<BirdQueue>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<BirdQueue>(Lifetime.Singleton).AsSelf();
     }
 }
