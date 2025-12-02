@@ -28,8 +28,9 @@ public class SlingshotShooterView : MonoBehaviour
 
     private readonly Collider[] _collisionBuffer = new Collider[4];
     private readonly Subject<Unit> _birdCollided = new();
+    private readonly CompositeDisposable _dragDisposable = new();
 
-    private SlingshotInputHandler _pointerInputHandler;
+    private SlingshotInputHandler _slingshotInputHandler;
     private Camera _mainCamera;
     private Rigidbody _currentBird;
     private SlingshotState _currentState = SlingshotState.Idle;
@@ -41,11 +42,11 @@ public class SlingshotShooterView : MonoBehaviour
 
     [Inject]
     public void Construct(SlingshotInputHandler pointerInputHandler) =>
-        _pointerInputHandler = pointerInputHandler;
+        _slingshotInputHandler = pointerInputHandler;
 
     private void Awake()
     {
-        _pointerInputHandler.LeftButtonPressed
+        _slingshotInputHandler.LeftButtonPressed
             .Subscribe(isPressed =>
             {
                 if (isPressed)
@@ -64,6 +65,8 @@ public class SlingshotShooterView : MonoBehaviour
         _rightRubber.useWorldSpace = true;
     }
 
+    private void OnDestroy() => _dragDisposable.Dispose();
+
     private void Update()
     {
         if (_currentBird == null)
@@ -72,17 +75,8 @@ public class SlingshotShooterView : MonoBehaviour
             return;
         }
 
-        switch (_currentState)
-        {
-            case SlingshotState.Dragging:
-                HandleDrag();
-                UpdateRubberGeometry();
-                break;
-
-            case SlingshotState.Flying:
-                HandleFlight();
-                break;
-        }
+        if (_currentState == SlingshotState.Flying)
+            HandleFlight();
     }
 
     public void SetCurrentBird(BirdFlyerView birdFlyerView)
@@ -100,6 +94,14 @@ public class SlingshotShooterView : MonoBehaviour
         {
             _currentState = SlingshotState.Dragging;
             _currentBird.isKinematic = true;
+
+            _slingshotInputHandler.DragInput
+                .Subscribe(_ =>
+                {
+                    HandleDrag();
+                    UpdateRubberGeometry();
+                })
+                .AddTo(_dragDisposable);
         }
     }
 
@@ -110,6 +112,8 @@ public class SlingshotShooterView : MonoBehaviour
             _currentState = SlingshotState.Flying;
             Shoot();
             SetLinesActive(false);
+
+            _dragDisposable.Clear();
         }
     }
 

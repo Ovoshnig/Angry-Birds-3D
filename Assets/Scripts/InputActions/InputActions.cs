@@ -100,6 +100,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Drag"",
+                    ""type"": ""Value"",
+                    ""id"": ""369b26c0-4ae7-4e73-b19d-5efb3635be83"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -111,6 +120,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Keyboard and Mouse"",
                     ""action"": ""LeftButton"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f89f065-2e61-4f15-b9dd-8b7480971c8a"",
+                    ""path"": ""<Mouse>/delta"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""Drag"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -390,6 +410,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Slingshot
         m_Slingshot = asset.FindActionMap("Slingshot", throwIfNotFound: true);
         m_Slingshot_LeftButton = m_Slingshot.FindAction("LeftButton", throwIfNotFound: true);
+        m_Slingshot_Drag = m_Slingshot.FindAction("Drag", throwIfNotFound: true);
         // Camera
         m_Camera = asset.FindActionMap("Camera", throwIfNotFound: true);
         m_Camera_Look = m_Camera.FindAction("Look", throwIfNotFound: true);
@@ -496,6 +517,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Slingshot;
     private List<ISlingshotActions> m_SlingshotActionsCallbackInterfaces = new List<ISlingshotActions>();
     private readonly InputAction m_Slingshot_LeftButton;
+    private readonly InputAction m_Slingshot_Drag;
     /// <summary>
     /// Provides access to input actions defined in input action map "Slingshot".
     /// </summary>
@@ -511,6 +533,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Slingshot/LeftButton".
         /// </summary>
         public InputAction @LeftButton => m_Wrapper.m_Slingshot_LeftButton;
+        /// <summary>
+        /// Provides access to the underlying input action "Slingshot/Drag".
+        /// </summary>
+        public InputAction @Drag => m_Wrapper.m_Slingshot_Drag;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -540,6 +566,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @LeftButton.started += instance.OnLeftButton;
             @LeftButton.performed += instance.OnLeftButton;
             @LeftButton.canceled += instance.OnLeftButton;
+            @Drag.started += instance.OnDrag;
+            @Drag.performed += instance.OnDrag;
+            @Drag.canceled += instance.OnDrag;
         }
 
         /// <summary>
@@ -554,6 +583,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             @LeftButton.started -= instance.OnLeftButton;
             @LeftButton.performed -= instance.OnLeftButton;
             @LeftButton.canceled -= instance.OnLeftButton;
+            @Drag.started -= instance.OnDrag;
+            @Drag.performed -= instance.OnDrag;
+            @Drag.canceled -= instance.OnDrag;
         }
 
         /// <summary>
@@ -1162,6 +1194,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnLeftButton(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Drag" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnDrag(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Camera" which allows adding and removing callbacks.
