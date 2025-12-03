@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 464952907125051655, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c11582410d629c14697c4bd469636d0b, type: 2}
+      objectReference: {fileID: 2100000, guid: 1d29cc3f996186847b30da4c02ed1ea4, type: 2}
     - target: {fileID: 6880484335812904183, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
       propertyPath: m_Name
       value: Block2x05.001 Variant
