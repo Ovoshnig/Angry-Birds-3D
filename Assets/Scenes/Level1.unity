@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109697}
   m_Layer: 0
-  m_Name: Structure
+  m_Name: BlockStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1180,6 +1180,9 @@ MonoBehaviour:
       _birdQueue: {fileID: 878781362}
   _slingshotInstaller:
     _slingshotShooterView: {fileID: 507049044}
+  _blockInstaller:
+    _blockCollisionInstaller:
+      _blockStructure: {fileID: 4109696}
 --- !u!4 &594520561
 Transform:
   m_ObjectHideFlags: 0
