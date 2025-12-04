@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 875609452968730072}
   - component: {fileID: -5172650290121811321}
   - component: {fileID: -2410263712265798004}
+  - component: {fileID: -4727393933927905322}
   - component: {fileID: 5612834060363791448}
   m_Layer: 0
   m_Name: Block4x05.001
@@ -140,6 +141,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-4727393933927905322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6818410917899165479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
 --- !u!114 &5612834060363791448
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,3 +165,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e730bb49cecadf64f8a6664d5a6e7406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Block::BlockDestructionView
+  <CollisionView>k__BackingField: {fileID: -4727393933927905322}
