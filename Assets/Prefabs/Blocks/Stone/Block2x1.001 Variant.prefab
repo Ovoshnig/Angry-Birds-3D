@@ -82,7 +82,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 1823623704637204130}
   <CollisionView>k__BackingField: {fileID: 2534574086181322244}
+--- !u!23 &1823623704637204130 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7951790494944731802, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+  m_PrefabInstance: {fileID: 8580693522336957496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &2534574086181322244 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: -3154733090109343172, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
