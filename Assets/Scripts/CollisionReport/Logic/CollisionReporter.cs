@@ -10,6 +10,6 @@ public class CollisionReporter<TView> where TView : MonoBehaviour
 
     public Observable<CollisionEvent<TView>> Collided => _collided;
 
-    public void Report(TView colliderView, Collision collision) =>
-        _collided.OnNext(new CollisionEvent<TView>(colliderView, collision));
+    public void Report(TView view, Collision collision) =>
+        _collided.OnNext(new CollisionEvent<TView>(view, collision));
 }
