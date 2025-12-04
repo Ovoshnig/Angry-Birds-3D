@@ -59,5 +59,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6870129872998549979}
   m_SourcePrefab: {fileID: 100100000, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+--- !u!1 &3834648436526791069 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 2044063946197600345}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6870129872998549979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834648436526791069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef91a39e3bc7aa409c6a2909122cf4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::GlassBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  <CollisionView>k__BackingField: {fileID: 8359497629810498873}
+--- !u!114 &8359497629810498873 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7520764646984881504, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 2044063946197600345}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3834648436526791069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
