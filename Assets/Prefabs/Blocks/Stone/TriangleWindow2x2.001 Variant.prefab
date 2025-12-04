@@ -64,6 +64,11 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -994730806052978491}
   m_SourcePrefab: {fileID: 100100000, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+--- !u!23 &2747310218819235776 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4376903314698259407, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3744491793814754763 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
@@ -82,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 2747310218819235776}
   <CollisionView>k__BackingField: {fileID: 8269336590393618799}
 --- !u!114 &8269336590393618799 stripped
 MonoBehaviour:

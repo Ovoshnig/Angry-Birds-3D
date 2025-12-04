@@ -75,6 +75,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!23 &3292381229587396135 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7610170189235883391, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+  m_PrefabInstance: {fileID: 4912338950470007640}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &8035059842584618036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3147565775122292588, guid: a432fb84ea609574e924cb9805005b36, type: 3}
@@ -93,4 +98,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 3292381229587396135}
   <CollisionView>k__BackingField: {fileID: 610229770114024612}

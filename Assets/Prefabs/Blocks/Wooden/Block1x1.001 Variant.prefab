@@ -82,7 +82,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 6124931893352507046}
   <CollisionView>k__BackingField: {fileID: 6541308862991371426}
+--- !u!23 &6124931893352507046 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 8788669565544826025, guid: f0f4906bb2002434f9edf4cb970f6ea6, type: 3}
+  m_PrefabInstance: {fileID: 3240200830219624975}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &6541308862991371426 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8516558392378896045, guid: f0f4906bb2002434f9edf4cb970f6ea6, type: 3}
