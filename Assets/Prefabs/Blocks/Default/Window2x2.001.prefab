@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 7610170189235883391}
   - component: {fileID: -2787960353040716437}
   - component: {fileID: 1087838474606952147}
+  - component: {fileID: -3307350079104687030}
   m_Layer: 0
   m_Name: Window2x2.001
   m_TagString: Untagged
@@ -140,3 +141,15 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-3307350079104687030
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3147565775122292588}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e730bb49cecadf64f8a6664d5a6e7406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::BlockDestructionView
