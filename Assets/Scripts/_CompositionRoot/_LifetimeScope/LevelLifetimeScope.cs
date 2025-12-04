@@ -7,6 +7,7 @@ public class LevelLifetimeScope : LifetimeScope
     [SerializeField] private LevelStateInstaller _levelStateInstaller;
     [SerializeField] private BirdInstaller _birdInstaller;
     [SerializeField] private SlingshotInstaller _slingshotInstaller;
+    [SerializeField] private BlockInstaller _blockInstaller;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -15,5 +16,6 @@ public class LevelLifetimeScope : LifetimeScope
         _levelStateInstaller.Install(builder);
         _birdInstaller.Install(builder);
         _slingshotInstaller.Install(builder);
+        _blockInstaller.Install(builder);
     }
 }
