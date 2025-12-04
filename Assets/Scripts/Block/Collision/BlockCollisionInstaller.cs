@@ -12,9 +12,9 @@ public class BlockCollisionInstaller : IInstaller
     {
         builder.Register<BlockCollisionReporter>(Lifetime.Singleton);
 
-        BlockDestructionView[] blockDestructionViews = _blockStructure
-            .GetComponentsInChildren<BlockDestructionView>();
-        builder.RegisterInstance(blockDestructionViews);
+        BlockDestroyerView[] blockDestroyerViews = _blockStructure
+            .GetComponentsInChildren<BlockDestroyerView>();
+        builder.RegisterInstance(blockDestroyerViews);
 
         builder.RegisterEntryPoint<BlockCollisionMediator>(Lifetime.Singleton);
     }

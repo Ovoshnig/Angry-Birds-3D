@@ -1,17 +1,17 @@
-public class BlockCollisionMediator : CollisionMediator<BlockDestructionView>
+public class BlockCollisionMediator : CollisionMediator<BlockDestroyerView>
 {
-    private readonly BlockDestructionView[] _blockDestructionViews;
+    private readonly BlockDestroyerView[] _blockDestroyerViews;
 
     public BlockCollisionMediator(BlockCollisionReporter blockCollisionReporter,
-        BlockDestructionView[] blockDestructionViews)
-        : base(blockCollisionReporter) => _blockDestructionViews = blockDestructionViews;
+        BlockDestroyerView[] blockDestroyerViews)
+        : base(blockCollisionReporter) => _blockDestroyerViews = blockDestroyerViews;
 
     public override void Initialize()
     {
-        foreach (var blockDestructionView in _blockDestructionViews)
+        foreach (var blockDestroyerView in _blockDestroyerViews)
         {
-            CollisionView blockCollisionView = blockDestructionView.CollisionView;
-            Subscribe(blockDestructionView, blockCollisionView);
+            CollisionView blockCollisionView = blockDestroyerView.CollisionView;
+            Subscribe(blockDestroyerView, blockCollisionView);
         }
     }
 }
