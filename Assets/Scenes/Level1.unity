@@ -1181,7 +1181,7 @@ MonoBehaviour:
   _slingshotInstaller:
     _slingshotShooterView: {fileID: 507049044}
   _blockInstaller:
-    _blockCollisionInstaller:
+    _blockDestructionInstaller:
       _blockStructure: {fileID: 4109696}
 --- !u!4 &594520561
 Transform:

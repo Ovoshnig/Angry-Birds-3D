@@ -7,7 +7,11 @@ using VContainer.Unity;
 public class BlockInstaller : IInstaller
 {
     [SerializeField] private BlockCollisionInstaller _blockCollisionInstaller;
+    [SerializeField] private BlockDestructionInstaller _blockDestructionInstaller;
 
-    public void Install(IContainerBuilder builder) =>
+    public void Install(IContainerBuilder builder)
+    {
         _blockCollisionInstaller.Install(builder);
+        _blockDestructionInstaller.Install(builder);
+    }
 }
