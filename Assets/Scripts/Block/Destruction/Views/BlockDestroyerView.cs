@@ -1,20 +1,25 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-public class BlockDestroyerView : MonoBehaviour
+public abstract class BlockDestroyerView : MonoBehaviour
 {
-    [field: SerializeField] public CollisionView CollisionView { get; private set; }
+    [SerializeField] private GameSettings _gameSettings;
 
     private Material _material;
 
+    [field: SerializeField] public CollisionView CollisionView { get; private set; }
+
+    protected BlockSettings BlockSettings => _gameSettings.BlockSettings;
+    protected abstract float DamageMultiplier { get; }
+
     private void Awake() => _material = GetComponent<MeshRenderer>().material;
 
-    public void Damage(float damage)
+    public void Damage(float rawDamage)
     {
         float _crackAmount = _material.GetFloat(BlockDestructionConstants.CrackAmountName);
-        _crackAmount += damage;
+        _crackAmount += DamageMultiplier * rawDamage;
 
-        if (_crackAmount >= 1)
+        if (_crackAmount >= 1f)
             Destroy(gameObject);
         else
             _material.SetFloat(BlockDestructionConstants.CrackAmountName, _crackAmount);

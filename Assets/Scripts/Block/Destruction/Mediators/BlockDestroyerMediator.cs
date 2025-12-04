@@ -11,7 +11,7 @@ public class BlockDestroyerMediator : Mediator
     {
         _blockDestroyer.Damaged
             .Subscribe(blockDamageEvent =>
-            blockDamageEvent.BlockDestroyerView.Damage(blockDamageEvent.Damage))
+            blockDamageEvent.BlockDestroyerView.Damage(blockDamageEvent.RawDamage))
             .AddTo(CompositeDisposable);
     }
 }

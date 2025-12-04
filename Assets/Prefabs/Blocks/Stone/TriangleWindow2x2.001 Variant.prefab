@@ -59,5 +59,38 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -994730806052978491}
   m_SourcePrefab: {fileID: 100100000, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+--- !u!1 &3744491793814754763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-994730806052978491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744491793814754763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a213d803804f004894e15d453870e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::StoneBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  <CollisionView>k__BackingField: {fileID: 8269336590393618799}
+--- !u!114 &8269336590393618799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7520764646984881504, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744491793814754763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
