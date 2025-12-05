@@ -55,9 +55,48 @@ PrefabInstance:
     - target: {fileID: 7610170189235883391, guid: a432fb84ea609574e924cb9805005b36, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a9a884c4a680b9e4ea903945048ed75f, type: 2}
+      objectReference: {fileID: 2100000, guid: 84d18eb41ffc0224a8fdd3932b8f2ea4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3147565775122292588, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 177288543992614551}
   m_SourcePrefab: {fileID: 100100000, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+--- !u!114 &710330113450913055 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3721140417222688772, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+  m_PrefabInstance: {fileID: 5008077518294913763}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939324550695734671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!23 &3178558989658660764 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7610170189235883391, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+  m_PrefabInstance: {fileID: 5008077518294913763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7939324550695734671 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3147565775122292588, guid: a432fb84ea609574e924cb9805005b36, type: 3}
+  m_PrefabInstance: {fileID: 5008077518294913763}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &177288543992614551
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7939324550695734671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef91a39e3bc7aa409c6a2909122cf4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::GlassBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 3178558989658660764}
+  <CollisionView>k__BackingField: {fileID: 710330113450913055}

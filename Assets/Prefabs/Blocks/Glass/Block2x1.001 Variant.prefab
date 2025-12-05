@@ -55,9 +55,48 @@ PrefabInstance:
     - target: {fileID: 7951790494944731802, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: a9a884c4a680b9e4ea903945048ed75f, type: 2}
+      objectReference: {fileID: 2100000, guid: 84d18eb41ffc0224a8fdd3932b8f2ea4, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 7257071955828055853, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -6214372976718375982}
   m_SourcePrefab: {fileID: 100100000, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+--- !u!114 &5424233321789927603 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: -3154733090109343172, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+  m_PrefabInstance: {fileID: 2269424502817196687}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919609895870272930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!23 &8152908254662273045 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 7951790494944731802, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+  m_PrefabInstance: {fileID: 2269424502817196687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8919609895870272930 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7257071955828055853, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+  m_PrefabInstance: {fileID: 2269424502817196687}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-6214372976718375982
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8919609895870272930}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ef91a39e3bc7aa409c6a2909122cf4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::GlassBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 8152908254662273045}
+  <CollisionView>k__BackingField: {fileID: 5424233321789927603}
