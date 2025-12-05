@@ -15,5 +15,6 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.SlingshotSettings);
         builder.RegisterInstance(_gameSettings.BirdSettings);
         builder.RegisterInstance(_gameSettings.BlockSettings);
+        builder.RegisterInstance(_gameSettings.ScoreSettings);
     }
 }
