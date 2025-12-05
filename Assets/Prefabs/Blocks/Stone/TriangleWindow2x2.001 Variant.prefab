@@ -15,7 +15,7 @@ PrefabInstance:
     - target: {fileID: 4376903314698259407, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c11582410d629c14697c4bd469636d0b, type: 2}
+      objectReference: {fileID: 2100000, guid: 1d29cc3f996186847b30da4c02ed1ea4, type: 2}
     - target: {fileID: 8502485976228601361, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
       propertyPath: m_LocalPosition.x
       value: -15
@@ -59,5 +59,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -994730806052978491}
   m_SourcePrefab: {fileID: 100100000, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+--- !u!23 &2747310218819235776 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 4376903314698259407, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &3744491793814754763 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &-994730806052978491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744491793814754763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a213d803804f004894e15d453870e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::StoneBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 2747310218819235776}
+  <CollisionView>k__BackingField: {fileID: 8269336590393618799}
+--- !u!114 &8269336590393618799 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7520764646984881504, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+  m_PrefabInstance: {fileID: 1917841064217322511}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3744491793814754763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView

@@ -11,7 +11,7 @@ PrefabInstance:
     - target: {fileID: 328084054977616385, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
-      objectReference: {fileID: 2100000, guid: c11582410d629c14697c4bd469636d0b, type: 2}
+      objectReference: {fileID: 2100000, guid: 1d29cc3f996186847b30da4c02ed1ea4, type: 2}
     - target: {fileID: 2131391072431906296, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0
@@ -59,5 +59,44 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 6353075278716366767, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8289153668532365597}
   m_SourcePrefab: {fileID: 100100000, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+--- !u!114 &3634586484895557175 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 66417187962802153, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+  m_PrefabInstance: {fileID: 3646599798274025950}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688202550991259249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!23 &3897519713819522015 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 328084054977616385, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+  m_PrefabInstance: {fileID: 3646599798274025950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7688202550991259249 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6353075278716366767, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+  m_PrefabInstance: {fileID: 3646599798274025950}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8289153668532365597
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7688202550991259249}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a213d803804f004894e15d453870e51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::StoneBlockDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  _meshRenderer: {fileID: 3897519713819522015}
+  <CollisionView>k__BackingField: {fileID: 3634586484895557175}

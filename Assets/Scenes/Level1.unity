@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4109697}
   m_Layer: 0
-  m_Name: Structure
+  m_Name: BlockStructure
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1180,6 +1180,9 @@ MonoBehaviour:
       _birdQueue: {fileID: 878781362}
   _slingshotInstaller:
     _slingshotShooterView: {fileID: 507049044}
+  _blockInstaller:
+    _blockDestructionInstaller:
+      _blockStructure: {fileID: 4109696}
 --- !u!4 &594520561
 Transform:
   m_ObjectHideFlags: 0
@@ -1583,6 +1586,37 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6686c01e4096a3d43b98fd597b2c1a6a, type: 3}
+--- !u!1 &1209101949
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1209101950}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1209101950
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209101949}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 75.5, y: 5.38845, z: 103.76589}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1415572717 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8900435261572302131, guid: 6686c01e4096a3d43b98fd597b2c1a6a, type: 3}
@@ -2727,3 +2761,4 @@ SceneRoots:
   - {fileID: 878781363}
   - {fileID: 1516261381}
   - {fileID: 4109697}
+  - {fileID: 1209101950}
