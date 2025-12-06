@@ -1,4 +1,4 @@
 ﻿public sealed class StoneBlockDestroyerView : BlockDestroyerView
 {
-    protected override float DamageMultiplier => BlockSettings.StoneDamageMultiplier;
+    protected override float MaxHealth => BlockSettings.StoneHealth;
 }
