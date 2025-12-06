@@ -34,7 +34,12 @@ MonoBehaviour:
     <SlingshotCollisionOffset>k__BackingField: 0.3
   <BirdSettings>k__BackingField:
     <RotationSpeedThreshold>k__BackingField: 0.5
+  <PigSettings>k__BackingField:
+    <Health>k__BackingField: 100
   <BlockSettings>k__BackingField:
-    <WoodDestructionMultiplier>k__BackingField: 0.002
-    <StoneDestructionMultiplier>k__BackingField: 0.0012
-    <GlassDestructionMultiplier>k__BackingField: 0.006
+    <WoodHealth>k__BackingField: 600
+    <StoneHealth>k__BackingField: 1200
+    <GlassHealth>k__BackingField: 200
+  <ScoreSettings>k__BackingField:
+    <BlockPoints>k__BackingField: 500
+    <PigPoints>k__BackingField: 5000
