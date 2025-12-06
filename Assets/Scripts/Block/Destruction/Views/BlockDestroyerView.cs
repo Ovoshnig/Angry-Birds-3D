@@ -7,7 +7,6 @@ public abstract class BlockDestroyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
 
-    private readonly Subject<int> _destroyed = new();
 
     private Material _material;
     private CollisionView _collisionView = null;
@@ -23,26 +22,23 @@ public abstract class BlockDestroyerView : MonoBehaviour
         }
     }
 
-    public Observable<int> Destroyed => _destroyed;
+    public BlockHealthModel HealthModel { get; private set; }
 
     protected BlockSettings BlockSettings => _gameSettings.BlockSettings;
-    protected abstract float DamageMultiplier { get; }
+    protected abstract float MaxHealth { get; }
 
-    private void Awake() => _material = GetComponent<MeshRenderer>().material;
-
-    public void Damage(float rawDamage)
+    private void Awake()
     {
-        float _crackAmount = _material.GetFloat(BlockDestructionConstants.CrackAmountName);
-        _crackAmount += DamageMultiplier * rawDamage;
+        _material = GetComponent<MeshRenderer>().material;
 
-        if (_crackAmount >= 1f)
-        {
-            _destroyed.OnNext(_gameSettings.ScoreSettings.BlockPoints);
-            Destroy(gameObject);
-        }
-        else
-        {
-            _material.SetFloat(BlockDestructionConstants.CrackAmountName, _crackAmount);
-        }
+        HealthModel = new BlockHealthModel(MaxHealth);
     }
+
+    public void Damage(float _)
+    {
+        float crackAmount = 1f - (HealthModel.Health / MaxHealth);
+        _material.SetFloat(BlockDestructionConstants.CrackAmountName, crackAmount);
+    }
+
+    public void Destroy() => Destroy(gameObject);
 }
