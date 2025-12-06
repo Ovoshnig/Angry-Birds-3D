@@ -10,6 +10,12 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private readonly SlingshotInputHandler _slingshotInputHandler;
     private readonly SlingshotSettings _slingshotSettings;
+    private readonly LineRenderer _leftRubber;
+    private readonly LineRenderer _rightRubber;
+    private readonly Transform _centerAnchorTransform;
+    private readonly Vector3 _leftAnchorPosition;
+    private readonly Vector3 _rightAnchorPosition;
+    private readonly Vector3 _centerAnchorPosition;
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
@@ -17,20 +23,26 @@ public class SlingshotShooter : IInitializable, IDisposable
     private SlingshotState _currentState = SlingshotState.Idle;
     private Camera _mainCamera;
     private Rigidbody _currentBird = null;
-    private LineRenderer _leftRubber;
-    private LineRenderer _rightRubber;
-    private Transform _centerAnchorTransform;
-    private Vector3 _leftAnchorPosition;
-    private Vector3 _rightAnchorPosition;
-    private Vector3 _centerAnchorPosition;
 
     private float _birdRadius = 0.5f;
 
-    public SlingshotShooter(SlingshotInputHandler pointerInputHandler,
-        SlingshotSettings slingshotSettings)
+    public SlingshotShooter(SlingshotInputHandler slingshotInputHandler,
+        SlingshotSettings slingshotSettings,
+        Transform centerAnchorTransform,
+        Vector3 leftAnchorPosition, 
+        Vector3 rightAnchorPosition, 
+        Vector3 centerAnchorPosition,
+        LineRenderer leftRubber, 
+        LineRenderer rightRubber)
     {
-        _slingshotInputHandler = pointerInputHandler;
+        _slingshotInputHandler = slingshotInputHandler;
         _slingshotSettings = slingshotSettings;
+        _centerAnchorTransform = centerAnchorTransform;
+        _leftAnchorPosition = leftAnchorPosition;
+        _rightAnchorPosition = rightAnchorPosition;
+        _centerAnchorPosition = centerAnchorPosition;
+        _leftRubber = leftRubber;
+        _rightRubber = rightRubber;
     }
 
     public Observable<Rigidbody> Shot => _shot;
@@ -54,22 +66,6 @@ public class SlingshotShooter : IInitializable, IDisposable
     {
         _leftButtonDisposable.Dispose();
         _dragDisposable.Dispose();
-    }
-
-    public void SetAnchorPositions(Vector3 left, Vector3 right, Vector3 center)
-    {
-        _leftAnchorPosition = left;
-        _rightAnchorPosition = right;
-        _centerAnchorPosition = center;
-    }
-
-    public void SetCenterAnchorTransform(Transform transform) =>
-        _centerAnchorTransform = transform;
-
-    public void SetRubbers(LineRenderer left, LineRenderer right)
-    {
-        _leftRubber = left;
-        _rightRubber = right;
     }
 
     public void SetCurrentBird(Rigidbody birdRigidbody)
