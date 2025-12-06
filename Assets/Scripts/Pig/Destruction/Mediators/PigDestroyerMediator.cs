@@ -3,14 +3,8 @@ using R3;
 public class PigDestroyerMediator : Mediator
 {
     private readonly PigDestroyer _pigDestroyer;
-    private readonly PigDestroyerView _pigDestroyerView;
 
-    public PigDestroyerMediator(PigDestroyer pigDestroyer,
-        PigDestroyerView pigDestroyerView)
-    {
-        _pigDestroyer = pigDestroyer;
-        _pigDestroyerView = pigDestroyerView;
-    }
+    public PigDestroyerMediator(PigDestroyer pigDestroyer) => _pigDestroyer = pigDestroyer;
 
     public override void Initialize()
     {
@@ -20,7 +14,7 @@ public class PigDestroyerMediator : Mediator
             .AddTo(CompositeDisposable);
 
         _pigDestroyer.Destroyed
-            .Subscribe(_ => _pigDestroyerView.Destroy())
+            .Subscribe(pigDestroyerView => pigDestroyerView.Destroy())
             .AddTo(CompositeDisposable);
     }
 }
