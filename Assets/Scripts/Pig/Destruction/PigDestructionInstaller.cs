@@ -13,5 +13,8 @@ public class PigDestructionInstaller : IInstaller
         PigDestroyerView[] pigDestroyerViews = _blockStructure
             .GetComponentsInChildren<PigDestroyerView>();
         builder.RegisterInstance(pigDestroyerViews);
+
+        builder.RegisterEntryPoint<PigDestroyer>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<PigDestroyerMediator>(Lifetime.Singleton);
     }
 }

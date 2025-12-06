@@ -30,18 +30,18 @@ public class PigDestroyer : IInitializable, IDisposable
     {
         PigDestroyerView pigDestroyerView = collisionEvent.View;
 
-        float health = pigDestroyerView.PigHealthModel.Health;
+        float health = pigDestroyerView.HealthModel.Health;
         float damage = collisionEvent.Collision.relativeVelocity.sqrMagnitude;
         float resultHealth = health - damage;
 
         if (resultHealth <= 0)
         {
-            pigDestroyerView.PigHealthModel.Decrement(health);
+            pigDestroyerView.HealthModel.Decrement(health);
             _destroyed.OnNext(pigDestroyerView);
         }
         else
         {
-            pigDestroyerView.PigHealthModel.Decrement(damage);
+            pigDestroyerView.HealthModel.Decrement(damage);
             _damaged.OnNext(new PigDamageEvent(pigDestroyerView, damage));
         }
     }
