@@ -16,6 +16,7 @@ public class SlingshotShooter : IInitializable, IDisposable
     private readonly Vector3 _leftAnchorPosition;
     private readonly Vector3 _rightAnchorPosition;
     private readonly Vector3 _centerAnchorPosition;
+    private readonly Subject<Unit> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
@@ -29,10 +30,10 @@ public class SlingshotShooter : IInitializable, IDisposable
     public SlingshotShooter(SlingshotInputHandler slingshotInputHandler,
         SlingshotSettings slingshotSettings,
         Transform centerAnchorTransform,
-        Vector3 leftAnchorPosition, 
-        Vector3 rightAnchorPosition, 
+        Vector3 leftAnchorPosition,
+        Vector3 rightAnchorPosition,
         Vector3 centerAnchorPosition,
-        LineRenderer leftRubber, 
+        LineRenderer leftRubber,
         LineRenderer rightRubber)
     {
         _slingshotInputHandler = slingshotInputHandler;
@@ -45,6 +46,7 @@ public class SlingshotShooter : IInitializable, IDisposable
         _rightRubber = rightRubber;
     }
 
+    public Observable<Unit> DraggingStarted => _draggingStarted;
     public Observable<Rigidbody> Shot => _shot;
 
     public void Initialize()
@@ -89,6 +91,11 @@ public class SlingshotShooter : IInitializable, IDisposable
                     HandleDrag();
                     UpdateRubberGeometry();
                 })
+                .AddTo(_dragDisposable);
+
+            _slingshotInputHandler.DragInput
+                .Take(1)
+                .Subscribe(_ => _draggingStarted.OnNext(Unit.Default))
                 .AddTo(_dragDisposable);
         }
     }
