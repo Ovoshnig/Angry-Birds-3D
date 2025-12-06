@@ -62,6 +62,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
       insertIndex: -1
       addedObject: {fileID: -7244309733263533213}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: -1857221396273101470}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6538603325883090317}
   m_SourcePrefab: {fileID: 100100000, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
 --- !u!1 &6152552218528034159 stripped
 GameObject:
@@ -118,3 +124,28 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-1857221396273101470
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152552218528034159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!114 &6538603325883090317
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152552218528034159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ecc5f201b69ef3c4a879f8c915cbaca2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Pig::PigDestroyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
