@@ -18,6 +18,10 @@ public class PigDestroyerView : MonoBehaviour
         }
     }
 
+    public PigHealthModel PigHealthModel { get; private set; }
+
+    private void Awake() => PigHealthModel = new PigHealthModel(_gameSettings.PigSettings.Health);
+
     public void Damage(float _)
     {
     }
