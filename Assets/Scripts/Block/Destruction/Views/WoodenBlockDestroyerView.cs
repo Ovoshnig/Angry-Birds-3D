@@ -1,4 +1,4 @@
 ﻿public sealed class WoodenBlockDestroyerView : BlockDestroyerView
 {
-    protected override float DamageMultiplier => BlockSettings.WoodDamageMultiplier;
+    protected override float MaxHealth => BlockSettings.WoodHealth;
 }
