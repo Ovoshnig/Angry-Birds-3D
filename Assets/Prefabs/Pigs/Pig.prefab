@@ -67,6 +67,9 @@ PrefabInstance:
       addedObject: {fileID: 8008611012345978311}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 8911524595737144779}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
+      insertIndex: -1
       addedObject: {fileID: -1857221396273101470}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 2fafceabefbbbd94697354c258ddf1f2, type: 3}
       insertIndex: -1
@@ -227,6 +230,18 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8911524595737144779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6152552218528034159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 72ce0c0cda37af04fb57318970062e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Pig::PigEntityView
 --- !u!114 &-1857221396273101470
 MonoBehaviour:
   m_ObjectHideFlags: 0

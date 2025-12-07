@@ -9,12 +9,13 @@ public class PigDestroyerMediator : Mediator
     public override void Initialize()
     {
         _pigDestroyer.Damaged
-            .Subscribe(pigDamageEvent =>
-            pigDamageEvent.PigDestroyerView.Damage(pigDamageEvent.Damage))
+            .Subscribe(damageEvent =>
+            damageEvent.EntityView.DestroyerView.Damage(damageEvent.Damage))
             .AddTo(CompositeDisposable);
 
         _pigDestroyer.Destroyed
-            .Subscribe(pigDestroyerView => pigDestroyerView.Destroy())
+            .Subscribe(destructionEvent =>
+            destructionEvent.EntityView.DestroyerView.Destroy())
             .AddTo(CompositeDisposable);
     }
 }
