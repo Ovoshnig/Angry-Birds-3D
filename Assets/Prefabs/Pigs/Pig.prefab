@@ -264,6 +264,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d43ce5f8b608d6744948f3a67da644f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Pig::PigSFXPlayerView
-  _collisionRandomContainer: {fileID: 0}
-  _damageRandomContainer: {fileID: 0}
-  _destructionRandomContainer: {fileID: 0}
+  _collisionRandomContainer: {fileID: 6418180475301049370, guid: ca368602840d68b44992745359187494, type: 2}
+  _damageRandomContainer: {fileID: 6418180475301049370, guid: 3c81b71781e48fc40b3a62614c7a8a3f, type: 2}
+  _destructionRandomContainer: {fileID: 8300000, guid: aa6019f6f1f668e4d9c422ac8cf7ede2, type: 3}
