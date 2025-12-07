@@ -220,7 +220,7 @@ AudioMixerSnapshotController:
     320ff1e72a9f61a47bff0ef40b1ba927: 0
     be2fc20e5ea3fa241886a2eac5e7e206: 10
     c3676b3e41c9ace429381d25e5e9c012: 22000
-    5b38fb9ebf3559a46b42ecd97f1be296: -10
+    5b38fb9ebf3559a46b42ecd97f1be296: 0
     5f1e312f725aa80438fab9fcb77442ce: 0
     ebb147df1d02b914ca661f9e0f1a6a64: 22000
   m_TransitionOverrides:
@@ -357,7 +357,7 @@ AudioMixerGroupController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Sounds
+  m_Name: SFX
   m_AudioMixer: {fileID: 24100000}
   m_GroupID: bd79ba2aede425849b4b5c55b42e92ca
   m_Children: []
