@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8956451123584217179}
   - component: {fileID: -88293780469830763}
   - component: {fileID: -6138132781109492552}
+  - component: {fileID: -3391109362471185395}
   - component: {fileID: 7435652980206925856}
   - component: {fileID: 1945763251988809205}
   m_Layer: 0
@@ -241,6 +242,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-3391109362471185395
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4280252254112894352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 203dcc62e8dd918499d3f118a3d539d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::BlockEntityView
+  <CollisionView>k__BackingField: {fileID: 0}
+  <DestroyerView>k__BackingField: {fileID: 0}
+  <SFXPlayerView>k__BackingField: {fileID: 0}
 --- !u!114 &7435652980206925856
 MonoBehaviour:
   m_ObjectHideFlags: 0
