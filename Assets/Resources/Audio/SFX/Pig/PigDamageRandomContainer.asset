@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8988583859871136060
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a4_{-8988583859871136060}
+  m_AudioClip: {fileID: 8300000, guid: 8670b55fd0215e340a730cdfbbc1c788, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-8145381975308968710
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a8_{-8145381975308968710}
+  m_AudioClip: {fileID: 8300000, guid: 570e6b3d1e672d74ea21fb5a023d629f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5294621017208854880
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a2_{-5294621017208854880}
+  m_AudioClip: {fileID: 8300000, guid: 458fa41468b4cdc43964b1e02394f759, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5160667780746661188
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a6_{-5160667780746661188}
+  m_AudioClip: {fileID: 8300000, guid: f8535039a209c1647b767233f26a1744, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1184618890267518303
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a1_{-1184618890267518303}
+  m_AudioClip: {fileID: 8300000, guid: 3614077d1b3e9d645a4f1e7e1ef0502f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-729457838207328855
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a7_{-729457838207328855}
+  m_AudioClip: {fileID: 8300000, guid: befa6d588143fd349a09f8e44bee0922, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-380400656652917105
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a3_{-380400656652917105}
+  m_AudioClip: {fileID: 8300000, guid: 70892611c7c7afb4ea7a983a8421212e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PigDamageRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -1184618890267518303}
+  - {fileID: -5294621017208854880}
+  - {fileID: -380400656652917105}
+  - {fileID: -8988583859871136060}
+  - {fileID: 8985564823650893953}
+  - {fileID: -5160667780746661188}
+  - {fileID: -729457838207328855}
+  - {fileID: -8145381975308968710}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &8985564823650893953
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette damage a5_{8985564823650893953}
+  m_AudioClip: {fileID: 8300000, guid: 1a2ff35051aba7043b9d2f0480343621, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

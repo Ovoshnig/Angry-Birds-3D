@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-5690691927576682327
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a7_{-5690691927576682327}
+  m_AudioClip: {fileID: 8300000, guid: 6b6f6c83347c8cd4fa3e8bfffbc93dbd, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-5456258176079082374
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a3_{-5456258176079082374}
+  m_AudioClip: {fileID: 8300000, guid: 8e8976ffc51f2834fbb9a49d9d301a92, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2937461747509186073
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a4_{-2937461747509186073}
+  m_AudioClip: {fileID: 8300000, guid: 95f7eaeb0b69a744abbe8fb602f49aef, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-772144650395675591
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a2_{-772144650395675591}
+  m_AudioClip: {fileID: 8300000, guid: fffdc8aa14faa0a43924cb03f33607a0, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1092104531972021289
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a1_{1092104531972021289}
+  m_AudioClip: {fileID: 8300000, guid: f5a80e28765349f42876b4904e7b6346, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4432581090095775352
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a8_{4432581090095775352}
+  m_AudioClip: {fileID: 8300000, guid: 53ee1535ee01d044cabceb2574f96b59, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: IceCollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 1092104531972021289}
+  - {fileID: -772144650395675591}
+  - {fileID: -5456258176079082374}
+  - {fileID: -2937461747509186073}
+  - {fileID: 6420506373625410995}
+  - {fileID: 6700220506809598589}
+  - {fileID: -5690691927576682327}
+  - {fileID: 4432581090095775352}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &6420506373625410995
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a5_{6420506373625410995}
+  m_AudioClip: {fileID: 8300000, guid: 35926ee57e42e1f47a7823ade4feeff3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &6700220506809598589
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ice light collision a6_{6700220506809598589}
+  m_AudioClip: {fileID: 8300000, guid: 58498c372a23f8347970df620f74e8b4, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

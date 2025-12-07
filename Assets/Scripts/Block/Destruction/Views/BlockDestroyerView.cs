@@ -1,8 +1,8 @@
-using R3;
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(CollisionView))]
+[RequireComponent(typeof(BlockSFXPlayerView))]
 public abstract class BlockDestroyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
@@ -10,6 +10,7 @@ public abstract class BlockDestroyerView : MonoBehaviour
 
     private Material _material;
     private CollisionView _collisionView = null;
+    private BlockSFXPlayerView _sfxPlayerView = null;
 
     public CollisionView CollisionView
     {
@@ -19,6 +20,17 @@ public abstract class BlockDestroyerView : MonoBehaviour
                 _collisionView = GetComponent<CollisionView>();
 
             return _collisionView;
+        }
+    }
+
+    public BlockSFXPlayerView SFXPlayerView
+    {
+        get
+        {
+            if (_sfxPlayerView == null)
+                _sfxPlayerView = GetComponent<BlockSFXPlayerView>();
+
+            return _sfxPlayerView;
         }
     }
 
