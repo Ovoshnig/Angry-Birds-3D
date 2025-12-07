@@ -17,5 +17,9 @@ public class SlingshotSFXPlayerMediator : Mediator
         _slingshotShooter.DraggingStarted
             .Subscribe(_ => _slingshotSFXPlayerView.PlayDragging())
             .AddTo(CompositeDisposable);
+
+        _slingshotShooter.Shot
+            .Subscribe(_ => _slingshotSFXPlayerView.PlayShot())
+            .AddTo(CompositeDisposable);
     }
 }
