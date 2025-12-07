@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3571822966921755298, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
+    - target: {fileID: -3571822966921755298, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
+    - target: {fileID: -3571822966921755298, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
     - target: {fileID: 5604694482434520285, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
       propertyPath: m_Name
       value: Cylinder1x1.001 Variant
@@ -64,11 +76,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -6537565512398142770}
   m_SourcePrefab: {fileID: 100100000, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
---- !u!23 &3087171991918073480 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 6090974826465404358, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
-  m_PrefabInstance: {fileID: 9101963707929260878}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &3717567747421833107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5604694482434520285, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
@@ -87,16 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 3087171991918073480}
-  <CollisionView>k__BackingField: {fileID: 7131280276715441171}
---- !u!114 &7131280276715441171 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -7158526152602976419, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
-  m_PrefabInstance: {fileID: 9101963707929260878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3717567747421833107}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView

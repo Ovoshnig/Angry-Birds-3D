@@ -8,18 +8,23 @@ public record BlockDestructionEvent(BlockDestroyerView BlockDestroyerView, int P
 public class BlockDestroyer : IInitializable, IDisposable
 {
     private readonly BlockCollisionReporter _blockCollisionReporter;
+    private readonly BlockSettings _blockSettings;
     private readonly ScoreSettings _scoreSettings;
+    private readonly Subject<BlockDamageEvent> _collided = new();
     private readonly Subject<BlockDamageEvent> _damaged = new();
     private readonly Subject<BlockDestructionEvent> _destroyed = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public BlockDestroyer(BlockCollisionReporter blockCollisionReporter, 
+    public BlockDestroyer(BlockSettings blockSettings,
+        BlockCollisionReporter blockCollisionReporter,
         ScoreSettings gameSettings)
     {
+        _blockSettings = blockSettings;
         _blockCollisionReporter = blockCollisionReporter;
         _scoreSettings = gameSettings;
     }
 
+    public Observable<BlockDamageEvent> Collided => _collided;
     public Observable<BlockDamageEvent> Damaged => _damaged;
     public Observable<BlockDestructionEvent> Destroyed => _destroyed;
 
@@ -43,13 +48,17 @@ public class BlockDestroyer : IInitializable, IDisposable
         if (resultHealth <= 0)
         {
             blockDestroyerView.HealthModel.Decrement(health);
-            _destroyed.OnNext(new BlockDestructionEvent(blockDestroyerView, 
+            _destroyed.OnNext(new BlockDestructionEvent(blockDestroyerView,
                 _scoreSettings.BlockPoints));
         }
         else
         {
             blockDestroyerView.HealthModel.Decrement(damage);
-            _damaged.OnNext(new BlockDamageEvent(blockDestroyerView, damage));
+
+            if (damage < _blockSettings.DamageThreshold)
+                _collided.OnNext(new BlockDamageEvent(blockDestroyerView, damage));
+            else
+                _damaged.OnNext(new BlockDamageEvent(blockDestroyerView, damage));
         }
     }
 }

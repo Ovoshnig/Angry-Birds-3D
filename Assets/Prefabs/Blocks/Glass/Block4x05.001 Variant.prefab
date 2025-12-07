@@ -16,6 +16,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block4x05.001 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 8072671261565693564, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
+    - target: {fileID: 8072671261565693564, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
+    - target: {fileID: 8072671261565693564, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
     - target: {fileID: 8653880468517918322, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
       propertyPath: m_LocalPosition.x
       value: -3
@@ -64,22 +76,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -8371823760961249470}
   m_SourcePrefab: {fileID: 100100000, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
---- !u!114 &996837862826082379 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -4727393933927905322, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
-  m_PrefabInstance: {fileID: 3724923854964688797}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7867307066011605178}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView
---- !u!23 &4582233031902779973 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 875609452968730072, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
-  m_PrefabInstance: {fileID: 3724923854964688797}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &7867307066011605178 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6818410917899165479, guid: e599d12bd007a084d9d03d929f3f180c, type: 3}
@@ -98,5 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::GlassBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 4582233031902779973}
-  <CollisionView>k__BackingField: {fileID: 996837862826082379}

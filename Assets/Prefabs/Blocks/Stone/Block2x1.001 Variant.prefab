@@ -8,6 +8,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9172420511724696392, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
+    - target: {fileID: -9172420511724696392, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
+    - target: {fileID: -9172420511724696392, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
     - target: {fileID: 1572713174019042775, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
@@ -82,21 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 1823623704637204130}
-  <CollisionView>k__BackingField: {fileID: 2534574086181322244}
---- !u!23 &1823623704637204130 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7951790494944731802, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
-  m_PrefabInstance: {fileID: 8580693522336957496}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2534574086181322244 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: -3154733090109343172, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
-  m_PrefabInstance: {fileID: 8580693522336957496}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414960643147520789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView
