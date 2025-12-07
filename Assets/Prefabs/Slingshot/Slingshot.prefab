@@ -650,6 +650,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73b3d33bca834e4fa92e078f7343b17, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Slingshot::SlingshotSFXPlayerView
+  _draggingClip: {fileID: 8300000, guid: c2c5c20ada47d844194ae7f6aea63e20, type: 3}
+  _shotRandomContainer: {fileID: 6418180475301049370, guid: 7605f1449fa0ab945bb6c718fc178615, type: 2}
 --- !u!4 &9146339721389530708 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -3484162128307566815, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
