@@ -7,13 +7,20 @@ public record PigDamageEvent(PigDestroyerView PigDestroyerView, float Damage);
 public class PigDestroyer : IInitializable, IDisposable
 {
     private readonly PigCollisionReporter _pigCollisionReporter;
+    private readonly PigSettings _pigSettings;
+    private readonly Subject<PigDamageEvent> _collided = new();
     private readonly Subject<PigDamageEvent> _damaged = new();
     private readonly Subject<PigDestroyerView> _destroyed = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public PigDestroyer(PigCollisionReporter pigCollisionReporter) =>
+    public PigDestroyer(PigCollisionReporter pigCollisionReporter,
+        PigSettings pigSettings)
+    {
         _pigCollisionReporter = pigCollisionReporter;
+        _pigSettings = pigSettings;
+    }
 
+    public Observable<PigDamageEvent> Collided => _collided;
     public Observable<PigDamageEvent> Damaged => _damaged;
     public Observable<PigDestroyerView> Destroyed => _destroyed;
 
@@ -42,7 +49,11 @@ public class PigDestroyer : IInitializable, IDisposable
         else
         {
             pigDestroyerView.HealthModel.Decrement(damage);
-            _damaged.OnNext(new PigDamageEvent(pigDestroyerView, damage));
+
+            if (damage < _pigSettings.DamageThreshold)
+                _collided.OnNext(new PigDamageEvent(pigDestroyerView, damage));
+            else
+                _damaged.OnNext(new PigDamageEvent(pigDestroyerView, damage));
         }
     }
 }
