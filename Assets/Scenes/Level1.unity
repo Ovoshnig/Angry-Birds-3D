@@ -1142,7 +1142,7 @@ MonoBehaviour:
     _birdQueueInstaller:
       _birdQueue: {fileID: 878781362}
   _pigInstaller:
-    _pigDestructionInstaller:
+    _pigEntityInstaller:
       _blockStructure: {fileID: 4109696}
   _slingshotInstaller:
     _slingshotShootingInstaller:

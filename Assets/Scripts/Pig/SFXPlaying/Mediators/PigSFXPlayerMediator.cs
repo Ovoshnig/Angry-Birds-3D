@@ -11,17 +11,17 @@ public class PigSFXPlayerMediator : Mediator
     {
         _pigDestroyer.Collided
             .Subscribe(damageEvent =>
-            damageEvent.PigDestroyerView.SFXPlayerView.PlayCollision())
+            damageEvent.EntityView.SFXPlayerView.PlayCollision())
             .AddTo(CompositeDisposable);
 
         _pigDestroyer.Damaged
             .Subscribe(damageEvent =>
-            damageEvent.PigDestroyerView.SFXPlayerView.PlayDamage())
+            damageEvent.EntityView.SFXPlayerView.PlayDamage())
             .AddTo(CompositeDisposable);
 
         _pigDestroyer.Destroyed
-            .Subscribe(destroyerView =>
-            destroyerView.SFXPlayerView.PlayDestruction())
+            .Subscribe(destructionEvent =>
+            destructionEvent.EntityView.SFXPlayerView.PlayDestruction())
             .AddTo(CompositeDisposable);
     }
 }
