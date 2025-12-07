@@ -14,12 +14,18 @@ public class BlockSFXPlayerView : MonoBehaviour
 
     public void PlayCollision()
     {
+        if (_audioSource.isPlaying)
+            return;
+
         _audioSource.resource = _collisionRandomContainer;
         _audioSource.Play();
     }
 
     public void PlayDamage()
     {
+        if (_audioSource.isPlaying)
+            return;
+
         _audioSource.resource = _damageRandomContainer;
         _audioSource.Play();
     }
