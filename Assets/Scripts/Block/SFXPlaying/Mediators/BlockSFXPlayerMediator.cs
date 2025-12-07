@@ -11,17 +11,17 @@ public class BlockSFXPlayerMediator : Mediator
     {
         _blockDestroyer.Collided
             .Subscribe(damageEvent =>
-            damageEvent.BlockDestroyerView.SFXPlayerView.PlayCollision())
+            damageEvent.EntityView.SFXPlayerView.PlayCollision())
             .AddTo(CompositeDisposable);
 
         _blockDestroyer.Damaged
             .Subscribe(damageEvent =>
-            damageEvent.BlockDestroyerView.SFXPlayerView.PlayDamage())
+            damageEvent.EntityView.SFXPlayerView.PlayDamage())
             .AddTo(CompositeDisposable);
 
         _blockDestroyer.Destroyed
             .Subscribe(destructionEvent =>
-            destructionEvent.BlockDestroyerView.SFXPlayerView.PlayDestruction())
+            destructionEvent.EntityView.SFXPlayerView.PlayDestruction())
             .AddTo(CompositeDisposable);
     }
 }
