@@ -1,3 +1,3 @@
-public class PigCollisionReporter : CollisionReporter<PigDestroyerView>
+public class PigCollisionReporter : CollisionReporter<PigEntityView>
 {
 }

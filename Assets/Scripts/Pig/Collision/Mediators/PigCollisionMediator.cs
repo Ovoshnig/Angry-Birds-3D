@@ -1,17 +1,23 @@
-public class PigCollisionMediator : CollisionMediator<PigDestroyerView>
+using VContainer.Unity;
+
+public class PigCollisionMediator : CollisionMediator<PigEntityView>, IStartable
 {
-    private readonly PigDestroyerView[] _pigDestroyerViews;
+    private readonly PigEntityView[] _pigEntityViews;
 
     public PigCollisionMediator(PigCollisionReporter pigCollisionReporter,
-        PigDestroyerView[] pigDestroyerViews)
-        : base(pigCollisionReporter) => _pigDestroyerViews = pigDestroyerViews;
+        PigEntityView[] pigEntityViews)
+        : base(pigCollisionReporter) => _pigEntityViews = pigEntityViews;
 
     public override void Initialize()
     {
-        foreach (var pigDestroyerView in _pigDestroyerViews)
+    }
+
+    public void Start()
+    {
+        foreach (var pigEntityView in _pigEntityViews)
         {
-            CollisionView pigCollisionView = pigDestroyerView.CollisionView;
-            Subscribe(pigDestroyerView, pigCollisionView);
+            CollisionView collisionView = pigEntityView.CollisionView;
+            Subscribe(pigEntityView, collisionView);
         }
     }
 }
