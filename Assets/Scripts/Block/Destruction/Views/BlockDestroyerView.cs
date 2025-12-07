@@ -7,32 +7,7 @@ public abstract class BlockDestroyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
 
-
     private Material _material;
-    private CollisionView _collisionView = null;
-    private BlockSFXPlayerView _sfxPlayerView = null;
-
-    public CollisionView CollisionView
-    {
-        get
-        {
-            if (_collisionView == null)
-                _collisionView = GetComponent<CollisionView>();
-
-            return _collisionView;
-        }
-    }
-
-    public BlockSFXPlayerView SFXPlayerView
-    {
-        get
-        {
-            if (_sfxPlayerView == null)
-                _sfxPlayerView = GetComponent<BlockSFXPlayerView>();
-
-            return _sfxPlayerView;
-        }
-    }
 
     public BlockHealthModel HealthModel { get; private set; }
 

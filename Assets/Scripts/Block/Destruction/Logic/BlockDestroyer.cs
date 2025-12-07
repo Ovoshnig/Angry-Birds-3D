@@ -2,8 +2,8 @@ using R3;
 using System;
 using VContainer.Unity;
 
-public record BlockDamageEvent(BlockDestroyerView BlockDestroyerView, float Damage);
-public record BlockDestructionEvent(BlockDestroyerView BlockDestroyerView, int Points);
+public record BlockDamageEvent(BlockEntityView EntityView, float Damage);
+public record BlockDestructionEvent(BlockEntityView EntityView, int Points);
 
 public class BlockDestroyer : IInitializable, IDisposable
 {
@@ -37,9 +37,10 @@ public class BlockDestroyer : IInitializable, IDisposable
 
     public void Dispose() => _compositeDisposable.Dispose();
 
-    private void OnCollided(CollisionEvent<BlockDestroyerView> collisionEvent)
+    private void OnCollided(CollisionEvent<BlockEntityView> collisionEvent)
     {
-        BlockDestroyerView blockDestroyerView = collisionEvent.View;
+        BlockEntityView blockEntityView = collisionEvent.View;
+        BlockDestroyerView blockDestroyerView = blockEntityView.DestroyerView;
 
         float health = blockDestroyerView.HealthModel.Health;
         float damage = collisionEvent.Collision.relativeVelocity.sqrMagnitude;
@@ -48,7 +49,7 @@ public class BlockDestroyer : IInitializable, IDisposable
         if (resultHealth <= 0)
         {
             blockDestroyerView.HealthModel.Decrement(health);
-            _destroyed.OnNext(new BlockDestructionEvent(blockDestroyerView,
+            _destroyed.OnNext(new BlockDestructionEvent(blockEntityView,
                 _scoreSettings.BlockPoints));
         }
         else
@@ -56,9 +57,9 @@ public class BlockDestroyer : IInitializable, IDisposable
             blockDestroyerView.HealthModel.Decrement(damage);
 
             if (damage < _blockSettings.DamageThreshold)
-                _collided.OnNext(new BlockDamageEvent(blockDestroyerView, damage));
+                _collided.OnNext(new BlockDamageEvent(blockEntityView, damage));
             else
-                _damaged.OnNext(new BlockDamageEvent(blockDestroyerView, damage));
+                _damaged.OnNext(new BlockDamageEvent(blockEntityView, damage));
         }
     }
 }

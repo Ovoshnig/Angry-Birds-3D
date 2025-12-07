@@ -1,3 +1,3 @@
-public class BlockCollisionReporter : CollisionReporter<BlockDestroyerView>
+public class BlockCollisionReporter : CollisionReporter<BlockEntityView>
 {
 }

@@ -1150,7 +1150,7 @@ MonoBehaviour:
     _slingshotSFXPlayingInstaller:
       _slingshotSFXPlayerView: {fileID: 507049048}
   _blockInstaller:
-    _blockDestructionInstaller:
+    _blockEntityInstaller:
       _blockStructure: {fileID: 4109696}
 --- !u!4 &594520561
 Transform:
