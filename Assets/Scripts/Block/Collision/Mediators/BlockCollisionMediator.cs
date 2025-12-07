@@ -1,17 +1,23 @@
-public class BlockCollisionMediator : CollisionMediator<BlockDestroyerView>
+using VContainer.Unity;
+
+public class BlockCollisionMediator : CollisionMediator<BlockEntityView>, IStartable
 {
-    private readonly BlockDestroyerView[] _blockDestroyerViews;
+    private readonly BlockEntityView[] _blockEntityViews;
 
     public BlockCollisionMediator(BlockCollisionReporter blockCollisionReporter,
-        BlockDestroyerView[] blockDestroyerViews)
-        : base(blockCollisionReporter) => _blockDestroyerViews = blockDestroyerViews;
+        BlockEntityView[] blockEntityViews)
+        : base(blockCollisionReporter) => _blockEntityViews = blockEntityViews;
 
     public override void Initialize()
     {
-        foreach (var blockDestroyerView in _blockDestroyerViews)
+    }
+
+    public void Start()
+    {
+        foreach (var blockEntityView in _blockEntityViews)
         {
-            CollisionView blockCollisionView = blockDestroyerView.CollisionView;
-            Subscribe(blockDestroyerView, blockCollisionView);
+            CollisionView collisionView = blockEntityView.CollisionView;
+            Subscribe(blockEntityView, collisionView);
         }
     }
 }
