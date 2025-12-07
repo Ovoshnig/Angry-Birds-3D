@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-4319382486121055236
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rock collision a2_{-4319382486121055236}
+  m_AudioClip: {fileID: 8300000, guid: 0a92ed00aaf15b1459f0c523831c8317, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3532855938722395456
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rock collision a1_{3532855938722395456}
+  m_AudioClip: {fileID: 8300000, guid: b7e2df3748d3c8c43878eb0af277b5d8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4546370538420427953
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rock collision a4_{4546370538420427953}
+  m_AudioClip: {fileID: 8300000, guid: e4ff8d28cd22a0a4fb718a41d47a31f1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &5182562094487288901
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rock collision a3_{5182562094487288901}
+  m_AudioClip: {fileID: 8300000, guid: 4cb24d554912aaf499b4b9e6812c1b54, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RockCollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 3532855938722395456}
+  - {fileID: -4319382486121055236}
+  - {fileID: 5182562094487288901}
+  - {fileID: 4546370538420427953}
+  - {fileID: 7561903799852625470}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7561903799852625470
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: rock collision a5_{7561903799852625470}
+  m_AudioClip: {fileID: 8300000, guid: b0b7eabfb72ad4b44ae42978a8adbac0, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

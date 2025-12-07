@@ -1,0 +1,93 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-8503408962047943945
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a3_{-8503408962047943945}
+  m_AudioClip: {fileID: 8300000, guid: f17a775f033d9ad438472f9effd3754f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-6941162272014533103
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a5_{-6941162272014533103}
+  m_AudioClip: {fileID: 8300000, guid: 4443f07154ce1d6449105ef1672b5da2, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3860444809959002481
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a6_{-3860444809959002481}
+  m_AudioClip: {fileID: 8300000, guid: 040e78e9ed1b13c40a00c2357f1b21a3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1544215830952280541
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a4_{-1544215830952280541}
+  m_AudioClip: {fileID: 8300000, guid: 85d53af958bbe6445948f36ce1449e20, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &554886989085169667
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a2_{554886989085169667}
+  m_AudioClip: {fileID: 8300000, guid: 389f4894227d66a4199bd1be87c275ca, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1629277950508275915
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: wood collision a1_{1629277950508275915}
+  m_AudioClip: {fileID: 8300000, guid: b6241e85b0b949e4889c3396fa30cdd9, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WoodCollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 1629277950508275915}
+  - {fileID: 554886989085169667}
+  - {fileID: -8503408962047943945}
+  - {fileID: -1544215830952280541}
+  - {fileID: -6941162272014533103}
+  - {fileID: -3860444809959002481}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0

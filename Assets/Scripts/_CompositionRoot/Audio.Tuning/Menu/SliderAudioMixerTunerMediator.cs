@@ -16,8 +16,8 @@ public class SliderAudioMixerTunerMediator : Mediator
         _sliderModel.Value
             .Subscribe(value =>
             {
-                if (_sliderModel is SoundSliderModel)
-                    _audioMixerTuner.SetSoundVolume(value);
+                if (_sliderModel is SFXSliderModel)
+                    _audioMixerTuner.SetSFXVolume(value);
                 else if (_sliderModel is MusicSliderModel)
                     _audioMixerTuner.SetMusicVolume(value);
             })

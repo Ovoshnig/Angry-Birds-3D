@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -82,21 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 5952461676249383768}
-  <CollisionView>k__BackingField: {fileID: 2831096853412575301}
---- !u!114 &2831096853412575301 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8332415746279746074, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
-  m_PrefabInstance: {fileID: 6118347282023830111}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 834529751946581672}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView
---- !u!23 &5952461676249383768 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 464952907125051655, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
-  m_PrefabInstance: {fileID: 6118347282023830111}
-  m_PrefabAsset: {fileID: 0}

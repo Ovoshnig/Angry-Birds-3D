@@ -56,6 +56,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 241e1b11012a87644a69824e07cc70c2, type: 2}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 33f0f7e849df3b54c8a1e1dd7bff80e8, type: 2}
+    - target: {fileID: 9047759862240439881, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: a519864607e0961408dbdd4d28a16c10, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -64,11 +76,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: -3509811419898674857}
   m_SourcePrefab: {fileID: 100100000, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
---- !u!23 &1828633488989822177 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 464952907125051655, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
-  m_PrefabInstance: {fileID: 2239208535590587878}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4642965200413313297 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6880484335812904183, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
@@ -87,16 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 1828633488989822177}
-  <CollisionView>k__BackingField: {fileID: 7832300393756780540}
---- !u!114 &7832300393756780540 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8332415746279746074, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
-  m_PrefabInstance: {fileID: 2239208535590587878}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4642965200413313297}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView

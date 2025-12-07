@@ -14,7 +14,7 @@ public class AudioMixerTuner
 
     private AudioMixer AudioMixer => _audioMixerGroup.audioMixer;
 
-    public bool SetSoundVolume(float value) => AudioMixer.SetFloat(AudioMixerConstants.SoundGroupName, value);
+    public bool SetSFXVolume(float value) => AudioMixer.SetFloat(AudioMixerConstants.SFXGroupName, value);
 
     public bool SetMusicVolume(float value) => AudioMixer.SetFloat(AudioMixerConstants.MusicGroupName, value);
 
