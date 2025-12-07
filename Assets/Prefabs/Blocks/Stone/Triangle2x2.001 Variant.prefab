@@ -12,6 +12,18 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 1d29cc3f996186847b30da4c02ed1ea4, type: 2}
+    - target: {fileID: 1945763251988809205, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
+    - target: {fileID: 1945763251988809205, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
+    - target: {fileID: 1945763251988809205, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
     - target: {fileID: 4280252254112894352, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
       propertyPath: m_Name
       value: Triangle2x2.001 Variant
@@ -64,11 +76,6 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 6790820807422128792}
   m_SourcePrefab: {fileID: 100100000, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
---- !u!23 &1382526962686087183 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 1635774962068890029, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
-  m_PrefabInstance: {fileID: 404418363445866914}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &4538021920035257394 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4280252254112894352, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
@@ -87,16 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::StoneBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 1382526962686087183}
-  <CollisionView>k__BackingField: {fileID: 7110188369255795074}
---- !u!114 &7110188369255795074 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7435652980206925856, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
-  m_PrefabInstance: {fileID: 404418363445866914}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4538021920035257394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView

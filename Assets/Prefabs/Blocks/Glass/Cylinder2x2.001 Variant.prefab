@@ -52,6 +52,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6918918919243169094, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
+      propertyPath: _damageRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
+    - target: {fileID: 6918918919243169094, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
+      propertyPath: _collisionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
+    - target: {fileID: 6918918919243169094, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
+      propertyPath: _destructionRandomContainer
+      value: 
+      objectReference: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
     - target: {fileID: 7813251505619712227, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -82,21 +94,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::GlassBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
-  _meshRenderer: {fileID: 8185341747911187444}
-  <CollisionView>k__BackingField: {fileID: 3122378146470740038}
---- !u!114 &3122378146470740038 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3936982026195870545, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
-  m_PrefabInstance: {fileID: 2158933045725651735}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2933835323090045305}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: CollisionReport::CollisionView
---- !u!23 &8185341747911187444 stripped
-MeshRenderer:
-  m_CorrespondingSourceObject: {fileID: 7813251505619712227, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
-  m_PrefabInstance: {fileID: 2158933045725651735}
-  m_PrefabAsset: {fileID: 0}
