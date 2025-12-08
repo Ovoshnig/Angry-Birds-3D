@@ -5,6 +5,7 @@ using VContainer.Unity;
 public class LevelLifetimeScope : LifetimeScope
 {
     [SerializeField] private LevelStateInstaller _levelStateInstaller;
+    [SerializeField] private ScoreInstaller _scoreInstaller;
     [SerializeField] private BirdInstaller _birdInstaller;
     [SerializeField] private PigInstaller _pigInstaller;
     [SerializeField] private SlingshotInstaller _slingshotInstaller;
@@ -15,6 +16,7 @@ public class LevelLifetimeScope : LifetimeScope
         new CompositionRootInstaller().Install(builder);
 
         _levelStateInstaller.Install(builder);
+        _scoreInstaller.Install(builder);
         _birdInstaller.Install(builder);
         _pigInstaller.Install(builder);
         _slingshotInstaller.Install(builder);
