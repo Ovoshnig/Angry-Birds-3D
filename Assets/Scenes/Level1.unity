@@ -1139,7 +1139,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _scoreInstaller:
-    _scoreView: {fileID: 0}
+    _scoreView: {fileID: 2081062521}
   _birdInstaller:
     _birdQueueInstaller:
       _birdQueue: {fileID: 878781362}
