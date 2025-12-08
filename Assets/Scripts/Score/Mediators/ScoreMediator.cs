@@ -14,7 +14,7 @@ public class ScoreMediator : Mediator
     public override void Initialize()
     {
         _scoreModel.Score
-            .Subscribe(_scoreView.SetScore)
+            .Subscribe(_scoreView.SetScoreSmoothly)
             .AddTo(CompositeDisposable);
     }
 }
