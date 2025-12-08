@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 962ce088b4b8f6748b39f99e3760ae22
+guid: a2427c11bf66b9c4fa28f340abbb831f
 TrueTypeFontImporter:
   externalObjects: {}
   serializedVersion: 4
@@ -9,7 +9,7 @@ TrueTypeFontImporter:
   characterPadding: 1
   includeFontData: 1
   fontNames:
-  - Feast of Flesh BB
+  - GUERRILLA
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0
