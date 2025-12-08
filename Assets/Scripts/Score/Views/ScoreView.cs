@@ -17,5 +17,5 @@ public class ScoreView : MonoBehaviour
         }
     }
 
-    public void SetScore(int value) => Text.text = $"SCORE\n{value:D4}";
+    public void SetScore(int value) => Text.text = $"Score: {value:D4}";
 }
