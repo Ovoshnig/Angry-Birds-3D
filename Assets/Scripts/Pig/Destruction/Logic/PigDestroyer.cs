@@ -3,7 +3,7 @@ using System;
 using VContainer.Unity;
 
 public record PigDamageEvent(PigEntityView EntityView, float Damage);
-public record PigDestructionEvent(PigEntityView EntityView, float Points);
+public record PigDestructionEvent(PigEntityView EntityView, int Points);
 
 public class PigDestroyer : IInitializable, IDisposable
 {
