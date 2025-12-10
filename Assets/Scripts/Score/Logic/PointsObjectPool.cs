@@ -29,10 +29,10 @@ public class PointsObjectPool : IDisposable
         _subscriptions.Clear();
     }
 
-    public void ShowPoints(Vector3 position, int points)
+    public void ShowPoints(Vector3 position, int points, Color color, float fontSize)
     {
         PointsView pointsView = _pointsPool.Get();
-        pointsView.Show(position, points);
+        pointsView.Show(position, points, color, fontSize);
 
         IDisposable subscription = pointsView.IsPlaying
             .Where(isPlaying => !isPlaying)

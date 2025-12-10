@@ -1,9 +1,10 @@
 using R3;
 using System;
+using UnityEngine;
 using VContainer.Unity;
 
 public record PigDamageEvent(PigEntityView EntityView, float Damage);
-public record PigDestructionEvent(PigEntityView EntityView, int Points);
+public record PigDestructionEvent(PigEntityView EntityView, int Points, Color Color, float FontSize);
 
 public class PigDestroyer : IInitializable, IDisposable
 {
@@ -49,7 +50,10 @@ public class PigDestroyer : IInitializable, IDisposable
         if (resultHealth <= 0)
         {
             destroyerView.HealthModel.Decrement(health);
-            _destroyed.OnNext(new PigDestructionEvent(entityView, _scoreSettings.PigPoints));
+            _destroyed.OnNext(new PigDestructionEvent(entityView,
+                _scoreSettings.PigPoints,
+                _scoreSettings.PigColor,
+                _scoreSettings.PigFontSize));
         }
         else
         {

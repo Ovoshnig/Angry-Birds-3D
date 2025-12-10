@@ -38,7 +38,7 @@ public class PointsView : MonoBehaviour
             Destroy(_cachedMaterial);
     }
 
-    public void Show(Vector3 position, int points)
+    public void Show(Vector3 position, int points, Color color, float fontSize)
     {
         if (_animationStrategy == null)
         {
@@ -54,7 +54,10 @@ public class PointsView : MonoBehaviour
         }
 
         transform.SetPositionAndRotation(position, _camera.transform.rotation);
+
         _text.text = points.ToString();
+        _text.color = color;
+        _text.fontSize = fontSize;
 
         _animationStrategy.ResetState(_text, _cachedMaterial);
         _sequence = _animationStrategy.CreateSequence(_text, _cachedMaterial);
