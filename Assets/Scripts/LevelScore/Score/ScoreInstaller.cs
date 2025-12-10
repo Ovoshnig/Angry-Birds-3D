@@ -12,8 +12,6 @@ public class ScoreInstaller : IInstaller
     {
         builder.RegisterComponent(_scoreView);
         builder.Register<ScoreModel>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ScoreLogic>(Lifetime.Singleton)
-            .AsSelf();
         builder.RegisterEntryPoint<ScoreMediator>(Lifetime.Singleton);
     }
 }
