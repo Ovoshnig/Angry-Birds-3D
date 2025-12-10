@@ -533,8 +533,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.05211689, y: 0.6867733, z: -0.049008492, w: -0.72334254}
-  m_LocalPosition: {x: 96.42476, y: 8.469955, z: 87.789116}
+  m_LocalRotation: {x: 0.020147793, y: -0.71381754, z: 0.028704835, w: 0.6994531}
+  m_LocalPosition: {x: 93.96466, y: 6.4740086, z: 89.03313}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2604,6 +2604,10 @@ PrefabInstance:
       propertyPath: m_PresetInfoIsWorld
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 7763047019394125746, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+      propertyPath: _animationStrategy
+      value: 
+      objectReference: {fileID: 11400000, guid: bcfdddb8453fc2f4abe355e52ce05d3f, type: 2}
     - target: {fileID: 8604922009742290092, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
       propertyPath: m_Name
       value: PointsCanvas
