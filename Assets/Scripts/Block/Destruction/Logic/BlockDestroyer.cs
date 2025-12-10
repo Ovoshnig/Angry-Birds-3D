@@ -1,10 +1,10 @@
 using R3;
 using System;
-using UnityEngine;
 using VContainer.Unity;
 
 public record BlockDamageEvent(BlockEntityView EntityView, float Damage);
-public record BlockDestructionEvent(BlockEntityView EntityView, int Points, Color Color, float FontSize);
+public record BlockDestructionEvent(BlockEntityView EntityView, 
+    DestructionPointsSettings PointsSettings);
 
 public class BlockDestroyer : IInitializable, IDisposable
 {
@@ -51,9 +51,7 @@ public class BlockDestroyer : IInitializable, IDisposable
         {
             blockDestroyerView.HealthModel.Decrement(health);
             _destroyed.OnNext(new BlockDestructionEvent(blockEntityView,
-                _scoreSettings.BlockPoints,
-                _scoreSettings.BlockColor,
-                _scoreSettings.BlockFontSize));
+                _scoreSettings.BlockPointsSettings));
         }
         else
         {

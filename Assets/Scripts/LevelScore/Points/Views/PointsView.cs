@@ -38,7 +38,7 @@ public class PointsView : MonoBehaviour
             Destroy(_cachedMaterial);
     }
 
-    public void Show(Vector3 position, int points, Color color, float fontSize)
+    public void Show(Vector3 position, DestructionPointsSettings pointsSettings)
     {
         if (_animationStrategy == null)
         {
@@ -55,9 +55,9 @@ public class PointsView : MonoBehaviour
 
         transform.SetPositionAndRotation(position, _camera.transform.rotation);
 
-        _text.text = points.ToString();
-        _text.color = color;
-        _text.fontSize = fontSize;
+        _text.text = pointsSettings.Points.ToString();
+        _text.color = pointsSettings.Color;
+        _text.fontSize = pointsSettings.FontSize;
 
         _animationStrategy.ResetState(_text, _cachedMaterial);
         _sequence = _animationStrategy.CreateSequence(_text, _cachedMaterial);

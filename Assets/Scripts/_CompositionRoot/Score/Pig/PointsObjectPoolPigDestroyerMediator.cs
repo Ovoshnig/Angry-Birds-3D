@@ -23,10 +23,7 @@ public class PointsObjectPoolPigDestroyerMediator : Mediator
     private void OnDestroyed(PigDestructionEvent destructionEvent)
     {
         Vector3 position = destructionEvent.EntityView.transform.position;
-        int points = destructionEvent.Points;
-        Color color = destructionEvent.Color;
-        float fontSize = destructionEvent.FontSize;
-
-        _pointsObjectPool.ShowPoints(position, points, color, fontSize);
+        DestructionPointsSettings pointsSettings = destructionEvent.PointsSettings;
+        _pointsObjectPool.ShowPoints(position, pointsSettings);
     }
 }

@@ -15,7 +15,7 @@ public class ScoreModelPigDestroyerMediator : Mediator
     public override void Initialize()
     {
         _pigDestroyer.Destroyed
-            .Subscribe(destructionEvent => _scoreModel.Increase(destructionEvent.Points))
+            .Subscribe(destructionEvent => _scoreModel.Increase(destructionEvent.PointsSettings.Points))
             .AddTo(CompositeDisposable);
     }
 }
