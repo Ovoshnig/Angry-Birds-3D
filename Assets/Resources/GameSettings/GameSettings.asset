@@ -43,11 +43,7 @@ MonoBehaviour:
     <StoneHealth>k__BackingField: 1200
     <GlassHealth>k__BackingField: 200
   <ScoreSettings>k__BackingField:
-    <BlockPoints>k__BackingField: 500
-    <PigPoints>k__BackingField: 5000
-    <BlockColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
-    <PigColor>k__BackingField: {r: 0.15337591, g: 0.8867924, b: 0.15337591, a: 1}
-    <BlockFontSize>k__BackingField: 1
-    <PigFontSize>k__BackingField: 1.7
+    <BlockPointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
+    <PigPointsSettings>k__BackingField: {fileID: 11400000, guid: ca051815bf01b9c4eb02b7c528ba635f, type: 2}
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10
