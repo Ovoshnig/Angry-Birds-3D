@@ -15,7 +15,7 @@ public class ScoreModelBlockDestroyerMediator : Mediator
     public override void Initialize()
     {
         _blockDestroyer.Destroyed
-            .Subscribe(destructionEvent => _scoreModel.Increase(destructionEvent.Points))
+            .Subscribe(destructionEvent => _scoreModel.Increase(destructionEvent.PointsSettings.Points))
             .AddTo(CompositeDisposable);
     }
 }
