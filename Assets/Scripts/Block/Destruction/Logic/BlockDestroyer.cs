@@ -3,7 +3,8 @@ using System;
 using VContainer.Unity;
 
 public record BlockDamageEvent(BlockEntityView EntityView, float Damage);
-public record BlockDestructionEvent(BlockEntityView EntityView, int Points);
+public record BlockDestructionEvent(BlockEntityView EntityView, 
+    DestructionPointsSettings PointsSettings);
 
 public class BlockDestroyer : IInitializable, IDisposable
 {
@@ -50,7 +51,7 @@ public class BlockDestroyer : IInitializable, IDisposable
         {
             blockDestroyerView.HealthModel.Decrement(health);
             _destroyed.OnNext(new BlockDestructionEvent(blockEntityView,
-                _scoreSettings.BlockPoints));
+                _scoreSettings.BlockPointsSettings));
         }
         else
         {

@@ -3,7 +3,8 @@ using System;
 using VContainer.Unity;
 
 public record PigDamageEvent(PigEntityView EntityView, float Damage);
-public record PigDestructionEvent(PigEntityView EntityView, float Points);
+public record PigDestructionEvent(PigEntityView EntityView, 
+    DestructionPointsSettings PointsSettings);
 
 public class PigDestroyer : IInitializable, IDisposable
 {
@@ -49,7 +50,8 @@ public class PigDestroyer : IInitializable, IDisposable
         if (resultHealth <= 0)
         {
             destroyerView.HealthModel.Decrement(health);
-            _destroyed.OnNext(new PigDestructionEvent(entityView, _scoreSettings.PigPoints));
+            _destroyed.OnNext(new PigDestructionEvent(entityView,
+                _scoreSettings.PigPointsSettings));
         }
         else
         {
