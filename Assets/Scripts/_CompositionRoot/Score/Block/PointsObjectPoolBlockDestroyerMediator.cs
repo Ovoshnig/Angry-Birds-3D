@@ -24,6 +24,9 @@ public class PointsObjectPoolBlockDestroyerMediator : Mediator
     {
         Vector3 position = destructionEvent.EntityView.transform.position;
         int points = destructionEvent.Points;
-        _pointsObjectPool.ShowPoints(position, points);
+        Color color = destructionEvent.Color;
+        float fontSize = destructionEvent.FontSize;
+
+        _pointsObjectPool.ShowPoints(position, points, color, fontSize);
     }
 }
