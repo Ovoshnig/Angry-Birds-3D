@@ -35,11 +35,19 @@ MonoBehaviour:
   <BirdSettings>k__BackingField:
     <RotationSpeedThreshold>k__BackingField: 0.5
   <PigSettings>k__BackingField:
+    <DamageThreshold>k__BackingField: 0.2
     <Health>k__BackingField: 100
   <BlockSettings>k__BackingField:
+    <DamageThreshold>k__BackingField: 0.2
     <WoodHealth>k__BackingField: 600
     <StoneHealth>k__BackingField: 1200
     <GlassHealth>k__BackingField: 200
   <ScoreSettings>k__BackingField:
     <BlockPoints>k__BackingField: 500
     <PigPoints>k__BackingField: 5000
+    <BlockColor>k__BackingField: {r: 1, g: 1, b: 1, a: 1}
+    <PigColor>k__BackingField: {r: 0.15337591, g: 0.8867924, b: 0.15337591, a: 1}
+    <BlockFontSize>k__BackingField: 1
+    <PigFontSize>k__BackingField: 1.7
+    <PoolDefaultCapacity>k__BackingField: 3
+    <PoolMaxSize>k__BackingField: 10
