@@ -7,5 +7,8 @@ public class ScoreCompositionInstaller : IInstaller
     {
         builder.RegisterEntryPoint<ScoreModelBlockDestroyerMediator>(Lifetime.Singleton);
         builder.RegisterEntryPoint<ScoreModelPigDestroyerMediator>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<PointsObjectPoolBlockDestroyerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<PointsObjectPoolPigDestroyerMediator>(Lifetime.Singleton);
     }
 }
