@@ -2,7 +2,6 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(CollisionView))]
-[RequireComponent(typeof(BlockSFXPlayerView))]
 public abstract class BlockDestroyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;

@@ -20,6 +20,8 @@ MonoBehaviour:
     <MinVolume>k__BackingField: -80
     <MaxVolume>k__BackingField: 0
     <SnapshotTransitionDuration>k__BackingField: 0
+    <PoolDefaultCapacity>k__BackingField: 10
+    <PoolMaxSize>k__BackingField: 50
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
       serializedVersion: 2

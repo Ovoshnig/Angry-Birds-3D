@@ -68,7 +68,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block05x05.001 Variant
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3837068521103511965, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+    - {fileID: -8889217040735875230, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
