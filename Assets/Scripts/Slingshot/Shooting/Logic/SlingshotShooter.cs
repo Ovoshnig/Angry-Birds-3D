@@ -16,12 +16,12 @@ public class SlingshotShooter : IInitializable, IDisposable
     private readonly Vector3 _leftAnchorPosition;
     private readonly Vector3 _rightAnchorPosition;
     private readonly Vector3 _centerAnchorPosition;
+    private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Unit> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
 
-    private SlingshotState _currentState = SlingshotState.Idle;
     private Camera _mainCamera;
     private Rigidbody _currentBird = null;
 
@@ -46,6 +46,7 @@ public class SlingshotShooter : IInitializable, IDisposable
         _rightRubber = rightRubber;
     }
 
+    public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
     public Observable<Unit> DraggingStarted => _draggingStarted;
     public Observable<Rigidbody> Shot => _shot;
 
@@ -80,9 +81,9 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private void OnPointerPressed()
     {
-        if (_currentState == SlingshotState.Idle && IsPointerNear())
+        if (_currentState.Value == SlingshotState.Idle && IsPointerNear())
         {
-            _currentState = SlingshotState.Dragging;
+            _currentState.Value = SlingshotState.Dragging;
             _currentBird.isKinematic = true;
 
             _slingshotInputHandler.DragInput
@@ -102,9 +103,9 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private void OnPointerReleased()
     {
-        if (_currentState == SlingshotState.Dragging)
+        if (_currentState.Value == SlingshotState.Dragging)
         {
-            _currentState = SlingshotState.Flying;
+            _currentState.Value = SlingshotState.Flying;
             Shoot();
             SetLinesActive(false);
 
@@ -185,7 +186,7 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private void Shoot()
     {
-        _currentState = SlingshotState.Flying;
+        _currentState.Value = SlingshotState.Flying;
         _currentBird.isKinematic = false;
 
         SetLinesActive(false);
@@ -199,7 +200,7 @@ public class SlingshotShooter : IInitializable, IDisposable
 
     private void ResetBird()
     {
-        _currentState = SlingshotState.Idle;
+        _currentState.Value = SlingshotState.Idle;
         _currentBird.isKinematic = true;
         _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
