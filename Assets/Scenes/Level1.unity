@@ -313,8 +313,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198076857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02804371, y: -0.9246838, z: 0.079802535, w: 0.37122092}
-  m_LocalPosition: {x: 13.727165, y: 4.5469527, z: 22.669289}
+  m_LocalRotation: {x: 0.047842406, y: -0.67955065, z: 0.047759037, w: 0.73050743}
+  m_LocalPosition: {x: 17.860008, y: 5.6848483, z: 20.26596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -535,6 +535,7 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585548}
+  - component: {fileID: 330585549}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -609,8 +610,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.02804371, y: -0.9246838, z: 0.079802535, w: 0.37122092}
-  m_LocalPosition: {x: 13.727165, y: 4.5469527, z: 22.669289}
+  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
+  m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -692,6 +693,21 @@ MonoBehaviour:
       m_PostInfinity: 2
       m_RotationOrder: 4
   CustomBlends: {fileID: 0}
+--- !u!114 &330585549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 330585543}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc17c636efe34064bb061c5d3a806a6d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Camera::CameraSwitchView
+  _slingshotCamera: {fileID: 198076859}
+  _generalCamera: {fileID: 2073807577}
+  _structureCamera: {fileID: 1486503892}
 --- !u!4 &361142951 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8604184308849490492, guid: dbbe2facd7779ce498270f6f9eecb09b, type: 3}
@@ -1251,6 +1267,9 @@ MonoBehaviour:
       _scoreView: {fileID: 2081062521}
     _pointsInstaller:
       _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+  _cameraInstaller:
+    _switchingInstaller:
+      _cameraSwitchView: {fileID: 330585549}
   _sfxInstaller:
     _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
   _birdInstaller:
