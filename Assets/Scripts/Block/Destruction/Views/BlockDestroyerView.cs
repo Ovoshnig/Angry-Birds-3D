@@ -2,12 +2,13 @@ using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
 [RequireComponent(typeof(CollisionView))]
-[RequireComponent(typeof(BlockSFXPlayerView))]
 public abstract class BlockDestroyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
 
     private Material _material;
+
+    [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
 
     public BlockHealthModel HealthModel { get; private set; }
 
