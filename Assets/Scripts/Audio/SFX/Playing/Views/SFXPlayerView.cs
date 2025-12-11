@@ -17,7 +17,8 @@ public class SFXPlayerView : MonoBehaviour
 
         Observable
             .EveryValueChanged(_audioSource, a => a.isPlaying)
-            .Subscribe(isPlaying => _isPlaying.Value = isPlaying)
+            .Where(isPlaying => !isPlaying)
+            .Subscribe(_ => _isPlaying.Value = false)
             .AddTo(this);
     }
 
@@ -27,5 +28,7 @@ public class SFXPlayerView : MonoBehaviour
 
         _audioSource.resource = audioResource;
         _audioSource.Play();
+
+        _isPlaying.Value = true;
     }
 }
