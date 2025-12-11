@@ -68,7 +68,9 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 7a6d4c7125119894186d6793134785f2, type: 2}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6918918919243169094, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
+    - {fileID: 574597295691879229, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -94,3 +96,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: c76f2d2297e192c41bc6cd94a29a9006, type: 2}

@@ -1,10 +1,11 @@
 using R3;
 using System;
+using UnityEngine.Audio;
 using VContainer.Unity;
 
-public record BlockDamageEvent(BlockEntityView EntityView, float Damage);
-public record BlockDestructionEvent(BlockEntityView EntityView, 
-    DestructionPointsSettings PointsSettings);
+public record BlockDamageEvent(BlockEntityView EntityView, float Damage, AudioResource AudioResource);
+public record BlockDestructionEvent(BlockEntityView EntityView, DestructionPointsSettings PointsSettings, 
+    AudioResource AudioResource);
 
 public class BlockDestroyer : IInitializable, IDisposable
 {
@@ -40,27 +41,29 @@ public class BlockDestroyer : IInitializable, IDisposable
 
     private void OnCollided(CollisionEvent<BlockEntityView> collisionEvent)
     {
-        BlockEntityView blockEntityView = collisionEvent.View;
-        BlockDestroyerView blockDestroyerView = blockEntityView.DestroyerView;
+        BlockEntityView entityView = collisionEvent.View;
+        BlockDestroyerView destroyerView = entityView.DestroyerView;
+        DestructionSFXSettings sfxSettings = destroyerView.DestructionSFXSettings;
 
-        float health = blockDestroyerView.HealthModel.Health;
+        float health = destroyerView.HealthModel.Health;
         float damage = collisionEvent.Collision.relativeVelocity.sqrMagnitude;
         float resultHealth = health - damage;
 
         if (resultHealth <= 0)
         {
-            blockDestroyerView.HealthModel.Decrement(health);
-            _destroyed.OnNext(new BlockDestructionEvent(blockEntityView,
-                _scoreSettings.BlockPointsSettings));
+            destroyerView.HealthModel.Decrement(health);
+            _destroyed.OnNext(new BlockDestructionEvent(entityView,
+                _scoreSettings.BlockPointsSettings, 
+                sfxSettings.DestructionResource));
         }
         else
         {
-            blockDestroyerView.HealthModel.Decrement(damage);
+            destroyerView.HealthModel.Decrement(damage);
 
             if (damage < _blockSettings.DamageThreshold)
-                _collided.OnNext(new BlockDamageEvent(blockEntityView, damage));
+                _collided.OnNext(new BlockDamageEvent(entityView, damage, sfxSettings.CollisionResource));
             else
-                _damaged.OnNext(new BlockDamageEvent(blockEntityView, damage));
+                _damaged.OnNext(new BlockDamageEvent(entityView, damage, sfxSettings.DamageResource));
         }
     }
 }

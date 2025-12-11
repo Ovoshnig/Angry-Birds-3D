@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bda07bacd81e6445ad3183613c74ee6, type: 3}
+  m_Name: StoneBlockDestructionSFXSettings
+  m_EditorClassIdentifier: GameSettings::DestructionSFXSettings
+  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
+  <DamageResource>k__BackingField: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
+  <DestructionResource>k__BackingField: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}

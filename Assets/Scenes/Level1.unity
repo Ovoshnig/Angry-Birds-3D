@@ -1143,6 +1143,8 @@ MonoBehaviour:
       _scoreView: {fileID: 2081062521}
     _pointsInstaller:
       _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+  _sfxInstaller:
+    _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
   _birdInstaller:
     _birdQueueInstaller:
       _birdQueue: {fileID: 878781362}
