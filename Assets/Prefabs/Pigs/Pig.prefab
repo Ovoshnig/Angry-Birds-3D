@@ -267,6 +267,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Pig::PigDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: 3f3d265e5c19cbc49931e64fdf4de224, type: 2}
 --- !u!114 &8323631302038410834
 MonoBehaviour:
   m_ObjectHideFlags: 0

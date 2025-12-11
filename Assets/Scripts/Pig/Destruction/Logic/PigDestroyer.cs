@@ -1,10 +1,11 @@
 using R3;
 using System;
+using UnityEngine.Audio;
 using VContainer.Unity;
 
-public record PigDamageEvent(PigEntityView EntityView, float Damage);
-public record PigDestructionEvent(PigEntityView EntityView, 
-    DestructionPointsSettings PointsSettings);
+public record PigDamageEvent(PigEntityView EntityView, float Damage, AudioResource AudioResource);
+public record PigDestructionEvent(PigEntityView EntityView, DestructionPointsSettings PointsSettings,
+    AudioResource AudioResource);
 
 public class PigDestroyer : IInitializable, IDisposable
 {
@@ -42,6 +43,7 @@ public class PigDestroyer : IInitializable, IDisposable
     {
         PigEntityView entityView = collisionEvent.View;
         PigDestroyerView destroyerView = entityView.DestroyerView;
+        DestructionSFXSettings sfxSettings = destroyerView.DestructionSFXSettings;
 
         float health = destroyerView.HealthModel.Health;
         float damage = collisionEvent.Collision.relativeVelocity.sqrMagnitude;
@@ -51,16 +53,16 @@ public class PigDestroyer : IInitializable, IDisposable
         {
             destroyerView.HealthModel.Decrement(health);
             _destroyed.OnNext(new PigDestructionEvent(entityView,
-                _scoreSettings.PigPointsSettings));
+                _scoreSettings.PigPointsSettings, sfxSettings.DestructionResource));
         }
         else
         {
             destroyerView.HealthModel.Decrement(damage);
 
             if (damage < _pigSettings.DamageThreshold)
-                _collided.OnNext(new PigDamageEvent(entityView, damage));
+                _collided.OnNext(new PigDamageEvent(entityView, damage, sfxSettings.CollisionResource));
             else
-                _damaged.OnNext(new PigDamageEvent(entityView, damage));
+                _damaged.OnNext(new PigDamageEvent(entityView, damage, sfxSettings.DamageResource));
         }
     }
 }

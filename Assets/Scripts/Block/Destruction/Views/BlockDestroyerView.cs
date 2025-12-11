@@ -9,6 +9,8 @@ public abstract class BlockDestroyerView : MonoBehaviour
 
     private Material _material;
 
+    [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
+
     public BlockHealthModel HealthModel { get; private set; }
 
     protected BlockSettings BlockSettings => _gameSettings.BlockSettings;

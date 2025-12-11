@@ -94,3 +94,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Block::GlassBlockDestroyerView
   _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
+  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: 72788d67b465d7549b99f75b44595059, type: 2}
