@@ -15,8 +15,12 @@ public class LevelLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        new CompositionRootInstaller().Install(builder);
+        InstallSystems(builder);
+        InstallMediators(builder);
+    }
 
+    private void InstallSystems(IContainerBuilder builder)
+    {
         _levelStateInstaller.Install(builder);
         _levelScoreInstaller.Install(builder);
         _cameraInstaller.Install(builder);
@@ -25,5 +29,14 @@ public class LevelLifetimeScope : LifetimeScope
         _pigInstaller.Install(builder);
         _slingshotInstaller.Install(builder);
         _blockInstaller.Install(builder);
+    }
+
+    private static void InstallMediators(IContainerBuilder builder)
+    {
+        new ScoreMediatorsInstaller().Install(builder);
+        new CameraMediatorsInstaller().Install(builder);
+        new SFXMediatorsInstaller().Install(builder);
+        new BirdMediatorsInstaller().Install(builder);
+        new SlingshotMediatorsInstaller().Install(builder);
     }
 }

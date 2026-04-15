@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-public class ScoreCompositionInstaller : IInstaller
+public class ScoreMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
