@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-public class SFXCompositionInstaller : IInstaller
+public class SFXMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
