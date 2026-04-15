@@ -6,6 +6,7 @@ public class LevelLifetimeScope : LifetimeScope
 {
     [SerializeField] private LevelStateInstaller _levelStateInstaller;
     [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
+    [SerializeField] private CameraInstaller _cameraInstaller;
     [SerializeField] private SFXInstaller _sfxInstaller;
     [SerializeField] private BirdInstaller _birdInstaller;
     [SerializeField] private PigInstaller _pigInstaller;
@@ -18,6 +19,7 @@ public class LevelLifetimeScope : LifetimeScope
 
         _levelStateInstaller.Install(builder);
         _levelScoreInstaller.Install(builder);
+        _cameraInstaller.Install(builder);
         _sfxInstaller.Install(builder);
         _birdInstaller.Install(builder);
         _pigInstaller.Install(builder);
