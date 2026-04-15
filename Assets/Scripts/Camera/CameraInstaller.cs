@@ -6,8 +6,8 @@ using VContainer.Unity;
 [Serializable]
 public class CameraInstaller : IInstaller
 {
-    [SerializeField] private CameraNoiseView _cameraNoiseView;
+    [SerializeField] private CameraSwitchingInstaller _switchingInstaller;
 
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterInstance(_cameraNoiseView);
+        _switchingInstaller.Install(builder);
 }
