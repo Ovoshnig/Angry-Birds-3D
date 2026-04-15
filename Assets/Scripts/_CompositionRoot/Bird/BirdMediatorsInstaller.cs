@@ -1,7 +1,7 @@
 ﻿using VContainer;
 using VContainer.Unity;
 
-public class BirdCompositionInstaller : IInstaller
+public class BirdMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {

@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-public class CameraCompositionInstaller : IInstaller
+public class CameraMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
