@@ -1,10 +1,10 @@
 using System;
 
-public class PigHealthModel
+public class HealthModel
 {
     private float _health;
 
-    public PigHealthModel(float health) => _health = health;
+    public HealthModel(float health) => _health = health;
 
     public float Health => _health;
 
