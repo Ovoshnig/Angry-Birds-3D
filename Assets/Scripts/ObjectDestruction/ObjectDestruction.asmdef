@@ -1,0 +1,18 @@
+{
+    "name": "ObjectDestruction",
+    "rootNamespace": "",
+    "references": [
+        "GUID:fa11c0068837bb3478f7546fa7c41f32",
+        "GUID:d3e7d90b77b244e41874da81c5f86368",
+        "GUID:b9a6d7cb7fe0f554fa4c0fefc0a712cf"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
