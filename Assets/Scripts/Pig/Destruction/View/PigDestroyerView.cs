@@ -6,9 +6,9 @@ public class PigDestroyerView : MonoBehaviour
 
     [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
 
-    public PigHealthModel HealthModel { get; private set; }
+    public HealthModel HealthModel { get; private set; }
 
-    private void Awake() => HealthModel = new PigHealthModel(_gameSettings.PigSettings.Health);
+    private void Awake() => HealthModel = new HealthModel(_gameSettings.PigSettings.Health);
 
     public void Damage(float _)
     {

@@ -10,7 +10,7 @@ public abstract class BlockDestroyerView : MonoBehaviour
 
     [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
 
-    public BlockHealthModel HealthModel { get; private set; }
+    public HealthModel HealthModel { get; private set; }
 
     protected BlockSettings BlockSettings => _gameSettings.BlockSettings;
     protected abstract float MaxHealth { get; }
@@ -19,7 +19,7 @@ public abstract class BlockDestroyerView : MonoBehaviour
     {
         _material = GetComponent<MeshRenderer>().material;
 
-        HealthModel = new BlockHealthModel(MaxHealth);
+        HealthModel = new HealthModel(MaxHealth);
     }
 
     public void Damage(float _)

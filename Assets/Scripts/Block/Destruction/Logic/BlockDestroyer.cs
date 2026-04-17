@@ -19,11 +19,11 @@ public class BlockDestroyer : IInitializable, IDisposable
 
     public BlockDestroyer(BlockSettings blockSettings,
         BlockCollisionReporter blockCollisionReporter,
-        ScoreSettings gameSettings)
+        ScoreSettings scoreSettings)
     {
         _blockSettings = blockSettings;
         _blockCollisionReporter = blockCollisionReporter;
-        _scoreSettings = gameSettings;
+        _scoreSettings = scoreSettings;
     }
 
     public Observable<BlockDamageEvent> Collided => _collided;
