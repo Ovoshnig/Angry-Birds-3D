@@ -4,9 +4,8 @@ public class PigColliderMediator : ObjectColliderMediator<PigEntityView>, IStart
 {
     private readonly PigEntityView[] _pigEntityViews;
 
-    public PigColliderMediator(PigCollider pigCollisionReporter,
-        PigEntityView[] pigEntityViews)
-        : base(pigCollisionReporter) => _pigEntityViews = pigEntityViews;
+    public PigColliderMediator(PigCollider pigCollider, PigEntityView[] pigEntityViews)
+        : base(pigCollider) => _pigEntityViews = pigEntityViews;
 
     public override void Initialize()
     {
