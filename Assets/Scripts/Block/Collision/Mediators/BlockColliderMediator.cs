@@ -4,9 +4,8 @@ public class BlockColliderMediator : ObjectColliderMediator<BlockEntityView>, IS
 {
     private readonly BlockEntityView[] _blockEntityViews;
 
-    public BlockColliderMediator(BlockCollider blockCollisionReporter,
-        BlockEntityView[] blockEntityViews)
-        : base(blockCollisionReporter) => _blockEntityViews = blockEntityViews;
+    public BlockColliderMediator(BlockCollider blockCollider, BlockEntityView[] blockEntityViews)
+        : base(blockCollider) => _blockEntityViews = blockEntityViews;
 
     public override void Initialize()
     {

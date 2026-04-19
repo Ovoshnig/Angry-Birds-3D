@@ -27,7 +27,6 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
     public Observable<DestructionEvent<TView>> Destroyed => _destroyed;
 
     protected abstract DestructionPointsSettings DestructionPointsSettings { get; }
-    protected abstract float DamageThreshold { get; }
 
     public void Initialize()
     {
@@ -62,10 +61,9 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
         {
             destroyerView.HealthModel.Decrement(damage);
 
-            if (damage < DamageThreshold)
-                _collided.OnNext(new DamageEvent<TView>(entityView, damage, sfxSettings.CollisionResource));
-            else
-                _damaged.OnNext(new DamageEvent<TView>(entityView, damage, sfxSettings.DamageResource));
+            _collided.OnNext(new DamageEvent<TView>(entityView,
+                damage,
+                sfxSettings.CollisionResource));
         }
     }
 }
