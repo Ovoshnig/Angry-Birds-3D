@@ -11,13 +11,11 @@ public abstract class ObjectDestroyerMediator<TView> : Mediator where TView : Mo
     public override void Initialize()
     {
         _objectDestroyer.Damaged
-            .Subscribe(damageEvent =>
-            _objectDestroyer.GetObjectDestroyerView(damageEvent.EntityView).Damage(damageEvent.Damage))
+            .Subscribe(damageEvent => damageEvent.DestroyerView.Damage(damageEvent.Damage))
             .AddTo(CompositeDisposable);
 
         _objectDestroyer.Destroyed
-            .Subscribe(destructionEvent =>
-            _objectDestroyer.GetObjectDestroyerView(destructionEvent.EntityView).Destroy())
+            .Subscribe(destructionEvent => destructionEvent.DestroyerView.Destroy())
             .AddTo(CompositeDisposable);
     }
 }

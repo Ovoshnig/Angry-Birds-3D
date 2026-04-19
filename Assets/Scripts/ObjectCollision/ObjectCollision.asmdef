@@ -2,7 +2,8 @@
     "name": "ObjectCollision",
     "rootNamespace": "",
     "references": [
-        "GUID:fa11c0068837bb3478f7546fa7c41f32"
+        "GUID:fa11c0068837bb3478f7546fa7c41f32",
+        "GUID:0200b5e7c37305d49adde3e1e1b6bd1d"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

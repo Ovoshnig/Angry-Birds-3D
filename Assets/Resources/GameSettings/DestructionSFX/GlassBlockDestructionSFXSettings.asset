@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda07bacd81e6445ad3183613c74ee6, type: 3}
   m_Name: GlassBlockDestructionSFXSettings
   m_EditorClassIdentifier: GameSettings::DestructionSFXSettings
+  <GlidingResource>k__BackingField: {fileID: 8300000, guid: f5a80e28765349f42876b4904e7b6346, type: 3}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
   <DamageResource>k__BackingField: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}
   <DestructionResource>k__BackingField: {fileID: 6418180475301049370, guid: 770856b674a7ecb4ab350bf7fd5cdf13, type: 2}

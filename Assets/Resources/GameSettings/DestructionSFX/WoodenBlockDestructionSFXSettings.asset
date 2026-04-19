@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda07bacd81e6445ad3183613c74ee6, type: 3}
   m_Name: WoodenBlockDestructionSFXSettings
   m_EditorClassIdentifier: GameSettings::DestructionSFXSettings
+  <GlidingResource>k__BackingField: {fileID: 8300000, guid: fada2396b7fddd44fa4782730b066a82, type: 3}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: 33f0f7e849df3b54c8a1e1dd7bff80e8, type: 2}
   <DamageResource>k__BackingField: {fileID: 6418180475301049370, guid: 241e1b11012a87644a69824e07cc70c2, type: 2}
   <DestructionResource>k__BackingField: {fileID: 6418180475301049370, guid: a519864607e0961408dbdd4d28a16c10, type: 2}
