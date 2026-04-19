@@ -41,9 +41,9 @@ MonoBehaviour:
     <Health>k__BackingField: 100
   <BlockSettings>k__BackingField:
     <DamageThreshold>k__BackingField: 0.2
-    <WoodHealth>k__BackingField: 600
-    <StoneHealth>k__BackingField: 1200
-    <GlassHealth>k__BackingField: 200
+    <WoodHealth>k__BackingField: 400
+    <StoneHealth>k__BackingField: 800
+    <GlassHealth>k__BackingField: 100
   <ScoreSettings>k__BackingField:
     <BlockPointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
     <PigPointsSettings>k__BackingField: {fileID: 11400000, guid: ca051815bf01b9c4eb02b7c528ba635f, type: 2}
