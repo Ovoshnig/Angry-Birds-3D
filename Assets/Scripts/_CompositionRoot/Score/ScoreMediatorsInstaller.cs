@@ -5,10 +5,10 @@ public class ScoreMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<ScoreModelBlockDestroyerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ScoreModelPigDestroyerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<ScoreModelObjectDestroyerMediator<BlockEntityView>>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<ScoreModelObjectDestroyerMediator<PigEntityView>>(Lifetime.Singleton);
 
-        builder.RegisterEntryPoint<PointsObjectPoolBlockDestroyerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<PointsObjectPoolPigDestroyerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator<BlockEntityView>>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator<PigEntityView>>(Lifetime.Singleton);
     }
 }
