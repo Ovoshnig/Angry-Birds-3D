@@ -3,7 +3,7 @@ public class BlockDestroyer : ObjectDestroyer<BlockEntityView>
     private readonly BlockSettings _blockSettings;
     private readonly DestructionPointsSettings _blockPointsSettings;
 
-    public BlockDestroyer(BlockCollisionReporter collisionReporter,
+    public BlockDestroyer(BlockCollider collisionReporter,
         BlockSettings blockSettings, ScoreSettings scoreSettings) : base(collisionReporter)
     {
         _blockSettings = blockSettings;

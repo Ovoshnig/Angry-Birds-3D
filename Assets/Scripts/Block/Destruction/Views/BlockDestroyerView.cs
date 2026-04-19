@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(CollisionView))]
+[RequireComponent(typeof(ObjectColliderView))]
 public abstract class BlockDestroyerView : ObjectDestroyerView
 {
     private Material _material;

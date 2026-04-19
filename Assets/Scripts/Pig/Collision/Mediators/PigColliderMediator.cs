@@ -1,10 +1,10 @@
 using VContainer.Unity;
 
-public class PigCollisionMediator : CollisionMediator<PigEntityView>, IStartable
+public class PigColliderMediator : ObjectColliderMediator<PigEntityView>, IStartable
 {
     private readonly PigEntityView[] _pigEntityViews;
 
-    public PigCollisionMediator(PigCollisionReporter pigCollisionReporter,
+    public PigColliderMediator(PigCollider pigCollisionReporter,
         PigEntityView[] pigEntityViews)
         : base(pigCollisionReporter) => _pigEntityViews = pigEntityViews;
 
@@ -16,8 +16,8 @@ public class PigCollisionMediator : CollisionMediator<PigEntityView>, IStartable
     {
         foreach (var pigEntityView in _pigEntityViews)
         {
-            CollisionView collisionView = pigEntityView.CollisionView;
-            Subscribe(pigEntityView, collisionView);
+            ObjectColliderView colliderView = pigEntityView.ColliderView;
+            Subscribe(pigEntityView, colliderView);
         }
     }
 }
