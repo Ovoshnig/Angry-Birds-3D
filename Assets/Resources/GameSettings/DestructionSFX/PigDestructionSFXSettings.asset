@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda07bacd81e6445ad3183613c74ee6, type: 3}
   m_Name: PigDestructionSFXSettings
   m_EditorClassIdentifier: GameSettings::DestructionSFXSettings
+  <GlidingResource>k__BackingField: {fileID: 6418180475301049370, guid: ca368602840d68b44992745359187494, type: 2}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: ca368602840d68b44992745359187494, type: 2}
   <DamageResource>k__BackingField: {fileID: 6418180475301049370, guid: 3c81b71781e48fc40b3a62614c7a8a3f, type: 2}
   <DestructionResource>k__BackingField: {fileID: 8300000, guid: aa6019f6f1f668e4d9c422ac8cf7ede2, type: 3}

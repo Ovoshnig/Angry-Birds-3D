@@ -1,18 +1,12 @@
 public class BlockDestroyer : ObjectDestroyer<BlockEntityView>
 {
-    private readonly BlockSettings _blockSettings;
     private readonly DestructionPointsSettings _blockPointsSettings;
 
-    public BlockDestroyer(BlockCollisionReporter collisionReporter,
-        BlockSettings blockSettings, ScoreSettings scoreSettings) : base(collisionReporter)
-    {
-        _blockSettings = blockSettings;
-        _blockPointsSettings = scoreSettings.BlockPointsSettings;
-    }
+    public BlockDestroyer(BlockCollider blockCollider, ScoreSettings scoreSettings)
+        : base(blockCollider) => _blockPointsSettings = scoreSettings.BlockPointsSettings;
 
     protected override DestructionPointsSettings DestructionPointsSettings => _blockPointsSettings;
-    protected override float DamageThreshold => _blockSettings.DamageThreshold;
 
-    public override ObjectDestroyerView GetObjectDestroyerView(BlockEntityView entityView) =>
+    protected override ObjectDestroyerView GetObjectDestroyerView(BlockEntityView entityView) =>
         entityView.DestroyerView;
 }

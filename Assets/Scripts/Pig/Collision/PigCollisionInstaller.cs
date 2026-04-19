@@ -7,7 +7,7 @@ public class PigCollisionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.Register<PigCollisionReporter>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<PigCollisionMediator>(Lifetime.Singleton);
+        builder.Register<PigCollider>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<PigColliderMediator>(Lifetime.Singleton);
     }
 }
