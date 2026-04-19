@@ -7,8 +7,8 @@ public class BlockCollisionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.Register<BlockCollisionReporter>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<BlockCollisionMediator>(Lifetime.Singleton);
+        builder.Register<BlockCollider>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<BlockColliderMediator>(Lifetime.Singleton);
     }
 }
 

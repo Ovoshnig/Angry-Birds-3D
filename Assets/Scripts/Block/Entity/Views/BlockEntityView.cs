@@ -1,14 +1,14 @@
 using UnityEngine;
 
-[RequireComponent(typeof(CollisionView))]
+[RequireComponent(typeof(ObjectColliderView))]
 public class BlockEntityView : MonoBehaviour
 {
-    public CollisionView CollisionView { get; private set; }
+    public ObjectColliderView ColliderView { get; private set; }
     public BlockDestroyerView DestroyerView { get; private set; }
 
     private void Awake()
     {
-        CollisionView = GetComponent<CollisionView>();
+        ColliderView = GetComponent<ObjectColliderView>();
         DestroyerView = GetComponent<BlockDestroyerView>();
     }
 }

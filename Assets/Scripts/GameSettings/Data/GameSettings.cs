@@ -6,6 +6,7 @@ public class GameSettings : ScriptableObject
 {
     [field: SerializeField] public SceneSettings SceneSettings { get; private set; }
     [field: SerializeField] public AudioSettings AudioSettings { get; private set; }
+    [field: SerializeField] public ObjectCollisionSettings ObjectCollisionSettings { get; private set; }
     [field: SerializeField] public SlingshotSettings SlingshotSettings { get; private set; }
     [field: SerializeField] public BirdSettings BirdSettings { get; private set; }
     [field: SerializeField] public PigSettings PigSettings { get; private set; }
