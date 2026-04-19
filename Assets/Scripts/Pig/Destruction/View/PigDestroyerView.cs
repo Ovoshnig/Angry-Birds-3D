@@ -1,18 +1,8 @@
-using UnityEngine;
-
-public class PigDestroyerView : MonoBehaviour
+public class PigDestroyerView : ObjectDestroyerView
 {
-    [SerializeField] private GameSettings _gameSettings;
+    protected override float MaxHealth => GameSettings.PigSettings.Health;
 
-    [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
-
-    public HealthModel HealthModel { get; private set; }
-
-    private void Awake() => HealthModel = new HealthModel(_gameSettings.PigSettings.Health);
-
-    public void Damage(float _)
+    public override void Damage(float _)
     {
     }
-
-    public void Destroy() => Destroy(gameObject);
 }
