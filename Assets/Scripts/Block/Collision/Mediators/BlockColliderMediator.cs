@@ -1,10 +1,10 @@
 using VContainer.Unity;
 
-public class BlockCollisionMediator : CollisionMediator<BlockEntityView>, IStartable
+public class BlockColliderMediator : ObjectColliderMediator<BlockEntityView>, IStartable
 {
     private readonly BlockEntityView[] _blockEntityViews;
 
-    public BlockCollisionMediator(BlockCollisionReporter blockCollisionReporter,
+    public BlockColliderMediator(BlockCollider blockCollisionReporter,
         BlockEntityView[] blockEntityViews)
         : base(blockCollisionReporter) => _blockEntityViews = blockEntityViews;
 
@@ -16,8 +16,8 @@ public class BlockCollisionMediator : CollisionMediator<BlockEntityView>, IStart
     {
         foreach (var blockEntityView in _blockEntityViews)
         {
-            CollisionView collisionView = blockEntityView.CollisionView;
-            Subscribe(blockEntityView, collisionView);
+            ObjectColliderView colliderView = blockEntityView.ColliderView;
+            Subscribe(blockEntityView, colliderView);
         }
     }
 }

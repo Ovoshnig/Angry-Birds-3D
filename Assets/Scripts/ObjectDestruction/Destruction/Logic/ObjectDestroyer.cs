@@ -13,14 +13,14 @@ public record DestructionEvent<TView>(TView EntityView, DestructionPointsSetting
 public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
     where TView : MonoBehaviour
 {
-    private readonly CollisionReporter<TView> _collisionReporter;
+    private readonly ObjectCollider<TView> _objectCollider;
     private readonly Subject<DamageEvent<TView>> _collided = new();
     private readonly Subject<DamageEvent<TView>> _damaged = new();
     private readonly Subject<DestructionEvent<TView>> _destroyed = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public ObjectDestroyer(CollisionReporter<TView> collisionReporter) =>
-        _collisionReporter = collisionReporter;
+    public ObjectDestroyer(ObjectCollider<TView> objectCollider) =>
+        _objectCollider = objectCollider;
 
     public Observable<DamageEvent<TView>> Collided => _collided;
     public Observable<DamageEvent<TView>> Damaged => _damaged;
@@ -31,7 +31,7 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
 
     public void Initialize()
     {
-        _collisionReporter.Collided
+        _objectCollider.Collided
             .Subscribe(OnCollided)
             .AddTo(_compositeDisposable);
     }

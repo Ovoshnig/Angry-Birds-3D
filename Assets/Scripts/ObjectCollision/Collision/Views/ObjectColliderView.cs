@@ -2,7 +2,7 @@ using R3;
 using UnityEngine;
 
 [RequireComponent(typeof(Collider))]
-public class CollisionView : MonoBehaviour
+public class ObjectColliderView : MonoBehaviour
 {
     private readonly Subject<Collision> _collided = new();
 
