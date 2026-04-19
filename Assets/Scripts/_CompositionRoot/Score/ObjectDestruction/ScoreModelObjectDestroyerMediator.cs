@@ -15,7 +15,8 @@ public class ScoreModelObjectDestroyerMediator<TView> : Mediator where TView : M
     public override void Initialize()
     {
         _destroyer.Destroyed
-            .Subscribe(destructionEvent => _scoreModel.Increase(destructionEvent.PointsSettings.Points))
+            .Subscribe(destructionEvent =>
+            _scoreModel.Increase(destructionEvent.DestroyerView.PointsSettings.Points))
             .AddTo(CompositeDisposable);
     }
 }

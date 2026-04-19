@@ -2,7 +2,8 @@ using UnityEngine;
 
 public abstract class ObjectDestroyerView : MonoBehaviour
 {
-    [field: SerializeField] public DestructionSFXSettings DestructionSFXSettings { get; private set; }
+    [field: SerializeField] public DestructionPointsSettings PointsSettings { get; private set; }
+    [field: SerializeField] public DestructionSFXSettings SfxSettings { get; private set; }
 
     public HealthModel HealthModel { get; private set; }
 
