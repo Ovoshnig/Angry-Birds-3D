@@ -22,6 +22,9 @@ MonoBehaviour:
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
+  <ObjectCollisionSettings>k__BackingField:
+    <GlidingThreshold>k__BackingField: 0.2
+    <DamageThreshold>k__BackingField: 5
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
       serializedVersion: 2
@@ -37,13 +40,11 @@ MonoBehaviour:
   <BirdSettings>k__BackingField:
     <RotationSpeedThreshold>k__BackingField: 0.5
   <PigSettings>k__BackingField:
-    <DamageThreshold>k__BackingField: 0.2
-    <Health>k__BackingField: 100
+    <Health>k__BackingField: 300
   <BlockSettings>k__BackingField:
-    <DamageThreshold>k__BackingField: 0.2
-    <WoodHealth>k__BackingField: 400
-    <StoneHealth>k__BackingField: 800
-    <GlassHealth>k__BackingField: 100
+    <WoodHealth>k__BackingField: 900
+    <StoneHealth>k__BackingField: 1200
+    <GlassHealth>k__BackingField: 300
   <ScoreSettings>k__BackingField:
     <BlockPointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
     <PigPointsSettings>k__BackingField: {fileID: 11400000, guid: ca051815bf01b9c4eb02b7c528ba635f, type: 2}

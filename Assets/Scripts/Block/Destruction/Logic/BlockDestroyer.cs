@@ -7,6 +7,6 @@ public class BlockDestroyer : ObjectDestroyer<BlockEntityView>
 
     protected override DestructionPointsSettings DestructionPointsSettings => _blockPointsSettings;
 
-    public override ObjectDestroyerView GetObjectDestroyerView(BlockEntityView entityView) =>
+    protected override ObjectDestroyerView GetObjectDestroyerView(BlockEntityView entityView) =>
         entityView.DestroyerView;
 }

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3bda07bacd81e6445ad3183613c74ee6, type: 3}
   m_Name: StoneBlockDestructionSFXSettings
   m_EditorClassIdentifier: GameSettings::DestructionSFXSettings
+  <GlidingResource>k__BackingField: {fileID: 8300000, guid: a2322b215a1334145a808e64ab9fde36, type: 3}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: f267afc87e7735c48af878c0db5dc483, type: 2}
   <DamageResource>k__BackingField: {fileID: 6418180475301049370, guid: b68bccbd198fa0747b0bf4734f0f552e, type: 2}
   <DestructionResource>k__BackingField: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}

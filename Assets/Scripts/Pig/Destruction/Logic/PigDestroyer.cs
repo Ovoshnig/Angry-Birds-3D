@@ -7,6 +7,6 @@ public class PigDestroyer : ObjectDestroyer<PigEntityView>
 
     protected override DestructionPointsSettings DestructionPointsSettings => _pigPointsSettings;
 
-    public override ObjectDestroyerView GetObjectDestroyerView(PigEntityView entityView) =>
+    protected override ObjectDestroyerView GetObjectDestroyerView(PigEntityView entityView) =>
         entityView.DestroyerView;
 }
