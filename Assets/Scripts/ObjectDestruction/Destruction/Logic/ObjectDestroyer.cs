@@ -6,8 +6,8 @@ using VContainer.Unity;
 public record DamageEvent<TView>(ObjectDestroyerView DestroyerView, CollisionType CollisionType,
     float Damage) where TView : MonoBehaviour;
 
-public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView,
-    DestructionPointsSettings PointsSettings) where TView : MonoBehaviour;
+public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView)
+    where TView : MonoBehaviour;
 
 public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
     where TView : MonoBehaviour
@@ -22,8 +22,6 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
 
     public Observable<DamageEvent<TView>> Damaged => _damaged;
     public Observable<DestructionEvent<TView>> Destroyed => _destroyed;
-
-    protected abstract DestructionPointsSettings DestructionPointsSettings { get; }
 
     public void Initialize()
     {
@@ -49,7 +47,7 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
         {
             destroyerView.HealthModel.Decrement(health);
 
-            _destroyed.OnNext(new DestructionEvent<TView>(destroyerView, DestructionPointsSettings));
+            _destroyed.OnNext(new DestructionEvent<TView>(destroyerView));
         }
         else
         {
