@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: PigDestructionSettings
   m_EditorClassIdentifier: GameSettings::DestructionSettings
   <MaxHealth>k__BackingField: 500
-  <PointsSettings>k__BackingField: {fileID: 0}
-  <SfxSettings>k__BackingField: {fileID: 0}
+  <PointsSettings>k__BackingField: {fileID: 11400000, guid: ca051815bf01b9c4eb02b7c528ba635f, type: 2}
+  <SfxSettings>k__BackingField: {fileID: 11400000, guid: 3f3d265e5c19cbc49931e64fdf4de224, type: 2}
