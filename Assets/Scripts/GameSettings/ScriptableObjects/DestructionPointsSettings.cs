@@ -1,7 +1,7 @@
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "DestructionPointsSettings", 
-    menuName = "Scriptable Objects/DestructionPointsSettings")]
+    menuName = "Scriptable Objects/DestructionSettings/Points")]
 public class DestructionPointsSettings : ScriptableObject
 {
     [field: SerializeField, Min(0)] public int Points { get; private set; } = 500;

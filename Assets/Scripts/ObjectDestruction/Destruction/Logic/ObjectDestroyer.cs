@@ -6,8 +6,8 @@ using VContainer.Unity;
 public record DamageEvent<TView>(ObjectDestroyerView DestroyerView, CollisionType CollisionType,
     float Damage) where TView : MonoBehaviour;
 
-public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView,
-    DestructionPointsSettings PointsSettings) where TView : MonoBehaviour;
+public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView)
+    where TView : MonoBehaviour;
 
 public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
     where TView : MonoBehaviour
@@ -22,8 +22,6 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
 
     public Observable<DamageEvent<TView>> Damaged => _damaged;
     public Observable<DestructionEvent<TView>> Destroyed => _destroyed;
-
-    protected abstract DestructionPointsSettings DestructionPointsSettings { get; }
 
     public void Initialize()
     {
@@ -41,21 +39,12 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
         TView entityView = collisionEvent.View;
         ObjectDestroyerView destroyerView = GetObjectDestroyerView(entityView);
 
-        float health = destroyerView.HealthModel.Health;
         float damage = collisionEvent.Force;
-        float resultHealth = health - damage;
+        destroyerView.HealthModel.Decrement(damage);
 
-        if (resultHealth <= 0)
-        {
-            destroyerView.HealthModel.Decrement(health);
-
-            _destroyed.OnNext(new DestructionEvent<TView>(destroyerView, DestructionPointsSettings));
-        }
+        if (destroyerView.HealthModel.Health <= 0)
+            _destroyed.OnNext(new DestructionEvent<TView>(destroyerView));
         else
-        {
-            destroyerView.HealthModel.Decrement(damage);
-
             _damaged.OnNext(new DamageEvent<TView>(destroyerView, collisionEvent.Type, damage));
-        }
     }
 }

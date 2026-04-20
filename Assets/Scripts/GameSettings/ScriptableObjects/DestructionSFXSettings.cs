@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Audio;
 
 [CreateAssetMenu(fileName = "DestructionSFXSettings", 
-    menuName = "Scriptable Objects/DestructionSFXSettings")]
+    menuName = "Scriptable Objects/DestructionSettings/SFX")]
 public class DestructionSFXSettings : ScriptableObject
 {
     [field: SerializeField] public AudioResource GlidingResource { get; private set; }
