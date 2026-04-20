@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -3177365611881303058, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c455d0dd98a3344ea6b8abf5c29115d, type: 2}
     - target: {fileID: 1451839510659646594, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
       propertyPath: _damageRandomContainer
       value: 
@@ -71,28 +75,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -994730806052978491}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
---- !u!1 &3744491793814754763 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2984357389616361924, guid: 88e5b1dd9dc8af54793ff5b1ec3535fd, type: 3}
-  m_PrefabInstance: {fileID: 1917841064217322511}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-994730806052978491
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3744491793814754763}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a213d803804f004894e15d453870e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Block::StoneBlockDestroyerView
-  <PointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
-  <SfxSettings>k__BackingField: {fileID: 11400000, guid: 864bd17620fb3d543ad4fb31d9ca43c5, type: 2}
-  <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}

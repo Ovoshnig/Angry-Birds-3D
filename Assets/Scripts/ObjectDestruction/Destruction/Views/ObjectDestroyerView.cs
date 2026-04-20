@@ -2,16 +2,11 @@ using UnityEngine;
 
 public abstract class ObjectDestroyerView : MonoBehaviour
 {
-    [field: SerializeField] public DestructionPointsSettings PointsSettings { get; private set; }
-    [field: SerializeField] public DestructionSFXSettings SfxSettings { get; private set; }
+    [field: SerializeField] public DestructionSettings Settings { get; private set; }
 
     public HealthModel HealthModel { get; private set; }
 
-    [field: SerializeField] protected GameSettings GameSettings { get; private set; }
-
-    protected abstract float MaxHealth { get; }
-
-    protected virtual void Awake() => HealthModel = new HealthModel(MaxHealth);
+    protected virtual void Awake() => HealthModel = new HealthModel(Settings.MaxHealth);
 
     public abstract void Damage(float value);
 
