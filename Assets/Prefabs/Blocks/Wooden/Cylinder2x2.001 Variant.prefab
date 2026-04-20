@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -5546303489602874776, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     - target: {fileID: 3837350023978478190, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
       propertyPath: m_Name
       value: Cylinder2x2.001 Variant
@@ -73,27 +77,5 @@ PrefabInstance:
     - {fileID: 574597295691879229, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 3837350023978478190, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -6776724510636369341}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
---- !u!1 &3326813993088907273 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3837350023978478190, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
-  m_PrefabInstance: {fileID: 1975450997778944615}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-6776724510636369341
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3326813993088907273}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a42d8a243c11474f96c5621bb1412f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
-  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: c76f2d2297e192c41bc6cd94a29a9006, type: 2}
-  <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}

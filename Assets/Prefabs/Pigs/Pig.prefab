@@ -163,5 +163,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5f201b69ef3c4a879f8c915cbaca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Pig::PigDestroyerView
-  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: 3f3d265e5c19cbc49931e64fdf4de224, type: 2}
+  <PointsSettings>k__BackingField: {fileID: 11400000, guid: ca051815bf01b9c4eb02b7c528ba635f, type: 2}
+  <SfxSettings>k__BackingField: {fileID: 11400000, guid: 3f3d265e5c19cbc49931e64fdf4de224, type: 2}
   <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}

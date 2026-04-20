@@ -1,12 +1,9 @@
 using UnityEngine;
 
 [RequireComponent(typeof(MeshRenderer))]
-[RequireComponent(typeof(ObjectColliderView))]
-public abstract class BlockDestroyerView : ObjectDestroyerView
+public class BlockDestroyerView : ObjectDestroyerView
 {
     private Material _material;
-
-    protected BlockSettings BlockSettings => GameSettings.BlockSettings;
 
     protected override void Awake()
     {
@@ -17,7 +14,7 @@ public abstract class BlockDestroyerView : ObjectDestroyerView
 
     public override void Damage(float _)
     {
-        float crackAmount = 1f - (HealthModel.Health / MaxHealth);
+        float crackAmount = 1f - (HealthModel.Health / Settings.MaxHealth);
         _material.SetFloat(BlockDestructionConstants.CrackAmountName, crackAmount);
     }
 }

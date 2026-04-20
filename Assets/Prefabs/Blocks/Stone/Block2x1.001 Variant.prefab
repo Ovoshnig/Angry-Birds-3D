@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: _destructionRandomContainer
       value: 
       objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
+    - target: {fileID: -6590679793107953740, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 6c455d0dd98a3344ea6b8abf5c29115d, type: 2}
     - target: {fileID: 1572713174019042775, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
@@ -71,27 +75,5 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 7257071955828055853, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 429467257900397327}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
---- !u!1 &1414960643147520789 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 7257071955828055853, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
-  m_PrefabInstance: {fileID: 8580693522336957496}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &429467257900397327
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1414960643147520789}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a213d803804f004894e15d453870e51, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Block::StoneBlockDestroyerView
-  <DestructionSFXSettings>k__BackingField: {fileID: 11400000, guid: 864bd17620fb3d543ad4fb31d9ca43c5, type: 2}
-  <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}

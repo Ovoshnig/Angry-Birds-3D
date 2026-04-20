@@ -8,13 +8,15 @@ public class HealthModel
 
     public float Health => _health;
 
-    public void Decrement(float value)
+    public void Decrement(float amount)
     {
-        if (_health - value < 0)
-            throw new ArgumentOutOfRangeException(
-                nameof(value), 
-                "Decrement value cannot reduce health below zero");
+        if (amount < 0)
+            throw new ArgumentOutOfRangeException(nameof(amount),
+                "Damage cannot be negative.");
 
-        _health -= value;
+        if (amount == 0)
+            return;
+
+        _health -= amount;
     }
 }
