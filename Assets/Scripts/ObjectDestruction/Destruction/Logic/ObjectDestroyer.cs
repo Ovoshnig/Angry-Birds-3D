@@ -39,21 +39,12 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
         TView entityView = collisionEvent.View;
         ObjectDestroyerView destroyerView = GetObjectDestroyerView(entityView);
 
-        float health = destroyerView.HealthModel.Health;
         float damage = collisionEvent.Force;
-        float resultHealth = health - damage;
+        destroyerView.HealthModel.Decrement(damage);
 
-        if (resultHealth <= 0)
-        {
-            destroyerView.HealthModel.Decrement(health);
-
+        if (destroyerView.HealthModel.Health <= 0)
             _destroyed.OnNext(new DestructionEvent<TView>(destroyerView));
-        }
         else
-        {
-            destroyerView.HealthModel.Decrement(damage);
-
             _damaged.OnNext(new DamageEvent<TView>(destroyerView, collisionEvent.Type, damage));
-        }
     }
 }
