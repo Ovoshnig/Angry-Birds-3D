@@ -24,7 +24,7 @@ MonoBehaviour:
     <PoolMaxSize>k__BackingField: 50
   <ObjectCollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.2
-    <DamageThreshold>k__BackingField: 5
+    <DamageThreshold>k__BackingField: 10
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
       serializedVersion: 2
@@ -40,10 +40,10 @@ MonoBehaviour:
   <BirdSettings>k__BackingField:
     <RotationSpeedThreshold>k__BackingField: 0.5
   <PigSettings>k__BackingField:
-    <Health>k__BackingField: 300
+    <Health>k__BackingField: 500
   <BlockSettings>k__BackingField:
-    <WoodHealth>k__BackingField: 900
-    <StoneHealth>k__BackingField: 1200
+    <WoodHealth>k__BackingField: 1000
+    <StoneHealth>k__BackingField: 1300
     <GlassHealth>k__BackingField: 300
   <ScoreSettings>k__BackingField:
     <BlockPointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
