@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: -6465795415378221829}
   - component: {fileID: -7992154655236778579}
   - component: {fileID: -3154733090109343172}
+  - component: {fileID: -6590679793107953740}
   m_Layer: 0
   m_Name: Block2x1.001
   m_TagString: Untagged
@@ -166,3 +167,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CollisionReport::CollisionView
+--- !u!114 &-6590679793107953740
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7257071955828055853}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e730bb49cecadf64f8a6664d5a6e7406, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Block::BlockDestroyerView
+  <Settings>k__BackingField: {fileID: 0}

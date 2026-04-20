@@ -30,7 +30,7 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
     private void OnDamaged(DamageEvent<TView> damageEvent)
     {
         Vector3 position = damageEvent.DestroyerView.transform.position;
-        DestructionSFXSettings sfxSettings = damageEvent.DestroyerView.SfxSettings;
+        DestructionSFXSettings sfxSettings = damageEvent.DestroyerView.Settings.SfxSettings;
 
         AudioResource audioResource = damageEvent.CollisionType switch
         {
@@ -45,8 +45,9 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
 
     private void OnDestroyed(DestructionEvent<TView> destructionEvent)
     {
-        Vector3 position = destructionEvent.DestroyerView.transform.position;
-        AudioResource audioResource = destructionEvent.DestroyerView.SfxSettings.DestructionResource;
+        ObjectDestroyerView destroyerView = destructionEvent.DestroyerView;
+        Vector3 position = destroyerView.transform.position;
+        AudioResource audioResource = destroyerView.Settings.SfxSettings.DestructionResource;
         _playerObjectPool.PlaySFX(position, audioResource);
     }
 }

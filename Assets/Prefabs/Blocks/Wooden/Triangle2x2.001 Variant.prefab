@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9089765524749744440, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     - target: {fileID: 1635774962068890029, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
@@ -73,28 +77,5 @@ PrefabInstance:
     - {fileID: -6138132781109492552, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 4280252254112894352, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -2704229831130676257}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
---- !u!1 &8291089764495262263 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4280252254112894352, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
-  m_PrefabInstance: {fileID: 5217803387418496935}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-2704229831130676257
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8291089764495262263}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0a42d8a243c11474f96c5621bb1412f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Block::WoodenBlockDestroyerView
-  <PointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
-  <SfxSettings>k__BackingField: {fileID: 11400000, guid: c76f2d2297e192c41bc6cd94a29a9006, type: 2}
-  <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}

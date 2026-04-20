@@ -68,31 +68,12 @@ PrefabInstance:
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
       objectReference: {fileID: 2100000, guid: 84d18eb41ffc0224a8fdd3932b8f2ea4, type: 2}
+    - target: {fileID: 6742316701887702087, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5947154743660705667, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: -7825796497281046025}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
---- !u!1 &6242284528813317864 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5947154743660705667, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
-  m_PrefabInstance: {fileID: 299917146832071019}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &-7825796497281046025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6242284528813317864}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ef91a39e3bc7aa409c6a2909122cf4e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Block::GlassBlockDestroyerView
-  <PointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
-  <SfxSettings>k__BackingField: {fileID: 11400000, guid: 72788d67b465d7549b99f75b44595059, type: 2}
-  <GameSettings>k__BackingField: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
