@@ -18,7 +18,8 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
     public override void Initialize()
     {
         _destroyer.Damaged
-            .Where((_, index) => index % 6 == 0)
+            .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
+            || index % 6 == 0)
             .Subscribe(OnDamaged)
             .AddTo(CompositeDisposable);
 
