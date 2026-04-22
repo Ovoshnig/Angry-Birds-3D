@@ -13,8 +13,10 @@ public class SFXPlayerObjectPool : IDisposable
 
     public SFXPlayerObjectPool(SFXPlayerView playerPrefab, AudioSettings audioSettings)
     {
+        Transform playerPoolTransform = new GameObject("SFXPlayerPool").transform;
+
         _sfxPlayerPool = new ObjectPool<SFXPlayerView>(
-            createFunc: () => Object.Instantiate(playerPrefab),
+            createFunc: () => Object.Instantiate(playerPrefab, playerPoolTransform),
             actionOnGet: playerView => playerView.gameObject.SetActive(true),
             actionOnRelease: OnRelease,
             defaultCapacity: audioSettings.PoolDefaultCapacity,
