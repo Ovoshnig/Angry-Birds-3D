@@ -32,11 +32,22 @@ public class SFXPlayerObjectPool : IDisposable
         _subscriptions.Clear();
     }
 
+    public void PlaySFX(AudioResource audioResource)
+    {
+        SFXPlayerView playerView = _sfxPlayerPool.Get();
+        playerView.Play2D(audioResource);
+        SubscribeToRelease(playerView);
+    }
+
     public void PlaySFX(Transform target, AudioResource audioResource)
     {
         SFXPlayerView playerView = _sfxPlayerPool.Get();
-        playerView.Play(target, audioResource);
+        playerView.Play3D(target, audioResource);
+        SubscribeToRelease(playerView);
+    }
 
+    private void SubscribeToRelease(SFXPlayerView playerView)
+    {
         IDisposable subscription = playerView.IsPlaying
             .Where(isPlaying => !isPlaying)
             .Subscribe(_ => _sfxPlayerPool.Release(playerView));
