@@ -7,5 +7,7 @@ public class SFXMediatorsInstaller : IInstaller
     {
         builder.RegisterEntryPoint<SFXPlayerPoolObjectDestroyerMediator<BlockEntityView>>(Lifetime.Singleton);
         builder.RegisterEntryPoint<SFXPlayerPoolObjectDestroyerMediator<PigEntityView>>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<SFXPlayerPoolSlingshotShooterMediator>(Lifetime.Singleton);
     }
 }

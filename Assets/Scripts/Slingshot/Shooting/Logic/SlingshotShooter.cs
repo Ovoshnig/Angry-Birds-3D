@@ -17,7 +17,7 @@ public class SlingshotShooter : IInitializable, IDisposable
     private readonly Vector3 _rightAnchorPosition;
     private readonly Vector3 _centerAnchorPosition;
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
-    private readonly Subject<Unit> _draggingStarted = new();
+    private readonly Subject<Rigidbody> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _leftButtonDisposable = new();
     private readonly CompositeDisposable _dragDisposable = new();
@@ -47,7 +47,7 @@ public class SlingshotShooter : IInitializable, IDisposable
     }
 
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
-    public Observable<Unit> DraggingStarted => _draggingStarted;
+    public Observable<Rigidbody> DraggingStarted => _draggingStarted;
     public Observable<Rigidbody> Shot => _shot;
 
     public void Initialize()
@@ -96,7 +96,7 @@ public class SlingshotShooter : IInitializable, IDisposable
 
             _slingshotInputHandler.DragInput
                 .Take(1)
-                .Subscribe(_ => _draggingStarted.OnNext(Unit.Default))
+                .Subscribe(_ => _draggingStarted.OnNext(_currentBird))
                 .AddTo(_dragDisposable);
         }
     }

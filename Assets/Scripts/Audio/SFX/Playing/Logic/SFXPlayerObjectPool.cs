@@ -13,8 +13,10 @@ public class SFXPlayerObjectPool : IDisposable
 
     public SFXPlayerObjectPool(SFXPlayerView playerPrefab, AudioSettings audioSettings)
     {
+        Transform playerPoolTransform = new GameObject("SFXPlayerPool").transform;
+
         _sfxPlayerPool = new ObjectPool<SFXPlayerView>(
-            createFunc: () => Object.Instantiate(playerPrefab),
+            createFunc: () => Object.Instantiate(playerPrefab, playerPoolTransform),
             actionOnGet: playerView => playerView.gameObject.SetActive(true),
             actionOnRelease: OnRelease,
             defaultCapacity: audioSettings.PoolDefaultCapacity,
@@ -30,11 +32,22 @@ public class SFXPlayerObjectPool : IDisposable
         _subscriptions.Clear();
     }
 
-    public void PlaySFX(Vector3 position, AudioResource audioResource)
+    public void PlaySFX(AudioResource audioResource)
     {
         SFXPlayerView playerView = _sfxPlayerPool.Get();
-        playerView.Play(position, audioResource);
+        playerView.Play2D(audioResource);
+        SubscribeToRelease(playerView);
+    }
 
+    public void PlaySFX(Transform target, AudioResource audioResource)
+    {
+        SFXPlayerView playerView = _sfxPlayerPool.Get();
+        playerView.Play3D(target, audioResource);
+        SubscribeToRelease(playerView);
+    }
+
+    private void SubscribeToRelease(SFXPlayerView playerView)
+    {
         IDisposable subscription = playerView.IsPlaying
             .Where(isPlaying => !isPlaying)
             .Subscribe(_ => _sfxPlayerPool.Release(playerView));
@@ -46,6 +59,7 @@ public class SFXPlayerObjectPool : IDisposable
     {
         _subscriptions[playerView].Dispose();
         _subscriptions.Remove(playerView);
+
         playerView.gameObject.SetActive(false);
     }
 }
