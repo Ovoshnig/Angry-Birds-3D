@@ -18,21 +18,25 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
 
     public override void Initialize()
     {
-        Vector3 position = _shooterView.transform.position;
+        Transform shooterTransform = _shooterView.transform;
 
         _shooter.DraggingStarted
             .Subscribe(bird =>
             {
-                _playerObjectPool.PlaySFX(position, bird.GetComponent<BirdFlyerView>().SelectionResource);
-                _playerObjectPool.PlaySFX(position, _shooterView.DraggingResource);
+                BirdFlyerView birdView = bird.GetComponent<BirdFlyerView>();
+
+                _playerObjectPool.PlaySFX(bird.transform, birdView.SelectionResource);
+                _playerObjectPool.PlaySFX(shooterTransform, _shooterView.DraggingResource);
             })
             .AddTo(CompositeDisposable);
 
         _shooter.Shot
             .Subscribe(bird =>
             {
-                _playerObjectPool.PlaySFX(position, _shooterView.ShotResource);
-                _playerObjectPool.PlaySFX(position, bird.GetComponent<BirdFlyerView>().FlyingResource);
+                BirdFlyerView birdView = bird.GetComponent<BirdFlyerView>();
+
+                _playerObjectPool.PlaySFX(bird.transform, _shooterView.ShotResource);
+                _playerObjectPool.PlaySFX(shooterTransform, birdView.FlyingResource);
             })
             .AddTo(CompositeDisposable);
     }
