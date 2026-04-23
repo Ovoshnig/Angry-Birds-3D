@@ -6,8 +6,7 @@ using VContainer.Unity;
 [Serializable]
 public class SlingshotInstaller : IInstaller
 {
-    [SerializeField] private SlingshotShootingInstaller _slingshotShootingInstaller  ;
-    [SerializeField] private SlingshotSFXPlayingInstaller _slingshotSFXPlayingInstaller;
+    [SerializeField] private SlingshotShootingInstaller _slingshotShootingInstaller;
 
     public void Install(IContainerBuilder builder)
     {
@@ -15,6 +14,5 @@ public class SlingshotInstaller : IInstaller
             .AsSelf();
 
         _slingshotShootingInstaller.Install(builder);
-        _slingshotSFXPlayingInstaller.Install(builder);
     }
 }

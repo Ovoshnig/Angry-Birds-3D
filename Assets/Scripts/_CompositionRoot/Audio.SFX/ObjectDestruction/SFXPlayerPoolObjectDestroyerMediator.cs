@@ -18,7 +18,8 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
     public override void Initialize()
     {
         _destroyer.Damaged
-            .Where((_, index) => index % 6 == 0)
+            .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
+            || index % 6 == 0)
             .Subscribe(OnDamaged)
             .AddTo(CompositeDisposable);
 
@@ -29,7 +30,7 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
 
     private void OnDamaged(DamageEvent<TView> damageEvent)
     {
-        Vector3 position = damageEvent.DestroyerView.transform.position;
+        Transform target = damageEvent.DestroyerView.transform;
         DestructionSFXSettings sfxSettings = damageEvent.DestroyerView.Settings.SfxSettings;
 
         AudioResource audioResource = damageEvent.CollisionType switch
@@ -40,14 +41,14 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
             _ => sfxSettings.DestructionResource
         };
 
-        _playerObjectPool.PlaySFX(position, audioResource);
+        _playerObjectPool.PlaySFX(target, audioResource);
     }
 
     private void OnDestroyed(DestructionEvent<TView> destructionEvent)
     {
         ObjectDestroyerView destroyerView = destructionEvent.DestroyerView;
-        Vector3 position = destroyerView.transform.position;
+        Transform parent = destroyerView.transform;
         AudioResource audioResource = destroyerView.Settings.SfxSettings.DestructionResource;
-        _playerObjectPool.PlaySFX(position, audioResource);
+        _playerObjectPool.PlaySFX(parent, audioResource);
     }
 }
