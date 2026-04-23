@@ -32,10 +32,10 @@ public class SFXPlayerObjectPool : IDisposable
         _subscriptions.Clear();
     }
 
-    public void PlaySFX(Vector3 position, AudioResource audioResource)
+    public void PlaySFX(Transform target, AudioResource audioResource)
     {
         SFXPlayerView playerView = _sfxPlayerPool.Get();
-        playerView.Play(position, audioResource);
+        playerView.Play(target, audioResource);
 
         IDisposable subscription = playerView.IsPlaying
             .Where(isPlaying => !isPlaying)
@@ -48,6 +48,7 @@ public class SFXPlayerObjectPool : IDisposable
     {
         _subscriptions[playerView].Dispose();
         _subscriptions.Remove(playerView);
+
         playerView.gameObject.SetActive(false);
     }
 }
