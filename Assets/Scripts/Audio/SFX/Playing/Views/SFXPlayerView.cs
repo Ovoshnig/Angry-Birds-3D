@@ -28,8 +28,17 @@ public class SFXPlayerView : MonoBehaviour
             .AddTo(this);
     }
 
-    public void Play(Transform target, AudioResource audioResource)
+    public void Play2D(AudioResource audioResource)
     {
+        _audioSource.spatialBlend = 0f;
+        _audioSource.resource = audioResource;
+        _audioSource.Play();
+        _isPlaying.Value = true;
+    }
+
+    public void Play3D(Transform target, AudioResource audioResource)
+    {
+        _audioSource.spatialBlend = 1f;
         _audioSource.resource = audioResource;
         _audioSource.Play();
         _isPlaying.Value = true;

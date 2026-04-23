@@ -35,8 +35,8 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
             {
                 BirdFlyerView birdView = bird.GetComponent<BirdFlyerView>();
 
-                _playerObjectPool.PlaySFX(bird.transform, _shooterView.ShotResource);
-                _playerObjectPool.PlaySFX(shooterTransform, birdView.FlyingResource);
+                _playerObjectPool.PlaySFX(shooterTransform, _shooterView.ShotResource);
+                _playerObjectPool.PlaySFX(bird.transform, birdView.FlyingResource);
             })
             .AddTo(CompositeDisposable);
     }
