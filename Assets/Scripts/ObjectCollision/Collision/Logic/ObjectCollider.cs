@@ -11,10 +11,10 @@ public record CollisionEvent<TView>(TView View, CollisionType Type, float Force)
 
 public class ObjectCollider<TView> where TView : MonoBehaviour
 {
-    private readonly ObjectCollisionSettings _collisionSettings;
+    private readonly CollisionSettings _collisionSettings;
     private readonly Subject<CollisionEvent<TView>> _collided = new();
 
-    public ObjectCollider(ObjectCollisionSettings collisionSettings) => 
+    public ObjectCollider(CollisionSettings collisionSettings) => 
         _collisionSettings = collisionSettings;
 
     public Observable<CollisionEvent<TView>> Collided => _collided;
@@ -33,10 +33,12 @@ public class ObjectCollider<TView> where TView : MonoBehaviour
 
         if (impactForce >= _collisionSettings.DamageThreshold)
             collisionType = CollisionType.Damage;
+        else if (impactForce >= _collisionSettings.CollisionThreshold)
+            collisionType = CollisionType.Collision;
         else if (isGliding)
             collisionType = CollisionType.Gliding;
         else
-            collisionType = CollisionType.Collision;
+            return;
 
         _collided.OnNext(new CollisionEvent<TView>(view, collisionType, impactForce));
     }
