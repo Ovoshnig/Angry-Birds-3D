@@ -1,6 +1,6 @@
 public class BlockCollider : ObjectCollider<BlockEntityView>
 {
-    public BlockCollider(ObjectCollisionSettings collisionSettings) : base(collisionSettings)
+    public BlockCollider(CollisionSettings collisionSettings) : base(collisionSettings)
     {
     }
 }
