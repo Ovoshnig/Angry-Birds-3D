@@ -12,8 +12,10 @@ public class PointsObjectPool : IDisposable
 
     public PointsObjectPool(PointsView pointsPrefab, ScoreSettings scoreSettings)
     {
+        Transform pointsPoolTransform = new GameObject("PointsPool").transform;
+
         _pointsPool = new ObjectPool<PointsView>(
-            createFunc: () => Object.Instantiate(pointsPrefab),
+            createFunc: () => Object.Instantiate(pointsPrefab, pointsPoolTransform),
             actionOnGet: pointsView => pointsView.gameObject.SetActive(true),
             actionOnRelease: OnRelease,
             defaultCapacity: scoreSettings.PoolDefaultCapacity,
