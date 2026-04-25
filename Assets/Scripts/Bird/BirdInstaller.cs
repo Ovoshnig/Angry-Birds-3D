@@ -6,12 +6,14 @@ using VContainer.Unity;
 [Serializable]
 public class BirdInstaller : IInstaller
 {
-    [SerializeField] private BirdQueueInstaller _birdQueueInstaller;
-    [SerializeField] private BirdFlightInstaller _birdFlightInstaller;
+    [SerializeField] private BirdEntityInstaller _entityInstaller;
+    [SerializeField] private BirdQueueInstaller _queueInstaller;
+    [SerializeField] private BirdFlightInstaller _flightInstaller;
 
     public void Install(IContainerBuilder builder)
     {
-        _birdQueueInstaller.Install(builder);
-        _birdFlightInstaller.Install(builder);
+        _entityInstaller.Install(builder);
+        _queueInstaller.Install(builder);
+        _flightInstaller.Install(builder);
     }
 }

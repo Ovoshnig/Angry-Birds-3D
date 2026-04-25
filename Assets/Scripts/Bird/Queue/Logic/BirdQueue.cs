@@ -5,18 +5,18 @@ using VContainer.Unity;
 
 public class BirdQueue : IPostInitializable, IDisposable
 {
-    private readonly Queue<BirdFlyerView> _birdFlyerQueue;
+    private readonly Queue<BirdEntityView> _queue;
     private readonly BirdFlyer _birdFlyer;
-    private readonly Subject<BirdFlyerView> _birdDequeued = new();
+    private readonly Subject<BirdEntityView> _birdDequeued = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public BirdQueue(BirdFlyerView[] birdFlyerViews, BirdFlyer birdFlyer)
+    public BirdQueue(BirdEntityView[] entityViews, BirdFlyer birdFlyer)
     {
-        _birdFlyerQueue = new Queue<BirdFlyerView>(birdFlyerViews);
+        _queue = new Queue<BirdEntityView>(entityViews);
         _birdFlyer = birdFlyer;
     }
 
-    public Observable<BirdFlyerView> BirdDequeued => _birdDequeued;
+    public Observable<BirdEntityView> BirdDequeued => _birdDequeued;
 
     public void PostInitialize()
     {
@@ -31,10 +31,10 @@ public class BirdQueue : IPostInitializable, IDisposable
 
     public bool TryDequeueBird()
     {
-        if (_birdFlyerQueue.TryDequeue(out BirdFlyerView birdFlyerView))
+        if (_queue.TryDequeue(out BirdEntityView entityView))
         {
-            birdFlyerView.transform.SetParent(null);
-            _birdDequeued.OnNext(birdFlyerView);
+            entityView.transform.SetParent(null);
+            _birdDequeued.OnNext(entityView);
             return true;
         }
 

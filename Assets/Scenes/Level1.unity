@@ -1262,7 +1262,7 @@ MonoBehaviour:
   _sfxInstaller:
     _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
   _birdInstaller:
-    _birdQueueInstaller:
+    _entityInstaller:
       _birdQueue: {fileID: 878781362}
   _pigInstaller:
     _pigEntityInstaller:

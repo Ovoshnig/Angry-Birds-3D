@@ -16,9 +16,9 @@ public class SlingshotShooterBirdQueueMediator : Mediator
     public override void Initialize()
     {
         _birdQueue.BirdDequeued
-            .Subscribe(birdFlyerView =>
+            .Subscribe(birdEntityView =>
             {
-                Rigidbody birdRigidbody = birdFlyerView.GetComponent<Rigidbody>();
+                Rigidbody birdRigidbody = birdEntityView.FlyerView.Rigidbody;
                 _slingshotShooter.SetCurrentBird(birdRigidbody);
             })
             .AddTo(CompositeDisposable);

@@ -22,9 +22,10 @@ MonoBehaviour:
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
-  <ObjectCollisionSettings>k__BackingField:
+  <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.2
     <DamageThreshold>k__BackingField: 10
+    <CollisionThreshold>k__BackingField: 0.001
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
       serializedVersion: 2

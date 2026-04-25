@@ -2,14 +2,28 @@ using R3;
 using UnityEngine;
 using UnityEngine.Audio;
 
+[RequireComponent(typeof(Rigidbody))]
 public class BirdFlyerView : MonoBehaviour
 {
+    private readonly ReactiveProperty<bool> _collided = new(false);
+
+    private Rigidbody _rigidbody = null;
+
     [field: SerializeField] public AudioResource SelectionResource { get; private set; }
     [field: SerializeField] public AudioResource FlyingResource { get; private set; }
 
-    private readonly ReactiveProperty<bool> _wasCollided = new(false);
+    public Rigidbody Rigidbody
+    {
+        get
+        {
+            if (_rigidbody == null)
+                _rigidbody = GetComponent<Rigidbody>();
 
-    public ReadOnlyReactiveProperty<bool> Collided => _wasCollided;
+            return _rigidbody;
+        }
+    }
 
-    private void OnCollisionEnter(Collision collision) => _wasCollided.Value = true;
+    public ReadOnlyReactiveProperty<bool> Collided => _collided;
+
+    private void OnCollisionEnter(Collision collision) => _collided.Value = true;
 }
