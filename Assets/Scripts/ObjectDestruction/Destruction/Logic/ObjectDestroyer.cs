@@ -43,8 +43,14 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
         destroyerView.HealthModel.Decrement(damage);
 
         if (destroyerView.HealthModel.Health <= 0)
+        {
+            destroyerView.Destroy();
             _destroyed.OnNext(new DestructionEvent<TView>(destroyerView));
+        }
         else
+        {
+            destroyerView.Damage(damage);
             _damaged.OnNext(new DamageEvent<TView>(destroyerView, collisionEvent.Type, damage));
+        }
     }
 }
