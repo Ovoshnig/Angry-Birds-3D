@@ -154,8 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ff21837565fb540b465c0b9281842a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BirdFlyerView
-  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 3518181d6554f0043ac658749fd99c74, type: 3}
-  <FlyingResource>k__BackingField: {fileID: 8300000, guid: 28057804ebac4654680c037c959be062, type: 3}
 --- !u!114 &6871059615493801463
 MonoBehaviour:
   m_ObjectHideFlags: 0
