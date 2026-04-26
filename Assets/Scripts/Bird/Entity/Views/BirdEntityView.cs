@@ -4,6 +4,8 @@ using UnityEngine;
 [RequireComponent(typeof(ObjectColliderView))]
 public class BirdEntityView : MonoBehaviour
 {
+    [field: SerializeField] public BirdSFXSettings SFXSettings { get; private set; }
+
     private BirdFlyerView _flyerView = null;
     private ObjectColliderView _colliderView = null;
 
