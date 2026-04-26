@@ -1,5 +1,7 @@
 ﻿using R3;
+using System;
 using UnityEngine;
+using VContainer.Unity;
 
 public enum CollisionType
 {
@@ -9,17 +11,39 @@ public enum CollisionType
 public record CollisionEvent<TView>(TView View, CollisionType Type, float Force)
     where TView : MonoBehaviour;
 
-public class ObjectCollider<TView> where TView : MonoBehaviour
+public abstract class ObjectCollider<TView> : IStartable, IDisposable
+    where TView : MonoBehaviour
 {
+    private readonly TView[] _entityViews;
     private readonly CollisionSettings _collisionSettings;
     private readonly Subject<CollisionEvent<TView>> _collided = new();
+    private readonly CompositeDisposable _compositeDisposable = new();
 
-    public ObjectCollider(CollisionSettings collisionSettings) => 
+    public ObjectCollider(TView[] entityViews, CollisionSettings collisionSettings)
+    {
+        _entityViews = entityViews;
         _collisionSettings = collisionSettings;
+    }
 
     public Observable<CollisionEvent<TView>> Collided => _collided;
 
-    public void Collide(TView view, Collision collision)
+    public void Start()
+    {
+        foreach (var entityView in _entityViews)
+        {
+            ObjectColliderView colliderView = GetObjectColliderView(entityView);
+
+            colliderView.Collided
+                .Subscribe(collision => OnCollided(entityView, collision))
+                .AddTo(_compositeDisposable);
+        }
+    }
+
+    public void Dispose() => _compositeDisposable.Dispose();
+
+    protected abstract ObjectColliderView GetObjectColliderView(TView entityView);
+
+    private void OnCollided(TView entityView, Collision collision)
     {
         float impactForce = collision.impulse.magnitude / Time.fixedDeltaTime;
 
@@ -40,6 +64,6 @@ public class ObjectCollider<TView> where TView : MonoBehaviour
         else
             return;
 
-        _collided.OnNext(new CollisionEvent<TView>(view, collisionType, impactForce));
+        _collided.OnNext(new CollisionEvent<TView>(entityView, collisionType, impactForce));
     }
 }
