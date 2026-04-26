@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f08d5ecbaa84949ae455909ed79ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdEntityView
+  <SFXSettings>k__BackingField: {fileID: 11400000, guid: e9ce99381149b264d90bccae8adcc1c7, type: 2}
 --- !u!114 &-2481184969509091846
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,8 +154,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ff21837565fb540b465c0b9281842a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BirdFlyerView
-  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 3518181d6554f0043ac658749fd99c74, type: 3}
-  <FlyingResource>k__BackingField: {fileID: 8300000, guid: 28057804ebac4654680c037c959be062, type: 3}
 --- !u!114 &6871059615493801463
 MonoBehaviour:
   m_ObjectHideFlags: 0

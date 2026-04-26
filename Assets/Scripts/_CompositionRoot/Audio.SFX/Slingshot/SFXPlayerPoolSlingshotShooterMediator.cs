@@ -23,9 +23,9 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
         _shooter.DraggingStarted
             .Subscribe(bird =>
             {
-                BirdFlyerView birdView = bird.GetComponent<BirdFlyerView>();
+                BirdSFXSettings birdSfxSettings = bird.GetComponent<BirdEntityView>().SFXSettings;
 
-                _playerObjectPool.PlaySFX(bird.transform, birdView.SelectionResource);
+                _playerObjectPool.PlaySFX(bird.transform, birdSfxSettings.SelectionResource);
                 _playerObjectPool.PlaySFX(shooterTransform, _shooterView.DraggingResource);
             })
             .AddTo(CompositeDisposable);
@@ -33,10 +33,10 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
         _shooter.Shot
             .Subscribe(bird =>
             {
-                BirdFlyerView birdView = bird.GetComponent<BirdFlyerView>();
+                BirdSFXSettings birdSfxSettings = bird.GetComponent<BirdEntityView>().SFXSettings;
 
                 _playerObjectPool.PlaySFX(shooterTransform, _shooterView.ShotResource);
-                _playerObjectPool.PlaySFX(bird.transform, birdView.FlyingResource);
+                _playerObjectPool.PlaySFX(bird.transform, birdSfxSettings.FlyingResource);
             })
             .AddTo(CompositeDisposable);
     }

@@ -1,6 +1,5 @@
 using R3;
 using UnityEngine;
-using UnityEngine.Audio;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BirdFlyerView : MonoBehaviour
@@ -8,9 +7,6 @@ public class BirdFlyerView : MonoBehaviour
     private readonly ReactiveProperty<bool> _collided = new(false);
 
     private Rigidbody _rigidbody = null;
-
-    [field: SerializeField] public AudioResource SelectionResource { get; private set; }
-    [field: SerializeField] public AudioResource FlyingResource { get; private set; }
 
     public Rigidbody Rigidbody
     {
