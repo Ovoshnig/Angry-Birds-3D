@@ -15,4 +15,10 @@ public class BirdFlyerView : MonoBehaviour
             return _rigidbody;
         }
     }
+
+    public void LookAtVelocityDirection()
+    {
+        if (_rigidbody.linearVelocity.sqrMagnitude != 0f)
+            _rigidbody.transform.forward = _rigidbody.linearVelocity.normalized;
+    }
 }
