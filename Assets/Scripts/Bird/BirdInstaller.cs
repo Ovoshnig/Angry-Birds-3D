@@ -10,6 +10,7 @@ public class BirdInstaller : IInstaller
     [SerializeField] private BirdQueueInstaller _queueInstaller;
     [SerializeField] private BirdFlightInstaller _flightInstaller;
     [SerializeField] private BirdCollisionInstaller _collisionInstaller;
+    [SerializeField] private BirdDestructionInstaller _destructionInstaller;
 
     public void Install(IContainerBuilder builder)
     {
@@ -17,5 +18,6 @@ public class BirdInstaller : IInstaller
         _queueInstaller.Install(builder);
         _flightInstaller.Install(builder);
         _collisionInstaller.Install(builder);
+        _destructionInstaller.Install(builder);
     }
 }
