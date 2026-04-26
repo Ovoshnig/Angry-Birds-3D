@@ -25,16 +25,16 @@ public class BirdDestroyer : IInitializable, IDisposable
             .Where(@event => !@event.View.DestroyerView.IsDestroying)
             .Do(@event =>
             {
-                _destructionStarted.OnNext(@event.View);
                 @event.View.DestroyerView.StartDestroying();
+                _destructionStarted.OnNext(@event.View);
             })
             .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
             .Subscribe(@event =>
             {
                 if (@event.View != null)
                 {
-                    _destroyed.OnNext(@event.View);
                     @event.View.DestroyerView.Destroy();
+                    _destroyed.OnNext(@event.View);
                 }
             })
             .AddTo(_compositeDisposable);
