@@ -1,11 +1,8 @@
-using R3;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BirdFlyerView : MonoBehaviour
 {
-    private readonly ReactiveProperty<bool> _collided = new(false);
-
     private Rigidbody _rigidbody = null;
 
     public Rigidbody Rigidbody
@@ -19,7 +16,9 @@ public class BirdFlyerView : MonoBehaviour
         }
     }
 
-    public ReadOnlyReactiveProperty<bool> Collided => _collided;
-
-    private void OnCollisionEnter(Collision collision) => _collided.Value = true;
+    public void LookAtVelocityDirection()
+    {
+        if (_rigidbody.linearVelocity.sqrMagnitude != 0f)
+            _rigidbody.transform.forward = _rigidbody.linearVelocity.normalized;
+    }
 }
