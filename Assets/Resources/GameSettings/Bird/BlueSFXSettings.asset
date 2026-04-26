@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dc7d9a7e32c074ba80e204932bf5f0, type: 3}
+  m_Name: BlueSFXSettings
+  m_EditorClassIdentifier: GameSettings::BirdSFXSettings
+  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 83844f0cc02be6d419f90bb0d582de85, type: 3}
+  <FlyingResource>k__BackingField: {fileID: 8300000, guid: d9b8357537561484081ff28dae1c8f7e, type: 3}
+  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: a6fffc07fa358d345b92aa4851e8b736, type: 2}
+  <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}
