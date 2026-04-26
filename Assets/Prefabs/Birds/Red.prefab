@@ -72,6 +72,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 424ddeee1b62bda4cb7784e6a52c3319, type: 3}
       insertIndex: -1
       addedObject: {fileID: -2481184969509091846}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 424ddeee1b62bda4cb7784e6a52c3319, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6871059615493801463}
   m_SourcePrefab: {fileID: 100100000, guid: 424ddeee1b62bda4cb7784e6a52c3319, type: 3}
 --- !u!1 &8489472657819736550 stripped
 GameObject:
@@ -152,3 +155,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::BirdFlyerView
   <SelectionResource>k__BackingField: {fileID: 8300000, guid: 3518181d6554f0043ac658749fd99c74, type: 3}
   <FlyingResource>k__BackingField: {fileID: 8300000, guid: 28057804ebac4654680c037c959be062, type: 3}
+--- !u!114 &6871059615493801463
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8489472657819736550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7e6ae842b4829e47b7dfe501031cdd8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: ObjectCollision::ObjectColliderView
