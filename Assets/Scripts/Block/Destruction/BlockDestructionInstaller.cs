@@ -10,7 +10,5 @@ public class BlockDestructionInstaller : IInstaller
         builder.RegisterEntryPoint<BlockDestroyer>(Lifetime.Singleton)
             .AsSelf()
             .As<ObjectDestroyer<BlockEntityView>>();
-
-        builder.RegisterEntryPoint<BlockDestroyerMediator>(Lifetime.Singleton);
     }
 }
