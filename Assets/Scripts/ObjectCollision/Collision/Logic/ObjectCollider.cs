@@ -45,9 +45,12 @@ public abstract class ObjectCollider<TView> : IStartable, IDisposable
 
     private void OnCollided(TView entityView, Collision collision)
     {
+        if (collision.contactCount == 0)
+            return;
+
         float impactForce = collision.impulse.magnitude / Time.fixedDeltaTime;
 
-        Vector3 contactNormal = collision.contacts[0].normal;
+        Vector3 contactNormal = collision.GetContact(0).normal;
         Vector3 impactVelocity = collision.relativeVelocity.normalized;
 
         float hitAngle = Mathf.Abs(Vector3.Dot(contactNormal, impactVelocity));
