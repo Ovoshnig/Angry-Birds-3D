@@ -14,7 +14,6 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.AudioSettings);
         builder.RegisterInstance(_gameSettings.CollisionSettings);
         builder.RegisterInstance(_gameSettings.SlingshotSettings);
-        builder.RegisterInstance(_gameSettings.BirdSettings);
         builder.RegisterInstance(_gameSettings.ScoreSettings);
     }
 }
