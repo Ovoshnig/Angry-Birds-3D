@@ -10,7 +10,5 @@ public class PigDestructionInstaller : IInstaller
         builder.RegisterEntryPoint<PigDestroyer>(Lifetime.Singleton)
             .AsSelf()
             .As<ObjectDestroyer<PigEntityView>>();
-
-        builder.RegisterEntryPoint<PigDestroyerMediator>(Lifetime.Singleton);
     }
 }

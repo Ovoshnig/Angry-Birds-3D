@@ -39,7 +39,7 @@ MonoBehaviour:
     <RubberWrapOffset>k__BackingField: 0.6
     <SlingshotCollisionOffset>k__BackingField: 0.3
   <BirdSettings>k__BackingField:
-    <RotationSpeedThreshold>k__BackingField: 0.5
+    <DestructionDelay>k__BackingField: 5
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10
