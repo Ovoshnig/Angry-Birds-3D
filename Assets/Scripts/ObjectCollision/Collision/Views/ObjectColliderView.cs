@@ -9,4 +9,6 @@ public class ObjectColliderView : MonoBehaviour
     public Observable<Collision> Collided => _collided;
 
     private void OnCollisionEnter(Collision collision) => _collided.OnNext(collision);
+
+    private void OnDestroy() => _collided.Dispose();
 }

@@ -1,6 +1,10 @@
 public class BirdCollider : ObjectCollider<BirdEntityView>
 {
-    public BirdCollider(CollisionSettings collisionSettings) : base(collisionSettings)
+    public BirdCollider(BirdEntityView[] entityViews, CollisionSettings collisionSettings) 
+        : base(entityViews, collisionSettings)
     {
     }
+
+    protected override ObjectColliderView GetObjectColliderView(BirdEntityView entityView) =>
+        entityView.ColliderView;
 }

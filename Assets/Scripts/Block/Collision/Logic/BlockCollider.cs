@@ -1,6 +1,10 @@
 public class BlockCollider : ObjectCollider<BlockEntityView>
 {
-    public BlockCollider(CollisionSettings collisionSettings) : base(collisionSettings)
+    public BlockCollider(BlockEntityView[] entityViews, CollisionSettings collisionSettings)
+        : base(entityViews, collisionSettings)
     {
     }
+
+    protected override ObjectColliderView GetObjectColliderView(BlockEntityView entityView) =>
+        entityView.ColliderView;
 }

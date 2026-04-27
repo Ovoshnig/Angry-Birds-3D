@@ -20,6 +20,9 @@ public class BirdQueue : IPostInitializable, IDisposable
 
     public void PostInitialize()
     {
+        foreach (var entityView in _queue)
+            entityView.FlyerView.Rigidbody.detectCollisions = false;
+
         TryDequeueBird();
 
         _birdFlyer.BirdCollided
