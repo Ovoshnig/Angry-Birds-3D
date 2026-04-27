@@ -29,10 +29,6 @@ public abstract class ButtonView : MonoBehaviour
             .AddTo(this);
     }
 
-    protected virtual void Start()
-    {
-    }
-
     protected virtual void OnDestroy() => _clicked.Dispose();
 
     public void SetEnable(bool value) => enabled = value;
