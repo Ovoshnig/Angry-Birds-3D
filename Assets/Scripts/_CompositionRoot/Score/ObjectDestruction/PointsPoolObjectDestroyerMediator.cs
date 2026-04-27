@@ -13,8 +13,12 @@ public class PointsPoolObjectDestroyerMediator<TView> : Mediator where TView : M
         _destroyer = destroyer;
     }
 
-    public override void Initialize() =>
-        _destroyer.Destroyed.Subscribe(OnDestroyed).AddTo(CompositeDisposable);
+    public override void Initialize()
+    {
+        _destroyer.Destroyed
+            .Subscribe(OnDestroyed)
+            .AddTo(CompositeDisposable);
+    }
 
     private void OnDestroyed(DestructionEvent<TView> destructionEvent)
     {
