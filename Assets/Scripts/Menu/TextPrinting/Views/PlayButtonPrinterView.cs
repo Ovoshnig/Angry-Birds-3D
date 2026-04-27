@@ -6,8 +6,6 @@ public class PlayButtonPrinterView : TextPrinterView
 {
     [SerializeField] private ScoreTablePrinterView _scoreTablePrinterView;
 
-    private readonly CompositeDisposable _compositeDisposable = new();
-
     protected override void Awake()
     {
         base.Awake();
@@ -17,13 +15,6 @@ public class PlayButtonPrinterView : TextPrinterView
 
         _scoreTablePrinterView.Completed
             .Subscribe(_ => PrintAsync(initialText).Forget())
-            .AddTo(_compositeDisposable);
-    }
-
-    protected override void OnDestroy()
-    {
-        _compositeDisposable.Dispose();
-
-        base.OnDestroy();
+            .AddTo(this);
     }
 }
