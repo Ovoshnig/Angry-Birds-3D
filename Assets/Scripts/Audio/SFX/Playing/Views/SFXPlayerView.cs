@@ -9,7 +9,7 @@ public class SFXPlayerView : MonoBehaviour
     private readonly ReactiveProperty<bool> _isPlaying = new(false);
 
     private AudioSource _audioSource;
-    private IDisposable _followSubscription;
+    private IDisposable _followSubscription = null;
 
     public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
 
@@ -26,6 +26,12 @@ public class SFXPlayerView : MonoBehaviour
                 StopFollowing();
             })
             .AddTo(this);
+    }
+
+    private void OnDestroy()
+    {
+        _followSubscription?.Dispose();
+        _isPlaying.Dispose();
     }
 
     public void Play2D(AudioResource audioResource)
