@@ -12,12 +12,12 @@ public abstract class PanelSwitchButtonView : ButtonView
             _currentPanel = transform.parent.gameObject;
     }
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         Clicked
-            .Subscribe(_ => OnButtonClicked())
+            .Subscribe(_ => Switch())
             .AddTo(this);
     }
 
@@ -26,6 +26,4 @@ public abstract class PanelSwitchButtonView : ButtonView
         _newPanel.SetActive(true);
         _currentPanel.SetActive(false);
     }
-
-    private void OnButtonClicked() => Switch();
 }
