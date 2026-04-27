@@ -22,16 +22,18 @@ public abstract class ButtonView : MonoBehaviour
         }
     }
 
-    protected virtual void Awake() { }
-
-    protected virtual void Start()
+    protected virtual void Awake() 
     {
         Button.OnClickAsObservable()
             .Subscribe(_clicked.OnNext)
             .AddTo(this);
     }
 
-    protected virtual void OnDestroy() { }
+    protected virtual void Start()
+    {
+    }
+
+    protected virtual void OnDestroy() => _clicked.Dispose();
 
     public void SetEnable(bool value) => enabled = value;
 

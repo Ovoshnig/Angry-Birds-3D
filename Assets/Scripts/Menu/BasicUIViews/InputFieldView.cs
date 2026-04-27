@@ -22,11 +22,13 @@ public abstract class InputFieldView : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Awake()
     {
         InputField.onValueChanged
             .AsObservable()
             .Subscribe(value => _text.Value = value)
             .AddTo(this);
     }
+
+    protected virtual void OnDestroy() => _text.Dispose();
 }

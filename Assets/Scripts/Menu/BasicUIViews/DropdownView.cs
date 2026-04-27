@@ -23,12 +23,14 @@ public abstract class DropdownView : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Awake()
     {
         Dropdown.onValueChanged.AsObservable()
             .Subscribe(value => _value.Value = value)
             .AddTo(this);
     }
+
+    protected virtual void OnDestroy() => _value.Dispose();
 
     public void SetOptions(List<TMP_Dropdown.OptionData> options) =>
         Dropdown.options = options;

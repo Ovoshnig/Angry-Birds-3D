@@ -22,12 +22,14 @@ public abstract class ToggleView : MonoBehaviour
         }
     }
 
-    private void Start()
+    protected virtual void Awake()
     {
         Toggle.OnValueChangedAsObservable()
             .Subscribe(value => _isOn.Value = value)
             .AddTo(this);
     }
+
+    protected virtual void OnDestroy() => _isOn.Dispose();
 
     public void SetIsOn(bool value)
     {
