@@ -36,6 +36,8 @@ public class PointsView : MonoBehaviour
 
         if (_cachedMaterial != null)
             Destroy(_cachedMaterial);
+
+        _isPlaying.Dispose();
     }
 
     public void Show(Vector3 position, DestructionPointsSettings pointsSettings)

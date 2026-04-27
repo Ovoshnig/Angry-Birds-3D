@@ -15,5 +15,7 @@ public class WindowView : MonoBehaviour
             .AddTo(this);
     }
 
+    private void OnDestroy() => _isActive.Dispose();
+
     public void SetActive(bool value) => gameObject.SetActive(value);
 }

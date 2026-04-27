@@ -25,12 +25,14 @@ public abstract class SliderView : MonoBehaviour
         }
     }
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         Slider.OnValueChangedAsObservable()
             .Subscribe(value => _value.Value = value)
             .AddTo(this);
     }
+
+    protected virtual void OnDestroy() => _value.Dispose();
 
     public void SetValue(float value)
     {
