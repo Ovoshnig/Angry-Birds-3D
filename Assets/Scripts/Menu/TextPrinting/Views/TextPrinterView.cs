@@ -40,7 +40,13 @@ public class TextPrinterView : MonoBehaviour
         }
     }
 
-    protected virtual void OnDestroy() => CancelPrinting();
+    protected virtual void OnDestroy()
+    {
+        CancelPrinting();
+
+        _isPrinting.Dispose();
+        _completed.Dispose();
+    }
 
     public async UniTask PrintAsync(string fullText)
     {
