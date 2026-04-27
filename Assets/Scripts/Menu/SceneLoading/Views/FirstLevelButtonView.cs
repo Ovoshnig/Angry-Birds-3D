@@ -10,6 +10,7 @@ public class FirstLevelButtonView : SceneButtonView
     protected override void Awake()
     {
         base.Awake();
+
         SetInteractable(false);
 
         _playButtonPrinterView.Completed
