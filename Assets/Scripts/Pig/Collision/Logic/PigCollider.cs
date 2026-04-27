@@ -1,6 +1,10 @@
 public class PigCollider : ObjectCollider<PigEntityView>
 {
-    public PigCollider(CollisionSettings collisionSettings) : base(collisionSettings)
+    public PigCollider(PigEntityView[] entityViews, CollisionSettings collisionSettings)
+        : base(entityViews, collisionSettings)
     {
     }
+
+    protected override ObjectColliderView GetObjectColliderView(PigEntityView entityView) =>
+        entityView.ColliderView;
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 
 [RequireComponent(typeof(ObjectColliderView))]
+[RequireComponent(typeof(BlockDestroyerView))]
 public class BlockEntityView : MonoBehaviour
 {
     public ObjectColliderView ColliderView { get; private set; }

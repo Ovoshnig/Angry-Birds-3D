@@ -188,6 +188,7 @@ public class SlingshotShooter : IInitializable, IDisposable
     {
         _currentState.Value = SlingshotState.Flying;
         _currentBird.isKinematic = false;
+        _currentBird.detectCollisions = true;
 
         SetLinesActive(false);
 
