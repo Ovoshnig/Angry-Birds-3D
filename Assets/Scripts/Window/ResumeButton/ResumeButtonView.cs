@@ -7,25 +7,18 @@ public class ResumeButtonView : MonoBehaviour
 {
     private readonly Subject<Unit> _clicked = new();
 
-    private Button _button = null;
-
-    private Button Button
-    {
-        get
-        {
-            if (_button == null)
-                _button = GetComponent<Button>();
-
-            return _button;
-        }
-    }
+    private Button _button;
 
     public Observable<Unit> Clicked => _clicked;
 
-    private void Start()
+    private void Awake()
     {
-        Button.OnClickAsObservable()
+        _button = GetComponent<Button>();
+
+        _button.OnClickAsObservable()
             .Subscribe(_clicked.OnNext)
             .AddTo(this);
     }
+
+    private void OnDestroy() => _clicked.Dispose();
 }
