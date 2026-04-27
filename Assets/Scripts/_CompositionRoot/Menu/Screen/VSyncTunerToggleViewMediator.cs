@@ -26,6 +26,6 @@ public class VSyncTunerToggleViewMediator : Mediator
                 else
                     _vSyncTuner.DisableVSync();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(_vSyncToggleView);
     }
 }

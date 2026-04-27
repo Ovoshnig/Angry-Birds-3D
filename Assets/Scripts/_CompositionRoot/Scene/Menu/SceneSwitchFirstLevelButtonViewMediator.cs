@@ -17,6 +17,6 @@ public class SceneSwitchFirstLevelButtonViewMediator : Mediator
     {
         _firstLevelButtonView.Clicked
             .Subscribe(_ => _sceneSwitch.LoadLevelAsync(2).Forget())
-            .AddTo(CompositeDisposable);
+            .AddTo(_firstLevelButtonView);
     }
 }
