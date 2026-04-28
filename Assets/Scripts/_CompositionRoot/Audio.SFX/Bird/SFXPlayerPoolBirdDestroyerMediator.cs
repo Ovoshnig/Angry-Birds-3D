@@ -16,6 +16,7 @@ public class SFXPlayerPoolBirdDestroyerMediator : Mediator
     {
         _birdDestroyer.Destroyed
             .Subscribe(entityView =>
-            _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.DestructionResource));
+            _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.DestructionResource))
+            .AddTo(CompositeDisposable);
     }
 }

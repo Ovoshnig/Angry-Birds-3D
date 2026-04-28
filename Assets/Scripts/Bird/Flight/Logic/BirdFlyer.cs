@@ -1,14 +1,10 @@
 using R3;
-using System;
 
-public class BirdFlyer : IDisposable
+public class BirdFlyer
 {
     private readonly Subject<Unit> _birdCollided = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
 
     public Observable<Unit> BirdCollided => _birdCollided;
-
-    public void Dispose() => _compositeDisposable.Dispose();
 
     public void StartFlight(BirdEntityView birdEntityView)
     {
@@ -17,13 +13,12 @@ public class BirdFlyer : IDisposable
 
         Observable.EveryUpdate()
             .TakeUntil(birdEntityView.ColliderView.Collided)
-            .Subscribe(onNext: _ =>
-            birdEntityView.FlyerView.LookAtVelocityDirection(),
+            .Subscribe(onNext: _ => birdEntityView.FlyerView.LookAtVelocityDirection(),
             onCompleted: result =>
             {
                 if (result.IsSuccess)
                     _birdCollided.OnNext(Unit.Default);
             })
-            .AddTo(_compositeDisposable);
+            .AddTo(birdEntityView);
     }
 }

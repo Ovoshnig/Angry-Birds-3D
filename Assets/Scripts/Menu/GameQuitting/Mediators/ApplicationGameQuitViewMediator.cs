@@ -5,7 +5,7 @@ public class ApplicationGameQuitViewMediator : Mediator
 {
     private readonly GameQuitButtonView _gameQuitButtonView;
 
-    public ApplicationGameQuitViewMediator(GameQuitButtonView gameQuitButtonView) => 
+    public ApplicationGameQuitViewMediator(GameQuitButtonView gameQuitButtonView) =>
         _gameQuitButtonView = gameQuitButtonView;
 
     public override void Initialize()
