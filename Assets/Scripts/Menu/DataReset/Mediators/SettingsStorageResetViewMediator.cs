@@ -16,6 +16,6 @@ public class SettingsStorageResetViewMediator : Mediator
     {
         _settingsResetButtonView.Clicked
             .Subscribe(_ => _settingsStorage.ResetData())
-            .AddTo(_settingsResetButtonView);
+            .AddTo(CompositeDisposable);
     }
 }
