@@ -48,7 +48,7 @@ public class PointsView : MonoBehaviour
 
         transform.SetPositionAndRotation(position, _camera.transform.rotation);
 
-        _text.SetText(pointsSettings.Points.ToString());
+        _text.SetText("{0}", pointsSettings.Points);
         _text.color = pointsSettings.Color;
         _text.fontSize = pointsSettings.FontSize;
 
