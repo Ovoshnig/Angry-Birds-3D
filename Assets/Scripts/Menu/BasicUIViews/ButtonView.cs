@@ -5,11 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public abstract class ButtonView : MonoBehaviour
 {
-    private readonly Subject<Unit> _clicked = new();
-
     private Button _button = null;
 
-    public Observable<Unit> Clicked => _clicked;
+    public Observable<Unit> Clicked => Button.OnClickAsObservable();
 
     private Button Button
     {
@@ -21,15 +19,6 @@ public abstract class ButtonView : MonoBehaviour
             return _button;
         }
     }
-
-    protected virtual void Awake() 
-    {
-        Button.OnClickAsObservable()
-            .Subscribe(_clicked.OnNext)
-            .AddTo(this);
-    }
-
-    protected virtual void OnDestroy() => _clicked.Dispose();
 
     public void SetEnable(bool value) => enabled = value;
 
