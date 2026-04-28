@@ -3,7 +3,7 @@
 [RequireComponent(typeof(Canvas))]
 public abstract class CanvasView : MonoBehaviour
 {
-    private Canvas _canvas;
+    private Canvas _canvas = null;
 
     private Canvas Canvas
     {

@@ -20,7 +20,7 @@ public class SliderMediator : Mediator
             .Subscribe(_sliderView.SetValueWithoutNotify)
             .AddTo(CompositeDisposable);
 
-        _sliderView.Value
+        _sliderView.ValueChanged
             .Subscribe(_sliderModel.SetClampedValue)
             .AddTo(CompositeDisposable);
     }

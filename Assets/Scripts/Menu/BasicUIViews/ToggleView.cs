@@ -5,11 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Toggle))]
 public abstract class ToggleView : MonoBehaviour
 {
-    private readonly ReactiveProperty<bool> _isOn = new();
-
     private Toggle _toggle = null;
 
-    public ReadOnlyReactiveProperty<bool> IsOn => _isOn;
+    public Observable<bool> ValueChanged => Toggle.OnValueChangedAsObservable();
 
     private Toggle Toggle
     {
@@ -22,24 +20,7 @@ public abstract class ToggleView : MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
-    {
-        Toggle.OnValueChangedAsObservable()
-            .Subscribe(value => _isOn.Value = value)
-            .AddTo(this);
-    }
+    public void SetIsOn(bool value) => Toggle.isOn = value;
 
-    protected virtual void OnDestroy() => _isOn.Dispose();
-
-    public void SetIsOn(bool value)
-    {
-        Toggle.isOn = value;
-        _isOn.Value = value;
-    }
-
-    public void SetIsOnWithoutNotify(bool value)
-    {
-        Toggle.SetIsOnWithoutNotify(value);
-        _isOn.Value = value;
-    }
+    public void SetIsOnWithoutNotify(bool value) => Toggle.SetIsOnWithoutNotify(value);
 }
