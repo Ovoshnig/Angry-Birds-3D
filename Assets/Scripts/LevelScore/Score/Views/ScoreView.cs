@@ -11,20 +11,9 @@ public class ScoreView : MonoBehaviour
     private Tween _scoreTween = null;
     private int _currentDisplayedScore = 0;
 
-    public TMP_Text Text
-    {
-        get
-        {
-            if (_text == null)
-                _text = GetComponent<TMP_Text>();
-
-            return _text;
-        }
-    }
+    private void Awake() => _text = GetComponent<TMP_Text>();
 
     private void Start() => UpdateText(_currentDisplayedScore);
-
-    private void OnDestroy() => _scoreTween?.Kill();
 
     public void SetScoreInstant(int value)
     {
@@ -38,7 +27,8 @@ public class ScoreView : MonoBehaviour
         _scoreTween?.Kill();
 
         _scoreTween = DOVirtual.Int(_currentDisplayedScore, targetValue, _updateDuration, OnUpdateScore)
-            .SetEase(Ease.OutQuad);
+            .SetEase(Ease.OutQuad)
+            .SetLink(gameObject);
     }
 
     private void OnUpdateScore(int value)
@@ -47,5 +37,5 @@ public class ScoreView : MonoBehaviour
         UpdateText(value);
     }
 
-    private void UpdateText(int value) => Text.text = $"Score: {value:D4}";
+    private void UpdateText(int value) => _text.SetText("Score: {0:0000}", value);
 }
