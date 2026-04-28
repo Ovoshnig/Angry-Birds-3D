@@ -15,13 +15,13 @@ public class SaveStorageAchievedViewMediator : Mediator
     public override void Initialize()
     {
         Observable
-            .EveryValueChanged(_achievedLevelButtonView, b => b.isActiveAndEnabled)
-            .Where(isActiveAndEnabled => isActiveAndEnabled)
+            .EveryUpdate(_achievedLevelButtonView.destroyCancellationToken)
+            .Where(_ => _achievedLevelButtonView.isActiveAndEnabled)
             .Subscribe(_ =>
             {
                 bool saveCreated = _saveStorage.Get(SaveConstants.SaveCreatedKey, false);
                 _achievedLevelButtonView.SetInteractable(saveCreated);
             })
-            .AddTo(_achievedLevelButtonView);
+            .AddTo(CompositeDisposable);
     }
 }

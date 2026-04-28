@@ -16,6 +16,6 @@ public class SaveStorageResetViewMediator : Mediator
     {
         _saveResetButtonView.Clicked
             .Subscribe(_ => _saveStorage.ResetData())
-            .AddTo(_saveResetButtonView);
+            .AddTo(CompositeDisposable);
     }
 }
