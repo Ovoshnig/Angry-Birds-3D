@@ -19,6 +19,6 @@ public class ResolutionTunerDropdownViewMediator : Mediator
 
         _resolutionDropdownView.Value
             .Subscribe(_resolutionTuner.SetResolution)
-            .AddTo(_resolutionDropdownView);
+            .AddTo(CompositeDisposable);
     }
 }

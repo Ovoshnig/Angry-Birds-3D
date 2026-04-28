@@ -26,6 +26,6 @@ public class FullScreenTunerToggleViewMediator : Mediator
                 else
                     _fullScreenTuner.DisableFullScreen();
             })
-            .AddTo(_fullScreenToggleView);
+            .AddTo(CompositeDisposable);
     }
 }
