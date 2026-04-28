@@ -15,6 +15,7 @@ public class PlayButtonPrinterView : TextPrinterView
 
         _scoreTablePrinterView.Completed
             .Subscribe(_ => PrintAsync(initialText).Forget())
+            .AddTo(_scoreTablePrinterView)
             .AddTo(this);
     }
 }
