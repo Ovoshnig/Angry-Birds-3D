@@ -15,6 +15,6 @@ public class WindowResumeButtonViewMediator : Mediator
     {
         _resumeButtonView.Clicked
             .Subscribe(_ => _window.TryClose())
-            .AddTo(_resumeButtonView);
+            .AddTo(CompositeDisposable);
     }
 }
