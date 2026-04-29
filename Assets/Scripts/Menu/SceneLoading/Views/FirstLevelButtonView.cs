@@ -5,7 +5,7 @@ public class FirstLevelButtonView : SceneButtonView
 {
     [SerializeField] private PlayButtonPrinterView _playButtonPrinterView;
 
-    protected virtual void Awake()
+    protected virtual void Start()
     {
         SetInteractable(false);
 

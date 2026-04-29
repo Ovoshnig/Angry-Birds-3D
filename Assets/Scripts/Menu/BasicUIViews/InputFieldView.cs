@@ -5,18 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_InputField))]
 public abstract class InputFieldView : MonoBehaviour
 {
-    private TMP_InputField _inputField = null;
+    private TMP_InputField _inputField;
 
-    public Observable<string> ValueChanged => InputField.onValueChanged.AsObservable(destroyCancellationToken);
+    public Observable<string> ValueChanged => _inputField.onValueChanged.AsObservable(destroyCancellationToken);
 
-    private TMP_InputField InputField
-    {
-        get
-        {
-            if (_inputField == null)
-                _inputField = GetComponent<TMP_InputField>();
-
-            return _inputField;
-        }
-    }
+    private void Awake() => _inputField = GetComponent<TMP_InputField>();
 }

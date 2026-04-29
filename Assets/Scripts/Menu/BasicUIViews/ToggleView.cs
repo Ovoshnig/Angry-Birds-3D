@@ -5,22 +5,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Toggle))]
 public abstract class ToggleView : MonoBehaviour
 {
-    private Toggle _toggle = null;
+    private Toggle _toggle;
 
-    public Observable<bool> ValueChanged => Toggle.OnValueChangedAsObservable();
+    public Observable<bool> ValueChanged => _toggle.OnValueChangedAsObservable();
 
-    private Toggle Toggle
-    {
-        get
-        {
-            if (_toggle == null)
-                _toggle = GetComponent<Toggle>();
+    private void Awake() => _toggle = GetComponent<Toggle>();
 
-            return _toggle;
-        }
-    }
+    public void SetIsOn(bool value) => _toggle.isOn = value;
 
-    public void SetIsOn(bool value) => Toggle.isOn = value;
-
-    public void SetIsOnWithoutNotify(bool value) => Toggle.SetIsOnWithoutNotify(value);
+    public void SetIsOnWithoutNotify(bool value) => _toggle.SetIsOnWithoutNotify(value);
 }
