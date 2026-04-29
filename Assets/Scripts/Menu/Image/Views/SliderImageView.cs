@@ -10,10 +10,10 @@ public class SliderImageView : MonoBehaviour
 
     private Image _image;
 
-    private void Awake()
-    {
-        _image = GetComponent<Image>();
+    private void Awake() => _image = GetComponent<Image>();
 
+    private void Start()
+    {
         _sliderView.ValueChanged
             .Subscribe(SetFillingSprite)
             .AddTo(this);
