@@ -5,22 +5,13 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Button))]
 public abstract class ButtonView : MonoBehaviour
 {
-    private Button _button = null;
+    private Button _button;
 
-    public Observable<Unit> Clicked => Button.OnClickAsObservable();
+    public Observable<Unit> Clicked => _button.OnClickAsObservable();
 
-    private Button Button
-    {
-        get
-        {
-            if (_button == null)
-                _button = GetComponent<Button>();
-
-            return _button;
-        }
-    }
+    private void Awake() => _button = GetComponent<Button>();
 
     public void SetEnable(bool value) => enabled = value;
 
-    public void SetInteractable(bool value) => Button.interactable = value;
+    public void SetInteractable(bool value) => _button.interactable = value;
 }
