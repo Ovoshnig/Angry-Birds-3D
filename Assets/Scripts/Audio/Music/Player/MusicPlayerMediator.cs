@@ -11,7 +11,7 @@ public class MusicPlayerMediator : Mediator
         _musicPlayerView = musicPlayerView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _musicPlayer.PlaybackStarted
             .Subscribe(clip =>
