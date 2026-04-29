@@ -14,7 +14,7 @@ public class SliderImageView : MonoBehaviour
     {
         _image = GetComponent<Image>();
 
-        _sliderView.Value
+        _sliderView.ValueChanged
             .Subscribe(SetFillingSprite)
             .AddTo(this);
     }

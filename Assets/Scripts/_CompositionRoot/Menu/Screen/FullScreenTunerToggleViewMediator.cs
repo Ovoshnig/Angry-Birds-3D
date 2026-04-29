@@ -18,7 +18,7 @@ public class FullScreenTunerToggleViewMediator : Mediator
             .Subscribe(_fullScreenToggleView.SetIsOnWithoutNotify)
             .AddTo(CompositeDisposable);
 
-        _fullScreenToggleView.IsOn
+        _fullScreenToggleView.ValueChanged
             .Subscribe(isOn =>
             {
                 if (isOn)
