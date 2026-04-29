@@ -5,28 +5,19 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public abstract class SliderView : MonoBehaviour
 {
-    private Slider _slider = null;
+    private Slider _slider;
 
-    public Observable<float> ValueChanged => Slider.OnValueChangedAsObservable();
+    public Observable<float> ValueChanged => _slider.OnValueChangedAsObservable();
     public float MinValue => _slider.minValue;
     public float MaxValue => _slider.maxValue;
 
-    private Slider Slider
-    {
-        get
-        {
-            if (_slider == null)
-                _slider = GetComponent<Slider>();
+    private void Awake() => _slider = GetComponent<Slider>();
 
-            return _slider;
-        }
-    }
+    public void SetValue(float value) => _slider.value = value;
 
-    public void SetValue(float value) => Slider.value = value;
+    public void SetValueWithoutNotify(float value) => _slider.SetValueWithoutNotify(value);
 
-    public void SetValueWithoutNotify(float value) => Slider.SetValueWithoutNotify(value);
+    public void SetMinValue(float value) => _slider.minValue = value;
 
-    public void SetMinValue(float value) => Slider.minValue = value;
-
-    public void SetMaxValue(float value) => Slider.maxValue = value;
+    public void SetMaxValue(float value) => _slider.maxValue = value;
 }
