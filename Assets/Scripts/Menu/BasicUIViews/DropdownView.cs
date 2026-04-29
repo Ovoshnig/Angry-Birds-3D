@@ -6,11 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_Dropdown))]
 public abstract class DropdownView : MonoBehaviour
 {
-    private readonly ReactiveProperty<int> _value = new();
-
     private TMP_Dropdown _dropdown = null;
 
-    public ReadOnlyReactiveProperty<int> Value => _value;
+    public Observable<int> ValueChanged => Dropdown.onValueChanged.AsObservable(destroyCancellationToken);
 
     private TMP_Dropdown Dropdown
     {
@@ -23,27 +21,10 @@ public abstract class DropdownView : MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
-    {
-        Dropdown.onValueChanged.AsObservable()
-            .Subscribe(value => _value.Value = value)
-            .AddTo(this);
-    }
-
-    protected virtual void OnDestroy() => _value.Dispose();
-
     public void SetOptions(List<TMP_Dropdown.OptionData> options) =>
         Dropdown.options = options;
 
-    public void SetValue(int value)
-    {
-        Dropdown.value = value;
-        _value.Value = value;
-    }
+    public void SetValue(int value) => Dropdown.value = value;
 
-    public void SetValueWithoutNotify(int value)
-    {
-        Dropdown.SetValueWithoutNotify(value);
-        _value.Value = value;
-    }
+    public void SetValueWithoutNotify(int value) => Dropdown.SetValueWithoutNotify(value);
 }

@@ -5,11 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_InputField))]
 public abstract class InputFieldView : MonoBehaviour
 {
-    private readonly ReactiveProperty<string> _text = new(string.Empty);
-
     private TMP_InputField _inputField = null;
 
-    public ReadOnlyReactiveProperty<string> Text => _text;
+    public Observable<string> ValueChanged => InputField.onValueChanged.AsObservable(destroyCancellationToken);
 
     private TMP_InputField InputField
     {
@@ -21,14 +19,4 @@ public abstract class InputFieldView : MonoBehaviour
             return _inputField;
         }
     }
-
-    protected virtual void Awake()
-    {
-        InputField.onValueChanged
-            .AsObservable()
-            .Subscribe(value => _text.Value = value)
-            .AddTo(this);
-    }
-
-    protected virtual void OnDestroy() => _text.Dispose();
 }

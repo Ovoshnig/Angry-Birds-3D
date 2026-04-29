@@ -5,10 +5,8 @@ public class FirstLevelButtonView : SceneButtonView
 {
     [SerializeField] private PlayButtonPrinterView _playButtonPrinterView;
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
-
         SetInteractable(false);
 
         _playButtonPrinterView.Completed

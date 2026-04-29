@@ -12,10 +12,8 @@ public abstract class PanelSwitchButtonView : ButtonView
             _currentPanel = transform.parent.gameObject;
     }
 
-    protected override void Awake()
+    protected virtual void Awake()
     {
-        base.Awake();
-
         Clicked
             .Subscribe(_ => Switch())
             .AddTo(this);

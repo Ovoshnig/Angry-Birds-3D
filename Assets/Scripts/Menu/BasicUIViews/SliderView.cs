@@ -5,11 +5,9 @@ using UnityEngine.UI;
 [RequireComponent(typeof(Slider))]
 public abstract class SliderView : MonoBehaviour
 {
-    private readonly ReactiveProperty<float> _value = new();
-
     private Slider _slider = null;
 
-    public ReadOnlyReactiveProperty<float> Value => _value;
+    public Observable<float> ValueChanged => Slider.OnValueChangedAsObservable();
     public float MinValue => _slider.minValue;
     public float MaxValue => _slider.maxValue;
 
@@ -24,26 +22,9 @@ public abstract class SliderView : MonoBehaviour
         }
     }
 
-    protected virtual void Awake()
-    {
-        Slider.OnValueChangedAsObservable()
-            .Subscribe(value => _value.Value = value)
-            .AddTo(this);
-    }
+    public void SetValue(float value) => Slider.value = value;
 
-    protected virtual void OnDestroy() => _value.Dispose();
-
-    public void SetValue(float value)
-    {
-        Slider.value = value;
-        _value.Value = value;
-    }
-
-    public void SetValueWithoutNotify(float value)
-    {
-        Slider.SetValueWithoutNotify(value);
-        _value.Value = value;
-    }
+    public void SetValueWithoutNotify(float value) => Slider.SetValueWithoutNotify(value);
 
     public void SetMinValue(float value) => Slider.minValue = value;
 
