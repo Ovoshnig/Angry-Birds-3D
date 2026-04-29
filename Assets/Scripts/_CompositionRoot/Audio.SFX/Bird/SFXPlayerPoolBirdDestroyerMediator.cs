@@ -12,7 +12,7 @@ public class SFXPlayerPoolBirdDestroyerMediator : Mediator
         _birdDestroyer = birdDestroyer;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _birdDestroyer.Destroyed
             .Subscribe(entityView =>

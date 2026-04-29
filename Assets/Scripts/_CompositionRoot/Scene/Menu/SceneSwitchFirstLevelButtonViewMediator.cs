@@ -13,7 +13,7 @@ public class SceneSwitchFirstLevelButtonViewMediator : Mediator
         _firstLevelButtonView = firstLevelButtonView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _firstLevelButtonView.Clicked
             .Subscribe(_ => _sceneSwitch.LoadLevelAsync(2).Forget())

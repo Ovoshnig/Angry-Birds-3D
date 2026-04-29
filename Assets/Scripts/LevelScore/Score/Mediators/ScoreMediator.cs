@@ -11,7 +11,7 @@ public class ScoreMediator : Mediator
         _scoreView = scoreView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _scoreModel.Score
             .Subscribe(_scoreView.SetScoreSmoothly)

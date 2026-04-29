@@ -12,7 +12,7 @@ public class SaveStorageResetViewMediator : Mediator
         _saveResetButtonView = saveResetButtonView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _saveResetButtonView.Clicked
             .Subscribe(_ => _saveStorage.ResetData())
