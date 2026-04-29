@@ -8,7 +8,7 @@ public class ApplicationGameQuitViewMediator : Mediator
     public ApplicationGameQuitViewMediator(GameQuitButtonView gameQuitButtonView) =>
         _gameQuitButtonView = gameQuitButtonView;
 
-    public override void Initialize()
+    public override void Start()
     {
         _gameQuitButtonView.Clicked
             .Subscribe(_ => Application.Quit())

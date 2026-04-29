@@ -12,7 +12,7 @@ public class ResolutionTunerDropdownViewMediator : Mediator
         _resolutionDropdownView = resolutionDropdownView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _resolutionDropdownView.SetResolutionOptions(_resolutionTuner.Resolutions);
         _resolutionDropdownView.SetValueWithoutNotify(_resolutionTuner.CurrentResolutionNumber);

@@ -11,7 +11,7 @@ public class WindowTrackerCursorTunerMediator : Mediator
         _cursorTuner = cursorTuner;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _windowTracker.IsOpen
             .Subscribe(isOpen =>

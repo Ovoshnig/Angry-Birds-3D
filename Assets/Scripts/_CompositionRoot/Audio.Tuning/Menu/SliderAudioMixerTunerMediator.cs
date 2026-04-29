@@ -11,7 +11,7 @@ public class SliderAudioMixerTunerMediator : Mediator
         _audioMixerTuner = audioMixerTuner;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _sliderModel.Value
             .Subscribe(value =>

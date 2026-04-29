@@ -12,7 +12,7 @@ public class SaveStorageAchievedViewMediator : Mediator
         _achievedLevelButtonView = achievedLevelButtonView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         Observable
             .EveryUpdate(_achievedLevelButtonView.destroyCancellationToken)

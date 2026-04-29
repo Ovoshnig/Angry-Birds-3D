@@ -11,7 +11,7 @@ public class AudioMixerTunerGamePauserMediator : Mediator
         _gamePauser = gamePauser;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _gamePauser.IsPause
             .Subscribe(_audioMixerTuner.SetPause)

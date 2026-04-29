@@ -14,7 +14,7 @@ public class TextPrinterInputHandlerMediator : Mediator
         _menuInputHandler = menuInputHandler;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _menuInputHandler.SkipTextPrintingPressed
             .Where(isPressed => isPressed)

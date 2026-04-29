@@ -11,7 +11,7 @@ public class SliderMediator : Mediator
         _sliderView = sliderView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _sliderView.SetMinValue(_sliderModel.MinValue);
         _sliderView.SetMaxValue(_sliderModel.MaxValue);
