@@ -3,24 +3,15 @@
 [RequireComponent(typeof(AudioSource))]
 public class MusicPlayerView : MonoBehaviour
 {
-    private AudioSource _audioSource = null;
+    private AudioSource _audioSource;
 
-    public bool IsPlaying => AudioSource.isPlaying;
+    public bool IsPlaying => _audioSource.isPlaying;
 
-    private AudioSource AudioSource
-    {
-        get 
-        {
-            if (_audioSource == null)
-                _audioSource = GetComponent<AudioSource>();
+    private void Awake() => _audioSource = GetComponent<AudioSource>();
 
-            return _audioSource;
-        }
-    }
+    public void SetClip(AudioClip clip) => _audioSource.clip = clip;
 
-    public void SetClip(AudioClip clip) => AudioSource.clip = clip;
+    public void Play() => _audioSource.Play();
 
-    public void Play() => AudioSource.Play();
-
-    public void Stop() => AudioSource.Stop();
+    public void Stop() => _audioSource.Stop();
 }
