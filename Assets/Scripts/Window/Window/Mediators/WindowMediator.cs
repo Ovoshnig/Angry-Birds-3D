@@ -11,7 +11,7 @@ public class WindowMediator : Mediator
         _windowView = windowView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _window.IsOpen
             .Subscribe(_windowView.SetActive)
