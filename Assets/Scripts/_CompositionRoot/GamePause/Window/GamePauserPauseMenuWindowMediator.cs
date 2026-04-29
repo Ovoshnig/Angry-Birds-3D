@@ -11,7 +11,7 @@ public class GamePauserPauseMenuWindowMediator : Mediator
         _pauseMenuWindow = pauseMenuWindow;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _pauseMenuWindow.IsOpen
             .Subscribe(isOpen =>

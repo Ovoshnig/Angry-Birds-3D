@@ -12,7 +12,7 @@ public class ScoreModelObjectDestroyerMediator<TView> : Mediator where TView : M
         _destroyer = destroyer;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _destroyer.Destroyed
             .Subscribe(destructionEvent =>

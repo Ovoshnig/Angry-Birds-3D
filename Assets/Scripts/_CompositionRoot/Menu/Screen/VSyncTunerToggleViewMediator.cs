@@ -12,7 +12,7 @@ public class VSyncTunerToggleViewMediator : Mediator
         _vSyncToggleView = vSyncToggleView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _vSyncTuner.IsVSyncEnabled
             .Subscribe(_vSyncToggleView.SetIsOnWithoutNotify)
