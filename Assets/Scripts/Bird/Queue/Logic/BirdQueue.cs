@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using VContainer.Unity;
 
-public class BirdQueue : IPostInitializable, IDisposable
+public class BirdQueue : IStartable, IDisposable
 {
     private readonly Queue<BirdEntityView> _queue;
     private readonly BirdFlyer _birdFlyer;
@@ -18,12 +18,10 @@ public class BirdQueue : IPostInitializable, IDisposable
 
     public Observable<BirdEntityView> BirdDequeued => _birdDequeued;
 
-    public void PostInitialize()
+    public void Start()
     {
         foreach (var entityView in _queue)
             entityView.FlyerView.Rigidbody.detectCollisions = false;
-
-        TryDequeueBird();
 
         _birdFlyer.BirdCollided
             .Subscribe(_ => TryDequeueBird())
