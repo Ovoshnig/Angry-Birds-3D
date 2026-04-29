@@ -22,5 +22,7 @@ public class SlingshotShooterBirdQueueMediator : Mediator
                 _slingshotShooter.SetCurrentBird(birdRigidbody);
             })
             .AddTo(CompositeDisposable);
+
+        _birdQueue.TryDequeueBird();
     }
 }
