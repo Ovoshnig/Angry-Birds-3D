@@ -11,7 +11,7 @@ public class WindowResumeButtonViewMediator : Mediator
         _resumeButtonView = resumeButtonView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _resumeButtonView.Clicked
             .Subscribe(_ => _window.TryClose())
