@@ -12,7 +12,7 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
         _birdCollider = birdCollider;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _birdCollider.Collided
             .Subscribe(@event =>

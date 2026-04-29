@@ -13,7 +13,7 @@ public class SlingshotShooterBirdQueueMediator : Mediator
         _birdQueue = birdQueue;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _birdQueue.BirdDequeued
             .Subscribe(birdEntityView =>

@@ -12,7 +12,7 @@ public class GamePauserSceneSwitchMediator : Mediator
         _sceneSwitch = sceneSwitch;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _sceneSwitch.IsSceneLoading
             .Subscribe(OnSceneLoadingChange)

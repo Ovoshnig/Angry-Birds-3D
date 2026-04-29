@@ -13,7 +13,7 @@ public class SceneSwitchButtonViewMediator : Mediator
         _sceneButtonView = sceneButtonView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _sceneButtonView.Clicked
             .Subscribe(_ => OnButtonClicked())

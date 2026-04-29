@@ -15,7 +15,7 @@ public class CameraSwitchSlingshotShooterMediator : Mediator
         _slingshotShooter = slingshotShooter;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _slingshotShooter.CurrentState
             .Subscribe(SlingshotStateChanged)

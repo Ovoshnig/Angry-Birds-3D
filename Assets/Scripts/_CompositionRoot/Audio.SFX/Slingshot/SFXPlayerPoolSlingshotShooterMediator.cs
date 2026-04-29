@@ -16,7 +16,7 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
         _shooterView = slingshotShooterView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         Transform shooterTransform = _shooterView.transform;
 

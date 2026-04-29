@@ -12,7 +12,7 @@ public class FullScreenTunerToggleViewMediator : Mediator
         _fullScreenToggleView = fullScreenToggleView;
     }
 
-    public override void Initialize()
+    public override void Start()
     {
         _fullScreenTuner.IsFullScreen
             .Subscribe(_fullScreenToggleView.SetIsOnWithoutNotify)
