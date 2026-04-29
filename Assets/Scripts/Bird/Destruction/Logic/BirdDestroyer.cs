@@ -2,7 +2,7 @@ using R3;
 using System;
 using VContainer.Unity;
 
-public class BirdDestroyer : IInitializable, IDisposable
+public class BirdDestroyer : IStartable, IDisposable
 {
     private readonly BirdCollider _birdCollider;
     private readonly BirdSettings _birdSettings;
@@ -19,7 +19,7 @@ public class BirdDestroyer : IInitializable, IDisposable
     public Observable<BirdEntityView> DestructionStarted => _destructionStarted;
     public Observable<BirdEntityView> Destroyed => _destroyed;
 
-    public void Initialize()
+    public void Start()
     {
         _birdCollider.Collided
             .Where(@event => !@event.View.DestroyerView.IsDestroying)
