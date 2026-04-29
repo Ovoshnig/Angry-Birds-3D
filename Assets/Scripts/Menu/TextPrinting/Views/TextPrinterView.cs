@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using R3;
 using System;
-using System.Text;
-using System.Threading;
 using TMPro;
 using UnityEngine;
 
@@ -16,7 +14,7 @@ public class TextPrinterView : MonoBehaviour
     private readonly Subject<Unit> _completed = new();
 
     private TMP_Text _tmpText;
-    private CancellationTokenSource _cts;
+    private int _operationId;
 
     public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
     public Observable<Unit> Completed => _completed;
@@ -51,41 +49,43 @@ public class TextPrinterView : MonoBehaviour
     public async UniTask PrintAsync(string fullText)
     {
         CancelPrinting();
-        _cts = new CancellationTokenSource();
+        int currentOperationId = ++_operationId;
 
         _isPrinting.Value = true;
-        _tmpText.text = string.Empty;
 
-        StringBuilder stringBuilder = new();
-        float delay = 1 / _speed;
+        _tmpText.text = fullText;
+        _tmpText.maxVisibleCharacters = 0;
+
+        _tmpText.ForceMeshUpdate();
+
+        int totalVisibleCharacters = _tmpText.textInfo.characterCount;
+        float delay = 1f / _speed;
 
         try
         {
-            foreach (var symbol in fullText)
+            for (int i = 0; i < totalVisibleCharacters; i++)
             {
-                stringBuilder.Append(symbol);
-                _tmpText.text = stringBuilder.ToString();
+                if (currentOperationId != _operationId)
+                    throw new OperationCanceledException();
 
-                await UniTask.WaitForSeconds(delay, cancellationToken: _cts.Token);
+                _tmpText.maxVisibleCharacters = i + 1;
+                await UniTask.WaitForSeconds(delay, cancellationToken: destroyCancellationToken);
             }
         }
         catch (OperationCanceledException)
         {
-            _tmpText.text = fullText;
+            _tmpText.maxVisibleCharacters = totalVisibleCharacters;
         }
         finally
         {
-            _isPrinting.Value = false;
+            if (currentOperationId == _operationId)
+                _isPrinting.Value = false;
         }
     }
 
     public void CancelPrinting()
     {
-        if (_cts != null)
-        {
-            _cts.Cancel();
-            _cts.Dispose();
-            _cts = null;
-        }
+        _operationId++;
+        _isPrinting.Value = false;
     }
 }
