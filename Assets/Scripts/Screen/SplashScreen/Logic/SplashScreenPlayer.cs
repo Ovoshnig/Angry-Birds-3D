@@ -5,14 +5,14 @@ using System.Threading;
 using UnityEngine.Rendering;
 using VContainer.Unity;
 
-public class SplashScreenLogic : IInitializable, IStartable, IDisposable
+public class SplashScreenPlayer : IInitializable, IStartable, IDisposable
 {
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isPlaying = new(false);
     private readonly CancellationTokenSource _cts = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public SplashScreenLogic(ScreenInputHandler screenInputHandler) =>
+    public SplashScreenPlayer(ScreenInputHandler screenInputHandler) =>
         _screenInputHandler = screenInputHandler;
 
     public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
