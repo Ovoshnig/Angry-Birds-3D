@@ -3,13 +3,13 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class FullScreenTuner : IInitializable, IDisposable
+public class FullScreenAdjuster : IInitializable, IDisposable
 {
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public FullScreenTuner(ScreenInputHandler screenInputHandler) => _screenInputHandler = screenInputHandler;
+    public FullScreenAdjuster(ScreenInputHandler screenInputHandler) => _screenInputHandler = screenInputHandler;
 
     public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
 

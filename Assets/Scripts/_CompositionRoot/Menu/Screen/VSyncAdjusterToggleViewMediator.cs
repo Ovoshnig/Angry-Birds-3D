@@ -1,20 +1,20 @@
 using R3;
 
-public class VSyncTunerToggleViewMediator : Mediator
+public class VSyncAdjusterToggleViewMediator : Mediator
 {
-    private readonly VSyncTuner _vSyncTuner;
+    private readonly VSyncAdjuster _vSyncAdjuster;
     private readonly VSyncToggleView _vSyncToggleView;
 
-    public VSyncTunerToggleViewMediator(VSyncTuner vSyncTuner,
+    public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster,
         VSyncToggleView vSyncToggleView)
     {
-        _vSyncTuner = vSyncTuner;
+        _vSyncAdjuster = vSyncAdjuster;
         _vSyncToggleView = vSyncToggleView;
     }
 
     public override void Start()
     {
-        _vSyncTuner.IsVSyncEnabled
+        _vSyncAdjuster.IsVSyncEnabled
             .Subscribe(_vSyncToggleView.SetIsOnWithoutNotify)
             .AddTo(CompositeDisposable);
 
@@ -22,9 +22,9 @@ public class VSyncTunerToggleViewMediator : Mediator
             .Subscribe(isOn =>
             {
                 if (isOn)
-                    _vSyncTuner.EnableVSync();
+                    _vSyncAdjuster.EnableVSync();
                 else
-                    _vSyncTuner.DisableVSync();
+                    _vSyncAdjuster.DisableVSync();
             })
             .AddTo(CompositeDisposable);
     }
