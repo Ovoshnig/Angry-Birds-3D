@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class CursorTuner
+public class CursorAdjuster
 {
     public void ShowCursor()
     {
