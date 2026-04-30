@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class FullScreenAdjuster : IInitializable, IDisposable
+public class FullScreenAdjuster : IStartable, IDisposable
 {
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
@@ -13,7 +13,7 @@ public class FullScreenAdjuster : IInitializable, IDisposable
 
     public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
 
-    public void Initialize()
+    public void Start()
     {
         _isFullScreen.Value = Screen.fullScreen;
 
