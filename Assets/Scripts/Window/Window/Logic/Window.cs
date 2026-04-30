@@ -2,7 +2,7 @@
 using System;
 using VContainer.Unity;
 
-public abstract class Window : IWindow, IInitializable, IDisposable
+public abstract class Window : IWindow, IStartable, IDisposable
 {
     private readonly WindowInputHandler _windowInputHandler;
     private readonly WindowTracker _windowTracker;
@@ -22,7 +22,7 @@ public abstract class Window : IWindow, IInitializable, IDisposable
     protected abstract ReadOnlyReactiveProperty<bool> WindowSwitchPressed { get; }
     protected WindowInputHandler WindowInputHandler => _windowInputHandler;
 
-    public virtual void Initialize() 
+    public virtual void Start() 
     {
         WindowSwitchPressed
             .Where(isPressed => isPressed)
