@@ -1,6 +1,7 @@
 using R3;
+using VContainer.Unity;
 
-public class WindowInputHandler : InputHandler<InputActions.WindowActions>
+public class WindowInputHandler : InputHandler<InputActions.WindowActions>, IInitializable
 {
     public WindowInputHandler(InputActions inputActions)
         : base(inputActions.Window) { }
@@ -9,10 +10,8 @@ public class WindowInputHandler : InputHandler<InputActions.WindowActions>
     public ReadOnlyReactiveProperty<bool> PauseMenuSwitchPressed { get; private set; }
     public ReadOnlyReactiveProperty<bool> InventorySwitchPressed { get; private set; }
 
-    public override void Initialize()
+    public void Initialize()
     {
-        base.Initialize();
-
         CloseCurrentPressed = BindButton(a => a.CloseCurrent);
         PauseMenuSwitchPressed = BindButton(a => a.SwitchPauseMenu);
         InventorySwitchPressed = BindButton(a => a.SwitchInventory);

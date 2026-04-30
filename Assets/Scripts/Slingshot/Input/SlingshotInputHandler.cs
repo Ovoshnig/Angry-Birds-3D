@@ -1,7 +1,8 @@
 using R3;
 using UnityEngine;
+using VContainer.Unity;
 
-public class SlingshotInputHandler : InputHandler<InputActions.SlingshotActions>
+public class SlingshotInputHandler : InputHandler<InputActions.SlingshotActions>, IInitializable
 {
     public SlingshotInputHandler(InputActions inputActions) : base(inputActions.Slingshot)
     { }
@@ -9,10 +10,8 @@ public class SlingshotInputHandler : InputHandler<InputActions.SlingshotActions>
     public ReadOnlyReactiveProperty<bool> LeftButtonPressed { get; private set; }
     public ReadOnlyReactiveProperty<Vector2> DragInput { get; private set; }
 
-    public override void Initialize()
+    public void Initialize()
     {
-        base.Initialize();
-
         LeftButtonPressed = BindButton(a => a.LeftButton);
         DragInput = BindValue<Vector2>(a => a.Drag);
     }

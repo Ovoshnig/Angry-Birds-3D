@@ -5,7 +5,7 @@ using System.Threading;
 using UnityEngine.Rendering;
 using VContainer.Unity;
 
-public class SplashScreenLogic : IInitializable, IDisposable
+public class SplashScreenLogic : IInitializable, IStartable, IDisposable
 {
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isPlaying = new(false);
@@ -17,10 +17,10 @@ public class SplashScreenLogic : IInitializable, IDisposable
 
     public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
 
-    public void Initialize()
-    {
-        PlayAsync().Forget();
+    public void Initialize() => PlayAsync().Forget();
 
+    public void Start()
+    {
         _screenInputHandler.SkipSplashImagePressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => Stop())
