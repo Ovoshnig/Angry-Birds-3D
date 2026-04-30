@@ -8,9 +8,13 @@ public abstract class DropdownView : MonoBehaviour
 {
     private TMP_Dropdown _dropdown;
 
-    public Observable<int> ValueChanged => _dropdown.onValueChanged.AsObservable(destroyCancellationToken);
+    public Observable<int> ValueChanged { get; private set; }
 
-    private void Awake() => _dropdown = GetComponent<TMP_Dropdown>();
+    private void Awake()
+    {
+        _dropdown = GetComponent<TMP_Dropdown>();
+        ValueChanged = _dropdown.onValueChanged.AsObservable(destroyCancellationToken);
+    }
 
     public void SetOptions(List<TMP_Dropdown.OptionData> options) => _dropdown.options = options;
 

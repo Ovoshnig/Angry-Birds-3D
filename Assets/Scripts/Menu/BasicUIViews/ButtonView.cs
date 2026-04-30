@@ -7,11 +7,13 @@ public abstract class ButtonView : MonoBehaviour
 {
     private Button _button;
 
-    public Observable<Unit> Clicked => _button.OnClickAsObservable();
+    public Observable<Unit> Clicked { get; private set; }
 
-    private void Awake() => _button = GetComponent<Button>();
-
-    public void SetEnable(bool value) => enabled = value;
+    private void Awake()
+    {
+        _button = GetComponent<Button>();
+        Clicked = _button.OnClickAsObservable();
+    }
 
     public void SetInteractable(bool value) => _button.interactable = value;
 }
