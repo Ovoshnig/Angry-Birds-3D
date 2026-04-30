@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-public class SlingshotShooter : IInitializable, IDisposable
+public class SlingshotShooter : IInitializable, IStartable, IDisposable
 {
     public enum SlingshotState { Idle, Dragging, Flying }
 
@@ -50,10 +50,10 @@ public class SlingshotShooter : IInitializable, IDisposable
     public Observable<Rigidbody> DraggingStarted => _draggingStarted;
     public Observable<Rigidbody> Shot => _shot;
 
-    public void Initialize()
-    {
-        _mainCamera = Camera.main;
+    public void Initialize() => _mainCamera = Camera.main;
 
+    public void Start()
+    {
         _slingshotInputHandler.LeftButtonPressed
             .Subscribe(isPressed =>
             {
