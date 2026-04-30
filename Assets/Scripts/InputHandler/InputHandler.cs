@@ -1,10 +1,9 @@
 ﻿using R3;
 using System;
-using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-public abstract class InputHandler<TActions> : IInitializable, IDisposable
+public abstract class InputHandler<TActions> : IStartable, IDisposable
 {
     private readonly CompositeDisposable _compositeDisposable = new();
 
@@ -12,7 +11,7 @@ public abstract class InputHandler<TActions> : IInitializable, IDisposable
 
     protected TActions Actions { get; }
 
-    public virtual void Initialize() => EnableActions();
+    public virtual void Start() => EnableActions();
 
     public virtual void Dispose()
     {
@@ -24,7 +23,7 @@ public abstract class InputHandler<TActions> : IInitializable, IDisposable
 
     protected abstract void DisableActions();
 
-    protected ReadOnlyReactiveProperty<T> BindValue<T>(Func<TActions, InputAction> selector) where T : struct => 
+    protected ReadOnlyReactiveProperty<T> BindValue<T>(Func<TActions, InputAction> selector) where T : struct =>
         selector(Actions).AsValueStream<T>().AddTo(_compositeDisposable);
 
     protected ReadOnlyReactiveProperty<bool> BindButton(Func<TActions, InputAction> selector)
