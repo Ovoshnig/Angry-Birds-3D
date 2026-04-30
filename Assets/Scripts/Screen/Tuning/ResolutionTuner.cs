@@ -1,63 +1,52 @@
 using R3;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
-public class ResolutionTuner : IInitializable
+public class ResolutionTuner : IInitializable, IDisposable
 {
-    public List<(int width, int height, RefreshRate refreshRate)> Resolutions { get; private set; }
-    public int CurrentResolutionNumber { get; private set; }
-
-    private (int width, int height, RefreshRate refreshRate) CurrentResolution
-    {
-        get
-        {
-            if (Screen.fullScreen)
-                return (Screen.currentResolution.width, 
-                    Screen.currentResolution.height, 
-                    Screen.currentResolution.refreshRateRatio);
-            else
-                return (Screen.width, 
-                    Screen.height, 
-                    Screen.currentResolution.refreshRateRatio);
-        }
-    }
+    public List<ResolutionData> Resolutions { get; private set; }
+    public ReactiveProperty<int> CurrentResolutionIndex { get; } = new(0);
 
     public void Initialize()
     {
-        var resolution = CurrentResolution;
-        var resolutions = Screen.resolutions
-            .Select(x => (x.width, x.height, x.refreshRateRatio))
+        ResolutionData currentResolution = GetCurrentResolutionData();
+
+        Resolutions = Screen.resolutions
+            .Select(r => new ResolutionData(r.width, r.height, r.refreshRateRatio))
+            .Distinct()
             .ToList();
-        Resolutions = resolutions;
 
-        if (resolutions.Contains(resolution))
-        {
-            CurrentResolutionNumber = resolutions.IndexOf(resolution);
-        }
-        else
-        {
-            int index = resolutions.BinarySearch(resolution);
+        if (!Resolutions.Contains(currentResolution))
+            Resolutions.Add(currentResolution);
 
-            if (index < 0)
-                index = ~index;
-
-            resolutions.Insert(index, resolution);
-            CurrentResolutionNumber = index;
-        }
+        Resolutions.Sort();
+        CurrentResolutionIndex.Value = Resolutions.IndexOf(currentResolution);
     }
 
-    public void SetResolution(int number)
+    public void Dispose() => CurrentResolutionIndex.Dispose();
+
+    public void SetResolution(int index)
     {
-        if (number < 0 || number >= Resolutions.Count)
+        if (index < 0 || index >= Resolutions.Count)
         {
-            Debug.LogError($"Resolution with index {number} not found");
+            Debug.LogError($"Resolution with index {index} not found.");
             return;
         }
 
-        var (width, height, refreshRate) = Resolutions[number];
-        Screen.SetResolution(width, height, Screen.fullScreenMode, refreshRate);
-        CurrentResolutionNumber = number;
+        ResolutionData resolution = Resolutions[index];
+        Screen.SetResolution(resolution.Width, resolution.Height, Screen.fullScreenMode, resolution.RefreshRate);
+        CurrentResolutionIndex.Value = index;
+    }
+
+    private ResolutionData GetCurrentResolutionData()
+    {
+        int width = Screen.fullScreen ? Screen.currentResolution.width : Screen.width;
+        int height = Screen.fullScreen ? Screen.currentResolution.height : Screen.height;
+        RefreshRate refreshRate = Screen.currentResolution.refreshRateRatio;
+
+        return new ResolutionData(width, height, refreshRate);
     }
 }

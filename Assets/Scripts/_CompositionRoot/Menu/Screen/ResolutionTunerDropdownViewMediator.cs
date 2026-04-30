@@ -1,4 +1,5 @@
 using R3;
+using System.Linq;
 
 public class ResolutionTunerDropdownViewMediator : Mediator
 {
@@ -14,8 +15,11 @@ public class ResolutionTunerDropdownViewMediator : Mediator
 
     public override void Start()
     {
-        _resolutionDropdownView.SetResolutionOptions(_resolutionTuner.Resolutions);
-        _resolutionDropdownView.SetValueWithoutNotify(_resolutionTuner.CurrentResolutionNumber);
+        _resolutionDropdownView.SetResolutionOptions(_resolutionTuner.Resolutions.Select(r => r.ToString()).ToList());
+
+        _resolutionTuner.CurrentResolutionIndex
+            .Subscribe(_resolutionDropdownView.SetValueWithoutNotify)
+            .AddTo(CompositeDisposable);
 
         _resolutionDropdownView.ValueChanged
             .Subscribe(_resolutionTuner.SetResolution)
