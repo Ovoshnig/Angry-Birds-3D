@@ -4,6 +4,6 @@ using VContainer.Unity;
 public class SplashScreenLifetimeScope : LifetimeScope
 {
     protected override void Configure(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<SplashScreenPlayer>(Lifetime.Singleton)
+        builder.RegisterEntryPoint<SplashScreenDisplayer>(Lifetime.Singleton)
             .AsSelf();
 }
