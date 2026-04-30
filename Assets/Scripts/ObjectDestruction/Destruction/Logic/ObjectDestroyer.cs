@@ -9,7 +9,7 @@ public record DamageEvent<TView>(ObjectDestroyerView DestroyerView, CollisionTyp
 public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView)
     where TView : MonoBehaviour;
 
-public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
+public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
     where TView : MonoBehaviour
 {
     private readonly ObjectCollider<TView> _objectCollider;
@@ -23,7 +23,7 @@ public abstract class ObjectDestroyer<TView> : IInitializable, IDisposable
     public Observable<DamageEvent<TView>> Damaged => _damaged;
     public Observable<DestructionEvent<TView>> Destroyed => _destroyed;
 
-    public void Initialize()
+    public void Start()
     {
         _objectCollider.Collided
             .Subscribe(OnCollided)
