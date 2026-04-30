@@ -5,7 +5,7 @@ using System.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
-public class ResolutionTuner : IInitializable, IDisposable
+public class ResolutionAdjuster : IInitializable, IDisposable
 {
     public List<ResolutionData> Resolutions { get; private set; }
     public ReactiveProperty<int> CurrentResolutionIndex { get; } = new(0);
