@@ -2,7 +2,7 @@ using R3;
 using System;
 using VContainer.Unity;
 
-public abstract class SliderModel : IInitializable, IDisposable
+public abstract class SliderModel : IStartable, IDisposable
 {
     private readonly ReactiveProperty<float> _value = new();
     private readonly SettingsStorage _settingsStorage;
@@ -17,7 +17,7 @@ public abstract class SliderModel : IInitializable, IDisposable
     protected abstract string DataKey { get; }
     protected abstract float DefaultValue { get; }
 
-    public void Initialize()
+    public virtual void Start()
     {
         float value = _settingsStorage.Get(DataKey, DefaultValue);
         SetClampedValue(value);
@@ -27,7 +27,7 @@ public abstract class SliderModel : IInitializable, IDisposable
             .AddTo(_compositeDisposable);
     }
 
-    public void Dispose()
+    public virtual void Dispose()
     {
         _settingsStorage.Set(DataKey, _value.Value);
 
