@@ -3,13 +3,13 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class VSyncTuner : IInitializable, IDisposable
+public class VSyncAdjuster : IInitializable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly ReactiveProperty<bool> _isVSyncEnabled = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
-    public VSyncTuner(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
+    public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
 
     public ReadOnlyReactiveProperty<bool> IsVSyncEnabled => _isVSyncEnabled;
 

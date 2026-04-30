@@ -1,20 +1,20 @@
 using R3;
 
-public class FullScreenTunerToggleViewMediator : Mediator
+public class FullScreenAdjusterToggleViewMediator : Mediator
 {
-    private readonly FullScreenTuner _fullScreenTuner;
+    private readonly FullScreenAdjuster _fullScreenAdjuster;
     private readonly FullScreenToggleView _fullScreenToggleView;
 
-    public FullScreenTunerToggleViewMediator(FullScreenTuner fullScreenTuner,
+    public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster,
         FullScreenToggleView fullScreenToggleView)
     {
-        _fullScreenTuner = fullScreenTuner;
+        _fullScreenAdjuster = fullScreenAdjuster;
         _fullScreenToggleView = fullScreenToggleView;
     }
 
     public override void Start()
     {
-        _fullScreenTuner.IsFullScreen
+        _fullScreenAdjuster.IsFullScreen
             .Subscribe(_fullScreenToggleView.SetIsOnWithoutNotify)
             .AddTo(CompositeDisposable);
 
@@ -22,9 +22,9 @@ public class FullScreenTunerToggleViewMediator : Mediator
             .Subscribe(isOn =>
             {
                 if (isOn)
-                    _fullScreenTuner.EnableFullScreen();
+                    _fullScreenAdjuster.EnableFullScreen();
                 else
-                    _fullScreenTuner.DisableFullScreen();
+                    _fullScreenAdjuster.DisableFullScreen();
             })
             .AddTo(CompositeDisposable);
     }
