@@ -33,7 +33,7 @@ public abstract class ObjectCollider<TView> : IStartable
 
             colliderView.Collided
                 .Subscribe(collision => OnCollided(entityView, collision))
-                .AddTo(colliderView);
+                .RegisterTo(colliderView.destroyCancellationToken);
         }
     }
 

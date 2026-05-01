@@ -19,6 +19,6 @@ public class BirdFlyer
                 if (result.IsSuccess)
                     _birdCollided.OnNext(Unit.Default);
             })
-            .AddTo(birdEntityView);
+            .RegisterTo(birdEntityView.destroyCancellationToken);
     }
 }
