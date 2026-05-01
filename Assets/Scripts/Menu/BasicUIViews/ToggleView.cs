@@ -9,7 +9,7 @@ public abstract class ToggleView : MonoBehaviour
 
     public Observable<bool> ValueChanged { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _toggle = GetComponent<Toggle>();
         ValueChanged = _toggle.OnValueChangedAsObservable();
