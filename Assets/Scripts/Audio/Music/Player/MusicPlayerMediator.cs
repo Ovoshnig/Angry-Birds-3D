@@ -19,13 +19,13 @@ public class MusicPlayerMediator : Mediator
                 _musicPlayerView.SetClip(clip);
                 _musicPlayerView.Play();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
         _musicPlayer.PlaybackEnded
             .Subscribe(_ =>
             {
                 _musicPlayerView.SetClip(null);
                 _musicPlayerView.Stop();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

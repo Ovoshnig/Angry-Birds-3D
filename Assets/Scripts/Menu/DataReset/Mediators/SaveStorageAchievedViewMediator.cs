@@ -22,6 +22,6 @@ public class SaveStorageAchievedViewMediator : Mediator
                 bool saveCreated = _saveStorage.Get(SaveConstants.SaveCreatedKey, false);
                 _achievedLevelButtonView.SetInteractable(saveCreated);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

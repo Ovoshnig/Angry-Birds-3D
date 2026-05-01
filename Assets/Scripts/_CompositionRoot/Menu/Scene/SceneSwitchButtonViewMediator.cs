@@ -17,7 +17,7 @@ public class SceneSwitchButtonViewMediator : Mediator
     {
         _sceneButtonView.Clicked
             .Subscribe(_ => OnButtonClicked())
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void OnButtonClicked()

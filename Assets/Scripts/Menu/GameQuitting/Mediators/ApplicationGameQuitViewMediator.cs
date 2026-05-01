@@ -12,6 +12,6 @@ public class ApplicationGameQuitViewMediator : Mediator
     {
         _gameQuitButtonView.Clicked
             .Subscribe(_ => Application.Quit())
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

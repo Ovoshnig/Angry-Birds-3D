@@ -15,10 +15,10 @@ public class WindowMediator : Mediator
     {
         _window.IsOpen
             .Subscribe(_windowView.SetActive)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _windowView.IsActive
             .Subscribe(_window.SetWindowActive)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }
