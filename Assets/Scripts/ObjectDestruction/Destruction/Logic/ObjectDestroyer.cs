@@ -3,10 +3,10 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public record DamageEvent<TView>(ObjectDestroyerView DestroyerView, CollisionType CollisionType,
-    float Damage) where TView : MonoBehaviour;
+public record DamageEvent<TView>(TView EntityView, ObjectDestroyerView DestroyerView,
+    CollisionType CollisionType, float Damage) where TView : MonoBehaviour;
 
-public record DestructionEvent<TView>(ObjectDestroyerView DestroyerView)
+public record DestructionEvent<TView>(TView EntityView, ObjectDestroyerView DestroyerView)
     where TView : MonoBehaviour;
 
 public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
@@ -51,12 +51,13 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
         if (destroyerView.HealthModel.Health <= 0)
         {
             destroyerView.Destroy();
-            _destroyed.OnNext(new DestructionEvent<TView>(destroyerView));
+            _destroyed.OnNext(new DestructionEvent<TView>(entityView, destroyerView));
         }
         else
         {
             destroyerView.Damage(damage);
-            _damaged.OnNext(new DamageEvent<TView>(destroyerView, collisionEvent.Type, damage));
+            _damaged.OnNext(new DamageEvent<TView>(entityView, destroyerView,
+                collisionEvent.Type, damage));
         }
     }
 }
