@@ -16,7 +16,7 @@ public class BirdFlyerSlingshotShooterMediator : Mediator
     {
         _slingshotShooter.Shot
             .Subscribe(birdRigidbody => _birdFlyer.StartFlight(birdRigidbody.GetComponent<BirdEntityView>()))
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }
 

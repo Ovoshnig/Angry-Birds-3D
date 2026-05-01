@@ -7,7 +7,7 @@ public abstract class Window : IWindow, IStartable, IDisposable
     private readonly WindowInputHandler _windowInputHandler;
     private readonly WindowTracker _windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     private bool _isWindowActive = false;
 
@@ -27,17 +27,17 @@ public abstract class Window : IWindow, IStartable, IDisposable
         WindowSwitchPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnWindowSwitchPressed())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
 
         WindowInputHandler.CloseCurrentPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => TryClose())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public virtual void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
 
         _isOpen.Dispose();
     }

@@ -17,7 +17,7 @@ public class PointsPoolObjectDestroyerMediator<TView> : Mediator where TView : M
     {
         _destroyer.Destroyed
             .Subscribe(OnDestroyed)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void OnDestroyed(DestructionEvent<TView> destructionEvent)

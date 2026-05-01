@@ -21,11 +21,11 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
             .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
             || index % 6 == 0)
             .Subscribe(OnDamaged)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _destroyer.Destroyed
             .Subscribe(OnDestroyed)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void OnDamaged(DamageEvent<TView> damageEvent)

@@ -16,7 +16,7 @@ public class VSyncAdjusterToggleViewMediator : Mediator
     {
         _vSyncAdjuster.IsVSyncEnabled
             .Subscribe(_vSyncToggleView.SetIsOnWithoutNotify)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _vSyncToggleView.ValueChanged
             .Subscribe(isOn =>
@@ -26,6 +26,6 @@ public class VSyncAdjusterToggleViewMediator : Mediator
                 else
                     _vSyncAdjuster.DisableVSync();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

@@ -19,7 +19,7 @@ public class TextPrinterInputHandlerMediator : Mediator
         _menuInputHandler.SkipTextPrintingPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnSkipTextPrintingPressed())
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void OnSkipTextPrintingPressed()

@@ -15,7 +15,7 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
     private readonly ObjectCollider<TView> _objectCollider;
     private readonly Subject<DamageEvent<TView>> _damaged = new();
     private readonly Subject<DestructionEvent<TView>> _destroyed = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public ObjectDestroyer(ObjectCollider<TView> objectCollider) =>
         _objectCollider = objectCollider;
@@ -27,12 +27,12 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
     {
         _objectCollider.Collided
             .Subscribe(OnCollided)
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
 
         _damaged.Dispose();
         _destroyed.Dispose();

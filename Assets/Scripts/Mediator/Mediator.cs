@@ -4,9 +4,9 @@ using VContainer.Unity;
 
 public abstract class Mediator : IStartable, IDisposable
 {
-    protected CompositeDisposable CompositeDisposable { get; } = new();
+    protected CompositeDisposable Disposables { get; } = new();
 
     public abstract void Start();
 
-    public virtual void Dispose() => CompositeDisposable.Dispose();
+    public virtual void Dispose() => Disposables.Dispose();
 }
