@@ -10,7 +10,7 @@ public abstract class DropdownView : MonoBehaviour
 
     public Observable<int> ValueChanged { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _dropdown = GetComponent<TMP_Dropdown>();
         ValueChanged = _dropdown.onValueChanged.AsObservable(destroyCancellationToken);

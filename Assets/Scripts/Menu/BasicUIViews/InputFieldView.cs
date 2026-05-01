@@ -9,7 +9,7 @@ public abstract class InputFieldView : MonoBehaviour
 
     public Observable<string> ValueChanged { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _inputField = GetComponent<TMP_InputField>();
         ValueChanged = _inputField.onValueChanged.AsObservable(destroyCancellationToken);
