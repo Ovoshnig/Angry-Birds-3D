@@ -8,9 +8,8 @@ public class WindowView : MonoBehaviour
     private void Awake()
     {
         IsActive = Observable
-            .EveryValueChanged(gameObject, g => g.activeSelf)
-            .ToReadOnlyReactiveProperty(false)
-            .AddTo(this);
+            .EveryValueChanged(gameObject, g => g.activeSelf, destroyCancellationToken)
+            .ToReadOnlyReactiveProperty(false);
     }
 
     public void SetActive(bool value) => gameObject.SetActive(value);

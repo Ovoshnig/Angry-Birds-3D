@@ -40,6 +40,6 @@ public class SFXPlayerObjectPool
         playerView.Stopped
             .Take(1)
             .Subscribe(_ => _sfxPlayerPool.Release(playerView))
-            .AddTo(playerView);
+            .RegisterTo(playerView.destroyCancellationToken);
     }
 }
