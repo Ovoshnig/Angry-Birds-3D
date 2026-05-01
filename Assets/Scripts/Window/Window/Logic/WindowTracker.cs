@@ -1,11 +1,18 @@
 using R3;
+using System;
 
-public class WindowTracker
+public class WindowTracker : IDisposable
 {
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly ReactiveProperty<Window> _currentWindow = new(null);
 
     public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
+
+    public void Dispose()
+    {
+        _isOpen.Dispose();
+        _currentWindow.Dispose();
+    }
 
     public bool TryOpenWindow(Window window)
     {
