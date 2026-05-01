@@ -1,4 +1,5 @@
 ﻿using R3;
+using System;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -10,7 +11,7 @@ public enum CollisionType
 public record CollisionEvent<TView>(TView View, CollisionType Type, float Force)
     where TView : MonoBehaviour;
 
-public abstract class ObjectCollider<TView> : IStartable
+public abstract class ObjectCollider<TView> : IStartable, IDisposable
     where TView : MonoBehaviour
 {
     private readonly TView[] _entityViews;
@@ -36,6 +37,8 @@ public abstract class ObjectCollider<TView> : IStartable
                 .RegisterTo(colliderView.destroyCancellationToken);
         }
     }
+
+    public void Dispose() => _collided.Dispose();
 
     protected abstract ObjectColliderView GetObjectColliderView(TView entityView);
 
