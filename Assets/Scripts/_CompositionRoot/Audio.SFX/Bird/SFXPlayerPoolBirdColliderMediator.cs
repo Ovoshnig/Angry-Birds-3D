@@ -20,6 +20,6 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
                 if (@event.Type == CollisionType.Damage)
                     _playerObjectPool.PlaySFX(@event.View.transform, @event.View.SFXSettings.CollisionResource);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

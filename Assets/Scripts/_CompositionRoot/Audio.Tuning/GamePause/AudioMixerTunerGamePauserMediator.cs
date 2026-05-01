@@ -15,6 +15,6 @@ public class AudioMixerTunerGamePauserMediator : Mediator
     {
         _gamePauser.IsPause
             .Subscribe(_audioMixerTuner.SetPause)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

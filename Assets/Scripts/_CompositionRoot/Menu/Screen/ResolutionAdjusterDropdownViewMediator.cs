@@ -19,10 +19,10 @@ public class ResolutionAdjusterDropdownViewMediator : Mediator
 
         _resolutionAdjuster.CurrentResolutionIndex
             .Subscribe(_resolutionDropdownView.SetValueWithoutNotify)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _resolutionDropdownView.ValueChanged
             .Subscribe(_resolutionAdjuster.SetResolution)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

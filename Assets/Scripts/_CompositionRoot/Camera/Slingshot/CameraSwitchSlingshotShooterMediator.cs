@@ -19,7 +19,7 @@ public class CameraSwitchSlingshotShooterMediator : Mediator
     {
         _slingshotShooter.CurrentState
             .Subscribe(SlingshotStateChanged)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void SlingshotStateChanged(SlingshotState state)
