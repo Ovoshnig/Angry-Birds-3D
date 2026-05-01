@@ -11,7 +11,7 @@ public abstract class SliderView : MonoBehaviour
     public float MinValue => _slider.minValue;
     public float MaxValue => _slider.maxValue;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _slider = GetComponent<Slider>();
         ValueChanged = _slider.OnValueChangedAsObservable();

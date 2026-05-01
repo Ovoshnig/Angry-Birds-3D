@@ -9,7 +9,7 @@ public abstract class ButtonView : MonoBehaviour
 
     public Observable<Unit> Clicked { get; private set; }
 
-    private void Awake()
+    protected virtual void Awake()
     {
         _button = GetComponent<Button>();
         Clicked = _button.OnClickAsObservable();

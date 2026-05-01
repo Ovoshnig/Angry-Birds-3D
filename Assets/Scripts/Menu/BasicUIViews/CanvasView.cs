@@ -5,5 +5,5 @@ public abstract class CanvasView : MonoBehaviour
 {
     private Canvas _canvas;
 
-    private void Awake() => _canvas = GetComponent<Canvas>();
+    protected virtual void Awake() => _canvas = GetComponent<Canvas>();
 }
