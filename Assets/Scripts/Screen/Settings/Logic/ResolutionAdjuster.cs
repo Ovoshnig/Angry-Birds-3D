@@ -7,8 +7,10 @@ using VContainer.Unity;
 
 public class ResolutionAdjuster : IInitializable, IDisposable
 {
+    private readonly ReactiveProperty<int> _currentResolutionIndex = new(0);
+
     public List<ResolutionData> Resolutions { get; private set; }
-    public ReactiveProperty<int> CurrentResolutionIndex { get; } = new(0);
+    public ReadOnlyReactiveProperty<int> CurrentResolutionIndex => _currentResolutionIndex;
 
     public void Initialize()
     {
@@ -23,10 +25,10 @@ public class ResolutionAdjuster : IInitializable, IDisposable
             Resolutions.Add(currentResolution);
 
         Resolutions.Sort();
-        CurrentResolutionIndex.Value = Resolutions.IndexOf(currentResolution);
+        _currentResolutionIndex.Value = Resolutions.IndexOf(currentResolution);
     }
 
-    public void Dispose() => CurrentResolutionIndex.Dispose();
+    public void Dispose() => _currentResolutionIndex.Dispose();
 
     public void SetResolution(int index)
     {
@@ -38,7 +40,7 @@ public class ResolutionAdjuster : IInitializable, IDisposable
 
         ResolutionData resolution = Resolutions[index];
         Screen.SetResolution(resolution.Width, resolution.Height, Screen.fullScreenMode, resolution.RefreshRate);
-        CurrentResolutionIndex.Value = index;
+        _currentResolutionIndex.Value = index;
     }
 
     private ResolutionData GetCurrentResolutionData()

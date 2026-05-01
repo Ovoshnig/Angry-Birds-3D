@@ -69,6 +69,10 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
     {
         _leftButtonDisposable.Dispose();
         _dragDisposable.Dispose();
+
+        _currentState.Dispose();
+        _draggingStarted.Dispose();
+        _shot.Dispose();
     }
 
     public void SetCurrentBird(Rigidbody birdRigidbody)

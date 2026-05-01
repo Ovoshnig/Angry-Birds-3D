@@ -1,10 +1,13 @@
 using R3;
+using System;
 
-public class BirdFlyer
+public class BirdFlyer : IDisposable
 {
     private readonly Subject<Unit> _birdCollided = new();
 
     public Observable<Unit> BirdCollided => _birdCollided;
+
+    public void Dispose() => _birdCollided.Dispose();
 
     public void StartFlight(BirdEntityView birdEntityView)
     {

@@ -29,6 +29,7 @@ public class VSyncAdjuster : IStartable, IDisposable
         _settingsStorage.Set(SettingsConstants.VSyncKey, _isVSyncEnabled.Value);
 
         _compositeDisposable.Dispose();
+        _isVSyncEnabled.Dispose();
     }
 
     public void SwitchVSync()
