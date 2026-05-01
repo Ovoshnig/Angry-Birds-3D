@@ -12,7 +12,7 @@ public abstract class PanelSwitchButtonView : ButtonView
     {
         Clicked
             .Subscribe(_ => Switch())
-            .AddTo(this);
+            .RegisterTo(destroyCancellationToken);
     }
 
     public void Switch()

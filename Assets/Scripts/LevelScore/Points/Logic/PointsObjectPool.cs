@@ -28,6 +28,6 @@ public class PointsObjectPool
         pointsView.Stopped
             .Take(1)
             .Subscribe(_ => _pointsPool.Release(pointsView))
-            .AddTo(pointsView);
+            .RegisterTo(pointsView.destroyCancellationToken);
     }
 }
