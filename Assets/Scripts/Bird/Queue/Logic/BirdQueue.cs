@@ -28,7 +28,12 @@ public class BirdQueue : IStartable, IDisposable
             .AddTo(_compositeDisposable);
     }
 
-    public void Dispose() => _compositeDisposable.Dispose();
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
+
+        _birdDequeued.Dispose();
+    }
 
     public bool TryDequeueBird()
     {
