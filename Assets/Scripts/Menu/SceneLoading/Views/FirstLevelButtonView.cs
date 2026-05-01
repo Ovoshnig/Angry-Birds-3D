@@ -11,6 +11,6 @@ public class FirstLevelButtonView : SceneButtonView
 
         _playButtonPrinterView.Completed
             .Subscribe(_ => SetInteractable(true))
-            .AddTo(this);
+            .RegisterTo(destroyCancellationToken);
     }
 }

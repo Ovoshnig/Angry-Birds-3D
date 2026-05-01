@@ -16,7 +16,7 @@ public class SliderImageView : MonoBehaviour
     {
         _sliderView.ValueChanged
             .Subscribe(SetFillingSprite)
-            .AddTo(this);
+            .RegisterTo(destroyCancellationToken);
     }
 
     private void SetFillingSprite(float value)
