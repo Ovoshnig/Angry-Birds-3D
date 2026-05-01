@@ -1,11 +1,13 @@
 ﻿using R3;
 using System;
 
-public class ScoreModel
+public class ScoreModel : IDisposable
 {
     private readonly ReactiveProperty<int> _score = new(0);
 
     public ReadOnlyReactiveProperty<int> Score => _score;
+
+    public void Dispose() => _score.Dispose();
 
     public void Increase(int value)
     {

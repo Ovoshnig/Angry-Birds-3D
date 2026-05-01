@@ -23,7 +23,12 @@ public class FullScreenAdjuster : IStartable, IDisposable
             .AddTo(_compositeDisposable);
     }
 
-    public void Dispose() => _compositeDisposable.Dispose();
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
+
+        _isFullScreen.Dispose();
+    }
 
     public void OnSwitchFullScreenPressed()
     {

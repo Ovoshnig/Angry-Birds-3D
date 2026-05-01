@@ -4,8 +4,8 @@ using VContainer.Unity;
 
 public abstract class SliderModel : IStartable, IDisposable
 {
-    private readonly ReactiveProperty<float> _value = new();
     private readonly SettingsStorage _settingsStorage;
+    private readonly ReactiveProperty<float> _value = new();
     private readonly CompositeDisposable _compositeDisposable = new();
 
     public SliderModel(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
@@ -32,6 +32,7 @@ public abstract class SliderModel : IStartable, IDisposable
         _settingsStorage.Set(DataKey, _value.Value);
 
         _compositeDisposable.Dispose();
+        _value.Dispose();
     }
 
     public void SetClampedValue(float value)

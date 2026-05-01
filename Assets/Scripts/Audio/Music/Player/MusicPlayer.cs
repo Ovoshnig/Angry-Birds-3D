@@ -32,6 +32,9 @@ public class MusicPlayer : IDisposable
     {
         _cts.Cancel();
         _cts.Dispose();
+
+        _playbackStarted.Dispose();
+        _playbackEnded.Dispose();
     }
 
     public async UniTask StartPlayMusicAsync(SceneSwitch.SceneType sceneType)

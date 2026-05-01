@@ -40,5 +40,11 @@ public class BirdDestroyer : IStartable, IDisposable
             .AddTo(_compositeDisposable);
     }
 
-    public void Dispose() => _compositeDisposable.Dispose();
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
+
+        _destructionStarted.Dispose();
+        _destroyed.Dispose();
+    }
 }

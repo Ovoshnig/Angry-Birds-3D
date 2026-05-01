@@ -30,7 +30,13 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
             .AddTo(_compositeDisposable);
     }
 
-    public void Dispose() => _compositeDisposable.Dispose();
+    public void Dispose()
+    {
+        _compositeDisposable.Dispose();
+
+        _damaged.Dispose();
+        _destroyed.Dispose();
+    }
 
     protected abstract ObjectDestroyerView GetObjectDestroyerView(TView entityView);
 
