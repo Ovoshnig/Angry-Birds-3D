@@ -11,23 +11,22 @@ public class TextPrinterView : MonoBehaviour
     [SerializeField] private bool _playOnAwake = false;
 
     private readonly ReactiveProperty<bool> _isPrinting = new(false);
-    private readonly Subject<Unit> _completed = new();
 
     private TMP_Text _tmpText;
     private int _operationId;
 
     public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
-    public Observable<Unit> Completed => _completed;
+    public Observable<Unit> Completed { get; private set; }
 
     protected TMP_Text TmpText => _tmpText;
 
     protected virtual void Awake()
     {
-        IsPrinting
+        Completed = _isPrinting
            .Pairwise()
            .Where(isPrinting => isPrinting.Previous && !isPrinting.Current)
-           .Subscribe(_ => _completed.OnNext(Unit.Default))
-           .AddTo(this);
+           .Select(_ => Unit.Default)
+           .Share();
 
         _tmpText = GetComponent<TMP_Text>();
 
@@ -43,7 +42,6 @@ public class TextPrinterView : MonoBehaviour
         CancelPrinting();
 
         _isPrinting.Dispose();
-        _completed.Dispose();
     }
 
     public async UniTask PrintAsync(string fullText)
