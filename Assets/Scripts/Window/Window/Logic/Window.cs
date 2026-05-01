@@ -22,20 +22,25 @@ public abstract class Window : IWindow, IStartable, IDisposable
     protected abstract ReadOnlyReactiveProperty<bool> WindowSwitchPressed { get; }
     protected WindowInputHandler WindowInputHandler => _windowInputHandler;
 
-    public virtual void Start() 
+    public virtual void Start()
     {
         WindowSwitchPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnWindowSwitchPressed())
             .AddTo(_compositeDisposable);
-            
+
         WindowInputHandler.CloseCurrentPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => TryClose())
             .AddTo(_compositeDisposable);
     }
 
-    public virtual void Dispose() => _compositeDisposable.Dispose();
+    public virtual void Dispose()
+    {
+        _compositeDisposable.Dispose();
+
+        _isOpen.Dispose();
+    }
 
     public virtual bool TryOpen()
     {
