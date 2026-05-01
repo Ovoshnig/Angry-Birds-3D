@@ -19,7 +19,7 @@ public class SceneSwitch : IInitializable, IDisposable
 
     private uint _currentLevel;
 
-    public ReadOnlyReactiveProperty<bool> IsSceneLoading => _isSceneLoading.ToReadOnlyReactiveProperty();
+    public ReadOnlyReactiveProperty<bool> IsSceneLoading => _isSceneLoading;
 
     public void Initialize()
     {
@@ -32,6 +32,8 @@ public class SceneSwitch : IInitializable, IDisposable
     {
         _cts.Cancel();
         _cts.Dispose();
+
+        _isSceneLoading.Dispose();
     }
 
     public async UniTask LoadCurrentLevelAsync() => await LoadLevelAsync(_currentLevel);
