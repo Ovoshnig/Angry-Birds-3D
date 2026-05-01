@@ -8,7 +8,7 @@ public class BirdDestroyer : IStartable, IDisposable
     private readonly BirdSettings _birdSettings;
     private readonly Subject<BirdEntityView> _destructionStarted = new();
     private readonly Subject<BirdEntityView> _destroyed = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public BirdDestroyer(BirdCollider birdCollider, BirdSettings birdSettings)
     {
@@ -37,12 +37,12 @@ public class BirdDestroyer : IStartable, IDisposable
                     _destroyed.OnNext(@event.View);
                 }
             })
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
 
         _destructionStarted.Dispose();
         _destroyed.Dispose();

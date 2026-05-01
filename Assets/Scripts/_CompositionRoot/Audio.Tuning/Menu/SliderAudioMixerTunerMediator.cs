@@ -21,6 +21,6 @@ public class SliderAudioMixerTunerMediator : Mediator
                 else if (_sliderModel is MusicSliderModel)
                     _audioMixerTuner.SetMusicVolume(value);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

@@ -16,7 +16,7 @@ public class FullScreenAdjusterToggleViewMediator : Mediator
     {
         _fullScreenAdjuster.IsFullScreen
             .Subscribe(_fullScreenToggleView.SetIsOnWithoutNotify)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _fullScreenToggleView.ValueChanged
             .Subscribe(isOn =>
@@ -26,6 +26,6 @@ public class FullScreenAdjusterToggleViewMediator : Mediator
                 else
                     _fullScreenAdjuster.DisableFullScreen();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

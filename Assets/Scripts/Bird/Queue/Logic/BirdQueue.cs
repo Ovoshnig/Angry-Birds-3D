@@ -8,7 +8,7 @@ public class BirdQueue : IStartable, IDisposable
     private readonly Queue<BirdEntityView> _queue;
     private readonly BirdFlyer _birdFlyer;
     private readonly Subject<BirdEntityView> _birdDequeued = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public BirdQueue(BirdEntityView[] entityViews, BirdFlyer birdFlyer)
     {
@@ -25,12 +25,12 @@ public class BirdQueue : IStartable, IDisposable
 
         _birdFlyer.BirdCollided
             .Subscribe(_ => TryDequeueBird())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
 
         _birdDequeued.Dispose();
     }

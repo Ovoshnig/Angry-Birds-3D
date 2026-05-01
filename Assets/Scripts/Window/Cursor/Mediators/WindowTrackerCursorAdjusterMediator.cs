@@ -21,6 +21,6 @@ public class WindowTrackerCursorAdjusterMediator : Mediator
                 else
                     _cursorAdjuster.HideCursor();
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

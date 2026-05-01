@@ -7,7 +7,7 @@ public class FullScreenAdjuster : IStartable, IDisposable
 {
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public FullScreenAdjuster(ScreenInputHandler screenInputHandler) => _screenInputHandler = screenInputHandler;
 
@@ -20,12 +20,12 @@ public class FullScreenAdjuster : IStartable, IDisposable
         _screenInputHandler.SwitchFullScreenPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnSwitchFullScreenPressed())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
 
         _isFullScreen.Dispose();
     }

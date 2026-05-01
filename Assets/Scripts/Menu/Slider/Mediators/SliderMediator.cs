@@ -18,10 +18,10 @@ public class SliderMediator : Mediator
 
         _sliderModel.Value
             .Subscribe(_sliderView.SetValueWithoutNotify)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _sliderView.ValueChanged
             .Subscribe(_sliderModel.SetClampedValue)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

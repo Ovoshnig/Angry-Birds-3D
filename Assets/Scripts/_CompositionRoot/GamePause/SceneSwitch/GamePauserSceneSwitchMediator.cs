@@ -16,7 +16,7 @@ public class GamePauserSceneSwitchMediator : Mediator
     {
         _sceneSwitch.IsSceneLoading
             .Subscribe(OnSceneLoadingChange)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 
     private void OnSceneLoadingChange(bool isLoading)

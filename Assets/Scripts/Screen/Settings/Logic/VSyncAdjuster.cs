@@ -7,7 +7,7 @@ public class VSyncAdjuster : IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly ReactiveProperty<bool> _isVSyncEnabled = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
 
@@ -21,14 +21,14 @@ public class VSyncAdjuster : IStartable, IDisposable
 
         _settingsStorage.ResetHappened
             .Subscribe(_ => DisableVSync())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public void Dispose()
     {
         _settingsStorage.Set(SettingsConstants.VSyncKey, _isVSyncEnabled.Value);
 
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
         _isVSyncEnabled.Dispose();
     }
 

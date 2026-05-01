@@ -28,7 +28,7 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
                 _playerObjectPool.PlaySFX(bird.transform, birdSfxSettings.SelectionResource);
                 _playerObjectPool.PlaySFX(shooterTransform, _shooterView.DraggingResource);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _shooter.Shot
             .Subscribe(bird =>
@@ -38,6 +38,6 @@ public class SFXPlayerPoolSlingshotShooterMediator : Mediator
                 _playerObjectPool.PlaySFX(shooterTransform, _shooterView.ShotResource);
                 _playerObjectPool.PlaySFX(bird.transform, birdSfxSettings.FlyingResource);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }

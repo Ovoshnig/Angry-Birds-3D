@@ -21,7 +21,7 @@ public class SlingshotShooterBirdQueueMediator : Mediator
                 Rigidbody birdRigidbody = birdEntityView.FlyerView.Rigidbody;
                 _slingshotShooter.SetCurrentBird(birdRigidbody);
             })
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
 
         _birdQueue.TryDequeueBird();
     }

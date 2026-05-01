@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 public abstract class InputHandler<TActions> : IStartable, IDisposable
 {
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     protected InputHandler(TActions actions) => Actions = actions;
 
@@ -15,7 +15,8 @@ public abstract class InputHandler<TActions> : IStartable, IDisposable
 
     public virtual void Dispose()
     {
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
+
         DisableActions();
     }
 
@@ -24,8 +25,8 @@ public abstract class InputHandler<TActions> : IStartable, IDisposable
     protected abstract void DisableActions();
 
     protected ReadOnlyReactiveProperty<T> BindValue<T>(Func<TActions, InputAction> selector) where T : struct =>
-        selector(Actions).AsValueStream<T>().AddTo(_compositeDisposable);
+        selector(Actions).AsValueStream<T>().AddTo(_disposables);
 
     protected ReadOnlyReactiveProperty<bool> BindButton(Func<TActions, InputAction> selector)
-        => selector(Actions).AsButtonStream().AddTo(_compositeDisposable);
+        => selector(Actions).AsButtonStream().AddTo(_disposables);
 }

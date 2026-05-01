@@ -10,7 +10,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
     private readonly ScreenInputHandler _screenInputHandler;
     private readonly ReactiveProperty<bool> _isPlaying = new(false);
     private readonly CancellationTokenSource _cts = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public SplashScreenDisplayer(ScreenInputHandler screenInputHandler) =>
         _screenInputHandler = screenInputHandler;
@@ -23,7 +23,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
             .Where(isPressed => isPressed)
             .Take(1)
             .Subscribe(_ => Stop())
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
 
         DisplayAsync().Forget();
     }
@@ -32,7 +32,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
     {
         Stop();
 
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
         _isPlaying.Dispose();
 
         _cts.Cancel();

@@ -15,6 +15,6 @@ public class ScoreMediator : Mediator
     {
         _scoreModel.Score
             .Subscribe(_scoreView.SetScoreSmoothly)
-            .AddTo(CompositeDisposable);
+            .AddTo(Disposables);
     }
 }
