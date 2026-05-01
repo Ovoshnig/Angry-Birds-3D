@@ -32,8 +32,8 @@ public class SplashScreenDisplayer : IStartable, IDisposable
     {
         Stop();
 
-        _isPlaying.Dispose();
         _compositeDisposable.Dispose();
+        _isPlaying.Dispose();
 
         _cts.Cancel();
         _cts.Dispose();
