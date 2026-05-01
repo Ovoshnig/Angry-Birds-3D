@@ -6,15 +6,13 @@ public class PlayButtonPrinterView : TextPrinterView
 {
     [SerializeField] private ScoreTablePrinterView _scoreTablePrinterView;
 
-    protected override void Awake()
+    protected virtual void Start()
     {
-        base.Awake();
-
         string initialText = TmpText.text;
         TmpText.text = string.Empty;
 
         _scoreTablePrinterView.Completed
             .Subscribe(_ => PrintAsync(initialText).Forget())
-            .AddTo(this);
+            .RegisterTo(destroyCancellationToken);
     }
 }
