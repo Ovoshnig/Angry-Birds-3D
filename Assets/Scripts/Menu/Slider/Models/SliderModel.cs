@@ -6,7 +6,7 @@ public abstract class SliderModel : IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly ReactiveProperty<float> _value = new();
-    private readonly CompositeDisposable _compositeDisposable = new();
+    private readonly CompositeDisposable _disposables = new();
 
     public SliderModel(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
 
@@ -24,14 +24,14 @@ public abstract class SliderModel : IStartable, IDisposable
 
         _settingsStorage.ResetHappened
             .Subscribe(_ => _value.Value = DefaultValue)
-            .AddTo(_compositeDisposable);
+            .AddTo(_disposables);
     }
 
     public virtual void Dispose()
     {
         _settingsStorage.Set(DataKey, _value.Value);
 
-        _compositeDisposable.Dispose();
+        _disposables.Dispose();
         _value.Dispose();
     }
 
