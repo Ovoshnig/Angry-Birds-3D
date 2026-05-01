@@ -1,10 +1,13 @@
 using R3;
+using System;
 
-public class GamePauser
+public class GamePauser : IDisposable
 {
     private readonly ReactiveProperty<bool> _isPause = new(false);
 
     public ReadOnlyReactiveProperty<bool> IsPause => _isPause;
+
+    public void Dispose() => _isPause.Dispose();
 
     public void Pause() => SetPause(true);
 
