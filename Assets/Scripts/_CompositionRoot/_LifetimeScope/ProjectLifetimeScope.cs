@@ -13,7 +13,6 @@ public class ProjectLifetimeScope : LifetimeScope
 
         new InputActionsInstaller().Install(builder);
         new AddressableLoadingInstaller().Install(builder);
-        new SceneInstaller().Install(builder);
 
         _gameSettingsInstaller.Install(builder);
     }
