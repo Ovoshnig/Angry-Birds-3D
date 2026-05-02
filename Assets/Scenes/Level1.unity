@@ -1729,6 +1729,9 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _levelStateInstaller:
+    _stateTrackingInstaller:
+      _completionPanelView: {fileID: 1188629418}
   _levelScoreInstaller:
     _scoreInstaller:
       _scoreView: {fileID: 2081062521}

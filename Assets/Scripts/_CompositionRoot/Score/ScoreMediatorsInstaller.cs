@@ -10,5 +10,7 @@ public class ScoreMediatorsInstaller : IInstaller
 
         builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator<BlockEntityView>>(Lifetime.Singleton);
         builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator<PigEntityView>>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<ScoreViewLevelTrackerMediator>(Lifetime.Singleton);
     }
 }
