@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System;
 using System.Threading;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
@@ -38,10 +39,20 @@ public class SceneSwitch : IInitializable, IDisposable
 
     public async UniTask LoadCurrentLevelAsync() => await LoadLevelAsync(_currentLevel);
 
+    public async UniTask LoadNextLevelAsync() => await LoadLevelAsync(_currentLevel + 1);
+
     public async UniTask LoadLevelAsync(uint index)
     {
         try
         {
+            if (index >= SceneManager.sceneCountInBuildSettings)
+            {
+                Debug.LogWarningFormat("Cannot load scene with index {0}, " +
+                    "there are fewer scenes in the scene list", index);
+
+                return;
+            }
+
             _isSceneLoading.Value = true;
 
             await SceneManager.LoadSceneAsync((int)index)
