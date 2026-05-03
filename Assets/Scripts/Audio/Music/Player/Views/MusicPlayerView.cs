@@ -5,8 +5,6 @@ public class MusicPlayerView : MonoBehaviour
 {
     private AudioSource _audioSource;
 
-    public bool IsPlaying => _audioSource.isPlaying;
-
     private void Awake() => _audioSource = GetComponent<AudioSource>();
 
     public void Play(AudioClip clip)
