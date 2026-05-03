@@ -1,0 +1,22 @@
+{
+    "name": "Pig",
+    "rootNamespace": "",
+    "references": [
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:77221876cc6b8244180b96e320b1bcd4",
+        "GUID:fa11c0068837bb3478f7546fa7c41f32",
+        "GUID:d3e7d90b77b244e41874da81c5f86368",
+        "GUID:6af2446c9f44aca4ab41190c6847448b",
+        "GUID:b9a6d7cb7fe0f554fa4c0fefc0a712cf",
+        "GUID:0200b5e7c37305d49adde3e1e1b6bd1d"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-6037611429385339011
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 05 collision a3_{-6037611429385339011}
+  m_AudioClip: {fileID: 8300000, guid: 232ef968c70cfce4aada87be667438f0, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-1742752858942082008
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 05 collision a1_{-1742752858942082008}
+  m_AudioClip: {fileID: 8300000, guid: f58fbb9fbbad0244486f74fd6d9fa7c6, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3305832872593263949
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 05 collision a2_{3305832872593263949}
+  m_AudioClip: {fileID: 8300000, guid: 2fdc590a80bc52747bf2cb64ffc4318d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4169092213153201699
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 05 collision a4_{4169092213153201699}
+  m_AudioClip: {fileID: 8300000, guid: 37d194a9ebe1c024084968d093d891b5, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird05CollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -5, y: 5}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -1742752858942082008}
+  - {fileID: 3305832872593263949}
+  - {fileID: -6037611429385339011}
+  - {fileID: 4169092213153201699}
+  - {fileID: 7376973255118330486}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &7376973255118330486
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 05 collision a5_{7376973255118330486}
+  m_AudioClip: {fileID: 8300000, guid: 96c97b37a5582e74c81cf7cbb49b480a, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
