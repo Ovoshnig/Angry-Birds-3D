@@ -1,0 +1,10 @@
+using UnityEngine;
+
+[CreateAssetMenu(fileName = "DestructionPointsSettings", 
+    menuName = "Scriptable Objects/DestructionSettings/Points")]
+public class DestructionPointsSettings : ScriptableObject
+{
+    [field: SerializeField, Min(0)] public int Points { get; private set; } = 500;
+    [field: SerializeField] public Color Color { get; private set; } = Color.white;
+    [field: SerializeField, Min(0f)] public float FontSize { get; private set; } = 1f;
+}

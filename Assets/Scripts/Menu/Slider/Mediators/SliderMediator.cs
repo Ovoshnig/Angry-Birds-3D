@@ -1,0 +1,27 @@
+using R3;
+
+public class SliderMediator : Mediator
+{
+    private readonly SliderModel _sliderModel;
+    private readonly SliderView _sliderView;
+
+    public SliderMediator(SliderModel sliderModel, SliderView sliderView)
+    {
+        _sliderModel = sliderModel;
+        _sliderView = sliderView;
+    }
+
+    public override void Start()
+    {
+        _sliderView.SetMinValue(_sliderModel.MinValue);
+        _sliderView.SetMaxValue(_sliderModel.MaxValue);
+
+        _sliderModel.Value
+            .Subscribe(_sliderView.SetValueWithoutNotify)
+            .AddTo(Disposables);
+
+        _sliderView.ValueChanged
+            .Subscribe(_sliderModel.SetClampedValue)
+            .AddTo(Disposables);
+    }
+}
