@@ -1,13 +1,19 @@
 ﻿using System;
+using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
 [Serializable]
 public class SceneInstaller : IInstaller
 {
+    [SerializeField] private RectTransform _sceneViewsParent;
+
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<SceneSwitch>(Lifetime.Singleton)
-            .AsSelf();
+        SceneButtonView[] sceneViews = _sceneViewsParent.GetComponentsInChildren<SceneButtonView>(true);
+        builder.RegisterInstance(sceneViews);
+
+        builder.RegisterEntryPoint<SceneSwitch>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<SceneSwitchButtonViewsMediator>(Lifetime.Singleton);
     }
 }
