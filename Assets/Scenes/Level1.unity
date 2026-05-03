@@ -881,8 +881,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
-  m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
+  m_LocalRotation: {x: 0.047842406, y: -0.67955065, z: 0.047759037, w: 0.73050743}
+  m_LocalPosition: {x: 17.860008, y: 5.6848483, z: 20.26596}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1729,6 +1729,8 @@ MonoBehaviour:
     TypeName: 
   autoRun: 1
   autoInjectGameObjects: []
+  _sceneInstaller:
+    _sceneViewsParent: {fileID: 1878442408}
   _levelStateInstaller:
     _stateTrackingInstaller:
       _completionPanelView: {fileID: 1188629418}

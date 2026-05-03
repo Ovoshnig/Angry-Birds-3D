@@ -18,13 +18,13 @@ public class SceneSwitch : IInitializable, IDisposable
     private readonly ReactiveProperty<bool> _isSceneLoading = new(true);
     private readonly CancellationTokenSource _cts = new();
 
-    private uint _currentLevel;
+    private int _currentLevel;
 
     public ReadOnlyReactiveProperty<bool> IsSceneLoading => _isSceneLoading;
 
     public void Initialize()
     {
-        _currentLevel = (uint)SceneManager.GetActiveScene().buildIndex;
+        _currentLevel = SceneManager.GetActiveScene().buildIndex;
 
         WaitForFirstSceneLoadAsync().Forget();
     }
@@ -37,48 +37,43 @@ public class SceneSwitch : IInitializable, IDisposable
         _isSceneLoading.Dispose();
     }
 
-    public async UniTask LoadCurrentLevelAsync() => await LoadLevelAsync(_currentLevel);
+    public UniTask LoadCurrentLevelAsync() => LoadLevelAsync(_currentLevel);
 
-    public async UniTask LoadNextLevelAsync() => await LoadLevelAsync(_currentLevel + 1);
+    public UniTask LoadNextLevelAsync() => LoadLevelAsync(_currentLevel + 1);
 
-    public async UniTask LoadLevelAsync(uint index)
+    public async UniTask LoadLevelAsync(int index)
     {
+        if (!IsValidIndex(index))
+            return;
+
         try
         {
-            if (index >= SceneManager.sceneCountInBuildSettings)
-            {
-                Debug.LogWarningFormat("Cannot load scene with index {0}, " +
-                    "there are fewer scenes in the scene list", index);
-
-                return;
-            }
-
             _isSceneLoading.Value = true;
 
-            await SceneManager.LoadSceneAsync((int)index)
-                .ToUniTask(cancellationToken: _cts.Token);
+            await SceneManager.LoadSceneAsync(index).ToUniTask(cancellationToken: _cts.Token);
 
             _currentLevel = index;
             _isSceneLoading.Value = false;
         }
         catch (OperationCanceledException)
         {
-            return;
         }
     }
 
     private async UniTask WaitForFirstSceneLoadAsync()
     {
-        try
-        {
-            await UniTask.WaitUntil(() => SceneManager
-                .GetActiveScene().isLoaded, cancellationToken: _cts.Token);
+        await UniTask.WaitUntil(() =>
+        SceneManager.GetActiveScene().isLoaded, cancellationToken: _cts.Token);
 
-            _isSceneLoading.Value = false;
-        }
-        catch (OperationCanceledException)
-        {
-            return;
-        }
+        _isSceneLoading.Value = false;
+    }
+
+    private bool IsValidIndex(int index)
+    {
+        if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
+            return true;
+
+        Debug.LogWarning($"Cannot load scene with index {index}, it is out of scene list bounds.");
+        return false;
     }
 }
