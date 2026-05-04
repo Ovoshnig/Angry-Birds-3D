@@ -12,11 +12,14 @@ public abstract class AudioSliderModel : SliderModel, IStartable
         _audioSettings = audioSettings;
     }
 
+    public abstract string MixerParameterName { get; }
+
     public override float MinValue => _audioSettings.MinVolume;
     public override float MaxValue => _audioSettings.MaxVolume;
-    protected override float DefaultValue => _audioSettings.DefaultVolume;
 
     protected abstract string DataKey { get; }
+
+    protected override float DefaultValue => _audioSettings.DefaultVolume;
 
     public virtual void Start()
     {
