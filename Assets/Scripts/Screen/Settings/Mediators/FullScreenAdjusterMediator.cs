@@ -1,11 +1,11 @@
 using R3;
 
-public class FullScreenAdjusterToggleViewMediator : Mediator
+public class FullScreenAdjusterMediator : Mediator
 {
     private readonly FullScreenAdjuster _fullScreenAdjuster;
     private readonly FullScreenToggleView _fullScreenToggleView;
 
-    public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster,
+    public FullScreenAdjusterMediator(FullScreenAdjuster fullScreenAdjuster,
         FullScreenToggleView fullScreenToggleView)
     {
         _fullScreenAdjuster = fullScreenAdjuster;
