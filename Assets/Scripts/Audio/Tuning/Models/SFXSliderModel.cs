@@ -5,5 +5,7 @@ public sealed class SFXSliderModel : AudioSliderModel
     {
     }
 
+    public override string MixerParameterName => AudioMixerConstants.SFXGroupName;
+
     protected override string DataKey => SettingsConstants.SFXVolumeKey;
 }
