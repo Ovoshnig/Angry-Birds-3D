@@ -2,12 +2,12 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 
-public class SceneSwitchButtonViewsMediator : Mediator
+public class SceneSwitchMediator : Mediator
 {
     private readonly SceneSwitch _sceneSwitch;
     private readonly IReadOnlyList<SceneButtonView> _sceneButtonViews;
 
-    public SceneSwitchButtonViewsMediator(SceneSwitch sceneSwitch,
+    public SceneSwitchMediator(SceneSwitch sceneSwitch,
         IReadOnlyList<SceneButtonView> sceneButtonViews)
     {
         _sceneSwitch = sceneSwitch;

@@ -15,6 +15,6 @@ public class SceneInstaller : IInstaller
         builder.RegisterInstance(sceneViews);
 
         builder.RegisterEntryPoint<SceneSwitch>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<SceneSwitchButtonViewsMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<SceneSwitchMediator>(Lifetime.Singleton);
     }
 }
