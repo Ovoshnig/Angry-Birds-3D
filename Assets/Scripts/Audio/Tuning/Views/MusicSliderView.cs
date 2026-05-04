@@ -1,3 +1,3 @@
-public sealed class MusicSliderView : SliderView
+public sealed class MusicSliderView : AudioSliderView
 {
 }
