@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,10 +11,10 @@ public class SceneInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        SceneButtonView[] sceneViews = _sceneViewsParent.GetComponentsInChildren<SceneButtonView>(true);
+        IReadOnlyList<SceneButtonView> sceneViews = _sceneViewsParent.GetComponentsInChildren<SceneButtonView>(true);
         builder.RegisterInstance(sceneViews);
 
         builder.RegisterEntryPoint<SceneSwitch>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<SceneSwitchButtonViewsMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<SceneSwitchMediator>(Lifetime.Singleton);
     }
 }
