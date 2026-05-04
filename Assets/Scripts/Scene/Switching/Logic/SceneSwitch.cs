@@ -37,27 +37,27 @@ public class SceneSwitch : IInitializable, IDisposable
         _isSceneLoading.Dispose();
     }
 
-    public UniTask LoadCurrentLevelAsync() => LoadLevelAsync(_currentLevel);
-
-    public UniTask LoadNextLevelAsync() => LoadLevelAsync(_currentLevel + 1);
-
-    public async UniTask LoadLevelAsync(int index)
+    public async UniTask LoadSceneAsync(SceneNavigationType navigationType, int specificIndex = -1)
     {
+        int index = navigationType switch
+        {
+            SceneNavigationType.MainMenu => 0,
+            SceneNavigationType.FirstLevel => 1,
+            SceneNavigationType.CurrentLevel => _currentLevel,
+            SceneNavigationType.NextLevel => _currentLevel + 1,
+            SceneNavigationType.SpecificIndex => specificIndex,
+            _ => throw new ArgumentOutOfRangeException(nameof(navigationType))
+        };
+
         if (!IsValidIndex(index))
             return;
 
-        try
-        {
-            _isSceneLoading.Value = true;
+        _isSceneLoading.Value = true;
 
-            await SceneManager.LoadSceneAsync(index).ToUniTask(cancellationToken: _cts.Token);
+        await SceneManager.LoadSceneAsync(index).ToUniTask(cancellationToken: _cts.Token);
 
-            _currentLevel = index;
-            _isSceneLoading.Value = false;
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        _currentLevel = index;
+        _isSceneLoading.Value = false;
     }
 
     private async UniTask WaitForFirstSceneLoadAsync()
