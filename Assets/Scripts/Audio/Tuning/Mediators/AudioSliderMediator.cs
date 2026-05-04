@@ -1,27 +1,27 @@
 using R3;
+using System.Collections.Generic;
+using System.Linq;
 
 public class AudioSliderMediator : Mediator
 {
-    private readonly MusicSliderModel _musicModel;
-    private readonly SFXSliderModel _sfxModel;
-    private readonly AudioSliderView[] _sliderViews;
+    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
+    private readonly IReadOnlyList<AudioSliderView> _sliderViews;
 
-    public AudioSliderMediator(MusicSliderModel musicModel, SFXSliderModel sfxModel,
-        AudioSliderView[] sliderViews)
+    public AudioSliderMediator(IReadOnlyList<AudioSliderModel> sliderModels,
+        IReadOnlyList<AudioSliderView> sliderViews)
     {
-        _musicModel = musicModel;
-        _sfxModel = sfxModel;
+        _sliderModels = sliderModels;
         _sliderViews = sliderViews;
     }
 
     public override void Start()
     {
-        foreach (var sliderView in _sliderViews)
+        foreach (var view in _sliderViews)
         {
-            if (sliderView is MusicSliderView)
-                BindModelAndView(_musicModel, sliderView);
-            else if (sliderView is SFXSliderView)
-                BindModelAndView(_sfxModel, sliderView);
+            AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
+
+            if (model != null)
+                BindModelAndView(model, view);
         }
     }
 

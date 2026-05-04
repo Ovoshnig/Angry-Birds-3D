@@ -5,6 +5,7 @@ public sealed class MusicSliderModel : AudioSliderModel
     {
     }
 
+    public override AudioChannel Channel => AudioChannel.Music;
     public override string MixerParameterName => AudioMixerConstants.MusicGroupName;
 
     protected override string DataKey => SettingsConstants.MusicVolumeKey;

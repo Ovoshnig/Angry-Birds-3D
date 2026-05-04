@@ -12,6 +12,7 @@ public abstract class AudioSliderModel : SliderModel, IStartable
         _audioSettings = audioSettings;
     }
 
+    public abstract AudioChannel Channel { get; }
     public abstract string MixerParameterName { get; }
 
     public override float MinValue => _audioSettings.MinVolume;
