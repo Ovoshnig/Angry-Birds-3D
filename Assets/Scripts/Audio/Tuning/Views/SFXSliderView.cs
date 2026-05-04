@@ -1,3 +1,3 @@
-public sealed class SFXSliderView : SliderView
+public sealed class SFXSliderView : AudioSliderView
 {
 }
