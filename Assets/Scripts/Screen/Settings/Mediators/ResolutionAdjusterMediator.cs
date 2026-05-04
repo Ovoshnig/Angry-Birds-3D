@@ -1,12 +1,12 @@
 using R3;
 using System.Linq;
 
-public class ResolutionAdjusterDropdownViewMediator : Mediator
+public class ResolutionAdjusterMediator : Mediator
 {
     private readonly ResolutionAdjuster _resolutionAdjuster;
     private readonly ResolutionDropdownView _resolutionDropdownView;
 
-    public ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
+    public ResolutionAdjusterMediator(ResolutionAdjuster resolutionAdjuster,
         ResolutionDropdownView resolutionDropdownView)
     {
         _resolutionAdjuster = resolutionAdjuster;

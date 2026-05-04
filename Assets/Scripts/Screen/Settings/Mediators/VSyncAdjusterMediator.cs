@@ -1,11 +1,11 @@
 using R3;
 
-public class VSyncAdjusterToggleViewMediator : Mediator
+public class VSyncAdjusterMediator : Mediator
 {
     private readonly VSyncAdjuster _vSyncAdjuster;
     private readonly VSyncToggleView _vSyncToggleView;
 
-    public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster,
+    public VSyncAdjusterMediator(VSyncAdjuster vSyncAdjuster,
         VSyncToggleView vSyncToggleView)
     {
         _vSyncAdjuster = vSyncAdjuster;
