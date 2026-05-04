@@ -1,7 +1,7 @@
 using VContainer;
 using VContainer.Unity;
 
-public class DataSavingInstaller : IInstaller
+public class DataStorageInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
