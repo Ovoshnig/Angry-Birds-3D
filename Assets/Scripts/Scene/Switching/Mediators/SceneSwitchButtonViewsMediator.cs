@@ -1,13 +1,14 @@
 using Cysharp.Threading.Tasks;
 using R3;
+using System.Collections.Generic;
 
 public class SceneSwitchButtonViewsMediator : Mediator
 {
     private readonly SceneSwitch _sceneSwitch;
-    private readonly SceneButtonView[] _sceneButtonViews;
+    private readonly IReadOnlyList<SceneButtonView> _sceneButtonViews;
 
     public SceneSwitchButtonViewsMediator(SceneSwitch sceneSwitch,
-        SceneButtonView[] sceneButtonViews)
+        IReadOnlyList<SceneButtonView> sceneButtonViews)
     {
         _sceneSwitch = sceneSwitch;
         _sceneButtonViews = sceneButtonViews;
@@ -15,29 +16,11 @@ public class SceneSwitchButtonViewsMediator : Mediator
 
     public override void Start()
     {
-        foreach (var sceneView in _sceneButtonViews)
-
-        sceneView.Clicked
-            .Subscribe(_ => OnButtonClicked(sceneView))
-            .AddTo(Disposables);
-    }
-
-    private void OnButtonClicked(SceneButtonView sceneButtonView)
-    {
-        switch (sceneButtonView)
+        foreach (var view in _sceneButtonViews)
         {
-            case MainMenuButtonView:
-                _sceneSwitch.LoadLevelAsync(0).Forget();
-                break;
-            case CurrentLevelButtonView:
-                _sceneSwitch.LoadCurrentLevelAsync().Forget();
-                break;
-            case NextLevelButtonView:
-                _sceneSwitch.LoadNextLevelAsync().Forget();
-                break;
-            default:
-                throw new System.Exception($"Unknown scene button view type: " +
-                    $"{_sceneButtonViews.GetType().Name}");
+            view.Clicked
+                .Subscribe(_ => _sceneSwitch.LoadSceneAsync(view.NavigationType, view.SpecificIndex).Forget())
+                .AddTo(Disposables);
         }
     }
 }
