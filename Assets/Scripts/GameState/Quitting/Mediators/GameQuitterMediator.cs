@@ -1,11 +1,11 @@
 ﻿using R3;
 using UnityEngine;
 
-public class ApplicationGameQuitViewMediator : Mediator
+public class GameQuitterMediator : Mediator
 {
     private readonly GameQuitButtonView _gameQuitButtonView;
 
-    public ApplicationGameQuitViewMediator(GameQuitButtonView gameQuitButtonView) =>
+    public GameQuitterMediator(GameQuitButtonView gameQuitButtonView) =>
         _gameQuitButtonView = gameQuitButtonView;
 
     public override void Start()
