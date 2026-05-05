@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -9,9 +10,11 @@ public class LevelLifetimeScope : LifetimeScope
     [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
     [SerializeField] private CameraInstaller _cameraInstaller;
     [SerializeField] private SFXInstaller _sfxInstaller;
+    [SerializeField] private SlingshotInstaller _slingshotInstaller;
+    [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
+    [SerializeField] private ObjectDestructionInstaller _objectDestructionInstaller;
     [SerializeField] private BirdInstaller _birdInstaller;
     [SerializeField] private PigInstaller _pigInstaller;
-    [SerializeField] private SlingshotInstaller _slingshotInstaller;
     [SerializeField] private BlockInstaller _blockInstaller;
 
     protected override void Configure(IContainerBuilder builder)
@@ -27,18 +30,39 @@ public class LevelLifetimeScope : LifetimeScope
         _levelScoreInstaller.Install(builder);
         _cameraInstaller.Install(builder);
         _sfxInstaller.Install(builder);
+        _slingshotInstaller.Install(builder);
+        _objectCollisionInstaller.Install(builder);
+        _objectDestructionInstaller.Install(builder);
         _birdInstaller.Install(builder);
         _pigInstaller.Install(builder);
-        _slingshotInstaller.Install(builder);
         _blockInstaller.Install(builder);
+        InstallCollidableEntities(builder);
     }
 
-    private static void InstallMediators(IContainerBuilder builder)
+    private void InstallMediators(IContainerBuilder builder)
     {
         new ScoreMediatorsInstaller().Install(builder);
         new CameraMediatorsInstaller().Install(builder);
         new SFXMediatorsInstaller().Install(builder);
         new BirdMediatorsInstaller().Install(builder);
         new SlingshotMediatorsInstaller().Install(builder);
+    }
+
+    private void InstallCollidableEntities(IContainerBuilder builder)
+    {
+        builder.Register(resolver =>
+        {
+            IReadOnlyList<BirdEntityView> birds = resolver.Resolve<IReadOnlyList<BirdEntityView>>();
+            IReadOnlyList<BlockEntityView> blocks = resolver.Resolve<IReadOnlyList<BlockEntityView>>();
+            IReadOnlyList<PigEntityView> pigs = resolver.Resolve<IReadOnlyList<PigEntityView>>();
+
+            List<CollidableEntityView> allCollidables = new(birds.Count + blocks.Count + pigs.Count);
+            allCollidables.AddRange(birds);
+            allCollidables.AddRange(blocks);
+            allCollidables.AddRange(pigs);
+
+            return allCollidables;
+        },
+        Lifetime.Singleton).As<IReadOnlyList<CollidableEntityView>>();
     }
 }

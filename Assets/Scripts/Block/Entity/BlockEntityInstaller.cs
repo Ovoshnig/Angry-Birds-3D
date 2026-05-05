@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,7 +11,7 @@ public class BlockEntityInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        BlockEntityView[] blockEntityViews = _blockStructure.GetComponentsInChildren<BlockEntityView>();
-        builder.RegisterInstance(blockEntityViews).As<DestructibleEntityView[]>().AsSelf();
+        IReadOnlyList<BlockEntityView> blockEntityViews = _blockStructure.GetComponentsInChildren<BlockEntityView>();
+        builder.RegisterInstance(blockEntityViews);
     }
 }

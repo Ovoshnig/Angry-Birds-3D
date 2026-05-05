@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,7 +11,7 @@ public class PigEntityInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        PigEntityView[] pigEntityViews = _blockStructure.GetComponentsInChildren<PigEntityView>();
-        builder.RegisterInstance(pigEntityViews).As<DestructibleEntityView[]>().AsSelf();
+        IReadOnlyList<PigEntityView> pigEntityViews = _blockStructure.GetComponentsInChildren<PigEntityView>();
+        builder.RegisterInstance(pigEntityViews);
     }
 }
