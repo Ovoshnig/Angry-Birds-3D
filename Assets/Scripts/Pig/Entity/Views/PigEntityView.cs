@@ -1,15 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ObjectColliderView))]
 [RequireComponent(typeof(PigDestroyerView))]
-public class PigEntityView : MonoBehaviour
+public class PigEntityView : DestructibleEntityView
 {
-    public ObjectColliderView ColliderView { get; private set; }
-    public PigDestroyerView DestroyerView { get; private set; }
-
-    private void Awake()
+    protected override void Awake()
     {
-        ColliderView = GetComponent<ObjectColliderView>();
+        base.Awake();
         DestroyerView = GetComponent<PigDestroyerView>();
     }
 }
