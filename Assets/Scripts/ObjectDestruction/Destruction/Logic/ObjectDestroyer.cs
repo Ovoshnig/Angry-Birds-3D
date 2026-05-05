@@ -1,27 +1,24 @@
 using R3;
 using System;
-using UnityEngine;
 using VContainer.Unity;
 
-public record DamageEvent<TView>(TView EntityView, ObjectDestroyerView DestroyerView,
-    CollisionType CollisionType, float Damage) where TView : MonoBehaviour;
+public record DamageEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView,
+    CollisionType CollisionType, float Damage);
 
-public record DestructionEvent<TView>(TView EntityView, ObjectDestroyerView DestroyerView)
-    where TView : MonoBehaviour;
+public record DestructionEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);
 
-public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
-    where TView : MonoBehaviour
+public class ObjectDestroyer : IStartable, IDisposable
 {
-    private readonly ObjectCollider<TView> _objectCollider;
-    private readonly Subject<DamageEvent<TView>> _damaged = new();
-    private readonly Subject<DestructionEvent<TView>> _destroyed = new();
+    private readonly ObjectCollider _objectCollider;
+    private readonly Subject<DamageEvent> _damaged = new();
+    private readonly Subject<DestructionEvent> _destroyed = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public ObjectDestroyer(ObjectCollider<TView> objectCollider) =>
+    public ObjectDestroyer(ObjectCollider objectCollider) =>
         _objectCollider = objectCollider;
 
-    public Observable<DamageEvent<TView>> Damaged => _damaged;
-    public Observable<DestructionEvent<TView>> Destroyed => _destroyed;
+    public Observable<DamageEvent> Damaged => _damaged;
+    public Observable<DestructionEvent> Destroyed => _destroyed;
 
     public void Start()
     {
@@ -38,12 +35,12 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
         _destroyed.Dispose();
     }
 
-    protected abstract ObjectDestroyerView GetObjectDestroyerView(TView entityView);
-
-    private void OnCollided(CollisionEvent<TView> collisionEvent)
+    private void OnCollided(CollisionEvent collisionEvent)
     {
-        TView entityView = collisionEvent.View;
-        ObjectDestroyerView destroyerView = GetObjectDestroyerView(entityView);
+        if (collisionEvent.EntityView is not DestructibleEntityView entityView)
+            return;
+
+        ObjectDestroyerView destroyerView = entityView.DestroyerView;
 
         float damage = collisionEvent.Force;
         destroyerView.HealthModel.Decrement(damage);
@@ -51,12 +48,12 @@ public abstract class ObjectDestroyer<TView> : IStartable, IDisposable
         if (destroyerView.HealthModel.Health <= 0)
         {
             destroyerView.Destroy();
-            _destroyed.OnNext(new DestructionEvent<TView>(entityView, destroyerView));
+            _destroyed.OnNext(new DestructionEvent(entityView, destroyerView));
         }
         else
         {
             destroyerView.Damage(damage);
-            _damaged.OnNext(new DamageEvent<TView>(entityView, destroyerView,
+            _damaged.OnNext(new DamageEvent(entityView, destroyerView,
                 collisionEvent.Type, damage));
         }
     }

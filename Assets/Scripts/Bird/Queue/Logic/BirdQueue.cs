@@ -10,7 +10,7 @@ public class BirdQueue : IStartable, IDisposable
     private readonly Subject<BirdEntityView> _birdDequeued = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public BirdQueue(BirdEntityView[] entityViews, BirdFlyer birdFlyer)
+    public BirdQueue(IReadOnlyList<BirdEntityView> entityViews, BirdFlyer birdFlyer)
     {
         _queue = new Queue<BirdEntityView>(entityViews);
         _birdFlyer = birdFlyer;
