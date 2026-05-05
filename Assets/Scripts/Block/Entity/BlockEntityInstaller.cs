@@ -10,8 +10,7 @@ public class BlockEntityInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        BlockEntityView[] blockEntityViews = _blockStructure
-            .GetComponentsInChildren<BlockEntityView>();
-        builder.RegisterInstance(blockEntityViews);
+        BlockEntityView[] blockEntityViews = _blockStructure.GetComponentsInChildren<BlockEntityView>();
+        builder.RegisterInstance(blockEntityViews).As<DestructibleEntityView[]>().AsSelf();
     }
 }
