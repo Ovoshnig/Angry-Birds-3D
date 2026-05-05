@@ -3,13 +3,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView : MonoBehaviour
+public class SFXPlayerPoolObjectDestroyerMediator : Mediator
 {
     private readonly SFXPlayerObjectPool _playerObjectPool;
-    private readonly ObjectDestroyer<TView> _destroyer;
+    private readonly ObjectDestroyer _destroyer;
 
     public SFXPlayerPoolObjectDestroyerMediator(SFXPlayerObjectPool playerObjectPool,
-        ObjectDestroyer<TView> destroyer)
+        ObjectDestroyer destroyer)
     {
         _playerObjectPool = playerObjectPool;
         _destroyer = destroyer;
@@ -19,7 +19,7 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
     {
         _destroyer.Damaged
             .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
-            || index % 6 == 0)
+                || index % 6 == 0)
             .Subscribe(OnDamaged)
             .AddTo(Disposables);
 
@@ -28,7 +28,7 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
             .AddTo(Disposables);
     }
 
-    private void OnDamaged(DamageEvent<TView> damageEvent)
+    private void OnDamaged(DamageEvent damageEvent)
     {
         Transform target = damageEvent.DestroyerView.transform;
         DestructionSFXSettings sfxSettings = damageEvent.DestroyerView.Settings.SfxSettings;
@@ -44,11 +44,11 @@ public class SFXPlayerPoolObjectDestroyerMediator<TView> : Mediator where TView 
         _playerObjectPool.PlaySFX(target, audioResource);
     }
 
-    private void OnDestroyed(DestructionEvent<TView> destructionEvent)
+    private void OnDestroyed(DestructionEvent destructionEvent)
     {
         ObjectDestroyerView destroyerView = destructionEvent.DestroyerView;
-        Transform parent = destroyerView.transform;
+        Transform target = destroyerView.transform;
         AudioResource audioResource = destroyerView.Settings.SfxSettings.DestructionResource;
-        _playerObjectPool.PlaySFX(parent, audioResource);
+        _playerObjectPool.PlaySFX(target, audioResource);
     }
 }

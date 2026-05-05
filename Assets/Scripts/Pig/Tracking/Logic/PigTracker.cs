@@ -8,16 +8,16 @@ using VContainer.Unity;
 public class PigTracker : IStartable, IDisposable
 {
     private readonly List<PigEntityView> _pigEntityViews;
-    private readonly PigDestroyer _pigDestroyer;
+    private readonly ObjectDestroyer _objectDestroyer;
     private readonly ReactiveProperty<int> _pigCount = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public PigTracker(PigEntityView[] pigEntityViews, PigDestroyer pigDestroyer)
+    public PigTracker(IReadOnlyList<PigEntityView> pigEntityViews, ObjectDestroyer objectDestroyer)
     {
         _pigEntityViews = pigEntityViews.ToList();
-        _pigDestroyer = pigDestroyer;
+        _objectDestroyer = objectDestroyer;
 
-        _pigCount.Value = pigEntityViews.Length;
+        _pigCount.Value = pigEntityViews.Count;
 
         PigsLeft = _pigCount
             .Where(count => count == 0)
@@ -30,7 +30,7 @@ public class PigTracker : IStartable, IDisposable
 
     public void Start()
     {
-        _pigDestroyer.Destroyed
+        _objectDestroyer.Destroyed
             .Subscribe(OnDestroyed)
             .AddTo(_disposables);
     }
@@ -42,11 +42,14 @@ public class PigTracker : IStartable, IDisposable
         _pigCount.Dispose();
     }
 
-    private void OnDestroyed(DestructionEvent<PigEntityView> @event)
+    private void OnDestroyed(DestructionEvent destructionEvent)
     {
-        if (_pigEntityViews.Contains(@event.EntityView))
+        if (destructionEvent.EntityView is not PigEntityView pigEntityView)
+            return;
+
+        if (_pigEntityViews.Contains(pigEntityView))
         {
-            _pigEntityViews.Remove(@event.EntityView);
+            _pigEntityViews.Remove(pigEntityView);
             _pigCount.Value--;
         }
         else
