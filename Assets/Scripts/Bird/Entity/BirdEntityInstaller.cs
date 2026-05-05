@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -10,7 +11,7 @@ public class BirdEntityInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        BirdEntityView[] entityViews = _birdQueue.GetComponentsInChildren<BirdEntityView>();
+        IReadOnlyList<BirdEntityView> entityViews = _birdQueue.GetComponentsInChildren<BirdEntityView>();
         builder.RegisterInstance(entityViews);
     }
 }

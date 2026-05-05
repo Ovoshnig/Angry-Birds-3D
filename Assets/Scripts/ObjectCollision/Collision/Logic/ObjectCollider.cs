@@ -1,5 +1,6 @@
 ﻿using R3;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
@@ -8,29 +9,28 @@ public enum CollisionType
     Gliding, Collision, Damage
 }
 
-public record CollisionEvent<TView>(TView View, CollisionType Type, float Force)
-    where TView : MonoBehaviour;
+public record CollisionEvent(CollidableEntityView EntityView, CollisionType Type, float Force);
 
-public abstract class ObjectCollider<TView> : IStartable, IDisposable
-    where TView : MonoBehaviour
+public class ObjectCollider : IStartable, IDisposable
 {
-    private readonly TView[] _entityViews;
+    private readonly IReadOnlyList<CollidableEntityView> _entityViews;
     private readonly CollisionSettings _collisionSettings;
-    private readonly Subject<CollisionEvent<TView>> _collided = new();
+    private readonly Subject<CollisionEvent> _collided = new();
 
-    public ObjectCollider(TView[] entityViews, CollisionSettings collisionSettings)
+    public ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews,
+        CollisionSettings collisionSettings)
     {
         _entityViews = entityViews;
         _collisionSettings = collisionSettings;
     }
 
-    public Observable<CollisionEvent<TView>> Collided => _collided;
+    public Observable<CollisionEvent> Collided => _collided;
 
     public void Start()
     {
         foreach (var entityView in _entityViews)
         {
-            ObjectColliderView colliderView = GetObjectColliderView(entityView);
+            ObjectColliderView colliderView = entityView.ColliderView;
 
             colliderView.Collided
                 .Subscribe(collision => OnCollided(entityView, collision))
@@ -40,9 +40,7 @@ public abstract class ObjectCollider<TView> : IStartable, IDisposable
 
     public void Dispose() => _collided.Dispose();
 
-    protected abstract ObjectColliderView GetObjectColliderView(TView entityView);
-
-    private void OnCollided(TView entityView, Collision collision)
+    private void OnCollided(CollidableEntityView entityView, Collision collision)
     {
         if (collision.contactCount == 0)
             return;
@@ -66,6 +64,6 @@ public abstract class ObjectCollider<TView> : IStartable, IDisposable
         else
             return;
 
-        _collided.OnNext(new CollisionEvent<TView>(entityView, collisionType, impactForce));
+        _collided.OnNext(new CollisionEvent(entityView, collisionType, impactForce));
     }
 }

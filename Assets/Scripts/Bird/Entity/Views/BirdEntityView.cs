@@ -1,20 +1,19 @@
 using UnityEngine;
 
 [RequireComponent(typeof(BirdFlyerView))]
-[RequireComponent(typeof(ObjectColliderView))]
 [RequireComponent(typeof(BirdDestroyerView))]
-public class BirdEntityView : MonoBehaviour
+public class BirdEntityView : CollidableEntityView
 {
     [field: SerializeField] public BirdSFXSettings SFXSettings { get; private set; }
 
     public BirdFlyerView FlyerView { get; private set; }
-    public ObjectColliderView ColliderView { get; private set; }
     public BirdDestroyerView DestroyerView { get; private set; }
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+
         FlyerView = GetComponent<BirdFlyerView>();
-        ColliderView = GetComponent<ObjectColliderView>();
         DestroyerView = GetComponent<BirdDestroyerView>();
     }
 }
