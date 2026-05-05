@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -5,45 +6,47 @@ using UnityEngine;
 
 public class SaveStorage : DataStorage
 {
-    protected override string SaveFileName => SaveConstants.SaveFileName;
+    protected override string FileName => SaveConstants.FileName;
 
     private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
 
-    protected override void LoadData()
+    protected override async UniTask LoadDataAsync()
     {
-        base.LoadData();
+        await base.LoadDataAsync();
 
-        if (File.Exists(FilePath) && File.Exists(HashFilePath))
-        {
-            string savedHash = File.ReadAllText(HashFilePath);
-            string currentHash = CalculateHash(FilePath);
-
-            if (savedHash != currentHash)
-            {
-                Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
-                ResetData();
-            }
-        }
-        else
+        if (!File.Exists(FilePath) || !File.Exists(HashFilePath))
         {
             ResetData();
+            return;
         }
+
+        string savedHash = await File.ReadAllTextAsync(HashFilePath);
+        string currentHash = await CalculateHashAsync(FilePath);
+
+        if (savedHash == currentHash)
+            return;
+
+        Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
+        ResetData();
     }
 
-    protected override void SaveData()
+    protected override async UniTask SaveDataAsync()
     {
-        base.SaveData();
+        await base.SaveDataAsync();
 
-        string fileHash = CalculateHash(FilePath);
-        File.WriteAllText(HashFilePath, fileHash);
+        string fileHash = await CalculateHashAsync(FilePath);
+        await File.WriteAllTextAsync(HashFilePath, fileHash);
     }
 
-    private string CalculateHash(string filePath)
+    private async UniTask<string> CalculateHashAsync(string filePath)
     {
-        using SHA256 sha256 = SHA256.Create();
-        byte[] fileBytes = File.ReadAllBytes(filePath);
-        byte[] hashBytes = sha256.ComputeHash(fileBytes);
-        string hash = Convert.ToBase64String(hashBytes);
-        return hash;
+        return await UniTask.RunOnThreadPool(() =>
+        {
+            using SHA256 sha256 = SHA256.Create();
+            using FileStream stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+
+            byte[] hashBytes = sha256.ComputeHash(stream);
+            return Convert.ToBase64String(hashBytes);
+        });
     }
 }

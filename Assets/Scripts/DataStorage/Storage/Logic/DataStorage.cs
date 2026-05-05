@@ -1,36 +1,32 @@
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
+using Cysharp.Threading.Tasks;
 using R3;
 using System;
 using System.Collections.Generic;
 using System.IO;
-using System.Linq;
+using System.Text.Json;
+using System.Threading;
 using UnityEngine;
 using VContainer.Unity;
 
-public abstract class DataStorage : IInitializable, IDisposable
+public abstract class DataStorage : IAsyncStartable, IDisposable
 {
-    private readonly JsonSerializerSettings _jsonSerializerSettings = new()
-    {
-        TypeNameHandling = TypeNameHandling.Auto
-    };
+    private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
     private readonly Dictionary<string, object> _defaultDataStore = new();
     private readonly Subject<Unit> _resetHappened = new();
 
-    private Dictionary<string, object> _dataStore = new();
+    private Dictionary<string, JsonElement> _dataStore = new();
 
     public Observable<Unit> ResetHappened => _resetHappened;
 
-    protected abstract string SaveFileName { get; }
-    protected string FilePath => Path.Combine(Application.persistentDataPath, SaveFileName);
-    protected IReadOnlyDictionary<string, object> DataStore => _dataStore;
+    protected abstract string FileName { get; }
 
-    public void Initialize() => LoadData();
+    protected string FilePath => Path.Combine(Application.persistentDataPath, FileName);
+
+    public async UniTask StartAsync(CancellationToken token) => await LoadDataAsync();
 
     public void Dispose()
     {
-        SaveData();
-
+        SaveDataAsync().Forget();
         _resetHappened.Dispose();
     }
 
@@ -38,62 +34,45 @@ public abstract class DataStorage : IInitializable, IDisposable
     {
         _defaultDataStore[key] = defaultValue;
 
-        if (_dataStore.TryGetValue(key, out object storedValue))
-        {
-            try
-            {
-                return storedValue is JObject jObject
-                    ? jObject.ToObject<T>()
-                    : (T)Convert.ChangeType(storedValue, typeof(T));
-            }
-            catch (Exception e)
-            {
-                Debug.LogWarning($"Failed to deserialize value for key {key}: {e.Message}");
-                return defaultValue;
-            }
-        }
+        if (!_dataStore.TryGetValue(key, out JsonElement storedValue))
+            return defaultValue;
 
-        return defaultValue;
+        try
+        {
+            return storedValue.Deserialize<T>(_jsonOptions);
+        }
+        catch (Exception exeption)
+        {
+            Debug.LogWarning($"Failed to deserialize key {key}: {exeption.Message}");
+            return defaultValue;
+        }
     }
 
-    public virtual void Set<T>(string key, T value) => _dataStore[key] = value;
+    public virtual void Set<T>(string key, T value) =>
+        _dataStore[key] = JsonSerializer.SerializeToElement(value, _jsonOptions);
 
     public virtual void ResetData()
     {
-        List<string> keys = _dataStore.Keys.ToList();
+        _dataStore.Clear();
 
-        foreach (var key in keys)
-        {
-            if (_defaultDataStore.TryGetValue(key, out object value))
-            {
-                _dataStore[key] = value;
-            }
-            else
-            {
-                object existingValue = _dataStore[key];
-                Type type = existingValue?.GetType();
-
-                _dataStore[key] = type != null
-                    ? (type.IsValueType ? Activator.CreateInstance(type) : null)
-                    : null;
-            }
-        }
+        foreach (var kvp in _defaultDataStore)
+            _dataStore[kvp.Key] = JsonSerializer.SerializeToElement(kvp.Value, _jsonOptions);
 
         _resetHappened.OnNext(Unit.Default);
     }
 
-    protected virtual void LoadData()
+    protected virtual async UniTask LoadDataAsync()
     {
-        if (File.Exists(FilePath))
-        {
-            string json = File.ReadAllText(FilePath);
-            _dataStore = JsonConvert.DeserializeObject<Dictionary<string, object>>(json, _jsonSerializerSettings);
-        }
+        if (!File.Exists(FilePath))
+            return;
+
+        using FileStream stream = new(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
+        _dataStore = await JsonSerializer.DeserializeAsync<Dictionary<string, JsonElement>>(stream, _jsonOptions) ?? new();
     }
 
-    protected virtual void SaveData()
+    protected virtual async UniTask SaveDataAsync()
     {
-        string json = JsonConvert.SerializeObject(_dataStore, Formatting.Indented, _jsonSerializerSettings);
-        File.WriteAllText(FilePath, json);
+        using FileStream stream = new(FilePath, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true);
+        await JsonSerializer.SerializeAsync(stream, _dataStore, _jsonOptions);
     }
 }
