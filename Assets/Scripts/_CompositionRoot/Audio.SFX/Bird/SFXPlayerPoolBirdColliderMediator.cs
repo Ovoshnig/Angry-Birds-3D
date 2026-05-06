@@ -3,22 +3,22 @@ using R3;
 public class SFXPlayerPoolBirdColliderMediator : Mediator
 {
     private readonly SFXPlayerObjectPool _playerObjectPool;
-    private readonly BirdCollider _birdCollider;
+    private readonly ObjectCollider _objectCollider;
 
     public SFXPlayerPoolBirdColliderMediator(SFXPlayerObjectPool playerObjectPool,
-        BirdCollider birdCollider)
+        ObjectCollider objectCollider)
     {
         _playerObjectPool = playerObjectPool;
-        _birdCollider = birdCollider;
+        _objectCollider = objectCollider;
     }
 
     public override void Start()
     {
-        _birdCollider.Collided
+        _objectCollider.Collided
             .Subscribe(@event =>
             {
-                if (@event.Type == CollisionType.Damage)
-                    _playerObjectPool.PlaySFX(@event.View.transform, @event.View.SFXSettings.CollisionResource);
+                if (@event.EntityView is BirdEntityView entityView && @event.Type == CollisionType.Damage)
+                    _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.CollisionResource);
             })
             .AddTo(Disposables);
     }
