@@ -14,15 +14,14 @@ public class AudioMixerTuner
 
     private AudioMixer AudioMixer => _audioMixerGroup.audioMixer;
 
-    public bool SetSFXVolume(float value) => AudioMixer.SetFloat(AudioMixerConstants.SFXGroupName, value);
-
-    public bool SetMusicVolume(float value) => AudioMixer.SetFloat(AudioMixerConstants.MusicGroupName, value);
+    public bool SetVolume(string parameterName, float value) => AudioMixer.SetFloat(parameterName, value);
 
     public void SetPause(bool value)
     {
         AudioMixerSnapshot snapshot = AudioMixer.FindSnapshot(value
             ? AudioMixerConstants.PauseSnapshotName
             : AudioMixerConstants.NormalSnapshotName);
+
         snapshot.TransitionTo(_audioSettings.SnapshotTransitionDuration);
     }
 }

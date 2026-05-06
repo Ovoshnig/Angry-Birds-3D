@@ -1,15 +1,11 @@
 using UnityEngine;
 
-[RequireComponent(typeof(ObjectColliderView))]
 [RequireComponent(typeof(BlockDestroyerView))]
-public class BlockEntityView : MonoBehaviour
+public class BlockEntityView : DestructibleEntityView
 {
-    public ObjectColliderView ColliderView { get; private set; }
-    public BlockDestroyerView DestroyerView { get; private set; }
-
-    private void Awake()
+    protected override void Awake()
     {
-        ColliderView = GetComponent<ObjectColliderView>();
+        base.Awake();
         DestroyerView = GetComponent<BlockDestroyerView>();
     }
 }

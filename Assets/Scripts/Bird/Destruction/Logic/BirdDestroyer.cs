@@ -4,15 +4,15 @@ using VContainer.Unity;
 
 public class BirdDestroyer : IStartable, IDisposable
 {
-    private readonly BirdCollider _birdCollider;
+    private readonly ObjectCollider _objectCollider;
     private readonly BirdSettings _birdSettings;
     private readonly Subject<BirdEntityView> _destructionStarted = new();
     private readonly Subject<BirdEntityView> _destroyed = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public BirdDestroyer(BirdCollider birdCollider, BirdSettings birdSettings)
+    public BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings)
     {
-        _birdCollider = birdCollider;
+        _objectCollider = objectCollider;
         _birdSettings = birdSettings;
     }
 
@@ -21,20 +21,22 @@ public class BirdDestroyer : IStartable, IDisposable
 
     public void Start()
     {
-        _birdCollider.Collided
-            .Where(@event => !@event.View.DestroyerView.IsDestroying)
+        _objectCollider.Collided
+            .Where(@event => @event.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
             .Do(@event =>
             {
-                @event.View.DestroyerView.StartDestroying();
-                _destructionStarted.OnNext(@event.View);
+                BirdEntityView entityView = @event.EntityView as BirdEntityView;
+                entityView.DestroyerView.StartDestroying();
+                _destructionStarted.OnNext(entityView);
             })
             .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
             .Subscribe(@event =>
             {
-                if (@event.View != null)
+                if (@event.EntityView != null)
                 {
-                    @event.View.DestroyerView.Destroy();
-                    _destroyed.OnNext(@event.View);
+                    BirdEntityView entityView = @event.EntityView as BirdEntityView;
+                    entityView.DestroyerView.Destroy();
+                    _destroyed.OnNext(entityView);
                 }
             })
             .AddTo(_disposables);

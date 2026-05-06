@@ -2,11 +2,11 @@ using R3;
 
 public class PauseMenuWindow : Window
 {
-    public PauseMenuWindow(WindowInputHandler windowInputHandler, WindowTracker windowTracker) 
-        : base(windowInputHandler, windowTracker)
+    public PauseMenuWindow(WindowInputProvider windowInputProvider, WindowTracker windowTracker) 
+        : base(windowInputProvider, windowTracker)
     {
     }
 
     protected override ReadOnlyReactiveProperty<bool> WindowSwitchPressed => 
-        WindowInputHandler.PauseMenuSwitchPressed;
+        WindowInputProvider.PauseMenuSwitchPressed;
 }
