@@ -8,7 +8,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
 {
     public enum SlingshotState { Idle, Dragging, Flying }
 
-    private readonly SlingshotInputHandler _slingshotInputHandler;
+    private readonly SlingshotInputProvider _slingshotInputProvider;
     private readonly SlingshotSettings _slingshotSettings;
     private readonly LineRenderer _leftRubber;
     private readonly LineRenderer _rightRubber;
@@ -27,7 +27,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
 
     private float _birdRadius = 0.5f;
 
-    public SlingshotShooter(SlingshotInputHandler slingshotInputHandler,
+    public SlingshotShooter(SlingshotInputProvider slingshotInputProvider,
         SlingshotSettings slingshotSettings,
         Transform centerAnchorTransform,
         Vector3 leftAnchorPosition,
@@ -36,7 +36,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
         LineRenderer leftRubber,
         LineRenderer rightRubber)
     {
-        _slingshotInputHandler = slingshotInputHandler;
+        _slingshotInputProvider = slingshotInputProvider;
         _slingshotSettings = slingshotSettings;
         _centerAnchorTransform = centerAnchorTransform;
         _leftAnchorPosition = leftAnchorPosition;
@@ -54,7 +54,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
 
     public void Start()
     {
-        _slingshotInputHandler.LeftButtonPressed
+        _slingshotInputProvider.LeftButtonPressed
             .Subscribe(isPressed =>
             {
                 if (isPressed)
@@ -90,7 +90,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
             _currentState.Value = SlingshotState.Dragging;
             _currentBird.isKinematic = true;
 
-            _slingshotInputHandler.DragInput
+            _slingshotInputProvider.DragInput
                 .Subscribe(_ =>
                 {
                     HandleDrag();
@@ -98,7 +98,7 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
                 })
                 .AddTo(_dragDisposable);
 
-            _slingshotInputHandler.DragInput
+            _slingshotInputProvider.DragInput
                 .Take(1)
                 .Subscribe(_ => _draggingStarted.OnNext(_currentBird))
                 .AddTo(_dragDisposable);
