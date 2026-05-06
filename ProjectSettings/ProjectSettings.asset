@@ -147,9 +147,10 @@ PlayerSettings:
   loadStoreDebugModeEnabled: 0
   visionOSBundleVersion: 1.0
   tvOSBundleVersion: 1.0
-  bundleVersion: 0.1.0
+  bundleVersion: 0.1.1
   preloadedAssets:
   - {fileID: 11400000, guid: 6d2cfbc0306937141b06618eb9ce25c1, type: 2}
+  - {fileID: -944628639613478452, guid: dfc5194a2da461941bbc4e192fa012b3, type: 3}
   metroInputSource: 0
   wsaTransparentSwapchain: 0
   xboxOneDisableKinectGpuReservation: 1
