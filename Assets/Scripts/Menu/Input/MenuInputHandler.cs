@@ -1,7 +1,7 @@
 using R3;
 using VContainer.Unity;
 
-public class MenuInputHandler : InputHandler<InputActions.MenuActions>, IInitializable
+public class MenuInputHandler : InputProvider<InputActions.MenuActions>, IInitializable
 {
     public MenuInputHandler(InputActions inputActions)
         : base(inputActions.Menu) { }
@@ -11,8 +11,8 @@ public class MenuInputHandler : InputHandler<InputActions.MenuActions>, IInitial
 
     public void Initialize()
     {
-        CloseCurrentPressed = BindButton(a => a.CloseCurrent);
-        SkipTextPrintingPressed = BindButton(a => a.SkipTextPrinting);
+        CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
+        SkipTextPrintingPressed = ObserveButton(a => a.SkipTextPrinting);
     }
 
     protected override void EnableActions() => Actions.Enable();
