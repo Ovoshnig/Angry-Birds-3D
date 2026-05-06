@@ -25,8 +25,8 @@ public abstract class InputHandler<TActions> : IStartable, IDisposable
     protected abstract void DisableActions();
 
     protected ReadOnlyReactiveProperty<T> BindValue<T>(Func<TActions, InputAction> selector) where T : struct =>
-        selector(Actions).AsValueStream<T>().AddTo(_disposables);
+        selector(Actions).ToValueProperty<T>().AddTo(_disposables);
 
     protected ReadOnlyReactiveProperty<bool> BindButton(Func<TActions, InputAction> selector)
-        => selector(Actions).AsButtonStream().AddTo(_disposables);
+        => selector(Actions).ToButtonProperty().AddTo(_disposables);
 }

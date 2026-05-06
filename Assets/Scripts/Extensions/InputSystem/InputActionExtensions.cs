@@ -3,45 +3,37 @@ using UnityEngine.InputSystem;
 
 public static class InputActionExtensions
 {
-    public static ReadOnlyReactiveProperty<bool> AsButtonStream(this InputAction action)
+    public static ReadOnlyReactiveProperty<bool> ToButtonProperty(this InputAction action)
     {
         return Observable.Create<bool>(observer =>
         {
-            void Handle(InputAction.CallbackContext context)
-            {
-                bool value = context.ReadValueAsButton();
-                observer.OnNext(value);
-            }
+            void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValueAsButton());
 
-            action.performed += Handle;
-            action.canceled += Handle;
+            action.performed += OnAction;
+            action.canceled += OnAction;
 
             return Disposable.Create(() =>
             {
-                action.performed -= Handle;
-                action.canceled -= Handle;
+                action.performed -= OnAction;
+                action.canceled -= OnAction;
             });
-        }).ToReadOnlyReactiveProperty();
+        }).ToReadOnlyReactiveProperty(action.IsPressed());
     }
 
-    public static ReadOnlyReactiveProperty<T> AsValueStream<T>(this InputAction action) where T : struct
+    public static ReadOnlyReactiveProperty<T> ToValueProperty<T>(this InputAction action) where T : struct
     {
         return Observable.Create<T>(observer =>
         {
-            void Handle(InputAction.CallbackContext context)
-            {
-                T value = context.ReadValue<T>();
-                observer.OnNext(value);
-            }
+            void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValue<T>());
 
-            action.performed += Handle;
-            action.canceled += Handle;
+            action.performed += OnAction;
+            action.canceled += OnAction;
 
             return Disposable.Create(() =>
             {
-                action.performed -= Handle;
-                action.canceled -= Handle;
+                action.performed -= OnAction;
+                action.canceled -= OnAction;
             });
-        }).ToReadOnlyReactiveProperty();
+        }).ToReadOnlyReactiveProperty(action.ReadValue<T>());
     }
 }
