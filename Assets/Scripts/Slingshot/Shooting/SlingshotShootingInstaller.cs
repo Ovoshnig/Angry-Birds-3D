@@ -14,10 +14,10 @@ public class SlingshotShootingInstaller : IInstaller
 
         builder.RegisterEntryPoint(resolver =>
         {
-            SlingshotInputHandler slingshotInputHandler = resolver.Resolve<SlingshotInputHandler>();
+            SlingshotInputProvider slingshotInputProvider = resolver.Resolve<SlingshotInputProvider>();
             SlingshotSettings slingshotSettings = resolver.Resolve<SlingshotSettings>();
 
-            return new SlingshotShooter(slingshotInputHandler, slingshotSettings,
+            return new SlingshotShooter(slingshotInputProvider, slingshotSettings,
                 _slingshotShooterView.CenterAnchor,
                 _slingshotShooterView.LeftAnchor.position,
                 _slingshotShooterView.RightAnchor.position,
