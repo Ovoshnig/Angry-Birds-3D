@@ -1,7 +1,7 @@
 using R3;
 using VContainer.Unity;
 
-public class ScreenInputHandler : InputHandler<InputActions.ScreenActions>, IInitializable
+public class ScreenInputHandler : InputProvider<InputActions.ScreenActions>, IInitializable
 {
     public ScreenInputHandler(InputActions inputActions)
         : base(inputActions.Screen) { }
@@ -11,8 +11,8 @@ public class ScreenInputHandler : InputHandler<InputActions.ScreenActions>, IIni
 
     public void Initialize()
     {
-        SwitchFullScreenPressed = BindButton(a => a.SwitchFullScreen);
-        SkipSplashImagePressed = BindButton(a => a.SkipSplashImage);
+        SwitchFullScreenPressed = ObserveButton(a => a.SwitchFullScreen);
+        SkipSplashImagePressed = ObserveButton(a => a.SkipSplashImage);
     }
 
     protected override void EnableActions() => Actions.Enable();
