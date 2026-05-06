@@ -5,11 +5,11 @@ using VContainer.Unity;
 
 public class FullScreenAdjuster : IStartable, IDisposable
 {
-    private readonly ScreenInputHandler _screenInputHandler;
+    private readonly ScreenInputProvider _screenInputProvider;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public FullScreenAdjuster(ScreenInputHandler screenInputHandler) => _screenInputHandler = screenInputHandler;
+    public FullScreenAdjuster(ScreenInputProvider screenInputProvider) => _screenInputProvider = screenInputProvider;
 
     public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
 
@@ -17,7 +17,7 @@ public class FullScreenAdjuster : IStartable, IDisposable
     {
         _isFullScreen.Value = Screen.fullScreen;
 
-        _screenInputHandler.SwitchFullScreenPressed
+        _screenInputProvider.SwitchFullScreenPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnSwitchFullScreenPressed())
             .AddTo(_disposables);

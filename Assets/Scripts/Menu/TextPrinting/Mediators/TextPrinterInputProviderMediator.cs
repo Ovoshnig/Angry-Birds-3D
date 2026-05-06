@@ -2,21 +2,21 @@ using R3;
 using System.Linq;
 using UnityEngine;
 
-public class TextPrinterInputHandlerMediator : Mediator
+public class TextPrinterInputProviderMediator : Mediator
 {
     [SerializeField] private TextPrinterView[] _textPrinterViews;
-    [SerializeField] private MenuInputHandler _menuInputHandler;
+    [SerializeField] private MenuInputProvider _menuInputProvider;
 
-    public TextPrinterInputHandlerMediator(TextPrinterView[] textPrinterViews, 
-        MenuInputHandler menuInputHandler)
+    public TextPrinterInputProviderMediator(TextPrinterView[] textPrinterViews,
+        MenuInputProvider menuInputProvider)
     {
         _textPrinterViews = textPrinterViews;
-        _menuInputHandler = menuInputHandler;
+        _menuInputProvider = menuInputProvider;
     }
 
     public override void Start()
     {
-        _menuInputHandler.SkipTextPrintingPressed
+        _menuInputProvider.SkipTextPrintingPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnSkipTextPrintingPressed())
             .AddTo(Disposables);

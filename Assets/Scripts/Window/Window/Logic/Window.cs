@@ -4,23 +4,23 @@ using VContainer.Unity;
 
 public abstract class Window : IWindow, IStartable, IDisposable
 {
-    private readonly WindowInputHandler _windowInputHandler;
+    private readonly WindowInputProvider _windowInputProvider;
     private readonly WindowTracker _windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly CompositeDisposable _disposables = new();
 
     private bool _isWindowActive = false;
 
-    public Window(WindowInputHandler windowInputHandler, WindowTracker windowTracker)
+    public Window(WindowInputProvider windowInputProvider, WindowTracker windowTracker)
     {
-        _windowInputHandler = windowInputHandler;
+        _windowInputProvider = windowInputProvider;
         _windowTracker = windowTracker;
     }
 
     public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
 
     protected abstract ReadOnlyReactiveProperty<bool> WindowSwitchPressed { get; }
-    protected WindowInputHandler WindowInputHandler => _windowInputHandler;
+    protected WindowInputProvider WindowInputProvider => _windowInputProvider;
 
     public virtual void Start()
     {
@@ -29,7 +29,7 @@ public abstract class Window : IWindow, IStartable, IDisposable
             .Subscribe(_ => OnWindowSwitchPressed())
             .AddTo(_disposables);
 
-        WindowInputHandler.CloseCurrentPressed
+        WindowInputProvider.CloseCurrentPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => TryClose())
             .AddTo(_disposables);
