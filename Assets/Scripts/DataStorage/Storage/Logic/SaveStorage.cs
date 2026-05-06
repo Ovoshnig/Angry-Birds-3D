@@ -1,4 +1,3 @@
-using Cysharp.Threading.Tasks;
 using System;
 using System.IO;
 using System.Security.Cryptography;
@@ -10,9 +9,9 @@ public class SaveStorage : DataStorage
 
     private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
 
-    protected override async UniTask LoadDataAsync()
+    protected override void LoadData()
     {
-        await base.LoadDataAsync();
+        base.LoadData();
 
         if (!File.Exists(FilePath) || !File.Exists(HashFilePath))
         {
@@ -20,8 +19,8 @@ public class SaveStorage : DataStorage
             return;
         }
 
-        string savedHash = await File.ReadAllTextAsync(HashFilePath);
-        string currentHash = await CalculateHashAsync(FilePath);
+        string savedHash = File.ReadAllText(HashFilePath);
+        string currentHash = CalculateHash(FilePath);
 
         if (savedHash == currentHash)
             return;
@@ -30,23 +29,20 @@ public class SaveStorage : DataStorage
         ResetData();
     }
 
-    protected override async UniTask SaveDataAsync()
+    protected override void SaveData()
     {
-        await base.SaveDataAsync();
+        base.SaveData();
 
-        string fileHash = await CalculateHashAsync(FilePath);
-        await File.WriteAllTextAsync(HashFilePath, fileHash);
+        string fileHash = CalculateHash(FilePath);
+        File.WriteAllText(HashFilePath, fileHash);
     }
 
-    private async UniTask<string> CalculateHashAsync(string filePath)
+    private string CalculateHash(string filePath)
     {
-        return await UniTask.RunOnThreadPool(() =>
-        {
-            using SHA256 sha256 = SHA256.Create();
-            using FileStream stream = new(filePath, FileMode.Open, FileAccess.Read, FileShare.Read);
+        using SHA256 sha256 = SHA256.Create();
+        byte[] fileBytes = File.ReadAllBytes(filePath);
+        byte[] hashBytes = sha256.ComputeHash(fileBytes);
 
-            byte[] hashBytes = sha256.ComputeHash(stream);
-            return Convert.ToBase64String(hashBytes);
-        });
+        return Convert.ToBase64String(hashBytes);
     }
 }

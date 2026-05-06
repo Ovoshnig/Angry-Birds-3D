@@ -1,20 +1,19 @@
-using Cysharp.Threading.Tasks;
 using R3;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text.Json;
-using System.Threading;
 using UnityEngine;
 using VContainer.Unity;
 
-public abstract class DataStorage : IAsyncStartable, IDisposable
+public abstract class DataStorage : IInitializable, IDisposable
 {
     private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
     private readonly Dictionary<string, object> _defaultDataStore = new();
+    private readonly Dictionary<string, object> _runtimeCache = new();
     private readonly Subject<Unit> _resetHappened = new();
 
-    private Dictionary<string, JsonElement> _dataStore = new();
+    private Dictionary<string, JsonElement> _rawData = new();
 
     public Observable<Unit> ResetHappened => _resetHappened;
 
@@ -22,11 +21,11 @@ public abstract class DataStorage : IAsyncStartable, IDisposable
 
     protected string FilePath => Path.Combine(Application.persistentDataPath, FileName);
 
-    public async UniTask StartAsync(CancellationToken token) => await LoadDataAsync();
+    public void Initialize() => LoadData();
 
     public void Dispose()
     {
-        SaveDataAsync().Forget();
+        SaveData();
         _resetHappened.Dispose();
     }
 
@@ -34,45 +33,55 @@ public abstract class DataStorage : IAsyncStartable, IDisposable
     {
         _defaultDataStore[key] = defaultValue;
 
-        if (!_dataStore.TryGetValue(key, out JsonElement storedValue))
-            return defaultValue;
+        if (_runtimeCache.TryGetValue(key, out object cachedValue))
+            return (T)cachedValue;
 
-        try
+        if (_rawData.TryGetValue(key, out JsonElement jsonElement))
         {
-            return storedValue.Deserialize<T>(_jsonOptions);
+            try
+            {
+                T value = jsonElement.Deserialize<T>(_jsonOptions);
+                _runtimeCache[key] = value;
+                return value;
+            }
+            catch (Exception exeption)
+            {
+                Debug.LogWarning($"Failed to deserialize key {key}: {exeption.Message}");
+            }
         }
-        catch (Exception exeption)
-        {
-            Debug.LogWarning($"Failed to deserialize key {key}: {exeption.Message}");
-            return defaultValue;
-        }
+
+        _runtimeCache[key] = defaultValue;
+        return defaultValue;
     }
 
-    public virtual void Set<T>(string key, T value) =>
-        _dataStore[key] = JsonSerializer.SerializeToElement(value, _jsonOptions);
+    public virtual void Set<T>(string key, T value) => _runtimeCache[key] = value;
 
     public virtual void ResetData()
     {
-        _dataStore.Clear();
+        _runtimeCache.Clear();
+        _rawData.Clear();
 
         foreach (var kvp in _defaultDataStore)
-            _dataStore[kvp.Key] = JsonSerializer.SerializeToElement(kvp.Value, _jsonOptions);
+            _runtimeCache[kvp.Key] = kvp.Value;
 
         _resetHappened.OnNext(Unit.Default);
     }
 
-    protected virtual async UniTask LoadDataAsync()
+    protected virtual void LoadData()
     {
         if (!File.Exists(FilePath))
             return;
 
-        using FileStream stream = new(FilePath, FileMode.Open, FileAccess.Read, FileShare.Read, 4096, true);
-        _dataStore = await JsonSerializer.DeserializeAsync<Dictionary<string, JsonElement>>(stream, _jsonOptions) ?? new();
+        string json = File.ReadAllText(FilePath);
+        _rawData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, _jsonOptions) ?? new();
     }
 
-    protected virtual async UniTask SaveDataAsync()
+    protected virtual void SaveData()
     {
-        using FileStream stream = new(FilePath, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true);
-        await JsonSerializer.SerializeAsync(stream, _dataStore, _jsonOptions);
+        foreach (var kvp in _runtimeCache)
+            _rawData[kvp.Key] = JsonSerializer.SerializeToElement(kvp.Value, kvp.Value.GetType(), _jsonOptions);
+
+        string json = JsonSerializer.Serialize(_rawData, _jsonOptions);
+        File.WriteAllText(FilePath, json);
     }
 }
