@@ -11,16 +11,6 @@ public class SlingshotShootingInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstance(_slingshotShooterView);
-
-        builder.RegisterEntryPoint(resolver =>
-        {
-            SlingshotInputProvider slingshotInputProvider = resolver.Resolve<SlingshotInputProvider>();
-            SlingshotSettings slingshotSettings = resolver.Resolve<SlingshotSettings>();
-
-            return new SlingshotShooter(slingshotInputProvider, slingshotSettings,
-                _slingshotShooterView.CenterAnchor,
-                _slingshotShooterView.LeftRubber,
-                _slingshotShooterView.RightRubber);
-        }, Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<SlingshotShooter>(Lifetime.Singleton).AsSelf();
     }
 }
