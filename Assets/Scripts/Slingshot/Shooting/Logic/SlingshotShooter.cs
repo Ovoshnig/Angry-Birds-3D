@@ -10,12 +10,12 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
 
     private readonly SlingshotInputProvider _slingshotInputProvider;
     private readonly SlingshotSettings _slingshotSettings;
+    private readonly Transform _centerAnchorTransform;
     private readonly LineRenderer _leftRubber;
     private readonly LineRenderer _rightRubber;
-    private readonly Transform _centerAnchorTransform;
+    private readonly Vector3 _centerAnchorPosition;
     private readonly Vector3 _leftAnchorPosition;
     private readonly Vector3 _rightAnchorPosition;
-    private readonly Vector3 _centerAnchorPosition;
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Rigidbody> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
@@ -30,20 +30,18 @@ public class SlingshotShooter : IInitializable, IStartable, IDisposable
     public SlingshotShooter(SlingshotInputProvider slingshotInputProvider,
         SlingshotSettings slingshotSettings,
         Transform centerAnchorTransform,
-        Vector3 leftAnchorPosition,
-        Vector3 rightAnchorPosition,
-        Vector3 centerAnchorPosition,
         LineRenderer leftRubber,
         LineRenderer rightRubber)
     {
         _slingshotInputProvider = slingshotInputProvider;
         _slingshotSettings = slingshotSettings;
         _centerAnchorTransform = centerAnchorTransform;
-        _leftAnchorPosition = leftAnchorPosition;
-        _rightAnchorPosition = rightAnchorPosition;
-        _centerAnchorPosition = centerAnchorPosition;
         _leftRubber = leftRubber;
         _rightRubber = rightRubber;
+
+        _centerAnchorPosition = centerAnchorTransform.position;
+        _leftAnchorPosition = leftRubber.transform.position;
+        _rightAnchorPosition = rightRubber.transform.position;
     }
 
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;

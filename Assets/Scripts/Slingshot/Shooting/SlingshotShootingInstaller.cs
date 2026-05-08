@@ -19,9 +19,6 @@ public class SlingshotShootingInstaller : IInstaller
 
             return new SlingshotShooter(slingshotInputProvider, slingshotSettings,
                 _slingshotShooterView.CenterAnchor,
-                _slingshotShooterView.LeftAnchor.position,
-                _slingshotShooterView.RightAnchor.position,
-                _slingshotShooterView.CenterAnchor.position,
                 _slingshotShooterView.LeftRubber,
                 _slingshotShooterView.RightRubber);
         }, Lifetime.Singleton).AsSelf();
