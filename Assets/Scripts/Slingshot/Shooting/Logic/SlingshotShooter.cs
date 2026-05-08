@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using VContainer.Unity;
 
-public class SlingshotShooter : IStartable, IDisposable
+public class SlingshotShooter : IStartable, IDisposable, ITickable
 {
     public enum SlingshotState { Idle, Dragging, Flying }
 
@@ -15,12 +15,13 @@ public class SlingshotShooter : IStartable, IDisposable
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Rigidbody> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
-    private readonly CompositeDisposable _leftButtonDisposable = new();
-    private readonly CompositeDisposable _dragDisposable = new();
+    private readonly CompositeDisposable _dragSubscription = new();
 
     private Rigidbody _currentBird = null;
     private Vector3 _centerAnchorPosition = Vector3.zero;
+    private IDisposable _leftButtonSubscription;
     private float _birdRadius = 0.5f;
+    private bool _isDragInput = false;
 
     public SlingshotShooter(SlingshotInputProvider slingshotInputProvider,
         SlingshotShooterView shooterView,
@@ -44,25 +45,33 @@ public class SlingshotShooter : IStartable, IDisposable
         _shooterView.LeftRubber.positionCount = _slingshotSettings.SegmentCount;
         _shooterView.RightRubber.positionCount = _slingshotSettings.SegmentCount;
 
-        _slingshotInputProvider.LeftButtonPressed
+        _leftButtonSubscription = _slingshotInputProvider.LeftButtonPressed
             .Subscribe(isPressed =>
             {
                 if (isPressed)
                     OnPointerPressed();
                 else
                     OnPointerReleased();
-            })
-            .AddTo(_leftButtonDisposable);
+            });
     }
 
     public void Dispose()
     {
-        _leftButtonDisposable.Dispose();
-        _dragDisposable.Dispose();
+        _leftButtonSubscription.Dispose();
+        _dragSubscription.Dispose();
 
         _currentState.Dispose();
         _draggingStarted.Dispose();
         _shot.Dispose();
+    }
+
+    public void Tick()
+    {
+        if (_currentState.Value != SlingshotState.Dragging || !_isDragInput)
+            return;
+
+        UpdateBirdPosition();
+        UpdateRubberGeometry();
     }
 
     public void SetCurrentBird(Rigidbody birdRigidbody)
@@ -75,39 +84,36 @@ public class SlingshotShooter : IStartable, IDisposable
 
     private void OnPointerPressed()
     {
-        if (_currentState.Value == SlingshotState.Idle && IsPointerNear())
-        {
-            _currentState.Value = SlingshotState.Dragging;
-            _currentBird.isKinematic = true;
+        if (_currentState.Value != SlingshotState.Idle || !IsPointerNear())
+            return;
 
-            _slingshotInputProvider.DragInput
-                .Subscribe(_ =>
-                {
-                    HandleDrag();
-                    UpdateRubberGeometry();
-                })
-                .AddTo(_dragDisposable);
+        _currentState.Value = SlingshotState.Dragging;
+        _currentBird.isKinematic = true;
 
-            _slingshotInputProvider.DragInput
-                .Take(1)
-                .Subscribe(_ => _draggingStarted.OnNext(_currentBird))
-                .AddTo(_dragDisposable);
-        }
+        _slingshotInputProvider.DragInput
+            .Subscribe(input => _isDragInput = input != Vector2.zero)
+            .AddTo(_dragSubscription);
+
+        _slingshotInputProvider.DragInput
+            .Where(_ => _isDragInput)
+            .Take(1)
+            .Subscribe(_ => _draggingStarted.OnNext(_currentBird))
+            .AddTo(_dragSubscription);
     }
 
     private void OnPointerReleased()
     {
-        if (_currentState.Value == SlingshotState.Dragging)
-        {
-            _currentState.Value = SlingshotState.Flying;
-            Shoot();
-            SetLinesActive(false);
+        if (_currentState.Value != SlingshotState.Dragging)
+            return;
 
-            _dragDisposable.Clear();
-        }
+        _currentState.Value = SlingshotState.Flying;
+
+        Shoot();
+        SetLinesActive(false);
+        _dragSubscription.Clear();
     }
 
-    private void HandleDrag()
+    private void UpdateBirdPosition()
     {
         Vector3 mouseWorldPosition = GetMouseWorldPosition();
         mouseWorldPosition.x = _centerAnchorPosition.x;
