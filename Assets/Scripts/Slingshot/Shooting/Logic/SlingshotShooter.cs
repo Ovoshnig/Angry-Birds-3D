@@ -1,7 +1,6 @@
 using R3;
 using System;
 using UnityEngine;
-using UnityEngine.InputSystem;
 using VContainer.Unity;
 
 public class SlingshotShooter : IStartable, IDisposable, ITickable
@@ -10,8 +9,8 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private readonly SlingshotInputProvider _slingshotInputProvider;
     private readonly SlingshotShooterView _shooterView;
+    private readonly PointerPositionMeter _pointerPositionMeter;
     private readonly SlingshotSettings _slingshotSettings;
-    private readonly Camera _mainCamera;
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Rigidbody> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
@@ -25,15 +24,15 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     public SlingshotShooter(SlingshotInputProvider slingshotInputProvider,
         SlingshotShooterView shooterView,
+        PointerPositionMeter pointerPositionMeter,
         SlingshotSettings slingshotSettings)
     {
         _slingshotInputProvider = slingshotInputProvider;
         _shooterView = shooterView;
+        _pointerPositionMeter = pointerPositionMeter;
         _slingshotSettings = slingshotSettings;
 
         _centerAnchorPosition = shooterView.CenterAnchor.transform.position;
-
-        _mainCamera = Camera.main;
     }
 
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
@@ -84,7 +83,8 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private void OnPointerPressed()
     {
-        if (_currentState.Value != SlingshotState.Idle || !IsPointerNear())
+        if (_currentState.Value != SlingshotState.Idle
+            || !_pointerPositionMeter.IsPointerNear(_centerAnchorPosition, _slingshotSettings.InputInteractionRadius))
             return;
 
         _currentState.Value = SlingshotState.Dragging;
@@ -109,13 +109,13 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _currentState.Value = SlingshotState.Flying;
 
         Shoot();
-        SetLinesActive(false);
+        SetLinesRendering(false);
         _dragSubscription.Clear();
     }
 
     private void UpdateBirdPosition()
     {
-        Vector3 mouseWorldPosition = GetMouseWorldPosition();
+        Vector3 mouseWorldPosition = _pointerPositionMeter.GetPointerWorldPosition(_centerAnchorPosition);
         mouseWorldPosition.x = _centerAnchorPosition.x;
 
         Vector3 pullVector = mouseWorldPosition - _centerAnchorPosition;
@@ -144,7 +144,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private void UpdateRubberGeometry()
     {
-        SetLinesActive(true);
+        SetLinesRendering(true);
 
         Vector3 birdPosition = _currentBird.transform.position;
 
@@ -191,7 +191,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _currentBird.isKinematic = false;
         _currentBird.detectCollisions = true;
 
-        SetLinesActive(false);
+        SetLinesRendering(false);
 
         Vector3 force = _centerAnchorPosition - _currentBird.transform.position;
         _currentBird.AddForce(force * _slingshotSettings.LaunchForce, ForceMode.Impulse);
@@ -207,27 +207,12 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
 
-    private Vector3 GetMouseWorldPosition()
+    private void SetLinesRendering(bool enabled)
     {
-        Vector2 pointerPosition = Pointer.current.position.ReadValue();
-        float z = _mainCamera.WorldToScreenPoint(_centerAnchorPosition).z;
-        return _mainCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, z));
-    }
+        if (_shooterView.LeftRubber.enabled == enabled)
+            return;
 
-    private bool IsPointerNear()
-    {
-        Vector3 mousePosition = GetMouseWorldPosition();
-        mousePosition.x = _centerAnchorPosition.x;
-        return Vector3.Distance(mousePosition, _centerAnchorPosition)
-            <= _slingshotSettings.InputInteractionRadius;
-    }
-
-    private void SetLinesActive(bool active)
-    {
-        if (_shooterView.LeftRubber.enabled != active)
-        {
-            _shooterView.LeftRubber.enabled = active;
-            _shooterView.RightRubber.enabled = active;
-        }
+        _shooterView.LeftRubber.enabled = enabled;
+        _shooterView.RightRubber.enabled = enabled;
     }
 }
