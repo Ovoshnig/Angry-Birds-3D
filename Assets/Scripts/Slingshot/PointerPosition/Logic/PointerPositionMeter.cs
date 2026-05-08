@@ -7,13 +7,12 @@ public class PointerPositionMeter
 
     public PointerPositionMeter() => _mainCamera = Camera.main;
 
-    public Vector3 GetPointerWorldPosition(Vector3 anchorPosition)
+    public Vector3 GetPointerWorldPosition(Vector3 anchorWorldPosition)
     {
-        Vector2 pointerPosition = Pointer.current.position.ReadValue();
-        float z = _mainCamera.ScreenToWorldPoint(anchorPosition).z;
-        Vector3 worldPosition = _mainCamera.ScreenToWorldPoint(new Vector3(pointerPosition.x, pointerPosition.y, z));
+        Vector2 pointerScreenPosition = Pointer.current.position.ReadValue();
+        float zDepth = _mainCamera.WorldToScreenPoint(anchorWorldPosition).z;
 
-        return worldPosition;
+        return _mainCamera.ScreenToWorldPoint(new Vector3(pointerScreenPosition.x, pointerScreenPosition.y, zDepth));
     }
 
     public bool IsPointerNear(Vector3 anchorPosition, float thresholdRadius)
