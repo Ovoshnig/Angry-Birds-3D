@@ -883,7 +883,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
+  m_LocalRotation: {x: 0, y: -0.6976279, z: 0, w: 0.71646035}
   m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1747,15 +1747,15 @@ MonoBehaviour:
       _cameraSwitchView: {fileID: 330585549}
   _sfxInstaller:
     _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
+  _slingshotInstaller:
+    _slingshotShootingInstaller:
+      _slingshotShooterView: {fileID: 507049044}
   _birdInstaller:
     _entityInstaller:
       _birdQueue: {fileID: 878781362}
   _pigInstaller:
     _pigEntityInstaller:
       _blockStructure: {fileID: 4109696}
-  _slingshotInstaller:
-    _slingshotShootingInstaller:
-      _slingshotShooterView: {fileID: 507049044}
   _blockInstaller:
     _blockEntityInstaller:
       _blockStructure: {fileID: 4109696}
@@ -3710,13 +3710,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073807576}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
+  m_LocalRotation: {x: 0, y: -0.6976279, z: 0, w: 0.71646035}
   m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1284036663}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -88.474, z: 0}
 --- !u!1001 &2081062518
 PrefabInstance:
   m_ObjectHideFlags: 0
