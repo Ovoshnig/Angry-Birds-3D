@@ -12,14 +12,12 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private readonly PointerPositionMeter _pointerMeter;
     private readonly SlingshotSettings _settings;
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
-    private readonly Subject<Rigidbody> _draggingStarted = new();
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _disposables = new();
 
     private Rigidbody _currentBird;
     private Vector3 _centerAnchorPosition;
     private float _birdRadius;
-    private bool _hasFiredDragEvent;
     private bool _isDragInput;
 
     public SlingshotShooter(SlingshotInputProvider inputProvider,
@@ -31,10 +29,17 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _view = view;
         _pointerMeter = pointerMeter;
         _settings = settings;
+
+        DraggingStarted = _currentState
+            .Pairwise()
+            .Where(pair => pair.Previous != SlingshotState.Dragging
+                && pair.Current == SlingshotState.Dragging)
+            .Select(_ => _currentBird)
+            .Share();
     }
 
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
-    public Observable<Rigidbody> DraggingStarted => _draggingStarted;
+    public Observable<Rigidbody> DraggingStarted { get; }
     public Observable<Rigidbody> Shot => _shot;
 
     public void Start()
@@ -47,16 +52,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             .AddTo(_disposables);
 
         _inputProvider.DragInput
-            .Subscribe(input =>
-            {
-                _isDragInput = input != Vector2.zero;
-
-                if (_isDragInput && _currentState.Value == SlingshotState.Dragging && !_hasFiredDragEvent)
-                {
-                    _hasFiredDragEvent = true;
-                    _draggingStarted.OnNext(_currentBird);
-                }
-            })
+            .Subscribe(input => _isDragInput = input != Vector2.zero)
             .AddTo(_disposables);
     }
 
@@ -64,7 +60,6 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     {
         _disposables.Dispose();
         _currentState.Dispose();
-        _draggingStarted.Dispose();
         _shot.Dispose();
     }
 
@@ -101,7 +96,6 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             return;
 
         _currentState.Value = SlingshotState.Dragging;
-        _hasFiredDragEvent = false;
         _isDragInput = false;
     }
 
