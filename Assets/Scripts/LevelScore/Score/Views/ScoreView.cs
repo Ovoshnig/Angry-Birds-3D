@@ -1,4 +1,4 @@
-using DG.Tweening;
+using LitMotion;
 using TMPro;
 using UnityEngine;
 
@@ -6,36 +6,35 @@ using UnityEngine;
 public class ScoreView : MonoBehaviour
 {
     [SerializeField, Min(0f)] private float _updateDuration = 0.5f;
+    [SerializeField] private Ease _ease = Ease.OutQuad;
 
-    private TMP_Text _text = null;
-    private Tween _scoreTween = null;
+    private TMP_Text _text;
+    private MotionHandle _handle;
     private int _currentDisplayedScore = 0;
 
     private void Awake() => _text = GetComponent<TMP_Text>();
 
-    private void Start() => UpdateText(_currentDisplayedScore);
+    private void Start() => UpdateText(0);
 
     public void SetScoreInstant(int value)
     {
-        _scoreTween?.Kill();
-        _currentDisplayedScore = value;
+        _handle.TryCancel();
         UpdateText(value);
     }
 
     public void SetScoreSmoothly(int targetValue)
     {
-        _scoreTween?.Kill();
+        _handle.TryCancel();
 
-        _scoreTween = DOVirtual.Int(_currentDisplayedScore, targetValue, _updateDuration, OnUpdateScore)
-            .SetEase(Ease.OutQuad)
-            .SetLink(gameObject);
+        _handle = LMotion.Create(_currentDisplayedScore, targetValue, _updateDuration)
+            .WithEase(_ease)
+            .Bind(UpdateText)
+            .AddTo(gameObject);
     }
 
-    private void OnUpdateScore(int value)
+    private void UpdateText(int score)
     {
-        _currentDisplayedScore = value;
-        UpdateText(value);
+        _text.SetText("Score: {0:00000}", score);
+        _currentDisplayedScore = score;
     }
-
-    private void UpdateText(int value) => _text.SetText("Score: {0:0000}", value);
 }

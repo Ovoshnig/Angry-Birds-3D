@@ -1,6 +1,6 @@
-using Cysharp.Threading.Tasks;
+using LitMotion;
+using LitMotion.Extensions;
 using R3;
-using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,82 +8,59 @@ using UnityEngine;
 public class TextPrinterView : MonoBehaviour
 {
     [SerializeField, Min(0.1f)] private float _speed = 5f;
-    [SerializeField] private bool _playOnAwake = false;
+    [SerializeField] private bool _autoPlay = false;
 
     private readonly ReactiveProperty<bool> _isPrinting = new(false);
+    private readonly Subject<Unit> _completed = new();
 
     private TMP_Text _tmpText;
-    private int _operationId;
+    private MotionHandle _handle;
 
     public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
-    public Observable<Unit> Completed { get; private set; }
+    public Observable<Unit> Completed => _completed;
 
     protected TMP_Text TmpText => _tmpText;
 
-    protected virtual void Awake()
+    protected virtual void Awake() => _tmpText = GetComponent<TMP_Text>();
+
+    protected virtual void Start()
     {
-        Completed = _isPrinting
-           .Pairwise()
-           .Where(isPrinting => isPrinting.Previous && !isPrinting.Current)
-           .Select(_ => Unit.Default)
-           .Share();
-
-        _tmpText = GetComponent<TMP_Text>();
-
-        if (_playOnAwake)
-        {
-            string initialText = _tmpText.text;
-            PrintAsync(initialText).Forget();
-        }
+        if (_autoPlay)
+            Print(_tmpText.text);
     }
 
     protected virtual void OnDestroy()
     {
-        CancelPrinting();
-
         _isPrinting.Dispose();
+        _completed.Dispose();
     }
 
-    public async UniTask PrintAsync(string fullText)
+    public void Print(string fullText)
     {
-        CancelPrinting();
-        int currentOperationId = ++_operationId;
+        _handle.TryCancel();
 
         _isPrinting.Value = true;
 
         _tmpText.text = fullText;
-        _tmpText.maxVisibleCharacters = 0;
-
         _tmpText.ForceMeshUpdate();
 
         int totalVisibleCharacters = _tmpText.textInfo.characterCount;
-        float delay = 1f / _speed;
+        float duration = totalVisibleCharacters / _speed;
 
-        try
-        {
-            for (int i = 0; i < totalVisibleCharacters; i++)
+        _handle = LMotion.Create(0, totalVisibleCharacters, duration)
+            .WithOnCancel(() =>
             {
-                if (currentOperationId != _operationId)
-                    throw new OperationCanceledException();
-
-                _tmpText.maxVisibleCharacters = i + 1;
-                await UniTask.WaitForSeconds(delay, cancellationToken: destroyCancellationToken);
-            }
-        }
-        catch (OperationCanceledException)
-        {
-            _tmpText.maxVisibleCharacters = totalVisibleCharacters;
-        }
-        finally
-        {
-            if (currentOperationId == _operationId)
+                if (!_isPrinting.IsDisposed)
+                    _isPrinting.Value = false;
+            })
+            .WithOnComplete(() =>
+            {
                 _isPrinting.Value = false;
-        }
+                _completed.OnNext(Unit.Default);
+            })
+            .BindToMaxVisibleCharacters(_tmpText)
+            .AddTo(gameObject);
     }
 
-    public void CancelPrinting()
-    {
-        _operationId++;
-        _isPrinting.Value = false;
-    }
+    public bool TryCompletePrinting() => _handle.TryComplete();
 }
