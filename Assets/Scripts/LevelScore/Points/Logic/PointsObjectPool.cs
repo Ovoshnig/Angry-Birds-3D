@@ -19,7 +19,7 @@ public class PointsObjectPool
         );
     }
 
-    public void ShowPoints(Vector3 position, DestructionPointsSettings pointsSettings)
+    public void ShowPoints(Vector3 position, PointsSettings pointsSettings)
     {
         PointsView pointsView = _pointsPool.Get();
         pointsView.Show(position, pointsSettings);
