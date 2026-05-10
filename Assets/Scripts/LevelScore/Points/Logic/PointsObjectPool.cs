@@ -1,7 +1,6 @@
 ﻿using R3;
 using UnityEngine;
 using UnityEngine.Pool;
-using Object = UnityEngine.Object;
 
 public class PointsObjectPool
 {
@@ -17,7 +16,7 @@ public class PointsObjectPool
             actionOnRelease: pointsView => pointsView.gameObject.SetActive(false),
             defaultCapacity: scoreSettings.PoolDefaultCapacity,
             maxSize: scoreSettings.PoolMaxSize
-            );
+        );
     }
 
     public void ShowPoints(Vector3 position, DestructionPointsSettings pointsSettings)
@@ -25,7 +24,7 @@ public class PointsObjectPool
         PointsView pointsView = _pointsPool.Get();
         pointsView.Show(position, pointsSettings);
 
-        pointsView.Stopped
+        pointsView.Completed
             .Take(1)
             .Subscribe(_ => _pointsPool.Release(pointsView))
             .RegisterTo(pointsView.destroyCancellationToken);
