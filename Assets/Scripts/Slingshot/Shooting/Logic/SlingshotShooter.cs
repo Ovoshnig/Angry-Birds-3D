@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 public class SlingshotShooter : IStartable, IDisposable, ITickable
 {
-    public enum SlingshotState { Idle, Dragging, Flying }
+    public enum SlingshotState { Idle, InputWaiting, Dragging }
 
     private readonly SlingshotInputProvider _inputProvider;
     private readonly SlingshotShooterView _view;
@@ -91,7 +91,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private void OnPointerPressed()
     {
-        if (_currentState.Value != SlingshotState.Idle
+        if (_currentState.Value != SlingshotState.InputWaiting
             || !_pointerMeter.IsPointerNear(_centerAnchorPosition, _settings.InputInteractionRadius))
             return;
 
@@ -104,7 +104,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         if (_currentState.Value != SlingshotState.Dragging)
             return;
 
-        _currentState.Value = SlingshotState.Flying;
+        _currentState.Value = SlingshotState.Idle;
         _view.SetLinesVisibility(false);
 
         _currentBird.isKinematic = false;
@@ -140,7 +140,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private void ResetBird()
     {
-        _currentState.Value = SlingshotState.Idle;
+        _currentState.Value = SlingshotState.InputWaiting;
         _currentBird.isKinematic = true;
         _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
