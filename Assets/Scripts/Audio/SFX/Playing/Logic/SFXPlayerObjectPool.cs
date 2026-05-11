@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Pool;
-using Object = UnityEngine.Object;
 
 public class SFXPlayerObjectPool
 {
@@ -18,7 +17,7 @@ public class SFXPlayerObjectPool
             actionOnRelease: playerView => playerView.gameObject.SetActive(false),
             defaultCapacity: audioSettings.PoolDefaultCapacity,
             maxSize: audioSettings.PoolMaxSize
-            );
+        );
     }
 
     public void PlaySFX(AudioResource audioResource)
