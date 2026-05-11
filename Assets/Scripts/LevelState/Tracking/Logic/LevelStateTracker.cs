@@ -1,18 +1,19 @@
 using R3;
-using System;
 
 public class LevelStateTracker
 {
+    private readonly BirdDestroyer _birdDestroyer;
     private readonly PigTracker _pigTracker;
-    private readonly BirdSettings _birdSettings;
 
-    public LevelStateTracker(PigTracker pigTracker, BirdSettings birdSettings)
+    public LevelStateTracker(BirdDestroyer birdDestroyer, PigTracker pigTracker)
     {
+        _birdDestroyer = birdDestroyer;
         _pigTracker = pigTracker;
-        _birdSettings = birdSettings;
 
-        Completed = _pigTracker.PigsLeft
-            .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update);
+        Completed = _birdDestroyer.Destroyed
+            .Where(_ => _pigTracker.PigCount.CurrentValue == 0)
+            .Select(_ => Unit.Default)
+            .Share();
     }
 
     public Observable<Unit> Completed { get; }
