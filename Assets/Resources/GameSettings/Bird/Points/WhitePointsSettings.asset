@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: WhitePointsSettings
   m_EditorClassIdentifier: GameSettings::PointsSettings
   <Points>k__BackingField: 10000
-  <Color>k__BackingField: {r: 0.8862746, g: 0.10588236, b: 0.16470589, a: 1}
+  <Color>k__BackingField: {r: 0.9308176, g: 0.9308176, b: 0.9308176, a: 1}
   <FontSize>k__BackingField: 2
