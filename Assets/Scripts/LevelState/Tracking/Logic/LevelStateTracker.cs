@@ -2,17 +2,17 @@ using R3;
 
 public class LevelStateTracker
 {
-    private readonly BirdDestroyer _birdDestroyer;
-    private readonly PigTracker _pigTracker;
-
-    public LevelStateTracker(BirdDestroyer birdDestroyer, PigTracker pigTracker)
+    public LevelStateTracker(BirdDestroyer birdDestroyer, PigTracker pigTracker,
+        SlingshotShooter slingshotShooter)
     {
-        _birdDestroyer = birdDestroyer;
-        _pigTracker = pigTracker;
-
-        Completed = _birdDestroyer.Destroyed
-            .Where(_ => _pigTracker.PigCount.CurrentValue == 0)
-            .Select(_ => Unit.Default)
+        Completed = Observable.Merge(
+            birdDestroyer.Destroyed
+                .Where(_ => pigTracker.PigCount.CurrentValue == 0)
+                .AsUnitObservable(),
+            pigTracker.PigsLeft
+                .Where(_ => slingshotShooter.CurrentState.CurrentValue != SlingshotShooter.SlingshotState.Idle)
+                .AsUnitObservable())
+            .Take(1)
             .Share();
     }
 

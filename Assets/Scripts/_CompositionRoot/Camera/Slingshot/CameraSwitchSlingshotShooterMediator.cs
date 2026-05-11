@@ -1,6 +1,4 @@
 using R3;
-using System;
-using UnityEngine;
 using static SlingshotShooter;
 
 public class CameraSwitchSlingshotShooterMediator : Mediator
@@ -25,10 +23,10 @@ public class CameraSwitchSlingshotShooterMediator : Mediator
     private void SlingshotStateChanged(SlingshotState state)
     {
         if (state == SlingshotState.Idle)
+            _cameraSwitchView.SetPriorityStructure();
+        else if (state == SlingshotState.InputWaiting)
             _cameraSwitchView.SetPrioritySlingshot();
         else if (state == SlingshotState.Dragging)
             _cameraSwitchView.SetPriorityGeneral();
-        else if (state == SlingshotState.Flying)
-            _cameraSwitchView.SetPriorityStructure();
     }
 }
