@@ -1,23 +1,23 @@
 using R3;
 
-public class FinalScoreViewLevelTrackerMediator : Mediator
+public class FinalScoreViewBirdPointsDisplayerMediator : Mediator
 {
     private readonly FinalScoreView _finalScoreView;
-    private readonly LevelStateTracker _levelStateTracker;
+    private readonly BirdPointsDisplayer _birdPointsDisplayer;
     private readonly ScoreModel _scoreModel;
 
-    public FinalScoreViewLevelTrackerMediator(FinalScoreView finalScoreView,
-        LevelStateTracker levelStateTracker,
+    public FinalScoreViewBirdPointsDisplayerMediator(FinalScoreView finalScoreView,
+        BirdPointsDisplayer birdPointsDisplayer,
         ScoreModel scoreModel)
     {
         _finalScoreView = finalScoreView;
-        _levelStateTracker = levelStateTracker;
+        _birdPointsDisplayer = birdPointsDisplayer;
         _scoreModel = scoreModel;
     }
 
     public override void Start()
     {
-        _levelStateTracker.Completed
+        _birdPointsDisplayer.AllDisplayed
             .Subscribe(_ => _finalScoreView.SetScore(_scoreModel.Score.CurrentValue))
             .AddTo(Disposables);
     }

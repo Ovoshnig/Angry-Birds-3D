@@ -141,6 +141,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdEntityView
   <SFXSettings>k__BackingField: {fileID: 11400000, guid: b300dcceb69830d4cb2a1020e4cd24b3, type: 2}
+  <PointsSettings>k__BackingField: {fileID: 11400000, guid: 017c9e679e83cf54782a7fd19e5ccb55, type: 2}
 --- !u!114 &-2855102667057212526
 MonoBehaviour:
   m_ObjectHideFlags: 0
