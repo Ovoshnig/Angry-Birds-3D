@@ -25,7 +25,7 @@ public class PointsView : MonoBehaviour
 
     private void OnDestroy() => _completed.Dispose();
 
-    public void Show(Vector3 position, DestructionPointsSettings pointsSettings)
+    public void Show(Vector3 position, PointsSettings pointsSettings)
     {
         _handle.TryCancel();
 

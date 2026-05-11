@@ -24,7 +24,7 @@ public class PointsPoolObjectDestroyerMediator : Mediator
     {
         ObjectDestroyerView destroyerView = destructionEvent.DestroyerView;
         Vector3 position = destroyerView.transform.position;
-        DestructionPointsSettings pointsSettings = destroyerView.Settings.PointsSettings;
+        PointsSettings pointsSettings = destroyerView.Settings.PointsSettings;
         _pointsObjectPool.ShowPoints(position, pointsSettings);
     }
 }
