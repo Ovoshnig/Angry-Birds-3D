@@ -1,5 +1,4 @@
 ﻿using R3;
-using UnityEngine;
 
 public class SlingshotShooterBirdDestroyerMediator : Mediator
 {
@@ -22,23 +21,16 @@ public class SlingshotShooterBirdDestroyerMediator : Mediator
     public override void Start()
     {
         _birdDestroyer.Destroyed
-            .Subscribe(_ =>
-            {
-                if (_pigTracker.PigCount.CurrentValue > 0)
-                    TryPutBirdInSlingshot();
-            })
+            .Subscribe(_ => OnDestroyed())
             .AddTo(Disposables);
-
-        TryPutBirdInSlingshot();
     }
 
-    private bool TryPutBirdInSlingshot()
+    private void OnDestroyed()
     {
-        if (!_birdQueue.TryDequeueBird(out BirdEntityView birdEntityView))
-            return false;
+        if (_pigTracker.PigCount.CurrentValue == 0)
+            return;
 
-        Rigidbody birdRigidbody = birdEntityView.FlyerView.Rigidbody;
-        _slingshotShooter.SetCurrentBird(birdRigidbody);
-        return true;
+        if (_birdQueue.TryDequeueBird(out BirdEntityView birdEntityView))
+            _slingshotShooter.SetCurrentBird(birdEntityView.FlyerView.Rigidbody);
     }
 }
