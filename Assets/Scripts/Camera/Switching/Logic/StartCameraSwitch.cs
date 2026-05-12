@@ -32,13 +32,13 @@ public class StartCameraSwitch : IStartable, IDisposable
 
     private async UniTask SwitchAsync()
     {
-        await _switchView.SwitchToStructureAsync(_cts.Token);
+        await _switchView.SwitchToStructureAsync();
         await UniTask.WaitForSeconds(_settings.StructureShowingDuration, cancellationToken: _cts.Token);
 
-        await _switchView.SwitchToSlingshotAsync(_cts.Token);
+        await _switchView.SwitchToSlingshotAsync();
         await UniTask.WaitForSeconds(_settings.SlingshotShowingDuration, cancellationToken: _cts.Token);
 
-        await _switchView.SwitchToGeneralAsync(_cts.Token);
+        await _switchView.SwitchToGeneralAsync();
 
         _completed.OnNext(Unit.Default);
     }
