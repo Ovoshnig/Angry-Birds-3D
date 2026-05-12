@@ -1,5 +1,4 @@
 using Cysharp.Threading.Tasks;
-using System.Threading;
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -15,21 +14,21 @@ public class CameraSwitchView : MonoBehaviour
 
     private void Awake() => _brain = GetComponent<CinemachineBrain>();
 
-    public UniTask SwitchToSlingshotAsync(CancellationToken token) => SwitchAndAwaitBlendAsync(_slingshotCamera, token);
+    public UniTask SwitchToSlingshotAsync() => SwitchAndAwaitBlendAsync(_slingshotCamera);
 
-    public UniTask SwitchToGeneralAsync(CancellationToken token) => SwitchAndAwaitBlendAsync(_generalCamera, token);
+    public UniTask SwitchToGeneralAsync() => SwitchAndAwaitBlendAsync(_generalCamera);
 
-    public UniTask SwitchToStructureAsync(CancellationToken token) => SwitchAndAwaitBlendAsync(_structureCamera, token);
+    public UniTask SwitchToStructureAsync() => SwitchAndAwaitBlendAsync(_structureCamera);
 
-    private async UniTask SwitchAndAwaitBlendAsync(CinemachineCamera targetCamera, CancellationToken token)
+    private async UniTask SwitchAndAwaitBlendAsync(CinemachineCamera targetCamera)
     {
         if (_activeCamera == targetCamera)
             return;
 
         SetPriority(targetCamera);
 
-        await UniTask.Yield(cancellationToken: token);
-        await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: token);
+        await UniTask.Yield(cancellationToken: destroyCancellationToken);
+        await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: destroyCancellationToken);
     }
 
     private void SetPriority(CinemachineCamera camera)
