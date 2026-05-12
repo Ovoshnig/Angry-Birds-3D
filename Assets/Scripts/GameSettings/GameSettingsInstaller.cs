@@ -11,6 +11,7 @@ public class GameSettingsInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstance(_gameSettings.SceneSettings);
+        builder.RegisterInstance(_gameSettings.CameraSettings);
         builder.RegisterInstance(_gameSettings.AudioSettings);
         builder.RegisterInstance(_gameSettings.CollisionSettings);
         builder.RegisterInstance(_gameSettings.SlingshotSettings);
