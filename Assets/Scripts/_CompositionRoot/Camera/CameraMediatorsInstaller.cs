@@ -7,5 +7,6 @@ public class CameraMediatorsInstaller : IInstaller
     {
         builder.RegisterEntryPoint<CameraSwitchViewBirdFlyerMediator>(Lifetime.Singleton);
         builder.RegisterEntryPoint<CameraSwitchViewBirdDestroyerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<CameraSwitchViewLevelTrackerMediator>(Lifetime.Singleton);
     }
 }
