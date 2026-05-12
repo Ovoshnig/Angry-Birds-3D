@@ -3,6 +3,9 @@ using VContainer.Unity;
 
 public class SlingshotMediatorsInstaller : IInstaller
 {
-    public void Install(IContainerBuilder builder) =>
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterEntryPoint<SlingshotShooterStartCameraSwitchMediator>(Lifetime.Singleton);
         builder.RegisterEntryPoint<SlingshotShooterBirdDestroyerMediator>(Lifetime.Singleton);
+    }
 }

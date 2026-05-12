@@ -8,5 +8,9 @@ public class CameraSwitchingInstaller : IInstaller
 {
     [SerializeField] private CameraSwitchView _cameraSwitchView;
 
-    public void Install(IContainerBuilder builder) => builder.RegisterInstance(_cameraSwitchView);
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterInstance(_cameraSwitchView);
+        builder.RegisterEntryPoint<StartCameraSwitch>(Lifetime.Singleton).AsSelf();
+    }
 }

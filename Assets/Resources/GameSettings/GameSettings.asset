@@ -16,6 +16,9 @@ MonoBehaviour:
     <FirstGameplayLevel>k__BackingField: 1
     <GameplayLevelsCount>k__BackingField: 1
     <LevelTransitionDuration>k__BackingField: 5
+  <CameraSettings>k__BackingField:
+    <StructureShowingDuration>k__BackingField: 1.2
+    <SlingshotShowingDuration>k__BackingField: 0.3
   <AudioSettings>k__BackingField:
     <MinVolume>k__BackingField: -80
     <MaxVolume>k__BackingField: 0
@@ -40,6 +43,7 @@ MonoBehaviour:
     <SlingshotCollisionOffset>k__BackingField: 0.3
   <BirdSettings>k__BackingField:
     <DestructionDelay>k__BackingField: 5
+    <PointsDisplayDelay>k__BackingField: 2
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10
