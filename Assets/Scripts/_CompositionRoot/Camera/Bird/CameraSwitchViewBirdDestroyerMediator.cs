@@ -21,9 +21,7 @@ public class CameraSwitchViewBirdDestroyerMediator : Mediator
         _birdDestroyer.Destroyed
             .Subscribe(_ =>
             {
-                if (_pigTracker.PigCount.CurrentValue == 0)
-                    _cameraSwitchView.SwitchToSlingshotAsync().Forget();
-                else
+                if (_pigTracker.PigCount.CurrentValue > 0)
                     _cameraSwitchView.SwitchToGeneralAsync().Forget();
             })
             .AddTo(Disposables);
