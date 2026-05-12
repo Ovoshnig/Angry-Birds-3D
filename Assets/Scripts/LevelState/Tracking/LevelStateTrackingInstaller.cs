@@ -12,10 +12,11 @@ public class LevelStateTrackingInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstance(_completionPanelView);
-        builder.Register<LevelStateTracker>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<CompletionViewLevelTrackerMediator>(Lifetime.Singleton);
-
         builder.RegisterInstance(_finalScoreView);
-        builder.RegisterEntryPoint<FinalScoreViewLevelTrackerMediator>(Lifetime.Singleton);
+
+        builder.Register<LevelStateTracker>(Lifetime.Singleton);
+
+        builder.RegisterEntryPoint<CompletionViewBirdPointsDisplayerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<FinalScoreViewBirdPointsDisplayerMediator>(Lifetime.Singleton);
     }
 }

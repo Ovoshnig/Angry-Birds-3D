@@ -1,18 +1,17 @@
-﻿using Cysharp.Threading.Tasks;
-using R3;
+﻿using R3;
 using UnityEngine;
 
 public class PlayButtonPrinterView : TextPrinterView
 {
     [SerializeField] private ScoreTablePrinterView _scoreTablePrinterView;
 
-    protected virtual void Start()
+    protected override void Start()
     {
+        TmpText.maxVisibleCharacters = 0;
         string initialText = TmpText.text;
-        TmpText.text = string.Empty;
 
         _scoreTablePrinterView.Completed
-            .Subscribe(_ => PrintAsync(initialText).Forget())
+            .Subscribe(_ => Print(initialText))
             .RegisterTo(destroyCancellationToken);
     }
 }

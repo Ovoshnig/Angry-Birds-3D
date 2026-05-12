@@ -1,11 +1,13 @@
 ﻿using R3;
+using System;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-public class PointsObjectPool
+public class PointsObjectPool : IDisposable
 {
     private readonly ObjectPool<PointsView> _pointsPool;
+    private readonly Subject<int> _pointsAdded = new();
 
     public PointsObjectPool(PointsView pointsPrefab, ScoreSettings scoreSettings)
     {
@@ -17,15 +19,21 @@ public class PointsObjectPool
             actionOnRelease: pointsView => pointsView.gameObject.SetActive(false),
             defaultCapacity: scoreSettings.PoolDefaultCapacity,
             maxSize: scoreSettings.PoolMaxSize
-            );
+        );
     }
 
-    public void ShowPoints(Vector3 position, DestructionPointsSettings pointsSettings)
+    public Observable<int> PointsAdded => _pointsAdded;
+
+    public void Dispose() => _pointsAdded.Dispose();
+
+    public void ShowPoints(Vector3 position, PointsSettings pointsSettings)
     {
+        _pointsAdded.OnNext(pointsSettings.Points);
+
         PointsView pointsView = _pointsPool.Get();
         pointsView.Show(position, pointsSettings);
 
-        pointsView.Stopped
+        pointsView.Completed
             .Take(1)
             .Subscribe(_ => _pointsPool.Release(pointsView))
             .RegisterTo(pointsView.destroyCancellationToken);

@@ -424,13 +424,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 198076857}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.047842406, y: -0.67955065, z: 0.047759037, w: 0.73050743}
-  m_LocalPosition: {x: 17.860008, y: 5.6848483, z: 20.26596}
+  m_LocalRotation: {x: 0.035910893, y: -0.69078356, z: 0.034389205, w: 0.72135}
+  m_LocalPosition: {x: 18.25, y: 4.1, z: 20.51}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1284036663}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 5.7, y: -87.52, z: 0}
 --- !u!114 &198076859
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -883,8 +883,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
-  m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
+  m_LocalRotation: {x: 0.066897705, y: -0.6334098, z: 0.057973243, w: 0.7687366}
+  m_LocalPosition: {x: 21.831833, y: 7.9805956, z: 43.073036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -958,7 +958,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 1.8
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -1747,15 +1747,15 @@ MonoBehaviour:
       _cameraSwitchView: {fileID: 330585549}
   _sfxInstaller:
     _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
+  _slingshotInstaller:
+    _slingshotShootingInstaller:
+      _slingshotShooterView: {fileID: 507049044}
   _birdInstaller:
     _entityInstaller:
       _birdQueue: {fileID: 878781362}
   _pigInstaller:
     _pigEntityInstaller:
       _blockStructure: {fileID: 4109696}
-  _slingshotInstaller:
-    _slingshotShootingInstaller:
-      _slingshotShooterView: {fileID: 507049044}
   _blockInstaller:
     _blockEntityInstaller:
       _blockStructure: {fileID: 4109696}
@@ -2715,8 +2715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
@@ -3710,13 +3710,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2073807576}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.023567084, y: -0.69725496, z: 0.025405772, w: 0.7159851}
+  m_LocalRotation: {x: 0, y: -0.6976279, z: 0, w: 0.71646035}
   m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1284036663}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -88.474, z: 0}
 --- !u!1001 &2081062518
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3727,7 +3727,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_text
-      value: 'Score: 1234'
+      value: 'Score: 12345'
       objectReference: {fileID: 0}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_fontSize
@@ -3767,11 +3767,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_VerticalAlignment
-      value: 512
+      value: 256
       objectReference: {fileID: 0}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_HorizontalAlignment
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_hasFontAssetChanged
@@ -3811,7 +3811,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8407699759676394508, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 400
+      value: 412
       objectReference: {fileID: 0}
     - target: {fileID: 8407699759676394508, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_SizeDelta.y
@@ -3895,7 +3895,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cd493b8fd4c749d42b562654de881964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Score::ScoreView
-  _updateDuration: 0.5
+  _updateDuration: 0.8
+  _ease: 14
 --- !u!1001 &2116243164
 PrefabInstance:
   m_ObjectHideFlags: 0
