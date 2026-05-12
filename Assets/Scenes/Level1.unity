@@ -883,8 +883,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.6976279, z: 0, w: 0.71646035}
-  m_LocalPosition: {x: 30.051262, y: 6.5266156, z: 33.102013}
+  m_LocalRotation: {x: 0.066897705, y: -0.6334098, z: 0.057973243, w: 0.7687366}
+  m_LocalPosition: {x: 21.831833, y: 7.9805956, z: 43.073036}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -958,7 +958,7 @@ MonoBehaviour:
     DefaultMode: 2
   DefaultBlend:
     Style: 1
-    Time: 2
+    Time: 1.8
     CustomCurve:
       serializedVersion: 2
       m_Curve: []
@@ -2715,8 +2715,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Unity.Cinemachine::Unity.Cinemachine.CinemachineCamera
   Priority:
-    Enabled: 0
-    m_Value: 0
+    Enabled: 1
+    m_Value: 1
   OutputChannel: 1
   StandbyUpdate: 2
   m_StreamingVersion: 20241001
