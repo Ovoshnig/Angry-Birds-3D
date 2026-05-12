@@ -5,6 +5,6 @@ using UnityEngine;
 public class DestructionSettings : ScriptableObject
 {
     [field: SerializeField, Min(0f)] public float MaxHealth { get; private set; } = 500f;
-    [field: SerializeField] public DestructionPointsSettings PointsSettings { get; private set; }
+    [field: SerializeField] public PointsSettings PointsSettings { get; private set; }
     [field: SerializeField] public DestructionSFXSettings SfxSettings { get; private set; }
 }
