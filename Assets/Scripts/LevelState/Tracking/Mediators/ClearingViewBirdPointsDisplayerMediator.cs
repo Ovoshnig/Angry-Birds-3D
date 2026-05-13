@@ -14,7 +14,7 @@ public class ClearingViewBirdPointsDisplayerMediator : Mediator
 
     public override void Start()
     {
-        _birdPointsDisplayer.AllDisplayed
+        _birdPointsDisplayer.BirdSequenceDisplayCompleted
             .Subscribe(_ => _clearingPanelView.Show())
             .AddTo(Disposables);
     }
