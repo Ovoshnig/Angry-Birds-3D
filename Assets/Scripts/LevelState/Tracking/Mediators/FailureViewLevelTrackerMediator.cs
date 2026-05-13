@@ -20,11 +20,11 @@ public class FailureViewLevelTrackerMediator : Mediator
     public override void Start()
     {
         _levelStateTracker.Failed
-            .SubscribeAwait(async (_, token) => await WaitCameraAndEnableFailurePanelAsync(token), AwaitOperation.Drop)
+            .SubscribeAwait(async (_, token) => await OnLevelFailedAsync(token), AwaitOperation.Drop)
             .AddTo(Disposables);
     }
 
-    private async UniTask WaitCameraAndEnableFailurePanelAsync(CancellationToken token)
+    private async UniTask OnLevelFailedAsync(CancellationToken token)
     {
         await UniTask.WaitForSeconds(1, cancellationToken: token);
 
