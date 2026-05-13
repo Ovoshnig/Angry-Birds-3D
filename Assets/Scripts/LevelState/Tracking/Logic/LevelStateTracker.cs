@@ -2,7 +2,9 @@ using R3;
 
 public class LevelStateTracker
 {
-    public LevelStateTracker(BirdDestroyer birdDestroyer, PigTracker pigTracker,
+    public LevelStateTracker(BirdQueue birdQueue,
+        BirdDestroyer birdDestroyer,
+        PigTracker pigTracker,
         SlingshotShooter slingshotShooter)
     {
         Cleared = Observable.Merge(
@@ -14,7 +16,20 @@ public class LevelStateTracker
                 .AsUnitObservable())
             .Take(1)
             .Share();
+
+        Failed = birdDestroyer.Destroyed
+            .Where(_ => !birdQueue.Any
+                && slingshotShooter.CurrentState.CurrentValue == SlingshotShooter.SlingshotState.Idle
+                && pigTracker.PigCount.CurrentValue > 0)
+            .AsUnitObservable()
+            .Take(1)
+            .Share();
+
+        Completed = Observable.Merge(Cleared, Failed)
+            .Take(1);
     }
 
     public Observable<Unit> Cleared { get; }
+    public Observable<Unit> Failed { get; }
+    public Observable<Unit> Completed { get; }
 }

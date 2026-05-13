@@ -1732,10 +1732,11 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _sceneInstaller:
-    _sceneViewsParent: {fileID: 1878442408}
+    _sceneViewsParent: {fileID: 942982355}
   _levelStateInstaller:
     _stateTrackingInstaller:
-      _completionPanelView: {fileID: 1188629418}
+      _clearingPanelView: {fileID: 1188629418}
+      _failurePanelView: {fileID: 1305749215}
       _finalScoreView: {fileID: 1502881964}
   _levelScoreInstaller:
     _scoreInstaller:
@@ -2853,7 +2854,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1188629414}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4cad2cd262293846af7408a061f0861, type: 3}
+  m_Script: {fileID: 11500000, guid: 612600d49e88d2a41ac903089d981015, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Menu::CompletionPanelView
 --- !u!1001 &1223361281
@@ -3044,7 +3045,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1305749213}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f4cad2cd262293846af7408a061f0861, type: 3}
+  m_Script: {fileID: 11500000, guid: 9cfd420eafbd99e45adbd50e6fc8424b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Menu::CompletionPanelView
 --- !u!1 &1327972501 stripped
@@ -4402,7 +4403,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5846680106980989162, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6349702003945479490, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_Transition
@@ -4430,7 +4431,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_AnchorMin.x
@@ -4438,7 +4439,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_AnchorMin.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_SizeDelta.x
@@ -4490,11 +4491,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1482.9948
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -316.19998
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x

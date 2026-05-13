@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class CompletionPanelView : MonoBehaviour
+public abstract class CompletionPanelView : MonoBehaviour
 {
     private void Start() => SetActive(false);
 
