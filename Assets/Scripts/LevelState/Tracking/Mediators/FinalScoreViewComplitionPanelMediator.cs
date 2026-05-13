@@ -1,23 +1,23 @@
 using R3;
 
-public class FinalScoreViewBirdPointsDisplayerMediator : Mediator
+public class FinalScoreViewComplitionPanelMediator : Mediator
 {
     private readonly FinalScoreView _finalScoreView;
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
+    private readonly ClearingPanelView _clearingPanelView;
     private readonly ScoreModel _scoreModel;
 
-    public FinalScoreViewBirdPointsDisplayerMediator(FinalScoreView finalScoreView,
-        BirdPointsDisplayer birdPointsDisplayer,
+    public FinalScoreViewComplitionPanelMediator(FinalScoreView finalScoreView,
+        ClearingPanelView clearingPanelView,
         ScoreModel scoreModel)
     {
         _finalScoreView = finalScoreView;
-        _birdPointsDisplayer = birdPointsDisplayer;
+        _clearingPanelView = clearingPanelView;
         _scoreModel = scoreModel;
     }
 
     public override void Start()
     {
-        _birdPointsDisplayer.BirdSequenceDisplayCompleted
+        _clearingPanelView.Shown
             .Subscribe(_ => _finalScoreView.SetScore(_scoreModel.Score.CurrentValue))
             .AddTo(Disposables);
     }
