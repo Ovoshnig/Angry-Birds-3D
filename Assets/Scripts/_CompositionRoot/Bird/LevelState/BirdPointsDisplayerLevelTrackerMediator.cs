@@ -19,7 +19,7 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 
     public override void Start()
     {
-        _levelStateTracker.Completed
+        _levelStateTracker.Cleared
             .SubscribeAwait(async (_, token) => await WaitCameraAndDisplayPointsAsync(token), AwaitOperation.Drop)
             .AddTo(Disposables);
     }

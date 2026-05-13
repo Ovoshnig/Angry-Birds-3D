@@ -4786,7 +4786,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1519124215760132835, guid: 8c32878ae634b2b499722f1ae8cfb007, type: 3}
       propertyPath: m_Name
-      value: LevelCompletionPanel
+      value: LevelClearingPanel
       objectReference: {fileID: 0}
     - target: {fileID: 1519124215760132835, guid: 8c32878ae634b2b499722f1ae8cfb007, type: 3}
       propertyPath: m_IsActive

@@ -15,7 +15,7 @@ public class CameraSwitchViewLevelTrackerMediator : Mediator
 
     public override void Start()
     {
-        _levelStateTracker.Completed
+        _levelStateTracker.Cleared
             .Subscribe(_ => _cameraSwitchView.SwitchToSlingshotAsync().Forget())
             .AddTo(Disposables);
     }

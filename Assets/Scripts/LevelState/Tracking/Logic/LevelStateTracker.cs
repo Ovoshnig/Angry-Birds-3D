@@ -5,7 +5,7 @@ public class LevelStateTracker
     public LevelStateTracker(BirdDestroyer birdDestroyer, PigTracker pigTracker,
         SlingshotShooter slingshotShooter)
     {
-        Completed = Observable.Merge(
+        Cleared = Observable.Merge(
             birdDestroyer.Destroyed
                 .Where(_ => pigTracker.PigCount.CurrentValue == 0)
                 .AsUnitObservable(),
@@ -16,5 +16,5 @@ public class LevelStateTracker
             .Share();
     }
 
-    public Observable<Unit> Completed { get; }
+    public Observable<Unit> Cleared { get; }
 }
