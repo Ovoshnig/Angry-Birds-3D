@@ -31,6 +31,6 @@ public class FailureViewLevelTrackerMediator : Mediator
         if (_cameraSwitchView.IsBlending.CurrentValue)
             await _cameraSwitchView.IsBlending.FirstAsync(isBlending => !isBlending, cancellationToken: token);
 
-        _failurePanelView.SetActive(true);
+        _failurePanelView.Show();
     }
 }
