@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using VContainer.Unity;
 
 public class BirdQueue : IStartable
@@ -7,6 +8,8 @@ public class BirdQueue : IStartable
 
     public BirdQueue(IReadOnlyList<BirdEntityView> entityViews) =>
         _queue = new Queue<BirdEntityView>(entityViews);
+
+    public bool Any => _queue.Any();
 
     public void Start()
     {

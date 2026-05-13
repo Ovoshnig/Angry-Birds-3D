@@ -15,7 +15,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _disposables = new();
 
-    private Rigidbody _currentBird;
+    private Rigidbody _currentBird = null;
     private Vector3 _centerAnchorPosition;
     private float _birdRadius;
     private bool _isDragInput;
@@ -81,6 +81,14 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         ResetBird();
     }
 
+    public void StopShooting()
+    {
+        _disposables.Dispose();
+
+        ResetBird();
+        _view.SetLinesVisibility(false);
+    }
+
     private void HandlePointerState(bool isPressed)
     {
         if (isPressed)
@@ -141,7 +149,11 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private void ResetBird()
     {
         _currentState.Value = SlingshotState.InputWaiting;
-        _currentBird.isKinematic = true;
-        _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
+
+        if (_currentBird != null)
+        {
+            _currentBird.isKinematic = true;
+            _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
+        }
     }
 }
