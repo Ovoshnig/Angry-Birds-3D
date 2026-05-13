@@ -1,11 +1,11 @@
 using R3;
 
-public class ClearingViewBirdPointsDisplayerMediator : Mediator
+public class ClearingPanelBirdPointsDisplayerMediator : Mediator
 {
     private readonly ClearingPanelView _clearingPanelView;
     private readonly BirdPointsDisplayer _birdPointsDisplayer;
 
-    public ClearingViewBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
+    public ClearingPanelBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
         BirdPointsDisplayer birdPointsDisplayer)
     {
         _clearingPanelView = clearingPanelView;
