@@ -10,9 +10,11 @@ public class BirdPointsDisplayer : IDisposable
 {
     private readonly BirdQueue _birdQueue;
     private readonly BirdSettings _birdSettings;
-    private readonly Subject<BirdPointsDisplayEvent> _displayStarted = new();
-    private readonly Subject<Unit> _allDisplayed = new();
+    private readonly Subject<BirdPointsDisplayEvent> _birdDisplayStarted = new();
+    private readonly Subject<Unit> _birdSequenceDisplayCompleted = new();
     private readonly CancellationTokenSource _cts = new();
+
+    private BirdEntityView _slingshotBird = null;
 
     public BirdPointsDisplayer(BirdQueue birdQueue, BirdSettings birdSettings)
     {
@@ -20,8 +22,8 @@ public class BirdPointsDisplayer : IDisposable
         _birdSettings = birdSettings;
     }
 
-    public Observable<BirdPointsDisplayEvent> DisplayStarted => _displayStarted;
-    public Observable<Unit> AllDisplayed => _allDisplayed;
+    public Observable<BirdPointsDisplayEvent> BirdDisplayStarted => _birdDisplayStarted;
+    public Observable<Unit> BirdSequenceDisplayCompleted => _birdSequenceDisplayCompleted;
 
     public void Dispose()
     {
@@ -29,17 +31,25 @@ public class BirdPointsDisplayer : IDisposable
         _cts.Dispose();
     }
 
-    public async UniTask DisplayPointsAsync()
+    public void SetSlingshotBird(BirdEntityView slingshotBird) => _slingshotBird = slingshotBird;
+
+    public async UniTask DisplayBirdSequenceAsync()
     {
         while (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
-        {
-            Bounds birdBounds = entityView.GetComponent<Renderer>().bounds;
-            Vector3 topCenter = new(birdBounds.center.x, birdBounds.max.y, birdBounds.center.z);
-            _displayStarted.OnNext(new BirdPointsDisplayEvent(topCenter, entityView.PointsSettings));
+            await DisplayBirdAsync(entityView);
 
-            await UniTask.WaitForSeconds(_birdSettings.PointsDisplayDelay, cancellationToken: _cts.Token);
-        }
+        if (_slingshotBird != null)
+            await DisplayBirdAsync(_slingshotBird);
 
-        _allDisplayed.OnNext(Unit.Default);
+        _birdSequenceDisplayCompleted.OnNext(Unit.Default);
+    }
+
+    private async UniTask DisplayBirdAsync(BirdEntityView bird)
+    {
+        Bounds birdBounds = bird.GetComponent<Renderer>().bounds;
+        Vector3 topCenter = new(birdBounds.center.x, birdBounds.max.y, birdBounds.center.z);
+        _birdDisplayStarted.OnNext(new BirdPointsDisplayEvent(topCenter, bird.PointsSettings));
+
+        await UniTask.WaitForSeconds(_birdSettings.PointsDisplayDelay, cancellationToken: _cts.Token);
     }
 }

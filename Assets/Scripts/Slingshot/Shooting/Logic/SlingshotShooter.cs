@@ -38,6 +38,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             .Share();
     }
 
+    public Rigidbody CurrentBird => _currentBird;
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
     public Observable<Rigidbody> DraggingStarted { get; }
     public Observable<Rigidbody> Shot => _shot;

@@ -17,7 +17,7 @@ public class FinalScoreViewBirdPointsDisplayerMediator : Mediator
 
     public override void Start()
     {
-        _birdPointsDisplayer.AllDisplayed
+        _birdPointsDisplayer.BirdSequenceDisplayCompleted
             .Subscribe(_ => _finalScoreView.SetScore(_scoreModel.Score.CurrentValue))
             .AddTo(Disposables);
     }

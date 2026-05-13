@@ -14,7 +14,7 @@ public class PointsPoolBirdDisplayerMediator : Mediator
 
     public override void Start()
     {
-        _birdPointsDisplayer.DisplayStarted
+        _birdPointsDisplayer.BirdDisplayStarted
             .Subscribe(@event => _pointsObjectPool.ShowPoints(@event.Position, @event.PointsSettings))
             .AddTo(Disposables);
     }
