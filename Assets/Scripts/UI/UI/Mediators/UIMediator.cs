@@ -6,7 +6,7 @@ public abstract class UIMediator<TView> : Mediator where TView : UIView
 
     public UIMediator(TView view) => _view = view;
 
-    public CompositeDisposable ViewDisposables { get; } = new();
+    protected CompositeDisposable ViewDisposables { get; } = new();
 
     public override void Start()
     {
