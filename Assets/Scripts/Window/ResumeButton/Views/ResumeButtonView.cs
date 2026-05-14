@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Button))]
-public class ResumeButtonView : MonoBehaviour
+public class ResumeButtonView : UIView
 {
     private Button _button;
 
