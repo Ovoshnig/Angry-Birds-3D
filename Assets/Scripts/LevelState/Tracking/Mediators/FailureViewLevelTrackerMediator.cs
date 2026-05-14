@@ -19,6 +19,8 @@ public class FailureViewLevelTrackerMediator : Mediator
 
     public override void Start()
     {
+        _failurePanelView.Hide();
+
         _levelStateTracker.Failed
             .SubscribeAwait(async (_, token) => await OnLevelFailedAsync(token), AwaitOperation.Drop)
             .AddTo(Disposables);

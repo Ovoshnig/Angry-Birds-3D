@@ -14,6 +14,8 @@ public class ClearingPanelBirdPointsDisplayerMediator : Mediator
 
     public override void Start()
     {
+        _clearingPanelView.Hide();
+
         _birdPointsDisplayer.BirdSequenceDisplayCompleted
             .Subscribe(_ => _clearingPanelView.Show())
             .AddTo(Disposables);

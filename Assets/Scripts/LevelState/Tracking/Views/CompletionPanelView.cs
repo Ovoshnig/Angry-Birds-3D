@@ -9,8 +9,6 @@ public abstract class CompletionPanelView : MonoBehaviour
 
     public Observable<Unit> Shown => _shown;
 
-    private void Start() => gameObject.SetActive(false);
-
     private void OnDestroy() => _shown.Dispose();
 
     public void Show()
@@ -18,4 +16,6 @@ public abstract class CompletionPanelView : MonoBehaviour
         gameObject.SetActive(true);
         _shown.OnNext(Unit.Default);
     }
+
+    public void Hide() => gameObject.SetActive(false);
 }

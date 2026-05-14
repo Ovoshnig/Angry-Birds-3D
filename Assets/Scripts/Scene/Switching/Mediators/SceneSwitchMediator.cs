@@ -2,25 +2,19 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 
-public class SceneSwitchMediator : Mediator
+public class SceneSwitchMediator : UIListMediator<SceneButtonView>
 {
     private readonly SceneSwitch _sceneSwitch;
-    private readonly IReadOnlyList<SceneButtonView> _sceneButtonViews;
 
-    public SceneSwitchMediator(SceneSwitch sceneSwitch,
-        IReadOnlyList<SceneButtonView> sceneButtonViews)
+    public SceneSwitchMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneButtonView> sceneButtonViews)
+        : base(sceneButtonViews) => _sceneSwitch = sceneSwitch;
+
+    protected override void OnViewEnabled(SceneButtonView view, CompositeDisposable disposables)
     {
-        _sceneSwitch = sceneSwitch;
-        _sceneButtonViews = sceneButtonViews;
+        view.Clicked
+            .Subscribe(_ => _sceneSwitch.LoadSceneAsync(view.NavigationType, view.SpecificIndex).Forget())
+            .AddTo(disposables);
     }
 
-    public override void Start()
-    {
-        foreach (var view in _sceneButtonViews)
-        {
-            view.Clicked
-                .Subscribe(_ => _sceneSwitch.LoadSceneAsync(view.NavigationType, view.SpecificIndex).Forget())
-                .AddTo(Disposables);
-        }
-    }
+    protected override void OnViewDisabled(SceneButtonView view) => base.OnViewDisabled(view);
 }
