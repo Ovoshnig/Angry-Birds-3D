@@ -1,18 +1,18 @@
 using R3;
 
-public class VSyncAdjusterMediator : Mediator
+public class VSyncAdjusterMediator : UIMediator<VSyncToggleView>
 {
     private readonly VSyncAdjuster _vSyncAdjuster;
     private readonly VSyncToggleView _vSyncToggleView;
 
     public VSyncAdjusterMediator(VSyncAdjuster vSyncAdjuster,
-        VSyncToggleView vSyncToggleView)
+        VSyncToggleView vSyncToggleView) : base(vSyncToggleView)
     {
         _vSyncAdjuster = vSyncAdjuster;
         _vSyncToggleView = vSyncToggleView;
     }
 
-    public override void Start()
+    protected override void OnViewEnabled()
     {
         _vSyncAdjuster.IsVSyncEnabled
             .Subscribe(_vSyncToggleView.SetIsOnWithoutNotify)

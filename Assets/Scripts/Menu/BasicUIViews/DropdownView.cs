@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Dropdown))]
-public abstract class DropdownView : MonoBehaviour
+public abstract class DropdownView : UIView
 {
     private TMP_Dropdown _dropdown;
 

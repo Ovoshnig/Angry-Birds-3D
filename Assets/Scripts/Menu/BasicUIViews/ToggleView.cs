@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Toggle))]
-public abstract class ToggleView : MonoBehaviour
+public abstract class ToggleView : UIView
 {
     private Toggle _toggle;
 
