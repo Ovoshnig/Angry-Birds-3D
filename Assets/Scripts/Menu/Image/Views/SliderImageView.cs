@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class SliderImageView : MonoBehaviour
+public class SliderImageView : UIView
 {
     [SerializeField] private SliderView _sliderView;
     [SerializeField] private Sprite[] _fillingSprites;
@@ -21,12 +21,12 @@ public class SliderImageView : MonoBehaviour
 
     private void SetFillingSprite(float value)
     {
-        if (_image != null && _fillingSprites.Length > 1)
-        {
-            float percentagePerImage = 1f / (_fillingSprites.Length - 1);
-            float fillingPercentage = (value - _sliderView.MinValue) / (_sliderView.MaxValue - _sliderView.MinValue);
-            int spriteIndex = Mathf.CeilToInt(fillingPercentage / percentagePerImage);
-            _image.sprite = _fillingSprites[spriteIndex];
-        }
+        if (_fillingSprites.Length <= 1)
+            return;
+
+        float percentagePerImage = 1f / (_fillingSprites.Length - 1);
+        float fillingPercentage = (value - _sliderView.MinValue) / (_sliderView.MaxValue - _sliderView.MinValue);
+        int spriteIndex = Mathf.CeilToInt(fillingPercentage / percentagePerImage);
+        _image.sprite = _fillingSprites[spriteIndex];
     }
 }
