@@ -1,17 +1,18 @@
 ﻿using R3;
 
-public class GameQuitterMediator : Mediator
+public class GameQuitterMediator : UIMediator<GameQuitterButtonView>
 {
     private readonly GameQuitter _gameQuitter;
-    private readonly GameQuitButtonView _gameQuitButtonView;
+    private readonly GameQuitterButtonView _gameQuitButtonView;
 
-    public GameQuitterMediator(GameQuitter gameQuitter, GameQuitButtonView gameQuitButtonView)
+    public GameQuitterMediator(GameQuitter gameQuitter, GameQuitterButtonView gameQuitButtonView)
+        : base(gameQuitButtonView)
     {
         _gameQuitter = gameQuitter;
         _gameQuitButtonView = gameQuitButtonView;
     }
 
-    public override void Start()
+    protected override void OnViewEnabled()
     {
         _gameQuitButtonView.Clicked
             .Subscribe(_ => _gameQuitter.Quit())
