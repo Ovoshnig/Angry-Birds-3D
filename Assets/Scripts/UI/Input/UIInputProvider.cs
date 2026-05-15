@@ -1,8 +1,8 @@
 using R3;
 
-public class UIInputProvider : InputProvider<InputActions.MenuActions>
+public class UIInputProvider : InputProvider<InputActions.UIActions>
 {
-    public UIInputProvider(InputActions inputActions) : base(inputActions.Menu)
+    public UIInputProvider(InputActions inputActions) : base(inputActions.UI)
     {
         CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
         SkipTextPrintingPressed = ObserveButton(a => a.SkipTextPrinting);
