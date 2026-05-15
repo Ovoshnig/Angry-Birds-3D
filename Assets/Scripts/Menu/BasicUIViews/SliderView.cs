@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Slider))]
-public abstract class SliderView : MonoBehaviour
+public abstract class SliderView : UIView
 {
     private Slider _slider;
 

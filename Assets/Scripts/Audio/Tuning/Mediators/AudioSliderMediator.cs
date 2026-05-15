@@ -2,40 +2,34 @@ using R3;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AudioSliderMediator : Mediator
+public class AudioSliderMediator : UIListMediator<AudioSliderView>
 {
     private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
-    private readonly IReadOnlyList<AudioSliderView> _sliderViews;
 
     public AudioSliderMediator(IReadOnlyList<AudioSliderModel> sliderModels,
-        IReadOnlyList<AudioSliderView> sliderViews)
-    {
+        IReadOnlyList<AudioSliderView> sliderViews) : base(sliderViews) =>
         _sliderModels = sliderModels;
-        _sliderViews = sliderViews;
-    }
 
-    public override void Start()
+    protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable disposables)
     {
-        foreach (var view in _sliderViews)
-        {
-            AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
+        AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
 
-            if (model != null)
-                BindModelAndView(model, view);
-        }
+        if (model != null)
+            BindModelAndView(model, view, disposables);
     }
 
-    private void BindModelAndView(AudioSliderModel sliderModel, AudioSliderView sliderView)
+    private void BindModelAndView(AudioSliderModel sliderModel, AudioSliderView sliderView,
+        CompositeDisposable disposables)
     {
         sliderView.SetMinValue(sliderModel.MinValue);
         sliderView.SetMaxValue(sliderModel.MaxValue);
 
         sliderModel.Value
             .Subscribe(value => sliderView.SetValueWithoutNotify(value))
-            .AddTo(Disposables);
+            .AddTo(disposables);
 
         sliderView.ValueChanged
             .Subscribe(value => sliderModel.SetClampedValue(value))
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }
