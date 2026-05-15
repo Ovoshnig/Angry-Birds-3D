@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_InputField))]
-public abstract class InputFieldView : MonoBehaviour
+public abstract class InputFieldView : UIView
 {
     private TMP_InputField _inputField;
 
