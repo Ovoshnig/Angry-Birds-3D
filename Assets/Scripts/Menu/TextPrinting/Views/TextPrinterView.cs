@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class TextPrinterView : MonoBehaviour
+public class TextPrinterView : UIView
 {
     [SerializeField, Min(0.1f)] private float _speed = 5f;
     [SerializeField] private bool _autoPlay = false;
