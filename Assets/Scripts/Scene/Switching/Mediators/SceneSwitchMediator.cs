@@ -15,6 +15,4 @@ public class SceneSwitchMediator : UIListMediator<SceneButtonView>
             .Subscribe(_ => _sceneSwitch.LoadSceneAsync(view.NavigationType, view.SpecificIndex).Forget())
             .AddTo(disposables);
     }
-
-    protected override void OnViewDisabled(SceneButtonView view) => base.OnViewDisabled(view);
 }
