@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class ScoreView : MonoBehaviour
+public class ScoreView : UIView
 {
     [SerializeField, Min(0f)] private float _updateDuration = 0.5f;
     [SerializeField] private Ease _ease = Ease.OutQuad;

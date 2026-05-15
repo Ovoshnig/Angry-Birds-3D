@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class LevelIndexView : MonoBehaviour
+public class LevelIndexView : UIView
 {
     private TMP_Text _text;
 

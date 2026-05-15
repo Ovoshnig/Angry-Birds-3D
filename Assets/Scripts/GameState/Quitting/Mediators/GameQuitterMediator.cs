@@ -1,20 +1,16 @@
 ﻿using R3;
 
-public class GameQuitterMediator : Mediator
+public class GameQuitterMediator : UIMediator<GameQuitterButtonView>
 {
     private readonly GameQuitter _gameQuitter;
-    private readonly GameQuitButtonView _gameQuitButtonView;
 
-    public GameQuitterMediator(GameQuitter gameQuitter, GameQuitButtonView gameQuitButtonView)
-    {
-        _gameQuitter = gameQuitter;
-        _gameQuitButtonView = gameQuitButtonView;
-    }
+    public GameQuitterMediator(GameQuitter gameQuitter, GameQuitterButtonView view)
+        : base(view) => _gameQuitter = gameQuitter;
 
-    public override void Start()
+    protected override void OnViewEnabled(GameQuitterButtonView view, CompositeDisposable viewDisposables)
     {
-        _gameQuitButtonView.Clicked
+        view.Clicked
             .Subscribe(_ => _gameQuitter.Quit())
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }

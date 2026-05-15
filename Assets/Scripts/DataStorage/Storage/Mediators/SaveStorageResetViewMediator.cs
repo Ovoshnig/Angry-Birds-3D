@@ -1,21 +1,16 @@
 ﻿using R3;
 
-public class SaveStorageResetViewMediator : Mediator
+public class SaveStorageResetViewMediator : UIMediator<SaveResetButtonView>
 {
     private readonly SaveStorage _saveStorage;
-    private readonly SaveResetButtonView _saveResetButtonView;
 
-    public SaveStorageResetViewMediator(SaveStorage saveStorage, 
-        SaveResetButtonView saveResetButtonView)
-    {
-        _saveStorage = saveStorage;
-        _saveResetButtonView = saveResetButtonView;
-    }
+    public SaveStorageResetViewMediator(SaveStorage saveStorage, SaveResetButtonView view)
+        : base(view) => _saveStorage = saveStorage;
 
-    public override void Start()
+    protected override void OnViewEnabled(SaveResetButtonView view, CompositeDisposable viewDisposables)
     {
-        _saveResetButtonView.Clicked
+        view.Clicked
             .Subscribe(_ => _saveStorage.ResetData())
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }
