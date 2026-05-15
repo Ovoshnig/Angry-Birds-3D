@@ -3,19 +3,14 @@
 public class WindowResumeButtonViewMediator : UIMediator<ResumeButtonView>
 {
     private readonly Window _window;
-    private readonly ResumeButtonView _resumeButtonView;
 
-    public WindowResumeButtonViewMediator(Window window, ResumeButtonView resumeButtonView)
-        : base(resumeButtonView)
-    {
-        _window = window;
-        _resumeButtonView = resumeButtonView;
-    }
+    public WindowResumeButtonViewMediator(Window window, ResumeButtonView view)
+        : base(view) => _window = window;
 
-    protected override void OnViewEnabled()
+    protected override void OnViewEnabled(ResumeButtonView view, CompositeDisposable viewDisposables)
     {
-        _resumeButtonView.Clicked
+        view.Clicked
             .Subscribe(_ => _window.TryClose())
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }

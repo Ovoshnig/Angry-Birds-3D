@@ -3,10 +3,9 @@ using R3;
 public abstract class UIMediator<TView> : Mediator where TView : UIView
 {
     private readonly TView _view;
+    private readonly CompositeDisposable _viewDisposables = new();
 
     public UIMediator(TView view) => _view = view;
-
-    protected CompositeDisposable ViewDisposables { get; } = new();
 
     public override void Start()
     {
@@ -14,9 +13,9 @@ public abstract class UIMediator<TView> : Mediator where TView : UIView
             .Subscribe(enabled =>
             {
                 if (enabled)
-                    OnViewEnabled();
+                    OnViewEnabled(_view, _viewDisposables);
                 else
-                    OnViewDisabled();
+                    OnViewDisabled(_view);
             })
             .AddTo(Disposables);
     }
@@ -24,10 +23,10 @@ public abstract class UIMediator<TView> : Mediator where TView : UIView
     public override void Dispose()
     {
         base.Dispose();
-        ViewDisposables.Dispose();
+        _viewDisposables.Dispose();
     }
 
-    protected abstract void OnViewEnabled();
+    protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
 
-    protected virtual void OnViewDisabled() => ViewDisposables.Clear();
+    protected virtual void OnViewDisabled(TView view) => _viewDisposables.Clear();
 }

@@ -3,22 +3,17 @@ using R3;
 public class VSyncAdjusterMediator : UIMediator<VSyncToggleView>
 {
     private readonly VSyncAdjuster _vSyncAdjuster;
-    private readonly VSyncToggleView _vSyncToggleView;
 
-    public VSyncAdjusterMediator(VSyncAdjuster vSyncAdjuster,
-        VSyncToggleView vSyncToggleView) : base(vSyncToggleView)
-    {
-        _vSyncAdjuster = vSyncAdjuster;
-        _vSyncToggleView = vSyncToggleView;
-    }
+    public VSyncAdjusterMediator(VSyncAdjuster vSyncAdjuster, VSyncToggleView view)
+        : base(view) => _vSyncAdjuster = vSyncAdjuster;
 
-    protected override void OnViewEnabled()
+    protected override void OnViewEnabled(VSyncToggleView view, CompositeDisposable viewDisposables)
     {
         _vSyncAdjuster.IsVSyncEnabled
-            .Subscribe(_vSyncToggleView.SetIsOnWithoutNotify)
-            .AddTo(Disposables);
+            .Subscribe(view.SetIsOnWithoutNotify)
+            .AddTo(viewDisposables);
 
-        _vSyncToggleView.ValueChanged
+        view.ValueChanged
             .Subscribe(isOn =>
             {
                 if (isOn)
@@ -26,6 +21,6 @@ public class VSyncAdjusterMediator : UIMediator<VSyncToggleView>
                 else
                     _vSyncAdjuster.DisableVSync();
             })
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }

@@ -4,25 +4,20 @@ using System.Linq;
 public class ResolutionAdjusterMediator : UIMediator<ResolutionDropdownView>
 {
     private readonly ResolutionAdjuster _resolutionAdjuster;
-    private readonly ResolutionDropdownView _resolutionDropdownView;
 
-    public ResolutionAdjusterMediator(ResolutionAdjuster resolutionAdjuster,
-        ResolutionDropdownView resolutionDropdownView) : base(resolutionDropdownView)
-    {
-        _resolutionAdjuster = resolutionAdjuster;
-        _resolutionDropdownView = resolutionDropdownView;
-    }
+    public ResolutionAdjusterMediator(ResolutionAdjuster resolutionAdjuster, ResolutionDropdownView view)
+        : base(view) => _resolutionAdjuster = resolutionAdjuster;
 
-    protected override void OnViewEnabled()
+    protected override void OnViewEnabled(ResolutionDropdownView view, CompositeDisposable viewDisposables)
     {
-        _resolutionDropdownView.SetResolutionOptions(_resolutionAdjuster.Resolutions.Select(r => r.ToString()).ToList());
+        view.SetResolutionOptions(_resolutionAdjuster.Resolutions.Select(r => r.ToString()).ToList());
 
         _resolutionAdjuster.CurrentResolutionIndex
-            .Subscribe(_resolutionDropdownView.SetValueWithoutNotify)
-            .AddTo(Disposables);
+            .Subscribe(view.SetValueWithoutNotify)
+            .AddTo(viewDisposables);
 
-        _resolutionDropdownView.ValueChanged
+        view.ValueChanged
             .Subscribe(_resolutionAdjuster.SetResolution)
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }

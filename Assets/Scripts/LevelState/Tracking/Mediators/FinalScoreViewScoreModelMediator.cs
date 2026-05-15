@@ -1,14 +1,12 @@
+using R3;
+
 public class FinalScoreViewScoreModelMediator : UIMediator<FinalScoreView>
 {
-    private readonly FinalScoreView _finalScoreView;
     private readonly ScoreModel _scoreModel;
 
-    public FinalScoreViewScoreModelMediator(FinalScoreView finalScoreView, ScoreModel scoreModel)
-        : base(finalScoreView)
-    {
-        _finalScoreView = finalScoreView;
-        _scoreModel = scoreModel;
-    }
+    public FinalScoreViewScoreModelMediator(FinalScoreView view, ScoreModel scoreModel)
+        : base(view) => _scoreModel = scoreModel;
 
-    protected override void OnViewEnabled() => _finalScoreView.SetScore(_scoreModel.Score.CurrentValue);
+    protected override void OnViewEnabled(FinalScoreView view, CompositeDisposable viewDisposables) =>
+        view.SetScore(_scoreModel.Score.CurrentValue);
 }

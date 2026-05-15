@@ -3,19 +3,14 @@
 public class SettingsStorageResetViewMediator : UIMediator<SettingsResetButtonView>
 {
     private readonly SettingsStorage _settingsStorage;
-    private readonly SettingsResetButtonView _settingsResetButtonView;
 
-    public SettingsStorageResetViewMediator(SettingsStorage settingsStorage,
-        SettingsResetButtonView settingsResetButtonView) : base(settingsResetButtonView)
-    {
-        _settingsStorage = settingsStorage;
-        _settingsResetButtonView = settingsResetButtonView;
-    }
+    public SettingsStorageResetViewMediator(SettingsStorage settingsStorage, SettingsResetButtonView view)
+        : base(view) => _settingsStorage = settingsStorage;
 
-    protected override void OnViewEnabled()
+    protected override void OnViewEnabled(SettingsResetButtonView view, CompositeDisposable viewDisposables)
     {
-        _settingsResetButtonView.Clicked
+        view.Clicked
             .Subscribe(_ => _settingsStorage.ResetData())
-            .AddTo(ViewDisposables);
+            .AddTo(viewDisposables);
     }
 }

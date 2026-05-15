@@ -4,23 +4,22 @@ using System.Collections.Generic;
 public abstract class UIListMediator<TView> : Mediator where TView : UIView
 {
     private readonly IReadOnlyList<TView> _views;
+    private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = new();
 
     public UIListMediator(IReadOnlyList<TView> views) => _views = views;
-
-    protected Dictionary<TView, CompositeDisposable> ViewDisposables { get; } = new();
 
     public override void Start()
     {
         foreach (var view in _views)
         {
-            CompositeDisposable disposables = new();
-            ViewDisposables[view] = disposables;
+            CompositeDisposable viewDisposables = new();
+            _viewToDisposables[view] = viewDisposables;
 
             view.IsEnabled
                 .Subscribe(enabled =>
                 {
                     if (enabled)
-                        OnViewEnabled(view, disposables);
+                        OnViewEnabled(view, viewDisposables);
                     else
                         OnViewDisabled(view);
                 })
@@ -32,17 +31,17 @@ public abstract class UIListMediator<TView> : Mediator where TView : UIView
     {
         base.Dispose();
 
-        foreach (var kvp in ViewDisposables)
+        foreach (var kvp in _viewToDisposables)
             kvp.Value.Dispose();
 
-        ViewDisposables.Clear();
+        _viewToDisposables.Clear();
     }
 
-    protected abstract void OnViewEnabled(TView view, CompositeDisposable disposables);
+    protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
 
     protected virtual void OnViewDisabled(TView view)
     {
-        if (ViewDisposables.TryGetValue(view, out CompositeDisposable disposables))
-            disposables.Clear();
+        if (_viewToDisposables.TryGetValue(view, out CompositeDisposable viewDisposables))
+            viewDisposables.Clear();
     }
 }
