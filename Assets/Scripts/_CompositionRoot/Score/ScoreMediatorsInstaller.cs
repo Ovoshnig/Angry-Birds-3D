@@ -7,6 +7,6 @@ public class ScoreMediatorsInstaller : IInstaller
     {
         builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator>(Lifetime.Singleton);
         builder.RegisterEntryPoint<PointsPoolBirdDisplayerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ScoreViewBirdDisplayerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<ScoreViewCompletionPanelsMediator>(Lifetime.Singleton);
     }
 }

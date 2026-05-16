@@ -213,7 +213,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ]
         },
         {
-            ""name"": ""Menu"",
+            ""name"": ""UI"",
             ""id"": ""0f52817e-7ac5-4645-addf-cf1b01c9b69e"",
             ""actions"": [
                 {
@@ -418,10 +418,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         // Credits
         m_Credits = asset.FindActionMap("Credits", throwIfNotFound: true);
         m_Credits_SpeedUp = m_Credits.FindAction("SpeedUp", throwIfNotFound: true);
-        // Menu
-        m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
-        m_Menu_CloseCurrent = m_Menu.FindAction("CloseCurrent", throwIfNotFound: true);
-        m_Menu_SkipTextPrinting = m_Menu.FindAction("SkipTextPrinting", throwIfNotFound: true);
+        // UI
+        m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_CloseCurrent = m_UI.FindAction("CloseCurrent", throwIfNotFound: true);
+        m_UI_SkipTextPrinting = m_UI.FindAction("SkipTextPrinting", throwIfNotFound: true);
         // Window
         m_Window = asset.FindActionMap("Window", throwIfNotFound: true);
         m_Window_CloseCurrent = m_Window.FindAction("CloseCurrent", throwIfNotFound: true);
@@ -438,7 +438,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         UnityEngine.Debug.Assert(!m_Slingshot.enabled, "This will cause a leak and performance issues, InputActions.Slingshot.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Camera.enabled, "This will cause a leak and performance issues, InputActions.Camera.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Credits.enabled, "This will cause a leak and performance issues, InputActions.Credits.Disable() has not been called.");
-        UnityEngine.Debug.Assert(!m_Menu.enabled, "This will cause a leak and performance issues, InputActions.Menu.Disable() has not been called.");
+        UnityEngine.Debug.Assert(!m_UI.enabled, "This will cause a leak and performance issues, InputActions.UI.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Window.enabled, "This will cause a leak and performance issues, InputActions.Window.Disable() has not been called.");
         UnityEngine.Debug.Assert(!m_Screen.enabled, "This will cause a leak and performance issues, InputActions.Screen.Disable() has not been called.");
     }
@@ -823,34 +823,34 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// </summary>
     public CreditsActions @Credits => new CreditsActions(this);
 
-    // Menu
-    private readonly InputActionMap m_Menu;
-    private List<IMenuActions> m_MenuActionsCallbackInterfaces = new List<IMenuActions>();
-    private readonly InputAction m_Menu_CloseCurrent;
-    private readonly InputAction m_Menu_SkipTextPrinting;
+    // UI
+    private readonly InputActionMap m_UI;
+    private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_CloseCurrent;
+    private readonly InputAction m_UI_SkipTextPrinting;
     /// <summary>
-    /// Provides access to input actions defined in input action map "Menu".
+    /// Provides access to input actions defined in input action map "UI".
     /// </summary>
-    public struct MenuActions
+    public struct UIActions
     {
         private @InputActions m_Wrapper;
 
         /// <summary>
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
-        public MenuActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Menu/CloseCurrent".
+        /// Provides access to the underlying input action "UI/CloseCurrent".
         /// </summary>
-        public InputAction @CloseCurrent => m_Wrapper.m_Menu_CloseCurrent;
+        public InputAction @CloseCurrent => m_Wrapper.m_UI_CloseCurrent;
         /// <summary>
-        /// Provides access to the underlying input action "Menu/SkipTextPrinting".
+        /// Provides access to the underlying input action "UI/SkipTextPrinting".
         /// </summary>
-        public InputAction @SkipTextPrinting => m_Wrapper.m_Menu_SkipTextPrinting;
+        public InputAction @SkipTextPrinting => m_Wrapper.m_UI_SkipTextPrinting;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
-        public InputActionMap Get() { return m_Wrapper.m_Menu; }
+        public InputActionMap Get() { return m_Wrapper.m_UI; }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Enable()" />
         public void Enable() { Get().Enable(); }
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.Disable()" />
@@ -858,9 +858,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <inheritdoc cref="UnityEngine.InputSystem.InputActionMap.enabled" />
         public bool enabled => Get().enabled;
         /// <summary>
-        /// Implicitly converts an <see ref="MenuActions" /> to an <see ref="InputActionMap" /> instance.
+        /// Implicitly converts an <see ref="UIActions" /> to an <see ref="InputActionMap" /> instance.
         /// </summary>
-        public static implicit operator InputActionMap(MenuActions set) { return set.Get(); }
+        public static implicit operator InputActionMap(UIActions set) { return set.Get(); }
         /// <summary>
         /// Adds <see cref="InputAction.started"/>, <see cref="InputAction.performed"/> and <see cref="InputAction.canceled"/> callbacks provided via <param cref="instance" /> on all input actions contained in this map.
         /// </summary>
@@ -868,11 +868,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c> or <paramref name="instance"/> have already been added this method does nothing.
         /// </remarks>
-        /// <seealso cref="MenuActions" />
-        public void AddCallbacks(IMenuActions instance)
+        /// <seealso cref="UIActions" />
+        public void AddCallbacks(IUIActions instance)
         {
-            if (instance == null || m_Wrapper.m_MenuActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_MenuActionsCallbackInterfaces.Add(instance);
+            if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
+            m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
             @CloseCurrent.started += instance.OnCloseCurrent;
             @CloseCurrent.performed += instance.OnCloseCurrent;
             @CloseCurrent.canceled += instance.OnCloseCurrent;
@@ -887,8 +887,8 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// Calling this method when <paramref name="instance" /> have not previously been registered has no side-effects.
         /// </remarks>
-        /// <seealso cref="MenuActions" />
-        private void UnregisterCallbacks(IMenuActions instance)
+        /// <seealso cref="UIActions" />
+        private void UnregisterCallbacks(IUIActions instance)
         {
             @CloseCurrent.started -= instance.OnCloseCurrent;
             @CloseCurrent.performed -= instance.OnCloseCurrent;
@@ -899,12 +899,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         }
 
         /// <summary>
-        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="MenuActions.UnregisterCallbacks(IMenuActions)" />.
+        /// Unregisters <param cref="instance" /> and unregisters all input action callbacks via <see cref="UIActions.UnregisterCallbacks(IUIActions)" />.
         /// </summary>
-        /// <seealso cref="MenuActions.UnregisterCallbacks(IMenuActions)" />
-        public void RemoveCallbacks(IMenuActions instance)
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void RemoveCallbacks(IUIActions instance)
         {
-            if (m_Wrapper.m_MenuActionsCallbackInterfaces.Remove(instance))
+            if (m_Wrapper.m_UIActionsCallbackInterfaces.Remove(instance))
                 UnregisterCallbacks(instance);
         }
 
@@ -914,21 +914,21 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <remarks>
         /// If <paramref name="instance" /> is <c>null</c>, calling this method will only unregister all existing callbacks but not register any new callbacks.
         /// </remarks>
-        /// <seealso cref="MenuActions.AddCallbacks(IMenuActions)" />
-        /// <seealso cref="MenuActions.RemoveCallbacks(IMenuActions)" />
-        /// <seealso cref="MenuActions.UnregisterCallbacks(IMenuActions)" />
-        public void SetCallbacks(IMenuActions instance)
+        /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+        /// <seealso cref="UIActions.UnregisterCallbacks(IUIActions)" />
+        public void SetCallbacks(IUIActions instance)
         {
-            foreach (var item in m_Wrapper.m_MenuActionsCallbackInterfaces)
+            foreach (var item in m_Wrapper.m_UIActionsCallbackInterfaces)
                 UnregisterCallbacks(item);
-            m_Wrapper.m_MenuActionsCallbackInterfaces.Clear();
+            m_Wrapper.m_UIActionsCallbackInterfaces.Clear();
             AddCallbacks(instance);
         }
     }
     /// <summary>
-    /// Provides a new <see cref="MenuActions" /> instance referencing this action map.
+    /// Provides a new <see cref="UIActions" /> instance referencing this action map.
     /// </summary>
-    public MenuActions @Menu => new MenuActions(this);
+    public UIActions @UI => new UIActions(this);
 
     // Window
     private readonly InputActionMap m_Window;
@@ -1240,11 +1240,11 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         void OnSpeedUp(InputAction.CallbackContext context);
     }
     /// <summary>
-    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "Menu" which allows adding and removing callbacks.
+    /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
     /// </summary>
-    /// <seealso cref="MenuActions.AddCallbacks(IMenuActions)" />
-    /// <seealso cref="MenuActions.RemoveCallbacks(IMenuActions)" />
-    public interface IMenuActions
+    /// <seealso cref="UIActions.AddCallbacks(IUIActions)" />
+    /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
+    public interface IUIActions
     {
         /// <summary>
         /// Method invoked when associated input action "CloseCurrent" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.

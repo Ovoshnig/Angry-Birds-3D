@@ -1,10 +1,21 @@
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(Image))]
-public class CompletionPanelView : MonoBehaviour
+public abstract class CompletionPanelView : MonoBehaviour
 {
-    private void Start() => SetActive(false);
+    private readonly Subject<Unit> _shown = new();
 
-    public void SetActive(bool value) => gameObject.SetActive(value);
+    public Observable<Unit> Shown => _shown;
+
+    private void OnDestroy() => _shown.Dispose();
+
+    public void Show()
+    {
+        gameObject.SetActive(true);
+        _shown.OnNext(Unit.Default);
+    }
+
+    public void Hide() => gameObject.SetActive(false);
 }

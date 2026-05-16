@@ -2,40 +2,29 @@ using R3;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AudioSliderMediator : Mediator
+public class AudioSliderMediator : UIListMediator<AudioSliderView>
 {
     private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
-    private readonly IReadOnlyList<AudioSliderView> _sliderViews;
 
-    public AudioSliderMediator(IReadOnlyList<AudioSliderModel> sliderModels,
-        IReadOnlyList<AudioSliderView> sliderViews)
+    public AudioSliderMediator(IReadOnlyList<AudioSliderModel> sliderModels, IReadOnlyList<AudioSliderView> views)
+        : base(views) => _sliderModels = sliderModels;
+
+    protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
     {
-        _sliderModels = sliderModels;
-        _sliderViews = sliderViews;
-    }
+        AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
 
-    public override void Start()
-    {
-        foreach (var view in _sliderViews)
-        {
-            AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
+        if (model == null)
+            return;
 
-            if (model != null)
-                BindModelAndView(model, view);
-        }
-    }
+        view.SetMinValue(model.MinValue);
+        view.SetMaxValue(model.MaxValue);
 
-    private void BindModelAndView(AudioSliderModel sliderModel, AudioSliderView sliderView)
-    {
-        sliderView.SetMinValue(sliderModel.MinValue);
-        sliderView.SetMaxValue(sliderModel.MaxValue);
+        model.Value
+            .Subscribe(view.SetValueWithoutNotify)
+            .AddTo(viewDisposables);
 
-        sliderModel.Value
-            .Subscribe(value => sliderView.SetValueWithoutNotify(value))
-            .AddTo(Disposables);
-
-        sliderView.ValueChanged
-            .Subscribe(value => sliderModel.SetClampedValue(value))
-            .AddTo(Disposables);
+        view.ValueChanged
+            .Subscribe(model.SetClampedValue)
+            .AddTo(viewDisposables);
     }
 }

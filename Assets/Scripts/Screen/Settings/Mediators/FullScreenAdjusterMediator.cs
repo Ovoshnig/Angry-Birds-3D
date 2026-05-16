@@ -1,24 +1,19 @@
 using R3;
 
-public class FullScreenAdjusterMediator : Mediator
+public class FullScreenAdjusterMediator : UIMediator<FullScreenToggleView>
 {
     private readonly FullScreenAdjuster _fullScreenAdjuster;
-    private readonly FullScreenToggleView _fullScreenToggleView;
 
-    public FullScreenAdjusterMediator(FullScreenAdjuster fullScreenAdjuster,
-        FullScreenToggleView fullScreenToggleView)
-    {
-        _fullScreenAdjuster = fullScreenAdjuster;
-        _fullScreenToggleView = fullScreenToggleView;
-    }
+    public FullScreenAdjusterMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenToggleView view)
+        : base(view) => _fullScreenAdjuster = fullScreenAdjuster;
 
-    public override void Start()
+    protected override void OnViewEnabled(FullScreenToggleView view, CompositeDisposable viewDisposables)
     {
         _fullScreenAdjuster.IsFullScreen
-            .Subscribe(_fullScreenToggleView.SetIsOnWithoutNotify)
-            .AddTo(Disposables);
+            .Subscribe(view.SetIsOnWithoutNotify)
+            .AddTo(viewDisposables);
 
-        _fullScreenToggleView.ValueChanged
+        view.ValueChanged
             .Subscribe(isOn =>
             {
                 if (isOn)
@@ -26,6 +21,6 @@ public class FullScreenAdjusterMediator : Mediator
                 else
                     _fullScreenAdjuster.DisableFullScreen();
             })
-            .AddTo(Disposables);
+            .AddTo(viewDisposables);
     }
 }

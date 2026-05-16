@@ -1,20 +1,16 @@
 using R3;
 
-public class ScoreMediator : Mediator
+public class ScoreMediator : UIMediator<ScoreView>
 {
     private readonly ScoreModel _scoreModel;
-    private readonly ScoreView _scoreView;
 
-    public ScoreMediator(ScoreModel scoreModel, ScoreView scoreView)
-    {
+    public ScoreMediator(ScoreModel scoreModel, ScoreView view) : base(view) =>
         _scoreModel = scoreModel;
-        _scoreView = scoreView;
-    }
 
-    public override void Start()
+    protected override void OnViewEnabled(ScoreView view, CompositeDisposable viewDisposables)
     {
         _scoreModel.Score
-            .Subscribe(_scoreView.SetScoreSmoothly)
-            .AddTo(Disposables);
+            .Subscribe(view.SetScoreSmoothly)
+            .AddTo(viewDisposables);
     }
 }

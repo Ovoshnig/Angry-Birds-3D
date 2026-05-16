@@ -18,11 +18,11 @@ public class SlingshotShooterBirdDestroyerMediator : Mediator
         _pigTracker = pigTracker;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _birdDestroyer.Destroyed
             .Subscribe(_ => OnDestroyed())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private void OnDestroyed()

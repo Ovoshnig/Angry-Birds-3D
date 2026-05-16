@@ -15,17 +15,17 @@ public class SFXPlayerPoolObjectDestroyerMediator : Mediator
         _destroyer = destroyer;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _destroyer.Damaged
             .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
                 || index % 6 == 0)
             .Subscribe(OnDamaged)
-            .AddTo(Disposables);
+            .AddTo(disposables);
 
         _destroyer.Destroyed
             .Subscribe(OnDestroyed)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private void OnDamaged(DamageEvent damageEvent)

@@ -2,7 +2,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public class FinalScoreView : MonoBehaviour
+public class FinalScoreView : UIView
 {
     private TMP_Text _text;
 

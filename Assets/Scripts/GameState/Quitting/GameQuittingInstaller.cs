@@ -6,7 +6,7 @@ using VContainer.Unity;
 [Serializable]
 public class GameQuittingInstaller : IInstaller
 {
-    [SerializeField] private GameQuitButtonView _quitButtonView;
+    [SerializeField] private GameQuitterButtonView _quitButtonView;
 
     public void Install(IContainerBuilder builder)
     {
