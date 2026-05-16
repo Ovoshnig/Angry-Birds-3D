@@ -12,11 +12,11 @@ public class BirdFlyerSlingshotShooterMediator : Mediator
         _slingshotShooter = slingshotShooter;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _slingshotShooter.Shot
             .Subscribe(birdRigidbody => _birdFlyer.StartFlight(birdRigidbody.GetComponent<BirdEntityView>()))
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }
 

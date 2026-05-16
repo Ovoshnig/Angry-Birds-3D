@@ -12,7 +12,7 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
         _objectCollider = objectCollider;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _objectCollider.Collided
             .Subscribe(@event =>
@@ -20,6 +20,6 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
                 if (@event.EntityView is BirdEntityView entityView && @event.Type == CollisionType.Damage)
                     _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.CollisionResource);
             })
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

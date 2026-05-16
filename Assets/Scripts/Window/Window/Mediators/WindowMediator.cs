@@ -11,14 +11,14 @@ public class WindowMediator : Mediator
         _windowView = windowView;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _window.IsOpen
             .Subscribe(_windowView.SetActive)
-            .AddTo(Disposables);
+            .AddTo(disposables);
 
         _windowView.IsActive
             .Subscribe(_window.SetWindowActive)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

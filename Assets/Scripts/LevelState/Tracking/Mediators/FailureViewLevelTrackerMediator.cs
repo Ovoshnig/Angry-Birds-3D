@@ -17,13 +17,13 @@ public class FailureViewLevelTrackerMediator : Mediator
         _cameraSwitchView = cameraSwitchView;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _failurePanelView.Hide();
 
         _levelStateTracker.Failed
             .SubscribeAwait(async (_, token) => await OnLevelFailedAsync(token), AwaitOperation.Drop)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private async UniTask OnLevelFailedAsync(CancellationToken token)

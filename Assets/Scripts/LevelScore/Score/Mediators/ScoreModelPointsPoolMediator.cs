@@ -11,10 +11,10 @@ public class ScoreModelPointsPoolMediator : Mediator
         _pointsPool = pointsPool;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _pointsPool.PointsAdded
             .Subscribe(_scoreModel.Increase)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

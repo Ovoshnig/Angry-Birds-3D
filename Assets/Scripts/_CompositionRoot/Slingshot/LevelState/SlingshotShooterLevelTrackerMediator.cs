@@ -12,10 +12,10 @@ public class SlingshotShooterLevelTrackerMediator : Mediator
         _levelStateTracker = levelStateTracker;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _levelStateTracker.Completed
             .Subscribe(_ => _slingshotShooter.StopShooting())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

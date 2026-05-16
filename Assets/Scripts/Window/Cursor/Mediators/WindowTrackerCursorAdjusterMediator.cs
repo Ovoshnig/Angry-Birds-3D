@@ -11,7 +11,7 @@ public class WindowTrackerCursorAdjusterMediator : Mediator
         _cursorAdjuster = cursorAdjuster;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _windowTracker.IsOpen
             .Subscribe(isOpen =>
@@ -21,6 +21,6 @@ public class WindowTrackerCursorAdjusterMediator : Mediator
                 else
                     _cursorAdjuster.HideCursor();
             })
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }
