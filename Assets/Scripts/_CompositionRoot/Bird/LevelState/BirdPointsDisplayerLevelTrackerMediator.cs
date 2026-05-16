@@ -20,11 +20,11 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
         _cameraSwitchView = cameraSwitchView;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _levelStateTracker.Cleared
             .SubscribeAwait(async (_, token) => await OnLevelClearedAsync(token), AwaitOperation.Drop)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private async UniTask OnLevelClearedAsync(CancellationToken token)

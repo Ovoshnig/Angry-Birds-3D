@@ -11,10 +11,10 @@ public class AudioMixerTunerGamePauserMediator : Mediator
         _gamePauser = gamePauser;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _gamePauser.IsPause
             .Subscribe(_audioMixerTuner.SetPause)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

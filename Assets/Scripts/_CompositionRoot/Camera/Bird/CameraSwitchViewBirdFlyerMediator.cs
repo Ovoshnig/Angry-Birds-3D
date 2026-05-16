@@ -12,10 +12,10 @@ public class CameraSwitchViewBirdFlyerMediator : Mediator
         _birdFlyer = birdFlyer;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _birdFlyer.FlightInterrupted
             .Subscribe(_ => _cameraSwitchView.SwitchToStructureAsync().Forget())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

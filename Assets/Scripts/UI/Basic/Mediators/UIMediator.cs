@@ -7,7 +7,7 @@ public abstract class UIMediator<TView> : Mediator where TView : UIView
 
     public UIMediator(TView view) => _view = view;
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _view.IsEnabled
             .Subscribe(enabled =>
@@ -17,12 +17,12 @@ public abstract class UIMediator<TView> : Mediator where TView : UIView
                 else
                     OnViewDisabled(_view);
             })
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
-    public override void Dispose()
+    protected override void Unbind()
     {
-        base.Dispose();
+        base.Unbind();
         _viewDisposables.Dispose();
     }
 

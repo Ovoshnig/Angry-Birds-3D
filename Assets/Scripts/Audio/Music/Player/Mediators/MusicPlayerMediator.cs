@@ -11,14 +11,14 @@ public class MusicPlayerMediator : Mediator
         _musicPlayerView = musicPlayerView;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _musicPlayer.PlaybackStarted
             .Subscribe(clip => _musicPlayerView.Play(clip))
-            .AddTo(Disposables);
+            .AddTo(disposables);
 
         _musicPlayer.PlaybackEnded
             .Subscribe(_ => _musicPlayerView.Stop())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

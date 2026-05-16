@@ -15,7 +15,7 @@ public class SlingshotShooterStartCameraSwitchMediator : Mediator
         _birdQueue = birdQueue;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _startCameraSwitch.Completed
             .Subscribe(_ =>
@@ -23,6 +23,6 @@ public class SlingshotShooterStartCameraSwitchMediator : Mediator
                 _birdQueue.TryDequeueBird(out BirdEntityView birdEntityView);
                 _slingshotShooter.SetCurrentBird(birdEntityView.FlyerView.Rigidbody);
             })
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

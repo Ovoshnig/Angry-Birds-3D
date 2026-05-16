@@ -12,12 +12,12 @@ public class ClearingPanelBirdPointsDisplayerMediator : Mediator
         _birdPointsDisplayer = birdPointsDisplayer;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _clearingPanelView.Hide();
 
         _birdPointsDisplayer.BirdSequenceDisplayCompleted
             .Subscribe(_ => _clearingPanelView.Show())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

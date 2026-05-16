@@ -13,10 +13,10 @@ public class CameraSwitchViewLevelTrackerMediator : Mediator
         _levelStateTracker = levelStateTracker;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _levelStateTracker.Cleared
             .Subscribe(_ => _cameraSwitchView.SwitchToSlingshotAsync().Forget())
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

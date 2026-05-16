@@ -12,11 +12,11 @@ public class SFXPlayerPoolBirdDestroyerMediator : Mediator
         _birdDestroyer = birdDestroyer;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _birdDestroyer.Destroyed
             .Subscribe(entityView =>
             _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.DestructionResource))
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

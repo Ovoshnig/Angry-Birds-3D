@@ -12,13 +12,13 @@ public class MixerTunerSliderModelMediator : Mediator
         _sliderModels = sliderModels;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         foreach (var model in _sliderModels)
         {
             model.Value
                 .Subscribe(value => _audioMixerTuner.SetVolume(model.MixerParameterName, value))
-                .AddTo(Disposables);
+                .AddTo(disposables);
         }
     }
 }

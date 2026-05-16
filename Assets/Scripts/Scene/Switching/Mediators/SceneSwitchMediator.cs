@@ -6,13 +6,13 @@ public class SceneSwitchMediator : UIListMediator<SceneButtonView>
 {
     private readonly SceneSwitch _sceneSwitch;
 
-    public SceneSwitchMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneButtonView> sceneButtonViews)
-        : base(sceneButtonViews) => _sceneSwitch = sceneSwitch;
+    public SceneSwitchMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneButtonView> views)
+        : base(views) => _sceneSwitch = sceneSwitch;
 
-    protected override void OnViewEnabled(SceneButtonView view, CompositeDisposable disposables)
+    protected override void OnViewEnabled(SceneButtonView view, CompositeDisposable viewDisposables)
     {
         view.Clicked
             .Subscribe(_ => _sceneSwitch.LoadSceneAsync(view.NavigationType, view.SpecificIndex).Forget())
-            .AddTo(disposables);
+            .AddTo(viewDisposables);
     }
 }

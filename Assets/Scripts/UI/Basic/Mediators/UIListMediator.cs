@@ -8,7 +8,7 @@ public abstract class UIListMediator<TView> : Mediator where TView : UIView
 
     public UIListMediator(IReadOnlyList<TView> views) => _views = views;
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         foreach (var view in _views)
         {
@@ -23,13 +23,13 @@ public abstract class UIListMediator<TView> : Mediator where TView : UIView
                     else
                         OnViewDisabled(view);
                 })
-                .AddTo(Disposables);
+                .AddTo(disposables);
         }
     }
 
-    public override void Dispose()
+    protected override void Unbind()
     {
-        base.Dispose();
+        base.Unbind();
 
         foreach (var kvp in _viewToDisposables)
             kvp.Value.Dispose();

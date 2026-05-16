@@ -16,7 +16,7 @@ public class CameraSwitchViewBirdDestroyerMediator : Mediator
         _pigTracker = pigTracker;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _birdDestroyer.Destroyed
             .Subscribe(_ =>
@@ -24,6 +24,6 @@ public class CameraSwitchViewBirdDestroyerMediator : Mediator
                 if (_pigTracker.PigCount.CurrentValue > 0)
                     _cameraSwitchView.SwitchToGeneralAsync().Forget();
             })
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }

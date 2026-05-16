@@ -13,11 +13,11 @@ public class PointsPoolObjectDestroyerMediator : Mediator
         _destroyer = destroyer;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _destroyer.Destroyed
             .Subscribe(OnDestroyed)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private void OnDestroyed(DestructionEvent destructionEvent)

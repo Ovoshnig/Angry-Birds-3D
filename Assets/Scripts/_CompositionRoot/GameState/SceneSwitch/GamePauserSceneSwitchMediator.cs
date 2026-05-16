@@ -12,11 +12,11 @@ public class GamePauserSceneSwitchMediator : Mediator
         _sceneSwitch = sceneSwitch;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         _sceneSwitch.IsSceneLoading
             .Subscribe(OnSceneLoadingChange)
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 
     private void OnSceneLoadingChange(bool isLoading)

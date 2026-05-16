@@ -6,8 +6,7 @@ public class ScoreViewCompletionPanelsMediator : Mediator
     private readonly ClearingPanelView _clearingPanelView;
     private readonly FailurePanelView _failurePanelView;
 
-    public ScoreViewCompletionPanelsMediator(
-        ScoreView scoreView,
+    public ScoreViewCompletionPanelsMediator(ScoreView scoreView,
         ClearingPanelView clearingPanelView,
         FailurePanelView failurePanelView)
     {
@@ -16,10 +15,10 @@ public class ScoreViewCompletionPanelsMediator : Mediator
         _failurePanelView = failurePanelView;
     }
 
-    public override void Start()
+    protected override void Bind(CompositeDisposable disposables)
     {
         Observable.Merge(_clearingPanelView.Shown, _failurePanelView.Shown)
             .Subscribe(_ => _scoreView.gameObject.SetActive(false))
-            .AddTo(Disposables);
+            .AddTo(disposables);
     }
 }
