@@ -4,10 +4,10 @@ using TMPro;
 
 public class ResolutionDropdownView : DropdownView
 {
-    public void SetResolutionOptions(IReadOnlyList<string> resolutions)
+    public void SetResolutionOptions(IReadOnlyList<ResolutionData> resolutions)
     {
         List<TMP_Dropdown.OptionData> options = resolutions
-            .Select(r => new TMP_Dropdown.OptionData(r))
+            .Select(r => new TMP_Dropdown.OptionData(r.ToString()))
             .ToList();
 
         SetOptions(options);

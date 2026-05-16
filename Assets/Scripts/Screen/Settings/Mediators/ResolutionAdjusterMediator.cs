@@ -1,5 +1,4 @@
 using R3;
-using System.Linq;
 
 public class ResolutionAdjusterMediator : UIMediator<ResolutionDropdownView>
 {
@@ -10,7 +9,7 @@ public class ResolutionAdjusterMediator : UIMediator<ResolutionDropdownView>
 
     protected override void OnViewEnabled(ResolutionDropdownView view, CompositeDisposable viewDisposables)
     {
-        view.SetResolutionOptions(_resolutionAdjuster.Resolutions.Select(r => r.ToString()).ToList());
+        view.SetResolutionOptions(_resolutionAdjuster.Resolutions);
 
         _resolutionAdjuster.CurrentResolutionIndex
             .Subscribe(view.SetValueWithoutNotify)
