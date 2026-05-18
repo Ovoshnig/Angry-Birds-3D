@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Cysharp.Threading.Tasks;
+using R3;
 using UnityEngine;
 
 public class PlayButtonPrinterView : TextPrinterView
@@ -11,7 +12,7 @@ public class PlayButtonPrinterView : TextPrinterView
         string initialText = TmpText.text;
 
         _scoreTablePrinterView.Completed
-            .Subscribe(_ => Print(initialText))
+            .Subscribe(_ => PrintAsync(initialText).Forget())
             .RegisterTo(destroyCancellationToken);
     }
 }
