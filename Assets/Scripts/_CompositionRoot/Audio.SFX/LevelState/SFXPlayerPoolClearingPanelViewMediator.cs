@@ -1,12 +1,12 @@
 using R3;
 
-public class SFXPlayerClearingPanelViewMediator : Mediator
+public class SFXPlayerPoolClearingPanelViewMediator : Mediator
 {
     private readonly SFXPlayerObjectPool _sfxPlayer;
     private readonly ClearingPanelView _clearingPanelView;
     private readonly LevelSFXSettings _levelSFXSettings;
 
-    public SFXPlayerClearingPanelViewMediator(SFXPlayerObjectPool sfxPlayer,
+    public SFXPlayerPoolClearingPanelViewMediator(SFXPlayerObjectPool sfxPlayer,
         ClearingPanelView clearingPanelView,
         LevelSFXSettings levelSFXSettings)
     {

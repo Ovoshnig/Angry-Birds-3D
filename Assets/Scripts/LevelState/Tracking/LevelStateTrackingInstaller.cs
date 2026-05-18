@@ -16,9 +16,11 @@ public class LevelStateTrackingInstaller : IInstaller
         builder.RegisterInstance(_finalScoreView);
         builder.RegisterInstance(_failurePanelView);
 
-        builder.RegisterEntryPoint<LevelStateTracker>(Lifetime.Singleton).AsSelf();
-
-        builder.RegisterEntryPoint<FinalScoreViewScoreModelMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<FailureViewLevelTrackerMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<LevelStateTracker>().AsSelf();
+            entryPoints.Add<FinalScoreViewScoreModelMediator>();
+            entryPoints.Add<FailureViewLevelTrackerMediator>();
+        });
     }
 }

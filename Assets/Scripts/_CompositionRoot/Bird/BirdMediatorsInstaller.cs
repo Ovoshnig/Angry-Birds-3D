@@ -5,7 +5,10 @@ public class BirdMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<BirdFlyerSlingshotShooterMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<BirdPointsDisplayerLevelTrackerMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<BirdFlyerSlingshotShooterMediator>();
+            entryPoints.Add<BirdPointsDisplayerLevelTrackerMediator>();
+        });
     }
 }

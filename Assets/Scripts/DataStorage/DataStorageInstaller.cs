@@ -5,7 +5,10 @@ public class DataStorageInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<SaveStorage>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<SettingsStorage>(Lifetime.Singleton).AsSelf();
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<SaveStorage>().AsSelf();
+            entryPoints.Add<SettingsStorage>().AsSelf();
+        });
     }
 }

@@ -6,5 +6,5 @@ using VContainer.Unity;
 public class ObjectCollisionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<ObjectCollider>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<ObjectCollider>().AsSelf();
 }

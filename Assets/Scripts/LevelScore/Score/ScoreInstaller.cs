@@ -12,8 +12,11 @@ public class ScoreInstaller : IInstaller
     {
         builder.RegisterComponent(_scoreView);
         builder.Register<ScoreModel>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ScoreMediator>(Lifetime.Singleton);
 
-        builder.RegisterEntryPoint<ScoreModelPointsPoolMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<ScoreMediator>();
+            entryPoints.Add<ScoreModelPointsPoolMediator>();
+        });
     }
 }

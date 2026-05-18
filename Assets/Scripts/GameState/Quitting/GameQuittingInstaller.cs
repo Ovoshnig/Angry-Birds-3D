@@ -6,12 +6,12 @@ using VContainer.Unity;
 [Serializable]
 public class GameQuittingInstaller : IInstaller
 {
-    [SerializeField] private GameQuitterButtonView _quitButtonView;
+    [SerializeField] private GameQuitterButtonView _quitterButtonView;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_quitButtonView);
+        builder.RegisterInstance(_quitterButtonView);
         builder.Register<GameQuitter>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<GameQuitterMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<GameQuitterMediator>();
     }
 }

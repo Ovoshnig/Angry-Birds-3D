@@ -5,8 +5,11 @@ public class ScoreMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<PointsPoolObjectDestroyerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<PointsPoolBirdDisplayerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ScoreViewCompletionPanelsMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<PointsPoolObjectDestroyerMediator>();
+            entryPoints.Add<PointsPoolBirdDisplayerMediator>();
+            entryPoints.Add<ScoreViewCompletionPanelsMediator>();
+        });
     }
 }
