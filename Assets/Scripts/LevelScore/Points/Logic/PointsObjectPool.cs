@@ -1,4 +1,5 @@
-﻿using R3;
+﻿using Cysharp.Threading.Tasks;
+using R3;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
@@ -31,7 +32,7 @@ public class PointsObjectPool : IDisposable
         _pointsAdded.OnNext(pointsSettings.Points);
 
         PointsView pointsView = _pointsPool.Get();
-        pointsView.Show(position, pointsSettings);
+        pointsView.ShowAsync(position, pointsSettings).Forget();
 
         pointsView.Completed
             .Take(1)
