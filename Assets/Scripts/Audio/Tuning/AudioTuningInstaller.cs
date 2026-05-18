@@ -16,15 +16,12 @@ public class AudioTuningInstaller : IInstaller
 
         builder.Register<AudioMixerTuner>(Lifetime.Singleton);
 
-        builder.RegisterEntryPoint<MusicSliderModel>(Lifetime.Singleton)
-            .As<AudioSliderModel>()
-            .AsSelf();
-
-        builder.RegisterEntryPoint<SFXSliderModel>(Lifetime.Singleton)
-            .As<AudioSliderModel>()
-            .AsSelf();
-
-        builder.RegisterEntryPoint<AudioSliderMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<MixerTunerSliderModelMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<MusicSliderModel>().As<AudioSliderModel>().AsSelf();
+            entryPoints.Add<SFXSliderModel>().As<AudioSliderModel>().AsSelf();
+            entryPoints.Add<AudioSliderMediator>();
+            entryPoints.Add<MixerTunerSliderModelMediator>();
+        });
     }
 }

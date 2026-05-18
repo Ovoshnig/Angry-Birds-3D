@@ -11,8 +11,7 @@ public class SlingshotInstaller : IInstaller
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<SlingshotInputProvider>(Lifetime.Singleton)
-            .AsSelf();
+        builder.RegisterEntryPoint<SlingshotInputProvider>().AsSelf();
 
         _pointerPositionInstaller.Install(builder);
         _slingshotShootingInstaller.Install(builder);

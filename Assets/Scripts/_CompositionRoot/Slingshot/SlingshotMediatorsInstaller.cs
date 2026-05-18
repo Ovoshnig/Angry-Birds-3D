@@ -5,8 +5,11 @@ public class SlingshotMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<SlingshotShooterStartCameraSwitchMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<SlingshotShooterBirdDestroyerMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<SlingshotShooterLevelTrackerMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<SlingshotShooterStartCameraSwitchMediator>();
+            entryPoints.Add<SlingshotShooterBirdDestroyerMediator>();
+            entryPoints.Add<SlingshotShooterLevelTrackerMediator>();
+        });
     }
 }

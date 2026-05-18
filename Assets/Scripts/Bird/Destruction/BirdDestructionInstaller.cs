@@ -6,5 +6,5 @@ using VContainer.Unity;
 public class BirdDestructionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<BirdDestroyer>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<BirdDestroyer>().AsSelf();
 }

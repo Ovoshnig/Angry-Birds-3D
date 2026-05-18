@@ -1,12 +1,12 @@
 using R3;
 
-public class SFXPlayerLevelTrackerMediator : Mediator
+public class SFXPlayerPoolLevelTrackerMediator : Mediator
 {
     private readonly SFXPlayerObjectPool _sfxPlayer;
     private readonly LevelStateTracker _levelStateTracker;
     private readonly LevelSFXSettings _levelSFXSettings;
 
-    public SFXPlayerLevelTrackerMediator(SFXPlayerObjectPool sfxPlayer,
+    public SFXPlayerPoolLevelTrackerMediator(SFXPlayerObjectPool sfxPlayer,
         LevelStateTracker levelStateTracker,
         LevelSFXSettings levelSFXSettings)
     {

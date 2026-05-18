@@ -6,5 +6,5 @@ using VContainer.Unity;
 public class PigTrackingInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<PigTracker>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<PigTracker>().AsSelf();
 }

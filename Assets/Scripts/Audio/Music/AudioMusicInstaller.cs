@@ -18,6 +18,6 @@ public class AudioMusicInstaller : IInstaller
         builder.RegisterComponentInNewPrefab(_musicPlayerView, Lifetime.Singleton)
             .DontDestroyOnLoad();
 
-        builder.RegisterEntryPoint<MusicPlayerMediator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<MusicPlayerMediator>();
     }
 }
