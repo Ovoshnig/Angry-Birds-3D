@@ -3,7 +3,7 @@ using System;
 using VContainer.Unity;
 
 public record DamageEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView,
-    CollisionType CollisionType, float Damage);
+    CollisionType CollisionType, float DamageAmount);
 
 public record DestructionEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);
 
@@ -42,8 +42,8 @@ public class ObjectDestroyer : IStartable, IDisposable
 
         ObjectDestroyerView destroyerView = entityView.DestroyerView;
 
-        float damage = collisionEvent.Force;
-        destroyerView.HealthModel.Decrement(damage);
+        float damageAmount = collisionEvent.Force;
+        destroyerView.HealthModel.ApplyDamage(damageAmount);
 
         if (destroyerView.HealthModel.Health <= 0)
         {
@@ -52,9 +52,9 @@ public class ObjectDestroyer : IStartable, IDisposable
         }
         else
         {
-            destroyerView.Damage(damage);
+            destroyerView.Damage(damageAmount);
             _damaged.OnNext(new DamageEvent(entityView, destroyerView,
-                collisionEvent.Type, damage));
+                collisionEvent.Type, damageAmount));
         }
     }
 }
