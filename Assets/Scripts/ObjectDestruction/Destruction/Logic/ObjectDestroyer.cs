@@ -2,11 +2,6 @@ using R3;
 using System;
 using VContainer.Unity;
 
-public record DamageEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView,
-    CollisionType CollisionType, float DamageAmount);
-
-public record DestructionEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);
-
 public class ObjectDestroyer : IStartable, IDisposable
 {
     private readonly ObjectCollider _objectCollider;
