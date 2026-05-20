@@ -4,13 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
-public enum CollisionType
-{
-    Gliding, Collision, Damage
-}
-
-public record CollisionEvent(CollidableEntityView EntityView, CollisionType Type, float Force);
-
 public class ObjectCollider : IStartable, IDisposable
 {
     private readonly IReadOnlyList<CollidableEntityView> _entityViews;
