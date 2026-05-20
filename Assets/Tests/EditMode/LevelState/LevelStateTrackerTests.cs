@@ -177,7 +177,7 @@ public sealed class LevelStateTrackerTests
 
         private TrackerHarness()
         {
-            ObjectCollider objectCollider = new(Array.Empty<CollidableEntityView>(), new CollisionSettings());
+            ObjectCollider objectCollider = new(Array.Empty<CollidableEntityView>(), new CollisionEvaluator(new CollisionSettings()));
             BirdDestroyer = new BirdDestroyer(objectCollider, new BirdSettings());
             BirdQueue = new BirdQueue(Array.Empty<BirdEntityView>());
             ObjectDestroyer objectDestroyer = new(objectCollider);
