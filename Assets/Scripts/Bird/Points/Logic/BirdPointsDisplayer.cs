@@ -4,8 +4,6 @@ using System;
 using System.Threading;
 using UnityEngine;
 
-public record BirdPointsDisplayEvent(Vector3 Position, PointsSettings PointsSettings);
-
 public class BirdPointsDisplayer : IDisposable
 {
     private readonly BirdQueue _birdQueue;
