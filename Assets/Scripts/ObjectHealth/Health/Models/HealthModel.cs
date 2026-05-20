@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 public class HealthModel
 {
@@ -8,15 +9,15 @@ public class HealthModel
 
     public float Health => _health;
 
-    public void Decrement(float amount)
+    public void ApplyDamage(float amount)
     {
         if (amount < 0)
             throw new ArgumentOutOfRangeException(nameof(amount),
-                "Damage cannot be negative.");
+                "The amount of damage cannot be negative.");
 
         if (amount == 0)
             return;
 
-        _health -= amount;
+        _health = Mathf.Max(0f, _health - amount);
     }
 }
