@@ -1738,6 +1738,7 @@ MonoBehaviour:
       _clearingPanelView: {fileID: 1188629418}
       _finalScoreView: {fileID: 1502881964}
       _failurePanelView: {fileID: 1305749215}
+    _sfxSettings: {fileID: 11400000, guid: 0e554c29318d5c34795e74aa4e9ea9fe, type: 2}
   _levelScoreInstaller:
     _scoreInstaller:
       _scoreView: {fileID: 2081062521}

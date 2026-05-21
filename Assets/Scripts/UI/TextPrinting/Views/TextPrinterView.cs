@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
 using R3;
@@ -26,7 +27,7 @@ public class TextPrinterView : UIView
     protected virtual void Start()
     {
         if (_autoPlay)
-            Print(_tmpText.text);
+            PrintAsync(_tmpText.text).Forget();
     }
 
     protected virtual void OnDestroy()
@@ -35,7 +36,7 @@ public class TextPrinterView : UIView
         _completed.Dispose();
     }
 
-    public void Print(string fullText)
+    public async UniTask PrintAsync(string fullText)
     {
         _handle.TryCancel();
 
@@ -47,19 +48,19 @@ public class TextPrinterView : UIView
         int totalVisibleCharacters = _tmpText.textInfo.characterCount;
         float duration = totalVisibleCharacters / _speed;
 
-        _handle = LMotion.Create(0, totalVisibleCharacters, duration)
-            .WithOnCancel(() =>
-            {
-                if (!_isPrinting.IsDisposed)
-                    _isPrinting.Value = false;
-            })
-            .WithOnComplete(() =>
-            {
+        try
+        {
+            _handle = LMotion.Create(0, totalVisibleCharacters, duration)
+                .BindToMaxVisibleCharacters(_tmpText);
+
+            await _handle.ToUniTask(destroyCancellationToken);
+            _completed.OnNext(Unit.Default);
+        }
+        finally
+        {
+            if (!_isPrinting.IsDisposed)
                 _isPrinting.Value = false;
-                _completed.OnNext(Unit.Default);
-            })
-            .BindToMaxVisibleCharacters(_tmpText)
-            .AddTo(gameObject);
+        }
     }
 
     public bool TryCompletePrinting() => _handle.TryComplete();

@@ -6,5 +6,5 @@ using VContainer.Unity;
 public class ObjectDestructionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<ObjectDestroyer>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<ObjectDestroyer>().AsSelf();
 }

@@ -14,12 +14,15 @@ public class SceneSettingsInstaller : IInstaller
         builder.RegisterInstance(_sceneViewsParent.GetComponentInChildren<ResolutionDropdownView>(true));
         builder.RegisterInstance(_sceneViewsParent.GetComponentInChildren<VSyncToggleView>(true));
 
-        builder.RegisterEntryPoint<FullScreenAdjuster>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<ResolutionAdjuster>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<VSyncAdjuster>(Lifetime.Singleton).AsSelf();
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<FullScreenAdjuster>().AsSelf();
+            entryPoints.Add<ResolutionAdjuster>().AsSelf();
+            entryPoints.Add<VSyncAdjuster>().AsSelf();
 
-        builder.RegisterEntryPoint<FullScreenAdjusterMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<ResolutionAdjusterMediator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<VSyncAdjusterMediator>(Lifetime.Singleton);
+            entryPoints.Add<FullScreenAdjusterMediator>();
+            entryPoints.Add<ResolutionAdjusterMediator>();
+            entryPoints.Add<VSyncAdjusterMediator>();
+        });
     }
 }

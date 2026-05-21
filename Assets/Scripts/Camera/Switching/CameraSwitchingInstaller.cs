@@ -11,6 +11,6 @@ public class CameraSwitchingInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstance(_cameraSwitchView);
-        builder.RegisterEntryPoint<StartCameraSwitch>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<StartCameraSwitch>().AsSelf();
     }
 }

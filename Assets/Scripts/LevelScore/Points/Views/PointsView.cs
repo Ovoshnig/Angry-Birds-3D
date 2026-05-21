@@ -1,4 +1,5 @@
-﻿using LitMotion;
+﻿using Cysharp.Threading.Tasks;
+using LitMotion;
 using LitMotion.Extensions;
 using R3;
 using TMPro;
@@ -12,8 +13,8 @@ public class PointsView : MonoBehaviour
     private readonly Subject<Unit> _completed = new();
 
     private TMP_Text _text;
-    private MotionHandle _handle;
     private Camera _camera;
+    private MotionHandle _currentHandle;
 
     public Observable<Unit> Completed => _completed;
 
@@ -25,9 +26,9 @@ public class PointsView : MonoBehaviour
 
     private void OnDestroy() => _completed.Dispose();
 
-    public void Show(Vector3 position, PointsSettings pointsSettings)
+    public async UniTask ShowAsync(Vector3 position, PointsSettings pointsSettings)
     {
-        _handle.TryCancel();
+        _currentHandle.TryCancel();
 
         transform.SetPositionAndRotation(position, _camera.transform.rotation);
 
@@ -35,12 +36,12 @@ public class PointsView : MonoBehaviour
         _text.color = pointsSettings.Color;
         _text.fontSize = pointsSettings.FontSize;
 
-        _handle = LSequence.Create()
-            .Append(LMotion.Create(_appearanceSettings).BindToLocalScaleXYZ(transform))
-            .Append(LMotion.Create(_disappearanceSettings)
-                .WithOnComplete(() => _completed.OnNext(Unit.Default))
-                .BindToLocalScaleXYZ(transform))
-            .Run()
-            .AddTo(gameObject);
+        _currentHandle = LMotion.Create(_appearanceSettings).BindToLocalScaleXYZ(transform);
+        await _currentHandle.ToUniTask(destroyCancellationToken);
+
+        _currentHandle = LMotion.Create(_disappearanceSettings).BindToLocalScaleXYZ(transform);
+        await _currentHandle.ToUniTask(destroyCancellationToken);
+
+        _completed.OnNext(Unit.Default);
     }
 }

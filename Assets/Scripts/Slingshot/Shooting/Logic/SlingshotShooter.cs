@@ -5,8 +5,6 @@ using VContainer.Unity;
 
 public class SlingshotShooter : IStartable, IDisposable, ITickable
 {
-    public enum SlingshotState { Idle, InputWaiting, Dragging }
-
     private readonly SlingshotInputProvider _inputProvider;
     private readonly SlingshotShooterView _view;
     private readonly PointerPositionMeter _pointerMeter;

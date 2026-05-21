@@ -14,7 +14,10 @@ public class SceneInstaller : IInstaller
         IReadOnlyList<SceneButtonView> sceneViews = _sceneViewsParent.GetComponentsInChildren<SceneButtonView>(true);
         builder.RegisterInstance(sceneViews);
 
-        builder.RegisterEntryPoint<SceneSwitch>(Lifetime.Singleton).AsSelf();
-        builder.RegisterEntryPoint<SceneSwitchMediator>(Lifetime.Singleton);
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<SceneSwitch>().AsSelf();
+            entryPoints.Add<SceneSwitchMediator>();
+        });
     }
 }

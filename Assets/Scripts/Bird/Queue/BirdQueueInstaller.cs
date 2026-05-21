@@ -6,5 +6,5 @@ using VContainer.Unity;
 public class BirdQueueInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<BirdQueue>(Lifetime.Singleton).AsSelf();
+        builder.RegisterEntryPoint<BirdQueue>().AsSelf();
 }

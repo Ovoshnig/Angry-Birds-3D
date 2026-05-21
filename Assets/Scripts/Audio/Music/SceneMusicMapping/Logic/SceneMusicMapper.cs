@@ -3,14 +3,14 @@ using UnityEngine;
 
 public sealed class SceneMusicMapper : ISceneMusicMapper
 {
-    private readonly Dictionary<SceneSwitch.SceneType, MusicCategory> _sceneToMusicCategory = new()
+    private readonly Dictionary<SceneType, MusicCategory> _sceneToMusicCategory = new()
     {
-        { SceneSwitch.SceneType.MainMenu, MusicCategory.MainMenu },
-        { SceneSwitch.SceneType.GameLevel, MusicCategory.GameLevel },
-        { SceneSwitch.SceneType.Credits, MusicCategory.Credits }
+        { SceneType.MainMenu, MusicCategory.MainMenu },
+        { SceneType.GameLevel, MusicCategory.GameLevel },
+        { SceneType.Credits, MusicCategory.Credits }
     };
 
-    public MusicCategory GetMusicCategory(SceneSwitch.SceneType sceneType)
+    public MusicCategory GetMusicCategory(SceneType sceneType)
     {
         if (_sceneToMusicCategory.TryGetValue(sceneType, out var category))
             return category;

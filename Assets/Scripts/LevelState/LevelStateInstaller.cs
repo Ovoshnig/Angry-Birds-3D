@@ -7,6 +7,12 @@ using VContainer.Unity;
 public class LevelStateInstaller : IInstaller
 {
     [SerializeField] private LevelStateTrackingInstaller _stateTrackingInstaller;
+    [SerializeField] private LevelSFXSettings _sfxSettings;
 
-    public void Install(IContainerBuilder builder) => _stateTrackingInstaller.Install(builder);
+    public void Install(IContainerBuilder builder)
+    {
+        _stateTrackingInstaller.Install(builder);
+
+        builder.RegisterInstance(_sfxSettings);
+    }
 }

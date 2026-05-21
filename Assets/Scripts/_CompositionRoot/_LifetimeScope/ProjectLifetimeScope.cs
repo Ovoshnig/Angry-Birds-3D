@@ -8,8 +8,7 @@ public class ProjectLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<ScreenInputProvider>(Lifetime.Singleton)
-            .AsSelf();
+        builder.RegisterEntryPoint<ScreenInputProvider>().AsSelf();
 
         new InputActionsInstaller().Install(builder);
         new AddressableLoadingInstaller().Install(builder);
