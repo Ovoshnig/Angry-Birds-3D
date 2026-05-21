@@ -9,7 +9,7 @@ public class LevelLifetimeScope : LifetimeScope
     [SerializeField] private LevelStateInstaller _levelStateInstaller;
     [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
     [SerializeField] private CameraInstaller _cameraInstaller;
-    [SerializeField] private SFXInstaller _sfxInstaller;
+    [SerializeField] private AudioSFXInstaller _sfxInstaller;
     [SerializeField] private SlingshotInstaller _slingshotInstaller;
     [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
     [SerializeField] private ObjectDestructionInstaller _objectDestructionInstaller;
@@ -44,7 +44,7 @@ public class LevelLifetimeScope : LifetimeScope
         new LevelStateMediatorsInstaller().Install(builder);
         new ScoreMediatorsInstaller().Install(builder);
         new CameraMediatorsInstaller().Install(builder);
-        new SFXMediatorsInstaller().Install(builder);
+        new AudioSFXMediatorsInstaller().Install(builder);
         new BirdMediatorsInstaller().Install(builder);
         new SlingshotMediatorsInstaller().Install(builder);
     }
