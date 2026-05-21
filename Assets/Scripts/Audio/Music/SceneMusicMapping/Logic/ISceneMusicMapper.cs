@@ -1,4 +1,4 @@
 ﻿public interface ISceneMusicMapper
 {
-    public MusicCategory GetMusicCategory(SceneSwitch.SceneType sceneType);
+    public MusicCategory GetMusicCategory(SceneType sceneType);
 }

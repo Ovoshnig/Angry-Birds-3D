@@ -1,4 +1,6 @@
 ﻿public enum CollisionType
 {
-    Gliding, Collision, Damage
+    Gliding,
+    Collision,
+    Damage
 }
