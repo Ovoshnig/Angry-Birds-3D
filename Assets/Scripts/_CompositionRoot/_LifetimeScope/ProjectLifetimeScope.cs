@@ -4,6 +4,7 @@ using VContainer.Unity;
 
 public class ProjectLifetimeScope : LifetimeScope
 {
+    [SerializeField] private DataStorageInstaller _dataStorageInstaller;
     [SerializeField] private GameSettingsInstaller _gameSettingsInstaller;
 
     protected override void Configure(IContainerBuilder builder)
@@ -13,6 +14,7 @@ public class ProjectLifetimeScope : LifetimeScope
 
         new AddressableLoadingInstaller().Install(builder);
 
+        _dataStorageInstaller.Install(builder);
         _gameSettingsInstaller.Install(builder);
     }
 }
