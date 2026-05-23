@@ -4,15 +4,17 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class SceneSettingsInstaller : IInstaller
+public class ScreenSettingsInstaller : IInstaller
 {
-    [SerializeField] private RectTransform _sceneViewsParent;
+    [SerializeField] private FullScreenToggleView _fullScreenToggleView;
+    [SerializeField] private ResolutionDropdownView _resolutionDropdownView;
+    [SerializeField] private VSyncToggleView _vSyncToggleView;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_sceneViewsParent.GetComponentInChildren<FullScreenToggleView>(true));
-        builder.RegisterInstance(_sceneViewsParent.GetComponentInChildren<ResolutionDropdownView>(true));
-        builder.RegisterInstance(_sceneViewsParent.GetComponentInChildren<VSyncToggleView>(true));
+        builder.RegisterInstance(_fullScreenToggleView);
+        builder.RegisterInstance(_resolutionDropdownView);
+        builder.RegisterInstance(_vSyncToggleView);
 
         builder.UseEntryPoints(entryPoints =>
         {
