@@ -5,7 +5,7 @@ using VContainer.Unity;
 
 public class LevelLifetimeScope : LifetimeScope
 {
-    [SerializeField] private SceneInstaller _sceneInstaller;
+    [SerializeField] private SceneSwitchingInstaller _sceneInstaller;
     [SerializeField] private LevelStateInstaller _levelStateInstaller;
     [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
     [SerializeField] private CameraInstaller _cameraInstaller;

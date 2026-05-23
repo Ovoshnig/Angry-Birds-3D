@@ -4,6 +4,7 @@ using VContainer.Unity;
 
 public class MainMenuLifetimeScope : LifetimeScope
 {
+    [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
     [SerializeField] private GameQuittingInstaller _gameQuittingInstaller;
     [SerializeField] private PanelCloseButtonsInstaller _panelCloseButtonsInstaller;
     [SerializeField] private SettingsStorageResetInstaller _settingsStorageResetInstaller;
@@ -12,8 +13,13 @@ public class MainMenuLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<UIInputProvider>().AsSelf();
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<UIInputProvider>().AsSelf();
+            entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
+        });
 
+        _sceneSwitchingInstaller.Install(builder);
         _gameQuittingInstaller.Install(builder);
         _panelCloseButtonsInstaller.Install(builder);
         _settingsStorageResetInstaller.Install(builder);

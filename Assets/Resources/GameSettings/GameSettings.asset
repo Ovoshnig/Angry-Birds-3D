@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   <SceneSettings>k__BackingField:
-    <FirstGameplayLevel>k__BackingField: 1
-    <GameplayLevelsCount>k__BackingField: 1
+    <FirstLevelIndex>k__BackingField: 2
+    <LevelCount>k__BackingField: 24
     <LevelTransitionDuration>k__BackingField: 5
   <CameraSettings>k__BackingField:
     <StructureShowingDuration>k__BackingField: 1.2

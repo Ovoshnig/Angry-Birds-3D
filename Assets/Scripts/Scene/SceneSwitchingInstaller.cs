@@ -5,7 +5,7 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class SceneInstaller : IInstaller
+public class SceneSwitchingInstaller : IInstaller
 {
     [SerializeField] private RectTransform _sceneViewsParent;
 
