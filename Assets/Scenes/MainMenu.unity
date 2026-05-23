@@ -1975,6 +1975,8 @@ MonoBehaviour:
   autoInjectGameObjects: []
   _gameQuittingInstaller:
     _quitterButtonView: {fileID: 7801221672610809886}
+  _panelCloseButtonsInstaller:
+    _closeButtonsParent: {fileID: 2134080788}
   _settingsStorageResetInstaller:
     _resetButtonView: {fileID: 834997612}
   _audioTuningInstaller:
