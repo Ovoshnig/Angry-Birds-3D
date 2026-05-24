@@ -8,17 +8,19 @@ using VContainer.Unity;
 
 public class SceneSwitch : IInitializable, IDisposable
 {
+    private readonly SceneSettings _sceneSettings;
     private readonly ReactiveProperty<bool> _isSceneLoading = new(true);
     private readonly CancellationTokenSource _cts = new();
 
-    private int _currentLevel;
+    private int _currentLevelIndex;
+
+    public SceneSwitch(SceneSettings sceneSettings) => _sceneSettings = sceneSettings;
 
     public ReadOnlyReactiveProperty<bool> IsSceneLoading => _isSceneLoading;
 
     public void Initialize()
     {
-        _currentLevel = SceneManager.GetActiveScene().buildIndex;
-
+        _currentLevelIndex = SceneManager.GetActiveScene().buildIndex;
         WaitForFirstSceneLoadAsync().Forget();
     }
 
@@ -34,10 +36,10 @@ public class SceneSwitch : IInitializable, IDisposable
     {
         int index = navigationType switch
         {
-            SceneNavigationType.MainMenu => 0,
-            SceneNavigationType.FirstLevel => 1,
-            SceneNavigationType.CurrentLevel => _currentLevel,
-            SceneNavigationType.NextLevel => _currentLevel + 1,
+            SceneNavigationType.MainMenu => _sceneSettings.MainMenuIndex,
+            SceneNavigationType.FirstLevel => _sceneSettings.FirstLevelIndex,
+            SceneNavigationType.CurrentLevel => _currentLevelIndex,
+            SceneNavigationType.NextLevel => _currentLevelIndex + 1,
             SceneNavigationType.SpecificIndex => specificIndex,
             _ => throw new ArgumentOutOfRangeException(nameof(navigationType))
         };
@@ -49,7 +51,7 @@ public class SceneSwitch : IInitializable, IDisposable
 
         await SceneManager.LoadSceneAsync(index).ToUniTask(cancellationToken: _cts.Token);
 
-        _currentLevel = index;
+        _currentLevelIndex = index;
         _isSceneLoading.Value = false;
     }
 

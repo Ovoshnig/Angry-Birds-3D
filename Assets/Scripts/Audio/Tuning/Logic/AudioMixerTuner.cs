@@ -2,23 +2,21 @@
 
 public class AudioMixerTuner
 {
-    private readonly AudioMixerGroup _audioMixerGroup;
+    private readonly AudioMixer _audioMixer;
     private readonly AudioSettings _audioSettings;
 
-    public AudioMixerTuner(AudioMixerGroup audioMixerGroup,
+    public AudioMixerTuner(AudioMixer audioMixer,
         AudioSettings audioSettings)
     {
-        _audioMixerGroup = audioMixerGroup;
+        _audioMixer = audioMixer;
         _audioSettings = audioSettings;
     }
 
-    private AudioMixer AudioMixer => _audioMixerGroup.audioMixer;
-
-    public bool SetVolume(string parameterName, float value) => AudioMixer.SetFloat(parameterName, value);
+    public bool SetVolume(string parameterName, float value) => _audioMixer.SetFloat(parameterName, value);
 
     public void SetPause(bool value)
     {
-        AudioMixerSnapshot snapshot = AudioMixer.FindSnapshot(value
+        AudioMixerSnapshot snapshot = _audioMixer.FindSnapshot(value
             ? AudioMixerConstants.PauseSnapshotName
             : AudioMixerConstants.NormalSnapshotName);
 
