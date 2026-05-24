@@ -38,6 +38,7 @@ public class SceneSwitch : IInitializable, IDisposable
         {
             SceneNavigationType.MainMenu => _sceneSettings.MainMenuIndex,
             SceneNavigationType.FirstLevel => _sceneSettings.FirstLevelIndex,
+            SceneNavigationType.PreviousLevel => _currentLevelIndex - 1,
             SceneNavigationType.CurrentLevel => _currentLevelIndex,
             SceneNavigationType.NextLevel => _currentLevelIndex + 1,
             SceneNavigationType.SpecificIndex => specificIndex,
