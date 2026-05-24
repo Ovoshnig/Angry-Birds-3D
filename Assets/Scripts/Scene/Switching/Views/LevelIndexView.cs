@@ -3,7 +3,7 @@ using TMPro;
 using UnityEngine;
 
 [RequireComponent(typeof(TMP_Text))]
-public sealed class SceneNumberView : UIView
+public sealed class LevelIndexView : UIView
 {
     private TMP_Text _text;
     private SceneButtonView _buttonView;
@@ -20,4 +20,14 @@ public sealed class SceneNumberView : UIView
             .Subscribe(isInteractable => _text.enabled = isInteractable)
             .AddTo(this);
     }
+
+#if UNITY_EDITOR
+    public void SetIndex(int index)
+    {
+        if (UnityEditor.EditorApplication.isPlaying)
+            return;
+
+        GetComponent<TMP_Text>().SetText("{0}", index);
+    }
+#endif
 }
