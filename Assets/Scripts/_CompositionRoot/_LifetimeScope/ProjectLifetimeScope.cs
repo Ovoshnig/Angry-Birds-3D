@@ -12,6 +12,8 @@ public class ProjectLifetimeScope : LifetimeScope
         builder.Register<InputActions>(Lifetime.Singleton);
         builder.RegisterEntryPoint<ScreenInputProvider>().AsSelf();
 
+        builder.RegisterEntryPoint<SceneSwitch>().AsSelf();
+
         new AddressableLoadingInstaller().Install(builder);
 
         _dataStorageInstaller.Install(builder);

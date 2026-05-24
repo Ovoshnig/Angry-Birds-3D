@@ -13,11 +13,6 @@ public class SceneSwitchingInstaller : IInstaller
     {
         IReadOnlyList<SceneButtonView> sceneViews = _sceneViewsParent.GetComponentsInChildren<SceneButtonView>(true);
         builder.RegisterInstance(sceneViews);
-
-        builder.UseEntryPoints(entryPoints =>
-        {
-            entryPoints.Add<SceneSwitch>().AsSelf();
-            entryPoints.Add<SceneSwitchMediator>();
-        });
+        builder.RegisterEntryPoint<SceneSwitchMediator>();
     }
 }
