@@ -10,6 +10,7 @@ public class LevelLifetimeScope : LifetimeScope
     [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
     [SerializeField] private CameraInstaller _cameraInstaller;
     [SerializeField] private WindowInstaller _windowInstaller;
+    [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
     [SerializeField] private AudioSFXInstaller _sfxInstaller;
     [SerializeField] private SlingshotInstaller _slingshotInstaller;
     [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
@@ -31,6 +32,7 @@ public class LevelLifetimeScope : LifetimeScope
         _levelScoreInstaller.Install(builder);
         _cameraInstaller.Install(builder);
         _windowInstaller.Install(builder);
+        _audioTuningInstaller.Install(builder);
         _sfxInstaller.Install(builder);
         _slingshotInstaller.Install(builder);
         _objectCollisionInstaller.Install(builder);
