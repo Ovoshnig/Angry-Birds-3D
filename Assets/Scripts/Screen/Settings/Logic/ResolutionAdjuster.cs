@@ -5,14 +5,14 @@ using System.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
-public class ResolutionAdjuster : IInitializable, IDisposable
+public class ResolutionAdjuster : IStartable, IDisposable
 {
     private readonly ReactiveProperty<int> _currentResolutionIndex = new(0);
 
     public List<ResolutionData> Resolutions { get; private set; }
     public ReadOnlyReactiveProperty<int> CurrentResolutionIndex => _currentResolutionIndex;
 
-    public void Initialize()
+    public void Start()
     {
         ResolutionData currentResolution = GetCurrentResolutionData();
 

@@ -3,7 +3,7 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-public class VSyncAdjuster : IStartable, IDisposable
+public class VSyncAdjuster : IPostInitializable, IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly ReactiveProperty<bool> _isVSyncEnabled = new();
@@ -13,12 +13,15 @@ public class VSyncAdjuster : IStartable, IDisposable
 
     public ReadOnlyReactiveProperty<bool> IsVSyncEnabled => _isVSyncEnabled;
 
-    public void Start()
+    public void PostInitialize()
     {
         _isVSyncEnabled.Value = _settingsStorage.Get(SettingsConstants.VSyncKey, false);
         QualitySettings.vSyncCount = _isVSyncEnabled.Value ? 1 : 0;
         Application.targetFrameRate = -1;
+    }
 
+    public void Start()
+    {
         _settingsStorage.ResetHappened
             .Subscribe(_ => DisableVSync())
             .AddTo(_disposables);
