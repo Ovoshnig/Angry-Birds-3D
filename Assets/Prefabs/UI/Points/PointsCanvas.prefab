@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &2078769217477800725
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -213,6 +213,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: 99b8314dce0b77248a9a2c3498cf5f3d, type: 2}
+    - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_fontColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -235,7 +239,7 @@ PrefabInstance:
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: -6876489708867444378, guid: 99b8314dce0b77248a9a2c3498cf5f3d, type: 2}
+      objectReference: {fileID: 2100000, guid: b36a7543bffd74b4ea4da1d3a25929a7, type: 2}
     - target: {fileID: 4340154353747558020, guid: ada1e80840d50a740865295f82d3bbe8, type: 3}
       propertyPath: m_characterSpacing
       value: 0
