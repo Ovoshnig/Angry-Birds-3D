@@ -4,7 +4,7 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class WindowInstaller : IInstaller
+public class PauseMenuWindowInstaller : IInstaller
 {
     [SerializeField] private WindowView _pauseMenuWindowView;
 
@@ -12,11 +12,8 @@ public class WindowInstaller : IInstaller
     {
         builder.RegisterInstance(_pauseMenuWindowView);
 
-        builder.Register<WindowTracker>(Lifetime.Singleton);
-
         builder.UseEntryPoints(entryPoints =>
         {
-            entryPoints.Add<WindowInputProvider>().AsSelf();
             entryPoints.Add<PauseMenuWindow>().AsSelf().As<Window>();
             entryPoints.Add<WindowMediator>();
         });
