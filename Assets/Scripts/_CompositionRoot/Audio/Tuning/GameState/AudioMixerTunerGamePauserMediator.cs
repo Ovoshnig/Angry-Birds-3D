@@ -13,7 +13,7 @@ public class AudioMixerTunerGamePauserMediator : Mediator
 
     protected override void Bind(CompositeDisposable disposables)
     {
-        _gamePauser.IsPause
+        _gamePauser.IsPaused
             .Subscribe(_audioMixerTuner.SetPause)
             .AddTo(disposables);
     }

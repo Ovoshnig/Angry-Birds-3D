@@ -327,7 +327,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 747915a98f8b5864ab00ee12bf11e21a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Scene::SceneButtonView
-  <NavigationType>k__BackingField: 4
+  <NavigationType>k__BackingField: 5
   <SpecificIndex>k__BackingField: 2
 --- !u!224 &8716484713597477394 stripped
 RectTransform:

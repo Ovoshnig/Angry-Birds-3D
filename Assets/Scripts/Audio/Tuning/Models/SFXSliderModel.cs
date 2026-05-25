@@ -6,7 +6,7 @@ public sealed class SFXSliderModel : AudioSliderModel
     }
 
     public override AudioChannel Channel => AudioChannel.SFX;
-    public override string MixerParameterName => AudioMixerConstants.SFXGroupName;
+    public override string MixerParameterName => AudioMixerConstants.SFXVolumeParameter;
 
     protected override string DataKey => SettingsConstants.SFXVolumeKey;
 }

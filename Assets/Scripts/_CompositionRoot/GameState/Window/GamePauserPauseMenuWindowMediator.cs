@@ -14,13 +14,7 @@ public class GamePauserPauseMenuWindowMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _pauseMenuWindow.IsOpen
-            .Subscribe(isOpen =>
-            {
-                if (isOpen)
-                    _gamePauser.Pause();
-                else
-                    _gamePauser.UnPause();
-            })
+            .Subscribe(_gamePauser.SetPause)
             .AddTo(disposables);
     }
 }

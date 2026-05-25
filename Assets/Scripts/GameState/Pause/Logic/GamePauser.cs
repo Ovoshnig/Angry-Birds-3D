@@ -1,17 +1,24 @@
 using R3;
 using System;
+using UnityEngine;
 
 public class GamePauser : IDisposable
 {
-    private readonly ReactiveProperty<bool> _isPause = new(false);
+    private readonly ReactiveProperty<bool> _isPaused = new(false);
 
-    public ReadOnlyReactiveProperty<bool> IsPause => _isPause;
+    public ReadOnlyReactiveProperty<bool> IsPaused => _isPaused;
 
-    public void Dispose() => _isPause.Dispose();
+    public void Dispose() => _isPaused.Dispose();
 
-    public void Pause() => SetPause(true);
+    public void TogglePause() => SetPause(!_isPaused.Value);
 
-    public void UnPause() => SetPause(false);
+    public void SetPause(bool isPaused)
+    {
+        _isPaused.Value = isPaused;
 
-    private void SetPause(bool value) => _isPause.Value = value;
+        if (isPaused)
+            Time.timeScale = 0f;
+        else
+            Time.timeScale = 1f;
+    }
 }

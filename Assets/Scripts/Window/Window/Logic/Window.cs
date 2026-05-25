@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 public abstract class Window : IWindow, IStartable, IDisposable
 {
-    private readonly WindowInputProvider _windowInputProvider;
+    private readonly WindowInputProvider _inputProvider;
     private readonly WindowTracker _windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly CompositeDisposable _disposables = new();
@@ -13,23 +13,20 @@ public abstract class Window : IWindow, IStartable, IDisposable
 
     public Window(WindowInputProvider windowInputProvider, WindowTracker windowTracker)
     {
-        _windowInputProvider = windowInputProvider;
+        _inputProvider = windowInputProvider;
         _windowTracker = windowTracker;
     }
 
     public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
 
-    protected abstract ReadOnlyReactiveProperty<bool> WindowSwitchPressed { get; }
-    protected WindowInputProvider WindowInputProvider => _windowInputProvider;
-
     public virtual void Start()
     {
-        WindowSwitchPressed
+        GetToggleWindowPressedProperty(_inputProvider)
             .Where(isPressed => isPressed)
-            .Subscribe(_ => OnWindowSwitchPressed())
+            .Subscribe(_ => Toggle())
             .AddTo(_disposables);
 
-        WindowInputProvider.CloseCurrentPressed
+        _inputProvider.CloseCurrentPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => TryClose())
             .AddTo(_disposables);
@@ -62,11 +59,19 @@ public abstract class Window : IWindow, IStartable, IDisposable
 
     public void SetWindowActive(bool value) => _isWindowActive = value;
 
-    protected virtual void OnWindowSwitchPressed()
+    public void Toggle()
     {
         if (IsOpen.CurrentValue)
             TryClose();
         else
             TryOpen();
     }
+
+    public void StopToggling()
+    {
+        _disposables.Clear();
+        TryClose();
+    }
+
+    protected abstract ReadOnlyReactiveProperty<bool> GetToggleWindowPressedProperty(WindowInputProvider inputProvider);
 }
