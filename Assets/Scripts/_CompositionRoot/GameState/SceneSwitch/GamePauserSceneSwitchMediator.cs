@@ -15,15 +15,7 @@ public class GamePauserSceneSwitchMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _sceneSwitch.IsSceneLoading
-            .Subscribe(OnSceneLoadingChange)
+            .Subscribe(_gamePauser.SetPause)
             .AddTo(disposables);
-    }
-
-    private void OnSceneLoadingChange(bool isLoading)
-    {
-        if (isLoading)
-            _gamePauser.Pause();
-        else
-            _gamePauser.UnPause();
     }
 }
