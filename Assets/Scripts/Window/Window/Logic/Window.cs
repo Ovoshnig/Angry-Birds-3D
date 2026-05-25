@@ -4,7 +4,7 @@ using VContainer.Unity;
 
 public abstract class Window : IWindow, IStartable, IDisposable
 {
-    private readonly WindowInputProvider _windowInputProvider;
+    private readonly WindowInputProvider _inputProvider;
     private readonly WindowTracker _windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly CompositeDisposable _disposables = new();
@@ -13,23 +13,20 @@ public abstract class Window : IWindow, IStartable, IDisposable
 
     public Window(WindowInputProvider windowInputProvider, WindowTracker windowTracker)
     {
-        _windowInputProvider = windowInputProvider;
+        _inputProvider = windowInputProvider;
         _windowTracker = windowTracker;
     }
 
     public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
 
-    protected abstract ReadOnlyReactiveProperty<bool> WindowSwitchPressed { get; }
-    protected WindowInputProvider WindowInputProvider => _windowInputProvider;
-
     public virtual void Start()
     {
-        WindowSwitchPressed
+        GetSwitchPressedProperty(_inputProvider)
             .Where(isPressed => isPressed)
             .Subscribe(_ => OnWindowSwitchPressed())
             .AddTo(_disposables);
 
-        WindowInputProvider.CloseCurrentPressed
+        _inputProvider.CloseCurrentPressed
             .Where(isPressed => isPressed)
             .Subscribe(_ => TryClose())
             .AddTo(_disposables);
@@ -61,6 +58,14 @@ public abstract class Window : IWindow, IStartable, IDisposable
     }
 
     public void SetWindowActive(bool value) => _isWindowActive = value;
+
+    public void StopSwitching()
+    {
+        _disposables.Clear();
+        TryClose();
+    }
+
+    protected abstract ReadOnlyReactiveProperty<bool> GetSwitchPressedProperty(WindowInputProvider inputProvider);
 
     protected virtual void OnWindowSwitchPressed()
     {
