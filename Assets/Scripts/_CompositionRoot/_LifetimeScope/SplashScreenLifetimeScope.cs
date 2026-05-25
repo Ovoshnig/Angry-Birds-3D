@@ -3,6 +3,10 @@ using VContainer.Unity;
 
 public class SplashScreenLifetimeScope : LifetimeScope
 {
-    protected override void Configure(IContainerBuilder builder) =>
+    protected override void Configure(IContainerBuilder builder)
+    {
         builder.RegisterEntryPoint<SplashScreenDisplayer>().AsSelf();
+
+        new SceneMediatorsInstaller().Install(builder);
+    }
 }

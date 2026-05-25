@@ -45,8 +45,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
         SplashScreen.Draw();
         _isPlaying.Value = true;
 
-        await UniTask.WaitUntil(() => SplashScreen.isFinished, cancellationToken: _cts.Token)
-            .SuppressCancellationThrow();
+        await UniTask.WaitUntil(() => SplashScreen.isFinished, cancellationToken: _cts.Token);
 
         _isPlaying.Value = false;
     }

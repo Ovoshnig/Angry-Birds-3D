@@ -2,26 +2,15 @@
 
 public class AudioMixerTuner
 {
-    private readonly AudioMixerGroup _audioMixerGroup;
-    private readonly AudioSettings _audioSettings;
+    private readonly AudioMixer _audioMixer;
 
-    public AudioMixerTuner(AudioMixerGroup audioMixerGroup,
-        AudioSettings audioSettings)
+    public AudioMixerTuner(AudioMixer audioMixer) => _audioMixer = audioMixer;
+
+    public bool SetVolume(string parameterName, float value) => _audioMixer.SetFloat(parameterName, value);
+
+    public void SetPause(bool isPaused)
     {
-        _audioMixerGroup = audioMixerGroup;
-        _audioSettings = audioSettings;
-    }
-
-    private AudioMixer AudioMixer => _audioMixerGroup.audioMixer;
-
-    public bool SetVolume(string parameterName, float value) => AudioMixer.SetFloat(parameterName, value);
-
-    public void SetPause(bool value)
-    {
-        AudioMixerSnapshot snapshot = AudioMixer.FindSnapshot(value
-            ? AudioMixerConstants.PauseSnapshotName
-            : AudioMixerConstants.NormalSnapshotName);
-
-        snapshot.TransitionTo(_audioSettings.SnapshotTransitionDuration);
+        float targetPitch = isPaused ? 0f : 1f;
+        _audioMixer.SetFloat(AudioMixerConstants.SFXPitchParameter, targetPitch);
     }
 }

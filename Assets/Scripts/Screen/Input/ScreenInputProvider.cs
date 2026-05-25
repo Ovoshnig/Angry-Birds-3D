@@ -4,11 +4,11 @@ public class ScreenInputProvider : InputProvider<InputActions.ScreenActions>
 {
     public ScreenInputProvider(InputActions inputActions) : base(inputActions.Screen)
     {
-        SwitchFullScreenPressed = ObserveButton(a => a.SwitchFullScreen);
+        ToggleFullScreenPressed = ObserveButton(a => a.ToggleFullScreen);
         SkipSplashImagePressed = ObserveButton(a => a.SkipSplashImage);
     }
 
-    public ReadOnlyReactiveProperty<bool> SwitchFullScreenPressed { get; }
+    public ReadOnlyReactiveProperty<bool> ToggleFullScreenPressed { get; }
     public ReadOnlyReactiveProperty<bool> SkipSplashImagePressed { get; }
 
     protected override void EnableActions() => Actions.Enable();

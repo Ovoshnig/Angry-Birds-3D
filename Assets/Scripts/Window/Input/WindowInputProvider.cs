@@ -5,13 +5,11 @@ public class WindowInputProvider : InputProvider<InputActions.WindowActions>
     public WindowInputProvider(InputActions inputActions) : base(inputActions.Window)
     {
         CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
-        PauseMenuSwitchPressed = ObserveButton(a => a.SwitchPauseMenu);
-        InventorySwitchPressed = ObserveButton(a => a.SwitchInventory);
+        TogglePauseMenuPressed = ObserveButton(a => a.TogglePauseMenu);
     }
 
     public ReadOnlyReactiveProperty<bool> CloseCurrentPressed { get; }
-    public ReadOnlyReactiveProperty<bool> PauseMenuSwitchPressed { get; }
-    public ReadOnlyReactiveProperty<bool> InventorySwitchPressed { get; }
+    public ReadOnlyReactiveProperty<bool> TogglePauseMenuPressed { get; }
 
     protected override void EnableActions() => Actions.Enable();
 

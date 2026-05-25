@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   <SceneSettings>k__BackingField:
-    <FirstGameplayLevel>k__BackingField: 1
-    <GameplayLevelsCount>k__BackingField: 1
+    <FirstLevelIndex>k__BackingField: 2
+    <LevelCount>k__BackingField: 24
     <LevelTransitionDuration>k__BackingField: 5
   <CameraSettings>k__BackingField:
     <StructureShowingDuration>k__BackingField: 1.2
@@ -22,6 +22,7 @@ MonoBehaviour:
   <AudioSettings>k__BackingField:
     <MinVolume>k__BackingField: -80
     <MaxVolume>k__BackingField: 0
+    <DefaultVolume>k__BackingField: -10
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50

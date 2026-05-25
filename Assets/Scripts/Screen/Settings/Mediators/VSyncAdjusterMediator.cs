@@ -9,18 +9,12 @@ public class VSyncAdjusterMediator : UIMediator<VSyncToggleView>
 
     protected override void OnViewEnabled(VSyncToggleView view, CompositeDisposable viewDisposables)
     {
-        _vSyncAdjuster.IsVSyncEnabled
+        _vSyncAdjuster.IsVSync
             .Subscribe(view.SetIsOnWithoutNotify)
             .AddTo(viewDisposables);
 
         view.ValueChanged
-            .Subscribe(isOn =>
-            {
-                if (isOn)
-                    _vSyncAdjuster.EnableVSync();
-                else
-                    _vSyncAdjuster.DisableVSync();
-            })
+            .Subscribe(_vSyncAdjuster.SetVSync)
             .AddTo(viewDisposables);
     }
 }
