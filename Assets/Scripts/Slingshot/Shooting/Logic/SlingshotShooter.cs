@@ -45,14 +45,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     {
         _centerAnchorPosition = _view.CenterAnchor.position;
         _view.SetSettings(_settings);
-
-        _inputProvider.LeftButtonPressed
-            .Subscribe(HandlePointerState)
-            .AddTo(_disposables);
-
-        _inputProvider.DragInput
-            .Subscribe(input => _isDragInput = input != Vector2.zero)
-            .AddTo(_disposables);
+        SubscribeToInputProvider();
     }
 
     public void Dispose()
@@ -80,12 +73,31 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         ResetBird();
     }
 
+    public void SetPause(bool isPaused)
+    {
+        if (isPaused)
+            StopShooting();
+        else
+            SubscribeToInputProvider();
+    }
+
     public void StopShooting()
     {
-        _disposables.Dispose();
+        _disposables.Clear();
 
         ResetBird();
         _view.SetLinesVisibility(false);
+    }
+
+    private void SubscribeToInputProvider()
+    {
+        _inputProvider.LeftButtonPressed
+            .Subscribe(HandlePointerState)
+            .AddTo(_disposables);
+
+        _inputProvider.DragInput
+            .Subscribe(input => _isDragInput = input != Vector2.zero)
+            .AddTo(_disposables);
     }
 
     private void HandlePointerState(bool isPressed)
