@@ -17,9 +17,9 @@ public class FullScreenAdjuster : IStartable, IDisposable
     {
         _isFullScreen.Value = Screen.fullScreen;
 
-        _screenInputProvider.SwitchFullScreenPressed
+        _screenInputProvider.ToggleFullScreenPressed
             .Where(isPressed => isPressed)
-            .Subscribe(_ => OnSwitchFullScreenPressed())
+            .Subscribe(_ => ToggleFullScreen())
             .AddTo(_disposables);
     }
 
@@ -30,23 +30,11 @@ public class FullScreenAdjuster : IStartable, IDisposable
         _isFullScreen.Dispose();
     }
 
-    public void OnSwitchFullScreenPressed()
-    {
-        if (IsFullScreen.CurrentValue)
-            DisableFullScreen();
-        else
-            EnableFullScreen();
-    }
+    public void ToggleFullScreen() => SetFullScreen(!_isFullScreen.Value);
 
-    public void EnableFullScreen()
+    public void SetFullScreen(bool isFullScreen)
     {
-        Screen.fullScreen = true;
-        _isFullScreen.Value = true;
-    }
-
-    public void DisableFullScreen()
-    {
-        Screen.fullScreen = false;
-        _isFullScreen.Value = false;
+        Screen.fullScreen = isFullScreen;
+        _isFullScreen.Value = isFullScreen;
     }
 }
