@@ -1,11 +1,11 @@
 using R3;
 using System.Collections.Generic;
 
-public class UIInputProviderCloseButtonViewMediator : UIListMediator<PanelCloseButtonView>
+public class InputProviderCloseButtonViewsMediator : UIListMediator<PanelCloseButtonView>
 {
     private readonly UIInputProvider _uiInputProvider;
 
-    public UIInputProviderCloseButtonViewMediator(UIInputProvider uIInputProvider, IReadOnlyList<PanelCloseButtonView> views)
+    public InputProviderCloseButtonViewsMediator(UIInputProvider uIInputProvider, IReadOnlyList<PanelCloseButtonView> views)
         : base(views) => _uiInputProvider = uIInputProvider;
 
     protected override void OnViewEnabled(PanelCloseButtonView view, CompositeDisposable viewDisposables)

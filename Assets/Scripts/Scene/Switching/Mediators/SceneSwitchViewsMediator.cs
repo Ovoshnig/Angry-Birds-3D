@@ -2,11 +2,11 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 
-public class SceneSwitchMediator : UIListMediator<SceneButtonView>
+public class SceneSwitchViewsMediator : UIListMediator<SceneButtonView>
 {
     private readonly SceneSwitch _sceneSwitch;
 
-    public SceneSwitchMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneButtonView> views)
+    public SceneSwitchViewsMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneButtonView> views)
         : base(views) => _sceneSwitch = sceneSwitch;
 
     protected override void OnViewEnabled(SceneButtonView view, CompositeDisposable viewDisposables)
