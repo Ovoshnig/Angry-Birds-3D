@@ -14,6 +14,11 @@ public class SceneSwitchingInstaller : IInstaller
             .FindObjectsByType<SceneButtonView>(FindObjectsInactive.Include);
 
         builder.RegisterInstance(sceneViews);
-        builder.RegisterEntryPoint<SceneSwitchViewsMediator>();
+
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<SceneSwitchViewsMediator>();
+            entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
+        });
     }
 }

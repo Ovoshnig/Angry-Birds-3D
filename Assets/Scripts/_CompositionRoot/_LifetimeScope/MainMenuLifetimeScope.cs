@@ -13,11 +13,7 @@ public class MainMenuLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.UseEntryPoints(entryPoints =>
-        {
-            entryPoints.Add<UIInputProvider>().AsSelf();
-            entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
-        });
+        builder.RegisterEntryPoint<UIInputProvider>().AsSelf();
 
         _sceneSwitchingInstaller.Install(builder);
         _gameQuittingInstaller.Install(builder);
