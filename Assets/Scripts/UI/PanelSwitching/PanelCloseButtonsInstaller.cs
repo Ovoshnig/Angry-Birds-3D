@@ -15,6 +15,6 @@ public class PanelCloseButtonsInstaller : IInstaller
             .GetComponentsInChildren<PanelCloseButtonView>(true);
 
         builder.RegisterInstance(closeButtonViews);
-        builder.RegisterEntryPoint<UIInputProviderCloseButtonViewMediator>();
+        builder.RegisterEntryPoint<InputProviderCloseButtonViewsMediator>();
     }
 }
