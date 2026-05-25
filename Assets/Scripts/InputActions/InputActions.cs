@@ -313,7 +313,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""4a6a1ede-c74b-43ed-938b-70cee49c018b"",
             ""actions"": [
                 {
-                    ""name"": ""SwitchFullScreen"",
+                    ""name"": ""ToggleFullScreen"",
                     ""type"": ""Button"",
                     ""id"": ""192f6986-3e29-4929-bc40-94233890cbb2"",
                     ""expectedControlType"": """",
@@ -339,7 +339,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": "";Keyboard and Mouse"",
-                    ""action"": ""SwitchFullScreen"",
+                    ""action"": ""ToggleFullScreen"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -408,7 +408,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Window_TogglePauseMenu = m_Window.FindAction("TogglePauseMenu", throwIfNotFound: true);
         // Screen
         m_Screen = asset.FindActionMap("Screen", throwIfNotFound: true);
-        m_Screen_SwitchFullScreen = m_Screen.FindAction("SwitchFullScreen", throwIfNotFound: true);
+        m_Screen_ToggleFullScreen = m_Screen.FindAction("ToggleFullScreen", throwIfNotFound: true);
         m_Screen_SkipSplashImage = m_Screen.FindAction("SkipSplashImage", throwIfNotFound: true);
     }
 
@@ -1019,7 +1019,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // Screen
     private readonly InputActionMap m_Screen;
     private List<IScreenActions> m_ScreenActionsCallbackInterfaces = new List<IScreenActions>();
-    private readonly InputAction m_Screen_SwitchFullScreen;
+    private readonly InputAction m_Screen_ToggleFullScreen;
     private readonly InputAction m_Screen_SkipSplashImage;
     /// <summary>
     /// Provides access to input actions defined in input action map "Screen".
@@ -1033,9 +1033,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// </summary>
         public ScreenActions(@InputActions wrapper) { m_Wrapper = wrapper; }
         /// <summary>
-        /// Provides access to the underlying input action "Screen/SwitchFullScreen".
+        /// Provides access to the underlying input action "Screen/ToggleFullScreen".
         /// </summary>
-        public InputAction @SwitchFullScreen => m_Wrapper.m_Screen_SwitchFullScreen;
+        public InputAction @ToggleFullScreen => m_Wrapper.m_Screen_ToggleFullScreen;
         /// <summary>
         /// Provides access to the underlying input action "Screen/SkipSplashImage".
         /// </summary>
@@ -1066,9 +1066,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ScreenActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ScreenActionsCallbackInterfaces.Add(instance);
-            @SwitchFullScreen.started += instance.OnSwitchFullScreen;
-            @SwitchFullScreen.performed += instance.OnSwitchFullScreen;
-            @SwitchFullScreen.canceled += instance.OnSwitchFullScreen;
+            @ToggleFullScreen.started += instance.OnToggleFullScreen;
+            @ToggleFullScreen.performed += instance.OnToggleFullScreen;
+            @ToggleFullScreen.canceled += instance.OnToggleFullScreen;
             @SkipSplashImage.started += instance.OnSkipSplashImage;
             @SkipSplashImage.performed += instance.OnSkipSplashImage;
             @SkipSplashImage.canceled += instance.OnSkipSplashImage;
@@ -1083,9 +1083,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="ScreenActions" />
         private void UnregisterCallbacks(IScreenActions instance)
         {
-            @SwitchFullScreen.started -= instance.OnSwitchFullScreen;
-            @SwitchFullScreen.performed -= instance.OnSwitchFullScreen;
-            @SwitchFullScreen.canceled -= instance.OnSwitchFullScreen;
+            @ToggleFullScreen.started -= instance.OnToggleFullScreen;
+            @ToggleFullScreen.performed -= instance.OnToggleFullScreen;
+            @ToggleFullScreen.canceled -= instance.OnToggleFullScreen;
             @SkipSplashImage.started -= instance.OnSkipSplashImage;
             @SkipSplashImage.performed -= instance.OnSkipSplashImage;
             @SkipSplashImage.canceled -= instance.OnSkipSplashImage;
@@ -1259,12 +1259,12 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     public interface IScreenActions
     {
         /// <summary>
-        /// Method invoked when associated input action "SwitchFullScreen" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// Method invoked when associated input action "ToggleFullScreen" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
-        void OnSwitchFullScreen(InputAction.CallbackContext context);
+        void OnToggleFullScreen(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "SkipSplashImage" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>

@@ -6,52 +6,39 @@ using VContainer.Unity;
 public class VSyncAdjuster : IPostInitializable, IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
-    private readonly ReactiveProperty<bool> _isVSyncEnabled = new();
+    private readonly ReactiveProperty<bool> _isVSync = new();
     private readonly CompositeDisposable _disposables = new();
 
     public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
 
-    public ReadOnlyReactiveProperty<bool> IsVSyncEnabled => _isVSyncEnabled;
+    public ReadOnlyReactiveProperty<bool> IsVSync => _isVSync;
 
     public void PostInitialize()
     {
-        _isVSyncEnabled.Value = _settingsStorage.Get(SettingsConstants.VSyncKey, false);
-        QualitySettings.vSyncCount = _isVSyncEnabled.Value ? 1 : 0;
+        SetVSync(_settingsStorage.Get(SettingsConstants.VSyncKey, false));
         Application.targetFrameRate = -1;
     }
 
     public void Start()
     {
         _settingsStorage.ResetHappened
-            .Subscribe(_ => DisableVSync())
+            .Subscribe(_ => SetVSync(false))
             .AddTo(_disposables);
     }
 
     public void Dispose()
     {
-        _settingsStorage.Set(SettingsConstants.VSyncKey, _isVSyncEnabled.Value);
+        _settingsStorage.Set(SettingsConstants.VSyncKey, _isVSync.Value);
 
         _disposables.Dispose();
-        _isVSyncEnabled.Dispose();
+        _isVSync.Dispose();
     }
 
-    public void SwitchVSync()
-    {
-        if (IsVSyncEnabled.CurrentValue)
-            DisableVSync();
-        else
-            EnableVSync();
-    }
+    public void ToggleVSync() => SetVSync(!_isVSync.Value);
 
-    public void EnableVSync()
+    public void SetVSync(bool isVSync)
     {
-        QualitySettings.vSyncCount = 1;
-        _isVSyncEnabled.Value = true;
-    }
-
-    public void DisableVSync()
-    {
-        QualitySettings.vSyncCount = 0;
-        _isVSyncEnabled.Value = false;
+        QualitySettings.vSyncCount = isVSync ? 1 : 0;
+        _isVSync.Value = isVSync;
     }
 }

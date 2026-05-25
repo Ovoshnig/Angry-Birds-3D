@@ -14,13 +14,7 @@ public class FullScreenAdjusterMediator : UIMediator<FullScreenToggleView>
             .AddTo(viewDisposables);
 
         view.ValueChanged
-            .Subscribe(isOn =>
-            {
-                if (isOn)
-                    _fullScreenAdjuster.EnableFullScreen();
-                else
-                    _fullScreenAdjuster.DisableFullScreen();
-            })
+            .Subscribe(_fullScreenAdjuster.SetFullScreen)
             .AddTo(viewDisposables);
     }
 }

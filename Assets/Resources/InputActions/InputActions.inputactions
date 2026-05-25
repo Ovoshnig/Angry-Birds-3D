@@ -227,7 +227,7 @@
             "id": "4a6a1ede-c74b-43ed-938b-70cee49c018b",
             "actions": [
                 {
-                    "name": "SwitchFullScreen",
+                    "name": "ToggleFullScreen",
                     "type": "Button",
                     "id": "192f6986-3e29-4929-bc40-94233890cbb2",
                     "expectedControlType": "",
@@ -253,7 +253,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard and Mouse",
-                    "action": "SwitchFullScreen",
+                    "action": "ToggleFullScreen",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
