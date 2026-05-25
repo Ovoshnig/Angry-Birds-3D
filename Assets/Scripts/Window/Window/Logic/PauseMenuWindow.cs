@@ -7,6 +7,6 @@ public class PauseMenuWindow : Window
     {
     }
 
-    protected override ReadOnlyReactiveProperty<bool> GetSwitchPressedProperty(WindowInputProvider inputProvider) =>
-        inputProvider.PauseMenuSwitchPressed;
+    protected override ReadOnlyReactiveProperty<bool> GetToggleWindowPressedProperty(WindowInputProvider inputProvider) =>
+        inputProvider.TogglePauseMenuPressed;
 }

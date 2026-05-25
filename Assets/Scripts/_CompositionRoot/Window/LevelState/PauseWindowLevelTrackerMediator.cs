@@ -14,7 +14,7 @@ public class PauseWindowLevelTrackerMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _levelStateTracker.Completed
-            .Subscribe(_ => _pauseMenuWindow.StopSwitching())
+            .Subscribe(_ => _pauseMenuWindow.StopToggling())
             .AddTo(disposables);
     }
 }

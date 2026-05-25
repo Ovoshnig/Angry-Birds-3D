@@ -21,9 +21,9 @@ public abstract class Window : IWindow, IStartable, IDisposable
 
     public virtual void Start()
     {
-        GetSwitchPressedProperty(_inputProvider)
+        GetToggleWindowPressedProperty(_inputProvider)
             .Where(isPressed => isPressed)
-            .Subscribe(_ => OnWindowSwitchPressed())
+            .Subscribe(_ => Toggle())
             .AddTo(_disposables);
 
         _inputProvider.CloseCurrentPressed
@@ -59,19 +59,19 @@ public abstract class Window : IWindow, IStartable, IDisposable
 
     public void SetWindowActive(bool value) => _isWindowActive = value;
 
-    public void StopSwitching()
-    {
-        _disposables.Clear();
-        TryClose();
-    }
-
-    protected abstract ReadOnlyReactiveProperty<bool> GetSwitchPressedProperty(WindowInputProvider inputProvider);
-
-    protected virtual void OnWindowSwitchPressed()
+    public void Toggle()
     {
         if (IsOpen.CurrentValue)
             TryClose();
         else
             TryOpen();
     }
+
+    public void StopToggling()
+    {
+        _disposables.Clear();
+        TryClose();
+    }
+
+    protected abstract ReadOnlyReactiveProperty<bool> GetToggleWindowPressedProperty(WindowInputProvider inputProvider);
 }
