@@ -7,6 +7,8 @@ using UnityEngine;
 [CustomEditor(typeof(LevelButtonGeneratorView))]
 public class LevelButtonGenerator : Editor
 {
+    private const string UndoGroupName = "Generate Level Buttons";
+
     public override void OnInspectorGUI()
     {
         DrawDefaultInspector();
@@ -35,9 +37,9 @@ public class LevelButtonGenerator : Editor
 
         Undo.IncrementCurrentGroup();
         int undoGroup = Undo.GetCurrentGroup();
-        Undo.SetCurrentGroupName("Generate Level Buttons");
+        Undo.SetCurrentGroupName(UndoGroupName);
 
-        Undo.RegisterFullObjectHierarchyUndo(parent.gameObject, "Generate Level Buttons");
+        Undo.RegisterFullObjectHierarchyUndo(parent.gameObject, UndoGroupName);
 
         if (!TryDestroyOld(parent))
         {
@@ -49,22 +51,26 @@ public class LevelButtonGenerator : Editor
 
         for (int i = 0; i < sceneSettings.LevelCount; i++)
         {
-            SceneButtonView levelView = (SceneButtonView)PrefabUtility.InstantiatePrefab(
-                generatorView.LevelButtonPrefab,
-                parent);
+            RectTransform levelButtonBlock = (RectTransform)PrefabUtility
+                .InstantiatePrefab(generatorView.LevelButtonBlockPrefab, parent);
 
-            levelView.name = $"LevelButton{i + 1}";
-            Undo.RegisterCreatedObjectUndo(levelView.gameObject, "Generate Level Buttons");
+            levelButtonBlock.name = $"LevelButtonBlock{i + 1}";
+            Undo.RegisterCreatedObjectUndo(levelButtonBlock.gameObject, UndoGroupName);
 
             int sceneIndex = sceneSettings.FirstLevelIndex + i;
             int displayedLevelIndex = i + 1;
 
-            Undo.RecordObject(levelView, "Generate Level Buttons");
+            SceneButtonView levelView = levelButtonBlock.GetComponentInChildren<SceneButtonView>();
+            Undo.RecordObject(levelView, UndoGroupName);
             levelView.SetSpecificIndex(sceneIndex);
 
             LevelIndexView indexView = levelView.GetComponentInChildren<LevelIndexView>();
-            Undo.RecordObject(indexView, "Generate Level Buttons");
+            Undo.RecordObject(indexView, UndoGroupName);
             indexView.SetIndex(displayedLevelIndex);
+
+            RatingShowerView ratingShowerView = levelButtonBlock.GetComponentInChildren<RatingShowerView>();
+            Undo.RecordObject(ratingShowerView, UndoGroupName);
+            ratingShowerView.SetLevelIndex(sceneIndex);
         }
 
         EditorUtility.SetDirty(parent);
@@ -75,7 +81,7 @@ public class LevelButtonGenerator : Editor
     private static bool TryDestroyOld(RectTransform parent)
     {
         IEnumerable<RectTransform> children = parent.Cast<RectTransform>();
-        RectTransform invalidChild = children.FirstOrDefault(c => c.GetComponent<SceneButtonView>() == null);
+        RectTransform invalidChild = children.FirstOrDefault(c => c.GetComponentInChildren<SceneButtonView>() == null);
 
         if (invalidChild != null)
         {
