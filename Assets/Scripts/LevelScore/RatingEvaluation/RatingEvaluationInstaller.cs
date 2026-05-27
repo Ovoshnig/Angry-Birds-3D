@@ -4,7 +4,7 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class RatingInstaller : IInstaller
+public class RatingEvaluationInstaller : IInstaller
 {
     [SerializeField] private RatingEvaluatorView _evaluatorView;
 
