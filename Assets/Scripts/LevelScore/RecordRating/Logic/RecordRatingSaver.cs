@@ -5,17 +5,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-public class RatingSaver : IStartable, IDisposable
+public class RecordRatingSaver : IStartable, IDisposable
 {
     private readonly SaveStorage _saveStorage;
     private readonly RatingEvaluator _ratingEvaluator;
+    private readonly ReactiveProperty<int> _record = new();
     private readonly CompositeDisposable _disposables = new();
 
-    public RatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
+    public RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
     {
         _saveStorage = saveStorage;
         _ratingEvaluator = ratingEvaluator;
     }
+
+    public ReadOnlyReactiveProperty<int> Record => _record;
 
     public void Start()
     {
@@ -24,7 +27,11 @@ public class RatingSaver : IStartable, IDisposable
             .AddTo(_disposables);
     }
 
-    public void Dispose() => _disposables.Dispose();
+    public void Dispose()
+    {
+        _disposables.Dispose();
+        _record.Dispose();
+    }
 
     private void OnRatingEvaluated(int starCount)
     {
@@ -40,5 +47,7 @@ public class RatingSaver : IStartable, IDisposable
 
         starRecordBylevelIndex[currentLevel] = starRecord;
         _saveStorage.Set(SaveConstants.StarRecordBylevelIndex, starRecordBylevelIndex);
+
+        _record.Value = starRecord;
     }
 }

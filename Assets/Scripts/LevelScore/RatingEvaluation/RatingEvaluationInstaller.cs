@@ -12,11 +12,6 @@ public class RatingEvaluationInstaller : IInstaller
     {
         builder.RegisterInstance(_evaluatorView);
         builder.Register<RatingEvaluator>(Lifetime.Singleton);
-
-        builder.UseEntryPoints(entryPoints =>
-        {
-            entryPoints.Add<RatingSaver>().AsSelf();
-            entryPoints.Add<RatingEvaluatorMediator>();
-        });
+        builder.RegisterEntryPoint<RatingEvaluatorMediator>();
     }
 }

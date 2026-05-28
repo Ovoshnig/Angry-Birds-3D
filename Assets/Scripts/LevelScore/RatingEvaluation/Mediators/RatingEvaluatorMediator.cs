@@ -11,6 +11,6 @@ public class RatingEvaluatorMediator : UIMediator<RatingEvaluatorView>
     protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
     {
         int starCount = _evaluator.EvaluateStarCount(view.MaxScoreThreshold, view.MaxStarCount);
-        view.SetStarCount(starCount).Forget();
+        view.ShowStarAsync(starCount).Forget();
     }
 }

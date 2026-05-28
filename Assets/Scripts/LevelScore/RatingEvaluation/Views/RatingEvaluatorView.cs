@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,10 +15,13 @@ public class RatingEvaluatorView : UIView
     [SerializeField, Min(0f)] private float _jumpDuration = 0.5f;
     [SerializeField, Min(0f)] private float _fallDuration = 1f;
 
+    private readonly Subject<Unit> _shown = new();
+
     private Image[] _images;
 
     [field: SerializeField, Min(0)] public int MaxScoreThreshold { get; private set; } = 15000;
 
+    public Subject<Unit> Shown => _shown;
     public int MaxStarCount { get; private set; }
 
     private void Awake()
@@ -26,7 +30,9 @@ public class RatingEvaluatorView : UIView
         MaxStarCount = _images.Length;
     }
 
-    public async UniTask SetStarCount(int count)
+    private void OnDestroy() => _shown.Dispose();
+
+    public async UniTask ShowStarAsync(int count)
     {
         foreach (var image in _images)
             image.sprite = _unactiveStar;
@@ -50,5 +56,7 @@ public class RatingEvaluatorView : UIView
                 .BindToAnchoredPositionY(image.rectTransform)
                 .ToUniTask(destroyCancellationToken);
         }
+
+        _shown.OnNext(Unit.Default);
     }
 }

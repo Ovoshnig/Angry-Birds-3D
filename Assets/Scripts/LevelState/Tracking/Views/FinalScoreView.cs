@@ -8,5 +8,5 @@ public class FinalScoreView : UIView
 
     private void Awake() => _text = GetComponent<TMP_Text>();
 
-    public void SetScore(int value) => _text.SetText("Score:\n{0:0000}", value);
+    public void SetScore(int value) => _text.SetText("Score: {0:0000}", value);
 }
