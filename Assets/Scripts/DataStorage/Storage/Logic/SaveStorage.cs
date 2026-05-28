@@ -26,7 +26,7 @@ public class SaveStorage : DataStorage
             return;
 
         Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
-        //ResetData();
+        ResetData();
     }
 
     protected override void SaveData()
