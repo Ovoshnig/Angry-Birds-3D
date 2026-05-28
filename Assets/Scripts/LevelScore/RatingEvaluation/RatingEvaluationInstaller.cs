@@ -1,0 +1,17 @@
+using System;
+using UnityEngine;
+using VContainer;
+using VContainer.Unity;
+
+[Serializable]
+public class RatingEvaluationInstaller : IInstaller
+{
+    [SerializeField] private RatingEvaluatorView _evaluatorView;
+
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterInstance(_evaluatorView);
+        builder.Register<RatingEvaluator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<RatingEvaluatorMediator>();
+    }
+}

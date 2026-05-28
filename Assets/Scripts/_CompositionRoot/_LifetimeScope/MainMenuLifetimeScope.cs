@@ -5,6 +5,7 @@ using VContainer.Unity;
 public class MainMenuLifetimeScope : LifetimeScope
 {
     [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
+    [SerializeField] private RatingShowingInstaller _ratingShowingInstaller;
     [SerializeField] private GameQuittingInstaller _gameQuittingInstaller;
     [SerializeField] private PanelCloseButtonsInstaller _panelCloseButtonsInstaller;
     [SerializeField] private SettingsStorageResetInstaller _settingsStorageResetInstaller;
@@ -16,6 +17,7 @@ public class MainMenuLifetimeScope : LifetimeScope
         builder.RegisterEntryPoint<UIInputProvider>().AsSelf();
 
         _sceneSwitchingInstaller.Install(builder);
+        _ratingShowingInstaller.Install(builder);
         _gameQuittingInstaller.Install(builder);
         _panelCloseButtonsInstaller.Install(builder);
         _settingsStorageResetInstaller.Install(builder);
