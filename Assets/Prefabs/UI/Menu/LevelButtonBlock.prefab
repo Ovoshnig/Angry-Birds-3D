@@ -49,6 +49,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 94d42c7e8715d154e9955f27a41027c0, type: 3}
+    - target: {fileID: 869746130914886231, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7257791538408287700, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
       propertyPath: m_Name
       value: Star3
@@ -171,6 +175,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: d1a3a4f2fa86cf34d96d7a1e6557cb4e, type: 3}
+    - target: {fileID: 869746130914886231, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7257791538408287700, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
       propertyPath: m_Name
       value: Rating
@@ -352,6 +360,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 94d42c7e8715d154e9955f27a41027c0, type: 3}
+    - target: {fileID: 869746130914886231, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7257791538408287700, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
       propertyPath: m_Name
       value: Star2
@@ -654,6 +666,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 94d42c7e8715d154e9955f27a41027c0, type: 3}
+    - target: {fileID: 869746130914886231, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
+      propertyPath: m_RaycastTarget
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7257791538408287700, guid: af99885e949118145abfb7bd6ad5f467, type: 3}
       propertyPath: m_Name
       value: Star1

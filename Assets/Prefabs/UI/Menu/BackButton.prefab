@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: e339af2419c8d48468b235d0bc3be357, type: 3}
     - target: {fileID: 5846680106980989162, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_Name
-      value: BackButton Variant
+      value: BackButton
       objectReference: {fileID: 0}
     - target: {fileID: 6630022663801786197, guid: bb1908cd8d98ff64d81928e8c4ef61d9, type: 3}
       propertyPath: m_Pivot.x
