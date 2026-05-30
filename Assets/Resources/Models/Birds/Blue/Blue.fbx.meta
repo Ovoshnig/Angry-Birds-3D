@@ -5,6 +5,21 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Blue
+    second: {fileID: 2100000, guid: cec2ed54b85214c4e96788d572a2113c, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Atlas_Color
+    second: {fileID: 2800000, guid: 1493f93cc9c14a840867b154e1d0b0c4, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Atlas_Roughness
+    second: {fileID: 2800000, guid: 9439ea4cf8c90594ba13083e21ad2721, type: 3}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Eye
