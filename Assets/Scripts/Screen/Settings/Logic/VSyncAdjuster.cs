@@ -16,7 +16,7 @@ public class VSyncAdjuster : IPostInitializable, IStartable, IDisposable
     public void PostInitialize()
     {
         SetVSync(_settingsStorage.Get(SettingsConstants.VSyncKey, false));
-        Application.targetFrameRate = -1;
+        Application.targetFrameRate = 180;
     }
 
     public void Start()
