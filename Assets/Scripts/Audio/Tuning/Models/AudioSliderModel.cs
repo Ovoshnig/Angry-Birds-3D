@@ -5,6 +5,7 @@ public abstract class AudioSliderModel : SliderModel, IStartable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly AudioSettings _audioSettings;
+    private readonly CompositeDisposable _disposables = new();
 
     protected AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
     {
@@ -27,14 +28,18 @@ public abstract class AudioSliderModel : SliderModel, IStartable
         float value = _settingsStorage.Get(DataKey, DefaultValue);
         SetClampedValue(value);
 
+        Value
+            .Subscribe(value => _settingsStorage.Set(DataKey, value))
+            .AddTo(_disposables);
+
         _settingsStorage.ResetHappened
             .Subscribe(_ => ResetValue())
-            .AddTo(Disposables);
+            .AddTo(_disposables);
     }
 
     public override void Dispose()
     {
-        _settingsStorage.Set(DataKey, Value.CurrentValue);
+        _disposables.Dispose();
         base.Dispose();
     }
 }

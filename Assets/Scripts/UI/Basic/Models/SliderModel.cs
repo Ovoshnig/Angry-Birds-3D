@@ -9,14 +9,9 @@ public abstract class SliderModel : IDisposable
     public abstract float MinValue { get; }
     public abstract float MaxValue { get; }
 
-    protected CompositeDisposable Disposables { get; } = new();
     protected abstract float DefaultValue { get; }
 
-    public virtual void Dispose()
-    {
-        Disposables.Dispose();
-        _value.Dispose();
-    }
+    public virtual void Dispose() => _value.Dispose();
 
     public void SetClampedValue(float value)
     {
