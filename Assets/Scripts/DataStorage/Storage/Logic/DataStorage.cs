@@ -44,9 +44,9 @@ public abstract class DataStorage : IInitializable, IDisposable
                 _runtimeCache[key] = value;
                 return value;
             }
-            catch (Exception exeption)
+            catch (Exception exception)
             {
-                Debug.LogWarning($"Failed to deserialize key {key}: {exeption.Message}");
+                Debug.LogWarning($"Failed to deserialize key {key}: {exception.Message}");
             }
         }
 
