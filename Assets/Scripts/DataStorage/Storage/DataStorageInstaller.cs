@@ -9,8 +9,8 @@ public class DataStorageInstaller : IInstaller
     {
         builder.UseEntryPoints(entryPoints =>
         {
-            entryPoints.Add<SaveStorage>().AsSelf();
-            entryPoints.Add<SettingsStorage>().AsSelf();
+            entryPoints.Add<SaveStorage>().As<DataStorage>().AsSelf();
+            entryPoints.Add<SettingsStorage>().As<DataStorage>().AsSelf();
         });
     }
 }

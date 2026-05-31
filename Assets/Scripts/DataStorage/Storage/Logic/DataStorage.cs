@@ -15,6 +15,8 @@ public abstract class DataStorage : IInitializable, IDisposable
 
     private Dictionary<string, JsonElement> _rawData = new();
 
+    public abstract DataStorageType StorageType { get; }
+
     public Observable<Unit> ResetHappened => _resetHappened;
 
     protected abstract string FileName { get; }
