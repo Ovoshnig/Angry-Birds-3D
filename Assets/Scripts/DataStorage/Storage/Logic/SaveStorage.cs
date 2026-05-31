@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SaveStorage : DataStorage
 {
+    public override DataStorageType StorageType => DataStorageType.Save;
+
     protected override string FileName => SaveConstants.FileName;
 
     private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
