@@ -5,12 +5,12 @@ public class RatingShower : IStartable
 {
     private readonly SaveStorage _saveStorage;
 
-    private Dictionary<int, int> _starRecordBylevelIndex;
+    private Dictionary<int, int> _starRecordByLevelIndex;
 
     public RatingShower(SaveStorage saveStorage) => _saveStorage = saveStorage;
 
     public void Start() =>
-        _starRecordBylevelIndex = _saveStorage.Get(SaveConstants.StarRecordBylevelIndex, new Dictionary<int, int>());
+        _starRecordByLevelIndex = _saveStorage.Get(SaveConstants.StarRecordByLevelIndex, new Dictionary<int, int>());
 
-    public int GetStarRecord(int levelIndex) => _starRecordBylevelIndex.GetValueOrDefault(levelIndex, 0);
+    public int GetStarRecord(int levelIndex) => _starRecordByLevelIndex.GetValueOrDefault(levelIndex, 0);
 }
