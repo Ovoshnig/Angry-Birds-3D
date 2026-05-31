@@ -35,18 +35,18 @@ public class RecordRatingSaver : IStartable, IDisposable
 
     private void OnRatingEvaluated(int starCount)
     {
-        Dictionary<int, int> starRecordBylevelIndex = _saveStorage
-            .Get(SaveConstants.StarRecordBylevelIndex, new Dictionary<int, int>());
+        Dictionary<int, int> starRecordByLevelIndex = _saveStorage
+            .Get(SaveConstants.StarRecordByLevelIndex, new Dictionary<int, int>());
 
         int currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        if (starRecordBylevelIndex.TryGetValue(currentLevel, out int starRecord))
+        if (starRecordByLevelIndex.TryGetValue(currentLevel, out int starRecord))
             starRecord = Mathf.Max(starCount, starRecord);
         else
             starRecord = starCount;
 
-        starRecordBylevelIndex[currentLevel] = starRecord;
-        _saveStorage.Set(SaveConstants.StarRecordBylevelIndex, starRecordBylevelIndex);
+        starRecordByLevelIndex[currentLevel] = starRecord;
+        _saveStorage.Set(SaveConstants.StarRecordByLevelIndex, starRecordByLevelIndex);
 
         _record.Value = starRecord;
     }
