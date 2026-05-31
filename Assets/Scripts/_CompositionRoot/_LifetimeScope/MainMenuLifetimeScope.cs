@@ -10,7 +10,7 @@ public class MainMenuLifetimeScope : LifetimeScope
     [SerializeField] private PanelCloseButtonsInstaller _panelCloseButtonsInstaller;
     [SerializeField] private SettingsStorageResetInstaller _settingsStorageResetInstaller;
     [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
-    [SerializeField] private ScreenSettingsInstaller _screenSettingsInstaller;
+    [SerializeField] private ScreenInstaller _screenInstaller;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -22,6 +22,6 @@ public class MainMenuLifetimeScope : LifetimeScope
         _panelCloseButtonsInstaller.Install(builder);
         _settingsStorageResetInstaller.Install(builder);
         _audioTuningInstaller.Install(builder);
-        _screenSettingsInstaller.Install(builder);
+        _screenInstaller.Install(builder);
     }
 }
