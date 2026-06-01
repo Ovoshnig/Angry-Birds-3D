@@ -1,6 +1,6 @@
 using R3;
 
-public class PauseMenuWindowButtonViewMediator : UIMediator<PauseButtonView>
+public class PauseMenuWindowButtonViewMediator : UIViewMediator<PauseButtonView>
 {
     private readonly PauseMenuWindow _pauseMenuWindow;
 

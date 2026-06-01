@@ -1,7 +1,7 @@
 using R3;
 using System.Collections.Generic;
 
-public class InputProviderTextPrinterViewsMediator : UIListMediator<TextPrinterView>
+public class InputProviderTextPrinterViewsMediator : UIViewsMediator<TextPrinterView>
 {
     private readonly UIInputProvider _uiInputProvider;
 

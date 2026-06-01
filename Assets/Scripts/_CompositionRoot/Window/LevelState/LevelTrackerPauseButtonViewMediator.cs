@@ -1,6 +1,6 @@
 using R3;
 
-public class LevelTrackerPauseButtonViewMediator : UIMediator<PauseButtonView>
+public class LevelTrackerPauseButtonViewMediator : UIViewMediator<PauseButtonView>
 {
     private readonly LevelStateTracker _levelStateTracker;
 

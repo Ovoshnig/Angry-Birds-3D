@@ -25,8 +25,8 @@ public class AudioTuningInstaller : IInstaller
         {
             entryPoints.Add<MusicSliderModel>().As<AudioSliderModel>().AsSelf();
             entryPoints.Add<SFXSliderModel>().As<AudioSliderModel>().AsSelf();
-            entryPoints.Add<AudioSliderViewsMediator>();
-            entryPoints.Add<MixerTunerSliderModelMediator>();
+            entryPoints.Add<AudioSliderModelsSliderViewsMediator>();
+            entryPoints.Add<AudioMixerTunerSliderModelsMediator>();
         });
     }
 }

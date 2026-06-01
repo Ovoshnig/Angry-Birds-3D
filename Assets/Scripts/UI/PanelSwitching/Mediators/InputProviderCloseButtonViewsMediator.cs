@@ -1,7 +1,7 @@
 using R3;
 using System.Collections.Generic;
 
-public class InputProviderCloseButtonViewsMediator : UIListMediator<PanelCloseButtonView>
+public class InputProviderCloseButtonViewsMediator : UIViewsMediator<PanelCloseButtonView>
 {
     private readonly UIInputProvider _uiInputProvider;
 

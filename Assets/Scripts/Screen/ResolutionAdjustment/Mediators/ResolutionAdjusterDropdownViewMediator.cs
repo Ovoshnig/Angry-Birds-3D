@@ -1,6 +1,6 @@
 using R3;
 
-public class ResolutionAdjusterDropdownViewMediator : UIMediator<ResolutionAdjustDropdownView>
+public class ResolutionAdjusterDropdownViewMediator : UIViewMediator<ResolutionAdjustDropdownView>
 {
     private readonly ResolutionAdjuster _resolutionAdjuster;
 

@@ -1,7 +1,7 @@
 using R3;
 using System.Collections.Generic;
 
-public class RatingShowerViewsMediator : UIListMediator<RatingShowerView>
+public class RatingShowerViewsMediator : UIViewsMediator<RatingShowerView>
 {
     private readonly RatingShower _ratingShower;
 

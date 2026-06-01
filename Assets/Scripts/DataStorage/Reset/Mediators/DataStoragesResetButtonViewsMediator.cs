@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-public class DataStoragesResetButtonViewsMediator : UIListMediator<DataResetButtonView>
+public class DataStoragesResetButtonViewsMediator : UIViewsMediator<DataResetButtonView>
 {
     private readonly IReadOnlyList<DataStorage> _dataStorages;
 

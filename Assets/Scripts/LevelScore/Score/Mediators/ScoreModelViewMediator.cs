@@ -1,10 +1,10 @@
 using R3;
 
-public class ScoreMediator : UIMediator<ScoreView>
+public class ScoreModelViewMediator : UIViewMediator<ScoreView>
 {
     private readonly ScoreModel _scoreModel;
 
-    public ScoreMediator(ScoreModel scoreModel, ScoreView view) : base(view) =>
+    public ScoreModelViewMediator(ScoreModel scoreModel, ScoreView view) : base(view) =>
         _scoreModel = scoreModel;
 
     protected override void OnViewEnabled(ScoreView view, CompositeDisposable viewDisposables)

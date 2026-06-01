@@ -1,6 +1,6 @@
 ﻿using R3;
 
-public class GameQuitterButtonViewMediator : UIMediator<GameQuitButtonView>
+public class GameQuitterButtonViewMediator : UIViewMediator<GameQuitButtonView>
 {
     private readonly GameQuitter _gameQuitter;
 

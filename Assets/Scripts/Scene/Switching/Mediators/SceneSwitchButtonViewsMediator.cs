@@ -2,7 +2,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 
-public class SceneSwitchButtonViewsMediator : UIListMediator<SceneSwitchButtonView>
+public class SceneSwitchButtonViewsMediator : UIViewsMediator<SceneSwitchButtonView>
 {
     private readonly SceneSwitch _sceneSwitch;
 

@@ -1,12 +1,12 @@
 using R3;
 using System.Collections.Generic;
 
-public abstract class UIListMediator<TView> : Mediator where TView : UIView
+public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
 {
     private readonly IReadOnlyList<TView> _views;
     private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = new();
 
-    public UIListMediator(IReadOnlyList<TView> views) => _views = views;
+    public UIViewsMediator(IReadOnlyList<TView> views) => _views = views;
 
     protected override void Bind(CompositeDisposable disposables)
     {

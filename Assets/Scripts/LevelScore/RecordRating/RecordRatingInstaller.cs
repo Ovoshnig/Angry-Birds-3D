@@ -15,7 +15,7 @@ public class RecordRatingInstaller : IInstaller
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<RecordRatingSaver>().AsSelf();
-            entryPoints.Add<RecordRatingViewMediator>();
+            entryPoints.Add<RecordRatingSaverViewMediator>();
         });
     }
 }
