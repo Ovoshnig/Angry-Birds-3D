@@ -6,16 +6,16 @@ using VContainer.Unity;
 [Serializable]
 public class FullScreenAdjustmentInstaller : IInstaller
 {
-    [SerializeField] private FullScreenAdjusterView _adjusterView;
+    [SerializeField] private FullScreenAdjustToggleView _toggleView;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_adjusterView);
+        builder.RegisterInstance(_toggleView);
 
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<FullScreenAdjuster>().AsSelf();
-            entryPoints.Add<FullScreenAdjusterViewMediator>();
+            entryPoints.Add<FullScreenAdjusterToggleViewMediator>();
         });
     }
 }

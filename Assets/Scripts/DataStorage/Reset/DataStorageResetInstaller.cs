@@ -7,14 +7,14 @@ using VContainer.Unity;
 [Serializable]
 public class DataStorageResetInstaller : IInstaller
 {
-    [SerializeField] private RectTransform _resetterViewParent;
+    [SerializeField] private RectTransform _resetButtonParent;
 
     public void Install(IContainerBuilder builder)
     {
-        IReadOnlyList<DataResetterView> resetterViews = _resetterViewParent
-            .GetComponentsInChildren<DataResetterView>(true);
-        builder.RegisterInstance(resetterViews);
+        IReadOnlyList<DataResetButtonView> resetButtonViews = _resetButtonParent
+            .GetComponentsInChildren<DataResetButtonView>(true);
+        builder.RegisterInstance(resetButtonViews);
 
-        builder.RegisterEntryPoint<DataStoragesResetterViewsMediator>();
+        builder.RegisterEntryPoint<DataStoragesResetButtonViewsMediator>();
     }
 }

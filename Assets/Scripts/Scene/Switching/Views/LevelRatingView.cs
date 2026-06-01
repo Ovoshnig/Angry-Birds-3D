@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class LevelRatingView : MonoBehaviour
 {
-    [SerializeField] private SceneButtonView _levelButtonView;
+    [SerializeField] private SceneSwitchButtonView _levelButtonView;
 
     private void Start()
     {
