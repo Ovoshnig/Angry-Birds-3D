@@ -5,13 +5,13 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class PanelCloseButtonsInstaller : IInstaller
+public class PanelSwitchingInstaller : IInstaller
 {
-    [SerializeField] private RectTransform _closeButtonsParent;
+    [SerializeField] private RectTransform _buttonsParent;
 
     public void Install(IContainerBuilder builder)
     {
-        IReadOnlyList<PanelCloseButtonView> closeButtonViews = _closeButtonsParent
+        IReadOnlyList<PanelCloseButtonView> closeButtonViews = _buttonsParent
             .GetComponentsInChildren<PanelCloseButtonView>(true);
 
         builder.RegisterInstance(closeButtonViews);

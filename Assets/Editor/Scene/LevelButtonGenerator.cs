@@ -60,7 +60,7 @@ public class LevelButtonGenerator : Editor
             int sceneIndex = sceneSettings.FirstLevelIndex + i;
             int displayedLevelIndex = i + 1;
 
-            SceneButtonView levelView = levelButtonBlock.GetComponentInChildren<SceneButtonView>();
+            SceneSwitchButtonView levelView = levelButtonBlock.GetComponentInChildren<SceneSwitchButtonView>();
             Undo.RecordObject(levelView, UndoGroupName);
             levelView.SetSpecificIndex(sceneIndex);
 
@@ -81,7 +81,7 @@ public class LevelButtonGenerator : Editor
     private static bool TryDestroyOld(RectTransform parent)
     {
         IEnumerable<RectTransform> children = parent.Cast<RectTransform>();
-        RectTransform invalidChild = children.FirstOrDefault(c => c.GetComponentInChildren<SceneButtonView>() == null);
+        RectTransform invalidChild = children.FirstOrDefault(c => c.GetComponentInChildren<SceneSwitchButtonView>() == null);
 
         if (invalidChild != null)
         {

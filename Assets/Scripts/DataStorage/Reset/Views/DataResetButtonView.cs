@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DataResetterView : ButtonView
+public class DataResetButtonView : ButtonView
 {
     [field: SerializeField] public DataStorageType StorageType { get; private set; }
 }

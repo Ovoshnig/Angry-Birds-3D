@@ -7,7 +7,7 @@ public class MainMenuLifetimeScope : LifetimeScope
     [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
     [SerializeField] private RatingShowingInstaller _ratingShowingInstaller;
     [SerializeField] private GameQuittingInstaller _gameQuittingInstaller;
-    [SerializeField] private PanelCloseButtonsInstaller _panelCloseButtonsInstaller;
+    [SerializeField] private PanelSwitchingInstaller _panelSwitchingInstaller;
     [SerializeField] private DataStorageResetInstaller _dataStorageResetInstaller;
     [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
     [SerializeField] private ScreenInstaller _screenInstaller;
@@ -19,7 +19,7 @@ public class MainMenuLifetimeScope : LifetimeScope
         _sceneSwitchingInstaller.Install(builder);
         _ratingShowingInstaller.Install(builder);
         _gameQuittingInstaller.Install(builder);
-        _panelCloseButtonsInstaller.Install(builder);
+        _panelSwitchingInstaller.Install(builder);
         _dataStorageResetInstaller.Install(builder);
         _audioTuningInstaller.Install(builder);
         _screenInstaller.Install(builder);

@@ -6,16 +6,16 @@ using VContainer.Unity;
 [Serializable]
 public class ResolutionAdjustmentInstaller : IInstaller
 {
-    [SerializeField] private ResolutionAdjusterView _adjusterView;
+    [SerializeField] private ResolutionAdjustDropdownView _dropdownView;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_adjusterView);
+        builder.RegisterInstance(_dropdownView);
 
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<ResolutionAdjuster>().AsSelf();
-            entryPoints.Add<ResolutionAdjusterViewMediator>();
+            entryPoints.Add<ResolutionAdjusterDropdownViewMediator>();
         });
     }
 }

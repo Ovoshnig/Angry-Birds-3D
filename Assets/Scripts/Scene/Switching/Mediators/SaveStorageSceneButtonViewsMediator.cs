@@ -2,7 +2,7 @@ using R3;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class SaveStorageSceneButtonViewsMediator : UIListMediator<SceneButtonView>
+public class SaveStorageSceneButtonViewsMediator : UIListMediator<SceneSwitchButtonView>
 {
     private readonly SaveStorage _saveStorage;
     private readonly SceneSettings _sceneSettings;
@@ -10,7 +10,7 @@ public class SaveStorageSceneButtonViewsMediator : UIListMediator<SceneButtonVie
     private int _currentScene;
 
     public SaveStorageSceneButtonViewsMediator(SaveStorage saveStorage,
-        IReadOnlyList<SceneButtonView> views,
+        IReadOnlyList<SceneSwitchButtonView> views,
         SceneSettings sceneSettings) : base(views)
     {
         _saveStorage = saveStorage;
@@ -24,7 +24,7 @@ public class SaveStorageSceneButtonViewsMediator : UIListMediator<SceneButtonVie
         _currentScene = SceneManager.GetActiveScene().buildIndex;
     }
 
-    protected override void OnViewEnabled(SceneButtonView view, CompositeDisposable viewDisposables)
+    protected override void OnViewEnabled(SceneSwitchButtonView view, CompositeDisposable viewDisposables)
     {
         int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
 

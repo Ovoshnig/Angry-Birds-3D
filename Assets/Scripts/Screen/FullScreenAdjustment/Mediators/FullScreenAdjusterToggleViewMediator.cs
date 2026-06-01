@@ -1,13 +1,13 @@
 using R3;
 
-public class FullScreenAdjusterViewMediator : UIMediator<FullScreenAdjusterView>
+public class FullScreenAdjusterToggleViewMediator : UIMediator<FullScreenAdjustToggleView>
 {
     private readonly FullScreenAdjuster _fullScreenAdjuster;
 
-    public FullScreenAdjusterViewMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenAdjusterView view)
+    public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenAdjustToggleView view)
         : base(view) => _fullScreenAdjuster = fullScreenAdjuster;
 
-    protected override void OnViewEnabled(FullScreenAdjusterView view, CompositeDisposable viewDisposables)
+    protected override void OnViewEnabled(FullScreenAdjustToggleView view, CompositeDisposable viewDisposables)
     {
         _fullScreenAdjuster.IsFullScreen
             .Subscribe(view.SetIsOnWithoutNotify)

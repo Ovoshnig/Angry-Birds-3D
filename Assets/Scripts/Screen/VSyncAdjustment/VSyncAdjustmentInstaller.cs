@@ -6,16 +6,16 @@ using VContainer.Unity;
 [Serializable]
 public class VSyncAdjustmentInstaller : IInstaller
 {
-    [SerializeField] private VSyncAdjusterView _adjusterView;
+    [SerializeField] private VSyncAdjustToggleView _toggleView;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_adjusterView);
+        builder.RegisterInstance(_toggleView);
 
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<VSyncAdjuster>().AsSelf();
-            entryPoints.Add<VSyncAdjusterViewMediator>();
+            entryPoints.Add<VSyncAdjusterToggleViewMediator>();
         });
     }
 }

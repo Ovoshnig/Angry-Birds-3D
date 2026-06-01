@@ -5425,21 +5425,21 @@ MonoBehaviour:
   _ratingShowingInstaller:
     _ratingShowerParent: {fileID: 1822887723}
   _gameQuittingInstaller:
-    _quitterButtonView: {fileID: 7801221672610809886}
-  _panelCloseButtonsInstaller:
-    _closeButtonsParent: {fileID: 2134080788}
+    _quitButtonView: {fileID: 7801221672610809886}
+  _panelSwitchingInstaller:
+    _buttonsParent: {fileID: 2134080788}
   _dataStorageResetInstaller:
-    _resetterViewParent: {fileID: 834997611}
+    _resetButtonParent: {fileID: 834997611}
   _audioTuningInstaller:
     _sliderViewsParent: {fileID: 702898039}
     _audioMixer: {fileID: 24100000, guid: 4589c14a7bd6ca145b694b55f7a0bc4e, type: 2}
   _screenInstaller:
     _fullScreenAdjustmentInstaller:
-      _adjusterView: {fileID: 1116178760}
+      _toggleView: {fileID: 1116178760}
     _resolutionAdjustmentInstaller:
-      _adjusterView: {fileID: 781590903}
+      _dropdownView: {fileID: 781590903}
     _vSyncAdjustmentInstaller:
-      _adjusterView: {fileID: 1685023560}
+      _toggleView: {fileID: 1685023560}
 --- !u!4 &1613175110
 Transform:
   m_ObjectHideFlags: 0

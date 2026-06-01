@@ -2,7 +2,7 @@
 using System.Linq;
 using TMPro;
 
-public class ResolutionAdjusterView : DropdownView
+public class ResolutionAdjustDropdownView : DropdownView
 {
     public void SetOptions(IReadOnlyList<ResolutionData> resolutions)
     {

@@ -1,13 +1,13 @@
 using R3;
 
-public class ResolutionAdjusterViewMediator : UIMediator<ResolutionAdjusterView>
+public class ResolutionAdjusterDropdownViewMediator : UIMediator<ResolutionAdjustDropdownView>
 {
     private readonly ResolutionAdjuster _resolutionAdjuster;
 
-    public ResolutionAdjusterViewMediator(ResolutionAdjuster resolutionAdjuster, ResolutionAdjusterView view)
-        : base(view) => _resolutionAdjuster = resolutionAdjuster;
+    public ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
+        ResolutionAdjustDropdownView view) : base(view) => _resolutionAdjuster = resolutionAdjuster;
 
-    protected override void OnViewEnabled(ResolutionAdjusterView view, CompositeDisposable viewDisposables)
+    protected override void OnViewEnabled(ResolutionAdjustDropdownView view, CompositeDisposable viewDisposables)
     {
         view.SetOptions(_resolutionAdjuster.Resolutions);
 
