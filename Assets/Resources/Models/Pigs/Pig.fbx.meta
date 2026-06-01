@@ -5,6 +5,21 @@ ModelImporter:
   internalIDToNameTable: []
   externalObjects:
   - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Pig
+    second: {fileID: 2100000, guid: eafaafdb342610a4bbbe8ff79c0eb4ac, type: 2}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Atlas_Color
+    second: {fileID: 2800000, guid: 9f6c4d1985280c84aa3f729a9d78ad9d, type: 3}
+  - first:
+      type: UnityEngine:Texture2D
+      assembly: UnityEngine.CoreModule
+      name: Atlas_Roughness
+    second: {fileID: 2800000, guid: 8ef1129b2503ad1449c28580122b0337, type: 3}
+  - first:
       type: UnityEngine:Texture2D
       assembly: UnityEngine.CoreModule
       name: Ear

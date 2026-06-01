@@ -15,6 +15,8 @@ public abstract class DataStorage : IInitializable, IDisposable
 
     private Dictionary<string, JsonElement> _rawData = new();
 
+    public abstract DataStorageType StorageType { get; }
+
     public Observable<Unit> ResetHappened => _resetHappened;
 
     protected abstract string FileName { get; }
@@ -44,9 +46,9 @@ public abstract class DataStorage : IInitializable, IDisposable
                 _runtimeCache[key] = value;
                 return value;
             }
-            catch (Exception exeption)
+            catch (Exception exception)
             {
-                Debug.LogWarning($"Failed to deserialize key {key}: {exeption.Message}");
+                Debug.LogWarning($"Failed to deserialize key {key}: {exception.Message}");
             }
         }
 

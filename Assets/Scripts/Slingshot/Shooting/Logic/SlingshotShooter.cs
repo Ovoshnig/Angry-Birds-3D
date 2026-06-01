@@ -159,12 +159,11 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     private void ResetBird()
     {
-        _currentState.Value = SlingshotState.InputWaiting;
+        if (_currentBird == null)
+            return;
 
-        if (_currentBird != null)
-        {
-            _currentBird.isKinematic = true;
-            _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
-        }
+        _currentState.Value = SlingshotState.InputWaiting;
+        _currentBird.isKinematic = true;
+        _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
 }

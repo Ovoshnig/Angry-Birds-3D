@@ -10,10 +10,15 @@ public class SceneSwitchingInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        IReadOnlyList<SceneButtonView> sceneViews = Object
-            .FindObjectsByType<SceneButtonView>(FindObjectsInactive.Include);
+        IReadOnlyList<SceneSwitchButtonView> switchButtonViews = Object
+            .FindObjectsByType<SceneSwitchButtonView>(FindObjectsInactive.Include);
 
-        builder.RegisterInstance(sceneViews);
-        builder.RegisterEntryPoint<SceneSwitchViewsMediator>();
+        builder.RegisterInstance(switchButtonViews);
+
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<SceneSwitchButtonViewsMediator>();
+            entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
+        });
     }
 }

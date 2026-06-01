@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class SaveStorage : DataStorage
 {
+    public override DataStorageType StorageType => DataStorageType.Save;
+
     protected override string FileName => SaveConstants.FileName;
 
     private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
@@ -26,7 +28,9 @@ public class SaveStorage : DataStorage
             return;
 
         Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
-        ResetData();
+
+        if (!Debug.isDebugBuild)
+            ResetData();
     }
 
     protected override void SaveData()

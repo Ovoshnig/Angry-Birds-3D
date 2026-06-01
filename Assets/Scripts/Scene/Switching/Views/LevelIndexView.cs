@@ -6,12 +6,12 @@ using UnityEngine;
 public sealed class LevelIndexView : UIView
 {
     private TMP_Text _text;
-    private SceneButtonView _buttonView;
+    private SceneSwitchButtonView _buttonView;
 
     private void Awake()
     {
         _text = GetComponent<TMP_Text>();
-        _buttonView = GetComponentInParent<SceneButtonView>();
+        _buttonView = GetComponentInParent<SceneSwitchButtonView>();
     }
 
     private void Start()

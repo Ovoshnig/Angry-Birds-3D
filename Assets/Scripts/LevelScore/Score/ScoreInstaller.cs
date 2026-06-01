@@ -15,7 +15,7 @@ public class ScoreInstaller : IInstaller
 
         builder.UseEntryPoints(entryPoints =>
         {
-            entryPoints.Add<ScoreMediator>();
+            entryPoints.Add<ScoreModelViewMediator>();
             entryPoints.Add<ScoreModelPointsPoolMediator>();
         });
     }
