@@ -1,12 +1,12 @@
 using R3;
 using System.Collections.Generic;
 
-public class MixerTunerSliderModelMediator : Mediator
+public class AudioMixerTunerSliderModelsMediator : Mediator
 {
     private readonly AudioMixerTuner _audioMixerTuner;
     private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
 
-    public MixerTunerSliderModelMediator(AudioMixerTuner audioMixerTuner, IReadOnlyList<AudioSliderModel> sliderModels)
+    public AudioMixerTunerSliderModelsMediator(AudioMixerTuner audioMixerTuner, IReadOnlyList<AudioSliderModel> sliderModels)
     {
         _audioMixerTuner = audioMixerTuner;
         _sliderModels = sliderModels;

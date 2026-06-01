@@ -1,6 +1,6 @@
 ﻿using R3;
 
-public class WindowResumeButtonViewMediator : UIMediator<ResumeButtonView>
+public class WindowResumeButtonViewMediator : UIViewMediator<ResumeButtonView>
 {
     private readonly Window _window;
 

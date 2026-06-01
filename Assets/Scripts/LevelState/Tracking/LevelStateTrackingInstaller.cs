@@ -19,7 +19,7 @@ public class LevelStateTrackingInstaller : IInstaller
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<LevelStateTracker>().AsSelf();
-            entryPoints.Add<FinalScoreViewScoreModelMediator>();
+            entryPoints.Add<ScoreModelFinalScoreViewMediator>();
             entryPoints.Add<FailureViewLevelTrackerMediator>();
         });
     }

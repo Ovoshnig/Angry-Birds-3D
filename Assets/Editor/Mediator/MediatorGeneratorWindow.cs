@@ -8,8 +8,8 @@ public class MediatorGeneratorWindow : EditorWindow
     public enum MediatorType
     {
         Standard,
-        UI,
-        UIList
+        UIView,
+        UIViews
     }
 
     private MediatorType _selectedType;
@@ -21,11 +21,11 @@ public class MediatorGeneratorWindow : EditorWindow
     [MenuItem("Assets/Create/Scripting/Mediator", false, priority = 3, secondaryPriority = 1f)]
     public static void CreateStandard() => Open(MediatorType.Standard);
 
-    [MenuItem("Assets/Create/Scripting/UI Mediator", false, priority = 3, secondaryPriority = 2f)]
-    public static void CreateUI() => Open(MediatorType.UI);
+    [MenuItem("Assets/Create/Scripting/UIView Mediator", false, priority = 3, secondaryPriority = 2f)]
+    public static void CreateUIView() => Open(MediatorType.UIView);
 
-    [MenuItem("Assets/Create/Scripting/UI List Mediator", false, priority = 3, secondaryPriority = 3f)]
-    public static void CreateUIList() => Open(MediatorType.UIList);
+    [MenuItem("Assets/Create/Scripting/UIViews Mediator", false, priority = 3, secondaryPriority = 3f)]
+    public static void CreateUIViews() => Open(MediatorType.UIViews);
 
     public static void Open(MediatorType mediatorType)
     {
@@ -59,7 +59,7 @@ public class MediatorGeneratorWindow : EditorWindow
         {
             _scriptB = selectedScriptB;
 
-            if (_selectedType == MediatorType.UI || _selectedType == MediatorType.UIList)
+            if (_selectedType == MediatorType.UIView || _selectedType == MediatorType.UIViews)
                 ValidateViewScript();
         }
 
@@ -113,6 +113,7 @@ public class MediatorGeneratorWindow : EditorWindow
     {
         string nameA = _scriptA != null ? _scriptA.name : "First";
         string nameB = _scriptB != null ? _scriptB.name : "Second";
+        nameB = _selectedType == MediatorType.UIViews ? nameB + "s" : nameB;
         _mediatorName = $"{nameA}{nameB}Mediator";
     }
 
@@ -134,8 +135,8 @@ public class MediatorGeneratorWindow : EditorWindow
         string code = _selectedType switch
         {
             MediatorType.Standard => GenerateStandardMediatorCode(_scriptA.name, _scriptB.name),
-            MediatorType.UI => GenerateUIMediatorCode(_scriptA.name, _scriptB.name),
-            MediatorType.UIList => GenerateUIListMediatorCode(_scriptA.name, _scriptB.name),
+            MediatorType.UIView => GenerateUIViewMediatorCode(_scriptA.name, _scriptB.name),
+            MediatorType.UIViews => GenerateUIViewsMediatorCode(_scriptA.name, _scriptB.name),
             _ => throw new ArgumentOutOfRangeException()
         };
 
@@ -168,7 +169,7 @@ public class MediatorGeneratorWindow : EditorWindow
 
         string code = $@"using R3;
 
-public class {_mediatorName} : Mediator
+public class {_mediatorName} : {nameof(Mediator)}
 {{
     private readonly {dependencyA} {fieldA};
     private readonly {dependencyB} {fieldB};
@@ -188,13 +189,13 @@ public class {_mediatorName} : Mediator
         return code;
     }
 
-    private string GenerateUIMediatorCode(string dependencyA, string dependencyB)
+    private string GenerateUIViewMediatorCode(string dependencyA, string dependencyB)
     {
         string serviceField = GetPrivateFieldName(dependencyA);
 
         string code = $@"using R3;
 
-public class {_mediatorName} : UIMediator<{dependencyB}>
+public class {_mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
 {{
     private readonly {dependencyA} {serviceField};
 
@@ -210,14 +211,14 @@ public class {_mediatorName} : UIMediator<{dependencyB}>
         return code;
     }
 
-    private string GenerateUIListMediatorCode(string dependencyA, string dependencyB)
+    private string GenerateUIViewsMediatorCode(string dependencyA, string dependencyB)
     {
         string serviceField = GetPrivateFieldName(dependencyA);
 
         string code = $@"using R3;
 using System.Collections.Generic;
 
-public class {_mediatorName} : UIListMediator<{dependencyB}>
+public class {_mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
 {{
     private readonly {dependencyA} {serviceField};
 

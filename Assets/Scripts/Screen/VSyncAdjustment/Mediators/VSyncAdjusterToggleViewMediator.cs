@@ -1,6 +1,6 @@
 using R3;
 
-public class VSyncAdjusterToggleViewMediator : UIMediator<VSyncAdjustToggleView>
+public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
 {
     private readonly VSyncAdjuster _vSyncAdjuster;
 

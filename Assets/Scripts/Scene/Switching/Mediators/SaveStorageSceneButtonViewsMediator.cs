@@ -2,7 +2,7 @@ using R3;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
-public class SaveStorageSceneButtonViewsMediator : UIListMediator<SceneSwitchButtonView>
+public class SaveStorageSceneButtonViewsMediator : UIViewsMediator<SceneSwitchButtonView>
 {
     private readonly SaveStorage _saveStorage;
     private readonly SceneSettings _sceneSettings;

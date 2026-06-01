@@ -1,11 +1,11 @@
 using R3;
 
-public abstract class UIMediator<TView> : Mediator where TView : UIView
+public abstract class UIViewMediator<TView> : Mediator where TView : UIView
 {
     private readonly TView _view;
     private readonly CompositeDisposable _viewDisposables = new();
 
-    public UIMediator(TView view) => _view = view;
+    public UIViewMediator(TView view) => _view = view;
 
     protected override void Bind(CompositeDisposable disposables)
     {

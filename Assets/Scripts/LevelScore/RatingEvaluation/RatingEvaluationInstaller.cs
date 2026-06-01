@@ -12,6 +12,6 @@ public class RatingEvaluationInstaller : IInstaller
     {
         builder.RegisterInstance(_evaluatorView);
         builder.Register<RatingEvaluator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<RatingEvaluatorMediator>();
+        builder.RegisterEntryPoint<RatingEvaluatorViewMediator>();
     }
 }

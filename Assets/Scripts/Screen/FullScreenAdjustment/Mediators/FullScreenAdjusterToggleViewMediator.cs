@@ -1,6 +1,6 @@
 using R3;
 
-public class FullScreenAdjusterToggleViewMediator : UIMediator<FullScreenAdjustToggleView>
+public class FullScreenAdjusterToggleViewMediator : UIViewMediator<FullScreenAdjustToggleView>
 {
     private readonly FullScreenAdjuster _fullScreenAdjuster;
 

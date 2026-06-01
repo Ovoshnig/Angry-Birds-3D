@@ -2,12 +2,12 @@ using R3;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AudioSliderViewsMediator : UIListMediator<AudioSliderView>
+public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
 {
     private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
 
-    public AudioSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels, IReadOnlyList<AudioSliderView> views)
-        : base(views) => _sliderModels = sliderModels;
+    public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
+        IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
 
     protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
     {
