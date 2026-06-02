@@ -3,7 +3,7 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class ObjectCollisionInstaller : IInstaller
+public class ObjectCollisionCollisionInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {

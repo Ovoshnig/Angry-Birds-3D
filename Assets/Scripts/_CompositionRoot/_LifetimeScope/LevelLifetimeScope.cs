@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
@@ -42,7 +41,6 @@ public class LevelLifetimeScope : LifetimeScope
         _birdInstaller.Install(builder);
         _pigInstaller.Install(builder);
         _blockInstaller.Install(builder);
-        InstallCollidableEntities(builder);
     }
 
     private void InstallMediators(IContainerBuilder builder)
@@ -56,23 +54,5 @@ public class LevelLifetimeScope : LifetimeScope
         new AudioSFXMediatorsInstaller().Install(builder);
         new BirdMediatorsInstaller().Install(builder);
         new SlingshotMediatorsInstaller().Install(builder);
-    }
-
-    private void InstallCollidableEntities(IContainerBuilder builder)
-    {
-        builder.Register(resolver =>
-        {
-            IReadOnlyList<BirdEntityView> birds = resolver.Resolve<IReadOnlyList<BirdEntityView>>();
-            IReadOnlyList<BlockEntityView> blocks = resolver.Resolve<IReadOnlyList<BlockEntityView>>();
-            IReadOnlyList<PigEntityView> pigs = resolver.Resolve<IReadOnlyList<PigEntityView>>();
-
-            List<CollidableEntityView> allCollidables = new(birds.Count + blocks.Count + pigs.Count);
-            allCollidables.AddRange(birds);
-            allCollidables.AddRange(blocks);
-            allCollidables.AddRange(pigs);
-
-            return allCollidables;
-        },
-        Lifetime.Singleton).As<IReadOnlyList<CollidableEntityView>>();
     }
 }
