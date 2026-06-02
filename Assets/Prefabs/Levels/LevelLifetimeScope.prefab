@@ -1,0 +1,66 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6053064933218109304
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4327329928734009670}
+  - component: {fileID: 5672890212311352383}
+  m_Layer: 0
+  m_Name: LevelLifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4327329928734009670
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053064933218109304}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5672890212311352383
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6053064933218109304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4d2f4140b64fe6c48811208ab32b9274, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::LevelLifetimeScope
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects: []
+  _levelStateInstaller:
+    _sfxSettings: {fileID: 11400000, guid: 0e554c29318d5c34795e74aa4e9ea9fe, type: 2}
+  _levelScoreInstaller:
+    _pointsInstaller:
+      _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+  _cameraInstaller: {}
+  _windowInstaller: {}
+  _audioTuningInstaller:
+    _audioMixer: {fileID: 24100000, guid: 4589c14a7bd6ca145b694b55f7a0bc4e, type: 2}
+  _sfxInstaller:
+    _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
+  _slingshotInstaller: {}
+  _objectCollisionInstaller: {}
+  _birdInstaller: {}
+  _pigInstaller: {}
+  _blockInstaller: {}
