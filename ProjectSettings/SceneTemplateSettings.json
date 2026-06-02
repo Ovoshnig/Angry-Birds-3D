@@ -4,7 +4,7 @@
         {
             "userAdded": false,
             "type": "UnityEngine.AnimationClip",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
@@ -19,7 +19,7 @@
         {
             "userAdded": false,
             "type": "UnityEditor.Audio.AudioMixerController",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
@@ -49,7 +49,7 @@
         {
             "userAdded": false,
             "type": "UnityEngine.Material",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
@@ -59,12 +59,12 @@
         {
             "userAdded": false,
             "type": "UnityEngine.PhysicsMaterial",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
             "type": "UnityEngine.PhysicsMaterial2D",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
@@ -99,17 +99,17 @@
         {
             "userAdded": false,
             "type": "UnityEngine.Texture",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
             "type": "UnityEngine.Texture2D",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         },
         {
             "userAdded": false,
             "type": "UnityEngine.Timeline.TimelineAsset",
-            "defaultInstantiationMode": 0
+            "defaultInstantiationMode": 1
         }
     ],
     "defaultDependencyTypeInfo": {
