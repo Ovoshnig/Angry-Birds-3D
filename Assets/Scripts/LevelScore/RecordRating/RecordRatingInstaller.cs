@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class RecordRatingInstaller : IInstaller
 {
-    [SerializeField] private RecordRatingView _recordRatingView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_recordRatingView);
+        builder.RegisterInstanceInHierarchy<RecordRatingView>();
 
         builder.UseEntryPoints(entryPoints =>
         {

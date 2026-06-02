@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class WindowPauseInstaller : IInstaller
 {
-    [SerializeField] private PauseButtonView _pauseButtonView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_pauseButtonView);
+        builder.RegisterInstanceInHierarchy<PauseButtonView>();
         builder.RegisterEntryPoint<PauseMenuWindowButtonViewMediator>();
     }
 }
