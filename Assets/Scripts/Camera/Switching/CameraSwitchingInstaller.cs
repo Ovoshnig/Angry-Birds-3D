@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class CameraSwitchingInstaller : IInstaller
 {
-    [SerializeField] private CameraSwitchView _cameraSwitchView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_cameraSwitchView);
+        builder.RegisterInstanceInHierarchy<CameraSwitchView>();
         builder.RegisterEntryPoint<StartCameraSwitch>().AsSelf();
     }
 }

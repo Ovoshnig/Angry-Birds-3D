@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class FullScreenAdjustmentInstaller : IInstaller
 {
-    [SerializeField] private FullScreenAdjustToggleView _toggleView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_toggleView);
+        builder.RegisterInstanceInHierarchy<FullScreenAdjustToggleView>();
 
         builder.UseEntryPoints(entryPoints =>
         {
