@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
+    - target: {fileID: 679339740206571447, guid: a08cbe031b38012459d4484e12057f9e, type: 3}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 2605389528928545234, guid: a08cbe031b38012459d4484e12057f9e, type: 3}
       propertyPath: _damageRandomContainer
       value: 

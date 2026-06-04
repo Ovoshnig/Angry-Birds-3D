@@ -24,6 +24,10 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 6c455d0dd98a3344ea6b8abf5c29115d, type: 2}
+    - target: {fileID: -6465795415378221829, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
+      propertyPath: m_Mass
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1572713174019042775, guid: b0f65a4d80072ff41bae53f489aaee38, type: 3}
       propertyPath: m_LocalPosition.x
       value: -7
