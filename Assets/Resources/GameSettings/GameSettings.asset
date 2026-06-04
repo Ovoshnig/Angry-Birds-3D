@@ -26,6 +26,7 @@ MonoBehaviour:
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
+    <MaxSameSfxPlaying>k__BackingField: 2
   <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.1
     <CollisionThreshold>k__BackingField: 1

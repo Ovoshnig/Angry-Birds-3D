@@ -8,6 +8,7 @@ public class AudioSettings
     [field: SerializeField, Range(-80f, 20f)] public float MaxVolume { get; private set; } = 0f;
     [field: SerializeField, Range(-80f, 20f)] public float DefaultVolume { get; private set; } = -10f;
     [field: SerializeField, Min(0f)] public float SnapshotTransitionDuration { get; private set; } = 0f;
-    [field: SerializeField] public int PoolDefaultCapacity { get; private set; } = 10;
-    [field: SerializeField] public int PoolMaxSize { get; private set; } = 50;
+    [field: SerializeField, Min(0)] public int PoolDefaultCapacity { get; private set; } = 10;
+    [field: SerializeField, Min(0)] public int PoolMaxSize { get; private set; } = 50;
+    [field: SerializeField, Min(0)] public int MaxSameSfxPlaying { get; private set; } = 3;
 }
