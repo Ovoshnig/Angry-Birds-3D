@@ -1,5 +1,4 @@
 using R3;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.Audio;
 
@@ -18,8 +17,6 @@ public class SFXPlayerPoolObjectDestroyerMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _destroyer.Damaged
-            .Where((damageEvent, index) => damageEvent.DestroyerView is not BlockDestroyerView
-                || index % 6 == 0)
             .Subscribe(OnDamaged)
             .AddTo(disposables);
 

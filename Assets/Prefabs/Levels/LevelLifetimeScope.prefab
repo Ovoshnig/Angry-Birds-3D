@@ -58,7 +58,8 @@ MonoBehaviour:
   _audioTuningInstaller:
     _audioMixer: {fileID: 24100000, guid: 4589c14a7bd6ca145b694b55f7a0bc4e, type: 2}
   _sfxInstaller:
-    _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
+    _playingInstaller:
+      _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
   _slingshotInstaller: {}
   _objectCollisionInstaller: {}
   _birdInstaller: {}
