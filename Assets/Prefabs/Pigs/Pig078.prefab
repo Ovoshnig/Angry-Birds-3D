@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7244309733263533213, guid: 316c38a87eee7664ca1a72f6c2243284, type: 3}
+      propertyPath: m_Mass
+      value: 0.78
+      objectReference: {fileID: 0}
     - target: {fileID: 6152552218528034159, guid: 316c38a87eee7664ca1a72f6c2243284, type: 3}
       propertyPath: m_Name
       value: Pig078

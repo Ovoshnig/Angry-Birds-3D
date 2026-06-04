@@ -14,7 +14,7 @@ public class CollisionEvaluator
         if (data.ContactCount == 0)
             return false;
 
-        impactForce = data.ImpulseMagnitude / Time.fixedDeltaTime;
+        impactForce = data.ImpulseMagnitude;
 
         Vector3 contactNormal = data.ContactNormal;
         Vector3 impactVelocity = data.RelativeVelocity.normalized;
@@ -30,12 +30,12 @@ public class CollisionEvaluator
 
         if (impactForce >= _settings.CollisionThreshold)
         {
-            type = CollisionType.Collision;
-            return true;
-        }
+            if (!isGliding)
+            {
+                type = CollisionType.Collision;
+                return true;
+            }
 
-        if (isGliding)
-        {
             type = CollisionType.Gliding;
             return true;
         }

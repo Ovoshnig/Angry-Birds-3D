@@ -29,13 +29,13 @@ MonoBehaviour:
     <MaxSameSfxPlaying>k__BackingField: 2
   <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.1
-    <CollisionThreshold>k__BackingField: 1
-    <DamageThreshold>k__BackingField: 50
+    <CollisionThreshold>k__BackingField: 2
+    <DamageThreshold>k__BackingField: 4
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
       serializedVersion: 2
       m_Bits: 64
-    <LaunchForce>k__BackingField: 8
+    <LaunchForce>k__BackingField: 9
     <MaxDragDistance>k__BackingField: 3
     <InputInteractionRadius>k__BackingField: 2
     <SkinOffset>k__BackingField: 0.18
