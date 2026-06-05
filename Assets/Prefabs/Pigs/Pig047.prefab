@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Pig047
       objectReference: {fileID: 0}
+    - target: {fileID: 6538603325883090317, guid: 316c38a87eee7664ca1a72f6c2243284, type: 3}
+      propertyPath: <Settings>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: e171ff414563ad5499cba2352a587cbc, type: 2}
     - target: {fileID: 6785113784636143573, guid: 316c38a87eee7664ca1a72f6c2243284, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.47
