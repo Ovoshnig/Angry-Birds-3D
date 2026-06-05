@@ -53,6 +53,8 @@ MonoBehaviour:
   _levelScoreInstaller:
     _pointsInstaller:
       _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+    _ratingEvaluationInstaller:
+      _ratingSettings: {fileID: 11400000, guid: 0776e72ed67cd2a47a889c1fb4c72a4f, type: 2}
   _cameraInstaller: {}
   _windowInstaller: {}
   _audioTuningInstaller:

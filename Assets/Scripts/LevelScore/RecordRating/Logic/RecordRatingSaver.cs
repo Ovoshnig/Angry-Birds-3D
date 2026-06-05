@@ -22,7 +22,7 @@ public class RecordRatingSaver : IStartable, IDisposable
 
     public void Start()
     {
-        _ratingEvaluator.Evaluated
+        _ratingEvaluator.Rating
             .Subscribe(OnRatingEvaluated)
             .AddTo(_disposables);
     }
