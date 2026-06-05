@@ -1,25 +1,37 @@
 using R3;
 using System;
+using System.Linq;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RatingEvaluator : IDisposable
 {
     private readonly ScoreModel _scoreModel;
-    private readonly Subject<int> _evaluated = new();
+    private readonly RatingSettings _ratingSettings;
+    private readonly SceneSettings _sceneSettings;
+    private readonly ReactiveProperty<int> _rating = new();
 
-    public RatingEvaluator(ScoreModel scoreModel) => _scoreModel = scoreModel;
-
-    public Observable<int> Evaluated => _evaluated;
-
-    public void Dispose() => _evaluated.Dispose();
-
-    public int EvaluateStarCount(int maxScoreThreshold, int maxStarCount)
+    public RatingEvaluator(ScoreModel scoreModel,
+        RatingSettings ratingSettings,
+        SceneSettings sceneSettings)
     {
-        int oneStarThreshold = maxScoreThreshold / maxStarCount;
-        int starCount = Mathf.FloorToInt(_scoreModel.Score.CurrentValue / oneStarThreshold);
-        int clampedStarCount = Mathf.Clamp(starCount, 1, maxStarCount);
+        _scoreModel = scoreModel;
+        _ratingSettings = ratingSettings;
+        _sceneSettings = sceneSettings;
+    }
 
-        _evaluated.OnNext(clampedStarCount);
-        return clampedStarCount;
+    public ReadOnlyReactiveProperty<int> Rating => _rating;
+
+    public void Dispose() => _rating.Dispose();
+
+    public void Evaluate()
+    {
+        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex - _sceneSettings.FirstLevelIndex + 1;
+        int maxScoreThreshold = _ratingSettings.LevelMaxScoreThresholds[currentLevelIndex];
+
+        int oneStarThreshold = maxScoreThreshold / _ratingSettings.MaxStarCount;
+        int starCount = Mathf.FloorToInt(_scoreModel.Score.CurrentValue / oneStarThreshold);
+        int clampedStarCount = Mathf.Clamp(starCount, _ratingSettings.MinStarCount, _ratingSettings.MaxStarCount);
+        _rating.Value = clampedStarCount;
     }
 }

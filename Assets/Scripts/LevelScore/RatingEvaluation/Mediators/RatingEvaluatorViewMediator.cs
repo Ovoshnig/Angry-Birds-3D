@@ -10,7 +10,8 @@ public class RatingEvaluatorViewMediator : UIViewMediator<RatingEvaluatorView>
 
     protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
     {
-        int starCount = _evaluator.EvaluateStarCount(view.MaxScoreThreshold, view.MaxStarCount);
-        view.ShowStarAsync(starCount).Forget();
+        _evaluator.Rating
+            .Subscribe(rating => view.ShowStarAsync(rating).Forget())
+            .AddTo(viewDisposables);
     }
 }
