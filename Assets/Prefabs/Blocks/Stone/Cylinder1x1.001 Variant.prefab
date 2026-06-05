@@ -22,7 +22,7 @@ PrefabInstance:
       objectReference: {fileID: 6418180475301049370, guid: 2c6b33a9151b62a4f8e75828f85e8c34, type: 2}
     - target: {fileID: -1760258200561064380, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 1463701401922089499, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
       propertyPath: <Settings>k__BackingField
