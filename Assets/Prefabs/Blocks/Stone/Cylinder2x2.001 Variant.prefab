@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8966267924755620737, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
       propertyPath: m_Mass
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: -5546303489602874776, guid: 05648833724fb4140ade4beb8975b3c5, type: 3}
       propertyPath: <Settings>k__BackingField
