@@ -6,11 +6,12 @@ using VContainer.Unity;
 [Serializable]
 public class AudioSFXInstaller : IInstaller
 {
-    [SerializeField] private SFXPlayerView _sfxPlayerViewPrefab;
+    [SerializeField] private SFXPlayingInstaller _playingInstaller;
+    [SerializeField] private SFXCountInstaller _sfxCountInstaller;
 
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_sfxPlayerViewPrefab);
-        builder.Register<SFXPlayerObjectPool>(Lifetime.Singleton);
+        _playingInstaller.Install(builder);
+        _sfxCountInstaller.Install(builder);
     }
 }

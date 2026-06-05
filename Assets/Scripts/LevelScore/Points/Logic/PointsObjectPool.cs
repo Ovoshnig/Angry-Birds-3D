@@ -8,14 +8,15 @@ using Object = UnityEngine.Object;
 public class PointsObjectPool : IDisposable
 {
     private readonly ObjectPool<PointsView> _pointsPool;
+    private readonly GameObject _poolRoot;
     private readonly Subject<int> _pointsAdded = new();
 
     public PointsObjectPool(PointsView pointsPrefab, ScoreSettings scoreSettings)
     {
-        Transform pointsPoolTransform = new GameObject("PointsPool").transform;
+        _poolRoot = new GameObject("PointsPool");
 
         _pointsPool = new ObjectPool<PointsView>(
-            createFunc: () => Object.Instantiate(pointsPrefab, pointsPoolTransform),
+            createFunc: () => Object.Instantiate(pointsPrefab, _poolRoot.transform),
             actionOnGet: pointsView => pointsView.gameObject.SetActive(true),
             actionOnRelease: pointsView => pointsView.gameObject.SetActive(false),
             defaultCapacity: scoreSettings.PoolDefaultCapacity,
@@ -25,7 +26,12 @@ public class PointsObjectPool : IDisposable
 
     public Observable<int> PointsAdded => _pointsAdded;
 
-    public void Dispose() => _pointsAdded.Dispose();
+    public void Dispose()
+    {
+        _pointsPool.Dispose();
+        _pointsAdded.Dispose();
+        Object.Destroy(_poolRoot);
+    }
 
     public void ShowPoints(Vector3 position, PointsSettings pointsSettings)
     {

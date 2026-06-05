@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c0631e883f30e4d82a28f1512db1c0, type: 3}
   m_Name: GlassBlockDestructionSettings
   m_EditorClassIdentifier: GameSettings::DestructionSettings
-  <MaxHealth>k__BackingField: 400
+  <MaxHealth>k__BackingField: 4
   <PointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
   <SfxSettings>k__BackingField: {fileID: 11400000, guid: 72788d67b465d7549b99f75b44595059, type: 2}

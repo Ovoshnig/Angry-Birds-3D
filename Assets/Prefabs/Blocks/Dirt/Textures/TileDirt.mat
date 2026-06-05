@@ -72,6 +72,7 @@ Material:
     - _QueueControl: 0
     - _QueueOffset: 0
     - _Smoothness: 0.25
+    - _Tile: 0.3
     m_Colors: []
   m_BuildTextureStacks: []
   m_AllowLocking: 1

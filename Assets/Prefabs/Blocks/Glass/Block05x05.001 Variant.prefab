@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
+    - target: {fileID: -3962233745629162189, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+      propertyPath: m_Mass
+      value: 0.5
+      objectReference: {fileID: 0}
     - target: {fileID: 328084054977616385, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 

@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class ResolutionAdjustmentInstaller : IInstaller
 {
-    [SerializeField] private ResolutionAdjustDropdownView _dropdownView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_dropdownView);
+        builder.RegisterInstanceInHierarchy<ResolutionAdjustDropdownView>();
 
         builder.UseEntryPoints(entryPoints =>
         {

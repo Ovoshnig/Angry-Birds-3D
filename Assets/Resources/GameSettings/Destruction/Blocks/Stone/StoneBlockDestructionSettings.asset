@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 85c0631e883f30e4d82a28f1512db1c0, type: 3}
   m_Name: StoneBlockDestructionSettings
   m_EditorClassIdentifier: GameSettings::DestructionSettings
-  <MaxHealth>k__BackingField: 1200
+  <MaxHealth>k__BackingField: 25
   <PointsSettings>k__BackingField: {fileID: 11400000, guid: 587e554dc51e0b1438ee1ea8a1586108, type: 2}
   <SfxSettings>k__BackingField: {fileID: 11400000, guid: 864bd17620fb3d543ad4fb31d9ca43c5, type: 2}

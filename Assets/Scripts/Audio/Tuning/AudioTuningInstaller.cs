@@ -1,23 +1,19 @@
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class AudioTuningInstaller : IInstaller
 {
-    [SerializeField] private RectTransform _sliderViewsParent;
     [SerializeField] private AudioMixer _audioMixer;
 
     public void Install(IContainerBuilder builder)
     {
-        IReadOnlyList<AudioSliderView> sliderViews = _sliderViewsParent
-            .GetComponentsInChildren<AudioSliderView>(true);
-
-        builder.RegisterInstance(sliderViews);
         builder.RegisterInstance(_audioMixer);
+        builder.RegisterInstancesInHierarchy<AudioSliderView>();
 
         builder.Register<AudioMixerTuner>(Lifetime.Singleton);
 

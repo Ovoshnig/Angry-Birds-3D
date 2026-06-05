@@ -1,20 +1,16 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class LevelStateTrackingInstaller : IInstaller
 {
-    [SerializeField] private ClearingPanelView _clearingPanelView;
-    [SerializeField] private FinalScoreView _finalScoreView;
-    [SerializeField] private FailurePanelView _failurePanelView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_clearingPanelView);
-        builder.RegisterInstance(_finalScoreView);
-        builder.RegisterInstance(_failurePanelView);
+        builder.RegisterInstanceInHierarchy<ClearingPanelView>();
+        builder.RegisterInstanceInHierarchy<FinalScoreView>();
+        builder.RegisterInstanceInHierarchy<FailurePanelView>();
 
         builder.UseEntryPoints(entryPoints =>
         {

@@ -1,16 +1,14 @@
 using System;
-using UnityEngine;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
 [Serializable]
 public class PauseMenuWindowInstaller : IInstaller
 {
-    [SerializeField] private WindowView _pauseMenuWindowView;
-
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstance(_pauseMenuWindowView);
+        builder.RegisterInstanceInHierarchy<WindowView>();
 
         builder.UseEntryPoints(entryPoints =>
         {
