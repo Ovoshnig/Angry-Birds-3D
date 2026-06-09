@@ -1314,7 +1314,7 @@ GameObject:
   - component: {fileID: 1024365704}
   - component: {fileID: 1024365703}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: StructureHill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3496,7 +3496,7 @@ SceneRoots:
   - {fileID: 3793034199556610716}
   - {fileID: 383033987}
   - {fileID: 878781363}
+  - {fileID: 1024365708}
   - {fileID: 4109697}
   - {fileID: 2765614911622580661}
   - {fileID: 5679047945862628901}
-  - {fileID: 1024365708}
