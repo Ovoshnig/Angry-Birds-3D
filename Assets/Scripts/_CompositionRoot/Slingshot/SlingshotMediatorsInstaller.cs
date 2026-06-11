@@ -7,8 +7,6 @@ public class SlingshotMediatorsInstaller : IInstaller
     {
         builder.UseEntryPoints(entryPoints =>
         {
-            entryPoints.Add<SlingshotShooterStartCameraSwitchMediator>();
-            entryPoints.Add<SlingshotShooterBirdDestroyerMediator>();
             entryPoints.Add<SlingshotShooterGamePauserMediator>();
             entryPoints.Add<SlingshotShooterLevelTrackerMediator>();
         });

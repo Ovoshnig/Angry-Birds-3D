@@ -29,16 +29,16 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 
     private async UniTask OnLevelClearedAsync(CancellationToken token)
     {
+        await UniTask.WaitForSeconds(1, cancellationToken: token);
+
+        if (_cameraSwitchView.IsBlending.CurrentValue)
+            await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
+
         if (_slingshotShooter.CurrentBird != null)
         {
             BirdEntityView slingshotBird = _slingshotShooter.CurrentBird.GetComponent<BirdEntityView>();
             _birdPointsDisplayer.SetSlingshotBird(slingshotBird);
         }
-
-        await UniTask.WaitForSeconds(1, cancellationToken: token);
-
-        if (_cameraSwitchView.IsBlending.CurrentValue)
-            await _cameraSwitchView.IsBlending.FirstAsync(isBlending => !isBlending, cancellationToken: token);
 
         await _birdPointsDisplayer.DisplayBirdSequenceAsync();
     }
