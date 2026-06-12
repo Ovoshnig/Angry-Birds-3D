@@ -8,7 +8,7 @@ public class SlingshotInstaller : IInstaller
 {
     [SerializeField] private PointerPositionInstaller _pointerPositionInstaller;
     [SerializeField] private SlingshotShootingInstaller _slingshotShootingInstaller;
-    [SerializeField] private SlingshotPlacingInstaller _slingshotPlacingInstaller;
+    [SerializeField] private SlingshotPlacementInstaller _slingshotPlacementInstaller;
 
     public void Install(IContainerBuilder builder)
     {
@@ -16,6 +16,6 @@ public class SlingshotInstaller : IInstaller
 
         _pointerPositionInstaller.Install(builder);
         _slingshotShootingInstaller.Install(builder);
-        _slingshotPlacingInstaller.Install(builder);
+        _slingshotPlacementInstaller.Install(builder);
     }
 }
