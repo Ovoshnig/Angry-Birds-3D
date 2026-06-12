@@ -27,6 +27,7 @@ public class PigTracker : IStartable, IDisposable
 
     public ReadOnlyReactiveProperty<int> PigCount => _pigCount;
     public Observable<Unit> PigsLeft { get; }
+    public bool AnyPigs => _pigCount.Value > 0;
 
     public void Start()
     {
