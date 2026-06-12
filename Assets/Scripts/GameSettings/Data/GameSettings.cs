@@ -11,5 +11,6 @@ public class GameSettings : ScriptableObject
     [field: SerializeField] public SlingshotSettings SlingshotSettings { get; private set; }
     [field: SerializeField] public SlingshotPlacingSettings SlingshotPlacingSettings { get; private set; }
     [field: SerializeField] public BirdSettings BirdSettings { get; private set; }
+    [field: SerializeField] public BirdStretchSettings BirdStretchSettings { get; private set; }
     [field: SerializeField] public ScoreSettings ScoreSettings { get; private set; }
 }
