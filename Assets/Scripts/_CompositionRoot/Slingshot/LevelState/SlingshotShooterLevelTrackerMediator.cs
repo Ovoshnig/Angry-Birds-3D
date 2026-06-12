@@ -50,7 +50,9 @@ public class SlingshotShooterLevelTrackerMediator : Mediator
 
     private bool TrySetBirdInSlingshot()
     {
-        if (_birdQueue.TryDequeueBird(out BirdEntityView birdEntityView))
+        if (!_slingshotBirdPlacer.IsPlacing
+            && _slingshotShooter.CurrentBird == null
+            && _birdQueue.TryDequeueBird(out BirdEntityView birdEntityView))
         {
             _slingshotBirdPlacer.PlaceBirdAsync(birdEntityView.FlyerView.Rigidbody).Forget();
             return true;

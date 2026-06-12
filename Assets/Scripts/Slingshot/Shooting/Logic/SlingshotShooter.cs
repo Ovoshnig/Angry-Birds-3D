@@ -66,6 +66,12 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
 
     public void SetCurrentBird(Rigidbody birdRigidbody)
     {
+        if (_currentBird != null)
+        {
+            Debug.LogError("The bird is already placed in the slingshot", _currentBird);
+            return;
+        }
+
         _currentBird = birdRigidbody;
         _birdRadius = birdRigidbody.GetComponent<SphereCollider>().radius;
         _view.SetBirdRadius(_birdRadius);

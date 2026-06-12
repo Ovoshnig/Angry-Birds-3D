@@ -12,6 +12,8 @@ public class SlingshotBirdPlacer : IDisposable
     private readonly SlingshotPlacingSettings _placingSettings;
     private readonly CancellationTokenSource _cts = new();
 
+    private bool _isPlacing = false;
+
     public SlingshotBirdPlacer(SlingshotShooter shooter,
         SlingshotShooterView shooterView,
         SlingshotPlacingSettings placingSettings)
@@ -21,6 +23,8 @@ public class SlingshotBirdPlacer : IDisposable
         _placingSettings = placingSettings;
     }
 
+    public bool IsPlacing { get => _isPlacing; set => _isPlacing = value; }
+
     public void Dispose()
     {
         _cts.Cancel();
@@ -29,6 +33,13 @@ public class SlingshotBirdPlacer : IDisposable
 
     public async UniTask PlaceBirdAsync(Rigidbody bird)
     {
+        if (_isPlacing)
+        {
+            Debug.LogError("The bird is already being placed in the slingshot", bird);
+            return;
+        }
+
+        _isPlacing = true;
         Transform birdTransform = bird.transform;
 
         await PlaySquashAsync(birdTransform, _cts.Token);
@@ -39,6 +50,7 @@ public class SlingshotBirdPlacer : IDisposable
         await UniTask.WhenAll(jumpTask, scaleTask);
 
         _shooter.SetCurrentBird(bird);
+        _isPlacing = false;
     }
 
     private async UniTask PlaySquashAsync(Transform birdTransform, CancellationToken token)
