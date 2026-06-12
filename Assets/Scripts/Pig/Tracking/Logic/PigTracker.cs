@@ -21,7 +21,7 @@ public class PigTracker : IStartable, IDisposable
 
         PigsLeft = _pigCount
             .Where(count => count == 0)
-            .Select(_ => Unit.Default)
+            .AsUnitObservable()
             .Share();
     }
 
@@ -38,7 +38,6 @@ public class PigTracker : IStartable, IDisposable
     public void Dispose()
     {
         _disposables.Dispose();
-
         _pigCount.Dispose();
     }
 
