@@ -1,21 +1,23 @@
 using Cysharp.Threading.Tasks;
 using R3;
-using System;
 using System.Threading;
 
 public class SlingshotShooterLevelTrackerMediator : Mediator
 {
     private readonly SlingshotShooter _slingshotShooter;
+    private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
     private readonly LevelStateTracker _levelStateTracker;
     private readonly BirdQueue _birdQueue;
     private readonly CameraSwitchView _cameraSwitchView;
 
     public SlingshotShooterLevelTrackerMediator(SlingshotShooter slingshotShooter,
+        SlingshotBirdPlacer slingshotBirdPlacer,
         LevelStateTracker levelStateTracker,
         BirdQueue birdQueue,
         CameraSwitchView cameraSwitchView)
     {
         _slingshotShooter = slingshotShooter;
+        _slingshotBirdPlacer = slingshotBirdPlacer;
         _levelStateTracker = levelStateTracker;
         _birdQueue = birdQueue;
         _cameraSwitchView = cameraSwitchView;
@@ -50,7 +52,7 @@ public class SlingshotShooterLevelTrackerMediator : Mediator
     {
         if (_birdQueue.TryDequeueBird(out BirdEntityView birdEntityView))
         {
-            _slingshotShooter.SetCurrentBird(birdEntityView.FlyerView.Rigidbody);
+            _slingshotBirdPlacer.PlaceBirdAsync(birdEntityView.FlyerView.Rigidbody).Forget();
             return true;
         }
 
