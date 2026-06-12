@@ -168,6 +168,7 @@ public sealed class LevelStateTrackerTests
         private readonly List<IDisposable> _disposables = new();
 
         public LevelStateTracker Tracker { get; private set; }
+        public StartCameraSwitch StartCameraSwitch { get; private set; }
         public BirdDestroyer BirdDestroyer { get; private set; }
         public BirdQueue BirdQueue { get; private set; }
         public PigTracker PigTracker { get; private set; }
@@ -178,12 +179,13 @@ public sealed class LevelStateTrackerTests
         private TrackerHarness()
         {
             ObjectCollider objectCollider = new(Array.Empty<CollidableEntityView>(), new CollisionEvaluator(new CollisionSettings()));
+            StartCameraSwitch = new StartCameraSwitch(null, null);
             BirdDestroyer = new BirdDestroyer(objectCollider, new BirdSettings());
             BirdQueue = new BirdQueue(Array.Empty<BirdEntityView>());
             ObjectDestroyer objectDestroyer = new(objectCollider);
             PigTracker = new PigTracker(Array.Empty<PigEntityView>(), objectDestroyer);
             SlingshotShooter = new SlingshotShooter(null, null, null, null);
-            Tracker = new LevelStateTracker(BirdQueue, BirdDestroyer, PigTracker, SlingshotShooter);
+            Tracker = new LevelStateTracker(StartCameraSwitch, BirdQueue, BirdDestroyer, PigTracker, SlingshotShooter);
 
             _disposables.Add(BirdDestroyer);
             _disposables.Add(PigTracker);
@@ -229,7 +231,7 @@ public sealed class LevelStateTrackerTests
 
             BirdQueue = new BirdQueue(birds);
             Tracker?.Dispose();
-            Tracker = new LevelStateTracker(BirdQueue, BirdDestroyer, PigTracker, SlingshotShooter);
+            Tracker = new LevelStateTracker(StartCameraSwitch, BirdQueue, BirdDestroyer, PigTracker, SlingshotShooter);
         }
 
         public void Dispose()

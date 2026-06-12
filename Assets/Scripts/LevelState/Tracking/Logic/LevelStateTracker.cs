@@ -6,15 +6,18 @@ public class LevelStateTracker : IPostStartable, IDisposable
 {
     private readonly Subject<Unit> _started = new();
 
-    public LevelStateTracker(BirdQueue birdQueue,
+    public LevelStateTracker(StartCameraSwitch startCameraSwitch,
+        BirdQueue birdQueue,
         BirdDestroyer birdDestroyer,
         PigTracker pigTracker,
         SlingshotShooter slingshotShooter)
     {
-        MovedToNext = birdDestroyer.Destroyed
-            .Where(_ => pigTracker.PigCount.CurrentValue > 0
-                && (birdQueue.Any || slingshotShooter.CurrentBird != null))
-            .AsUnitObservable()
+        MovedToNext = Observable.Merge(
+            startCameraSwitch.Completed,
+            birdDestroyer.Destroyed
+                .Where(_ => pigTracker.PigCount.CurrentValue > 0
+                    && (birdQueue.Any || slingshotShooter.CurrentBird != null))
+                .AsUnitObservable())
             .Share();
 
         Cleared = Observable.Merge(

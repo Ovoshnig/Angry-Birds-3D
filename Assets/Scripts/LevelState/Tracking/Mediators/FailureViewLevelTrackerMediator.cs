@@ -31,7 +31,7 @@ public class FailureViewLevelTrackerMediator : Mediator
         await UniTask.WaitForSeconds(1, cancellationToken: token);
 
         if (_cameraSwitchView.IsBlending.CurrentValue)
-            await _cameraSwitchView.IsBlending.FirstAsync(isBlending => !isBlending, cancellationToken: token);
+            await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
         _failurePanelView.Show();
     }
