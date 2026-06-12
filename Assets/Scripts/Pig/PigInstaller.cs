@@ -6,12 +6,12 @@ using VContainer.Unity;
 [Serializable]
 public class PigInstaller : IInstaller
 {
-    [SerializeField] private PigEntityInstaller _pigEntityInstaller;
-    [SerializeField] private PigTrackingInstaller _pigTrackingInstaller;
+    [SerializeField] private PigEntityInstaller _entityInstaller;
+    [SerializeField] private PigTrackingInstaller _trackingInstaller;
 
     public void Install(IContainerBuilder builder)
     {
-        _pigEntityInstaller.Install(builder);
-        _pigTrackingInstaller.Install(builder);
+        _entityInstaller.Install(builder);
+        _trackingInstaller.Install(builder);
     }
 }

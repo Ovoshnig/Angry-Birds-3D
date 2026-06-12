@@ -6,30 +6,29 @@ public class LevelStateTracker : IPostStartable, IDisposable
 {
     private readonly Subject<Unit> _started = new();
 
-    public LevelStateTracker(BirdQueue birdQueue,
+    public LevelStateTracker(StartCameraSwitch startCameraSwitch,
         BirdDestroyer birdDestroyer,
-        PigTracker pigTracker,
-        SlingshotShooter slingshotShooter)
+        BirdTracker birdTracker,
+        PigTracker pigTracker)
     {
-        MovedToNext = birdDestroyer.Destroyed
-            .Where(_ => pigTracker.PigCount.CurrentValue > 0
-                && (birdQueue.Any || slingshotShooter.CurrentBird != null))
-            .AsUnitObservable()
+        MovedToNext = Observable.Merge(
+            startCameraSwitch.Completed,
+            birdDestroyer.Destroyed
+                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyBirds)
+                .AsUnitObservable())
             .Share();
 
         Cleared = Observable.Merge(
             birdDestroyer.Destroyed
-                .Where(_ => pigTracker.PigCount.CurrentValue == 0)
+                .Where(_ => !pigTracker.AnyPigs)
                 .AsUnitObservable(),
             pigTracker.PigsLeft
-                .Where(_ => slingshotShooter.CurrentBird != null)
-                .AsUnitObservable())
+                .Where(_ => !birdTracker.IsBirdLaunched.CurrentValue))
             .Take(1)
             .Share();
 
-        Failed = birdDestroyer.Destroyed
-            .Where(_ => !birdQueue.Any && slingshotShooter.CurrentBird == null
-                && pigTracker.PigCount.CurrentValue > 0)
+        Failed = birdTracker.BirdsLeft
+            .Where(_ => pigTracker.AnyPigs)
             .AsUnitObservable()
             .Take(1)
             .Share();

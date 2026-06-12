@@ -2,7 +2,8 @@
     "name": "GameSettings",
     "rootNamespace": "",
     "references": [
-        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
+        "GUID:3b570a5146f9d4f0fa107ed4559471a3"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

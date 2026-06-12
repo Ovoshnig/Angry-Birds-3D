@@ -9,6 +9,7 @@ public class ScoreMediatorsInstaller : IInstaller
         {
             entryPoints.Add<PointsPoolObjectDestroyerMediator>();
             entryPoints.Add<PointsPoolBirdDisplayerMediator>();
+            entryPoints.Add<RatingEvaluatorBirdDisplayerMediator>();
             entryPoints.Add<ScoreViewCompletionPanelsMediator>();
         });
     }

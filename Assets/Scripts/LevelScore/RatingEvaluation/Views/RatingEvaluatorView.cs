@@ -19,16 +19,9 @@ public class RatingEvaluatorView : UIView
 
     private Image[] _images;
 
-    [field: SerializeField, Min(0)] public int MaxScoreThreshold { get; private set; } = 15000;
-
     public Subject<Unit> Shown => _shown;
-    public int MaxStarCount { get; private set; }
 
-    private void Awake()
-    {
-        _images = GetComponentsInChildren<Image>();
-        MaxStarCount = _images.Length;
-    }
+    private void Awake() => _images = GetComponentsInChildren<Image>();
 
     private void OnDestroy() => _shown.Dispose();
 

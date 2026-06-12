@@ -21,12 +21,13 @@ public class PigTracker : IStartable, IDisposable
 
         PigsLeft = _pigCount
             .Where(count => count == 0)
-            .Select(_ => Unit.Default)
+            .AsUnitObservable()
             .Share();
     }
 
     public ReadOnlyReactiveProperty<int> PigCount => _pigCount;
     public Observable<Unit> PigsLeft { get; }
+    public bool AnyPigs => _pigCount.Value > 0;
 
     public void Start()
     {
@@ -38,7 +39,6 @@ public class PigTracker : IStartable, IDisposable
     public void Dispose()
     {
         _disposables.Dispose();
-
         _pigCount.Dispose();
     }
 

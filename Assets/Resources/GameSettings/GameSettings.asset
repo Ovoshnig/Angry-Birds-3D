@@ -43,9 +43,26 @@ MonoBehaviour:
     <TangentScale>k__BackingField: 1.6
     <RubberWrapOffset>k__BackingField: 0.6
     <SlingshotCollisionOffset>k__BackingField: 0.3
+  <SlingshotPlacingSettings>k__BackingField:
+    <JumpHeight>k__BackingField: 4
+    <PlacingDuration>k__BackingField: 1
+    <SquashDuration>k__BackingField: 0.2
+    <SquashScale>k__BackingField: {x: 1.25, y: 0.7, z: 1.25}
+    <StretchScale>k__BackingField: {x: 0.8, y: 1.3, z: 0.8}
+    <SquashEase>k__BackingField: 5
+    <JumpEase>k__BackingField: 3
+    <RiseScaleEase>k__BackingField: 14
+    <FallScaleEase>k__BackingField: 13
   <BirdSettings>k__BackingField:
     <DestructionDelay>k__BackingField: 5
     <PointsDisplayDelay>k__BackingField: 2
+  <BirdStretchSettings>k__BackingField:
+    <StretchDelay>k__BackingField: 0.02
+    <StretchDuration>k__BackingField: 0.5
+    <MinVelocitySquareMagnitude>k__BackingField: 0
+    <MaxVelocitySquareMagnitude>k__BackingField: 800
+    <MaxStretchScale>k__BackingField: {x: 0.6, y: 0.6, z: 2}
+    <StretchEase>k__BackingField: 5
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10
