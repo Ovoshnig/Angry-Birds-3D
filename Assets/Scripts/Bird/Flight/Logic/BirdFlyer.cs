@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using R3;
 using System;
+using System.Threading;
 
 public class BirdFlyer : IDisposable
 {
@@ -26,13 +27,21 @@ public class BirdFlyer : IDisposable
 
         _flightStarted.OnNext(birdEntityView);
 
+        CancellationTokenSource flightCts = CancellationTokenSource
+            .CreateLinkedTokenSource(birdEntityView.destroyCancellationToken);
+        birdEntityView.destroyCancellationToken.Register(() => flightCts.Dispose());
+
         BirdFlyerView flyerView = birdEntityView.FlyerView;
-        flyerView.StretchAsync(_stretchSettings).Forget();
+        flyerView.StretchAsync(_stretchSettings, flightCts.Token).Forget();
 
         Observable.EveryUpdate()
             .TakeUntil(birdEntityView.ColliderView.Collided)
             .Subscribe(_ => flyerView.LookAtVelocityDirection(),
-                _ => _flightInterrupted.OnNext(birdEntityView))
+                result =>
+                {
+                    flightCts.Cancel();
+                    _flightInterrupted.OnNext(birdEntityView);
+                })
             .RegisterTo(birdEntityView.destroyCancellationToken);
     }
 }

@@ -59,6 +59,7 @@ MonoBehaviour:
   <BirdStretchSettings>k__BackingField:
     <StretchDelay>k__BackingField: 0.02
     <StretchDuration>k__BackingField: 0.5
+    <StretchCancelDuration>k__BackingField: 0.1
     <MinVelocitySquareMagnitude>k__BackingField: 0
     <MaxVelocitySquareMagnitude>k__BackingField: 800
     <MaxStretchScale>k__BackingField: {x: 0.6, y: 0.6, z: 2}
