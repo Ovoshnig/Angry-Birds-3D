@@ -20,5 +20,7 @@ public class ProjectLifetimeScope : LifetimeScope
         _dataStorageInstaller.Install(builder);
         _gameSettingsInstaller.Install(builder);
         _sceneLoadingScreenInstaller.Install(builder);
+
+        new InputActionsMediatorsInstaller().Install(builder);
     }
 }
