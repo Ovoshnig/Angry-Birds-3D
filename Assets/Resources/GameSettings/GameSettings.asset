@@ -15,7 +15,7 @@ MonoBehaviour:
   <SceneSettings>k__BackingField:
     <FirstLevelIndex>k__BackingField: 2
     <LevelCount>k__BackingField: 24
-    <LevelTransitionDuration>k__BackingField: 5
+    <InterpolationSpeed>k__BackingField: 13
   <CameraSettings>k__BackingField:
     <StructureShowingDuration>k__BackingField: 1.2
     <SlingshotShowingDuration>k__BackingField: 0.3
