@@ -55,9 +55,22 @@ public class SlingshotBirdPlacer : IDisposable
 
     private async UniTask PlaySquashAsync(Transform birdTransform, CancellationToken token)
     {
+        SphereCollider collider = birdTransform.GetComponent<SphereCollider>();
+
+        Vector3 startPosition = birdTransform.position;
+        float groundY = collider.bounds.min.y;
+        float localBottomOffset = startPosition.y - groundY;
+
         await LMotion.Create(Vector3.one, _placingSettings.SquashScale, _placingSettings.SquashDuration)
             .WithEase(_placingSettings.SquashEase)
-            .BindToLocalScale(birdTransform)
+            .Bind(scale =>
+            {
+                birdTransform.localScale = scale;
+
+                Vector3 position = startPosition;
+                position.y = groundY + (scale.y * localBottomOffset);
+                birdTransform.position = position;
+            })
             .ToUniTask(token);
     }
 
