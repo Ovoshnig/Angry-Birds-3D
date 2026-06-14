@@ -48,11 +48,10 @@ MonoBehaviour:
     <PlacingDuration>k__BackingField: 1
     <SquashDuration>k__BackingField: 0.2
     <SquashScale>k__BackingField: {x: 1.25, y: 0.7, z: 1.25}
-    <StretchScale>k__BackingField: {x: 0.8, y: 1.3, z: 0.8}
-    <SquashEase>k__BackingField: 5
-    <JumpEase>k__BackingField: 3
-    <RiseScaleEase>k__BackingField: 14
-    <FallScaleEase>k__BackingField: 13
+    <StretchScale>k__BackingField: {x: 0.7, y: 1.5, z: 0.7}
+    <SquashEase>k__BackingField: 1
+    <RiseEase>k__BackingField: 0
+    <FallEase>k__BackingField: 1
   <BirdSettings>k__BackingField:
     <DestructionDelay>k__BackingField: 5
     <PointsDisplayDelay>k__BackingField: 2
