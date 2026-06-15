@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using VContainer.Unity;
 
-public class ObjectCollider : IStartable, IDisposable
+public class ObjectCollider : IDisposable
 {
     private readonly IReadOnlyList<CollidableEntityView> _entityViews;
     private readonly CollisionEvaluator _evaluator;
@@ -18,7 +18,7 @@ public class ObjectCollider : IStartable, IDisposable
 
     public Observable<CollisionEvent> Collided => _collided;
 
-    public void Start()
+    public void Subscribe()
     {
         foreach (var entityView in _entityViews)
         {
