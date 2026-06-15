@@ -31,7 +31,7 @@ MonoBehaviour:
     <LoopDuration>k__BackingField: 360
   <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.1
-    <CollisionThreshold>k__BackingField: 2
+    <CollisionThreshold>k__BackingField: 0.1
     <DamageThreshold>k__BackingField: 4
   <SlingshotSettings>k__BackingField:
     <SlingshotLayer>k__BackingField:
