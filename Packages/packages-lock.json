@@ -29,6 +29,13 @@
       },
       "hash": "24d04125d68719816e24dfb79c60dd97ca396038"
     },
+    "com.cysharp.slnmerge": {
+      "version": "https://github.com/Cysharp/SlnMerge.git?path=src",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5aeb21150644e777c01789935679f60ae5d7d876"
+    },
     "com.cysharp.unitask": {
       "version": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
       "depth": 0,
