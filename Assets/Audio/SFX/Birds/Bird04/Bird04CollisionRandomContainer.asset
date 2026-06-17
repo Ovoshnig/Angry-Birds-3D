@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-1648749863500505330
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 04 collision a2_{-1648749863500505330}
+  m_AudioClip: {fileID: 8300000, guid: c3761023272135e4da78001512b46c79, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4357134092833140100
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 04 collision a4_{4357134092833140100}
+  m_AudioClip: {fileID: 8300000, guid: 547bbcf61b701ff4b90f60aab9a2ceb1, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &4713879343477689525
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 04 collision a3_{4713879343477689525}
+  m_AudioClip: {fileID: 8300000, guid: 1e94e33afb96433489b0c7285892e379, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird04CollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -5, y: 5}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: 9203830509597928305}
+  - {fileID: -1648749863500505330}
+  - {fileID: 4713879343477689525}
+  - {fileID: 4357134092833140100}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
+--- !u!1233149941 &9203830509597928305
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 04 collision a1_{9203830509597928305}
+  m_AudioClip: {fileID: 8300000, guid: 495c331bfc3b12b459a5a4a36fb58a37, type: 3}
+  m_Volume: 0
+  m_Enabled: 1

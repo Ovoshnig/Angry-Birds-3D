@@ -1,0 +1,115 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-4860146785009738180
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a7_{-4860146785009738180}
+  m_AudioClip: {fileID: 8300000, guid: a18ed2f06fcd9b84d81c4134326d31d7, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3951438772053804371
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a3_{-3951438772053804371}
+  m_AudioClip: {fileID: 8300000, guid: f97a3dd427d32b14882fe1979b80032b, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-3018027626556310164
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a6_{-3018027626556310164}
+  m_AudioClip: {fileID: 8300000, guid: 49fa08e99f69f4044a97aaaefc78c747, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2464411490160588555
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a5_{-2464411490160588555}
+  m_AudioClip: {fileID: 8300000, guid: bba952a6182da784e80344a7b5dc3da8, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-2405316072852061254
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a1_{-2405316072852061254}
+  m_AudioClip: {fileID: 8300000, guid: 42e433bcd8eef1a4390bbd2c139f78e3, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-676210385945825907
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a8_{-676210385945825907}
+  m_AudioClip: {fileID: 8300000, guid: c8cc5a14e9ec7a34881668f50f0fe58e, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-82856952226100683
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a4_{-82856952226100683}
+  m_AudioClip: {fileID: 8300000, guid: 033f2dbb11eba2c4eb7586b52f40f72f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &3576428715692669706
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: piglette collision a2_{3576428715692669706}
+  m_AudioClip: {fileID: 8300000, guid: 23e07b205fbe58d45a08281a532ef45f, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: PigCollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: 0, y: 0}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -2405316072852061254}
+  - {fileID: 3576428715692669706}
+  - {fileID: -3951438772053804371}
+  - {fileID: -82856952226100683}
+  - {fileID: -2464411490160588555}
+  - {fileID: -3018027626556310164}
+  - {fileID: -4860146785009738180}
+  - {fileID: -676210385945825907}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 0
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0

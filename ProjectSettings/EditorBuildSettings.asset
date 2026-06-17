@@ -39,4 +39,5 @@ EditorBuildSettings:
     path: Assets/Scenes/Levels/Plains/Level9.unity
     guid: 060db1b03cce6704ba509595fa6b8364
   m_configObjects:
+    com.unity.addressableassets: {fileID: 11400000, guid: 48d4fcc9ab83b0a478a7f77463228f31, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dfc5194a2da461941bbc4e192fa012b3, type: 3}

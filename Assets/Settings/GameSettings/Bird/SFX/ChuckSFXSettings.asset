@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dc7d9a7e32c074ba80e204932bf5f0, type: 3}
+  m_Name: ChuckSFXSettings
+  m_EditorClassIdentifier: GameSettings::BirdSFXSettings
+  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 2a81b8f60274f4643bd3825b69fdcb95, type: 3}
+  <FlyingResource>k__BackingField: {fileID: 8300000, guid: 42a8922c752cda341a2219bf9a8a0c2b, type: 3}
+  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: 8b3893a7f68c6814ea38f211b1be7d68, type: 2}
+  <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}

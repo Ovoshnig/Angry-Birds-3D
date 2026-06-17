@@ -1,0 +1,82 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1233149941 &-2929562274958293149
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 03 collision a1_{-2929562274958293149}
+  m_AudioClip: {fileID: 8300000, guid: a4646b6b8d451724598de786b6594f72, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-496201676964804110
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 03 collision a5_{-496201676964804110}
+  m_AudioClip: {fileID: 8300000, guid: 60e9e90de3b086240af178349a89ea17, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-353892634140611183
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 03 collision a3_{-353892634140611183}
+  m_AudioClip: {fileID: 8300000, guid: 402245d340011e449928ef30a6041810, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &-84729984408593894
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 03 collision a4_{-84729984408593894}
+  m_AudioClip: {fileID: 8300000, guid: 313a5f76971334a49afa66e1d302036d, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1233149941 &1044384452355073992
+AudioContainerElement:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: bird 03 collision a2_{1044384452355073992}
+  m_AudioClip: {fileID: 8300000, guid: b5ea8306ee65522439fa28539c656650, type: 3}
+  m_Volume: 0
+  m_Enabled: 1
+--- !u!1307931743 &6418180475301049370
+AudioRandomContainer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Bird03CollisionRandomContainer
+  m_Volume: 0
+  m_Pitch: 0
+  m_AutomaticTriggerTime: 0
+  m_LoopCount: 1
+  m_VolumeRandomizationRange: {x: -5, y: 5}
+  m_PitchRandomizationRange: {x: -200, y: 200}
+  m_AutomaticTriggerTimeRandomizationRange: {x: 0, y: 0}
+  m_LoopCountRandomizationRange: {x: 0, y: 0}
+  m_Elements:
+  - {fileID: -2929562274958293149}
+  - {fileID: 1044384452355073992}
+  - {fileID: -353892634140611183}
+  - {fileID: -84729984408593894}
+  - {fileID: -496201676964804110}
+  m_AvoidRepeatingLast: 0
+  m_PlaybackMode: 2
+  m_TriggerMode: 1
+  m_AutomaticTriggerMode: 1
+  m_LoopMode: 1
+  m_VolumeRandomizationEnabled: 1
+  m_PitchRandomizationEnabled: 1
+  m_AutomaticTriggerTimeRandomizationEnabled: 0
+  m_LoopCountRandomizationEnabled: 0
