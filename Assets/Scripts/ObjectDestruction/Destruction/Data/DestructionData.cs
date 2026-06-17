@@ -1,0 +1,1 @@
+public record DestructionData(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);

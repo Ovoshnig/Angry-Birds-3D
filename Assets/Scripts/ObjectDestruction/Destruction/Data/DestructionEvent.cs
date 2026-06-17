@@ -1,1 +1,0 @@
-public record DestructionEvent(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);

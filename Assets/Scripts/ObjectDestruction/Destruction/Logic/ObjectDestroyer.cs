@@ -5,15 +5,15 @@ using VContainer.Unity;
 public class ObjectDestroyer : IStartable, IDisposable
 {
     private readonly ObjectCollider _objectCollider;
-    private readonly Subject<DamageEvent> _damaged = new();
-    private readonly Subject<DestructionEvent> _destroyed = new();
+    private readonly Subject<DamageData> _damaged = new();
+    private readonly Subject<DestructionData> _destroyed = new();
     private readonly CompositeDisposable _disposables = new();
 
     public ObjectDestroyer(ObjectCollider objectCollider) =>
         _objectCollider = objectCollider;
 
-    public Observable<DamageEvent> Damaged => _damaged;
-    public Observable<DestructionEvent> Destroyed => _destroyed;
+    public Observable<DamageData> Damaged => _damaged;
+    public Observable<DestructionData> Destroyed => _destroyed;
 
     public void Start()
     {
@@ -30,26 +30,25 @@ public class ObjectDestroyer : IStartable, IDisposable
         _destroyed.Dispose();
     }
 
-    private void OnCollided(CollisionEvent collisionEvent)
+    private void OnCollided(CollisionData data)
     {
-        if (collisionEvent.EntityView is not DestructibleEntityView entityView)
+        if (data.EntityView is not DestructibleEntityView entityView)
             return;
 
         ObjectDestroyerView destroyerView = entityView.DestroyerView;
 
-        float damageAmount = collisionEvent.Force;
+        float damageAmount = data.Force;
         destroyerView.HealthModel.ApplyDamage(damageAmount);
 
         if (destroyerView.HealthModel.Health <= 0)
         {
             destroyerView.Destroy();
-            _destroyed.OnNext(new DestructionEvent(entityView, destroyerView));
+            _destroyed.OnNext(new DestructionData(entityView, destroyerView));
         }
         else
         {
             destroyerView.Damage(damageAmount);
-            _damaged.OnNext(new DamageEvent(entityView, destroyerView,
-                collisionEvent.Type, damageAmount));
+            _damaged.OnNext(new DamageData(entityView, destroyerView, data.Type, damageAmount));
         }
     }
 }

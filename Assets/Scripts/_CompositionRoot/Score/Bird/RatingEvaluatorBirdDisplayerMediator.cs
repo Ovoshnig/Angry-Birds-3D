@@ -14,7 +14,7 @@ public class RatingEvaluatorBirdDisplayerMediator : Mediator
 
     protected override void Bind(CompositeDisposable disposables)
     {
-        _birdPointsDisplayer.BirdSequenceDisplayCompleted
+        _birdPointsDisplayer.SequenceDisplayCompleted
             .Subscribe(_ => _ratingEvaluator.Evaluate())
             .AddTo(disposables);
     }

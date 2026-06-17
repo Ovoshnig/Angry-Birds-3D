@@ -22,19 +22,19 @@ public class BirdDestroyer : IStartable, IDisposable
     public void Start()
     {
         _objectCollider.Collided
-            .Where(@event => @event.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
-            .Do(@event =>
+            .Where(data => data.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
+            .Do(data =>
             {
-                BirdEntityView entityView = @event.EntityView as BirdEntityView;
+                BirdEntityView entityView = data.EntityView as BirdEntityView;
                 entityView.DestroyerView.StartDestroying();
                 _destructionStarted.OnNext(entityView);
             })
             .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
-            .Subscribe(@event =>
+            .Subscribe(data =>
             {
-                if (@event.EntityView != null)
+                if (data.EntityView != null)
                 {
-                    BirdEntityView entityView = @event.EntityView as BirdEntityView;
+                    BirdEntityView entityView = data.EntityView as BirdEntityView;
                     entityView.DestroyerView.Destroy();
                     _destroyed.OnNext(entityView);
                 }
