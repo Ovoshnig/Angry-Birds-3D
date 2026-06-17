@@ -15,9 +15,9 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _objectCollider.Collided
-            .Subscribe(@event =>
+            .Subscribe(data =>
             {
-                if (@event.EntityView is BirdEntityView entityView && @event.Type == CollisionType.Damage)
+                if (data.EntityView is BirdEntityView entityView && data.Type == CollisionType.Damage)
                     _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.CollisionResource);
             })
             .AddTo(disposables);

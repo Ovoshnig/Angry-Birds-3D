@@ -40,6 +40,6 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
             _birdPointsDisplayer.SetSlingshotBird(slingshotBird);
         }
 
-        await _birdPointsDisplayer.DisplayBirdSequenceAsync();
+        await _birdPointsDisplayer.DisplaySequenceAsync();
     }
 }

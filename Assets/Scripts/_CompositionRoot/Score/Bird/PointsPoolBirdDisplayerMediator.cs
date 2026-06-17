@@ -14,8 +14,8 @@ public class PointsPoolBirdDisplayerMediator : Mediator
 
     protected override void Bind(CompositeDisposable disposables)
     {
-        _birdPointsDisplayer.BirdDisplayStarted
-            .Subscribe(@event => _pointsObjectPool.ShowPoints(@event.Position, @event.PointsSettings))
+        _birdPointsDisplayer.PointsDisplayStarted
+            .Subscribe(data => _pointsObjectPool.ShowPoints(data.Position, data.PointsSettings))
             .AddTo(disposables);
     }
 }
