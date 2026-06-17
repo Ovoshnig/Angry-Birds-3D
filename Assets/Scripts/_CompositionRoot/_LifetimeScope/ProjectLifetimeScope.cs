@@ -6,6 +6,7 @@ public class ProjectLifetimeScope : LifetimeScope
 {
     [SerializeField] private DataStorageInstaller _dataStorageInstaller;
     [SerializeField] private GameSettingsInstaller _gameSettingsInstaller;
+    [SerializeField] private SceneLoadingScreenInstaller _sceneLoadingScreenInstaller;
 
     protected override void Configure(IContainerBuilder builder)
     {
@@ -18,5 +19,8 @@ public class ProjectLifetimeScope : LifetimeScope
 
         _dataStorageInstaller.Install(builder);
         _gameSettingsInstaller.Install(builder);
+        _sceneLoadingScreenInstaller.Install(builder);
+
+        new InputActionsMediatorsInstaller().Install(builder);
     }
 }

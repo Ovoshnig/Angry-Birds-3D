@@ -1,6 +1,5 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
-using LitMotion.Extensions;
 using System;
 using System.Threading;
 using UnityEngine;
@@ -43,11 +42,7 @@ public class SlingshotBirdPlacer : IDisposable
         Transform birdTransform = bird.transform;
 
         await PlaySquashAsync(birdTransform, _cts.Token);
-
-        UniTask jumpTask = PlayJumpAsync(birdTransform, _cts.Token);
-        UniTask scaleTask = PlayJumpScaleAsync(birdTransform, _cts.Token);
-
-        await UniTask.WhenAll(jumpTask, scaleTask);
+        await PlayJumpAndScaleAsync(birdTransform, _cts.Token);
 
         _shooter.SetCurrentBird(bird);
         _isPlacing = false;
@@ -55,41 +50,59 @@ public class SlingshotBirdPlacer : IDisposable
 
     private async UniTask PlaySquashAsync(Transform birdTransform, CancellationToken token)
     {
+        SphereCollider collider = birdTransform.GetComponent<SphereCollider>();
+
+        Vector3 startPosition = birdTransform.position;
+        float groundY = collider.bounds.min.y;
+        float localBottomOffset = startPosition.y - groundY;
+
         await LMotion.Create(Vector3.one, _placingSettings.SquashScale, _placingSettings.SquashDuration)
             .WithEase(_placingSettings.SquashEase)
-            .BindToLocalScale(birdTransform)
-            .ToUniTask(token);
-    }
-
-    private async UniTask PlayJumpAsync(Transform birdTransform, CancellationToken token)
-    {
-        Vector3 startPosition = birdTransform.position;
-        Vector3 endPosition = _shooterView.CenterAnchor.position;
-
-        await LMotion.Create(0f, 1f, _placingSettings.PlacingDuration)
-            .WithEase(_placingSettings.JumpEase)
-            .Bind(value =>
+            .Bind(scale =>
             {
-                Vector3 currentPosition = Vector3.Lerp(startPosition, endPosition, value);
-                float parabolicOffset = ParabolicTrajectory.CalculateOffset(_placingSettings.JumpHeight, value);
-                currentPosition.y += parabolicOffset;
-                birdTransform.position = currentPosition;
+                birdTransform.localScale = scale;
+
+                Vector3 position = startPosition;
+                position.y = groundY + (scale.y * localBottomOffset);
+                birdTransform.position = position;
             })
             .ToUniTask(token);
     }
 
-    private async UniTask PlayJumpScaleAsync(Transform birdTransform, CancellationToken token)
+    private async UniTask PlayJumpAndScaleAsync(Transform birdTransform, CancellationToken token)
     {
-        float halfDuration = _placingSettings.PlacingDuration * 0.5f;
+        Vector3 startPosition = birdTransform.position;
+        Vector3 endPosition = _shooterView.CenterAnchor.position;
 
-        await LMotion.Create(_placingSettings.SquashScale, _placingSettings.StretchScale, halfDuration)
-            .WithEase(_placingSettings.RiseScaleEase)
-            .BindToLocalScale(birdTransform)
+        float peakProgress = ParabolicTrajectory.CalculatePeakProgress(
+            startPosition.y,
+            endPosition.y,
+            _placingSettings.JumpHeight);
+
+        float riseDuration = _placingSettings.PlacingDuration * peakProgress;
+        float fallDuration = _placingSettings.PlacingDuration * (1f - peakProgress);
+
+        await LMotion.Create(0f, 1f, riseDuration)
+            .WithEase(_placingSettings.RiseEase)
+            .Bind(value => UpdatePlacement(birdTransform, startPosition, endPosition,
+                0f, peakProgress, _placingSettings.SquashScale, _placingSettings.StretchScale, value))
             .ToUniTask(token);
 
-        await LMotion.Create(_placingSettings.StretchScale, Vector3.one, halfDuration)
-            .WithEase(_placingSettings.FallScaleEase)
-            .BindToLocalScale(birdTransform)
+        await LMotion.Create(0f, 1f, fallDuration)
+            .WithEase(_placingSettings.FallEase)
+            .Bind(value => UpdatePlacement(birdTransform, startPosition, endPosition,
+                peakProgress, 1f, _placingSettings.StretchScale, Vector3.one, value))
             .ToUniTask(token);
+    }
+
+    private void UpdatePlacement(Transform birdTransform, Vector3 start, Vector3 end,
+        float startProgress, float endProgress, Vector3 startScale, Vector3 endScale, float value)
+    {
+        float progress = Mathf.Lerp(startProgress, endProgress, value);
+        Vector3 position = Vector3.Lerp(start, end, progress);
+        position.y += ParabolicTrajectory.CalculateOffset(_placingSettings.JumpHeight, progress);
+
+        birdTransform.position = position;
+        birdTransform.localScale = Vector3.Lerp(startScale, endScale, value);
     }
 }

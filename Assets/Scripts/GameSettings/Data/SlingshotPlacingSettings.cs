@@ -15,8 +15,7 @@ public class SlingshotPlacingSettings
     [field: SerializeField] public Vector3 StretchScale { get; private set; } = new(0.8f, 1.3f, 0.8f);
 
     [field: Header("Ease Settings")]
-    [field: SerializeField] public Ease SquashEase { get; private set; } = Ease.OutQuad;
-    [field: SerializeField] public Ease JumpEase { get; private set; } = Ease.InOutQuad;
-    [field: SerializeField] public Ease RiseScaleEase { get; private set; } = Ease.OutQuad;
-    [field: SerializeField] public Ease FallScaleEase { get; private set; } = Ease.InQuad;
+    [field: SerializeField] public Ease SquashEase { get; private set; } = Ease.InQuad;
+    [field: SerializeField] public Ease RiseEase { get; private set; } = Ease.OutQuad;
+    [field: SerializeField] public Ease FallEase { get; private set; } = Ease.InQuad;
 }

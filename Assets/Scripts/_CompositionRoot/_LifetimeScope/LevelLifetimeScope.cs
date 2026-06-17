@@ -12,6 +12,8 @@ public class LevelLifetimeScope : LifetimeScope
     [SerializeField] private GamePauseInstaller _gamePauseInstaller;
     [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
     [SerializeField] private AudioSFXInstaller _sfxInstaller;
+    [SerializeField] private ParticleTrailInstaller _particleTrailInstaller;
+    [SerializeField] private SkyboxInstaller _skyboxInstaller;
     [SerializeField] private SlingshotInstaller _slingshotInstaller;
     [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
     [SerializeField] private ObjectDestructionInstaller _objectDestructionInstaller;
@@ -35,6 +37,8 @@ public class LevelLifetimeScope : LifetimeScope
         _gamePauseInstaller.Install(builder);
         _audioTuningInstaller.Install(builder);
         _sfxInstaller.Install(builder);
+        _particleTrailInstaller.Install(builder);
+        _skyboxInstaller.Install(builder);
         _slingshotInstaller.Install(builder);
         _objectCollisionInstaller.Install(builder);
         _objectDestructionInstaller.Install(builder);
@@ -52,6 +56,8 @@ public class LevelLifetimeScope : LifetimeScope
         new GameStateMediatorsInstaller().Install(builder);
         new AudioTuningMediatorsInstaller().Install(builder);
         new AudioSFXMediatorsInstaller().Install(builder);
+        new ParticleMediatorsInstaller().Install(builder);
+        new ObjectCollisionMediatorsInstaller().Install(builder);
         new BirdMediatorsInstaller().Install(builder);
         new SlingshotMediatorsInstaller().Install(builder);
     }
