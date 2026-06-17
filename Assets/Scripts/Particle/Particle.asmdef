@@ -1,0 +1,20 @@
+{
+    "name": "Particle",
+    "rootNamespace": "",
+    "references": [
+        "VContainer",
+        "UniTask",
+        "LitMotion",
+        "LitMotion.Extensions",
+        "GameSettings"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
