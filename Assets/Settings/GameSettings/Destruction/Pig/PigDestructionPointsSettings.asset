@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b40cf5adada8d5e498471207f15b8433, type: 3}
+  m_Name: PigDestructionPointsSettings
+  m_EditorClassIdentifier: GameSettings::DestructionPointsSettings
+  <Points>k__BackingField: 5000
+  <Color>k__BackingField: {r: 0, g: 1, b: 0.010662079, a: 1}
+  <FontSize>k__BackingField: 1.5

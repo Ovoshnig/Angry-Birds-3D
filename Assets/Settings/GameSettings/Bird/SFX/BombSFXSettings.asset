@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4dc7d9a7e32c074ba80e204932bf5f0, type: 3}
+  m_Name: BombSFXSettings
+  m_EditorClassIdentifier: GameSettings::BirdSFXSettings
+  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 46a70bc8256dce1498c85974f6b51609, type: 3}
+  <FlyingResource>k__BackingField: {fileID: 8300000, guid: 641733f7f9900184a9ce3d4bf90eb5a9, type: 3}
+  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: e745bacef9e1ed34c87294990b6b80a9, type: 2}
+  <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}
