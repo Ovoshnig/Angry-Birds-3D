@@ -65,6 +65,9 @@ MonoBehaviour:
     <MaxVelocitySquareMagnitude>k__BackingField: 800
     <MaxStretchScale>k__BackingField: {x: 0.6, y: 0.6, z: 2}
     <StretchEase>k__BackingField: 5
+  <BirdPowerSettings>k__BackingField:
+    <SplitPositionDiff>k__BackingField: 1.1
+    <SplitAngleDiff>k__BackingField: 12
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10

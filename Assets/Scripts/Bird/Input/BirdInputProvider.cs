@@ -2,7 +2,7 @@ using R3;
 
 public class BirdInputProvider : InputProvider<InputActions.BirdActions>
 {
-    public BirdInputProvider(InputActions.BirdActions actions) : base(actions) =>
+    public BirdInputProvider(InputActions inputActions) : base(inputActions.Bird) =>
         UsePowerPressed = ObserveButton(a => a.UsePower);
 
     public ReadOnlyReactiveProperty<bool> UsePowerPressed { get; }
