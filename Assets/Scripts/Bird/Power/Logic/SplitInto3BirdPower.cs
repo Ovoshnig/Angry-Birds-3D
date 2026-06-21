@@ -19,6 +19,10 @@ public class SplitInto3BirdPower : IBirdPower
         BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
         destroyerView.AddClone(firstClone.DestroyerView);
         destroyerView.AddClone(secondClone.DestroyerView);
+
+        BirdFlyerView flyerView = birdEntityView.FlyerView;
+        flyerView.AddClone(firstClone.FlyerView);
+        flyerView.AddClone(secondClone.FlyerView);
     }
 
     private BirdEntityView CreateClone(BirdEntityView original,
