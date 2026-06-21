@@ -55,6 +55,9 @@ public class BirdPowerActivator : IStartable, IDisposable
     {
         BirdPowerType powerType = birdEntityView.PowerView.PowerType;
 
+        if (powerType == BirdPowerType.None)
+            return;
+
         if (_powerRegistry.TryGet(powerType, out IBirdPower power))
             power.Activate(birdEntityView, _powerSettings);
     }
