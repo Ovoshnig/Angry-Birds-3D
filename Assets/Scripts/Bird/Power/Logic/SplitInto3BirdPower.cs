@@ -10,14 +10,18 @@ public class SplitInto3BirdPower : IBirdPower
         Vector3 rotation = birdEntityView.transform.localEulerAngles;
         float velocityMagnitude = birdEntityView.FlyerView.Rigidbody.linearVelocity.magnitude;
 
-        CreateClone(birdEntityView, position, rotation, velocityMagnitude,
+        BirdEntityView firstClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
             -powerSettings.SplitAngleDiff, powerSettings.SplitPositionDiff);
 
-        CreateClone(birdEntityView, position, rotation, velocityMagnitude,
+        BirdEntityView secondClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
             powerSettings.SplitAngleDiff, -powerSettings.SplitPositionDiff);
+
+        BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
+        destroyerView.AddClone(firstClone.DestroyerView);
+        destroyerView.AddClone(secondClone.DestroyerView);
     }
 
-    private void CreateClone(BirdEntityView original,
+    private BirdEntityView CreateClone(BirdEntityView original,
         Vector3 basePosition,
         Vector3 baseRotation,
         float velocityMagnitude,
@@ -32,5 +36,7 @@ public class SplitInto3BirdPower : IBirdPower
         clone.transform.position = basePosition + (positionOffset * clone.transform.up);
         clone.transform.localScale = Vector3.one;
         clone.FlyerView.Rigidbody.linearVelocity = velocityMagnitude * clone.transform.forward.normalized;
+
+        return clone;
     }
 }
