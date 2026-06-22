@@ -12,7 +12,7 @@ public class TrailParticlePlayer : IDisposable
     private readonly List<TrailParticleView> _currentParticles = new();
     private readonly List<TrailParticleView> _previousParticles = new();
 
-    public TrailParticlePlayer(TrailParticleView particlePrefab)
+    public TrailParticlePlayer(TrailParticleView particlePrefab, TrailParticleSettings settings)
     {
         _poolRoot = new GameObject("TrailParticlePlayerPool");
 
@@ -28,8 +28,8 @@ public class TrailParticlePlayer : IDisposable
                 particleView.transform.SetParent(_poolRoot.transform);
                 particleView.gameObject.SetActive(false);
             },
-            defaultCapacity: 3,
-            maxSize: 6
+            defaultCapacity: settings.PoolDefaultCapacity,
+            maxSize: settings.PoolMaxSize
         );
     }
 
