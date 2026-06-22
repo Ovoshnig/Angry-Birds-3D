@@ -18,8 +18,6 @@ public class TrailParticleView : MonoBehaviour
         _emissionModule = _particleSystem.emission;
     }
 
-    private void Start() => _particleSystem.Stop();
-
     public void Play(Transform birdTransform)
     {
         _scaleHandle.TryCancel();

@@ -1,8 +1,15 @@
+using R3;
+using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
-public class SplitInto3BirdPower : IBirdPower
+public class SplitInto3BirdPower : IBirdPower, IDisposable
 {
+    private readonly Subject<BirdEntityView> _cloneCreated = new();
+
     public BirdPowerType Type => BirdPowerType.SplitInto3;
+
+    public Observable<BirdEntityView> CloneCreated => _cloneCreated;
 
     public void Activate(BirdEntityView birdEntityView, BirdPowerSettings powerSettings)
     {
@@ -23,7 +30,12 @@ public class SplitInto3BirdPower : IBirdPower
         BirdFlyerView flyerView = birdEntityView.FlyerView;
         flyerView.AddClone(firstClone.FlyerView);
         flyerView.AddClone(secondClone.FlyerView);
+
+        _cloneCreated.OnNext(firstClone);
+        _cloneCreated.OnNext(secondClone);
     }
+
+    public void Dispose() => _cloneCreated.Dispose();
 
     private BirdEntityView CreateClone(BirdEntityView original,
         Vector3 basePosition,

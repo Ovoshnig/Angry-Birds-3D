@@ -1,3 +1,4 @@
+using Cysharp.Threading.Tasks;
 using R3;
 
 public class TrailParticlePlayerBirdFlyerMediator : Mediator
