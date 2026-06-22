@@ -3,54 +3,6 @@
     "name": "InputActions",
     "maps": [
         {
-            "name": "Slingshot",
-            "id": "b5f27395-9b66-4c9d-9e35-e20fbd5c257c",
-            "actions": [
-                {
-                    "name": "LeftButton",
-                    "type": "Button",
-                    "id": "02a5285e-e57a-4709-8c8c-c43fb9783785",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Drag",
-                    "type": "Value",
-                    "id": "369b26c0-4ae7-4e73-b19d-5efb3635be83",
-                    "expectedControlType": "Vector2",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": true
-                }
-            ],
-            "bindings": [
-                {
-                    "name": "",
-                    "id": "9f0d7a46-904a-4a56-999f-75e29e7d4fac",
-                    "path": "<Mouse>/leftButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard and Mouse",
-                    "action": "LeftButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "3f89f065-2e61-4f15-b9dd-8b7480971c8a",
-                    "path": "<Mouse>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Keyboard and Mouse",
-                    "action": "Drag",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                }
-            ]
-        },
-        {
             "name": "Camera",
             "id": "d4ff12c5-45a9-4f41-97ff-02b9768165bd",
             "actions": [
@@ -99,13 +51,61 @@
             ]
         },
         {
-            "name": "Credits",
-            "id": "c70f53b1-65a5-4e4e-9d19-389e4aaafe0d",
+            "name": "Slingshot",
+            "id": "b5f27395-9b66-4c9d-9e35-e20fbd5c257c",
             "actions": [
                 {
-                    "name": "SpeedUp",
+                    "name": "LeftButton",
                     "type": "Button",
-                    "id": "474e3938-f525-491f-a578-b95a34ac627c",
+                    "id": "02a5285e-e57a-4709-8c8c-c43fb9783785",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Drag",
+                    "type": "Value",
+                    "id": "369b26c0-4ae7-4e73-b19d-5efb3635be83",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "9f0d7a46-904a-4a56-999f-75e29e7d4fac",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "LeftButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "3f89f065-2e61-4f15-b9dd-8b7480971c8a",
+                    "path": "<Mouse>/delta",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "Drag",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Bird",
+            "id": "4d6bfce8-2677-440b-b2e7-6e278ca71a06",
+            "actions": [
+                {
+                    "name": "UsePower",
+                    "type": "Button",
+                    "id": "d0c92d93-6414-41aa-9089-283d53f505a7",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -115,12 +115,23 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "c4e7cafc-f5c6-4e82-aed0-6648e67e1ff8",
+                    "id": "8bb16bbb-8ec2-41a8-a918-87dd6c12bd7b",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "UsePower",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "55a0627f-1b64-4a45-b58d-1b3e1a22039c",
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
                     "groups": ";Keyboard and Mouse",
-                    "action": "SpeedUp",
+                    "action": "UsePower",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -265,6 +276,34 @@
                     "processors": "",
                     "groups": ";Keyboard and Mouse",
                     "action": "SkipSplashImage",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Credits",
+            "id": "c70f53b1-65a5-4e4e-9d19-389e4aaafe0d",
+            "actions": [
+                {
+                    "name": "SpeedUp",
+                    "type": "Button",
+                    "id": "474e3938-f525-491f-a578-b95a34ac627c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "c4e7cafc-f5c6-4e82-aed0-6648e67e1ff8",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "SpeedUp",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

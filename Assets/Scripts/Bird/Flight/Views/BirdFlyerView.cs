@@ -1,16 +1,24 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
-using LitMotion.Extensions;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
 public class BirdFlyerView : MonoBehaviour
 {
+    private readonly HashSet<BirdFlyerView> _cloneFlyerViews = new();
+
     public Rigidbody Rigidbody { get; private set; }
 
     private void Awake() => Rigidbody = GetComponent<Rigidbody>();
+
+    public void AddClone(BirdFlyerView clone)
+    {
+        if (clone != null)
+            _cloneFlyerViews.Add(clone);
+    }
 
     public async UniTask StretchAsync(BirdStretchSettings settings, CancellationToken token)
     {
@@ -28,7 +36,7 @@ public class BirdFlyerView : MonoBehaviour
             await LMotion.Create(Vector3.one, stretchScale, settings.StretchDuration)
                 .WithEase(settings.StretchEase)
                 .WithLoops(2, LoopType.Yoyo)
-                .BindToLocalScale(transform)
+                .Bind(UpdateLocalScale)
                 .ToUniTask(token);
         }
         catch (OperationCanceledException)
@@ -38,14 +46,25 @@ public class BirdFlyerView : MonoBehaviour
 
             await LMotion.Create(transform.localScale, Vector3.one, settings.StretchCancelDuration)
                 .WithEase(Ease.InQuad)
-                .BindToLocalScale(transform)
+                .Bind(UpdateLocalScale)
                 .ToUniTask(cancellationToken: destroyCancellationToken);
         }
+    }
+
+    public void UpdateLocalScale(Vector3 scale)
+    {
+        transform.localScale = scale;
+
+        foreach (var clone in _cloneFlyerViews)
+            clone.transform.localScale = scale;
     }
 
     public void LookAtVelocityDirection()
     {
         if (Rigidbody.linearVelocity.sqrMagnitude != 0f)
             Rigidbody.transform.forward = Rigidbody.linearVelocity.normalized;
+
+        foreach (var clone in _cloneFlyerViews)
+            clone.LookAtVelocityDirection();
     }
 }
