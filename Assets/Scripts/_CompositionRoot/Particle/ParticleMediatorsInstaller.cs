@@ -7,5 +7,6 @@ public class ParticleMediatorsInstaller : IInstaller
     {
         builder.RegisterEntryPoint<TrailParticlePlayerBirdFlyerMediator>();
         builder.RegisterEntryPoint<TrailParticlePlayerSplitInto3BirdPowerMediator>();
+        builder.RegisterEntryPoint<TrailParticlePlayerBirdPowerActivatorMediator>();
     }
 }

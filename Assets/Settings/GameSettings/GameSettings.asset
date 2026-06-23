@@ -27,6 +27,10 @@ MonoBehaviour:
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
     <MaxSameSfxPlaying>k__BackingField: 2
+  <TrailParticleSettings>k__BackingField:
+    <PoolDefaultCapacity>k__BackingField: 3
+    <PoolMaxSize>k__BackingField: 6
+    <PowerParticleSize>k__BackingField: 0.75
   <SkyboxSettings>k__BackingField:
     <LoopDuration>k__BackingField: 360
   <CollisionSettings>k__BackingField:

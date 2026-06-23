@@ -1,5 +1,6 @@
 using R3;
 using System;
+using UnityEngine;
 using VContainer.Unity;
 
 public class BirdPowerActivator : IStartable, IDisposable
@@ -8,6 +9,7 @@ public class BirdPowerActivator : IStartable, IDisposable
     private readonly BirdInputProvider _inputProvider;
     private readonly BirdPowerRegistry _powerRegistry;
     private readonly BirdPowerSettings _powerSettings;
+    private readonly Subject<Vector3> _activated = new();
     private readonly CompositeDisposable _flightDisposables = new();
     private readonly CompositeDisposable _inputDisposables = new();
 
@@ -21,6 +23,8 @@ public class BirdPowerActivator : IStartable, IDisposable
         _powerRegistry = powerRegistry;
         _powerSettings = powerSettings;
     }
+
+    public Observable<Vector3> Activated => _activated;
 
     public void Start()
     {
@@ -59,6 +63,9 @@ public class BirdPowerActivator : IStartable, IDisposable
             return;
 
         if (_powerRegistry.TryGet(powerType, out IBirdPower power))
+        {
             power.Activate(birdEntityView, _powerSettings);
+            _activated.OnNext(birdEntityView.transform.position);
+        }
     }
 }
