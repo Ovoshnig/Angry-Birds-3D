@@ -63,14 +63,18 @@ MonoBehaviour:
     <PointsDisplayDelay>k__BackingField: 2
   <BirdStretchSettings>k__BackingField:
     <StretchDelay>k__BackingField: 0.02
-    <StretchDuration>k__BackingField: 0.5
+    <StretchDuration>k__BackingField: 0.4
     <StretchCancelDuration>k__BackingField: 0.1
     <MinVelocitySquareMagnitude>k__BackingField: 0
     <MaxVelocitySquareMagnitude>k__BackingField: 800
-    <MaxStretchScale>k__BackingField: {x: 0.6, y: 0.6, z: 2}
+    <MaxStretchScale>k__BackingField: {x: 0.7, y: 0.7, z: 1.75}
     <StretchEase>k__BackingField: 5
   <BirdPowerSettings>k__BackingField:
     <SplitAngleDiff>k__BackingField: 12
+    <VelocityIncreasingDuration>k__BackingField: 0.1
+    <BoostDuration>k__BackingField: 0.13
+    <BoostVelocity>k__BackingField: 40
+    <VelocityIncreasingEase>k__BackingField: 2
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10
