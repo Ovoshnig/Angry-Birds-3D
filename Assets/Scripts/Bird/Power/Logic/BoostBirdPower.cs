@@ -6,7 +6,10 @@ using UnityEngine;
 
 public class BoostBirdPower : IBirdPower, IDisposable
 {
+    private readonly BirdStretchSettings _stretchSettings;
     private readonly CancellationTokenSource _cts = new();
+
+    public BoostBirdPower(BirdStretchSettings stretchSettings) => _stretchSettings = stretchSettings;
 
     public BirdPowerType Type => BirdPowerType.Boost;
 
@@ -24,6 +27,8 @@ public class BoostBirdPower : IBirdPower, IDisposable
 
     private async UniTask BoostAsync(BirdFlyerView birdFlyerView, BirdPowerSettings powerSettings)
     {
+        birdFlyerView.StretchAsync(_stretchSettings, birdFlyerView.destroyCancellationToken).Forget();
+
         Vector3 linearVelocity = birdFlyerView.Rigidbody.linearVelocity;
         Vector3 targetVelocity = powerSettings.BoostVelocity * linearVelocity.normalized;
 
