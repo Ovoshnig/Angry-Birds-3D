@@ -51,7 +51,7 @@ ParticleSystem:
   emitterVelocityMode: 1
   looping: 1
   prewarm: 0
-  playOnAwake: 1
+  playOnAwake: 0
   useUnscaledTime: 0
   autoRandomSeed: 1
   startDelay:
@@ -4849,4 +4849,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5543c22f6014d26418c51a12740a97ba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Particle::TrailParticleView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
   _disappearanceDuration: 0.5

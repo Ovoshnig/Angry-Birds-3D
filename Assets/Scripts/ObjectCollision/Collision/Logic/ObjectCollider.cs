@@ -2,13 +2,13 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using VContainer.Unity;
 
 public class ObjectCollider : IDisposable
 {
     private readonly IReadOnlyList<CollidableEntityView> _entityViews;
     private readonly CollisionEvaluator _evaluator;
-    private readonly Subject<CollisionEvent> _collided = new();
+    private readonly Subject<CollisionData> _collided = new();
+
     public ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews,
         CollisionEvaluator evaluator)
     {
@@ -16,7 +16,7 @@ public class ObjectCollider : IDisposable
         _evaluator = evaluator;
     }
 
-    public Observable<CollisionEvent> Collided => _collided;
+    public Observable<CollisionData> Collided => _collided;
 
     public void Subscribe()
     {
@@ -37,12 +37,12 @@ public class ObjectCollider : IDisposable
         if (collision.contactCount == 0)
             return;
 
-        CollisionData data = new(collision.GetContact(0).normal,
+        CollisionRawData rawData = new(collision.GetContact(0).normal,
             collision.relativeVelocity,
             collision.impulse.magnitude,
             collision.contactCount);
 
-        if (_evaluator.TryEvaluate(data, out CollisionType type, out float force))
-            _collided.OnNext(new CollisionEvent(entityView, type, force));
+        if (_evaluator.TryEvaluate(rawData, out CollisionType type, out float force))
+            _collided.OnNext(new CollisionData(entityView, type, force));
     }
 }

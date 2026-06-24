@@ -6,19 +6,24 @@ using UnityEngine;
 [RequireComponent(typeof(ParticleSystem))]
 public class TrailParticleView : MonoBehaviour
 {
+    [SerializeField] private GameSettings _gameSettings;
     [SerializeField, Min(0f)] private float _disappearanceDuration = 0.5f;
 
     private ParticleSystem _particleSystem;
+    private ParticleSystem.MainModule _mainModule;
     private ParticleSystem.EmissionModule _emissionModule;
     private MotionHandle _scaleHandle;
+    private ParticleSystem.MinMaxCurve _startSize;
 
     private void Awake()
     {
         _particleSystem = GetComponent<ParticleSystem>();
+
+        _mainModule = _particleSystem.main;
+        _startSize = _mainModule.startSize;
+
         _emissionModule = _particleSystem.emission;
     }
-
-    private void Start() => _particleSystem.Stop();
 
     public void Play(Transform birdTransform)
     {
@@ -50,5 +55,12 @@ public class TrailParticleView : MonoBehaviour
 
         _particleSystem.Stop();
         _particleSystem.Clear();
+    }
+
+    public void EmitPowerParticle()
+    {
+        _mainModule.startSize = _gameSettings.TrailParticleSettings.PowerParticleSize;
+        _particleSystem.Emit(1);
+        _mainModule.startSize = _startSize;
     }
 }

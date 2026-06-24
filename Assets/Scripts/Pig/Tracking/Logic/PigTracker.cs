@@ -42,9 +42,9 @@ public class PigTracker : IStartable, IDisposable
         _pigCount.Dispose();
     }
 
-    private void OnDestroyed(DestructionEvent destructionEvent)
+    private void OnDestroyed(DestructionData data)
     {
-        if (destructionEvent.EntityView is not PigEntityView pigEntityView)
+        if (data.EntityView is not PigEntityView pigEntityView)
             return;
 
         if (_pigEntityViews.Contains(pigEntityView))

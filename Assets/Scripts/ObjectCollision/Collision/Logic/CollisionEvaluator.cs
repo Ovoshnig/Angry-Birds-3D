@@ -6,18 +6,18 @@ public class CollisionEvaluator
 
     public CollisionEvaluator(CollisionSettings settings) => _settings = settings;
 
-    public bool TryEvaluate(CollisionData data, out CollisionType type, out float impactForce)
+    public bool TryEvaluate(CollisionRawData rawData, out CollisionType type, out float impactForce)
     {
         type = CollisionType.Collision;
         impactForce = 0f;
 
-        if (data.ContactCount == 0)
+        if (rawData.ContactCount == 0)
             return false;
 
-        impactForce = data.ImpulseMagnitude;
+        impactForce = rawData.ImpulseMagnitude;
 
-        Vector3 contactNormal = data.ContactNormal;
-        Vector3 impactVelocity = data.RelativeVelocity.normalized;
+        Vector3 contactNormal = rawData.ContactNormal;
+        Vector3 impactVelocity = rawData.RelativeVelocity.normalized;
 
         float hitAngle = Mathf.Abs(Vector3.Dot(contactNormal, impactVelocity));
         bool isGliding = hitAngle < _settings.GlidingThreshold;
