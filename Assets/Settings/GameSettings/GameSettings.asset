@@ -60,6 +60,7 @@ MonoBehaviour:
     <FallEase>k__BackingField: 1
   <BirdSettings>k__BackingField:
     <DestructionDelay>k__BackingField: 5
+    <FallOutDepth>k__BackingField: 10
     <PointsDisplayDelay>k__BackingField: 2
   <BirdStretchSettings>k__BackingField:
     <StretchDelay>k__BackingField: 0.02
