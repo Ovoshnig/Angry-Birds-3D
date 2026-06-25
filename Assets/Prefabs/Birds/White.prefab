@@ -157,6 +157,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ff21837565fb540b465c0b9281842a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BirdFlyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
 --- !u!114 &968675676329880659
 MonoBehaviour:
   m_ObjectHideFlags: 0
