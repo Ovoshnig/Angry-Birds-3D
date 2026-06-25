@@ -8,6 +8,8 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody))]
 public class BirdFlyerView : MonoBehaviour
 {
+    [SerializeField] private GameSettings _gameSettings;
+
     private readonly HashSet<BirdFlyerView> _cloneFlyerViews = new();
 
     public Rigidbody Rigidbody { get; private set; }
@@ -20,8 +22,10 @@ public class BirdFlyerView : MonoBehaviour
             _cloneFlyerViews.Add(clone);
     }
 
-    public async UniTask StretchAsync(BirdStretchSettings settings, CancellationToken token)
+    public async UniTask StretchAsync(CancellationToken token)
     {
+        BirdStretchSettings settings = _gameSettings.BirdStretchSettings;
+
         try
         {
             await UniTask.WaitForSeconds(settings.StretchDelay, cancellationToken: token);
@@ -51,14 +55,6 @@ public class BirdFlyerView : MonoBehaviour
         }
     }
 
-    public void UpdateLocalScale(Vector3 scale)
-    {
-        transform.localScale = scale;
-
-        foreach (var clone in _cloneFlyerViews)
-            clone.transform.localScale = scale;
-    }
-
     public void LookAtVelocityDirection()
     {
         if (Rigidbody.linearVelocity.sqrMagnitude != 0f)
@@ -66,5 +62,13 @@ public class BirdFlyerView : MonoBehaviour
 
         foreach (var clone in _cloneFlyerViews)
             clone.LookAtVelocityDirection();
+    }
+
+    private void UpdateLocalScale(Vector3 scale)
+    {
+        transform.localScale = scale;
+
+        foreach (var clone in _cloneFlyerViews)
+            clone.transform.localScale = scale;
     }
 }

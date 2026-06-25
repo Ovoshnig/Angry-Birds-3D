@@ -14,7 +14,7 @@ public class CameraSwitchViewBirdFlyerMediator : Mediator
 
     protected override void Bind(CompositeDisposable disposables)
     {
-        _birdFlyer.FlightInterrupted
+        _birdFlyer.BirdCollided
             .Subscribe(_ => _cameraSwitchView.SwitchToStructureAsync().Forget())
             .AddTo(disposables);
     }

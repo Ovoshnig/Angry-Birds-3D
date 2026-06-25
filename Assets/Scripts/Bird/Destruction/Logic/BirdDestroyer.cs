@@ -23,18 +23,17 @@ public class BirdDestroyer : IStartable, IDisposable
     {
         _objectCollider.Collided
             .Where(data => data.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
-            .Do(data =>
+            .Select(data => data.EntityView as BirdEntityView)
+            .Do(entityView =>
             {
-                BirdEntityView entityView = data.EntityView as BirdEntityView;
                 entityView.DestroyerView.StartDestroying();
                 _destructionStarted.OnNext(entityView);
             })
             .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
-            .Subscribe(data =>
+            .Subscribe(entityView =>
             {
-                if (data.EntityView != null)
+                if (entityView != null)
                 {
-                    BirdEntityView entityView = data.EntityView as BirdEntityView;
                     entityView.DestroyerView.Destroy();
                     _destroyed.OnNext(entityView);
                 }
@@ -48,5 +47,18 @@ public class BirdDestroyer : IStartable, IDisposable
 
         _destructionStarted.Dispose();
         _destroyed.Dispose();
+    }
+
+    public void DestroyImmediate(BirdEntityView birdEntityView)
+    {
+        if (birdEntityView == null)
+            return;
+
+        BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
+        destroyerView.StartDestroying();
+        _destructionStarted.OnNext(birdEntityView);
+
+        destroyerView.Destroy();
+        _destroyed.OnNext(birdEntityView);
     }
 }
