@@ -7,6 +7,7 @@ public class BirdEntityView : CollidableEntityView
 {
     [field: SerializeField] public BirdSFXSettings SFXSettings { get; private set; }
     [field: SerializeField] public PointsSettings PointsSettings { get; private set; }
+    [field: SerializeField] public Color FeatherColor { get; private set; }
 
     public BirdFlyerView FlyerView { get; private set; }
     public BirdDestroyerView DestroyerView { get; private set; }
