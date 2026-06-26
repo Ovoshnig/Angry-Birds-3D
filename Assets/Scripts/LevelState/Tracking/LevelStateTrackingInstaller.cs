@@ -16,7 +16,8 @@ public class LevelStateTrackingInstaller : IInstaller
         {
             entryPoints.Add<LevelStateTracker>().AsSelf();
             entryPoints.Add<ScoreModelFinalScoreViewMediator>();
-            entryPoints.Add<FailureViewLevelTrackerMediator>();
+            entryPoints.Add<ClearingPanelViewBirdPointsDisplayerMediator>();
+            entryPoints.Add<FailurePanelViewLevelTrackerMediator>();
         });
     }
 }
