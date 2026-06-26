@@ -15,3 +15,8 @@ MonoBehaviour:
   <Points>k__BackingField: 10000
   <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
   <FontSize>k__BackingField: 2
+  <AppearanceDuration>k__BackingField: 0.35
+  <ShowingDuration>k__BackingField: 0.65
+  <DisappearanceDuration>k__BackingField: 0.35
+  <AppearanceEase>k__BackingField: 17
+  <DisappearanceEase>k__BackingField: 1
