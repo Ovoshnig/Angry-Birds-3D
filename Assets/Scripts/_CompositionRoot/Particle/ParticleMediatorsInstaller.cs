@@ -5,8 +5,14 @@ public class ParticleMediatorsInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<TrailParticlePlayerBirdFlyerMediator>();
-        builder.RegisterEntryPoint<TrailParticlePlayerSplitInto3BirdPowerMediator>();
-        builder.RegisterEntryPoint<TrailParticlePlayerBirdPowerActivatorMediator>();
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<TrailParticlePlayerBirdFlyerMediator>();
+            entryPoints.Add<TrailParticlePlayerSplitInto3BirdPowerMediator>();
+            entryPoints.Add<TrailParticlePlayerBirdPowerActivatorMediator>();
+
+            entryPoints.Add<FeatherParticleViewObjectColliderMediator>();
+            entryPoints.Add<FeatherParticleViewBirdDestroyerMediator>();
+        });
     }
 }

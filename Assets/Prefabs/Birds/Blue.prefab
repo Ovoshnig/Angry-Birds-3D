@@ -149,6 +149,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Bird::BirdEntityView
   <SFXSettings>k__BackingField: {fileID: 11400000, guid: a5eeb81d4c1c694408afef3c54f3ad5e, type: 2}
   <PointsSettings>k__BackingField: {fileID: 11400000, guid: 08df871a007a1b24ab211c0e57a7bcb7, type: 2}
+  <FeatherColor>k__BackingField: {r: 0.38431373, g: 0.654902, b: 0.75686276, a: 1}
 --- !u!114 &8067183096181335180
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,6 +162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f7ff21837565fb540b465c0b9281842a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdFlyerView
+  _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
 --- !u!114 &2459273862630260589
 MonoBehaviour:
   m_ObjectHideFlags: 0

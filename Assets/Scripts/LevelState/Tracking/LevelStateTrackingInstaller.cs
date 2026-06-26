@@ -9,14 +9,17 @@ public class LevelStateTrackingInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstanceInHierarchy<ClearingPanelView>();
+        builder.RegisterInstanceInHierarchy<LevelIndexView>();
         builder.RegisterInstanceInHierarchy<FinalScoreView>();
         builder.RegisterInstanceInHierarchy<FailurePanelView>();
 
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<LevelStateTracker>().AsSelf();
+            entryPoints.Add<ClearingPanelViewBirdPointsDisplayerMediator>();
+            entryPoints.Add<SceneManagerLevelIndexViewMediator>();
             entryPoints.Add<ScoreModelFinalScoreViewMediator>();
-            entryPoints.Add<FailureViewLevelTrackerMediator>();
+            entryPoints.Add<FailurePanelViewLevelTrackerMediator>();
         });
     }
 }

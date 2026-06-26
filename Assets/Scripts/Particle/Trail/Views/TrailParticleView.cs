@@ -40,6 +40,8 @@ public class TrailParticleView : MonoBehaviour
     public void StopEmitting()
     {
         transform.SetParent(null);
+        transform.localScale = Vector3.one;
+
         _emissionModule.enabled = false;
     }
 

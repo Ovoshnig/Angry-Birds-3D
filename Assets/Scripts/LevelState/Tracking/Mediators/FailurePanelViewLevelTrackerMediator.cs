@@ -2,13 +2,13 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Threading;
 
-public class FailureViewLevelTrackerMediator : Mediator
+public class FailurePanelViewLevelTrackerMediator : Mediator
 {
     private readonly FailurePanelView _failurePanelView;
     private readonly LevelStateTracker _levelStateTracker;
     private readonly CameraSwitchView _cameraSwitchView;
 
-    public FailureViewLevelTrackerMediator(FailurePanelView failurePanelView,
+    public FailurePanelViewLevelTrackerMediator(FailurePanelView failurePanelView,
         LevelStateTracker levelStateTracker,
         CameraSwitchView cameraSwitchView)
     {

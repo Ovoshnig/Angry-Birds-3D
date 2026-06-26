@@ -1,5 +1,6 @@
 public enum BirdPowerType
 {
     None,
-    SplitInto3
+    SplitInto3,
+    Boost
 }
