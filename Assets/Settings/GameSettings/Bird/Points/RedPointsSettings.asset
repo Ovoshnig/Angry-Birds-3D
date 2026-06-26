@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: RedPointsSettings
   m_EditorClassIdentifier: GameSettings::PointsSettings
   <Points>k__BackingField: 10000
-  <Color>k__BackingField: {r: 0.8862746, g: 0.10588236, b: 0.16470589, a: 1}
+  <Color>k__BackingField: {r: 0.827451, g: 0.003921569, b: 0.1882353, a: 1}
   <FontSize>k__BackingField: 2
