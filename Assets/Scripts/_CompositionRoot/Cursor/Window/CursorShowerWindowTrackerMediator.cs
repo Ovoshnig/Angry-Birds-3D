@@ -1,14 +1,14 @@
 ﻿using R3;
 
-public class WindowTrackerCursorAdjusterMediator : Mediator
+public class CursorShowerWindowTrackerMediator : Mediator
 {
+    private readonly CursorShower _cursorShower;
     private readonly WindowTracker _windowTracker;
-    private readonly CursorAdjuster _cursorAdjuster;
 
-    public WindowTrackerCursorAdjusterMediator(WindowTracker windowTracker, CursorAdjuster cursorAdjuster)
+    public CursorShowerWindowTrackerMediator(CursorShower cursorShower, WindowTracker windowTracker)
     {
+        _cursorShower = cursorShower;
         _windowTracker = windowTracker;
-        _cursorAdjuster = cursorAdjuster;
     }
 
     protected override void Bind(CompositeDisposable disposables)
@@ -17,9 +17,9 @@ public class WindowTrackerCursorAdjusterMediator : Mediator
             .Subscribe(isOpen =>
             {
                 if (isOpen)
-                    _cursorAdjuster.ShowCursor();
+                    _cursorShower.ShowCursor();
                 else
-                    _cursorAdjuster.HideCursor();
+                    _cursorShower.HideCursor();
             })
             .AddTo(disposables);
     }
