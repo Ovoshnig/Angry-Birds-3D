@@ -9,11 +9,6 @@ public class FullScreenAdjustmentInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstanceInHierarchy<FullScreenAdjustToggleView>();
-
-        builder.UseEntryPoints(entryPoints =>
-        {
-            entryPoints.Add<FullScreenAdjuster>().AsSelf();
-            entryPoints.Add<FullScreenAdjusterToggleViewMediator>();
-        });
+        builder.RegisterEntryPoint<FullScreenAdjusterToggleViewMediator>();
     }
 }
