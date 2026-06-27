@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: CursorConfiguration
   m_EditorClassIdentifier: Cursor::CursorConfiguration
   <UiHoverTexture>k__BackingField: {fileID: 2800000, guid: 7e5d33b4eed7d914dbbf4135789ef5c1, type: 3}
-  <UiHoverHotspot>k__BackingField: {x: 13, y: 12}
+  <UiHoverHotspot>k__BackingField: {x: 5, y: 4}
   <UiClickTexture>k__BackingField: {fileID: 2800000, guid: c23c0224d6ecfce469722a482ec39be2, type: 3}
-  <UiClickHotspot>k__BackingField: {x: 16, y: 15}
+  <UiClickHotspot>k__BackingField: {x: 5, y: 4}
   <GameplayHoverTexture>k__BackingField: {fileID: 2800000, guid: c4929dcbffe36084d8c9fd74c1fb74c1, type: 3}
   <GameplayHoverHotspot>k__BackingField: {x: 5, y: 10}
   <GameplayGrabTexture>k__BackingField: {fileID: 2800000, guid: 7f37eb17d0e327d49ade35d53e0296bf, type: 3}
-  <GameplayGrabHotspot>k__BackingField: {x: 9, y: 34}
+  <GameplayGrabHotspot>k__BackingField: {x: 15, y: 17}
