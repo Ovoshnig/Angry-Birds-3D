@@ -14,8 +14,6 @@ public class MainMenuLifetimeScope : LifetimeScope
 
     protected override void Configure(IContainerBuilder builder)
     {
-        builder.RegisterEntryPoint<UIInputProvider>().AsSelf();
-
         _sceneSwitchingInstaller.Install(builder);
         _ratingShowingInstaller.Install(builder);
         _gameQuittingInstaller.Install(builder);

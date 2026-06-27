@@ -52,3 +52,6 @@ MonoBehaviour:
     _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
   _sceneLoadingScreenInstaller:
     _loadingScreenView: {fileID: 3323423462091642806, guid: 95c90c7e43682a442a4f05875ebe9b31, type: 3}
+  _cursorInstaller:
+    _stateInstaller:
+      _cursorConfiguration: {fileID: 11400000, guid: 217f10e4ec2f34542b0a4e7f5451131b, type: 2}

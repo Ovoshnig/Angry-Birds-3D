@@ -142,6 +142,15 @@
             "id": "0f52817e-7ac5-4645-addf-cf1b01c9b69e",
             "actions": [
                 {
+                    "name": "Click",
+                    "type": "Button",
+                    "id": "32391ac7-61de-494a-90f7-545ce66c6a38",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "CloseCurrent",
                     "type": "Button",
                     "id": "50da8447-761f-4686-a0b3-e2f05a4665aa",
@@ -180,6 +189,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "SkipTextPrinting",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "927e10a8-ace0-4cc6-973e-8a5f1114fa45",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard and Mouse",
+                    "action": "Click",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

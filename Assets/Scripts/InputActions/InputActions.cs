@@ -228,6 +228,15 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
             ""id"": ""0f52817e-7ac5-4645-addf-cf1b01c9b69e"",
             ""actions"": [
                 {
+                    ""name"": ""Click"",
+                    ""type"": ""Button"",
+                    ""id"": ""32391ac7-61de-494a-90f7-545ce66c6a38"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""CloseCurrent"",
                     ""type"": ""Button"",
                     ""id"": ""50da8447-761f-4686-a0b3-e2f05a4665aa"",
@@ -266,6 +275,17 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""SkipTextPrinting"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""927e10a8-ace0-4cc6-973e-8a5f1114fa45"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard and Mouse"",
+                    ""action"": ""Click"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -439,6 +459,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         m_Bird_UsePower = m_Bird.FindAction("UsePower", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
+        m_UI_Click = m_UI.FindAction("Click", throwIfNotFound: true);
         m_UI_CloseCurrent = m_UI.FindAction("CloseCurrent", throwIfNotFound: true);
         m_UI_SkipTextPrinting = m_UI.FindAction("SkipTextPrinting", throwIfNotFound: true);
         // Window
@@ -848,6 +869,7 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     // UI
     private readonly InputActionMap m_UI;
     private List<IUIActions> m_UIActionsCallbackInterfaces = new List<IUIActions>();
+    private readonly InputAction m_UI_Click;
     private readonly InputAction m_UI_CloseCurrent;
     private readonly InputAction m_UI_SkipTextPrinting;
     /// <summary>
@@ -861,6 +883,10 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// Construct a new instance of the input action map wrapper class.
         /// </summary>
         public UIActions(@InputActions wrapper) { m_Wrapper = wrapper; }
+        /// <summary>
+        /// Provides access to the underlying input action "UI/Click".
+        /// </summary>
+        public InputAction @Click => m_Wrapper.m_UI_Click;
         /// <summary>
         /// Provides access to the underlying input action "UI/CloseCurrent".
         /// </summary>
@@ -895,6 +921,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_UIActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_UIActionsCallbackInterfaces.Add(instance);
+            @Click.started += instance.OnClick;
+            @Click.performed += instance.OnClick;
+            @Click.canceled += instance.OnClick;
             @CloseCurrent.started += instance.OnCloseCurrent;
             @CloseCurrent.performed += instance.OnCloseCurrent;
             @CloseCurrent.canceled += instance.OnCloseCurrent;
@@ -912,6 +941,9 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UIActions" />
         private void UnregisterCallbacks(IUIActions instance)
         {
+            @Click.started -= instance.OnClick;
+            @Click.performed -= instance.OnClick;
+            @Click.canceled -= instance.OnClick;
             @CloseCurrent.started -= instance.OnCloseCurrent;
             @CloseCurrent.performed -= instance.OnCloseCurrent;
             @CloseCurrent.canceled -= instance.OnCloseCurrent;
@@ -1353,6 +1385,13 @@ public partial class @InputActions: IInputActionCollection2, IDisposable
     /// <seealso cref="UIActions.RemoveCallbacks(IUIActions)" />
     public interface IUIActions
     {
+        /// <summary>
+        /// Method invoked when associated input action "Click" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnClick(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "CloseCurrent" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
