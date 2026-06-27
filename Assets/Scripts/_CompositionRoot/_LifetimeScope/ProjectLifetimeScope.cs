@@ -16,6 +16,8 @@ public class ProjectLifetimeScope : LifetimeScope
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<ScreenInputProvider>().AsSelf();
+            entryPoints.Add<FullScreenAdjuster>().AsSelf();
+
             entryPoints.Add<UIInputProvider>().AsSelf();
             entryPoints.Add<SceneSwitch>().AsSelf();
         });
