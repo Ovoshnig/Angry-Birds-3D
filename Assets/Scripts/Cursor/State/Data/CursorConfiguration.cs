@@ -1,17 +1,25 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "CursorConfiguration", menuName = "Scriptable Objects/Cursor Configuration")]
-public sealed class CursorConfiguration : ScriptableObject
+public sealed class CursorConfiguration : ScriptableObject, ISerializationCallbackReceiver
 {
-    [field: SerializeField] public Texture2D UiHoverTexture { get; private set; }
-    [field: SerializeField] public Vector2 UiHoverHotspot { get; private set; }
+    [field: SerializeField] public List<CursorData> CursorPresets { get; private set; } = new();
 
-    [field: SerializeField] public Texture2D UiClickTexture { get; private set; }
-    [field: SerializeField] public Vector2 UiClickHotspot { get; private set; }
+    private readonly Dictionary<CursorState, CursorData> _cursorMap = new();
 
-    [field: SerializeField] public Texture2D GameplayHoverTexture { get; private set; }
-    [field: SerializeField] public Vector2 GameplayHoverHotspot { get; private set; }
+    public void OnBeforeSerialize()
+    {
+    }
 
-    [field: SerializeField] public Texture2D GameplayGrabTexture { get; private set; }
-    [field: SerializeField] public Vector2 GameplayGrabHotspot { get; private set; }
+    public void OnAfterDeserialize()
+    {
+        _cursorMap.Clear();
+
+        foreach (CursorData preset in CursorPresets)
+            _cursorMap[preset.State] = preset;
+    }
+
+    public bool TryGetCursorData(CursorState state, out CursorData data) =>
+        _cursorMap.TryGetValue(state, out data);
 }

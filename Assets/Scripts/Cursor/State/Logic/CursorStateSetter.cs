@@ -34,21 +34,8 @@ public sealed class CursorStateSetter : IStartable, IDisposable
 
     private void OnCursorStateChanged(CursorState state)
     {
-        switch (state)
-        {
-            case CursorState.UIHover:
-                Cursor.SetCursor(_configuration.UiHoverTexture, _configuration.UiHoverHotspot, CursorMode.Auto);
-                break;
-            case CursorState.UIClick:
-                Cursor.SetCursor(_configuration.UiClickTexture, _configuration.UiClickHotspot, CursorMode.Auto);
-                break;
-            case CursorState.GameplayHover:
-                Cursor.SetCursor(_configuration.GameplayHoverTexture, _configuration.GameplayHoverHotspot, CursorMode.Auto);
-                break;
-            case CursorState.GameplayGrab:
-                Cursor.SetCursor(_configuration.GameplayGrabTexture, _configuration.GameplayGrabHotspot, CursorMode.Auto);
-                break;
-        }
+        if (_configuration.TryGetCursorData(state, out CursorData data))
+            Cursor.SetCursor(data.Texture, data.Hotspot, CursorMode.Auto);
     }
 
     private void OnClickPressed(bool isPressed)

@@ -12,11 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 08c4071506e261344853920d55785ca5, type: 3}
   m_Name: CursorConfiguration
   m_EditorClassIdentifier: Cursor::CursorConfiguration
-  <UiHoverTexture>k__BackingField: {fileID: 2800000, guid: 7e5d33b4eed7d914dbbf4135789ef5c1, type: 3}
-  <UiHoverHotspot>k__BackingField: {x: 5, y: 4}
-  <UiClickTexture>k__BackingField: {fileID: 2800000, guid: c23c0224d6ecfce469722a482ec39be2, type: 3}
-  <UiClickHotspot>k__BackingField: {x: 5, y: 4}
-  <GameplayHoverTexture>k__BackingField: {fileID: 2800000, guid: c4929dcbffe36084d8c9fd74c1fb74c1, type: 3}
-  <GameplayHoverHotspot>k__BackingField: {x: 5, y: 10}
-  <GameplayGrabTexture>k__BackingField: {fileID: 2800000, guid: 7f37eb17d0e327d49ade35d53e0296bf, type: 3}
-  <GameplayGrabHotspot>k__BackingField: {x: 15, y: 17}
+  <CursorPresets>k__BackingField:
+  - <State>k__BackingField: 0
+    <Texture>k__BackingField: {fileID: 2800000, guid: 7e5d33b4eed7d914dbbf4135789ef5c1, type: 3}
+    <Hotspot>k__BackingField: {x: 6, y: 4}
+  - <State>k__BackingField: 1
+    <Texture>k__BackingField: {fileID: 2800000, guid: c23c0224d6ecfce469722a482ec39be2, type: 3}
+    <Hotspot>k__BackingField: {x: 6, y: 4}
+  - <State>k__BackingField: 2
+    <Texture>k__BackingField: {fileID: 2800000, guid: c4929dcbffe36084d8c9fd74c1fb74c1, type: 3}
+    <Hotspot>k__BackingField: {x: 4, y: 9}
+  - <State>k__BackingField: 3
+    <Texture>k__BackingField: {fileID: 2800000, guid: 7f37eb17d0e327d49ade35d53e0296bf, type: 3}
+    <Hotspot>k__BackingField: {x: 15, y: 17}
