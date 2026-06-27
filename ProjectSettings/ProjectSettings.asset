@@ -14,8 +14,8 @@ PlayerSettings:
   accelerometerFrequency: 60
   companyName: Boost
   productName: Angry Birds 3D
-  defaultCursor: {fileID: 0}
-  cursorHotspot: {x: 0, y: 0}
+  defaultCursor: {fileID: 2800000, guid: 7e5d33b4eed7d914dbbf4135789ef5c1, type: 3}
+  cursorHotspot: {x: 13, y: 12}
   m_SplashScreenBackgroundColor: {r: 0.19215687, g: 0.21568628, b: 0.25882354, a: 1}
   m_ShowUnitySplashScreen: 0
   m_ShowUnitySplashLogo: 1
