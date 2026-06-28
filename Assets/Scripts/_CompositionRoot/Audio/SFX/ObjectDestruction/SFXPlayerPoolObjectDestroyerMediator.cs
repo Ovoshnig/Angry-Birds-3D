@@ -27,15 +27,15 @@ public class SFXPlayerPoolObjectDestroyerMediator : Mediator
 
     private void OnDamaged(DamageData data)
     {
-        Transform target = data.DestroyerView.transform;
-        DestructionSFXSettings sfxSettings = data.DestroyerView.Settings.SfxSettings;
+        Transform target = data.EntityView.transform;
+        DestructionSfxProfile SfxProfile = data.EntityView.DestructionProfile.SfxProfile;
 
         AudioResource audioResource = data.CollisionType switch
         {
-            CollisionType.Gliding => sfxSettings.GlidingResource,
-            CollisionType.Collision => sfxSettings.CollisionResource,
-            CollisionType.Damage => sfxSettings.DamageResource,
-            _ => sfxSettings.DestructionResource
+            CollisionType.Gliding => SfxProfile.GlidingResource,
+            CollisionType.Collision => SfxProfile.CollisionResource,
+            CollisionType.Damage => SfxProfile.DamageResource,
+            _ => SfxProfile.DestructionResource
         };
 
         _playerObjectPool.PlaySFX(target, audioResource);
@@ -43,9 +43,9 @@ public class SFXPlayerPoolObjectDestroyerMediator : Mediator
 
     private void OnDestroyed(DestructionData data)
     {
-        ObjectDestroyerView destroyerView = data.DestroyerView;
-        Transform target = destroyerView.transform;
-        AudioResource audioResource = destroyerView.Settings.SfxSettings.DestructionResource;
+        DestructibleEntityView entityView = data.EntityView;
+        Transform target = entityView.transform;
+        AudioResource audioResource = entityView.DestructionProfile.SfxProfile.DestructionResource;
         _playerObjectPool.PlaySFX(target, audioResource);
     }
 }

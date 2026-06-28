@@ -16,6 +16,10 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
+    - target: {fileID: 5379505530745881749, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
+      propertyPath: <DestructionProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     - target: {fileID: 6880484335812904183, guid: 67e44ed8631cb0e41b2cfc60b62d02a3, type: 3}
       propertyPath: m_Name
       value: Block2x05.001 Variant

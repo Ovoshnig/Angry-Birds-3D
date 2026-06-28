@@ -5,16 +5,11 @@ public class BlockDestroyerView : ObjectDestroyerView
 {
     private Material _material;
 
-    protected override void Awake()
-    {
-        base.Awake();
+    private void Awake() => _material = GetComponent<MeshRenderer>().material;
 
-        _material = GetComponent<MeshRenderer>().material;
-    }
-
-    public override void Damage(float _)
+    public override void VisualizeDamage(float health, float maxHealth)
     {
-        float crackAmount = 1f - (HealthModel.Health / Settings.MaxHealth);
+        float crackAmount = 1f - (health / maxHealth);
         _material.SetFloat(BlockDestructionConstants.CrackAmountName, crackAmount);
     }
 }

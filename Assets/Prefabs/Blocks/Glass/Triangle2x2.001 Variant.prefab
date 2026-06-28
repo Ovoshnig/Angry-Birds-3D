@@ -12,6 +12,14 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
+    - target: {fileID: -3391109362471185395, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: <Profile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
+    - target: {fileID: -3391109362471185395, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
+      propertyPath: <DestructionProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
     - target: {fileID: -88293780469830763, guid: 1ee6584a7494fb049a7606ac5f588aa5, type: 3}
       propertyPath: m_Mass
       value: 0.5

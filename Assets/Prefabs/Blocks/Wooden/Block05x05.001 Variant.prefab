@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Block05x05.001 Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 6814711949110434441, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+      propertyPath: <DestructionProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     m_RemovedComponents:
     - {fileID: 3837068521103511965, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
     - {fileID: -8889217040735875230, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
