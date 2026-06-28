@@ -72,6 +72,10 @@ PrefabInstance:
       propertyPath: <Settings>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
+    - target: {fileID: 7290870758559437920, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
+      propertyPath: <DestructionProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     m_RemovedComponents:
     - {fileID: 4653016362872397178, guid: f24728e7aa439c546bac11ed2056da71, type: 3}
     - {fileID: -5260093593767832690, guid: f24728e7aa439c546bac11ed2056da71, type: 3}

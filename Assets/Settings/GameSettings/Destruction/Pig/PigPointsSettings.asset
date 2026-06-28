@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b40cf5adada8d5e498471207f15b8433, type: 3}
-  m_Name: PigDestructionPointsSettings
+  m_Name: PigPointsSettings
   m_EditorClassIdentifier: GameSettings::DestructionPointsSettings
   <Points>k__BackingField: 5000
   <Color>k__BackingField: {r: 0, g: 1, b: 0.010662079, a: 1}

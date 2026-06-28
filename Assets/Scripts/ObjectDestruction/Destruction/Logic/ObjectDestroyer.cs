@@ -35,20 +35,21 @@ public class ObjectDestroyer : IStartable, IDisposable
         if (data.EntityView is not DestructibleEntityView entityView)
             return;
 
+        float damageAmount = data.Force;
+        HealthModel healthModel = entityView.HealthModel;
+        healthModel.ApplyDamage(damageAmount);
+
         ObjectDestroyerView destroyerView = entityView.DestroyerView;
 
-        float damageAmount = data.Force;
-        destroyerView.HealthModel.ApplyDamage(damageAmount);
-
-        if (destroyerView.HealthModel.Health <= 0)
+        if (healthModel.Health <= 0)
         {
             destroyerView.Destroy();
-            _destroyed.OnNext(new DestructionData(entityView, destroyerView));
+            _destroyed.OnNext(new DestructionData(entityView));
         }
         else
         {
-            destroyerView.Damage(damageAmount);
-            _damaged.OnNext(new DamageData(entityView, destroyerView, data.Type, damageAmount));
+            destroyerView.VisualizeDamage(healthModel.Health, entityView.DestructionProfile.MaxHealth);
+            _damaged.OnNext(new DamageData(entityView, data.Type, damageAmount));
         }
     }
 }

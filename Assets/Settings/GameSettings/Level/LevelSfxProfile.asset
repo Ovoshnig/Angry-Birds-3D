@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 779dc307a4c06224eb7ee596f2aa96c5, type: 3}
-  m_Name: LevelSFXSettings
+  m_Name: LevelSfxProfile
   m_EditorClassIdentifier: GameSettings::LevelSFXSettings
   <StartResource>k__BackingField: {fileID: 6418180475301049370, guid: c6a73c6c65c7bdf478d099b3cd785436, type: 2}
   <NextResource>k__BackingField: {fileID: 6418180475301049370, guid: 0d77f399f6e2bf34e8ea61843679c218, type: 2}

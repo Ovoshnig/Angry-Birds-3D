@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "LevelRatingSettings",
-    menuName = "Scriptable Objects/LevelRatingSettings")]
+[CreateAssetMenu(fileName = "LevelRatingSettings", menuName = "Scriptable Objects/Level Rating Settings")]
 public class RatingSettings : ScriptableObject
 {
     [field: SerializeField, Min(0)] public int MinStarCount { get; private set; } = 1;

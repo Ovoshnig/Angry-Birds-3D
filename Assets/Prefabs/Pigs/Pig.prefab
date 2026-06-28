@@ -191,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72ce0c0cda37af04fb57318970062e81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Pig::PigEntityView
+  <DestructionProfile>k__BackingField: {fileID: 11400000, guid: 234d02332481ffe40b50bc72d2c4c02a, type: 2}
 --- !u!114 &-1857221396273101470
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -215,4 +216,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ecc5f201b69ef3c4a879f8c915cbaca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Pig::PigDestroyerView
-  <Settings>k__BackingField: {fileID: 11400000, guid: 234d02332481ffe40b50bc72d2c4c02a, type: 2}

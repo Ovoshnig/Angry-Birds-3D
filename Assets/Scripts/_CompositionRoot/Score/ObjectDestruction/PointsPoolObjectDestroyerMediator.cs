@@ -22,9 +22,9 @@ public class PointsPoolObjectDestroyerMediator : Mediator
 
     private void OnDestroyed(DestructionData data)
     {
-        ObjectDestroyerView destroyerView = data.DestroyerView;
-        Vector3 position = destroyerView.transform.position;
-        PointsSettings pointsSettings = destroyerView.Settings.PointsSettings;
+        DestructibleEntityView entityView = data.EntityView;
+        Vector3 position = entityView.transform.position;
+        PointsSettings pointsSettings = entityView.DestructionProfile.PointsSettings;
         _pointsObjectPool.ShowPoints(position, pointsSettings);
     }
 }

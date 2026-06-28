@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(BirdPowerView))]
 public class BirdEntityView : CollidableEntityView
 {
-    [field: SerializeField] public BirdSFXSettings SFXSettings { get; private set; }
+    [field: SerializeField] public BirdSfxProfile SfxProfile { get; private set; }
     [field: SerializeField] public PointsSettings PointsSettings { get; private set; }
     [field: SerializeField] public Color FeatherColor { get; private set; }
 

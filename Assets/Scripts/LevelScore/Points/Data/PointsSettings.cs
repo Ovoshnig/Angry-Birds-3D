@@ -1,7 +1,7 @@
 using LitMotion;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "PointsSettings", menuName = "Scriptable Objects/PointsSettings")]
+[CreateAssetMenu(fileName = "PointsSettings", menuName = "Scriptable Objects/Points Settings")]
 public class PointsSettings : ScriptableObject
 {
     [field: SerializeField, Min(0)] public int Points { get; private set; } = 500;
