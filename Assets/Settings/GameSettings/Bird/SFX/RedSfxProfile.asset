@@ -10,10 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a4dc7d9a7e32c074ba80e204932bf5f0, type: 3}
-  m_Name: BlueSFXSettings
+  m_Name: RedSfxProfile
   m_EditorClassIdentifier: GameSettings::BirdSFXSettings
-  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 83844f0cc02be6d419f90bb0d582de85, type: 3}
-  <FlyingResource>k__BackingField: {fileID: 8300000, guid: d9b8357537561484081ff28dae1c8f7e, type: 3}
-  <PowerActivationResource>k__BackingField: {fileID: 8300000, guid: af484a15d5cda784c9f7e3324f7f1ead, type: 3}
-  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: a6fffc07fa358d345b92aa4851e8b736, type: 2}
+  <SelectionResource>k__BackingField: {fileID: 8300000, guid: 3518181d6554f0043ac658749fd99c74, type: 3}
+  <FlyingResource>k__BackingField: {fileID: 8300000, guid: 28057804ebac4654680c037c959be062, type: 3}
+  <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: 95adc88823105ac418dede5dc6daed87, type: 2}
   <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}

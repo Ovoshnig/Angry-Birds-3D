@@ -147,7 +147,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92f08d5ecbaa84949ae455909ed79ce4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdEntityView
-  <SFXSettings>k__BackingField: {fileID: 11400000, guid: e9ce99381149b264d90bccae8adcc1c7, type: 2}
+  <SfxProfile>k__BackingField: {fileID: 11400000, guid: e9ce99381149b264d90bccae8adcc1c7, type: 2}
   <PointsSettings>k__BackingField: {fileID: 11400000, guid: f00f1fc63ac8a634cae06aa2e7a8b599, type: 2}
   <FeatherColor>k__BackingField: {r: 0.827451, g: 0.003921569, b: 0.1882353, a: 1}
 --- !u!114 &-2481184969509091846
