@@ -8,10 +8,10 @@ public class LevelStateTrackingInstaller : IInstaller
 {
     public void Install(IContainerBuilder builder)
     {
-        builder.RegisterInstanceInHierarchy<ClearingPanelView>();
+        builder.RegisterInstanceInHierarchy<ClearingPanelView>().AsSelf().As<CompletionPanelView>();
         builder.RegisterInstanceInHierarchy<LevelIndexView>();
         builder.RegisterInstanceInHierarchy<FinalScoreView>();
-        builder.RegisterInstanceInHierarchy<FailurePanelView>();
+        builder.RegisterInstanceInHierarchy<FailurePanelView>().AsSelf().As<CompletionPanelView>();
 
         builder.UseEntryPoints(entryPoints =>
         {

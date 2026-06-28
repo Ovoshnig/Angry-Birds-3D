@@ -18,7 +18,7 @@ public class SFXPlayerPoolBirdColliderMediator : Mediator
             .Subscribe(data =>
             {
                 if (data.EntityView is BirdEntityView entityView && data.Type == CollisionType.Damage)
-                    _playerObjectPool.PlaySFX(entityView.transform, entityView.SFXSettings.CollisionResource);
+                    _playerObjectPool.PlaySFX(entityView.transform, entityView.SfxProfile.CollisionResource);
             })
             .AddTo(disposables);
     }

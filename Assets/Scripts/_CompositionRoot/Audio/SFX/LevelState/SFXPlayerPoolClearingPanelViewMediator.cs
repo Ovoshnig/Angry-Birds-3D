@@ -4,21 +4,21 @@ public class SFXPlayerPoolClearingPanelViewMediator : Mediator
 {
     private readonly SFXPlayerObjectPool _sfxPlayer;
     private readonly ClearingPanelView _clearingPanelView;
-    private readonly LevelSFXSettings _levelSFXSettings;
+    private readonly LevelSfxProfile _levelSfxProfile;
 
     public SFXPlayerPoolClearingPanelViewMediator(SFXPlayerObjectPool sfxPlayer,
         ClearingPanelView clearingPanelView,
-        LevelSFXSettings levelSFXSettings)
+        LevelSfxProfile levelSfxProfile)
     {
         _sfxPlayer = sfxPlayer;
         _clearingPanelView = clearingPanelView;
-        _levelSFXSettings = levelSFXSettings;
+        _levelSfxProfile = levelSfxProfile;
     }
 
     protected override void Bind(CompositeDisposable disposables)
     {
         _clearingPanelView.Shown
-            .Subscribe(_ => _sfxPlayer.PlaySFX(_levelSFXSettings.ClearingPanelResource))
+            .Subscribe(_ => _sfxPlayer.PlaySFX(_levelSfxProfile.ClearingPanelResource))
             .AddTo(disposables);
     }
 }

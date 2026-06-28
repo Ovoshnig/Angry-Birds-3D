@@ -7,9 +7,6 @@ using UnityEngine;
 
 public class PointsView : MonoBehaviour
 {
-    [SerializeField] private SerializableMotionSettings<float, NoOptions> _appearanceSettings;
-    [SerializeField] private SerializableMotionSettings<float, NoOptions> _disappearanceSettings;
-
     private readonly Subject<Unit> _completed = new();
 
     private TMP_Text _text;
@@ -36,10 +33,17 @@ public class PointsView : MonoBehaviour
         _text.color = pointsSettings.Color;
         _text.fontSize = pointsSettings.FontSize;
 
-        _currentHandle = LMotion.Create(_appearanceSettings).BindToLocalScaleXYZ(transform);
-        await _currentHandle.ToUniTask(destroyCancellationToken);
+        _currentHandle = LMotion.Create(0f, 1f, pointsSettings.AppearanceDuration)
+            .WithEase(pointsSettings.AppearanceEase)
+            .BindToLocalScaleXYZ(transform);
 
-        _currentHandle = LMotion.Create(_disappearanceSettings).BindToLocalScaleXYZ(transform);
+        await _currentHandle.ToUniTask(destroyCancellationToken);
+        await UniTask.WaitForSeconds(pointsSettings.ShowingDuration, cancellationToken: destroyCancellationToken);
+
+        _currentHandle = LMotion.Create(1f, 0f, pointsSettings.DisappearanceDuration)
+            .WithEase(pointsSettings.DisappearanceEase)
+            .BindToLocalScaleXYZ(transform);
+
         await _currentHandle.ToUniTask(destroyCancellationToken);
 
         _completed.OnNext(Unit.Default);

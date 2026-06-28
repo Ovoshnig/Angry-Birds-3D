@@ -7,18 +7,13 @@ using UnityEngine;
 public class BirdPointsDisplayer : IDisposable
 {
     private readonly BirdQueue _birdQueue;
-    private readonly BirdSettings _birdSettings;
     private readonly Subject<BirdPointsDisplayData> _pointsDisplayStarted = new();
     private readonly Subject<Unit> _sequenceDisplayCompleted = new();
     private readonly CancellationTokenSource _cts = new();
 
     private BirdEntityView _slingshotBird = null;
 
-    public BirdPointsDisplayer(BirdQueue birdQueue, BirdSettings birdSettings)
-    {
-        _birdQueue = birdQueue;
-        _birdSettings = birdSettings;
-    }
+    public BirdPointsDisplayer(BirdQueue birdQueue) => _birdQueue = birdQueue;
 
     public Observable<BirdPointsDisplayData> PointsDisplayStarted => _pointsDisplayStarted;
     public Observable<Unit> SequenceDisplayCompleted => _sequenceDisplayCompleted;
@@ -48,6 +43,6 @@ public class BirdPointsDisplayer : IDisposable
         Vector3 topCenter = new(birdBounds.center.x, birdBounds.max.y, birdBounds.center.z);
         _pointsDisplayStarted.OnNext(new BirdPointsDisplayData(topCenter, bird.PointsSettings));
 
-        await UniTask.WaitForSeconds(_birdSettings.PointsDisplayDelay, cancellationToken: _cts.Token);
+        await UniTask.WaitForSeconds(bird.PointsSettings.TotalDuration, cancellationToken: _cts.Token);
     }
 }

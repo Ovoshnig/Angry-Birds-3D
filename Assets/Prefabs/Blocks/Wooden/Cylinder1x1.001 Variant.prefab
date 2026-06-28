@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: _destructionRandomContainer
       value: 
       objectReference: {fileID: 6418180475301049370, guid: a519864607e0961408dbdd4d28a16c10, type: 2}
+    - target: {fileID: -1616003051914825255, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
+      propertyPath: <DestructionProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d2fda301c4dba8942b80c26deb435aac, type: 2}
     - target: {fileID: 1463701401922089499, guid: 7f7871b1f3f58b44ca40f35e387fc989, type: 3}
       propertyPath: <Settings>k__BackingField
       value: 

@@ -1,1 +1,1 @@
-public record DestructionData(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView);
+public record DestructionData(DestructibleEntityView EntityView);

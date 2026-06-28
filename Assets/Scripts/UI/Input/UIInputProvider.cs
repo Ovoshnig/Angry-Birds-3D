@@ -4,10 +4,12 @@ public class UIInputProvider : InputProvider<InputActions.UIActions>
 {
     public UIInputProvider(InputActions inputActions) : base(inputActions.UI)
     {
+        ClickPressed = ObserveButton(a => a.Click);
         CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
         SkipTextPrintingPressed = ObserveButton(a => a.SkipTextPrinting);
     }
 
+    public ReadOnlyReactiveProperty<bool> ClickPressed { get; }
     public ReadOnlyReactiveProperty<bool> CloseCurrentPressed { get; }
     public ReadOnlyReactiveProperty<bool> SkipTextPrintingPressed { get; }
 

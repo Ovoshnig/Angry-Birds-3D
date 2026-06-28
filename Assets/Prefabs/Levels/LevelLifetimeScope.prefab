@@ -49,7 +49,7 @@ MonoBehaviour:
   autoRun: 1
   autoInjectGameObjects: []
   _levelStateInstaller:
-    _sfxSettings: {fileID: 11400000, guid: 0e554c29318d5c34795e74aa4e9ea9fe, type: 2}
+    _sfxProfile: {fileID: 11400000, guid: 0e554c29318d5c34795e74aa4e9ea9fe, type: 2}
   _levelScoreInstaller:
     _pointsInstaller:
       _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}

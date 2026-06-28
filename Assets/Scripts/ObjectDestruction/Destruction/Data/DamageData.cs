@@ -1,2 +1,1 @@
-public record DamageData(DestructibleEntityView EntityView, ObjectDestroyerView DestroyerView,
-    CollisionType CollisionType, float DamageAmount);
+public record DamageData(DestructibleEntityView EntityView, CollisionType CollisionType, float DamageAmount);

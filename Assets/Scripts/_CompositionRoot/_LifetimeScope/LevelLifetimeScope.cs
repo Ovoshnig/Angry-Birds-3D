@@ -53,6 +53,7 @@ public class LevelLifetimeScope : LifetimeScope
         new CameraMediatorsInstaller().Install(builder);
         new WindowMediatorsInstaller().Install(builder);
         new GameStateMediatorsInstaller().Install(builder);
+        new CursorMediatorsInstaller().Install(builder);
         new AudioTuningMediatorsInstaller().Install(builder);
         new AudioSFXMediatorsInstaller().Install(builder);
         new ParticleMediatorsInstaller().Install(builder);

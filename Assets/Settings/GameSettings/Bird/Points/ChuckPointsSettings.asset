@@ -13,5 +13,10 @@ MonoBehaviour:
   m_Name: ChuckPointsSettings
   m_EditorClassIdentifier: GameSettings::PointsSettings
   <Points>k__BackingField: 10000
-  <Color>k__BackingField: {r: 0.92941177, g: 0.7972052, b: 0.13725491, a: 1}
+  <Color>k__BackingField: {r: 0.92941177, g: 0.84313726, b: 0.14117648, a: 1}
   <FontSize>k__BackingField: 2
+  <AppearanceDuration>k__BackingField: 0.35
+  <ShowingDuration>k__BackingField: 0.65
+  <DisappearanceDuration>k__BackingField: 0.35
+  <AppearanceEase>k__BackingField: 17
+  <DisappearanceEase>k__BackingField: 1

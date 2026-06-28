@@ -16,7 +16,7 @@ public class SFXPlayerPoolBirdPowerActivatorMediator : Mediator
     {
         _birdPowerActivator.Activated
             .Subscribe(birdEntityView =>
-                _sFXPlayerObjectPool.PlaySFX(birdEntityView.transform, birdEntityView.SFXSettings.PowerActivationResource))
+                _sFXPlayerObjectPool.PlaySFX(birdEntityView.transform, birdEntityView.SfxProfile.PowerActivationResource))
             .AddTo(disposables);
     }
 }
