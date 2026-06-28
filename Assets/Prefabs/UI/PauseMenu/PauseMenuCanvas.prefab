@@ -990,6 +990,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: MainPanel
       objectReference: {fileID: 0}
+    - target: {fileID: 6441438620205437270, guid: 385cdb3d5ccc963449273008d2cf3c2c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 9024966084086149704, guid: 385cdb3d5ccc963449273008d2cf3c2c, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
