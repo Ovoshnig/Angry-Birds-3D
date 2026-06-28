@@ -14,14 +14,16 @@ public class WindowView : MonoBehaviour
                 _isActive = new ReactiveProperty<bool>();
 
                 Observable
-                    .EveryValueChanged(gameObject, g => g.activeSelf)
+                    .EveryValueChanged(gameObject, g => g != null && g.activeSelf)
                     .Subscribe(activeSelf => _isActive.Value = activeSelf)
-                    .AddTo(gameObject);
+                    .RegisterTo(destroyCancellationToken);
             }
 
             return _isActive;
         }
     }
+
+    private void OnDestroy() => _isActive.Dispose();
 
     public void SetActive(bool isActive) => gameObject.SetActive(isActive);
 }
