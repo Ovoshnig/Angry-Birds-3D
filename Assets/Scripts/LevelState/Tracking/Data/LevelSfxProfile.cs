@@ -1,8 +1,8 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-[CreateAssetMenu(fileName = "LevelSFXSettings", menuName = "Scriptable Objects/LevelSFXSettings")]
-public class LevelSFXSettings : ScriptableObject
+[CreateAssetMenu(fileName = "LevelSfxProfile", menuName = "Scriptable Objects/Level Sfx Profile")]
+public class LevelSfxProfile : ScriptableObject
 {
     [field: SerializeField] public AudioResource StartResource { get; private set; }
     [field: SerializeField] public AudioResource NextResource { get; private set; }
