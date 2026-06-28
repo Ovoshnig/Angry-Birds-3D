@@ -98,6 +98,5 @@ public class MusicPlayer : IDisposable
     {
         _playbackEnded.OnNext(Unit.Default);
         _clipLoader.UnloadClip(clip);
-        Resources.UnloadAsset(clip);
     }
 }
