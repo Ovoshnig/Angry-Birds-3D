@@ -11,17 +11,22 @@ public class FeatherParticleView : MonoBehaviour
 
     private void Awake() => _particleSystem = GetComponent<ParticleSystem>();
 
-    public void Emit(Vector3 position, Color color, float force)
+    public void Emit(Vector3 position, Color color, int count)
     {
-        int count = Mathf.Clamp(Mathf.RoundToInt(force * _forceMultiplier), _minParticles, _maxParticles);
-
         ParticleSystem.EmitParams emitParams = new()
         {
             position = position,
+            applyShapeToPosition = true,
             startColor = color
         };
 
         _particleSystem.Emit(emitParams, count);
+    }
+
+    public void Emit(Vector3 position, Color color, float force)
+    {
+        int count = Mathf.Clamp(Mathf.RoundToInt(force * _forceMultiplier), _minParticles, _maxParticles);
+        Emit(position, color, count);
     }
 
     public void EmitMax(Vector3 position, Color color) => Emit(position, color, _maxParticles);

@@ -4,7 +4,7 @@ using VContainer;
 using VContainer.Unity;
 
 [Serializable]
-public class ParticleTrailInstaller : IInstaller
+public class BirdTrailParticleInstaller : IInstaller
 {
     [SerializeField] private TrailParticleView _trailParticlePrefab;
 

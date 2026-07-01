@@ -1,19 +1,33 @@
 using Cysharp.Threading.Tasks;
+using R3;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Pool;
+using VContainer.Unity;
 using Object = UnityEngine.Object;
 
-public class TrailParticlePlayer : IDisposable
+public class TrailParticlePlayer : IStartable, IDisposable
 {
+    private readonly BirdFlyer _birdFlyer;
+    private readonly BirdPowerActivator _birdPowerActivator;
+    private readonly SplitInto3BirdPower _splitInto3Power;
     private readonly GameObject _poolRoot;
     private readonly ObjectPool<TrailParticleView> _trailParticlePool;
     private readonly List<TrailParticleView> _currentParticles = new();
     private readonly List<TrailParticleView> _previousParticles = new();
+    private readonly CompositeDisposable _disposables = new();
 
-    public TrailParticlePlayer(TrailParticleView particlePrefab, TrailParticleSettings settings)
+    public TrailParticlePlayer(BirdFlyer birdFlyer,
+        BirdPowerActivator birdPowerActivator,
+        SplitInto3BirdPower splitInto3Power,
+        TrailParticleView particlePrefab,
+        TrailParticleSettings settings)
     {
+        _birdFlyer = birdFlyer;
+        _birdPowerActivator = birdPowerActivator;
+        _splitInto3Power = splitInto3Power;
+
         _poolRoot = new GameObject("TrailParticlePlayerPool");
 
         _trailParticlePool = new ObjectPool<TrailParticleView>(
@@ -33,8 +47,29 @@ public class TrailParticlePlayer : IDisposable
         );
     }
 
+    public void Start()
+    {
+        _birdFlyer.FlightStarted
+            .Subscribe(birdEntityView => StartPlaying(birdEntityView.transform))
+            .AddTo(_disposables);
+
+        _birdFlyer.FlightInterrupted
+            .Subscribe(birdEntityView => StopPlaying())
+            .AddTo(_disposables);
+
+        _birdPowerActivator.Activated
+            .Subscribe(_ => PlayPowerParticle())
+            .AddTo(_disposables);
+
+        _splitInto3Power.CloneCreated
+            .Subscribe(clone => StartPlaying(clone.transform))
+            .AddTo(_disposables);
+    }
+
     public void Dispose()
     {
+        _disposables.Dispose();
+
         foreach (var particle in _currentParticles)
             Object.Destroy(particle);
 
@@ -49,14 +84,14 @@ public class TrailParticlePlayer : IDisposable
         Object.Destroy(_poolRoot);
     }
 
-    public void StartPlaying(Transform birdTransform)
+    private void StartPlaying(Transform birdTransform)
     {
         TrailParticleView particleView = _trailParticlePool.Get();
         particleView.Play(birdTransform);
         _currentParticles.Add(particleView);
     }
 
-    public void StopPlaying()
+    private void StopPlaying()
     {
         foreach (TrailParticleView particle in _currentParticles)
             particle.StopEmitting();
@@ -70,7 +105,7 @@ public class TrailParticlePlayer : IDisposable
         _currentParticles.Clear();
     }
 
-    public void PlayPowerParticle() => _currentParticles[0].EmitPowerParticle();
+    private void PlayPowerParticle() => _currentParticles[0].EmitPowerParticle();
 
     private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
     {
