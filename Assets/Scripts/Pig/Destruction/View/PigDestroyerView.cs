@@ -7,7 +7,7 @@ public class PigDestroyerView : ObjectDestroyerView
 
     private void Awake() => _animator = GetComponent<Animator>();
 
-    public override void VisualizeDamage(float health, float maxHealth)
+    public override void VisualizeDamage(Vector3 _, float health, float maxHealth)
     {
         float normalizedHealth = Mathf.InverseLerp(0, maxHealth, health);
         _animator.SetFloat(PigAnimationConstants.HealthParameterId, normalizedHealth);

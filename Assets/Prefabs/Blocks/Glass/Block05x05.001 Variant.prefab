@@ -81,6 +81,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}
     - target: {fileID: 6814711949110434441, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
+      propertyPath: <ParticleProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: 54f16e64a85f7d2418245831e7c39c62, type: 2}
+    - target: {fileID: 6814711949110434441, guid: 3018faa9b02ba7348a06dd8cf9e637e1, type: 3}
       propertyPath: <DestructionProfile>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: d98277d9afdcbed4f91028fc5680e941, type: 2}

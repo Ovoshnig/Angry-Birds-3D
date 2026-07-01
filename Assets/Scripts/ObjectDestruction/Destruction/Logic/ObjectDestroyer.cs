@@ -48,7 +48,7 @@ public class ObjectDestroyer : IStartable, IDisposable
         }
         else
         {
-            destroyerView.VisualizeDamage(healthModel.Health, entityView.DestructionProfile.MaxHealth);
+            destroyerView.VisualizeDamage(data.Point, healthModel.Health, entityView.DestructionProfile.MaxHealth);
             _damaged.OnNext(new DamageData(entityView, data.Type, damageAmount));
         }
     }

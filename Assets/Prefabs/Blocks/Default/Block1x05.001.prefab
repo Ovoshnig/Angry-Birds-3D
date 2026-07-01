@@ -155,6 +155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 203dcc62e8dd918499d3f118a3d539d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Block::BlockEntityView
+  <DestructionProfile>k__BackingField: {fileID: 0}
 --- !u!114 &5944619429636675033
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -179,4 +180,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e730bb49cecadf64f8a6664d5a6e7406, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Block::BlockDestroyerView
-  <Settings>k__BackingField: {fileID: 0}
+  _destructionSettings: {fileID: 11400000, guid: 6c9e448b827afbd49a99f1b92bcb58ec, type: 2}

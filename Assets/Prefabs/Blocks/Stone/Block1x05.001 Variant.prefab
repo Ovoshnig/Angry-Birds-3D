@@ -13,6 +13,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 6c455d0dd98a3344ea6b8abf5c29115d, type: 2}
     - target: {fileID: -4467262460135285437, guid: a08cbe031b38012459d4484e12057f9e, type: 3}
+      propertyPath: <ParticleProfile>k__BackingField
+      value: 
+      objectReference: {fileID: 11400000, guid: d71e8807f8873d0428f2fb3ddbf2005a, type: 2}
+    - target: {fileID: -4467262460135285437, guid: a08cbe031b38012459d4484e12057f9e, type: 3}
       propertyPath: <DestructionProfile>k__BackingField
       value: 
       objectReference: {fileID: 11400000, guid: 6c455d0dd98a3344ea6b8abf5c29115d, type: 2}
