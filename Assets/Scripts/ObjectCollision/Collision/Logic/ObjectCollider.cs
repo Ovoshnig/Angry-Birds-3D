@@ -43,6 +43,6 @@ public class ObjectCollider : IDisposable
             collision.contactCount);
 
         if (_evaluator.TryEvaluate(rawData, out CollisionType type, out float force))
-            _collided.OnNext(new CollisionData(entityView, type, force));
+            _collided.OnNext(new CollisionData(entityView, type, collision.GetContact(0).point, force));
     }
 }

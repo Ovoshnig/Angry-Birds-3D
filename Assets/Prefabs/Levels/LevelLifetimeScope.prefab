@@ -72,4 +72,6 @@ MonoBehaviour:
   _objectCollisionInstaller: {}
   _birdInstaller: {}
   _pigInstaller: {}
-  _blockInstaller: {}
+  _blockInstaller:
+    _particleInstaller:
+      _blockParticlePrefab: {fileID: 1546344721604537010, guid: a426b2b9ba562d74390b2f0fb1be0b95, type: 3}
