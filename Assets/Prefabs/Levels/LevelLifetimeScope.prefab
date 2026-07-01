@@ -63,14 +63,14 @@ MonoBehaviour:
     _playingInstaller:
       _sfxPlayerViewPrefab: {fileID: 2693506316837470068, guid: d6a5ae7e103c44a45b951df58d749abe, type: 3}
   _particleInstaller:
-    _trailInstaller:
-      _trailParticlePrefab: {fileID: 5797264380014560616, guid: 19ce99205375e7c4684c8cc7f682fabe, type: 3}
     _featherInstaller:
       _featherParticlePrefab: {fileID: 5405476774270819167, guid: fee69490ef2e5c442aa8fd70895025d6, type: 3}
   _skyboxInstaller: {}
   _slingshotInstaller: {}
   _objectCollisionInstaller: {}
-  _birdInstaller: {}
+  _birdInstaller:
+    _trailParticleInstaller:
+      _trailParticlePrefab: {fileID: 5797264380014560616, guid: 19ce99205375e7c4684c8cc7f682fabe, type: 3}
   _pigInstaller: {}
   _blockInstaller:
     _particleInstaller:
