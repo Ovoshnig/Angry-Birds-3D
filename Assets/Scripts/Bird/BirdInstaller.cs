@@ -14,6 +14,7 @@ public class BirdInstaller : IInstaller
     [SerializeField] private BirdPowerInstaller _powerInstaller;
     [SerializeField] private BirdPointsInstaller _pointsInstaller;
     [SerializeField] private BirdTrailParticleInstaller _trailParticleInstaller;
+    [SerializeField] private BirdFeatherParticleInstaller _featherParticleInstaller;
 
     public void Install(IContainerBuilder builder)
     {
@@ -27,5 +28,6 @@ public class BirdInstaller : IInstaller
         _powerInstaller.Install(builder);
         _pointsInstaller.Install(builder);
         _trailParticleInstaller.Install(builder);
+        _featherParticleInstaller.Install(builder);
     }
 }
