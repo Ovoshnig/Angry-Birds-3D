@@ -1,7 +1,6 @@
 using LitMotion;
 using UnityEngine;
 
-[ExecuteAlways]
 [RequireComponent(typeof(Renderer))]
 public class BlockDestroyerView : ObjectDestroyerView
 {

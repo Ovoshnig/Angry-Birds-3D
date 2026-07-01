@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1aaa7ff307ecc1749925dfcc86bf475d, type: 3}
+  m_Name: StoneParticleProfile
+  m_EditorClassIdentifier: Block::BlockParticleProfile
+  <Meshes>k__BackingField:
+  - {fileID: -2359605460251376175, guid: d6fac28d39225634d86e2b9666aab270, type: 3}
+  - {fileID: 3206218433893824221, guid: e80d07e48334f54408fef1f733c7bd1e, type: 3}
+  - {fileID: -5647028051208667864, guid: ec81e904b38377c4ba450686691968a3, type: 3}
+  <Material>k__BackingField: {fileID: 2100000, guid: c11582410d629c14697c4bd469636d0b, type: 2}
+  <ForceMultiplier>k__BackingField: 0.5
+  <MinParticles>k__BackingField: 3
+  <MaxParticles>k__BackingField: 40

@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ec81e904b38377c4ba450686691968a3
+guid: d6f23f1d36821714ab95019e5c423c6a
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
@@ -7,8 +7,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Stone_baked
-    second: {fileID: 2100000, guid: c11582410d629c14697c4bd469636d0b, type: 2}
+      name: Wood_baked
+    second: {fileID: 2100000, guid: a388cc8173bd38f4d8d92aab4b3c6cae, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -36,7 +36,7 @@ ModelImporter:
     extraExposedTransformPaths: []
     extraUserProperties: []
     clipAnimations: []
-    isReadable: 0
+    isReadable: 1
   meshes:
     lODScreenPercentages: []
     globalScale: 1
