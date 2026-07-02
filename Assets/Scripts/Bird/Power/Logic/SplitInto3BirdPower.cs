@@ -5,23 +5,25 @@ using Object = UnityEngine.Object;
 
 public class SplitInto3BirdPower : IBirdPower, IDisposable
 {
+    private readonly SplitInto3PowerSettings _powerSettings;
     private readonly Subject<BirdEntityView> _cloneCreated = new();
 
-    public BirdPowerType Type => BirdPowerType.SplitInto3;
+    public SplitInto3BirdPower(SplitInto3PowerSettings powerSettings) => _powerSettings = powerSettings;
 
+    public BirdPowerType Type => BirdPowerType.SplitInto3;
     public Observable<BirdEntityView> CloneCreated => _cloneCreated;
 
-    public void Activate(BirdEntityView birdEntityView, BirdPowerSettings powerSettings)
+    public void Activate(BirdEntityView birdEntityView)
     {
         Vector3 position = birdEntityView.transform.position;
         Vector3 rotation = birdEntityView.transform.localEulerAngles;
         float velocityMagnitude = birdEntityView.FlyerView.Rigidbody.linearVelocity.magnitude;
 
         BirdEntityView firstClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
-            -powerSettings.SplitAngleDiff);
+            -_powerSettings.SplitAngleDiff);
 
         BirdEntityView secondClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
-            powerSettings.SplitAngleDiff);
+            _powerSettings.SplitAngleDiff);
 
         BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
         destroyerView.AddClone(firstClone.DestroyerView);

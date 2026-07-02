@@ -6,14 +6,17 @@ using UnityEngine;
 
 public class BoostBirdPower : IBirdPower, IDisposable
 {
+    private readonly BoostPowerSettings _powerSettings;
     private readonly CancellationTokenSource _cts = new();
+
+    public BoostBirdPower(BoostPowerSettings powerSettings) => _powerSettings = powerSettings;
 
     public BirdPowerType Type => BirdPowerType.Boost;
 
-    public void Activate(BirdEntityView birdEntityView, BirdPowerSettings powerSettings)
+    public void Activate(BirdEntityView birdEntityView)
     {
         BirdFlyerView flyerView = birdEntityView.FlyerView;
-        BoostAsync(flyerView, powerSettings).Forget();
+        BoostAsync(flyerView).Forget();
     }
 
     public void Dispose()
@@ -22,19 +25,19 @@ public class BoostBirdPower : IBirdPower, IDisposable
         _cts.Dispose();
     }
 
-    private async UniTask BoostAsync(BirdFlyerView birdFlyerView, BirdPowerSettings powerSettings)
+    private async UniTask BoostAsync(BirdFlyerView birdFlyerView)
     {
         birdFlyerView.StretchAsync(birdFlyerView.destroyCancellationToken).Forget();
 
         Vector3 linearVelocity = birdFlyerView.Rigidbody.linearVelocity;
-        Vector3 targetVelocity = powerSettings.BoostVelocity * linearVelocity.normalized;
+        Vector3 targetVelocity = _powerSettings.BoostVelocity * linearVelocity.normalized;
 
-        await LMotion.Create(linearVelocity, targetVelocity, powerSettings.VelocityIncreasingDuration)
-            .WithEase(powerSettings.VelocityIncreasingEase)
+        await LMotion.Create(linearVelocity, targetVelocity, _powerSettings.VelocityIncreasingDuration)
+            .WithEase(_powerSettings.VelocityIncreasingEase)
             .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
             .ToUniTask(_cts.Token);
 
-        await LMotion.Create(targetVelocity, targetVelocity, powerSettings.BoostDuration)
+        await LMotion.Create(targetVelocity, targetVelocity, _powerSettings.BoostDuration)
             .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
             .ToUniTask(_cts.Token);
     }

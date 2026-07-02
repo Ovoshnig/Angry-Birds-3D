@@ -7,20 +7,17 @@ public class BirdPowerActivator : IStartable, IDisposable
     private readonly BirdFlyer _birdFlyer;
     private readonly BirdInputProvider _inputProvider;
     private readonly BirdPowerRegistry _powerRegistry;
-    private readonly BirdPowerSettings _powerSettings;
     private readonly Subject<BirdEntityView> _activated = new();
     private readonly CompositeDisposable _flightDisposables = new();
     private readonly CompositeDisposable _inputDisposables = new();
 
     public BirdPowerActivator(BirdFlyer birdFlyer,
         BirdInputProvider inputProvider,
-        BirdPowerRegistry powerRegistry,
-        BirdPowerSettings powerSettings)
+        BirdPowerRegistry powerRegistry)
     {
         _birdFlyer = birdFlyer;
         _inputProvider = inputProvider;
         _powerRegistry = powerRegistry;
-        _powerSettings = powerSettings;
     }
 
     public Observable<BirdEntityView> Activated => _activated;
@@ -49,7 +46,7 @@ public class BirdPowerActivator : IStartable, IDisposable
 
         if (!powerView.WasActivated && _powerRegistry.TryGet(powerType, out IBirdPower power))
         {
-            power.Activate(birdEntityView, _powerSettings);
+            power.Activate(birdEntityView);
             powerView.SetWasActivated();
             _activated.OnNext(birdEntityView);
         }

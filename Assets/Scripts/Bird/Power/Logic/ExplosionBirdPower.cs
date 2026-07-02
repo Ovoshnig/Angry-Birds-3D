@@ -2,15 +2,23 @@ using UnityEngine;
 
 public class ExplosionBirdPower : IBirdPower
 {
+    private readonly ExplosionPowerSettings _powerSettings;
+    private readonly Collider[] _colliders;
+
+    public ExplosionBirdPower(ExplosionPowerSettings powerSettings)
+    {
+        _powerSettings = powerSettings;
+        _colliders = new Collider[powerSettings.MaxExplosiveCount];
+    }
+
     public BirdPowerType Type => BirdPowerType.Explosion;
 
-    public void Activate(BirdEntityView birdEntityView, BirdPowerSettings powerSettings)
+    public void Activate(BirdEntityView birdEntityView)
     {
         Vector3 birdPosition = birdEntityView.transform.position;
-        Collider[] colliders = new Collider[powerSettings.MaxExplosiveCount];
-        Physics.OverlapSphereNonAlloc(birdPosition, powerSettings.ExplosionRadius, colliders);
+        Physics.OverlapSphereNonAlloc(birdPosition, _powerSettings.ExplosionRadius, _colliders);
 
-        foreach (Collider collider in colliders)
+        foreach (Collider collider in _colliders)
         {
             if (collider == null || collider.gameObject == birdEntityView.gameObject)
                 continue;
@@ -20,10 +28,10 @@ public class ExplosionBirdPower : IBirdPower
             if (rigidbody != null)
             {
                 rigidbody.AddExplosionForce(
-                    powerSettings.ExplosionForce,
+                    _powerSettings.ExplosionForce,
                     birdPosition,
-                    powerSettings.ExplosionRadius,
-                    powerSettings.UpwardsModifier);
+                    _powerSettings.ExplosionRadius,
+                    _powerSettings.UpwardsModifier);
             }
         }
     }

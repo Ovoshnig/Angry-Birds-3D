@@ -6,15 +6,15 @@ public class BirdPowerActivatorBirdFlyerMediator : Mediator
 {
     private readonly BirdPowerActivator _birdPowerActivator;
     private readonly BirdFlyer _birdFlyer;
-    private readonly BirdPowerSettings _birdPowerSettings;
+    private readonly ExplosionPowerSettings _explosionPowerSettings;
 
     public BirdPowerActivatorBirdFlyerMediator(BirdPowerActivator birdPowerActivator,
         BirdFlyer birdFlyer,
-        BirdPowerSettings birdPowerSettings)
+        ExplosionPowerSettings explosionPowerSettings)
     {
         _birdPowerActivator = birdPowerActivator;
         _birdFlyer = birdFlyer;
-        _birdPowerSettings = birdPowerSettings;
+        _explosionPowerSettings = explosionPowerSettings;
     }
 
     protected override void Bind(CompositeDisposable disposables)
@@ -31,7 +31,7 @@ public class BirdPowerActivatorBirdFlyerMediator : Mediator
 
         if (powerView.PowerType == BirdPowerType.Explosion && !powerView.WasActivated)
         {
-            await UniTask.WaitForSeconds(_birdPowerSettings.ExplosionDelay, cancellationToken: token);
+            await UniTask.WaitForSeconds(_explosionPowerSettings.ExplosionDelay, cancellationToken: token);
 
             _birdPowerActivator.ActivatePower(entityView);
         }
