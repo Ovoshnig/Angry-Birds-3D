@@ -105,7 +105,11 @@ public class TrailParticlePlayer : IStartable, IDisposable
         _currentParticles.Clear();
     }
 
-    private void PlayPowerParticle() => _currentParticles[0].EmitPowerParticle();
+    private void PlayPowerParticle()
+    {
+        if (_currentParticles.Count > 0)
+            _currentParticles[0].EmitPowerParticle();
+    }
 
     private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
     {

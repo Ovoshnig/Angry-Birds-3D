@@ -42,29 +42,28 @@ public class BirdPowerActivator : IStartable, IDisposable
         _inputDisposables.Dispose();
     }
 
+    public void ActivatePower(BirdEntityView birdEntityView)
+    {
+        BirdPowerView powerView = birdEntityView.PowerView;
+        BirdPowerType powerType = powerView.PowerType;
+
+        if (!powerView.WasActivated && _powerRegistry.TryGet(powerType, out IBirdPower power))
+        {
+            power.Activate(birdEntityView, _powerSettings);
+            powerView.SetWasActivated();
+            _activated.OnNext(birdEntityView);
+        }
+    }
+
     private void OnFlightStarted(BirdEntityView birdEntityView)
     {
         _inputProvider.UsePowerPressed
             .Pairwise()
             .Where(isPressed => !isPressed.Previous && isPressed.Current)
             .Take(1)
-            .Subscribe(_ => OnUsePowerPressed(birdEntityView))
+            .Subscribe(_ => ActivatePower(birdEntityView))
             .AddTo(_inputDisposables);
     }
 
     private void OnFlightInterrupted(BirdEntityView _) => _inputDisposables.Clear();
-
-    private void OnUsePowerPressed(BirdEntityView birdEntityView)
-    {
-        BirdPowerType powerType = birdEntityView.PowerView.PowerType;
-
-        if (powerType == BirdPowerType.None)
-            return;
-
-        if (_powerRegistry.TryGet(powerType, out IBirdPower power))
-        {
-            power.Activate(birdEntityView, _powerSettings);
-            _activated.OnNext(birdEntityView);
-        }
-    }
 }

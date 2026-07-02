@@ -9,8 +9,14 @@ public class BirdPowerInstaller : IInstaller
     {
         builder.Register<SplitInto3BirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
         builder.Register<BoostBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
+        builder.Register<ExplosionBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
 
         builder.Register<BirdPowerRegistry>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<BirdPowerActivator>().AsSelf();
+
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<BirdPowerActivator>().AsSelf();
+            entryPoints.Add<BirdPowerActivatorBirdFlyerMediator>().AsSelf();
+        });
     }
 }
