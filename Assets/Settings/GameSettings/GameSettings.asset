@@ -61,7 +61,6 @@ MonoBehaviour:
   <BirdSettings>k__BackingField:
     <DestructionDelay>k__BackingField: 5
     <FallOutDepth>k__BackingField: 10
-    <PointsDisplayDelay>k__BackingField: 2
   <BirdStretchSettings>k__BackingField:
     <StretchDelay>k__BackingField: 0.02
     <StretchDuration>k__BackingField: 0.4
@@ -71,11 +70,19 @@ MonoBehaviour:
     <MaxStretchScale>k__BackingField: {x: 0.7, y: 0.7, z: 1.75}
     <StretchEase>k__BackingField: 5
   <BirdPowerSettings>k__BackingField:
-    <SplitAngleDiff>k__BackingField: 12
-    <VelocityIncreasingDuration>k__BackingField: 0.1
-    <BoostDuration>k__BackingField: 0.13
-    <BoostVelocity>k__BackingField: 40
-    <VelocityIncreasingEase>k__BackingField: 2
+    <SplitInto3PowerSettings>k__BackingField:
+      <SplitAngleDiff>k__BackingField: 12
+    <BoostPowerSettings>k__BackingField:
+      <VelocityIncreasingDuration>k__BackingField: 0.1
+      <BoostDuration>k__BackingField: 0.12
+      <BoostVelocity>k__BackingField: 40
+      <VelocityIncreasingEase>k__BackingField: 2
+    <ExplosionPowerSettings>k__BackingField:
+      <ExplosionDelay>k__BackingField: 1.5
+      <ExplosionForce>k__BackingField: 700
+      <ExplosionRadius>k__BackingField: 6
+      <UpwardsModifier>k__BackingField: 2
+      <MaxExplosiveCount>k__BackingField: 30
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 10

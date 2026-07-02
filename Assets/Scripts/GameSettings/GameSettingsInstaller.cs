@@ -20,7 +20,9 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.SlingshotPlacingSettings);
         builder.RegisterInstance(_gameSettings.BirdSettings);
         builder.RegisterInstance(_gameSettings.BirdStretchSettings);
-        builder.RegisterInstance(_gameSettings.BirdPowerSettings);
+        builder.RegisterInstance(_gameSettings.BirdPowerSettings.SplitInto3PowerSettings);
+        builder.RegisterInstance(_gameSettings.BirdPowerSettings.BoostPowerSettings);
+        builder.RegisterInstance(_gameSettings.BirdPowerSettings.ExplosionPowerSettings);
         builder.RegisterInstance(_gameSettings.ScoreSettings);
     }
 }

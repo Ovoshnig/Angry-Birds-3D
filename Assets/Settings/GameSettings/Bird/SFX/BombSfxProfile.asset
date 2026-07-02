@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameSettings::BirdSFXSettings
   <SelectionResource>k__BackingField: {fileID: 8300000, guid: 46a70bc8256dce1498c85974f6b51609, type: 3}
   <FlyingResource>k__BackingField: {fileID: 8300000, guid: 641733f7f9900184a9ce3d4bf90eb5a9, type: 3}
-  <PowerActivationResource>k__BackingField: {fileID: 8300000, guid: 495c331bfc3b12b459a5a4a36fb58a37, type: 3}
+  <PowerActivationResource>k__BackingField: {fileID: 8300000, guid: 7595f702e79bfb54cb19bf72bbb9dec0, type: 3}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: e745bacef9e1ed34c87294990b6b80a9, type: 2}
   <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}

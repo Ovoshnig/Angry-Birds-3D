@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <SlnMergeSettings>
-  <MergeTargetSolution>..\AngryBirds3D.slnx</MergeTargetSolution>
+  <MergeTargetSolution>AngryBirds3D.slnx</MergeTargetSolution>
   <NestedProjects>
     <NestedProject ProjectName="Installer.Editor" FolderPath="Editor" />
     <NestedProject ProjectName="Scene.Editor" FolderPath="Editor" />
@@ -12,7 +12,6 @@
     <NestedProject ProjectName="Tests.EditMode.LevelScore" FolderPath="Tests" />
     <NestedProject ProjectName="Tests.EditMode.ObjectCollision" FolderPath="Tests" />
     <NestedProject ProjectName="Tests.EditMode.ObjectHealth" FolderPath="Tests" />
-    <NestedProject ProjectName="Tests.PlayMode.LevelScore" FolderPath="Tests" />
   </NestedProjects>
   <ProjectConflictResolution>PreserveUnity</ProjectConflictResolution>
   <DefaultProcessingPolicy>NestedProjectOnly</DefaultProcessingPolicy>
