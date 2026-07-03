@@ -2,7 +2,6 @@ using UnityEngine;
 
 public class ExplosionParticleView : MonoBehaviour
 {
-    [SerializeField] private AnimationCurve _curve;
     [SerializeField] private ParticleSystem _fireSmokeSystem;
     [SerializeField] private ParticleSystem _shockwaveSystem;
 

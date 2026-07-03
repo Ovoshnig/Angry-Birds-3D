@@ -74,6 +74,18 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Levels/Plains/Level21.unity
     guid: c74ef952e731d6a4db9b09296fb28c3b
+  - enabled: 1
+    path: Assets/Scenes/Levels/Plains/Level22.unity
+    guid: dd05b63d3b2f72040bc0b5e9f44c0fd8
+  - enabled: 1
+    path: Assets/Scenes/Levels/Plains/Level23.unity
+    guid: c0c6b4c6da991f0409af96f96c77fd7c
+  - enabled: 1
+    path: Assets/Scenes/Levels/Plains/Level24.unity
+    guid: 6c2cad30b32ec4b4caa94c8ccc67f879
+  - enabled: 1
+    path: Assets/Scenes/Levels/Plains/Level25.unity
+    guid: 9986975f55d6ac74a8c4b55534fc4a54
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 48d4fcc9ab83b0a478a7f77463228f31, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: dfc5194a2da461941bbc4e192fa012b3, type: 3}
