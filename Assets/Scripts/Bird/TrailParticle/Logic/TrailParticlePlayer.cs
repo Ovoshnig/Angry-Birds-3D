@@ -58,6 +58,7 @@ public class TrailParticlePlayer : IStartable, IDisposable
             .AddTo(_disposables);
 
         _birdPowerActivator.Activated
+            .Where(entityView => entityView.PowerView.HasPowerParticle)
             .Subscribe(_ => PlayPowerParticle())
             .AddTo(_disposables);
 

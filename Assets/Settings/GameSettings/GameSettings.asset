@@ -30,7 +30,7 @@ MonoBehaviour:
   <TrailParticleSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 6
-    <PowerParticleSize>k__BackingField: 0.75
+    <PowerParticleSize>k__BackingField: 0.65
   <SkyboxSettings>k__BackingField:
     <LoopDuration>k__BackingField: 360
   <CollisionSettings>k__BackingField:

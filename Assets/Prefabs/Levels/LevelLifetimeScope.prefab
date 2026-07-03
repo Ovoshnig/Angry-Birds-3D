@@ -70,6 +70,8 @@ MonoBehaviour:
       _trailParticlePrefab: {fileID: 5797264380014560616, guid: 19ce99205375e7c4684c8cc7f682fabe, type: 3}
     _featherParticleInstaller:
       _featherParticlePrefab: {fileID: 5405476774270819167, guid: fee69490ef2e5c442aa8fd70895025d6, type: 3}
+    _explosionParticleInstaller:
+      _explosionParticlePrefab: {fileID: 2636192714593321530, guid: 8064619bbc1287c4e9fd246253608212, type: 3}
   _pigInstaller: {}
   _blockInstaller:
     _particleInstaller:
