@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <SceneSettings>k__BackingField:
     <FirstLevelIndex>k__BackingField: 2
-    <LevelCount>k__BackingField: 24
+    <LevelCount>k__BackingField: 30
     <InterpolationSpeed>k__BackingField: 13
   <CameraSettings>k__BackingField:
     <StructureShowingDuration>k__BackingField: 1.2
