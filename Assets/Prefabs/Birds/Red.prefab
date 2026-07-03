@@ -200,3 +200,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdPowerView
   <PowerType>k__BackingField: 0
+  <HasPowerParticle>k__BackingField: 0
