@@ -58,6 +58,7 @@ public class TrailParticlePlayer : IStartable, IDisposable
             .AddTo(_disposables);
 
         _birdPowerActivator.Activated
+            .Where(entityView => entityView.PowerView.HasPowerParticle)
             .Subscribe(_ => PlayPowerParticle())
             .AddTo(_disposables);
 
@@ -105,7 +106,11 @@ public class TrailParticlePlayer : IStartable, IDisposable
         _currentParticles.Clear();
     }
 
-    private void PlayPowerParticle() => _currentParticles[0].EmitPowerParticle();
+    private void PlayPowerParticle()
+    {
+        if (_currentParticles.Count > 0)
+            _currentParticles[0].EmitPowerParticle();
+    }
 
     private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
     {
