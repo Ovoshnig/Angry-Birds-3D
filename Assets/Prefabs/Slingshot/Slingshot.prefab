@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
       propertyPath: m_ConstrainProportionsScale
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
@@ -136,10 +136,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6442505233512434767}
+      addedObject: {fileID: 6375969141108199114}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 6375969141108199114}
+      addedObject: {fileID: 4170904245695003389}
     - targetCorrespondingSourceObject: {fileID: 2471068575292509919, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
       insertIndex: -1
       addedObject: {fileID: 5857934459864665325}
@@ -441,28 +441,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
   m_PrefabInstance: {fileID: 3552098231136295285}
   m_PrefabAsset: {fileID: 0}
---- !u!64 &6442505233512434767
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4434637521994982436}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 5192874587645291261, guid: f8a5309bd68d6924194bd8333411416a, type: 3}
 --- !u!114 &6375969141108199114
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -480,3 +458,26 @@ MonoBehaviour:
   <CenterAnchor>k__BackingField: {fileID: 1943040412088983679}
   <DraggingResource>k__BackingField: {fileID: 8300000, guid: c2c5c20ada47d844194ae7f6aea63e20, type: 3}
   <ShotResource>k__BackingField: {fileID: 6418180475301049370, guid: 7605f1449fa0ab945bb6c718fc178615, type: 2}
+--- !u!136 &4170904245695003389
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4434637521994982436}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.26
+  m_Height: 3.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.53, z: 0}

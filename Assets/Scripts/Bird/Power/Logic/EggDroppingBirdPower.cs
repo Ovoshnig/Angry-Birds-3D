@@ -1,0 +1,51 @@
+using R3;
+using System;
+using UnityEngine;
+using Object = UnityEngine.Object;
+
+public class EggDroppingBirdPower : IBirdPower, IDisposable
+{
+    private readonly BirdExploder _birdExploder;
+    private readonly EggDroppingPowerSettings _powerSettings;
+    private readonly Collider[] _colliders;
+    private readonly CompositeDisposable _disposables = new();
+
+    public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
+    {
+        _birdExploder = birdExploder;
+        _powerSettings = powerSettings;
+
+        _colliders = new Collider[powerSettings.MaxExplosiveCount];
+    }
+
+    public BirdPowerType Type => BirdPowerType.EggDropping;
+
+    public void Activate(BirdEntityView birdEntityView)
+    {
+        EggEntityView eggEntityView = birdEntityView.GetComponentInChildren<EggEntityView>();
+
+        Transform eggTransform = eggEntityView.transform;
+        eggTransform.SetParent(null);
+        eggTransform.localRotation = Quaternion.identity;
+
+        eggEntityView.Rigidbody.isKinematic = false;
+
+        Vector3 recoilForce = _powerSettings.RecoilForce * birdEntityView.transform.up.normalized;
+        birdEntityView.FlyerView.Rigidbody.AddForce(recoilForce, ForceMode.Impulse);
+
+        eggEntityView.ColliderView.Collided
+            .Take(1)
+            .Subscribe(_ => OnEggCollided(eggEntityView))
+            .AddTo(_disposables);
+    }
+
+    public void Dispose() => _disposables.Dispose();
+
+    private void OnEggCollided(EggEntityView eggEntityView)
+    {
+        _birdExploder.Explode(eggEntityView.gameObject, _colliders, _powerSettings.ExplosionForce,
+            _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier);
+
+        Object.Destroy(eggEntityView.gameObject);
+    }
+}
