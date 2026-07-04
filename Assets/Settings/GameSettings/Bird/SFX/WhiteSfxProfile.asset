@@ -17,3 +17,4 @@ MonoBehaviour:
   <PowerActivationResource>k__BackingField: {fileID: 8300000, guid: 59cb1e3d01369f84cb0234a5116318d6, type: 3}
   <CollisionResource>k__BackingField: {fileID: 6418180475301049370, guid: e745bacef9e1ed34c87294990b6b80a9, type: 2}
   <DestructionResource>k__BackingField: {fileID: 8300000, guid: 018d55def0b012d41af1495d34978967, type: 3}
+  <ExplosionResource>k__BackingField: {fileID: 8300000, guid: 7595f702e79bfb54cb19bf72bbb9dec0, type: 3}

@@ -1,6 +1,7 @@
 using R3;
 using System;
 using UnityEngine;
+using UnityEngine.Audio;
 using Object = UnityEngine.Object;
 
 public class EggDroppingBirdPower : IBirdPower, IDisposable
@@ -38,7 +39,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
 
         eggEntityView.ColliderView.Collided
             .Take(1)
-            .Subscribe(_ => OnEggCollided(eggEntityView))
+            .Subscribe(_ => OnEggCollided(eggEntityView, birdEntityView.SfxProfile.ExplosionResource))
             .AddTo(_disposables);
     }
 
@@ -48,10 +49,10 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
         _eggDropped.Dispose();
     }
 
-    private void OnEggCollided(EggEntityView eggEntityView)
+    private void OnEggCollided(EggEntityView eggEntityView, AudioResource explosionResource)
     {
         _birdExploder.Explode(eggEntityView.gameObject, _colliders, _powerSettings.ExplosionForce,
-            _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier);
+            _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier, explosionResource);
 
         Object.Destroy(eggEntityView.gameObject);
     }

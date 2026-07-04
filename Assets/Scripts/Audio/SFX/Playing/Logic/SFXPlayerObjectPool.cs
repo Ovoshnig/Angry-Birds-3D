@@ -40,7 +40,7 @@ public class SFXPlayerObjectPool : IDisposable
 
     private void Play(AudioResource audioResource, Transform target = null)
     {
-        if (_sfxCounter.GetCount(audioResource) >= _audioSettings.MaxSameSfxPlaying)
+        if (audioResource == null || _sfxCounter.GetCount(audioResource) >= _audioSettings.MaxSameSfxPlaying)
             return;
 
         SFXPlayerView playerView = _sfxPlayerPool.Get();

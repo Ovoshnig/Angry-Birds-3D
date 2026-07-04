@@ -19,5 +19,5 @@ public class ExplosionParticleViewBirdExploderMediator : Mediator
             .AddTo(disposables);
     }
 
-    private void OnActivated(BirdExplosionData data) => _explosionParticleView.Play(data.Position, data.Radius);
+    private void OnActivated(BirdExplosionData data) => _explosionParticleView.Play(data.Transform.position, data.Radius);
 }

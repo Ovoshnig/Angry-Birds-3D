@@ -1,5 +1,6 @@
 using R3;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class BirdExploder
 {
@@ -8,7 +9,7 @@ public class BirdExploder
     public Observable<BirdExplosionData> Exploded => _exploded;
 
     public void Explode(GameObject explodingObject, Collider[] colliders, float force, float radius,
-        float upwardsModifier)
+        float upwardsModifier, AudioResource explosionResource)
     {
         Vector3 explodingObjectPosition = explodingObject.transform.position;
         Physics.OverlapSphereNonAlloc(explodingObjectPosition, radius, colliders);
@@ -24,6 +25,6 @@ public class BirdExploder
                 rigidbody.AddExplosionForce(force, explodingObjectPosition, radius, upwardsModifier);
         }
 
-        _exploded.OnNext(new BirdExplosionData(explodingObjectPosition, force, radius));
+        _exploded.OnNext(new BirdExplosionData(explodingObject.transform, force, radius, explosionResource));
     }
 }

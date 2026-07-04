@@ -16,6 +16,7 @@ public class ExplosionBirdPower : IBirdPower
 
     public BirdPowerType Type => BirdPowerType.Explosion;
 
-    public void Activate(BirdEntityView birdEntityView) => _birdExploder.Explode(birdEntityView.gameObject, _colliders,
-        _powerSettings.ExplosionForce, _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier);
+    public void Activate(BirdEntityView birdEntityView) => _birdExploder.Explode(birdEntityView.gameObject,
+        _colliders, _powerSettings.ExplosionForce, _powerSettings.ExplosionRadius,
+        _powerSettings.UpwardsModifier, birdEntityView.SfxProfile.ExplosionResource);
 }
