@@ -23,6 +23,7 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.SplitInto3PowerSettings);
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.BoostPowerSettings);
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.ExplosionPowerSettings);
+        builder.RegisterInstance(_gameSettings.BirdPowerSettings.EggDroppingPowerSettings);
         builder.RegisterInstance(_gameSettings.ScoreSettings);
     }
 }

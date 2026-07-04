@@ -39,7 +39,7 @@ public class BirdPointsDisplayer : IDisposable
 
     private async UniTask DisplayPointsAsync(BirdEntityView bird)
     {
-        Bounds birdBounds = bird.GetComponent<Renderer>().bounds;
+        Bounds birdBounds = bird.GetComponent<Collider>().bounds;
         Vector3 topCenter = new(birdBounds.center.x, birdBounds.max.y, birdBounds.center.z);
         _pointsDisplayStarted.OnNext(new BirdPointsDisplayData(topCenter, bird.PointsSettings));
 

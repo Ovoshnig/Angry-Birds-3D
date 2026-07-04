@@ -81,6 +81,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bd630faad34d234d9f87d76a6db891e, type: 3}
       insertIndex: -1
       addedObject: {fileID: 6498496844078961982}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0bd630faad34d234d9f87d76a6db891e, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7607456195104490493}
   m_SourcePrefab: {fileID: 100100000, guid: 0bd630faad34d234d9f87d76a6db891e, type: 3}
 --- !u!1 &4234002839151405378 stripped
 GameObject:
@@ -200,3 +203,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Bird::BirdPowerView
   <PowerType>k__BackingField: 1
+  <HasPowerParticle>k__BackingField: 1
+--- !u!114 &7607456195104490493
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4234002839151405378}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b6643f7aad78f4096fdbbe473e15ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bird::BirdAnimatorView

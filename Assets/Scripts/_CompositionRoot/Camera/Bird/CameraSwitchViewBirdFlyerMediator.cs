@@ -15,6 +15,7 @@ public class CameraSwitchViewBirdFlyerMediator : Mediator
     protected override void Bind(CompositeDisposable disposables)
     {
         _birdFlyer.BirdCollided
+            .Where(birdEntityView => birdEntityView.PowerView.PowerType != BirdPowerType.EggDropping)
             .Subscribe(_ => _cameraSwitchView.SwitchToStructureAsync().Forget())
             .AddTo(disposables);
     }

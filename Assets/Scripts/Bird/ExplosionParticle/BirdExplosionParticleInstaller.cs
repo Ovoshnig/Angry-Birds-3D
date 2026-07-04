@@ -11,6 +11,6 @@ public class BirdExplosionParticleInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterComponentInNewPrefab(_explosionParticlePrefab, Lifetime.Singleton);
-        builder.RegisterEntryPoint<ExplosionParticleViewPowerActivatorMediator>();
+        builder.RegisterEntryPoint<ExplosionParticleViewBirdExploderMediator>();
     }
 }
