@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff9a089bf7d05c040be60d4b35cac672
+guid: d9d735dd0ec2d6648b6453997da6b4b3
 ModelImporter:
   serializedVersion: 24501
   internalIDToNameTable: []
@@ -9,26 +9,6 @@ ModelImporter:
       assembly: UnityEngine.CoreModule
       name: White
     second: {fileID: 2100000, guid: f7b76788997d27b448a5500172197af3, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Atlas_Color
-    second: {fileID: 2800000, guid: 599f60c5215aa57459cc5598ebd77ccf, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Atlas_Roughness
-    second: {fileID: 2800000, guid: 28870f5d7e6f4034ca7e36139a1a29d4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Body
-    second: {fileID: 2800000, guid: d1f99a1ba7506fa448212138fcf771f4, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: Eye
-    second: {fileID: 2800000, guid: fe3c8f8c3d3be8b44bcf7431a29f5ad6, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -106,7 +86,7 @@ ModelImporter:
     legacyComputeAllNormalsFromSmoothingGroupsWhenMeshHasBlendShapes: 0
     blendShapeNormalImportMode: 1
     normalSmoothingSource: 0
-    calculateBlendshapeNormalsDeltaFromImportedNormals: 1
+    calculateBlendshapeNormalsDeltaFromImportedNormals: 0
   referencedClips: []
   importAnimation: 1
   humanDescription:
