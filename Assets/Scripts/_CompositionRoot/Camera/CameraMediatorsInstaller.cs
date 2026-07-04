@@ -8,6 +8,7 @@ public class CameraMediatorsInstaller : IInstaller
         builder.UseEntryPoints(entryPoints =>
         {
             entryPoints.Add<CameraSwitchViewBirdFlyerMediator>();
+            entryPoints.Add<CameraSwitchViewEggDroppingBirdPowerMediator>();
             entryPoints.Add<CameraSwitchViewLevelTrackerMediator>();
         });
     }

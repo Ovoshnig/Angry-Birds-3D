@@ -8,6 +8,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
     private readonly BirdExploder _birdExploder;
     private readonly EggDroppingPowerSettings _powerSettings;
     private readonly Collider[] _colliders;
+    private readonly Subject<EggEntityView> _eggDropped = new();
     private readonly CompositeDisposable _disposables = new();
 
     public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
@@ -19,6 +20,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
     }
 
     public BirdPowerType Type => BirdPowerType.EggDropping;
+    public Observable<EggEntityView> EggDropped => _eggDropped;
 
     public void Activate(BirdEntityView birdEntityView)
     {
@@ -29,6 +31,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
         eggTransform.localRotation = Quaternion.identity;
 
         eggEntityView.Rigidbody.isKinematic = false;
+        _eggDropped.OnNext(eggEntityView);
 
         Vector3 recoilForce = _powerSettings.RecoilForce * birdEntityView.transform.up.normalized;
         birdEntityView.FlyerView.Rigidbody.AddForce(recoilForce, ForceMode.Impulse);
@@ -39,7 +42,11 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
             .AddTo(_disposables);
     }
 
-    public void Dispose() => _disposables.Dispose();
+    public void Dispose()
+    {
+        _disposables.Dispose();
+        _eggDropped.Dispose();
+    }
 
     private void OnEggCollided(EggEntityView eggEntityView)
     {
