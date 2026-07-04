@@ -18,23 +18,33 @@ public class LevelStateTracker : IPostStartable, IDisposable
                 .AsUnitObservable())
             .Share();
 
-        Cleared = Observable.Merge(
+        Observable<Unit> clearedSource = Observable.Merge(
             birdDestroyer.Destroyed
                 .Where(_ => !pigTracker.AnyPigs)
                 .AsUnitObservable(),
             pigTracker.PigsLeft
-                .Where(_ => !birdTracker.IsBirdLaunched.CurrentValue))
-            .Take(1)
-            .Share();
+                .Where(_ => !birdTracker.IsBirdLaunched.CurrentValue)
+                .AsUnitObservable());
 
-        Failed = birdTracker.BirdsLeft
+        Observable<Unit> failedSource = birdTracker.BirdsLeft
             .Where(_ => pigTracker.AnyPigs)
-            .AsUnitObservable()
+            .AsUnitObservable();
+
+        Observable<bool> result = Observable.Merge(
+                clearedSource.Select(_ => true),
+                failedSource.Select(_ => false))
             .Take(1)
             .Share();
 
-        Completed = Observable.Merge(Cleared, Failed)
-            .Take(1);
+        Cleared = result
+            .Where(isCleared => isCleared)
+            .AsUnitObservable();
+
+        Failed = result
+            .Where(isCleared => !isCleared)
+            .AsUnitObservable();
+
+        Completed = result.AsUnitObservable();
     }
 
     public Observable<Unit> Started => _started;
