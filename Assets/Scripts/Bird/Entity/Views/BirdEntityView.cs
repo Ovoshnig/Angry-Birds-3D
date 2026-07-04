@@ -3,6 +3,7 @@ using UnityEngine;
 [RequireComponent(typeof(BirdFlyerView))]
 [RequireComponent(typeof(BirdDestroyerView))]
 [RequireComponent(typeof(BirdPowerView))]
+[RequireComponent(typeof(BirdAnimatorView))]
 public class BirdEntityView : CollidableEntityView
 {
     [field: SerializeField] public BirdSfxProfile SfxProfile { get; private set; }
@@ -12,6 +13,7 @@ public class BirdEntityView : CollidableEntityView
     public BirdFlyerView FlyerView { get; private set; }
     public BirdDestroyerView DestroyerView { get; private set; }
     public BirdPowerView PowerView { get; private set; }
+    public BirdAnimatorView AnimatorView { get; private set; }
 
     protected override void Awake()
     {
@@ -20,5 +22,6 @@ public class BirdEntityView : CollidableEntityView
         FlyerView = GetComponent<BirdFlyerView>();
         DestroyerView = GetComponent<BirdDestroyerView>();
         PowerView = GetComponent<BirdPowerView>();
+        AnimatorView = GetComponent<BirdAnimatorView>();
     }
 }

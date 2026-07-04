@@ -96,6 +96,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 5866666021909216657, guid: ff9a089bf7d05c040be60d4b35cac672, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 396a9159efaf604459d7a0ae2e067059, type: 2}
     - target: {fileID: 7036213049465896255, guid: ff9a089bf7d05c040be60d4b35cac672, type: 3}
       propertyPath: m_Layer
       value: 8
@@ -132,6 +136,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff9a089bf7d05c040be60d4b35cac672, type: 3}
       insertIndex: -1
       addedObject: {fileID: 8440570377797495768}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: ff9a089bf7d05c040be60d4b35cac672, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 3179567979513802879}
   m_SourcePrefab: {fileID: 100100000, guid: ff9a089bf7d05c040be60d4b35cac672, type: 3}
 --- !u!4 &2585612668477566313 stripped
 Transform:
@@ -257,6 +264,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Bird::BirdPowerView
   <PowerType>k__BackingField: 4
   <HasPowerParticle>k__BackingField: 1
+--- !u!114 &3179567979513802879
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2930191518598346707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79b6643f7aad78f4096fdbbe473e15ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Bird::BirdAnimatorView
+  _animator: {fileID: 0}
 --- !u!1001 &4481841651343811032
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -399,8 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97b595b66a2e95b41b9b6fc771ab0d92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Bird::EggEntityView
-  <Rigidbody>k__BackingField: {fileID: 0}
-  <ColliderView>k__BackingField: {fileID: 0}
 --- !u!114 &4684430291743970524
 MonoBehaviour:
   m_ObjectHideFlags: 0
