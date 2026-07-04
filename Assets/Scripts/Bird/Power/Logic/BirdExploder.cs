@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class BirdExploder
 {
-    private readonly Subject<float> _exploded = new();
+    private readonly Subject<BirdExplosionData> _exploded = new();
 
-    public Observable<float> Exploded => _exploded;
+    public Observable<BirdExplosionData> Exploded => _exploded;
 
     public void Explode(GameObject explodingObject, Collider[] colliders, float force, float radius,
         float upwardsModifier)
@@ -24,6 +24,6 @@ public class BirdExploder
                 rigidbody.AddExplosionForce(force, explodingObjectPosition, radius, upwardsModifier);
         }
 
-        _exploded.OnNext(radius);
+        _exploded.OnNext(new BirdExplosionData(explodingObjectPosition, force, radius));
     }
 }
