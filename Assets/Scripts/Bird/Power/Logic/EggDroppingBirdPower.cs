@@ -36,7 +36,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
         eggRigidbody.AddForce(_powerSettings.DropForce * Vector3.down, ForceMode.Impulse);
         _eggDropped.OnNext(eggEntityView);
 
-        birdEntityView.FlyerView.Rigidbody.AddForce(_powerSettings.RecoilForce * birdEntityView.transform.up,
+        birdEntityView.FlyerView.Rigidbody.AddForce(_powerSettings.RecoilForce * Vector3.up,
             ForceMode.Impulse);
 
         eggEntityView.ColliderView.Collided
