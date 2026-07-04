@@ -85,6 +85,7 @@ MonoBehaviour:
       <MaxExplosiveCount>k__BackingField: 30
     <EggDroppingPowerSettings>k__BackingField:
       <RecoilForce>k__BackingField: 10
+      <DropForce>k__BackingField: 8
       <ExplosionForce>k__BackingField: 500
       <ExplosionRadius>k__BackingField: 4
       <UpwardsModifier>k__BackingField: 1

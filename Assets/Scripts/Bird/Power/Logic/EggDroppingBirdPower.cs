@@ -29,13 +29,15 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
 
         Transform eggTransform = eggEntityView.transform;
         eggTransform.SetParent(null);
-        eggTransform.localRotation = Quaternion.identity;
+        eggTransform.rotation = Quaternion.identity;
 
-        eggEntityView.Rigidbody.isKinematic = false;
+        Rigidbody eggRigidbody = eggEntityView.Rigidbody;
+        eggRigidbody.isKinematic = false;
+        eggRigidbody.AddForce(_powerSettings.DropForce * Vector3.down, ForceMode.Impulse);
         _eggDropped.OnNext(eggEntityView);
 
-        Vector3 recoilForce = _powerSettings.RecoilForce * birdEntityView.transform.up.normalized;
-        birdEntityView.FlyerView.Rigidbody.AddForce(recoilForce, ForceMode.Impulse);
+        birdEntityView.FlyerView.Rigidbody.AddForce(_powerSettings.RecoilForce * birdEntityView.transform.up,
+            ForceMode.Impulse);
 
         eggEntityView.ColliderView.Collided
             .Take(1)
