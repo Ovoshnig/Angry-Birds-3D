@@ -15,6 +15,7 @@ public class LevelStateTrackingInstaller : IInstaller
 
         builder.UseEntryPoints(entryPoints =>
         {
+            entryPoints.Add<ActivityTracker>().AsSelf();
             entryPoints.Add<LevelStateTracker>().AsSelf();
             entryPoints.Add<ClearingPanelViewBirdPointsDisplayerMediator>();
             entryPoints.Add<SceneManagerLevelIndexViewMediator>();

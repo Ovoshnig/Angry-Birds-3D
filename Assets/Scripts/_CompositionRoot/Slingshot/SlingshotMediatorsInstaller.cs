@@ -9,6 +9,7 @@ public class SlingshotMediatorsInstaller : IInstaller
         {
             entryPoints.Add<SlingshotShooterGamePauserMediator>();
             entryPoints.Add<SlingshotShooterLevelTrackerMediator>();
+            entryPoints.Add<SlingshotBirdPlacerLevelTrackerMediator>();
         });
     }
 }

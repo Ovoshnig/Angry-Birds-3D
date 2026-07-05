@@ -18,10 +18,8 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private float _birdRadius;
     private bool _isDragInput;
 
-    public SlingshotShooter(SlingshotInputProvider inputProvider,
-        SlingshotShooterView view,
-        PointerPositionMeter pointerMeter,
-        SlingshotSettings settings)
+    public SlingshotShooter(SlingshotInputProvider inputProvider, SlingshotShooterView view,
+        PointerPositionMeter pointerMeter, SlingshotSettings settings)
     {
         _inputProvider = inputProvider;
         _view = view;
@@ -36,10 +34,10 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             .Share();
     }
 
-    public Rigidbody CurrentBird => _currentBird;
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
     public Observable<Rigidbody> DraggingStarted { get; }
     public Observable<Rigidbody> Shot => _shot;
+    public bool HasBird => _currentBird != null;
 
     public void Start()
     {
