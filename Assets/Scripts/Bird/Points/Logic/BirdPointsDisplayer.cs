@@ -1,19 +1,15 @@
 using Cysharp.Threading.Tasks;
 using R3;
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
 public class BirdPointsDisplayer : IDisposable
 {
-    private readonly BirdQueue _birdQueue;
     private readonly Subject<BirdPointsDisplayData> _pointsDisplayStarted = new();
     private readonly Subject<Unit> _sequenceDisplayCompleted = new();
     private readonly CancellationTokenSource _cts = new();
-
-    private BirdEntityView _slingshotBird = null;
-
-    public BirdPointsDisplayer(BirdQueue birdQueue) => _birdQueue = birdQueue;
 
     public Observable<BirdPointsDisplayData> PointsDisplayStarted => _pointsDisplayStarted;
     public Observable<Unit> SequenceDisplayCompleted => _sequenceDisplayCompleted;
@@ -24,25 +20,21 @@ public class BirdPointsDisplayer : IDisposable
         _cts.Dispose();
     }
 
-    public void SetSlingshotBird(BirdEntityView slingshotBird) => _slingshotBird = slingshotBird;
-
-    public async UniTask DisplaySequenceAsync()
+    public async UniTask DisplaySequenceAsync(IReadOnlyList<BirdEntityView> entityViews)
     {
-        while (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
-            await DisplayPointsAsync(entityView);
-
-        if (_slingshotBird != null)
-            await DisplayPointsAsync(_slingshotBird);
+        foreach (var entityView in entityViews)
+            if (entityView != null)
+                await DisplayPointsAsync(entityView);
 
         _sequenceDisplayCompleted.OnNext(Unit.Default);
     }
 
-    private async UniTask DisplayPointsAsync(BirdEntityView bird)
+    private async UniTask DisplayPointsAsync(BirdEntityView entityView)
     {
-        Bounds birdBounds = bird.GetComponent<Collider>().bounds;
+        Bounds birdBounds = entityView.GetComponent<Collider>().bounds;
         Vector3 topCenter = new(birdBounds.center.x, birdBounds.max.y, birdBounds.center.z);
-        _pointsDisplayStarted.OnNext(new BirdPointsDisplayData(topCenter, bird.PointsSettings));
+        _pointsDisplayStarted.OnNext(new BirdPointsDisplayData(topCenter, entityView.PointsSettings));
 
-        await UniTask.WaitForSeconds(bird.PointsSettings.TotalDuration, cancellationToken: _cts.Token);
+        await UniTask.WaitForSeconds(entityView.PointsSettings.TotalDuration, cancellationToken: _cts.Token);
     }
 }

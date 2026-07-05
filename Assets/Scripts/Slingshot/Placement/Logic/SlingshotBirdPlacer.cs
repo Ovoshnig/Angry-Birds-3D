@@ -22,8 +22,6 @@ public class SlingshotBirdPlacer : IDisposable
         _placingSettings = placingSettings;
     }
 
-    public bool IsPlacing { get => _isPlacing; set => _isPlacing = value; }
-
     public void Dispose()
     {
         _cts.Cancel();
