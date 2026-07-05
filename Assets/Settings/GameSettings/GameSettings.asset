@@ -26,7 +26,7 @@ MonoBehaviour:
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
-    <MaxSameSfxPlaying>k__BackingField: 2
+    <MaxSameSfxPlaying>k__BackingField: 3
   <TrailParticleSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 6
