@@ -33,6 +33,8 @@ MonoBehaviour:
     <PowerParticleSize>k__BackingField: 0.65
   <SkyboxSettings>k__BackingField:
     <LoopDuration>k__BackingField: 360
+  <LevelStateTrackingSettings>k__BackingField:
+    <ActivityTimeout>k__BackingField: 2
   <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.1
     <CollisionThreshold>k__BackingField: 0.1
