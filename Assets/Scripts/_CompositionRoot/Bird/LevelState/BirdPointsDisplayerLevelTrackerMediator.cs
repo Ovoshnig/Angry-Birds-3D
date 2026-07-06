@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 using System.Threading;
-using UnityEngine;
 
 public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 {
