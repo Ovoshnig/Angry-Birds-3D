@@ -63,7 +63,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _view.UpdateRubbers(_currentBird.transform.position);
     }
 
-    public void SetCurrentBird(Rigidbody birdRigidbody)
+    public void SetBird(Rigidbody birdRigidbody)
     {
         if (_currentBird != null)
         {

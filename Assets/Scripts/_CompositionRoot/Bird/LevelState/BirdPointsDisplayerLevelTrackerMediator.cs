@@ -2,6 +2,7 @@ using Cysharp.Threading.Tasks;
 using R3;
 using System.Collections.Generic;
 using System.Threading;
+using UnityEngine;
 
 public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 {
@@ -10,18 +11,16 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
     private readonly BirdQueue _birdQueue;
     private readonly CameraSwitchView _cameraSwitchView;
     private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
-    private readonly SlingshotShooter _slingshotShooter;
 
     public BirdPointsDisplayerLevelTrackerMediator(BirdPointsDisplayer birdPointsDisplayer,
         LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView,
-        SlingshotBirdPlacer slingshotBirdPlacer, SlingshotShooter slingshotShooter)
+        SlingshotBirdPlacer slingshotBirdPlacer)
     {
         _birdPointsDisplayer = birdPointsDisplayer;
         _levelStateTracker = levelStateTracker;
         _birdQueue = birdQueue;
         _cameraSwitchView = cameraSwitchView;
         _slingshotBirdPlacer = slingshotBirdPlacer;
-        _slingshotShooter = slingshotShooter;
     }
 
     protected override void Bind(CompositeDisposable disposables)
@@ -35,14 +34,14 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
     {
         BirdEntityView slingshotEntityView = null;
 
-        if (_slingshotShooter.ContainsBird)
-        {
-            slingshotEntityView = _slingshotShooter.CurrentBird.GetComponent<BirdEntityView>();
-        }
-        else
+        if (_slingshotBirdPlacer.CanPlace)
         {
             if (_birdQueue.TryDequeueBird(out slingshotEntityView))
                 _slingshotBirdPlacer.PlaceBirdAsync(slingshotEntityView.FlyerView.Rigidbody).Forget();
+        }
+        else
+        {
+            slingshotEntityView = _slingshotBirdPlacer.SlingshotBird.GetComponent<BirdEntityView>();
         }
 
         await UniTask.Yield(token);

@@ -45,17 +45,11 @@ public class CameraSwitchView : MonoBehaviour
 
         SetPriority(targetCamera);
 
-        try
-        {
-            await UniTask.Yield(cancellationToken);
-            _isBlending.Value = true;
+        await UniTask.Yield(cancellationToken);
+        _isBlending.Value = true;
 
-            await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: cancellationToken);
-            _isBlending.Value = false;
-        }
-        catch (OperationCanceledException)
-        {
-        }
+        await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: cancellationToken);
+        _isBlending.Value = false;
     }
 
     private void CancelCts()
