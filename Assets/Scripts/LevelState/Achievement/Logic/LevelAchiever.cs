@@ -35,7 +35,7 @@ public class LevelAchiever : IStartable, IDisposable
         int nextLevel = currentLevel + 1;
         int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
 
-        if (currentLevel < _sceneSettings.LastLevelIndex
+        if (currentLevel < _sceneSettings.ComingSoonSceneIndex
             && nextLevel > achievedLevel
             && nextLevel < sceneCount)
             _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);

@@ -10,5 +10,5 @@ public class SceneSettings
 
     public int MainMenuIndex => FirstLevelIndex - 1;
     public int LastLevelIndex => FirstLevelIndex + LevelCount - 1;
-    public int CreditsSceneIndex => LastLevelIndex + 1;
+    public int ComingSoonSceneIndex => LastLevelIndex + 1;
 }
