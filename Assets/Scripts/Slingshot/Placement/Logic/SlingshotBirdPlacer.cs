@@ -11,6 +11,7 @@ public class SlingshotBirdPlacer : IDisposable
     private readonly SlingshotPlacingSettings _placingSettings;
     private readonly CancellationTokenSource _cts = new();
 
+    private Rigidbody _currentBird = null;
     private bool _isPlacing = false;
 
     public SlingshotBirdPlacer(SlingshotShooter shooter,
@@ -21,6 +22,22 @@ public class SlingshotBirdPlacer : IDisposable
         _shooterView = shooterView;
         _placingSettings = placingSettings;
     }
+
+    public Rigidbody SlingshotBird
+    {
+        get
+        {
+            if (_shooter.ContainsBird)
+                return _shooter.CurrentBird;
+
+            if (_isPlacing)
+                return _currentBird;
+
+            return null;
+        }
+    }
+
+    public bool CanPlace => !_shooter.ContainsBird && !_isPlacing;
 
     public void Dispose()
     {
@@ -36,13 +53,16 @@ public class SlingshotBirdPlacer : IDisposable
             return;
         }
 
+        _currentBird = bird;
         _isPlacing = true;
+
         Transform birdTransform = bird.transform;
 
         await PlaySquashAsync(birdTransform, _cts.Token);
         await PlayJumpAndScaleAsync(birdTransform, _cts.Token);
 
-        _shooter.SetCurrentBird(bird);
+        _shooter.SetBird(bird);
+        _currentBird = null;
         _isPlacing = false;
     }
 

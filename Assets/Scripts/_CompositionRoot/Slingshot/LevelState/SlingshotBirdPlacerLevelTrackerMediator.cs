@@ -27,14 +27,13 @@ public class SlingshotBirdPlacerLevelTrackerMediator : Mediator
 
     private async UniTask OnMovedToNextAsync(CancellationToken token)
     {
-        if (!_birdQueue.TryDequeueBird(out BirdEntityView entityView))
-            return;
-
         await UniTask.Yield(token);
 
         if (_cameraSwitchView.IsBlending.CurrentValue)
             await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
-        _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
+        if (_slingshotBirdPlacer.CanPlace)
+            if (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
+                _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
     }
 }

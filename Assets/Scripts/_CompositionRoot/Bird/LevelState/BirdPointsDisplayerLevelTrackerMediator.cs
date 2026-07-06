@@ -31,8 +31,17 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 
     private async UniTask OnLevelClearedAsync(CancellationToken token)
     {
-        if (_birdQueue.TryDequeueBird(out BirdEntityView firstEntityView))
-            _slingshotBirdPlacer.PlaceBirdAsync(firstEntityView.FlyerView.Rigidbody).Forget();
+        BirdEntityView slingshotEntityView = null;
+
+        if (_slingshotBirdPlacer.CanPlace)
+        {
+            if (_birdQueue.TryDequeueBird(out slingshotEntityView))
+                _slingshotBirdPlacer.PlaceBirdAsync(slingshotEntityView.FlyerView.Rigidbody).Forget();
+        }
+        else
+        {
+            slingshotEntityView = _slingshotBirdPlacer.SlingshotBird.GetComponent<BirdEntityView>();
+        }
 
         await UniTask.Yield(token);
 
@@ -44,7 +53,8 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
         while (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
             entityViews.Add(entityView);
 
-        entityViews.Add(firstEntityView);
+        entityViews.Add(slingshotEntityView);
+
         _birdPointsDisplayer.DisplaySequenceAsync(entityViews).Forget();
     }
 }
