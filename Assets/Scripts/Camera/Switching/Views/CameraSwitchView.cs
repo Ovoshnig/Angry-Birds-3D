@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using R3;
 using Unity.Cinemachine;
@@ -14,12 +16,17 @@ public class CameraSwitchView : MonoBehaviour
 
     private CinemachineBrain _brain;
     private CinemachineCamera _activeCamera = null;
+    private CancellationTokenSource _cts = null;
 
     public ReadOnlyReactiveProperty<bool> IsBlending => _isBlending;
 
     private void Awake() => _brain = GetComponent<CinemachineBrain>();
 
-    private void OnDestroy() => _isBlending.Dispose();
+    private void OnDestroy()
+    {
+        CancelCts();
+        _isBlending.Dispose();
+    }
 
     public UniTask SwitchToSlingshotAsync() => SwitchAndAwaitBlendAsync(_slingshotCamera);
 
@@ -32,13 +39,33 @@ public class CameraSwitchView : MonoBehaviour
         if (_activeCamera == targetCamera)
             return;
 
+        CancelCts();
+        _cts = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
+        CancellationToken cancellationToken = _cts.Token;
+
         SetPriority(targetCamera);
 
-        await UniTask.Yield(cancellationToken: destroyCancellationToken);
-        _isBlending.Value = true;
+        try
+        {
+            await UniTask.Yield(cancellationToken);
+            _isBlending.Value = true;
 
-        await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: destroyCancellationToken);
-        _isBlending.Value = false;
+            await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: cancellationToken);
+            _isBlending.Value = false;
+        }
+        catch (OperationCanceledException)
+        {
+        }
+    }
+
+    private void CancelCts()
+    {
+        if (_cts == null)
+            return;
+
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = null;
     }
 
     private void SetPriority(CinemachineCamera camera)
