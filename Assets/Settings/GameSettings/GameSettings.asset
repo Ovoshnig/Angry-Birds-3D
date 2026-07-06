@@ -26,13 +26,15 @@ MonoBehaviour:
     <SnapshotTransitionDuration>k__BackingField: 0
     <PoolDefaultCapacity>k__BackingField: 10
     <PoolMaxSize>k__BackingField: 50
-    <MaxSameSfxPlaying>k__BackingField: 2
+    <MaxSameSfxPlaying>k__BackingField: 3
   <TrailParticleSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3
     <PoolMaxSize>k__BackingField: 6
     <PowerParticleSize>k__BackingField: 0.65
   <SkyboxSettings>k__BackingField:
     <LoopDuration>k__BackingField: 360
+  <LevelStateTrackingSettings>k__BackingField:
+    <ActivityTimeout>k__BackingField: 2
   <CollisionSettings>k__BackingField:
     <GlidingThreshold>k__BackingField: 0.1
     <CollisionThreshold>k__BackingField: 0.1
@@ -82,6 +84,13 @@ MonoBehaviour:
       <ExplosionForce>k__BackingField: 700
       <ExplosionRadius>k__BackingField: 6
       <UpwardsModifier>k__BackingField: 2
+      <MaxExplosiveCount>k__BackingField: 30
+    <EggDroppingPowerSettings>k__BackingField:
+      <RecoilForce>k__BackingField: 15
+      <DropForce>k__BackingField: 9
+      <ExplosionForce>k__BackingField: 450
+      <ExplosionRadius>k__BackingField: 3.5
+      <UpwardsModifier>k__BackingField: 1.5
       <MaxExplosiveCount>k__BackingField: 30
   <ScoreSettings>k__BackingField:
     <PoolDefaultCapacity>k__BackingField: 3

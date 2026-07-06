@@ -6,35 +6,40 @@ public class LevelStateTracker : IPostStartable, IDisposable
 {
     private readonly Subject<Unit> _started = new();
 
-    public LevelStateTracker(StartCameraSwitch startCameraSwitch,
-        BirdDestroyer birdDestroyer,
-        BirdTracker birdTracker,
-        PigTracker pigTracker)
+    public LevelStateTracker(StartCameraSwitch startCameraSwitch, ActivityTracker activityTracker,
+        BirdTracker birdTracker, PigTracker pigTracker)
     {
+        Observable<Unit> clearedSource = Observable.Merge(
+            activityTracker.CalmedDown
+                .Where(_ => !pigTracker.AnyPigs),
+            pigTracker.PigsLeft
+                .Where(_ => !activityTracker.IsActive.CurrentValue));
+
+        Observable<Unit> failedSource = birdTracker.BirdsLeft
+            .Where(_ => pigTracker.AnyPigs);
+
+        Observable<bool> result = Observable.Merge(
+                clearedSource.Select(_ => true),
+                failedSource.Select(_ => false))
+            .Take(1)
+            .Share();
+
         MovedToNext = Observable.Merge(
             startCameraSwitch.Completed,
-            birdDestroyer.Destroyed
-                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyBirds)
-                .AsUnitObservable())
+            activityTracker.CalmedDown
+                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyUnlaunchedBirds))
+            .TakeUntil(result)
             .Share();
 
-        Cleared = Observable.Merge(
-            birdDestroyer.Destroyed
-                .Where(_ => !pigTracker.AnyPigs)
-                .AsUnitObservable(),
-            pigTracker.PigsLeft
-                .Where(_ => !birdTracker.IsBirdLaunched.CurrentValue))
-            .Take(1)
-            .Share();
+        Cleared = result
+            .Where(isCleared => isCleared)
+            .AsUnitObservable();
 
-        Failed = birdTracker.BirdsLeft
-            .Where(_ => pigTracker.AnyPigs)
-            .AsUnitObservable()
-            .Take(1)
-            .Share();
+        Failed = result
+            .Where(isCleared => !isCleared)
+            .AsUnitObservable();
 
-        Completed = Observable.Merge(Cleared, Failed)
-            .Take(1);
+        Completed = result.AsUnitObservable();
     }
 
     public Observable<Unit> Started => _started;

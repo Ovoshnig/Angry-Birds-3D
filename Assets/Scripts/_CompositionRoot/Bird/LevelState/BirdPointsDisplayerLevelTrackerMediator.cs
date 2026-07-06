@@ -1,23 +1,25 @@
 using Cysharp.Threading.Tasks;
 using R3;
+using System.Collections.Generic;
 using System.Threading;
 
 public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 {
     private readonly BirdPointsDisplayer _birdPointsDisplayer;
     private readonly LevelStateTracker _levelStateTracker;
-    private readonly SlingshotShooter _slingshotShooter;
+    private readonly BirdQueue _birdQueue;
     private readonly CameraSwitchView _cameraSwitchView;
+    private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
 
     public BirdPointsDisplayerLevelTrackerMediator(BirdPointsDisplayer birdPointsDisplayer,
-        LevelStateTracker levelStateTracker,
-        SlingshotShooter slingshotShooter,
-        CameraSwitchView cameraSwitchView)
+        LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView,
+        SlingshotBirdPlacer slingshotBirdPlacer)
     {
         _birdPointsDisplayer = birdPointsDisplayer;
         _levelStateTracker = levelStateTracker;
-        _slingshotShooter = slingshotShooter;
+        _birdQueue = birdQueue;
         _cameraSwitchView = cameraSwitchView;
+        _slingshotBirdPlacer = slingshotBirdPlacer;
     }
 
     protected override void Bind(CompositeDisposable disposables)
@@ -29,17 +31,30 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 
     private async UniTask OnLevelClearedAsync(CancellationToken token)
     {
-        await UniTask.WaitForSeconds(1, cancellationToken: token);
+        BirdEntityView slingshotEntityView = null;
+
+        if (_slingshotBirdPlacer.CanPlace)
+        {
+            if (_birdQueue.TryDequeueBird(out slingshotEntityView))
+                _slingshotBirdPlacer.PlaceBirdAsync(slingshotEntityView.FlyerView.Rigidbody).Forget();
+        }
+        else
+        {
+            slingshotEntityView = _slingshotBirdPlacer.SlingshotBird.GetComponent<BirdEntityView>();
+        }
+
+        await UniTask.Yield(token);
 
         if (_cameraSwitchView.IsBlending.CurrentValue)
             await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
-        if (_slingshotShooter.CurrentBird != null)
-        {
-            BirdEntityView slingshotBird = _slingshotShooter.CurrentBird.GetComponent<BirdEntityView>();
-            _birdPointsDisplayer.SetSlingshotBird(slingshotBird);
-        }
+        List<BirdEntityView> entityViews = new();
 
-        await _birdPointsDisplayer.DisplaySequenceAsync();
+        while (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
+            entityViews.Add(entityView);
+
+        entityViews.Add(slingshotEntityView);
+
+        _birdPointsDisplayer.DisplaySequenceAsync(entityViews).Forget();
     }
 }

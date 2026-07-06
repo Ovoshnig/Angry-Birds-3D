@@ -15,6 +15,7 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.AudioSettings);
         builder.RegisterInstance(_gameSettings.TrailParticleSettings);
         builder.RegisterInstance(_gameSettings.SkyboxSettings);
+        builder.RegisterInstance(_gameSettings.LevelStateTrackingSettings);
         builder.RegisterInstance(_gameSettings.CollisionSettings);
         builder.RegisterInstance(_gameSettings.SlingshotSettings);
         builder.RegisterInstance(_gameSettings.SlingshotPlacingSettings);
@@ -23,6 +24,7 @@ public class GameSettingsInstaller : IInstaller
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.SplitInto3PowerSettings);
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.BoostPowerSettings);
         builder.RegisterInstance(_gameSettings.BirdPowerSettings.ExplosionPowerSettings);
+        builder.RegisterInstance(_gameSettings.BirdPowerSettings.EggDroppingPowerSettings);
         builder.RegisterInstance(_gameSettings.ScoreSettings);
     }
 }

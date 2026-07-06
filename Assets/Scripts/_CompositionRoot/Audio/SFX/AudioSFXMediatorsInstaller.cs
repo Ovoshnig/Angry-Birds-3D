@@ -13,6 +13,7 @@ public class AudioSFXMediatorsInstaller : IInstaller
             entryPoints.Add<SFXPlayerPoolBirdColliderMediator>();
             entryPoints.Add<SFXPlayerPoolBirdDestroyerMediator>();
             entryPoints.Add<SFXPlayerPoolBirdPowerActivatorMediator>();
+            entryPoints.Add<SFXPlayerPoolBirdExploderMediator>();
             entryPoints.Add<SFXPlayerPoolObjectDestroyerMediator>();
         });
     }
