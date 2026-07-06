@@ -9,29 +9,26 @@ public class LevelStateTracker : IPostStartable, IDisposable
     public LevelStateTracker(StartCameraSwitch startCameraSwitch, ActivityTracker activityTracker,
         BirdTracker birdTracker, PigTracker pigTracker)
     {
-        MovedToNext = Observable.Merge(
-            startCameraSwitch.Completed,
-            activityTracker.CalmedDown
-                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyUnlaunchedBirds)
-                .AsUnitObservable())
-            .Share();
-
         Observable<Unit> clearedSource = Observable.Merge(
             activityTracker.CalmedDown
-                .Where(_ => !pigTracker.AnyPigs)
-                .AsUnitObservable(),
+                .Where(_ => !pigTracker.AnyPigs),
             pigTracker.PigsLeft
-                .Where(_ => !activityTracker.IsActive.CurrentValue)
-                .AsUnitObservable());
+                .Where(_ => !activityTracker.IsActive.CurrentValue));
 
         Observable<Unit> failedSource = birdTracker.BirdsLeft
-            .Where(_ => pigTracker.AnyPigs)
-            .AsUnitObservable();
+            .Where(_ => pigTracker.AnyPigs);
 
         Observable<bool> result = Observable.Merge(
                 clearedSource.Select(_ => true),
                 failedSource.Select(_ => false))
             .Take(1)
+            .Share();
+
+        MovedToNext = Observable.Merge(
+            startCameraSwitch.Completed,
+            activityTracker.CalmedDown
+                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyUnlaunchedBirds))
+            .TakeUntil(result)
             .Share();
 
         Cleared = result
