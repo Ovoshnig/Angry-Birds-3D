@@ -20,7 +20,11 @@ public class CameraSwitchViewLevelTrackerMediator : Mediator
             .AddTo(disposables);
 
         _levelStateTracker.Completed
-            .Subscribe(_ => _cameraSwitchView.SwitchToSlingshotAsync().Forget())
+            .Subscribe(_ =>
+            {
+                _cameraSwitchView.SwitchToSlingshotAsync().Forget();
+                _cameraSwitchView.StopSwitching();
+            })
             .AddTo(disposables);
     }
 }

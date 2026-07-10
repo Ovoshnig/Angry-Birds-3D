@@ -16,6 +16,7 @@ public class CameraSwitchView : MonoBehaviour
     private CinemachineBrain _brain;
     private CinemachineCamera _activeCamera = null;
     private CancellationTokenSource _cts = null;
+    private bool _wasStopped = false;
 
     public ReadOnlyReactiveProperty<bool> IsBlending => _isBlending;
 
@@ -40,22 +41,24 @@ public class CameraSwitchView : MonoBehaviour
         _isBlending.Dispose();
     }
 
-    public UniTask SwitchToSlingshotAsync() => SwitchAndAwaitBlendAsync(_slingshotCamera);
+    public UniTask SwitchToSlingshotAsync() => SwitchAsync(_slingshotCamera);
 
-    public UniTask SwitchToGeneralAsync() => SwitchAndAwaitBlendAsync(_generalCamera);
+    public UniTask SwitchToGeneralAsync() => SwitchAsync(_generalCamera);
 
-    public UniTask SwitchToStructureAsync() => SwitchAndAwaitBlendAsync(_structureCamera);
+    public UniTask SwitchToStructureAsync() => SwitchAsync(_structureCamera);
 
-    private async UniTask SwitchAndAwaitBlendAsync(CinemachineCamera targetCamera)
+    public void StopSwitching() => _wasStopped = true;
+
+    private async UniTask SwitchAsync(CinemachineCamera targetCamera)
     {
-        if (ActiveCamera == targetCamera)
+        if (ActiveCamera == targetCamera || _wasStopped)
             return;
 
         CancelCts();
         _cts = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
         CancellationToken cancellationToken = _cts.Token;
 
-        SetPriority(targetCamera);
+        Prioritize(targetCamera);
         _isBlending.Value = true;
 
         await UniTask.WaitUntil(() => _brain.IsBlending, cancellationToken: cancellationToken);
@@ -74,7 +77,7 @@ public class CameraSwitchView : MonoBehaviour
         _cts = null;
     }
 
-    private void SetPriority(CinemachineCamera camera)
+    private void Prioritize(CinemachineCamera camera)
     {
         ActiveCamera.Priority = 0;
         camera.Priority = 1;
