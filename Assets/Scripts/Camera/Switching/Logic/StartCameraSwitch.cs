@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 using VContainer.Unity;
 
-public class StartCameraSwitch : IStartable, IDisposable
+public class StartCameraSwitch : IPostStartable, IDisposable
 {
     private readonly CameraSwitchView _switchView;
     private readonly CameraSettings _settings;
@@ -20,7 +20,7 @@ public class StartCameraSwitch : IStartable, IDisposable
 
     public Observable<Unit> Completed => _completed;
 
-    public void Start() => SwitchAsync().Forget();
+    public void PostStart() => SwitchAsync().Forget();
 
     public void Dispose()
     {
@@ -32,7 +32,6 @@ public class StartCameraSwitch : IStartable, IDisposable
 
     private async UniTask SwitchAsync()
     {
-        await _switchView.SwitchToStructureAsync();
         await UniTask.WaitForSeconds(_settings.StructureShowingDuration, cancellationToken: _cts.Token);
 
         await _switchView.SwitchToSlingshotAsync();

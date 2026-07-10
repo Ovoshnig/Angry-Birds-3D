@@ -16,8 +16,22 @@ public class CameraSwitchView : MonoBehaviour
     private CinemachineBrain _brain;
     private CinemachineCamera _activeCamera = null;
     private CancellationTokenSource _cts = null;
+    private bool _wasStopped = false;
 
     public ReadOnlyReactiveProperty<bool> IsBlending => _isBlending;
+
+    private CinemachineCamera ActiveCamera
+    {
+        get
+        {
+            if (_activeCamera == null)
+                _activeCamera = _brain.ActiveVirtualCamera as CinemachineCamera;
+
+            return _activeCamera;
+        }
+
+        set => _activeCamera = value;
+    }
 
     private void Awake() => _brain = GetComponent<CinemachineBrain>();
 
@@ -27,27 +41,29 @@ public class CameraSwitchView : MonoBehaviour
         _isBlending.Dispose();
     }
 
-    public UniTask SwitchToSlingshotAsync() => SwitchAndAwaitBlendAsync(_slingshotCamera);
+    public UniTask SwitchToSlingshotAsync() => SwitchAsync(_slingshotCamera);
 
-    public UniTask SwitchToGeneralAsync() => SwitchAndAwaitBlendAsync(_generalCamera);
+    public UniTask SwitchToGeneralAsync() => SwitchAsync(_generalCamera);
 
-    public UniTask SwitchToStructureAsync() => SwitchAndAwaitBlendAsync(_structureCamera);
+    public UniTask SwitchToStructureAsync() => SwitchAsync(_structureCamera);
 
-    private async UniTask SwitchAndAwaitBlendAsync(CinemachineCamera targetCamera)
+    public void StopSwitching() => _wasStopped = true;
+
+    private async UniTask SwitchAsync(CinemachineCamera targetCamera)
     {
-        if (_activeCamera == targetCamera)
+        if (ActiveCamera == targetCamera || _wasStopped)
             return;
 
         CancelCts();
         _cts = CancellationTokenSource.CreateLinkedTokenSource(destroyCancellationToken);
         CancellationToken cancellationToken = _cts.Token;
 
-        SetPriority(targetCamera);
-
-        await UniTask.Yield(cancellationToken);
+        Prioritize(targetCamera);
         _isBlending.Value = true;
 
+        await UniTask.WaitUntil(() => _brain.IsBlending, cancellationToken: cancellationToken);
         await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: cancellationToken);
+
         _isBlending.Value = false;
     }
 
@@ -61,24 +77,10 @@ public class CameraSwitchView : MonoBehaviour
         _cts = null;
     }
 
-    private void SetPriority(CinemachineCamera camera)
+    private void Prioritize(CinemachineCamera camera)
     {
-        if (_activeCamera == null)
-            _activeCamera = GetInitialActiveCamera();
-
-        _activeCamera.Priority = 0;
+        ActiveCamera.Priority = 0;
         camera.Priority = 1;
-        _activeCamera = camera;
-    }
-
-    private CinemachineCamera GetInitialActiveCamera()
-    {
-        if (_brain.IsLiveChild(_slingshotCamera))
-            return _slingshotCamera;
-
-        if (_brain.IsLiveChild(_structureCamera))
-            return _structureCamera;
-
-        return _generalCamera;
+        ActiveCamera = camera;
     }
 }

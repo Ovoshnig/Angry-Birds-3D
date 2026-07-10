@@ -43,10 +43,7 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
             slingshotEntityView = _slingshotBirdPlacer.SlingshotBird.GetComponent<BirdEntityView>();
         }
 
-        await UniTask.Yield(token);
-
-        if (_cameraSwitchView.IsBlending.CurrentValue)
-            await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
+        await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
         List<BirdEntityView> entityViews = new();
 
