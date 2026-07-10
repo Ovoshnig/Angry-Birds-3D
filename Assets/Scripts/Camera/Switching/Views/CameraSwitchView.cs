@@ -19,6 +19,19 @@ public class CameraSwitchView : MonoBehaviour
 
     public ReadOnlyReactiveProperty<bool> IsBlending => _isBlending;
 
+    private CinemachineCamera ActiveCamera
+    {
+        get
+        {
+            if (_activeCamera == null)
+                _activeCamera = _brain.ActiveVirtualCamera as CinemachineCamera;
+
+            return _activeCamera;
+        }
+
+        set => _activeCamera = value;
+    }
+
     private void Awake() => _brain = GetComponent<CinemachineBrain>();
 
     private void OnDestroy()
@@ -35,7 +48,7 @@ public class CameraSwitchView : MonoBehaviour
 
     private async UniTask SwitchAndAwaitBlendAsync(CinemachineCamera targetCamera)
     {
-        if (_activeCamera == targetCamera)
+        if (ActiveCamera == targetCamera)
             return;
 
         CancelCts();
@@ -43,11 +56,11 @@ public class CameraSwitchView : MonoBehaviour
         CancellationToken cancellationToken = _cts.Token;
 
         SetPriority(targetCamera);
-
-        await UniTask.Yield(cancellationToken);
         _isBlending.Value = true;
 
+        await UniTask.WaitUntil(() => _brain.IsBlending, cancellationToken: cancellationToken);
         await UniTask.WaitWhile(() => _brain.IsBlending, cancellationToken: cancellationToken);
+
         _isBlending.Value = false;
     }
 
@@ -63,22 +76,8 @@ public class CameraSwitchView : MonoBehaviour
 
     private void SetPriority(CinemachineCamera camera)
     {
-        if (_activeCamera == null)
-            _activeCamera = GetInitialActiveCamera();
-
-        _activeCamera.Priority = 0;
+        ActiveCamera.Priority = 0;
         camera.Priority = 1;
-        _activeCamera = camera;
-    }
-
-    private CinemachineCamera GetInitialActiveCamera()
-    {
-        if (_brain.IsLiveChild(_slingshotCamera))
-            return _slingshotCamera;
-
-        if (_brain.IsLiveChild(_structureCamera))
-            return _structureCamera;
-
-        return _generalCamera;
+        ActiveCamera = camera;
     }
 }
