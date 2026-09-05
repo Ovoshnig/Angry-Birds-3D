@@ -8,5 +8,5 @@ public class LevelIndexView : UIView
 
     private void Awake() => _text = GetComponent<TMP_Text>();
 
-    public void SetIndex(int season, int level) => _text.SetText("{0}-{1}", season, level);
+    public void SetIndex(int season, int level) => _text.SetText($"{season}-{level}");
 }
