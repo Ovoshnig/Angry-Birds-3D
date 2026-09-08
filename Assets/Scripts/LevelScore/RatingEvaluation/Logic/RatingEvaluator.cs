@@ -26,9 +26,9 @@ public class RatingEvaluator : IDisposable
     public void Evaluate()
     {
         int currentLevelIndex = SceneManager.GetActiveScene().buildIndex - _sceneSettings.FirstLevelIndex + 1;
-        int maxScoreThreshold = _ratingSettings.LevelMaxScoreThresholds[currentLevelIndex];
+        int maxScore = _ratingSettings.LevelMaxScores[currentLevelIndex];
 
-        int oneStarThreshold = maxScoreThreshold / _ratingSettings.MaxStarCount;
+        int oneStarThreshold = maxScore / _ratingSettings.MaxStarCount;
         int starCount = Mathf.FloorToInt(_scoreModel.Score.CurrentValue / oneStarThreshold);
         int clampedStarCount = Mathf.Clamp(starCount, _ratingSettings.MinStarCount, _ratingSettings.MaxStarCount);
         _rating.Value = clampedStarCount;
