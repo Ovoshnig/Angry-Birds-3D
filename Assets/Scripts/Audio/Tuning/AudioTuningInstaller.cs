@@ -1,3 +1,4 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;

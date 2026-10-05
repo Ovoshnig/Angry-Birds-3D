@@ -1,7 +1,7 @@
+using Ovoshnig.Extensions.VContainer;
 using Ovoshnig.Scene.Switching;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
 namespace AngryBirds3D.LevelState.Tracking

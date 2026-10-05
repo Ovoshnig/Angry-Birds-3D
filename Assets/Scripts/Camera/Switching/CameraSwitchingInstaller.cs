@@ -1,7 +1,7 @@
 using AngryBirds3D.Camera.Switching;
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
 namespace AngryBirds3D.Camera.Switching

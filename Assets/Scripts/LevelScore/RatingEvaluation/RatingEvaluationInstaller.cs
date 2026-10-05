@@ -1,7 +1,7 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using UnityEngine;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
 namespace AngryBirds3D.LevelScore.RatingEvaluation

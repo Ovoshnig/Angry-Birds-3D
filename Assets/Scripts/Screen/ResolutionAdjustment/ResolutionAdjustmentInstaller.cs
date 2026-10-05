@@ -1,3 +1,4 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
 using VContainer.Unity;

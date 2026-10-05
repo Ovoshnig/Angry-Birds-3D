@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
+using VContainer;
 using VContainer.Unity;
 
-namespace VContainer.Extensions
+namespace Ovoshnig.Extensions.VContainer
 {
     public static class VContainerInstanceInHierarchyExtensions
     {

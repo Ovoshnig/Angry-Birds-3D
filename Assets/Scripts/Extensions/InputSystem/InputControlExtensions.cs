@@ -1,25 +1,28 @@
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Controls;
 
-public static class InputControlExtensions
+namespace Ovoshnig.Extensions.InputSystem
 {
-    public static string ToCaseIndependentString(this InputControl inputControl)
+    public static class InputControlExtensions
     {
-        if (inputControl is KeyControl keyControl)
+        public static string ToCaseIndependentString(this InputControl inputControl)
         {
-            Key key = keyControl.keyCode;
+            if (inputControl is KeyControl keyControl)
+            {
+                Key key = keyControl.keyCode;
 
-            if (key >= Key.Backquote && key <= Key.Z)
-            {
-                InputAction tempAction = new(binding: $"<Keyboard>/{key}");
-                return tempAction.bindings[0].ToDisplayString();
+                if (key >= Key.Backquote && key <= Key.Z)
+                {
+                    InputAction tempAction = new(binding: $"<Keyboard>/{key}");
+                    return tempAction.bindings[0].ToDisplayString();
+                }
+                else
+                {
+                    return inputControl.displayName;
+                }
             }
-            else
-            {
-                return inputControl.displayName;
-            }
+
+            return inputControl.displayName;
         }
-        
-        return inputControl.displayName;
     }
 }
