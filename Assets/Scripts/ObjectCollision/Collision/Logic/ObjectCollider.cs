@@ -2,7 +2,6 @@ using Ovoshnig.ObjectCollision.Entity;
 using R3;
 using System;
 using System.Collections.Generic;
-using UnityEngine;
 
 namespace Ovoshnig.ObjectCollision.Collision
 {

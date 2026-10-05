@@ -3,7 +3,6 @@ using Ovoshnig.Screen.Input;
 using R3;
 using System;
 using System.Threading;
-using UnityEngine.Rendering;
 using VContainer.Unity;
 using UnitySplashScreen = UnityEngine.Rendering.SplashScreen;
 

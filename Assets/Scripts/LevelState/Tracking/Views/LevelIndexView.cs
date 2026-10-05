@@ -1,4 +1,3 @@
-using Ovoshnig.Scene.Switching;
 using Ovoshnig.UI.Basic;
 using TMPro;
 using UnityEngine;

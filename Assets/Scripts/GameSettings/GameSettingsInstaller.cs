@@ -1,4 +1,3 @@
-using Ovoshnig.GameSettings.BirdPower;
 using System;
 using UnityEngine;
 using VContainer;

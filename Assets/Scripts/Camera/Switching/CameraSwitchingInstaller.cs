@@ -1,4 +1,3 @@
-using AngryBirds3D.Camera.Switching;
 using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;

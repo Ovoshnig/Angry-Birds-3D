@@ -1,5 +1,3 @@
-using UnityEngine;
-
 namespace Ovoshnig.GameState.Quitting
 {
     public class GameQuitter

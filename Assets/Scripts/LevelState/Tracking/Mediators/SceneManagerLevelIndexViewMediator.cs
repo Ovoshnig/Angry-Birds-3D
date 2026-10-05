@@ -1,5 +1,4 @@
 using Ovoshnig.GameSettings;
-using Ovoshnig.Scene.Switching;
 using Ovoshnig.UI.Basic;
 using R3;
 using UnityEngine.SceneManagement;

@@ -1,6 +1,5 @@
 using UnityEngine;
 using GameSettingsAsset = Ovoshnig.GameSettings.GameSettings;
-using GameSettings = Ovoshnig.GameSettings.GameSettings;
 
 namespace Ovoshnig.Scene.LevelButtonGeneration
 {

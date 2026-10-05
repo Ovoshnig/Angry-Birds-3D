@@ -1,5 +1,4 @@
 using Ovoshnig.Extensions.VContainer;
-using Ovoshnig.Scene.Switching;
 using System;
 using VContainer;
 using VContainer.Unity;
