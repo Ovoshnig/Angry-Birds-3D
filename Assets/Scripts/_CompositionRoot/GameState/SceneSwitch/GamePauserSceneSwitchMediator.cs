@@ -1,4 +1,7 @@
-﻿using R3;
+﻿using Ovoshnig.GameState.Pause;
+using Ovoshnig.Mediation;
+using Ovoshnig.Scene.Switching;
+using R3;
 
 public class GamePauserSceneSwitchMediator : Mediator
 {

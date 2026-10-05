@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
+using Ovoshnig.GameSettings;
 using System;
 using System.Threading;
 using UnityEngine;

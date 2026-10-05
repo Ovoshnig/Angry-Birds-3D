@@ -1,8 +1,11 @@
 using UnityEngine;
 
-public abstract class ObjectDestroyerView : MonoBehaviour
+namespace Ovoshnig.ObjectDestruction.Destruction
 {
-    public abstract void VisualizeDamage(Vector3 worldPoint, float health, float maxHealth);
+    public abstract class ObjectDestroyerView : MonoBehaviour
+    {
+        public abstract void VisualizeDamage(Vector3 worldPoint, float health, float maxHealth);
 
-    public virtual void Destroy() => Destroy(gameObject);
+        public virtual void Destroy() => Destroy(gameObject);
+    }
 }

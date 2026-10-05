@@ -2,11 +2,14 @@ using LitMotion;
 using System;
 using UnityEngine;
 
-[Serializable]
-public class BoostPowerSettings
+namespace Ovoshnig.GameSettings.BirdPower
 {
-    [field: SerializeField, Min(0f)] public float VelocityIncreasingDuration { get; private set; } = 0.1f;
-    [field: SerializeField, Min(0f)] public float BoostDuration { get; private set; } = 0.12f;
-    [field: SerializeField, Min(0f)] public float BoostVelocity { get; private set; } = 40f;
-    [field: SerializeField] public Ease VelocityIncreasingEase { get; private set; } = Ease.OutSine;
+    [Serializable]
+    public class BoostPowerSettings
+    {
+        [field: SerializeField, Min(0f)] public float VelocityIncreasingDuration { get; private set; } = 0.1f;
+        [field: SerializeField, Min(0f)] public float BoostDuration { get; private set; } = 0.12f;
+        [field: SerializeField, Min(0f)] public float BoostVelocity { get; private set; } = 40f;
+        [field: SerializeField] public Ease VelocityIncreasingEase { get; private set; } = Ease.OutSine;
+    }
 }

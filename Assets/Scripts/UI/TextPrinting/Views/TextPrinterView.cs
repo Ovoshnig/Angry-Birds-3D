@@ -1,67 +1,71 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using Ovoshnig.UI.Basic;
 using R3;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public class TextPrinterView : UIView
+namespace Ovoshnig.UI.TextPrinting
 {
-    [SerializeField, Min(0.1f)] private float _speed = 5f;
-    [SerializeField] private bool _autoPlay = false;
-
-    private readonly ReactiveProperty<bool> _isPrinting = new(false);
-    private readonly Subject<Unit> _completed = new();
-
-    private TMP_Text _tmpText;
-    private MotionHandle _handle;
-
-    public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
-    public Observable<Unit> Completed => _completed;
-
-    protected TMP_Text TmpText => _tmpText;
-
-    protected virtual void Awake() => _tmpText = GetComponent<TMP_Text>();
-
-    protected virtual void Start()
+    [RequireComponent(typeof(TMP_Text))]
+    public class TextPrinterView : UIView
     {
-        if (_autoPlay)
-            PrintAsync(_tmpText.text).Forget();
-    }
+        [SerializeField, Min(0.1f)] private float _speed = 5f;
+        [SerializeField] private bool _autoPlay = false;
 
-    protected virtual void OnDestroy()
-    {
-        _isPrinting.Dispose();
-        _completed.Dispose();
-    }
+        private readonly ReactiveProperty<bool> _isPrinting = new(false);
+        private readonly Subject<Unit> _completed = new();
 
-    public async UniTask PrintAsync(string fullText)
-    {
-        _handle.TryCancel();
+        private TMP_Text _tmpText;
+        private MotionHandle _handle;
 
-        _isPrinting.Value = true;
+        public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
+        public Observable<Unit> Completed => _completed;
 
-        _tmpText.text = fullText;
-        _tmpText.ForceMeshUpdate();
+        protected TMP_Text TmpText => _tmpText;
 
-        int totalVisibleCharacters = _tmpText.textInfo.characterCount;
-        float duration = totalVisibleCharacters / _speed;
+        protected virtual void Awake() => _tmpText = GetComponent<TMP_Text>();
 
-        try
+        protected virtual void Start()
         {
-            _handle = LMotion.Create(0, totalVisibleCharacters, duration)
-                .BindToMaxVisibleCharacters(_tmpText);
-
-            await _handle.ToUniTask(destroyCancellationToken);
-            _completed.OnNext(Unit.Default);
+            if (_autoPlay)
+                PrintAsync(_tmpText.text).Forget();
         }
-        finally
+
+        protected virtual void OnDestroy()
         {
-            if (!_isPrinting.IsDisposed)
-                _isPrinting.Value = false;
+            _isPrinting.Dispose();
+            _completed.Dispose();
         }
-    }
 
-    public bool TryCompletePrinting() => _handle.TryComplete();
+        public async UniTask PrintAsync(string fullText)
+        {
+            _handle.TryCancel();
+
+            _isPrinting.Value = true;
+
+            _tmpText.text = fullText;
+            _tmpText.ForceMeshUpdate();
+
+            int totalVisibleCharacters = _tmpText.textInfo.characterCount;
+            float duration = totalVisibleCharacters / _speed;
+
+            try
+            {
+                _handle = LMotion.Create(0, totalVisibleCharacters, duration)
+                    .BindToMaxVisibleCharacters(_tmpText);
+
+                await _handle.ToUniTask(destroyCancellationToken);
+                _completed.OnNext(Unit.Default);
+            }
+            finally
+            {
+                if (!_isPrinting.IsDisposed)
+                    _isPrinting.Value = false;
+            }
+        }
+
+        public bool TryCompletePrinting() => _handle.TryComplete();
+    }
 }

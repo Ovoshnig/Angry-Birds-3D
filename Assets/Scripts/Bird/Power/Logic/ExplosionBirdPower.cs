@@ -1,3 +1,4 @@
+using Ovoshnig.GameSettings.BirdPower;
 using UnityEngine;
 
 public class ExplosionBirdPower : IBirdPower

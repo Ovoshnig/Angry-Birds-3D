@@ -1,8 +1,11 @@
 using System;
 using UnityEngine;
 
-[Serializable]
-public class SkyboxSettings
+namespace Ovoshnig.GameSettings
 {
-    [field: SerializeField] public float LoopDuration { get; private set; } = 360f;
+    [Serializable]
+    public class SkyboxSettings
+    {
+        [field: SerializeField] public float LoopDuration { get; private set; } = 360f;
+    }
 }

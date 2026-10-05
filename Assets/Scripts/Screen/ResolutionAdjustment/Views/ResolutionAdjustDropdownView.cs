@@ -1,15 +1,19 @@
-﻿using System.Collections.Generic;
+using Ovoshnig.UI.Basic;
+using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 
-public class ResolutionAdjustDropdownView : DropdownView
+namespace Ovoshnig.Screen.ResolutionAdjustment
 {
-    public void SetOptions(IReadOnlyList<ResolutionData> resolutions)
+    public class ResolutionAdjustDropdownView : DropdownView
     {
-        List<TMP_Dropdown.OptionData> options = resolutions
-            .Select(r => new TMP_Dropdown.OptionData(r.ToString()))
-            .ToList();
+        public void SetOptions(IReadOnlyList<ResolutionData> resolutions)
+        {
+            List<TMP_Dropdown.OptionData> options = resolutions
+                .Select(r => new TMP_Dropdown.OptionData(r.ToString()))
+                .ToList();
 
-        SetOptions(options);
+            SetOptions(options);
+        }
     }
 }

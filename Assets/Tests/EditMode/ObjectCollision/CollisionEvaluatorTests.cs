@@ -1,4 +1,6 @@
 using NUnit.Framework;
+using Ovoshnig.GameSettings;
+using Ovoshnig.ObjectCollision.Collision;
 using UnityEngine;
 
 [TestFixture]

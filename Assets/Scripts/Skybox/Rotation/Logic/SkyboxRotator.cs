@@ -1,42 +1,46 @@
 using LitMotion;
+using Ovoshnig.GameSettings;
 using UnityEngine;
 using VContainer.Unity;
 using Random = System.Random;
 
-public class SkyboxRotator : IStartable
+namespace Ovoshnig.Skybox.Rotation
 {
-    private readonly SkyboxSettings _skyboxSettings;
-    private readonly Material _skybox;
-    private readonly Random _random = new();
-
-    public SkyboxRotator(SkyboxSettings skyboxSettings)
+    public class SkyboxRotator : IStartable
     {
-        _skyboxSettings = skyboxSettings;
+        private readonly SkyboxSettings _skyboxSettings;
+        private readonly Material _skybox;
+        private readonly Random _random = new();
 
-        _skybox = new Material(RenderSettings.skybox);
-        RenderSettings.skybox = _skybox;
-    }
+        public SkyboxRotator(SkyboxSettings skyboxSettings)
+        {
+            _skyboxSettings = skyboxSettings;
 
-    public void Start()
-    {
-        float startValue = SkyboxRotationConstants.MinValue;
-        float endValue = SkyboxRotationConstants.MaxValue;
-        int randomDirection = _random.Next(0, 2);
+            _skybox = new Material(RenderSettings.skybox);
+            RenderSettings.skybox = _skybox;
+        }
 
-        if (randomDirection == 1)
-            (startValue, endValue) = (endValue, startValue);
+        public void Start()
+        {
+            float startValue = SkyboxRotationConstants.MinValue;
+            float endValue = SkyboxRotationConstants.MaxValue;
+            int randomDirection = _random.Next(0, 2);
 
-        float randomDegree = Mathf.Lerp(
-            SkyboxRotationConstants.MinValue,
-            SkyboxRotationConstants.MaxValue,
-            (float)_random.NextDouble());
+            if (randomDirection == 1)
+                (startValue, endValue) = (endValue, startValue);
 
-        LMotion.Create(startValue, endValue, _skyboxSettings.LoopDuration)
-            .WithLoops(-1, LoopType.Incremental)
-            .Bind(value =>
-            {
-                float rotation = (value + randomDegree) % SkyboxRotationConstants.MaxValue;
-                _skybox.SetFloat(SkyboxRotationConstants.RotationProperty, rotation);
-            });
+            float randomDegree = Mathf.Lerp(
+                SkyboxRotationConstants.MinValue,
+                SkyboxRotationConstants.MaxValue,
+                (float)_random.NextDouble());
+
+            LMotion.Create(startValue, endValue, _skyboxSettings.LoopDuration)
+                .WithLoops(-1, LoopType.Incremental)
+                .Bind(value =>
+                {
+                    float rotation = (value + randomDegree) % SkyboxRotationConstants.MaxValue;
+                    _skybox.SetFloat(SkyboxRotationConstants.RotationProperty, rotation);
+                });
+        }
     }
 }

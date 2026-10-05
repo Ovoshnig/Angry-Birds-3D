@@ -6,84 +6,87 @@ using System.Text.Json;
 using UnityEngine;
 using VContainer.Unity;
 
-public abstract class DataStorage : IInitializable, IDisposable
+namespace Ovoshnig.DataStorage.Storage
 {
-    private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
-    private readonly Dictionary<string, object> _defaultDataStore = new();
-    private readonly Dictionary<string, object> _runtimeCache = new();
-    private readonly Subject<Unit> _resetHappened = new();
-
-    private Dictionary<string, JsonElement> _rawData = new();
-
-    public abstract DataStorageType StorageType { get; }
-
-    public Observable<Unit> ResetHappened => _resetHappened;
-
-    protected abstract string FileName { get; }
-
-    protected string FilePath => Path.Combine(Application.persistentDataPath, FileName);
-
-    public void Initialize() => LoadData();
-
-    public void Dispose()
+    public abstract class DataStorage : IInitializable, IDisposable
     {
-        SaveData();
-        _resetHappened.Dispose();
-    }
+        private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
+        private readonly Dictionary<string, object> _defaultDataStore = new();
+        private readonly Dictionary<string, object> _runtimeCache = new();
+        private readonly Subject<Unit> _resetHappened = new();
 
-    public virtual T Get<T>(string key, T defaultValue)
-    {
-        _defaultDataStore[key] = defaultValue;
+        private Dictionary<string, JsonElement> _rawData = new();
 
-        if (_runtimeCache.TryGetValue(key, out object cachedValue))
-            return (T)cachedValue;
+        public abstract DataStorageType StorageType { get; }
 
-        if (_rawData.TryGetValue(key, out JsonElement jsonElement))
+        public Observable<Unit> ResetHappened => _resetHappened;
+
+        protected abstract string FileName { get; }
+
+        protected string FilePath => Path.Combine(Application.persistentDataPath, FileName);
+
+        public void Initialize() => LoadData();
+
+        public void Dispose()
         {
-            try
-            {
-                T value = jsonElement.Deserialize<T>(_jsonOptions);
-                _runtimeCache[key] = value;
-                return value;
-            }
-            catch (Exception exception)
-            {
-                Debug.LogWarning($"Failed to deserialize key {key}: {exception.Message}");
-            }
+            SaveData();
+            _resetHappened.Dispose();
         }
 
-        _runtimeCache[key] = defaultValue;
-        return defaultValue;
-    }
+        public virtual T Get<T>(string key, T defaultValue)
+        {
+            _defaultDataStore[key] = defaultValue;
 
-    public virtual void Set<T>(string key, T value) => _runtimeCache[key] = value;
+            if (_runtimeCache.TryGetValue(key, out object cachedValue))
+                return (T)cachedValue;
 
-    public virtual void ResetData()
-    {
-        _runtimeCache.Clear();
-        _rawData.Clear();
+            if (_rawData.TryGetValue(key, out JsonElement jsonElement))
+            {
+                try
+                {
+                    T value = jsonElement.Deserialize<T>(_jsonOptions);
+                    _runtimeCache[key] = value;
+                    return value;
+                }
+                catch (Exception exception)
+                {
+                    Debug.LogWarning($"Failed to deserialize key {key}: {exception.Message}");
+                }
+            }
 
-        foreach (var kvp in _defaultDataStore)
-            _runtimeCache[kvp.Key] = kvp.Value;
+            _runtimeCache[key] = defaultValue;
+            return defaultValue;
+        }
 
-        _resetHappened.OnNext(Unit.Default);
-    }
+        public virtual void Set<T>(string key, T value) => _runtimeCache[key] = value;
 
-    protected virtual void LoadData()
-    {
-        if (!File.Exists(FilePath))
-            return;
+        public virtual void ResetData()
+        {
+            _runtimeCache.Clear();
+            _rawData.Clear();
 
-        string json = File.ReadAllText(FilePath);
-        _rawData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, _jsonOptions) ?? new();
-    }
+            foreach (var kvp in _defaultDataStore)
+                _runtimeCache[kvp.Key] = kvp.Value;
 
-    protected virtual void SaveData()
-    {
-        foreach (var kvp in _runtimeCache)
-            _rawData[kvp.Key] = JsonSerializer.SerializeToElement(kvp.Value, kvp.Value.GetType(), _jsonOptions);
+            _resetHappened.OnNext(Unit.Default);
+        }
 
-        string json = JsonSerializer.Serialize(_rawData, _jsonOptions);
-        File.WriteAllText(FilePath, json);
+        protected virtual void LoadData()
+        {
+            if (!File.Exists(FilePath))
+                return;
+
+            string json = File.ReadAllText(FilePath);
+            _rawData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, _jsonOptions) ?? new();
+        }
+
+        protected virtual void SaveData()
+        {
+            foreach (var kvp in _runtimeCache)
+                _rawData[kvp.Key] = JsonSerializer.SerializeToElement(kvp.Value, kvp.Value.GetType(), _jsonOptions);
+
+            string json = JsonSerializer.Serialize(_rawData, _jsonOptions);
+            File.WriteAllText(FilePath, json);
+        }
     }
 }

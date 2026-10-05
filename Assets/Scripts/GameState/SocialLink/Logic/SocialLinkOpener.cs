@@ -1,6 +1,9 @@
 using UnityEngine;
 
-public class SocialLinkOpener
+namespace Ovoshnig.GameState.SocialLink
 {
-    public void Open(string url) => Application.OpenURL(url);
+    public class SocialLinkOpener
+    {
+        public void Open(string url) => Application.OpenURL(url);
+    }
 }

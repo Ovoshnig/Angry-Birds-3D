@@ -1,29 +1,32 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System.Linq;
 using Random = System.Random;
 
-public class MusicQueue
+namespace Ovoshnig.Audio.Music.Queue
 {
-    private readonly Random _random = new();
-
-    private Queue<object> _clipKeysQueue = new();
-
-    public void Clear() => _clipKeysQueue.Clear();
-
-    public void SetClipKeys(IEnumerable<object> clips) => _clipKeysQueue = new Queue<object>(clips);
-
-    public bool TryGetNextClipKey(out object key) => _clipKeysQueue.TryDequeue(out key);
-
-    public void ShuffleClipKeys()
+    public class MusicQueue
     {
-        List<object> clips = new(_clipKeysQueue);
-        _clipKeysQueue.Clear();
+        private readonly Random _random = new();
 
-        while (clips.Any())
+        private Queue<object> _clipKeysQueue = new();
+
+        public void Clear() => _clipKeysQueue.Clear();
+
+        public void SetClipKeys(IEnumerable<object> clips) => _clipKeysQueue = new Queue<object>(clips);
+
+        public bool TryGetNextClipKey(out object key) => _clipKeysQueue.TryDequeue(out key);
+
+        public void ShuffleClipKeys()
         {
-            int index = _random.Next(clips.Count);
-            _clipKeysQueue.Enqueue(clips[index]);
-            clips.RemoveAt(index);
+            List<object> clips = new(_clipKeysQueue);
+            _clipKeysQueue.Clear();
+
+            while (clips.Any())
+            {
+                int index = _random.Next(clips.Count);
+                _clipKeysQueue.Enqueue(clips[index]);
+                clips.RemoveAt(index);
+            }
         }
     }
 }

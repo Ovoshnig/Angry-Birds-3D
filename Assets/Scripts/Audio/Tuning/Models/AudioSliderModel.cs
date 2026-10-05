@@ -1,45 +1,51 @@
+using Ovoshnig.DataStorage.Storage;
+using Ovoshnig.GameSettings;
+using Ovoshnig.UI.Basic;
 using R3;
 using VContainer.Unity;
 
-public abstract class AudioSliderModel : SliderModel, IStartable
+namespace Ovoshnig.Audio.Tuning
 {
-    private readonly SettingsStorage _settingsStorage;
-    private readonly AudioSettings _audioSettings;
-    private readonly CompositeDisposable _disposables = new();
-
-    protected AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
+    public abstract class AudioSliderModel : SliderModel, IStartable
     {
-        _settingsStorage = settingsStorage;
-        _audioSettings = audioSettings;
-    }
+        private readonly SettingsStorage _settingsStorage;
+        private readonly AudioSettings _audioSettings;
+        private readonly CompositeDisposable _disposables = new();
 
-    public abstract AudioChannel Channel { get; }
-    public abstract string MixerParameterName { get; }
+        protected AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
+        {
+            _settingsStorage = settingsStorage;
+            _audioSettings = audioSettings;
+        }
 
-    public override float MinValue => _audioSettings.MinVolume;
-    public override float MaxValue => _audioSettings.MaxVolume;
+        public abstract AudioChannel Channel { get; }
+        public abstract string MixerParameterName { get; }
 
-    protected abstract string DataKey { get; }
+        public override float MinValue => _audioSettings.MinVolume;
+        public override float MaxValue => _audioSettings.MaxVolume;
 
-    protected override float DefaultValue => _audioSettings.DefaultVolume;
+        protected abstract string DataKey { get; }
 
-    public virtual void Start()
-    {
-        float value = _settingsStorage.Get(DataKey, DefaultValue);
-        SetClampedValue(value);
+        protected override float DefaultValue => _audioSettings.DefaultVolume;
 
-        Value
-            .Subscribe(value => _settingsStorage.Set(DataKey, value))
-            .AddTo(_disposables);
+        public virtual void Start()
+        {
+            float value = _settingsStorage.Get(DataKey, DefaultValue);
+            SetClampedValue(value);
 
-        _settingsStorage.ResetHappened
-            .Subscribe(_ => ResetValue())
-            .AddTo(_disposables);
-    }
+            Value
+                .Subscribe(value => _settingsStorage.Set(DataKey, value))
+                .AddTo(_disposables);
 
-    public override void Dispose()
-    {
-        _disposables.Dispose();
-        base.Dispose();
+            _settingsStorage.ResetHappened
+                .Subscribe(_ => ResetValue())
+                .AddTo(_disposables);
+        }
+
+        public override void Dispose()
+        {
+            _disposables.Dispose();
+            base.Dispose();
+        }
     }
 }

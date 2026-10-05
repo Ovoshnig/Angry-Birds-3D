@@ -1,23 +1,27 @@
+using Ovoshnig.Mediation;
 using R3;
 
-public class ClearingPanelViewBirdPointsDisplayerMediator : Mediator
+namespace Ovoshnig.LevelState.Tracking
 {
-    private readonly ClearingPanelView _clearingPanelView;
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
-
-    public ClearingPanelViewBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
-        BirdPointsDisplayer birdPointsDisplayer)
+    public class ClearingPanelViewBirdPointsDisplayerMediator : Mediator
     {
-        _clearingPanelView = clearingPanelView;
-        _birdPointsDisplayer = birdPointsDisplayer;
-    }
+        private readonly ClearingPanelView _clearingPanelView;
+        private readonly BirdPointsDisplayer _birdPointsDisplayer;
 
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _clearingPanelView.Hide();
+        public ClearingPanelViewBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
+            BirdPointsDisplayer birdPointsDisplayer)
+        {
+            _clearingPanelView = clearingPanelView;
+            _birdPointsDisplayer = birdPointsDisplayer;
+        }
 
-        _birdPointsDisplayer.SequenceDisplayCompleted
-            .Subscribe(_ => _clearingPanelView.Show())
-            .AddTo(disposables);
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _clearingPanelView.Hide();
+
+            _birdPointsDisplayer.SequenceDisplayCompleted
+                .Subscribe(_ => _clearingPanelView.Show())
+                .AddTo(disposables);
+        }
     }
 }

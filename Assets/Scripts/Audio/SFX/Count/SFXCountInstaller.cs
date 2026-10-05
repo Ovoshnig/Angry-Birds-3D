@@ -2,8 +2,11 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class SFXCountInstaller : IInstaller
+namespace Ovoshnig.Audio.SFX.Count
 {
-    public void Install(IContainerBuilder builder) => builder.Register<SFXCounter>(Lifetime.Singleton);
+    [Serializable]
+    public class SFXCountInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) => builder.Register<SFXCounter>(Lifetime.Singleton);
+    }
 }

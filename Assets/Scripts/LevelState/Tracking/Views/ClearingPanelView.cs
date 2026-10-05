@@ -1,3 +1,6 @@
-public sealed class ClearingPanelView : CompletionPanelView
+namespace Ovoshnig.LevelState.Tracking
 {
+    public sealed class ClearingPanelView : CompletionPanelView
+    {
+    }
 }

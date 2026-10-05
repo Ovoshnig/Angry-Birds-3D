@@ -1,6 +1,9 @@
-﻿public enum MusicCategory
+namespace Ovoshnig.Audio.Music.SceneMusicMapping
 {
-    MainMenu,
-    GameLevel,
-    Credits
+    public enum MusicCategory
+    {
+        MainMenu,
+        GameLevel,
+        Credits
+    }
 }

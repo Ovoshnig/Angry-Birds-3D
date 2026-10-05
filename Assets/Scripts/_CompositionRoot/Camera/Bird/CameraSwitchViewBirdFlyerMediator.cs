@@ -1,4 +1,5 @@
 ﻿using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
 using R3;
 
 public class CameraSwitchViewBirdFlyerMediator : Mediator

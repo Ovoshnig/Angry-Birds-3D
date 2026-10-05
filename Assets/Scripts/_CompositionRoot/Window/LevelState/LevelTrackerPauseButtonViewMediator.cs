@@ -1,3 +1,6 @@
+using Ovoshnig.LevelState.Tracking;
+using Ovoshnig.UI.Basic;
+using Ovoshnig.Window.Pause;
 using R3;
 
 public class LevelTrackerPauseButtonViewMediator : UIViewMediator<PauseButtonView>

@@ -1,3 +1,4 @@
+using Ovoshnig.ObjectDestruction.Entity;
 using UnityEngine;
 
 [RequireComponent(typeof(PigDestroyerView))]

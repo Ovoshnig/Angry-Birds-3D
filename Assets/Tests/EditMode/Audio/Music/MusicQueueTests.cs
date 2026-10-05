@@ -1,7 +1,8 @@
+using NUnit.Framework;
+using Ovoshnig.Audio.Music.Queue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using NUnit.Framework;
 
 public sealed class MusicQueueTests
 {

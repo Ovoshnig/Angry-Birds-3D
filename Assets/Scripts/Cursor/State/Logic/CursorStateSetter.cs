@@ -1,48 +1,53 @@
+using Ovoshnig.UI.Input;
 using R3;
 using System;
 using UnityEngine;
 using VContainer.Unity;
+using UnityCursor = UnityEngine.Cursor;
 
-public sealed class CursorStateSetter : IStartable, IDisposable
+namespace Ovoshnig.Cursor.State
 {
-    private readonly CursorStateModel _model;
-    private readonly CursorConfiguration _configuration;
-    private readonly UIInputProvider _uiInputProvider;
-    private readonly CompositeDisposable _disposables = new();
-
-    public CursorStateSetter(CursorStateModel model,
-        CursorConfiguration configuration,
-        UIInputProvider uiInputProvider)
+    public sealed class CursorStateSetter : IStartable, IDisposable
     {
-        _model = model;
-        _configuration = configuration;
-        _uiInputProvider = uiInputProvider;
-    }
+        private readonly CursorStateModel _model;
+        private readonly CursorConfiguration _configuration;
+        private readonly UIInputProvider _uiInputProvider;
+        private readonly CompositeDisposable _disposables = new();
 
-    public void Start()
-    {
-        _model.CurrentState
-            .Subscribe(OnCursorStateChanged)
-            .AddTo(_disposables);
+        public CursorStateSetter(CursorStateModel model,
+            CursorConfiguration configuration,
+            UIInputProvider uiInputProvider)
+        {
+            _model = model;
+            _configuration = configuration;
+            _uiInputProvider = uiInputProvider;
+        }
 
-        _uiInputProvider.ClickPressed
-            .Subscribe(OnClickPressed)
-            .AddTo(_disposables);
-    }
+        public void Start()
+        {
+            _model.CurrentState
+                .Subscribe(OnCursorStateChanged)
+                .AddTo(_disposables);
 
-    public void Dispose() => _disposables.Dispose();
+            _uiInputProvider.ClickPressed
+                .Subscribe(OnClickPressed)
+                .AddTo(_disposables);
+        }
 
-    private void OnCursorStateChanged(CursorState state)
-    {
-        if (_configuration.TryGetCursorData(state, out CursorData data))
-            Cursor.SetCursor(data.Texture, data.Hotspot, CursorMode.Auto);
-    }
+        public void Dispose() => _disposables.Dispose();
 
-    private void OnClickPressed(bool isPressed)
-    {
-        if (isPressed && _model.CurrentState.CurrentValue == CursorState.UIHover)
-            _model.SetState(CursorState.UIClick);
-        else if (!isPressed && _model.CurrentState.CurrentValue == CursorState.UIClick)
-            _model.SetState(CursorState.UIHover);
+        private void OnCursorStateChanged(CursorState state)
+        {
+            if (_configuration.TryGetCursorData(state, out CursorData data))
+                UnityCursor.SetCursor(data.Texture, data.Hotspot, CursorMode.Auto);
+        }
+
+        private void OnClickPressed(bool isPressed)
+        {
+            if (isPressed && _model.CurrentState.CurrentValue == CursorState.UIHover)
+                _model.SetState(CursorState.UIClick);
+            else if (!isPressed && _model.CurrentState.CurrentValue == CursorState.UIClick)
+                _model.SetState(CursorState.UIHover);
+        }
     }
 }

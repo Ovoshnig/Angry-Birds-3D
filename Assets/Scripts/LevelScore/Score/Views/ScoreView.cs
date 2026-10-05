@@ -1,4 +1,5 @@
 using LitMotion;
+using Ovoshnig.UI.Basic;
 using TMPro;
 using UnityEngine;
 

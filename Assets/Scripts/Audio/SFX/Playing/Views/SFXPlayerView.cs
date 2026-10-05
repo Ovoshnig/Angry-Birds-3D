@@ -3,63 +3,66 @@ using System;
 using UnityEngine;
 using UnityEngine.Audio;
 
-[RequireComponent(typeof(AudioSource))]
-public class SFXPlayerView : MonoBehaviour
+namespace Ovoshnig.Audio.SFX.Playing
 {
-    private readonly Subject<Unit> _stopped = new();
-
-    private AudioSource _audioSource;
-    private IDisposable _followSubscription = null;
-    private IDisposable _playbackSubscription = null;
-
-    public Observable<Unit> Stopped => _stopped;
-
-    private void Awake() => _audioSource = GetComponent<AudioSource>();
-
-    private void OnDestroy()
+    [RequireComponent(typeof(AudioSource))]
+    public class SFXPlayerView : MonoBehaviour
     {
-        _followSubscription?.Dispose();
-        _playbackSubscription?.Dispose();
-        _stopped.Dispose();
-    }
+        private readonly Subject<Unit> _stopped = new();
 
-    public void Play2D(AudioResource audioResource)
-    {
-        _followSubscription?.Dispose();
+        private AudioSource _audioSource;
+        private IDisposable _followSubscription = null;
+        private IDisposable _playbackSubscription = null;
 
-        _audioSource.spatialBlend = 0f;
-        _audioSource.resource = audioResource;
-        _audioSource.Play();
+        public Observable<Unit> Stopped => _stopped;
 
-        StartTrackingPlayback();
-    }
+        private void Awake() => _audioSource = GetComponent<AudioSource>();
 
-    public void Play3D(Transform target, AudioResource audioResource)
-    {
-        _audioSource.spatialBlend = 1f;
-        _audioSource.resource = audioResource;
-        _audioSource.Play();
+        private void OnDestroy()
+        {
+            _followSubscription?.Dispose();
+            _playbackSubscription?.Dispose();
+            _stopped.Dispose();
+        }
 
-        StartFollowing(target);
-        StartTrackingPlayback();
-    }
+        public void Play2D(AudioResource audioResource)
+        {
+            _followSubscription?.Dispose();
 
-    private void StartTrackingPlayback()
-    {
-        _playbackSubscription?.Dispose();
+            _audioSource.spatialBlend = 0f;
+            _audioSource.resource = audioResource;
+            _audioSource.Play();
 
-        _playbackSubscription = Observable.EveryUpdate(destroyCancellationToken)
-            .Where(_ => !_audioSource.isPlaying)
-            .Take(1)
-            .Subscribe(_ => _stopped.OnNext(Unit.Default));
-    }
+            StartTrackingPlayback();
+        }
 
-    private void StartFollowing(Transform target)
-    {
-        _followSubscription?.Dispose();
+        public void Play3D(Transform target, AudioResource audioResource)
+        {
+            _audioSource.spatialBlend = 1f;
+            _audioSource.resource = audioResource;
+            _audioSource.Play();
 
-        _followSubscription = Observable.EveryUpdate(destroyCancellationToken)
-            .TakeWhile(_ => target != null && _audioSource.isPlaying)
-            .Subscribe(_ => transform.position = target.position);
+            StartFollowing(target);
+            StartTrackingPlayback();
+        }
+
+        private void StartTrackingPlayback()
+        {
+            _playbackSubscription?.Dispose();
+
+            _playbackSubscription = Observable.EveryUpdate(destroyCancellationToken)
+                .Where(_ => !_audioSource.isPlaying)
+                .Take(1)
+                .Subscribe(_ => _stopped.OnNext(Unit.Default));
+        }
+
+        private void StartFollowing(Transform target)
+        {
+            _followSubscription?.Dispose();
+
+            _followSubscription = Observable.EveryUpdate(destroyCancellationToken)
+                .TakeWhile(_ => target != null && _audioSource.isPlaying)
+                .Subscribe(_ => transform.position = target.position);
+        }
     }
 }

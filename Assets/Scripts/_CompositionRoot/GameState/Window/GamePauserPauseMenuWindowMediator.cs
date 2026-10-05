@@ -1,3 +1,6 @@
+using Ovoshnig.GameState.Pause;
+using Ovoshnig.Mediation;
+using Ovoshnig.Window.Window;
 using R3;
 
 public class GamePauserPauseMenuWindowMediator : Mediator

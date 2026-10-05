@@ -1,3 +1,4 @@
+using Ovoshnig.ObjectCollision.Entity;
 using UnityEngine;
 
 [RequireComponent(typeof(BirdFlyerView))]

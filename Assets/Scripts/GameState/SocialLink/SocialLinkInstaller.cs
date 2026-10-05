@@ -1,15 +1,17 @@
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class SocialLinkInstaller : IInstaller
+namespace Ovoshnig.GameState.SocialLink
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class SocialLinkInstaller : IInstaller
     {
-        builder.RegisterInstancesInHierarchy<SocialLinkButtonView>();
-        builder.Register<SocialLinkOpener>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<SocialLinkOpenerButtonViewsMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstancesInHierarchy<SocialLinkButtonView>();
+            builder.Register<SocialLinkOpener>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<SocialLinkOpenerButtonViewsMediator>();
+        }
     }
 }

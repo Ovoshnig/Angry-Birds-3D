@@ -1,26 +1,29 @@
+using Ovoshnig.Scene.Switching;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class LevelStateTrackingInstaller : IInstaller
+namespace Ovoshnig.LevelState.Tracking
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class LevelStateTrackingInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<ClearingPanelView>().AsSelf().As<CompletionPanelView>();
-        builder.RegisterInstanceInHierarchy<LevelIndexView>();
-        builder.RegisterInstanceInHierarchy<FinalScoreView>();
-        builder.RegisterInstanceInHierarchy<FailurePanelView>().AsSelf().As<CompletionPanelView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<ActivityTracker>().AsSelf();
-            entryPoints.Add<LevelStateTracker>().AsSelf();
-            entryPoints.Add<ClearingPanelViewBirdPointsDisplayerMediator>();
-            entryPoints.Add<SceneManagerLevelIndexViewMediator>();
-            entryPoints.Add<ScoreModelFinalScoreViewMediator>();
-            entryPoints.Add<FailurePanelViewLevelTrackerMediator>();
-        });
+            builder.RegisterInstanceInHierarchy<ClearingPanelView>().AsSelf().As<CompletionPanelView>();
+            builder.RegisterInstanceInHierarchy<LevelIndexView>();
+            builder.RegisterInstanceInHierarchy<FinalScoreView>();
+            builder.RegisterInstanceInHierarchy<FailurePanelView>().AsSelf().As<CompletionPanelView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<ActivityTracker>().AsSelf();
+                entryPoints.Add<LevelStateTracker>().AsSelf();
+                entryPoints.Add<ClearingPanelViewBirdPointsDisplayerMediator>();
+                entryPoints.Add<SceneManagerLevelIndexViewMediator>();
+                entryPoints.Add<ScoreModelFinalScoreViewMediator>();
+                entryPoints.Add<FailurePanelViewLevelTrackerMediator>();
+            });
+        }
     }
 }

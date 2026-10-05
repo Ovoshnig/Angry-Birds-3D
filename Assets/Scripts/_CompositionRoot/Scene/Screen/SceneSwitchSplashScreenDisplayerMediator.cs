@@ -1,4 +1,7 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
+using Ovoshnig.Scene.Switching;
+using Ovoshnig.Screen.SplashScreen;
 using R3;
 
 public class SceneSwitchSplashScreenDisplayerMediator : Mediator

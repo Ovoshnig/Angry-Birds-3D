@@ -1,43 +1,49 @@
+using Ovoshnig.DataStorage.Storage;
+using Ovoshnig.GameSettings;
+using Ovoshnig.LevelState.Tracking;
 using R3;
 using System;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-public class LevelAchiever : IStartable, IDisposable
+namespace Ovoshnig.LevelState.Achievement
 {
-    private readonly LevelStateTracker _levelTracker;
-    private readonly SaveStorage _saveStorage;
-    private readonly SceneSettings _sceneSettings;
-    private readonly CompositeDisposable _disposables = new();
-
-    public LevelAchiever(LevelStateTracker levelTracker,
-        SaveStorage saveStorage,
-        SceneSettings sceneSettings)
+    public class LevelAchiever : IStartable, IDisposable
     {
-        _levelTracker = levelTracker;
-        _saveStorage = saveStorage;
-        _sceneSettings = sceneSettings;
-    }
+        private readonly LevelStateTracker _levelTracker;
+        private readonly SaveStorage _saveStorage;
+        private readonly SceneSettings _sceneSettings;
+        private readonly CompositeDisposable _disposables = new();
 
-    public void Start()
-    {
-        _levelTracker.Cleared
-            .Subscribe(_ => OnLevelCleared())
-            .AddTo(_disposables);
-    }
+        public LevelAchiever(LevelStateTracker levelTracker,
+            SaveStorage saveStorage,
+            SceneSettings sceneSettings)
+        {
+            _levelTracker = levelTracker;
+            _saveStorage = saveStorage;
+            _sceneSettings = sceneSettings;
+        }
 
-    public void Dispose() => _disposables.Dispose();
+        public void Start()
+        {
+            _levelTracker.Cleared
+                .Subscribe(_ => OnLevelCleared())
+                .AddTo(_disposables);
+        }
 
-    private void OnLevelCleared()
-    {
-        int sceneCount = SceneManager.sceneCountInBuildSettings;
-        int currentLevel = SceneManager.GetActiveScene().buildIndex;
-        int nextLevel = currentLevel + 1;
-        int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
+        public void Dispose() => _disposables.Dispose();
 
-        if (currentLevel < _sceneSettings.ComingSoonSceneIndex
-            && nextLevel > achievedLevel
-            && nextLevel < sceneCount)
-            _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);
+        private void OnLevelCleared()
+        {
+            int sceneCount = SceneManager.sceneCountInBuildSettings;
+            int currentLevel = SceneManager.GetActiveScene().buildIndex;
+            int nextLevel = currentLevel + 1;
+            int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
+
+            if (currentLevel < _sceneSettings.ComingSoonSceneIndex
+                && nextLevel > achievedLevel
+                && nextLevel < sceneCount)
+                _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);
+        }
     }
 }

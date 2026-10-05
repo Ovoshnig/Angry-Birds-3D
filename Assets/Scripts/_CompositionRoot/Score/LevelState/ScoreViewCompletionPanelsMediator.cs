@@ -1,3 +1,5 @@
+using Ovoshnig.LevelState.Tracking;
+using Ovoshnig.Mediation;
 using R3;
 
 public class ScoreViewCompletionPanelsMediator : Mediator

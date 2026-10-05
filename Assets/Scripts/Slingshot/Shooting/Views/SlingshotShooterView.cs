@@ -1,3 +1,4 @@
+using Ovoshnig.GameSettings;
 using UnityEngine;
 using UnityEngine.Audio;
 

@@ -1,3 +1,5 @@
+using Ovoshnig.Cursor.State;
+using Ovoshnig.Mediation;
 using R3;
 
 public class CursorStateModelSlingshotShooterMediator : Mediator

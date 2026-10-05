@@ -1,6 +1,9 @@
-﻿public enum CollisionType
+namespace Ovoshnig.ObjectCollision.Collision
 {
-    Gliding,
-    Collision,
-    Damage
+    public enum CollisionType
+    {
+        Gliding,
+        Collision,
+        Damage
+    }
 }

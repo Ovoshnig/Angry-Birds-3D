@@ -1,14 +1,16 @@
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class DataStorageResetInstaller : IInstaller
+namespace Ovoshnig.DataStorage.Reset
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class DataStorageResetInstaller : IInstaller
     {
-        builder.RegisterInstancesInHierarchy<DataResetButtonView>();
-        builder.RegisterEntryPoint<DataStoragesResetButtonViewsMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstancesInHierarchy<DataResetButtonView>();
+            builder.RegisterEntryPoint<DataStoragesResetButtonViewsMediator>();
+        }
     }
 }

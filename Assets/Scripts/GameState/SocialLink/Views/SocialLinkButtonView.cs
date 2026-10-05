@@ -1,6 +1,10 @@
+using Ovoshnig.UI.Basic;
 using UnityEngine;
 
-public class SocialLinkButtonView : ButtonView
+namespace Ovoshnig.GameState.SocialLink
 {
-    [field: SerializeField] public string Url { get; private set; }
+    public class SocialLinkButtonView : ButtonView
+    {
+        [field: SerializeField] public string Url { get; private set; }
+    }
 }

@@ -1,3 +1,5 @@
+using Ovoshnig.Mediation;
+using Ovoshnig.Scene.Switching;
 using R3;
 
 public class InputActionsSceneSwitchMediator : Mediator

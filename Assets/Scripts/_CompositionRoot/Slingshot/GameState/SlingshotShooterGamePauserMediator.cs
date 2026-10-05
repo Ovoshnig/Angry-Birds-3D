@@ -1,3 +1,5 @@
+using Ovoshnig.GameState.Pause;
+using Ovoshnig.Mediation;
 using R3;
 
 public class SlingshotShooterGamePauserMediator : Mediator

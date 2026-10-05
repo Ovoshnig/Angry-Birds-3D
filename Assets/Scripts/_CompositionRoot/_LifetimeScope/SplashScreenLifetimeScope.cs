@@ -1,3 +1,4 @@
+using Ovoshnig.Screen.SplashScreen;
 using VContainer;
 using VContainer.Unity;
 

@@ -1,19 +1,21 @@
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class ResolutionAdjustmentInstaller : IInstaller
+namespace Ovoshnig.Screen.ResolutionAdjustment
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class ResolutionAdjustmentInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<ResolutionAdjustDropdownView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<ResolutionAdjuster>().AsSelf();
-            entryPoints.Add<ResolutionAdjusterDropdownViewMediator>();
-        });
+            builder.RegisterInstanceInHierarchy<ResolutionAdjustDropdownView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<ResolutionAdjuster>().AsSelf();
+                entryPoints.Add<ResolutionAdjusterDropdownViewMediator>();
+            });
+        }
     }
 }

@@ -1,3 +1,12 @@
+using Ovoshnig.AddressableLoading;
+using Ovoshnig.Cursor;
+using Ovoshnig.DataStorage.Storage;
+using Ovoshnig.GameSettings;
+using Ovoshnig.Scene.LoadingScreen;
+using Ovoshnig.Scene.Switching;
+using Ovoshnig.Screen.FullScreenAdjustment;
+using Ovoshnig.Screen.Input;
+using Ovoshnig.UI.Input;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

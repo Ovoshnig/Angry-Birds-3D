@@ -1,6 +1,7 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
+using Ovoshnig.GameSettings;
 using UnityEngine;
 
 [RequireComponent(typeof(ParticleSystem))]

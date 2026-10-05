@@ -1,6 +1,10 @@
+using Ovoshnig.UI.Basic;
 using UnityEngine;
 
-public class AudioSliderView : SliderView
+namespace Ovoshnig.Audio.Tuning
 {
-    [field: SerializeField] public AudioChannel Channel { get; private set; }
+    public class AudioSliderView : SliderView
+    {
+        [field: SerializeField] public AudioChannel Channel { get; private set; }
+    }
 }

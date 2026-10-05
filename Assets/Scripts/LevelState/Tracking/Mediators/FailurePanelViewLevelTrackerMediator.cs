@@ -1,35 +1,39 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
 using R3;
 using System.Threading;
 
-public class FailurePanelViewLevelTrackerMediator : Mediator
+namespace Ovoshnig.LevelState.Tracking
 {
-    private readonly FailurePanelView _failurePanelView;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly CameraSwitchView _cameraSwitchView;
-
-    public FailurePanelViewLevelTrackerMediator(FailurePanelView failurePanelView,
-        LevelStateTracker levelStateTracker,
-        CameraSwitchView cameraSwitchView)
+    public class FailurePanelViewLevelTrackerMediator : Mediator
     {
-        _failurePanelView = failurePanelView;
-        _levelStateTracker = levelStateTracker;
-        _cameraSwitchView = cameraSwitchView;
-    }
+        private readonly FailurePanelView _failurePanelView;
+        private readonly LevelStateTracker _levelStateTracker;
+        private readonly CameraSwitchView _cameraSwitchView;
 
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _failurePanelView.Hide();
+        public FailurePanelViewLevelTrackerMediator(FailurePanelView failurePanelView,
+            LevelStateTracker levelStateTracker,
+            CameraSwitchView cameraSwitchView)
+        {
+            _failurePanelView = failurePanelView;
+            _levelStateTracker = levelStateTracker;
+            _cameraSwitchView = cameraSwitchView;
+        }
 
-        _levelStateTracker.Failed
-            .SubscribeAwait(async (_, token) => await OnLevelFailedAsync(token), AwaitOperation.Drop)
-            .AddTo(disposables);
-    }
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _failurePanelView.Hide();
 
-    private async UniTask OnLevelFailedAsync(CancellationToken token)
-    {
-        await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
+            _levelStateTracker.Failed
+                .SubscribeAwait(async (_, token) => await OnLevelFailedAsync(token), AwaitOperation.Drop)
+                .AddTo(disposables);
+        }
 
-        _failurePanelView.Show();
+        private async UniTask OnLevelFailedAsync(CancellationToken token)
+        {
+            await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
+
+            _failurePanelView.Show();
+        }
     }
 }

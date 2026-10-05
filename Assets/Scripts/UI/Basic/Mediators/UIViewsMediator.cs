@@ -1,47 +1,51 @@
+using Ovoshnig.Mediation;
 using R3;
 using System.Collections.Generic;
 
-public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
+namespace Ovoshnig.UI.Basic
 {
-    private readonly IReadOnlyList<TView> _views;
-    private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = new();
-
-    public UIViewsMediator(IReadOnlyList<TView> views) => _views = views;
-
-    protected override void Bind(CompositeDisposable disposables)
+    public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
     {
-        foreach (var view in _views)
+        private readonly IReadOnlyList<TView> _views;
+        private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = new();
+
+        public UIViewsMediator(IReadOnlyList<TView> views) => _views = views;
+
+        protected override void Bind(CompositeDisposable disposables)
         {
-            CompositeDisposable viewDisposables = new();
-            _viewToDisposables[view] = viewDisposables;
+            foreach (var view in _views)
+            {
+                CompositeDisposable viewDisposables = new();
+                _viewToDisposables[view] = viewDisposables;
 
-            view.IsEnabled
-                .Subscribe(enabled =>
-                {
-                    if (enabled)
-                        OnViewEnabled(view, viewDisposables);
-                    else
-                        OnViewDisabled(view);
-                })
-                .AddTo(disposables);
+                view.IsEnabled
+                    .Subscribe(enabled =>
+                    {
+                        if (enabled)
+                            OnViewEnabled(view, viewDisposables);
+                        else
+                            OnViewDisabled(view);
+                    })
+                    .AddTo(disposables);
+            }
         }
-    }
 
-    protected override void Unbind()
-    {
-        base.Unbind();
+        protected override void Unbind()
+        {
+            base.Unbind();
 
-        foreach (var kvp in _viewToDisposables)
-            kvp.Value.Dispose();
+            foreach (var kvp in _viewToDisposables)
+                kvp.Value.Dispose();
 
-        _viewToDisposables.Clear();
-    }
+            _viewToDisposables.Clear();
+        }
 
-    protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
+        protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
 
-    protected virtual void OnViewDisabled(TView view)
-    {
-        if (_viewToDisposables.TryGetValue(view, out CompositeDisposable viewDisposables))
-            viewDisposables.Clear();
+        protected virtual void OnViewDisabled(TView view)
+        {
+            if (_viewToDisposables.TryGetValue(view, out CompositeDisposable viewDisposables))
+                viewDisposables.Clear();
+        }
     }
 }

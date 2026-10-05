@@ -1,6 +1,9 @@
-public static class SkyboxRotationConstants
+namespace Ovoshnig.Skybox.Rotation
 {
-    public const string RotationProperty = "_Rotation";
-    public const float MinValue = 0f;
-    public const float MaxValue = 360f;
+    public static class SkyboxRotationConstants
+    {
+        public const string RotationProperty = "_Rotation";
+        public const float MinValue = 0f;
+        public const float MaxValue = 360f;
+    }
 }

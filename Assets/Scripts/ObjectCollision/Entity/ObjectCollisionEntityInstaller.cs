@@ -1,10 +1,12 @@
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class ObjectCollisionEntityInstaller : IInstaller
+namespace Ovoshnig.ObjectCollision.Entity
 {
-    public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<CollidableEntityView>();
+    [Serializable]
+    public class ObjectCollisionEntityInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<CollidableEntityView>();
+    }
 }

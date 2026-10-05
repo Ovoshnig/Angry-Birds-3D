@@ -1,3 +1,12 @@
+using Ovoshnig.Audio.SFX;
+using Ovoshnig.Audio.Tuning;
+using Ovoshnig.GameState.Pause;
+using Ovoshnig.LevelState;
+using Ovoshnig.ObjectCollision;
+using Ovoshnig.ObjectDestruction.Destruction;
+using Ovoshnig.Scene.Switching;
+using Ovoshnig.Skybox;
+using Ovoshnig.Window;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;

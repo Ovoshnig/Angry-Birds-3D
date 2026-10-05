@@ -1,9 +1,13 @@
+using Ovoshnig.ObjectCollision.Collision;
 using UnityEngine;
 
-[RequireComponent(typeof(ObjectColliderView))]
-public abstract class CollidableEntityView : MonoBehaviour
+namespace Ovoshnig.ObjectCollision.Entity
 {
-    public ObjectColliderView ColliderView { get; private set; }
+    [RequireComponent(typeof(ObjectColliderView))]
+    public abstract class CollidableEntityView : MonoBehaviour
+    {
+        public ObjectColliderView ColliderView { get; private set; }
 
-    protected virtual void Awake() => ColliderView = GetComponent<ObjectColliderView>();
+        protected virtual void Awake() => ColliderView = GetComponent<ObjectColliderView>();
+    }
 }

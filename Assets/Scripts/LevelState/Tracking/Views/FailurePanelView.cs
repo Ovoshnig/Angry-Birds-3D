@@ -1,3 +1,6 @@
-public sealed class FailurePanelView : CompletionPanelView
+namespace Ovoshnig.LevelState.Tracking
 {
+    public sealed class FailurePanelView : CompletionPanelView
+    {
+    }
 }

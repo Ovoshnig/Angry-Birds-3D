@@ -1,28 +1,31 @@
 using System.Collections.Generic;
 using UnityEngine.Audio;
 
-public class SFXCounter
+namespace Ovoshnig.Audio.SFX.Count
 {
-    private readonly Dictionary<AudioResource, int> _countByResource = new();
-
-    public int GetCount(AudioResource resource) => _countByResource.GetValueOrDefault(resource, 0);
-
-    public void Increment(AudioResource resource)
+    public class SFXCounter
     {
-        if (_countByResource.TryGetValue(resource, out int count))
-            _countByResource[resource] = count + 1;
-        else
-            _countByResource[resource] = 1;
-    }
+        private readonly Dictionary<AudioResource, int> _countByResource = new();
 
-    public void Decrement(AudioResource resource)
-    {
-        if (!_countByResource.TryGetValue(resource, out int count))
-            return;
+        public int GetCount(AudioResource resource) => _countByResource.GetValueOrDefault(resource, 0);
 
-        if (count <= 1)
-            _countByResource.Remove(resource);
-        else
-            _countByResource[resource] = count - 1;
+        public void Increment(AudioResource resource)
+        {
+            if (_countByResource.TryGetValue(resource, out int count))
+                _countByResource[resource] = count + 1;
+            else
+                _countByResource[resource] = 1;
+        }
+
+        public void Decrement(AudioResource resource)
+        {
+            if (!_countByResource.TryGetValue(resource, out int count))
+                return;
+
+            if (count <= 1)
+                _countByResource.Remove(resource);
+            else
+                _countByResource[resource] = count - 1;
+        }
     }
 }

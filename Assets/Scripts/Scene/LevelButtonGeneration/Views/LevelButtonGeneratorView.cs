@@ -1,8 +1,13 @@
 using UnityEngine;
+using GameSettingsAsset = Ovoshnig.GameSettings.GameSettings;
+using GameSettings = Ovoshnig.GameSettings.GameSettings;
 
-public class LevelButtonGeneratorView : MonoBehaviour
+namespace Ovoshnig.Scene.LevelButtonGeneration
 {
-    [field: SerializeField] public RectTransform LevelButtonParent { get; private set; }
-    [field: SerializeField] public RectTransform LevelButtonBlockPrefab { get; private set; }
-    [field: SerializeField] public GameSettings GameSettings { get; private set; }
+    public class LevelButtonGeneratorView : MonoBehaviour
+    {
+        [field: SerializeField] public RectTransform LevelButtonParent { get; private set; }
+        [field: SerializeField] public RectTransform LevelButtonBlockPrefab { get; private set; }
+        [field: SerializeField] public GameSettingsAsset GameSettings { get; private set; }
+    }
 }

@@ -1,3 +1,4 @@
+using Ovoshnig.UI.Basic;
 using R3;
 
 public class ScoreModelViewMediator : UIViewMediator<ScoreView>

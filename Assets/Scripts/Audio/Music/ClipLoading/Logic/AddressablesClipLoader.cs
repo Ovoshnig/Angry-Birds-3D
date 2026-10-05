@@ -1,4 +1,5 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Ovoshnig.Audio.Music.SceneMusicMapping;
 using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
@@ -8,51 +9,54 @@ using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
 using UnityEngine.ResourceManagement.ResourceLocations;
 
-public class AddressablesClipLoader : IClipLoader
+namespace Ovoshnig.Audio.Music.ClipLoading
 {
-    private AsyncOperationHandle<AudioClip> _handle;
-
-    public async UniTask<Dictionary<MusicCategory, IEnumerable<object>>> LoadClipKeysAsync(CancellationToken token)
+    public class AddressablesClipLoader : IClipLoader
     {
-        Dictionary<MusicCategory, IEnumerable<object>> musicClipKeys = new();
+        private AsyncOperationHandle<AudioClip> _handle;
 
-        foreach (MusicCategory category in Enum.GetValues(typeof(MusicCategory)))
+        public async UniTask<Dictionary<MusicCategory, IEnumerable<object>>> LoadClipKeysAsync(CancellationToken token)
         {
-            string categoryName = category.ToString();
-            categoryName = Regex.Replace(categoryName, "(?<!^)([A-Z])", " $1").ToLower();
-            List<string> labels = new() { "audio", "music", categoryName };
+            Dictionary<MusicCategory, IEnumerable<object>> musicClipKeys = new();
 
-            AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(
-                labels,
-                Addressables.MergeMode.Intersection);
-            await locationsHandle.ToUniTask(cancellationToken: token);
-            IList<IResourceLocation> locations = locationsHandle.Result;
-            musicClipKeys[category] = locations;
+            foreach (MusicCategory category in Enum.GetValues(typeof(MusicCategory)))
+            {
+                string categoryName = category.ToString();
+                categoryName = Regex.Replace(categoryName, "(?<!^)([A-Z])", " $1").ToLower();
+                List<string> labels = new() { "audio", "music", categoryName };
 
-            locationsHandle.Release();
+                AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(
+                    labels,
+                    Addressables.MergeMode.Intersection);
+                await locationsHandle.ToUniTask(cancellationToken: token);
+                IList<IResourceLocation> locations = locationsHandle.Result;
+                musicClipKeys[category] = locations;
+
+                locationsHandle.Release();
+            }
+
+            return musicClipKeys;
         }
 
-        return musicClipKeys;
-    }
-
-    public async UniTask<AudioClip> LoadClipAsync(object address, CancellationToken token)
-    {
-        IResourceLocation resourceLocation = (IResourceLocation)address;
-        _handle = Addressables.LoadAssetAsync<AudioClip>(resourceLocation);
-        await _handle.ToUniTask(cancellationToken: token);
-
-        if (_handle.Status == AsyncOperationStatus.Succeeded)
+        public async UniTask<AudioClip> LoadClipAsync(object address, CancellationToken token)
         {
-            AudioClip clip = _handle.Result;
-            return clip;
+            IResourceLocation resourceLocation = (IResourceLocation)address;
+            _handle = Addressables.LoadAssetAsync<AudioClip>(resourceLocation);
+            await _handle.ToUniTask(cancellationToken: token);
+
+            if (_handle.Status == AsyncOperationStatus.Succeeded)
+            {
+                AudioClip clip = _handle.Result;
+                return clip;
+            }
+
+            return null;
         }
 
-        return null;
-    }
-
-    public void UnloadClip(AudioClip clip)
-    {
-        if (_handle.IsValid())
-            _handle.Release();
+        public void UnloadClip(AudioClip clip)
+        {
+            if (_handle.IsValid())
+                _handle.Release();
+        }
     }
 }

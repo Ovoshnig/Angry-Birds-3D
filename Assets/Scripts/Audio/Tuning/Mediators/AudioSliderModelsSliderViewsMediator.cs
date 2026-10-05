@@ -1,30 +1,34 @@
+using Ovoshnig.UI.Basic;
 using R3;
 using System.Collections.Generic;
 using System.Linq;
 
-public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
+namespace Ovoshnig.Audio.Tuning
 {
-    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
-
-    public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
-        IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
-
-    protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
+    public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
     {
-        AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
+        private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
 
-        if (model == null)
-            return;
+        public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
+            IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
 
-        view.SetMinValue(model.MinValue);
-        view.SetMaxValue(model.MaxValue);
+        protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
+        {
+            AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
 
-        model.Value
-            .Subscribe(view.SetValueWithoutNotify)
-            .AddTo(viewDisposables);
+            if (model == null)
+                return;
 
-        view.ValueChanged
-            .Subscribe(model.SetClampedValue)
-            .AddTo(viewDisposables);
+            view.SetMinValue(model.MinValue);
+            view.SetMaxValue(model.MaxValue);
+
+            model.Value
+                .Subscribe(view.SetValueWithoutNotify)
+                .AddTo(viewDisposables);
+
+            view.ValueChanged
+                .Subscribe(model.SetClampedValue)
+                .AddTo(viewDisposables);
+        }
     }
 }

@@ -1,3 +1,4 @@
+using Ovoshnig.InputProvision.Provision;
 using R3;
 
 public class BirdInputProvider : InputProvider<InputActions.BirdActions>
