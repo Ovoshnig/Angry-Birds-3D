@@ -1,11 +1,11 @@
-using Ovoshnig.LevelState.Achievement;
-using Ovoshnig.LevelState.Tracking;
+using AngryBirds3D.LevelState.Achievement;
+using AngryBirds3D.LevelState.Tracking;
 using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.LevelState
+namespace AngryBirds3D.LevelState
 {
     [Serializable]
     public class LevelStateInstaller : IInstaller

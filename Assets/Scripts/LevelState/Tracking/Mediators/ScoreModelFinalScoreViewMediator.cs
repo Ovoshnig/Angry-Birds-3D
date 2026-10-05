@@ -1,7 +1,8 @@
+using AngryBirds3D.LevelScore.Score;
 using Ovoshnig.UI.Basic;
 using R3;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     public class ScoreModelFinalScoreViewMediator : UIViewMediator<FinalScoreView>
     {

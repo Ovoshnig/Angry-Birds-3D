@@ -3,7 +3,7 @@ using Ovoshnig.UI.Basic;
 using TMPro;
 using UnityEngine;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     [RequireComponent(typeof(TMP_Text))]
     public class LevelIndexView : UIView

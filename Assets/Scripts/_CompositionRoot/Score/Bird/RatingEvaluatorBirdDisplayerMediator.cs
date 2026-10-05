@@ -1,3 +1,5 @@
+using AngryBirds3D.Bird.Points;
+using AngryBirds3D.LevelScore.RatingEvaluation;
 using Ovoshnig.Mediation;
 using R3;
 

@@ -1,4 +1,7 @@
-﻿using Ovoshnig.Mediation;
+using AngryBirds3D.Bird.Entity;
+using AngryBirds3D.Bird.Flight;
+using AngryBirds3D.Slingshot.Shooting;
+using Ovoshnig.Mediation;
 using R3;
 
 public class BirdFlyerSlingshotShooterMediator : Mediator
@@ -20,4 +23,3 @@ public class BirdFlyerSlingshotShooterMediator : Mediator
             .AddTo(disposables);
     }
 }
-

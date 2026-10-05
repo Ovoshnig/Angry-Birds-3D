@@ -1,16 +1,19 @@
 using Ovoshnig.ObjectCollision.Collision;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-[RequireComponent(typeof(ObjectColliderView))]
-public class EggEntityView : MonoBehaviour
+namespace AngryBirds3D.Bird.Entity
 {
-    public Rigidbody Rigidbody { get; private set; }
-    public ObjectColliderView ColliderView { get; private set; }
-
-    private void Awake()
+    [RequireComponent(typeof(Rigidbody))]
+    [RequireComponent(typeof(ObjectColliderView))]
+    public class EggEntityView : MonoBehaviour
     {
-        Rigidbody = GetComponent<Rigidbody>();
-        ColliderView = GetComponent<ObjectColliderView>();
+        public Rigidbody Rigidbody { get; private set; }
+        public ObjectColliderView ColliderView { get; private set; }
+
+        private void Awake()
+        {
+            Rigidbody = GetComponent<Rigidbody>();
+            ColliderView = GetComponent<ObjectColliderView>();
+        }
     }
 }

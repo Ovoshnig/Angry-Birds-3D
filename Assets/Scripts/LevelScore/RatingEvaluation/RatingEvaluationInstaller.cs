@@ -4,17 +4,20 @@ using VContainer;
 using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class RatingEvaluationInstaller : IInstaller
+namespace AngryBirds3D.LevelScore.RatingEvaluation
 {
-    [SerializeField] private RatingSettings _ratingSettings;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class RatingEvaluationInstaller : IInstaller
     {
-        builder.RegisterInstance(_ratingSettings);
-        builder.RegisterInstanceInHierarchy<RatingEvaluatorView>();
+        [SerializeField] private RatingSettings _ratingSettings;
 
-        builder.Register<RatingEvaluator>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<RatingEvaluatorViewMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_ratingSettings);
+            builder.RegisterInstanceInHierarchy<RatingEvaluatorView>();
+
+            builder.Register<RatingEvaluator>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<RatingEvaluatorViewMediator>();
+        }
     }
 }

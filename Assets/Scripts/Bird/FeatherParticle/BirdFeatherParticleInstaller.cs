@@ -3,19 +3,22 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdFeatherParticleInstaller : IInstaller
+namespace AngryBirds3D.Bird.FeatherParticle
 {
-    [SerializeField] private FeatherParticleView _featherParticlePrefab;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class BirdFeatherParticleInstaller : IInstaller
     {
-        builder.RegisterComponentInNewPrefab(_featherParticlePrefab, Lifetime.Singleton);
+        [SerializeField] private FeatherParticleView _featherParticlePrefab;
 
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<FeatherParticleViewObjectColliderMediator>();
-            entryPoints.Add<FeatherParticleViewBirdDestroyerMediator>();
-        });
+            builder.RegisterComponentInNewPrefab(_featherParticlePrefab, Lifetime.Singleton);
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<FeatherParticleViewObjectColliderMediator>();
+                entryPoints.Add<FeatherParticleViewBirdDestroyerMediator>();
+            });
+        }
     }
 }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     [CreateAssetMenu(fileName = "LevelSfxProfile", menuName = "Scriptable Objects/Level Sfx Profile")]
     public class LevelSfxProfile : ScriptableObject

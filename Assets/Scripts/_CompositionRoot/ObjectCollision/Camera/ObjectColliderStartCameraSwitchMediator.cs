@@ -1,3 +1,4 @@
+using AngryBirds3D.Camera.Switching;
 using Ovoshnig.Mediation;
 using Ovoshnig.ObjectCollision.Collision;
 using R3;

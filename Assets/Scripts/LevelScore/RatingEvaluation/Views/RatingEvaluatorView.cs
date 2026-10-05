@@ -6,51 +6,54 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class RatingEvaluatorView : UIView
+namespace AngryBirds3D.LevelScore.RatingEvaluation
 {
-    [SerializeField] private Sprite _activeStar;
-    [SerializeField] private Sprite _unactiveStar;
-    [SerializeField] private Ease _jumpEase = Ease.OutQuint;
-    [SerializeField] private Ease _fallEase = Ease.OutBounce;
-    [SerializeField, Min(0f)] private float _motionDeltaY = 300f;
-    [SerializeField, Min(0f)] private float _jumpDuration = 0.5f;
-    [SerializeField, Min(0f)] private float _fallDuration = 1f;
-
-    private readonly Subject<Unit> _shown = new();
-
-    private Image[] _images;
-
-    public Subject<Unit> Shown => _shown;
-
-    private void Awake() => _images = GetComponentsInChildren<Image>();
-
-    private void OnDestroy() => _shown.Dispose();
-
-    public async UniTask ShowStarAsync(int count)
+    public class RatingEvaluatorView : UIView
     {
-        foreach (var image in _images)
-            image.sprite = _unactiveStar;
+        [SerializeField] private Sprite _activeStar;
+        [SerializeField] private Sprite _unactiveStar;
+        [SerializeField] private Ease _jumpEase = Ease.OutQuint;
+        [SerializeField] private Ease _fallEase = Ease.OutBounce;
+        [SerializeField, Min(0f)] private float _motionDeltaY = 300f;
+        [SerializeField, Min(0f)] private float _jumpDuration = 0.5f;
+        [SerializeField, Min(0f)] private float _fallDuration = 1f;
 
-        for (int i = 0; i < count; i++)
+        private readonly Subject<Unit> _shown = new();
+
+        private Image[] _images;
+
+        public Subject<Unit> Shown => _shown;
+
+        private void Awake() => _images = GetComponentsInChildren<Image>();
+
+        private void OnDestroy() => _shown.Dispose();
+
+        public async UniTask ShowStarAsync(int count)
         {
-            Image image = _images[i];
+            foreach (var image in _images)
+                image.sprite = _unactiveStar;
 
-            Vector3 position = image.rectTransform.anchoredPosition;
-            float yPosition = position.y;
+            for (int i = 0; i < count; i++)
+            {
+                Image image = _images[i];
 
-            await LMotion.Create(yPosition, yPosition + _motionDeltaY, _jumpDuration)
-                .WithEase(_jumpEase)
-                .BindToAnchoredPositionY(image.rectTransform)
-                .ToUniTask(destroyCancellationToken);
+                Vector3 position = image.rectTransform.anchoredPosition;
+                float yPosition = position.y;
 
-            image.sprite = _activeStar;
+                await LMotion.Create(yPosition, yPosition + _motionDeltaY, _jumpDuration)
+                    .WithEase(_jumpEase)
+                    .BindToAnchoredPositionY(image.rectTransform)
+                    .ToUniTask(destroyCancellationToken);
 
-            await LMotion.Create(yPosition + _motionDeltaY, yPosition, _fallDuration)
-                .WithEase(_fallEase)
-                .BindToAnchoredPositionY(image.rectTransform)
-                .ToUniTask(destroyCancellationToken);
+                image.sprite = _activeStar;
+
+                await LMotion.Create(yPosition + _motionDeltaY, yPosition, _fallDuration)
+                    .WithEase(_fallEase)
+                    .BindToAnchoredPositionY(image.rectTransform)
+                    .ToUniTask(destroyCancellationToken);
+            }
+
+            _shown.OnNext(Unit.Default);
         }
-
-        _shown.OnNext(Unit.Default);
     }
 }

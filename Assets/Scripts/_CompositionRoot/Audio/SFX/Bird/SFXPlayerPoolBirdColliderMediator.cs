@@ -1,3 +1,4 @@
+using AngryBirds3D.Bird.Entity;
 using Ovoshnig.Audio.SFX.Playing;
 using Ovoshnig.Mediation;
 using Ovoshnig.ObjectCollision.Collision;

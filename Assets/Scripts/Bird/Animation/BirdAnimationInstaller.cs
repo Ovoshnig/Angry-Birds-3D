@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdAnimationInstaller : IInstaller
+namespace AngryBirds3D.Bird.Animation
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<WhiteBirdAnimatorViewPowerActivatorMediator>();
+    [Serializable]
+    public class BirdAnimationInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<WhiteBirdAnimatorViewPowerActivatorMediator>();
+    }
 }

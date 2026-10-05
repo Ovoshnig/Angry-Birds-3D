@@ -1,3 +1,4 @@
+using AngryBirds3D.LevelScore.Points;
 using Ovoshnig.Mediation;
 using Ovoshnig.ObjectDestruction.Destruction;
 using Ovoshnig.ObjectDestruction.Entity;

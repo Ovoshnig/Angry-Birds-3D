@@ -1,59 +1,65 @@
+using AngryBirds3D.Bird.Destruction;
+using AngryBirds3D.Bird.Entity;
+using AngryBirds3D.Bird.Flight;
 using Ovoshnig.GameSettings.BirdPower;
 using R3;
 using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-public class SplitInto3BirdPower : IBirdPower, IDisposable
+namespace AngryBirds3D.Bird.Power
 {
-    private readonly SplitInto3PowerSettings _powerSettings;
-    private readonly Subject<BirdEntityView> _cloneCreated = new();
-
-    public SplitInto3BirdPower(SplitInto3PowerSettings powerSettings) => _powerSettings = powerSettings;
-
-    public BirdPowerType Type => BirdPowerType.SplitInto3;
-    public Observable<BirdEntityView> CloneCreated => _cloneCreated;
-
-    public void Activate(BirdEntityView birdEntityView)
+    public class SplitInto3BirdPower : IBirdPower, IDisposable
     {
-        Vector3 position = birdEntityView.transform.position;
-        Vector3 rotation = birdEntityView.transform.localEulerAngles;
-        float velocityMagnitude = birdEntityView.FlyerView.Rigidbody.linearVelocity.magnitude;
+        private readonly SplitInto3PowerSettings _powerSettings;
+        private readonly Subject<BirdEntityView> _cloneCreated = new();
 
-        BirdEntityView firstClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
-            -_powerSettings.SplitAngleDiff);
+        public SplitInto3BirdPower(SplitInto3PowerSettings powerSettings) => _powerSettings = powerSettings;
 
-        BirdEntityView secondClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
-            _powerSettings.SplitAngleDiff);
+        public BirdPowerType Type => BirdPowerType.SplitInto3;
+        public Observable<BirdEntityView> CloneCreated => _cloneCreated;
 
-        BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
-        destroyerView.AddClone(firstClone.DestroyerView);
-        destroyerView.AddClone(secondClone.DestroyerView);
+        public void Activate(BirdEntityView birdEntityView)
+        {
+            Vector3 position = birdEntityView.transform.position;
+            Vector3 rotation = birdEntityView.transform.localEulerAngles;
+            float velocityMagnitude = birdEntityView.FlyerView.Rigidbody.linearVelocity.magnitude;
 
-        BirdFlyerView flyerView = birdEntityView.FlyerView;
-        flyerView.AddClone(firstClone.FlyerView);
-        flyerView.AddClone(secondClone.FlyerView);
+            BirdEntityView firstClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
+                -_powerSettings.SplitAngleDiff);
 
-        _cloneCreated.OnNext(firstClone);
-        _cloneCreated.OnNext(secondClone);
-    }
+            BirdEntityView secondClone = CreateClone(birdEntityView, position, rotation, velocityMagnitude,
+                _powerSettings.SplitAngleDiff);
 
-    public void Dispose() => _cloneCreated.Dispose();
+            BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
+            destroyerView.AddClone(firstClone.DestroyerView);
+            destroyerView.AddClone(secondClone.DestroyerView);
 
-    private BirdEntityView CreateClone(BirdEntityView original,
-        Vector3 basePosition,
-        Vector3 baseRotation,
-        float velocityMagnitude,
-        float angleOffset)
-    {
-        Vector3 cloneRotation = baseRotation;
-        cloneRotation.x += angleOffset;
+            BirdFlyerView flyerView = birdEntityView.FlyerView;
+            flyerView.AddClone(firstClone.FlyerView);
+            flyerView.AddClone(secondClone.FlyerView);
 
-        BirdEntityView clone = Object.Instantiate(original, basePosition, Quaternion.Euler(cloneRotation));
+            _cloneCreated.OnNext(firstClone);
+            _cloneCreated.OnNext(secondClone);
+        }
 
-        clone.transform.localScale = Vector3.one;
-        clone.FlyerView.Rigidbody.linearVelocity = velocityMagnitude * clone.transform.forward.normalized;
+        public void Dispose() => _cloneCreated.Dispose();
 
-        return clone;
+        private BirdEntityView CreateClone(BirdEntityView original,
+            Vector3 basePosition,
+            Vector3 baseRotation,
+            float velocityMagnitude,
+            float angleOffset)
+        {
+            Vector3 cloneRotation = baseRotation;
+            cloneRotation.x += angleOffset;
+
+            BirdEntityView clone = Object.Instantiate(original, basePosition, Quaternion.Euler(cloneRotation));
+
+            clone.transform.localScale = Vector3.one;
+            clone.FlyerView.Rigidbody.linearVelocity = velocityMagnitude * clone.transform.forward.normalized;
+
+            return clone;
+        }
     }
 }

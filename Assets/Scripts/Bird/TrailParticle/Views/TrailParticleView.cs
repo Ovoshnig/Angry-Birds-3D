@@ -4,66 +4,69 @@ using LitMotion.Extensions;
 using Ovoshnig.GameSettings;
 using UnityEngine;
 
-[RequireComponent(typeof(ParticleSystem))]
-public class TrailParticleView : MonoBehaviour
+namespace AngryBirds3D.Bird.TrailParticle
 {
-    [SerializeField] private GameSettings _gameSettings;
-    [SerializeField, Min(0f)] private float _disappearanceDuration = 0.5f;
-
-    private ParticleSystem _particleSystem;
-    private ParticleSystem.MainModule _mainModule;
-    private ParticleSystem.EmissionModule _emissionModule;
-    private MotionHandle _scaleHandle;
-    private ParticleSystem.MinMaxCurve _startSize;
-
-    private void Awake()
+    [RequireComponent(typeof(ParticleSystem))]
+    public class TrailParticleView : MonoBehaviour
     {
-        _particleSystem = GetComponent<ParticleSystem>();
+        [SerializeField] private GameSettings _gameSettings;
+        [SerializeField, Min(0f)] private float _disappearanceDuration = 0.5f;
 
-        _mainModule = _particleSystem.main;
-        _startSize = _mainModule.startSize;
+        private ParticleSystem _particleSystem;
+        private ParticleSystem.MainModule _mainModule;
+        private ParticleSystem.EmissionModule _emissionModule;
+        private MotionHandle _scaleHandle;
+        private ParticleSystem.MinMaxCurve _startSize;
 
-        _emissionModule = _particleSystem.emission;
-    }
+        private void Awake()
+        {
+            _particleSystem = GetComponent<ParticleSystem>();
 
-    public void Play(Transform birdTransform)
-    {
-        _scaleHandle.TryCancel();
+            _mainModule = _particleSystem.main;
+            _startSize = _mainModule.startSize;
 
-        transform.SetParent(birdTransform);
-        transform.localPosition = Vector3.zero;
-        transform.localScale = Vector3.one;
+            _emissionModule = _particleSystem.emission;
+        }
 
-        _particleSystem.Play();
-        _emissionModule.enabled = true;
-    }
+        public void Play(Transform birdTransform)
+        {
+            _scaleHandle.TryCancel();
 
-    public void StopEmitting()
-    {
-        transform.SetParent(null);
-        transform.localScale = Vector3.one;
+            transform.SetParent(birdTransform);
+            transform.localPosition = Vector3.zero;
+            transform.localScale = Vector3.one;
 
-        _emissionModule.enabled = false;
-    }
+            _particleSystem.Play();
+            _emissionModule.enabled = true;
+        }
 
-    public async UniTask StopAsync()
-    {
-        _scaleHandle.TryCancel();
+        public void StopEmitting()
+        {
+            transform.SetParent(null);
+            transform.localScale = Vector3.one;
 
-        _scaleHandle = LMotion.Create(Vector3.one, Vector3.zero, _disappearanceDuration)
-            .WithEase(Ease.InSine)
-            .BindToLocalScale(transform);
+            _emissionModule.enabled = false;
+        }
 
-        await _scaleHandle.ToUniTask(destroyCancellationToken);
+        public async UniTask StopAsync()
+        {
+            _scaleHandle.TryCancel();
 
-        _particleSystem.Stop();
-        _particleSystem.Clear();
-    }
+            _scaleHandle = LMotion.Create(Vector3.one, Vector3.zero, _disappearanceDuration)
+                .WithEase(Ease.InSine)
+                .BindToLocalScale(transform);
 
-    public void EmitPowerParticle()
-    {
-        _mainModule.startSize = _gameSettings.TrailParticleSettings.PowerParticleSize;
-        _particleSystem.Emit(1);
-        _mainModule.startSize = _startSize;
+            await _scaleHandle.ToUniTask(destroyCancellationToken);
+
+            _particleSystem.Stop();
+            _particleSystem.Clear();
+        }
+
+        public void EmitPowerParticle()
+        {
+            _mainModule.startSize = _gameSettings.TrailParticleSettings.PowerParticleSize;
+            _particleSystem.Emit(1);
+            _mainModule.startSize = _startSize;
+        }
     }
 }

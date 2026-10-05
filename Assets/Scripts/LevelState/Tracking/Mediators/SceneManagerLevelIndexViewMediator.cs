@@ -4,7 +4,7 @@ using Ovoshnig.UI.Basic;
 using R3;
 using UnityEngine.SceneManagement;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     public class SceneManagerLevelIndexViewMediator : UIViewMediator<LevelIndexView>
     {

@@ -1,7 +1,13 @@
+using AngryBirds3D.Bird;
+using AngryBirds3D.Block;
+using AngryBirds3D.Camera;
+using AngryBirds3D.LevelScore;
+using AngryBirds3D.LevelState;
+using AngryBirds3D.Pig;
+using AngryBirds3D.Slingshot;
 using Ovoshnig.Audio.SFX;
 using Ovoshnig.Audio.Tuning;
 using Ovoshnig.GameState.Pause;
-using Ovoshnig.LevelState;
 using Ovoshnig.ObjectCollision;
 using Ovoshnig.ObjectDestruction.Destruction;
 using Ovoshnig.Scene.Switching;

@@ -1,3 +1,4 @@
+using AngryBirds3D.Bird.Power;
 using Ovoshnig.Audio.SFX.Playing;
 using Ovoshnig.Mediation;
 using R3;

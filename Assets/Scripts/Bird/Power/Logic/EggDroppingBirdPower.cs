@@ -1,3 +1,4 @@
+using AngryBirds3D.Bird.Entity;
 using Ovoshnig.GameSettings.BirdPower;
 using R3;
 using System;
@@ -5,58 +6,61 @@ using UnityEngine;
 using UnityEngine.Audio;
 using Object = UnityEngine.Object;
 
-public class EggDroppingBirdPower : IBirdPower, IDisposable
+namespace AngryBirds3D.Bird.Power
 {
-    private readonly BirdExploder _birdExploder;
-    private readonly EggDroppingPowerSettings _powerSettings;
-    private readonly Collider[] _colliders;
-    private readonly Subject<EggEntityView> _eggDropped = new();
-    private readonly CompositeDisposable _disposables = new();
-
-    public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
+    public class EggDroppingBirdPower : IBirdPower, IDisposable
     {
-        _birdExploder = birdExploder;
-        _powerSettings = powerSettings;
+        private readonly BirdExploder _birdExploder;
+        private readonly EggDroppingPowerSettings _powerSettings;
+        private readonly Collider[] _colliders;
+        private readonly Subject<EggEntityView> _eggDropped = new();
+        private readonly CompositeDisposable _disposables = new();
 
-        _colliders = new Collider[powerSettings.MaxExplosiveCount];
-    }
+        public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
+        {
+            _birdExploder = birdExploder;
+            _powerSettings = powerSettings;
 
-    public BirdPowerType Type => BirdPowerType.EggDropping;
-    public Observable<EggEntityView> EggDropped => _eggDropped;
+            _colliders = new Collider[powerSettings.MaxExplosiveCount];
+        }
 
-    public void Activate(BirdEntityView birdEntityView)
-    {
-        EggEntityView eggEntityView = birdEntityView.GetComponentInChildren<EggEntityView>();
+        public BirdPowerType Type => BirdPowerType.EggDropping;
+        public Observable<EggEntityView> EggDropped => _eggDropped;
 
-        Transform eggTransform = eggEntityView.transform;
-        eggTransform.SetParent(null);
-        eggTransform.rotation = Quaternion.identity;
+        public void Activate(BirdEntityView birdEntityView)
+        {
+            EggEntityView eggEntityView = birdEntityView.GetComponentInChildren<EggEntityView>();
 
-        Rigidbody eggRigidbody = eggEntityView.Rigidbody;
-        eggRigidbody.isKinematic = false;
-        eggRigidbody.AddForce(_powerSettings.DropForce * Vector3.down, ForceMode.Impulse);
-        _eggDropped.OnNext(eggEntityView);
+            Transform eggTransform = eggEntityView.transform;
+            eggTransform.SetParent(null);
+            eggTransform.rotation = Quaternion.identity;
 
-        birdEntityView.FlyerView.Rigidbody.AddForce(_powerSettings.RecoilForce * Vector3.up,
-            ForceMode.Impulse);
+            Rigidbody eggRigidbody = eggEntityView.Rigidbody;
+            eggRigidbody.isKinematic = false;
+            eggRigidbody.AddForce(_powerSettings.DropForce * Vector3.down, ForceMode.Impulse);
+            _eggDropped.OnNext(eggEntityView);
 
-        eggEntityView.ColliderView.Collided
-            .Take(1)
-            .Subscribe(_ => OnEggCollided(eggEntityView, birdEntityView.SfxProfile.ExplosionResource))
-            .AddTo(_disposables);
-    }
+            birdEntityView.FlyerView.Rigidbody.AddForce(_powerSettings.RecoilForce * Vector3.up,
+                ForceMode.Impulse);
 
-    public void Dispose()
-    {
-        _disposables.Dispose();
-        _eggDropped.Dispose();
-    }
+            eggEntityView.ColliderView.Collided
+                .Take(1)
+                .Subscribe(_ => OnEggCollided(eggEntityView, birdEntityView.SfxProfile.ExplosionResource))
+                .AddTo(_disposables);
+        }
 
-    private void OnEggCollided(EggEntityView eggEntityView, AudioResource explosionResource)
-    {
-        _birdExploder.Explode(eggEntityView.gameObject, _colliders, _powerSettings.ExplosionForce,
-            _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier, explosionResource);
+        public void Dispose()
+        {
+            _disposables.Dispose();
+            _eggDropped.Dispose();
+        }
 
-        Object.Destroy(eggEntityView.gameObject);
+        private void OnEggCollided(EggEntityView eggEntityView, AudioResource explosionResource)
+        {
+            _birdExploder.Explode(eggEntityView.gameObject, _colliders, _powerSettings.ExplosionForce,
+                _powerSettings.ExplosionRadius, _powerSettings.UpwardsModifier, explosionResource);
+
+            Object.Destroy(eggEntityView.gameObject);
+        }
     }
 }

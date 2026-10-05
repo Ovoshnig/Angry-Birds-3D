@@ -1,3 +1,4 @@
+using AngryBirds3D.LevelScore.Points;
 using UnityEngine;
 
 namespace Ovoshnig.ObjectDestruction.Entity

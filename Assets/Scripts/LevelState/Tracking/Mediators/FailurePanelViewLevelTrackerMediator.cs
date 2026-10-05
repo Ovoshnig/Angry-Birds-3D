@@ -1,9 +1,10 @@
+using AngryBirds3D.Camera.Switching;
 using Cysharp.Threading.Tasks;
 using Ovoshnig.Mediation;
 using R3;
 using System.Threading;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     public class FailurePanelViewLevelTrackerMediator : Mediator
     {

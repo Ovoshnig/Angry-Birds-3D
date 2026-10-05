@@ -1,4 +1,4 @@
-﻿using Ovoshnig.Cursor.State;
+using Ovoshnig.Cursor.State;
 using Ovoshnig.Mediation;
 using Ovoshnig.Window.Window;
 using R3;

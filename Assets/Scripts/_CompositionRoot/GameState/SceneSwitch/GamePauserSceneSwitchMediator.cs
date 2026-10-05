@@ -1,4 +1,4 @@
-﻿using Ovoshnig.GameState.Pause;
+using Ovoshnig.GameState.Pause;
 using Ovoshnig.Mediation;
 using Ovoshnig.Scene.Switching;
 using R3;

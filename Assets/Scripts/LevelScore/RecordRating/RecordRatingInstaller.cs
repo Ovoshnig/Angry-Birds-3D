@@ -3,17 +3,20 @@ using VContainer;
 using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class RecordRatingInstaller : IInstaller
+namespace AngryBirds3D.LevelScore.RecordRating
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class RecordRatingInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<RecordRatingView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<RecordRatingSaver>().AsSelf();
-            entryPoints.Add<RecordRatingSaverViewMediator>();
-        });
+            builder.RegisterInstanceInHierarchy<RecordRatingView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<RecordRatingSaver>().AsSelf();
+                entryPoints.Add<RecordRatingSaverViewMediator>();
+            });
+        }
     }
 }

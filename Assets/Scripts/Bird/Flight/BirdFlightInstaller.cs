@@ -1,15 +1,18 @@
-﻿using System;
+using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdFlightInstaller : IInstaller
+namespace AngryBirds3D.Bird.Flight
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class BirdFlightInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<Terrain>();
-        builder.Register<BirdFlyer>(Lifetime.Singleton);
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstanceInHierarchy<Terrain>();
+            builder.Register<BirdFlyer>(Lifetime.Singleton);
+        }
     }
 }

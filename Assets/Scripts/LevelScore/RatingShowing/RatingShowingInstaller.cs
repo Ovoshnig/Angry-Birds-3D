@@ -3,17 +3,20 @@ using VContainer;
 using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class RatingShowingInstaller : IInstaller
+namespace AngryBirds3D.LevelScore.RatingShowing
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class RatingShowingInstaller : IInstaller
     {
-        builder.RegisterInstancesInHierarchy<RatingShowerView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<RatingShower>().AsSelf();
-            entryPoints.Add<RatingShowerViewsMediator>();
-        });
+            builder.RegisterInstancesInHierarchy<RatingShowerView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<RatingShower>().AsSelf();
+                entryPoints.Add<RatingShowerViewsMediator>();
+            });
+        }
     }
 }

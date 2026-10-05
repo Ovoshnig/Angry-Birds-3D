@@ -1,9 +1,10 @@
 using Ovoshnig.Scene.Switching;
 using System;
 using VContainer;
+using VContainer.Extensions;
 using VContainer.Unity;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     [Serializable]
     public class LevelStateTrackingInstaller : IInstaller

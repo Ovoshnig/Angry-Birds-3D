@@ -1,32 +1,36 @@
+using AngryBirds3D.Bird.Entity;
 using Ovoshnig.Mediation;
 using Ovoshnig.ObjectCollision.Collision;
 using R3;
 
-public class FeatherParticleViewObjectColliderMediator : Mediator
+namespace AngryBirds3D.Bird.FeatherParticle
 {
-    private readonly FeatherParticleView _featherParticleView;
-    private readonly ObjectCollider _objectCollider;
-
-    public FeatherParticleViewObjectColliderMediator(FeatherParticleView featherParticleView,
-        ObjectCollider objectCollider)
+    public class FeatherParticleViewObjectColliderMediator : Mediator
     {
-        _featherParticleView = featherParticleView;
-        _objectCollider = objectCollider;
-    }
+        private readonly FeatherParticleView _featherParticleView;
+        private readonly ObjectCollider _objectCollider;
 
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _objectCollider.Collided
-            .Where(data => data.EntityView is BirdEntityView)
-            .Subscribe(OnCollided)
-            .AddTo(disposables);
-    }
+        public FeatherParticleViewObjectColliderMediator(FeatherParticleView featherParticleView,
+            ObjectCollider objectCollider)
+        {
+            _featherParticleView = featherParticleView;
+            _objectCollider = objectCollider;
+        }
 
-    private void OnCollided(CollisionData data)
-    {
-        if (data.EntityView is not BirdEntityView birdEntityView)
-            return;
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _objectCollider.Collided
+                .Where(data => data.EntityView is BirdEntityView)
+                .Subscribe(OnCollided)
+                .AddTo(disposables);
+        }
 
-        _featherParticleView.Emit(birdEntityView.transform.position, birdEntityView.FeatherColor, data.Force);
+        private void OnCollided(CollisionData data)
+        {
+            if (data.EntityView is not BirdEntityView birdEntityView)
+                return;
+
+            _featherParticleView.Emit(birdEntityView.transform.position, birdEntityView.FeatherColor, data.Force);
+        }
     }
 }

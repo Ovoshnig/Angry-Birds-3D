@@ -1,7 +1,8 @@
+using AngryBirds3D.Bird.Points;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     public class ClearingPanelViewBirdPointsDisplayerMediator : Mediator
     {

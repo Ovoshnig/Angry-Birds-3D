@@ -1,3 +1,5 @@
+using AngryBirds3D.Bird.Power;
+using AngryBirds3D.Camera.Switching;
 using Cysharp.Threading.Tasks;
 using Ovoshnig.Mediation;
 using R3;

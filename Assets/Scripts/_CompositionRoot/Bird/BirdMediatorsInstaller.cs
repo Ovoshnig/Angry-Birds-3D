@@ -1,4 +1,4 @@
-﻿using VContainer;
+using VContainer;
 using VContainer.Unity;
 
 public class BirdMediatorsInstaller : IInstaller

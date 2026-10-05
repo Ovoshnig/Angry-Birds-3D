@@ -1,17 +1,22 @@
-﻿using System;
+using AngryBirds3D.Block.Entity;
+using AngryBirds3D.Block.Particle;
+using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BlockInstaller : IInstaller
+namespace AngryBirds3D.Block
 {
-    [SerializeField] private BlockEntityInstaller _entityInstaller;
-    [SerializeField] private BlockParticleInstaller _particleInstaller;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class BlockInstaller : IInstaller
     {
-        _entityInstaller.Install(builder);
-        _particleInstaller.Install(builder);
+        [SerializeField] private BlockEntityInstaller _entityInstaller;
+        [SerializeField] private BlockParticleInstaller _particleInstaller;
+
+        public void Install(IContainerBuilder builder)
+        {
+            _entityInstaller.Install(builder);
+            _particleInstaller.Install(builder);
+        }
     }
 }

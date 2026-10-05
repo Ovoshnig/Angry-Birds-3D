@@ -1,20 +1,23 @@
-﻿using System;
+using System;
 using VContainer;
 using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class ScoreInstaller : IInstaller
+namespace AngryBirds3D.LevelScore.Score
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class ScoreInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<ScoreView>();
-        builder.Register<ScoreModel>(Lifetime.Singleton);
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<ScoreModelViewMediator>();
-            entryPoints.Add<ScoreModelPointsPoolMediator>();
-        });
+            builder.RegisterInstanceInHierarchy<ScoreView>();
+            builder.Register<ScoreModel>(Lifetime.Singleton);
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<ScoreModelViewMediator>();
+                entryPoints.Add<ScoreModelPointsPoolMediator>();
+            });
+        }
     }
 }

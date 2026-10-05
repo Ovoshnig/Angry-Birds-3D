@@ -1,11 +1,11 @@
+using AngryBirds3D.Bird.Flight;
 using Ovoshnig.GameSettings;
 using Ovoshnig.ObjectCollision.Collision;
 using R3;
 using System;
-using UnityEngine;
 using VContainer.Unity;
 
-namespace Ovoshnig.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking
 {
     public class ActivityTracker : IStartable, IDisposable
     {
