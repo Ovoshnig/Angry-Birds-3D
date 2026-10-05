@@ -1,15 +1,18 @@
 using VContainer;
 using VContainer.Unity;
 
-public class CursorMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder)
+    public class CursorMediatorsInstaller : IInstaller
     {
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<CursorStateModelSlingshotShooterMediator>();
-            entryPoints.Add<CursorStateModelWindowTrackerMediator>();
-            entryPoints.Add<CursorStateModelCompletionPanelViewsMediator>();
-        });
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<CursorStateModelSlingshotShooterMediator>();
+                entryPoints.Add<CursorStateModelWindowTrackerMediator>();
+                entryPoints.Add<CursorStateModelCompletionPanelViewsMediator>();
+            });
+        }
     }
 }

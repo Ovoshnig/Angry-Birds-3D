@@ -4,22 +4,25 @@ using Cysharp.Threading.Tasks;
 using Ovoshnig.Mediation;
 using R3;
 
-public class SlingshotShooterLevelTrackerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly SlingshotShooter _slingshotShooter;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public SlingshotShooterLevelTrackerMediator(SlingshotShooter slingshotShooter,
-        LevelStateTracker levelStateTracker)
+    public class SlingshotShooterLevelTrackerMediator : Mediator
     {
-        _slingshotShooter = slingshotShooter;
-        _levelStateTracker = levelStateTracker;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _levelStateTracker.Completed
-            .Subscribe(_ => _slingshotShooter.StopShooting())
-            .AddTo(disposables);
+        private readonly SlingshotShooter _slingshotShooter;
+        private readonly LevelStateTracker _levelStateTracker;
+    
+        public SlingshotShooterLevelTrackerMediator(SlingshotShooter slingshotShooter,
+            LevelStateTracker levelStateTracker)
+        {
+            _slingshotShooter = slingshotShooter;
+            _levelStateTracker = levelStateTracker;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _levelStateTracker.Completed
+                .Subscribe(_ => _slingshotShooter.StopShooting())
+                .AddTo(disposables);
+        }
     }
 }

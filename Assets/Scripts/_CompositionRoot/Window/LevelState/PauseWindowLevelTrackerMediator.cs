@@ -3,21 +3,24 @@ using Ovoshnig.Mediation;
 using Ovoshnig.Window.Window;
 using R3;
 
-public class PauseWindowLevelTrackerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly PauseMenuWindow _pauseMenuWindow;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public PauseWindowLevelTrackerMediator(PauseMenuWindow pauseMenuWindow, LevelStateTracker levelStateTracker)
+    public class PauseWindowLevelTrackerMediator : Mediator
     {
-        _pauseMenuWindow = pauseMenuWindow;
-        _levelStateTracker = levelStateTracker;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _levelStateTracker.Completed
-            .Subscribe(_ => _pauseMenuWindow.StopToggling())
-            .AddTo(disposables);
+        private readonly PauseMenuWindow _pauseMenuWindow;
+        private readonly LevelStateTracker _levelStateTracker;
+    
+        public PauseWindowLevelTrackerMediator(PauseMenuWindow pauseMenuWindow, LevelStateTracker levelStateTracker)
+        {
+            _pauseMenuWindow = pauseMenuWindow;
+            _levelStateTracker = levelStateTracker;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _levelStateTracker.Completed
+                .Subscribe(_ => _pauseMenuWindow.StopToggling())
+                .AddTo(disposables);
+        }
     }
 }

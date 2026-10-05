@@ -4,22 +4,25 @@ using AngryBirds3D.Slingshot.Shooting;
 using Ovoshnig.Mediation;
 using R3;
 
-public class BirdFlyerSlingshotShooterMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly BirdFlyer _birdFlyer;
-    private readonly SlingshotShooter _slingshotShooter;
-
-    public BirdFlyerSlingshotShooterMediator(BirdFlyer birdFlyer,
-        SlingshotShooter slingshotShooter)
+    public class BirdFlyerSlingshotShooterMediator : Mediator
     {
-        _birdFlyer = birdFlyer;
-        _slingshotShooter = slingshotShooter;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _slingshotShooter.Shot
-            .Subscribe(birdRigidbody => _birdFlyer.StartFlight(birdRigidbody.GetComponent<BirdEntityView>()))
-            .AddTo(disposables);
+        private readonly BirdFlyer _birdFlyer;
+        private readonly SlingshotShooter _slingshotShooter;
+    
+        public BirdFlyerSlingshotShooterMediator(BirdFlyer birdFlyer,
+            SlingshotShooter slingshotShooter)
+        {
+            _birdFlyer = birdFlyer;
+            _slingshotShooter = slingshotShooter;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _slingshotShooter.Shot
+                .Subscribe(birdRigidbody => _birdFlyer.StartFlight(birdRigidbody.GetComponent<BirdEntityView>()))
+                .AddTo(disposables);
+        }
     }
 }

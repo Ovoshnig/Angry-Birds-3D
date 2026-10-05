@@ -1,8 +1,11 @@
 using VContainer;
 using VContainer.Unity;
 
-public class AudioTuningMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<AudioMixerTunerGamePauserMediator>();
+    public class AudioTuningMediatorsInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<AudioMixerTunerGamePauserMediator>();
+    }
 }

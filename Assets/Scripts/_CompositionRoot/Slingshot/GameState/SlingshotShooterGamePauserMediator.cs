@@ -3,21 +3,24 @@ using Ovoshnig.GameState.Pause;
 using Ovoshnig.Mediation;
 using R3;
 
-public class SlingshotShooterGamePauserMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly SlingshotShooter _slingshotShooter;
-    private readonly GamePauser _gamePauser;
-
-    public SlingshotShooterGamePauserMediator(SlingshotShooter slingshotShooter, GamePauser gamePauser)
+    public class SlingshotShooterGamePauserMediator : Mediator
     {
-        _slingshotShooter = slingshotShooter;
-        _gamePauser = gamePauser;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _gamePauser.IsPaused
-            .Subscribe(_slingshotShooter.SetPause)
-            .AddTo(disposables);
+        private readonly SlingshotShooter _slingshotShooter;
+        private readonly GamePauser _gamePauser;
+    
+        public SlingshotShooterGamePauserMediator(SlingshotShooter slingshotShooter, GamePauser gamePauser)
+        {
+            _slingshotShooter = slingshotShooter;
+            _gamePauser = gamePauser;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _gamePauser.IsPaused
+                .Subscribe(_slingshotShooter.SetPause)
+                .AddTo(disposables);
+        }
     }
 }
