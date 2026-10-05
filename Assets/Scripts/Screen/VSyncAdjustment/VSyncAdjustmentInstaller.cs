@@ -1,19 +1,22 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class VSyncAdjustmentInstaller : IInstaller
+namespace Ovoshnig.Screen.VSyncAdjustment
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class VSyncAdjustmentInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<VSyncAdjustToggleView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<VSyncAdjuster>().AsSelf();
-            entryPoints.Add<VSyncAdjusterToggleViewMediator>();
-        });
+            builder.RegisterInstanceInHierarchy<VSyncAdjustToggleView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<VSyncAdjuster>().AsSelf();
+                entryPoints.Add<VSyncAdjusterToggleViewMediator>();
+            });
+        }
     }
 }

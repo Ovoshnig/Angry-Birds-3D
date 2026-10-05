@@ -2,8 +2,11 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class CursorShowingInstaller : IInstaller
+namespace Ovoshnig.Cursor.Showing
 {
-    public void Install(IContainerBuilder builder) => builder.Register<CursorShower>(Lifetime.Singleton);
+    [Serializable]
+    public class CursorShowingInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) => builder.Register<CursorShower>(Lifetime.Singleton);
+    }
 }

@@ -1,16 +1,20 @@
-﻿using R3;
+using Ovoshnig.UI.Basic;
+using R3;
 
-public class GameQuitterButtonViewMediator : UIViewMediator<GameQuitButtonView>
+namespace Ovoshnig.GameState.Quitting
 {
-    private readonly GameQuitter _gameQuitter;
-
-    public GameQuitterButtonViewMediator(GameQuitter gameQuitter, GameQuitButtonView view)
-        : base(view) => _gameQuitter = gameQuitter;
-
-    protected override void OnViewEnabled(GameQuitButtonView view, CompositeDisposable viewDisposables)
+    public class GameQuitterButtonViewMediator : UIViewMediator<GameQuitButtonView>
     {
-        view.Clicked
-            .Subscribe(_ => _gameQuitter.Quit())
-            .AddTo(viewDisposables);
+        private readonly GameQuitter _gameQuitter;
+
+        public GameQuitterButtonViewMediator(GameQuitter gameQuitter, GameQuitButtonView view)
+            : base(view) => _gameQuitter = gameQuitter;
+
+        protected override void OnViewEnabled(GameQuitButtonView view, CompositeDisposable viewDisposables)
+        {
+            view.Clicked
+                .Subscribe(_ => _gameQuitter.Quit())
+                .AddTo(viewDisposables);
+        }
     }
 }

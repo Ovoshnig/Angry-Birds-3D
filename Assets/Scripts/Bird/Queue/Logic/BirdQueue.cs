@@ -1,32 +1,36 @@
+using AngryBirds3D.Bird.Entity;
 using System.Collections.Generic;
 using System.Linq;
 using VContainer.Unity;
 
-public class BirdQueue : IStartable
+namespace AngryBirds3D.Bird.Queue
 {
-    private readonly Queue<BirdEntityView> _queue;
-
-    public BirdQueue(IReadOnlyList<BirdEntityView> entityViews) =>
-        _queue = new Queue<BirdEntityView>(entityViews);
-
-    public bool Any => _queue.Any();
-
-    public void Start()
+    public class BirdQueue : IStartable
     {
-        foreach (var entityView in _queue)
-            entityView.FlyerView.Rigidbody.detectCollisions = false;
-    }
+        private readonly Queue<BirdEntityView> _queue;
 
-    public bool TryDequeueBird(out BirdEntityView birdEntityView)
-    {
-        if (_queue.TryDequeue(out BirdEntityView entityView))
+        public BirdQueue(IReadOnlyList<BirdEntityView> entityViews) =>
+            _queue = new Queue<BirdEntityView>(entityViews);
+
+        public bool Any => _queue.Any();
+
+        public void Start()
         {
-            entityView.transform.SetParent(null);
-            birdEntityView = entityView;
-            return true;
+            foreach (var entityView in _queue)
+                entityView.FlyerView.Rigidbody.detectCollisions = false;
         }
 
-        birdEntityView = null;
-        return false;
+        public bool TryDequeueBird(out BirdEntityView birdEntityView)
+        {
+            if (_queue.TryDequeue(out BirdEntityView entityView))
+            {
+                entityView.transform.SetParent(null);
+                birdEntityView = entityView;
+                return true;
+            }
+
+            birdEntityView = null;
+            return false;
+        }
     }
 }

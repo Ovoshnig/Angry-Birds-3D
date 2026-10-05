@@ -1,21 +1,27 @@
+using AngryBirds3D.Bird.Points;
+using AngryBirds3D.LevelScore.Points;
+using Ovoshnig.Mediation;
 using R3;
 
-public class PointsPoolBirdDisplayerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly PointsObjectPool _pointsObjectPool;
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
-
-    public PointsPoolBirdDisplayerMediator(PointsObjectPool pointsObjectPool,
-        BirdPointsDisplayer birdPointsDisplayer)
+    public class PointsPoolBirdDisplayerMediator : Mediator
     {
-        _pointsObjectPool = pointsObjectPool;
-        _birdPointsDisplayer = birdPointsDisplayer;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _birdPointsDisplayer.PointsDisplayStarted
-            .Subscribe(data => _pointsObjectPool.ShowPoints(data.Position, data.PointsSettings))
-            .AddTo(disposables);
+        private readonly PointsObjectPool _pointsObjectPool;
+        private readonly BirdPointsDisplayer _birdPointsDisplayer;
+    
+        public PointsPoolBirdDisplayerMediator(PointsObjectPool pointsObjectPool,
+            BirdPointsDisplayer birdPointsDisplayer)
+        {
+            _pointsObjectPool = pointsObjectPool;
+            _birdPointsDisplayer = birdPointsDisplayer;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _birdPointsDisplayer.PointsDisplayStarted
+                .Subscribe(data => _pointsObjectPool.ShowPoints(data.Position, data.PointsSettings))
+                .AddTo(disposables);
+        }
     }
 }

@@ -1,32 +1,36 @@
+using Ovoshnig.Mediation;
 using R3;
 
-public abstract class UIViewMediator<TView> : Mediator where TView : UIView
+namespace Ovoshnig.UI.Basic
 {
-    private readonly TView _view;
-    private readonly CompositeDisposable _viewDisposables = new();
-
-    public UIViewMediator(TView view) => _view = view;
-
-    protected override void Bind(CompositeDisposable disposables)
+    public abstract class UIViewMediator<TView> : Mediator where TView : UIView
     {
-        _view.IsEnabled
-            .Subscribe(enabled =>
-            {
-                if (enabled)
-                    OnViewEnabled(_view, _viewDisposables);
-                else
-                    OnViewDisabled(_view);
-            })
-            .AddTo(disposables);
+        private readonly TView _view;
+        private readonly CompositeDisposable _viewDisposables = new();
+
+        public UIViewMediator(TView view) => _view = view;
+
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _view.IsEnabled
+                .Subscribe(enabled =>
+                {
+                    if (enabled)
+                        OnViewEnabled(_view, _viewDisposables);
+                    else
+                        OnViewDisabled(_view);
+                })
+                .AddTo(disposables);
+        }
+
+        protected override void Unbind()
+        {
+            base.Unbind();
+            _viewDisposables.Dispose();
+        }
+
+        protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
+
+        protected virtual void OnViewDisabled(TView view) => _viewDisposables.Clear();
     }
-
-    protected override void Unbind()
-    {
-        base.Unbind();
-        _viewDisposables.Dispose();
-    }
-
-    protected abstract void OnViewEnabled(TView view, CompositeDisposable viewDisposables);
-
-    protected virtual void OnViewDisabled(TView view) => _viewDisposables.Clear();
 }

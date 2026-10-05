@@ -1,16 +1,19 @@
-﻿using UnityEngine.Audio;
+using UnityEngine.Audio;
 
-public class AudioMixerTuner
+namespace Ovoshnig.Audio.Tuning
 {
-    private readonly AudioMixer _audioMixer;
-
-    public AudioMixerTuner(AudioMixer audioMixer) => _audioMixer = audioMixer;
-
-    public bool SetVolume(string parameterName, float value) => _audioMixer.SetFloat(parameterName, value);
-
-    public void SetPause(bool isPaused)
+    public class AudioMixerTuner
     {
-        float targetPitch = isPaused ? 0f : 1f;
-        _audioMixer.SetFloat(AudioMixerConstants.SFXPitchParameter, targetPitch);
+        private readonly AudioMixer _audioMixer;
+
+        public AudioMixerTuner(AudioMixer audioMixer) => _audioMixer = audioMixer;
+
+        public bool SetVolume(string parameterName, float value) => _audioMixer.SetFloat(parameterName, value);
+
+        public void SetPause(bool isPaused)
+        {
+            float targetPitch = isPaused ? 0f : 1f;
+            _audioMixer.SetFloat(AudioMixerConstants.SFXPitchParameter, targetPitch);
+        }
     }
 }

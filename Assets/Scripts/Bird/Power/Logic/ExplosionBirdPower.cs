@@ -1,22 +1,27 @@
+using AngryBirds3D.Bird.Entity;
+using Ovoshnig.GameSettings.BirdPower;
 using UnityEngine;
 
-public class ExplosionBirdPower : IBirdPower
+namespace AngryBirds3D.Bird.Power
 {
-    private readonly BirdExploder _birdExploder;
-    private readonly ExplosionPowerSettings _powerSettings;
-    private readonly Collider[] _colliders;
-
-    public ExplosionBirdPower(BirdExploder birdExploder, ExplosionPowerSettings powerSettings)
+    public class ExplosionBirdPower : IBirdPower
     {
-        _birdExploder = birdExploder;
-        _powerSettings = powerSettings;
+        private readonly BirdExploder _birdExploder;
+        private readonly ExplosionPowerSettings _powerSettings;
+        private readonly Collider[] _colliders;
 
-        _colliders = new Collider[powerSettings.MaxExplosiveCount];
+        public ExplosionBirdPower(BirdExploder birdExploder, ExplosionPowerSettings powerSettings)
+        {
+            _birdExploder = birdExploder;
+            _powerSettings = powerSettings;
+
+            _colliders = new Collider[powerSettings.MaxExplosiveCount];
+        }
+
+        public BirdPowerType Type => BirdPowerType.Explosion;
+
+        public void Activate(BirdEntityView birdEntityView) => _birdExploder.Explode(birdEntityView.gameObject,
+            _colliders, _powerSettings.ExplosionForce, _powerSettings.ExplosionRadius,
+            _powerSettings.UpwardsModifier, birdEntityView.SfxProfile.ExplosionResource);
     }
-
-    public BirdPowerType Type => BirdPowerType.Explosion;
-
-    public void Activate(BirdEntityView birdEntityView) => _birdExploder.Explode(birdEntityView.gameObject,
-        _colliders, _powerSettings.ExplosionForce, _powerSettings.ExplosionRadius,
-        _powerSettings.UpwardsModifier, birdEntityView.SfxProfile.ExplosionResource);
 }

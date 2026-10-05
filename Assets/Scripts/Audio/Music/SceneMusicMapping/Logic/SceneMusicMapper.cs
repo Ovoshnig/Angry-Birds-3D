@@ -1,21 +1,25 @@
-﻿using System.Collections.Generic;
+using Ovoshnig.Scene.Switching;
+using System.Collections.Generic;
 using UnityEngine;
 
-public sealed class SceneMusicMapper : ISceneMusicMapper
+namespace Ovoshnig.Audio.Music.SceneMusicMapping
 {
-    private readonly Dictionary<SceneType, MusicCategory> _sceneToMusicCategory = new()
+    public sealed class SceneMusicMapper : ISceneMusicMapper
     {
-        { SceneType.MainMenu, MusicCategory.MainMenu },
-        { SceneType.GameLevel, MusicCategory.GameLevel },
-        { SceneType.Credits, MusicCategory.Credits }
-    };
+        private readonly Dictionary<SceneType, MusicCategory> _sceneToMusicCategory = new()
+        {
+            { SceneType.MainMenu, MusicCategory.MainMenu },
+            { SceneType.GameLevel, MusicCategory.GameLevel },
+            { SceneType.Credits, MusicCategory.Credits }
+        };
 
-    public MusicCategory GetMusicCategory(SceneType sceneType)
-    {
-        if (_sceneToMusicCategory.TryGetValue(sceneType, out var category))
-            return category;
+        public MusicCategory GetMusicCategory(SceneType sceneType)
+        {
+            if (_sceneToMusicCategory.TryGetValue(sceneType, out var category))
+                return category;
 
-        Debug.LogWarning($"No suitable music category for {sceneType} scene type");
-        return MusicCategory.MainMenu;
+            Debug.LogWarning($"No suitable music category for {sceneType} scene type");
+            return MusicCategory.MainMenu;
+        }
     }
 }

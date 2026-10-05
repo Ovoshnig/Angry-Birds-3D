@@ -1,11 +1,16 @@
+using AngryBirds3D.Pig.Destruction;
+using Ovoshnig.ObjectDestruction.Entity;
 using UnityEngine;
 
-[RequireComponent(typeof(PigDestroyerView))]
-public class PigEntityView : DestructibleEntityView
+namespace AngryBirds3D.Pig.Entity
 {
-    protected override void Awake()
+    [RequireComponent(typeof(PigDestroyerView))]
+    public class PigEntityView : DestructibleEntityView
     {
-        base.Awake();
-        DestroyerView = GetComponent<PigDestroyerView>();
+        protected override void Awake()
+        {
+            base.Awake();
+            DestroyerView = GetComponent<PigDestroyerView>();
+        }
     }
 }

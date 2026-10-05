@@ -1,14 +1,17 @@
 using R3;
 using UnityEngine;
 
-public class LevelRatingView : MonoBehaviour
+namespace Ovoshnig.Scene.Switching
 {
-    [SerializeField] private SceneSwitchButtonView _levelButtonView;
-
-    private void Start()
+    public class LevelRatingView : MonoBehaviour
     {
-        _levelButtonView.IsInteractable
-            .Subscribe(isInteractable => gameObject.SetActive(isInteractable))
-            .AddTo(this);
+        [SerializeField] private SceneSwitchButtonView _levelButtonView;
+
+        private void Start()
+        {
+            _levelButtonView.IsInteractable
+                .Subscribe(isInteractable => gameObject.SetActive(isInteractable))
+                .AddTo(this);
+        }
     }
 }

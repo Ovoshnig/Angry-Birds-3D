@@ -1,17 +1,22 @@
+using AngryBirds3D.Bird.Power;
+using Ovoshnig.Mediation;
 using R3;
 
-public class WhiteBirdAnimatorViewPowerActivatorMediator : Mediator
+namespace AngryBirds3D.Bird.Animation
 {
-    private readonly BirdPowerActivator _birdPowerActivator;
-
-    public WhiteBirdAnimatorViewPowerActivatorMediator(BirdPowerActivator birdPowerActivator) =>
-        _birdPowerActivator = birdPowerActivator;
-
-    protected override void Bind(CompositeDisposable disposables)
+    public class WhiteBirdAnimatorViewPowerActivatorMediator : Mediator
     {
-        _birdPowerActivator.Activated
-            .Where(entityView => entityView.PowerView.PowerType == BirdPowerType.EggDropping)
-            .Subscribe(entityView => entityView.AnimatorView.SetTrigger(BirdAnimationConstants.EggDroppedTriggerId))
-            .AddTo(disposables);
+        private readonly BirdPowerActivator _birdPowerActivator;
+
+        public WhiteBirdAnimatorViewPowerActivatorMediator(BirdPowerActivator birdPowerActivator) =>
+            _birdPowerActivator = birdPowerActivator;
+
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _birdPowerActivator.Activated
+                .Where(entityView => entityView.PowerView.PowerType == BirdPowerType.EggDropping)
+                .Subscribe(entityView => entityView.AnimatorView.SetTrigger(BirdAnimationConstants.EggDroppedTriggerId))
+                .AddTo(disposables);
+        }
     }
 }

@@ -1,22 +1,29 @@
+using Ovoshnig.Window.Input;
+using Ovoshnig.Window.Pause;
+using Ovoshnig.Window.Resumption;
+using Ovoshnig.Window.Window;
 using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class WindowInstaller : IInstaller
+namespace Ovoshnig.Window
 {
-    [SerializeField] private PauseMenuWindowInstaller _pauseMenuWindowInstaller;
-    [SerializeField] private WindowPauseInstaller _windowPauseInstaller;
-    [SerializeField] private WindowResumptionInstaller _windowResumptionInstaller;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class WindowInstaller : IInstaller
     {
-        builder.RegisterEntryPoint<WindowInputProvider>().AsSelf();
-        builder.Register<WindowTracker>(Lifetime.Singleton);
+        [SerializeField] private PauseMenuWindowInstaller _pauseMenuWindowInstaller;
+        [SerializeField] private WindowPauseInstaller _windowPauseInstaller;
+        [SerializeField] private WindowResumptionInstaller _windowResumptionInstaller;
 
-        _pauseMenuWindowInstaller.Install(builder);
-        _windowPauseInstaller.Install(builder);
-        _windowResumptionInstaller.Install(builder);
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterEntryPoint<WindowInputProvider>().AsSelf();
+            builder.Register<WindowTracker>(Lifetime.Singleton);
+
+            _pauseMenuWindowInstaller.Install(builder);
+            _windowPauseInstaller.Install(builder);
+            _windowResumptionInstaller.Install(builder);
+        }
     }
 }

@@ -1,4 +1,7 @@
+using AngryBirds3D.Bird.Flight;
+using AngryBirds3D.Bird.Power;
 using Cysharp.Threading.Tasks;
+using Ovoshnig.GameSettings;
 using R3;
 using System;
 using System.Collections.Generic;
@@ -7,121 +10,124 @@ using UnityEngine.Pool;
 using VContainer.Unity;
 using Object = UnityEngine.Object;
 
-public class TrailParticlePlayer : IStartable, IDisposable
+namespace AngryBirds3D.Bird.TrailParticle
 {
-    private readonly BirdFlyer _birdFlyer;
-    private readonly BirdPowerActivator _birdPowerActivator;
-    private readonly SplitInto3BirdPower _splitInto3Power;
-    private readonly GameObject _poolRoot;
-    private readonly ObjectPool<TrailParticleView> _trailParticlePool;
-    private readonly List<TrailParticleView> _currentParticles = new();
-    private readonly List<TrailParticleView> _previousParticles = new();
-    private readonly CompositeDisposable _disposables = new();
-
-    public TrailParticlePlayer(BirdFlyer birdFlyer,
-        BirdPowerActivator birdPowerActivator,
-        SplitInto3BirdPower splitInto3Power,
-        TrailParticleView particlePrefab,
-        TrailParticleSettings settings)
+    public class TrailParticlePlayer : IStartable, IDisposable
     {
-        _birdFlyer = birdFlyer;
-        _birdPowerActivator = birdPowerActivator;
-        _splitInto3Power = splitInto3Power;
+        private readonly BirdFlyer _birdFlyer;
+        private readonly BirdPowerActivator _birdPowerActivator;
+        private readonly SplitInto3BirdPower _splitInto3Power;
+        private readonly GameObject _poolRoot;
+        private readonly ObjectPool<TrailParticleView> _trailParticlePool;
+        private readonly List<TrailParticleView> _currentParticles = new();
+        private readonly List<TrailParticleView> _previousParticles = new();
+        private readonly CompositeDisposable _disposables = new();
 
-        _poolRoot = new GameObject("TrailParticlePlayerPool");
+        public TrailParticlePlayer(BirdFlyer birdFlyer,
+            BirdPowerActivator birdPowerActivator,
+            SplitInto3BirdPower splitInto3Power,
+            TrailParticleView particlePrefab,
+            TrailParticleSettings settings)
+        {
+            _birdFlyer = birdFlyer;
+            _birdPowerActivator = birdPowerActivator;
+            _splitInto3Power = splitInto3Power;
 
-        _trailParticlePool = new ObjectPool<TrailParticleView>(
-            createFunc: () => Object.Instantiate(particlePrefab, _poolRoot.transform),
-            actionOnGet: particleView =>
-            {
-                particleView.transform.SetParent(null);
-                particleView.gameObject.SetActive(true);
-            },
-            actionOnRelease: particleView =>
-            {
-                particleView.transform.SetParent(_poolRoot.transform);
-                particleView.gameObject.SetActive(false);
-            },
-            defaultCapacity: settings.PoolDefaultCapacity,
-            maxSize: settings.PoolMaxSize
-        );
-    }
+            _poolRoot = new GameObject("TrailParticlePlayerPool");
 
-    public void Start()
-    {
-        _birdFlyer.FlightStarted
-            .Subscribe(birdEntityView => StartPlaying(birdEntityView.transform))
-            .AddTo(_disposables);
+            _trailParticlePool = new ObjectPool<TrailParticleView>(
+                createFunc: () => Object.Instantiate(particlePrefab, _poolRoot.transform),
+                actionOnGet: particleView =>
+                {
+                    particleView.transform.SetParent(null);
+                    particleView.gameObject.SetActive(true);
+                },
+                actionOnRelease: particleView =>
+                {
+                    particleView.transform.SetParent(_poolRoot.transform);
+                    particleView.gameObject.SetActive(false);
+                },
+                defaultCapacity: settings.PoolDefaultCapacity,
+                maxSize: settings.PoolMaxSize
+            );
+        }
 
-        _birdFlyer.FlightInterrupted
-            .Subscribe(birdEntityView => StopPlaying())
-            .AddTo(_disposables);
+        public void Start()
+        {
+            _birdFlyer.FlightStarted
+                .Subscribe(birdEntityView => StartPlaying(birdEntityView.transform))
+                .AddTo(_disposables);
 
-        _birdPowerActivator.Activated
-            .Where(entityView => entityView.PowerView.HasPowerParticle)
-            .Subscribe(_ => PlayPowerParticle())
-            .AddTo(_disposables);
+            _birdFlyer.FlightInterrupted
+                .Subscribe(birdEntityView => StopPlaying())
+                .AddTo(_disposables);
 
-        _splitInto3Power.CloneCreated
-            .Subscribe(clone => StartPlaying(clone.transform))
-            .AddTo(_disposables);
-    }
+            _birdPowerActivator.Activated
+                .Where(entityView => entityView.PowerView.HasPowerParticle)
+                .Subscribe(_ => PlayPowerParticle())
+                .AddTo(_disposables);
 
-    public void Dispose()
-    {
-        _disposables.Dispose();
+            _splitInto3Power.CloneCreated
+                .Subscribe(clone => StartPlaying(clone.transform))
+                .AddTo(_disposables);
+        }
 
-        foreach (var particle in _currentParticles)
-            Object.Destroy(particle);
+        public void Dispose()
+        {
+            _disposables.Dispose();
 
-        _currentParticles.Clear();
+            foreach (var particle in _currentParticles)
+                Object.Destroy(particle);
 
-        foreach (var particle in _previousParticles)
-            Object.Destroy(particle);
+            _currentParticles.Clear();
 
-        _previousParticles.Clear();
+            foreach (var particle in _previousParticles)
+                Object.Destroy(particle);
 
-        _trailParticlePool.Dispose();
-        Object.Destroy(_poolRoot);
-    }
+            _previousParticles.Clear();
 
-    private void StartPlaying(Transform birdTransform)
-    {
-        TrailParticleView particleView = _trailParticlePool.Get();
-        particleView.Play(birdTransform);
-        _currentParticles.Add(particleView);
-    }
+            _trailParticlePool.Dispose();
+            Object.Destroy(_poolRoot);
+        }
 
-    private void StopPlaying()
-    {
-        foreach (TrailParticleView particle in _currentParticles)
-            particle.StopEmitting();
+        private void StartPlaying(Transform birdTransform)
+        {
+            TrailParticleView particleView = _trailParticlePool.Get();
+            particleView.Play(birdTransform);
+            _currentParticles.Add(particleView);
+        }
 
-        List<TrailParticleView> particlesToRelease = new(_previousParticles);
-        _previousParticles.Clear();
+        private void StopPlaying()
+        {
+            foreach (TrailParticleView particle in _currentParticles)
+                particle.StopEmitting();
 
-        ReleaseParticlesAsync(particlesToRelease).Forget();
+            List<TrailParticleView> particlesToRelease = new(_previousParticles);
+            _previousParticles.Clear();
 
-        _previousParticles.AddRange(_currentParticles);
-        _currentParticles.Clear();
-    }
+            ReleaseParticlesAsync(particlesToRelease).Forget();
 
-    private void PlayPowerParticle()
-    {
-        if (_currentParticles.Count > 0)
-            _currentParticles[0].EmitPowerParticle();
-    }
+            _previousParticles.AddRange(_currentParticles);
+            _currentParticles.Clear();
+        }
 
-    private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
-    {
-        List<UniTask> tasks = new();
+        private void PlayPowerParticle()
+        {
+            if (_currentParticles.Count > 0)
+                _currentParticles[0].EmitPowerParticle();
+        }
 
-        foreach (TrailParticleView particle in particles)
-            tasks.Add(particle.StopAsync());
+        private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
+        {
+            List<UniTask> tasks = new();
 
-        await UniTask.WhenAll(tasks);
+            foreach (TrailParticleView particle in particles)
+                tasks.Add(particle.StopAsync());
 
-        foreach (TrailParticleView particle in particles)
-            _trailParticlePool.Release(particle);
+            await UniTask.WhenAll(tasks);
+
+            foreach (TrailParticleView particle in particles)
+                _trailParticlePool.Release(particle);
+        }
     }
 }

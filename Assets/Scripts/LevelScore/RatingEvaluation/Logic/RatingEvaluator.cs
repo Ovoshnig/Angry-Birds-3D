@@ -1,36 +1,41 @@
+using AngryBirds3D.LevelScore.Score;
+using Ovoshnig.GameSettings;
 using R3;
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RatingEvaluator : IDisposable
+namespace AngryBirds3D.LevelScore.RatingEvaluation
 {
-    private readonly ScoreModel _scoreModel;
-    private readonly RatingSettings _ratingSettings;
-    private readonly SceneSettings _sceneSettings;
-    private readonly ReactiveProperty<int> _rating = new();
-
-    public RatingEvaluator(ScoreModel scoreModel,
-        RatingSettings ratingSettings,
-        SceneSettings sceneSettings)
+    public class RatingEvaluator : IDisposable
     {
-        _scoreModel = scoreModel;
-        _ratingSettings = ratingSettings;
-        _sceneSettings = sceneSettings;
-    }
+        private readonly ScoreModel _scoreModel;
+        private readonly RatingSettings _ratingSettings;
+        private readonly SceneSettings _sceneSettings;
+        private readonly ReactiveProperty<int> _rating = new();
 
-    public ReadOnlyReactiveProperty<int> Rating => _rating;
+        public RatingEvaluator(ScoreModel scoreModel,
+            RatingSettings ratingSettings,
+            SceneSettings sceneSettings)
+        {
+            _scoreModel = scoreModel;
+            _ratingSettings = ratingSettings;
+            _sceneSettings = sceneSettings;
+        }
 
-    public void Dispose() => _rating.Dispose();
+        public ReadOnlyReactiveProperty<int> Rating => _rating;
 
-    public void Evaluate()
-    {
-        int currentLevelIndex = SceneManager.GetActiveScene().buildIndex - _sceneSettings.FirstLevelIndex + 1;
-        int maxScore = _ratingSettings.LevelMaxScores[currentLevelIndex];
+        public void Dispose() => _rating.Dispose();
 
-        int oneStarThreshold = maxScore / _ratingSettings.MaxStarCount;
-        int starCount = Mathf.FloorToInt(_scoreModel.Score.CurrentValue / oneStarThreshold);
-        int clampedStarCount = Mathf.Clamp(starCount, _ratingSettings.MinStarCount, _ratingSettings.MaxStarCount);
-        _rating.Value = clampedStarCount;
+        public void Evaluate()
+        {
+            int currentLevelIndex = SceneManager.GetActiveScene().buildIndex - _sceneSettings.FirstLevelIndex + 1;
+            int maxScore = _ratingSettings.LevelMaxScores[currentLevelIndex];
+
+            int oneStarThreshold = maxScore / _ratingSettings.MaxStarCount;
+            int starCount = Mathf.FloorToInt(_scoreModel.Score.CurrentValue / oneStarThreshold);
+            int clampedStarCount = Mathf.Clamp(starCount, _ratingSettings.MinStarCount, _ratingSettings.MaxStarCount);
+            _rating.Value = clampedStarCount;
+        }
     }
 }

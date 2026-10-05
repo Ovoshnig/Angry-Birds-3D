@@ -1,14 +1,17 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class SlingshotShootingInstaller : IInstaller
+namespace AngryBirds3D.Slingshot.Shooting
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class SlingshotShootingInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<SlingshotShooterView>();
-        builder.RegisterEntryPoint<SlingshotShooter>().AsSelf();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstanceInHierarchy<SlingshotShooterView>();
+            builder.RegisterEntryPoint<SlingshotShooter>().AsSelf();
+        }
     }
 }

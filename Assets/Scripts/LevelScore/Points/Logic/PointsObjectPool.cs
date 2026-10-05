@@ -1,48 +1,52 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Ovoshnig.GameSettings;
 using R3;
 using System;
 using UnityEngine;
 using UnityEngine.Pool;
 using Object = UnityEngine.Object;
 
-public class PointsObjectPool : IDisposable
+namespace AngryBirds3D.LevelScore.Points
 {
-    private readonly ObjectPool<PointsView> _pointsPool;
-    private readonly GameObject _poolRoot;
-    private readonly Subject<int> _pointsAdded = new();
-
-    public PointsObjectPool(PointsView pointsPrefab, ScoreSettings scoreSettings)
+    public class PointsObjectPool : IDisposable
     {
-        _poolRoot = new GameObject("PointsPool");
+        private readonly ObjectPool<PointsView> _pointsPool;
+        private readonly GameObject _poolRoot;
+        private readonly Subject<int> _pointsAdded = new();
 
-        _pointsPool = new ObjectPool<PointsView>(
-            createFunc: () => Object.Instantiate(pointsPrefab, _poolRoot.transform),
-            actionOnGet: pointsView => pointsView.gameObject.SetActive(true),
-            actionOnRelease: pointsView => pointsView.gameObject.SetActive(false),
-            defaultCapacity: scoreSettings.PoolDefaultCapacity,
-            maxSize: scoreSettings.PoolMaxSize
-        );
-    }
+        public PointsObjectPool(PointsView pointsPrefab, ScoreSettings scoreSettings)
+        {
+            _poolRoot = new GameObject("PointsPool");
 
-    public Observable<int> PointsAdded => _pointsAdded;
+            _pointsPool = new ObjectPool<PointsView>(
+                createFunc: () => Object.Instantiate(pointsPrefab, _poolRoot.transform),
+                actionOnGet: pointsView => pointsView.gameObject.SetActive(true),
+                actionOnRelease: pointsView => pointsView.gameObject.SetActive(false),
+                defaultCapacity: scoreSettings.PoolDefaultCapacity,
+                maxSize: scoreSettings.PoolMaxSize
+            );
+        }
 
-    public void Dispose()
-    {
-        _pointsPool.Dispose();
-        _pointsAdded.Dispose();
-        Object.Destroy(_poolRoot);
-    }
+        public Observable<int> PointsAdded => _pointsAdded;
 
-    public void ShowPoints(Vector3 position, PointsSettings pointsSettings)
-    {
-        _pointsAdded.OnNext(pointsSettings.Points);
+        public void Dispose()
+        {
+            _pointsPool.Dispose();
+            _pointsAdded.Dispose();
+            Object.Destroy(_poolRoot);
+        }
 
-        PointsView pointsView = _pointsPool.Get();
-        pointsView.ShowAsync(position, pointsSettings).Forget();
+        public void ShowPoints(Vector3 position, PointsSettings pointsSettings)
+        {
+            _pointsAdded.OnNext(pointsSettings.Points);
 
-        pointsView.Completed
-            .Take(1)
-            .Subscribe(_ => _pointsPool.Release(pointsView))
-            .RegisterTo(pointsView.destroyCancellationToken);
+            PointsView pointsView = _pointsPool.Get();
+            pointsView.ShowAsync(position, pointsSettings).Forget();
+
+            pointsView.Completed
+                .Take(1)
+                .Subscribe(_ => _pointsPool.Release(pointsView))
+                .RegisterTo(pointsView.destroyCancellationToken);
+        }
     }
 }

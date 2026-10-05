@@ -1,16 +1,20 @@
+using Ovoshnig.UI.Basic;
 using R3;
 using System.Collections.Generic;
 
-public class RatingShowerViewsMediator : UIViewsMediator<RatingShowerView>
+namespace AngryBirds3D.LevelScore.RatingShowing
 {
-    private readonly RatingShower _ratingShower;
-
-    public RatingShowerViewsMediator(RatingShower ratingShower, IReadOnlyList<RatingShowerView> views)
-        : base(views) => _ratingShower = ratingShower;
-
-    protected override void OnViewEnabled(RatingShowerView view, CompositeDisposable viewDisposables)
+    public class RatingShowerViewsMediator : UIViewsMediator<RatingShowerView>
     {
-        int starRecord = _ratingShower.GetStarRecord(view.LevelIndex);
-        view.SetStarCount(starRecord);
+        private readonly RatingShower _ratingShower;
+
+        public RatingShowerViewsMediator(RatingShower ratingShower, IReadOnlyList<RatingShowerView> views)
+            : base(views) => _ratingShower = ratingShower;
+
+        protected override void OnViewEnabled(RatingShowerView view, CompositeDisposable viewDisposables)
+        {
+            int starRecord = _ratingShower.GetStarRecord(view.LevelIndex);
+            view.SetStarCount(starRecord);
+        }
     }
 }

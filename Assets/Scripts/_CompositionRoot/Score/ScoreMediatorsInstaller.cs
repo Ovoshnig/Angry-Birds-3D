@@ -1,16 +1,19 @@
 using VContainer;
 using VContainer.Unity;
 
-public class ScoreMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder)
+    public class ScoreMediatorsInstaller : IInstaller
     {
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<PointsPoolObjectDestroyerMediator>();
-            entryPoints.Add<PointsPoolBirdDisplayerMediator>();
-            entryPoints.Add<RatingEvaluatorBirdDisplayerMediator>();
-            entryPoints.Add<ScoreViewCompletionPanelsMediator>();
-        });
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<PointsPoolObjectDestroyerMediator>();
+                entryPoints.Add<PointsPoolBirdDisplayerMediator>();
+                entryPoints.Add<RatingEvaluatorBirdDisplayerMediator>();
+                entryPoints.Add<ScoreViewCompletionPanelsMediator>();
+            });
+        }
     }
 }

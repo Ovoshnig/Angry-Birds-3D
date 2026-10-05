@@ -1,21 +1,27 @@
+using Ovoshnig.Cursor.Showing;
+using Ovoshnig.Mediation;
+using Ovoshnig.Screen.SplashScreen;
 using R3;
 
-public class CursorShowerSplashScreenDisplayerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly CursorShower _cursorShower;
-    private readonly SplashScreenDisplayer _splashScreenDisplayer;
-
-    public CursorShowerSplashScreenDisplayerMediator(CursorShower cursorShower,
-        SplashScreenDisplayer splashScreenDisplayer)
+    public class CursorShowerSplashScreenDisplayerMediator : Mediator
     {
-        _cursorShower = cursorShower;
-        _splashScreenDisplayer = splashScreenDisplayer;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _splashScreenDisplayer.IsPlaying
-            .Subscribe(isPlaying => _cursorShower.SetShowing(!isPlaying))
-            .AddTo(disposables);
+        private readonly CursorShower _cursorShower;
+        private readonly SplashScreenDisplayer _splashScreenDisplayer;
+    
+        public CursorShowerSplashScreenDisplayerMediator(CursorShower cursorShower,
+            SplashScreenDisplayer splashScreenDisplayer)
+        {
+            _cursorShower = cursorShower;
+            _splashScreenDisplayer = splashScreenDisplayer;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _splashScreenDisplayer.IsPlaying
+                .Subscribe(isPlaying => _cursorShower.SetShowing(!isPlaying))
+                .AddTo(disposables);
+        }
     }
 }

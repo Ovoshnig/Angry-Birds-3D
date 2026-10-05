@@ -1,23 +1,30 @@
+using Ovoshnig.Audio.Music.ClipLoading;
+using Ovoshnig.Audio.Music.Playback;
+using Ovoshnig.Audio.Music.Queue;
+using Ovoshnig.Audio.Music.SceneMusicMapping;
 using VContainer;
 using VContainer.Unity;
 
-public class AudioMusicInstaller : IInstaller
+namespace Ovoshnig.Audio.Music
 {
-    private readonly MusicPlayerView _musicPlayerView;
-
-    public AudioMusicInstaller(MusicPlayerView musicPlayerView) =>
-        _musicPlayerView = musicPlayerView;
-
-    public void Install(IContainerBuilder builder)
+    public class AudioMusicInstaller : IInstaller
     {
-        builder.Register<IClipLoader, AddressablesClipLoader>(Lifetime.Singleton);
-        builder.Register<ISceneMusicMapper, SceneMusicMapper>(Lifetime.Singleton);
-        builder.Register<MusicQueue>(Lifetime.Singleton);
-        builder.Register<MusicPlayer>(Lifetime.Singleton);
+        private readonly MusicPlayerView _musicPlayerView;
 
-        builder.RegisterComponentInNewPrefab(_musicPlayerView, Lifetime.Singleton)
-            .DontDestroyOnLoad();
+        public AudioMusicInstaller(MusicPlayerView musicPlayerView) =>
+            _musicPlayerView = musicPlayerView;
 
-        builder.RegisterEntryPoint<MusicPlayerMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.Register<IClipLoader, AddressablesClipLoader>(Lifetime.Singleton);
+            builder.Register<ISceneMusicMapper, SceneMusicMapper>(Lifetime.Singleton);
+            builder.Register<MusicQueue>(Lifetime.Singleton);
+            builder.Register<MusicPlayer>(Lifetime.Singleton);
+
+            builder.RegisterComponentInNewPrefab(_musicPlayerView, Lifetime.Singleton)
+                .DontDestroyOnLoad();
+
+            builder.RegisterEntryPoint<MusicPlayerMediator>();
+        }
     }
 }

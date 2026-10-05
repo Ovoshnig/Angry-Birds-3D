@@ -3,16 +3,19 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class SceneLoadingScreenInstaller : IInstaller
+namespace Ovoshnig.Scene.LoadingScreen
 {
-    [SerializeField] private LoadingScreenView _loadingScreenView;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class SceneLoadingScreenInstaller : IInstaller
     {
-        builder.RegisterComponentInNewPrefab(_loadingScreenView, Lifetime.Singleton)
-            .DontDestroyOnLoad();
+        [SerializeField] private LoadingScreenView _loadingScreenView;
 
-        builder.RegisterEntryPoint<SceneSwitchLoadingScreenViewMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInNewPrefab(_loadingScreenView, Lifetime.Singleton)
+                .DontDestroyOnLoad();
+
+            builder.RegisterEntryPoint<SceneSwitchLoadingScreenViewMediator>();
+        }
     }
 }

@@ -2,10 +2,13 @@ using R3;
 using R3.Triggers;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider))]
-public class ObjectColliderView : MonoBehaviour
+namespace Ovoshnig.ObjectCollision.Collision
 {
-    public Observable<Collision> Collided { get; private set; }
+    [RequireComponent(typeof(Collider))]
+    public class ObjectColliderView : MonoBehaviour
+    {
+        public Observable<UnityEngine.Collision> Collided { get; private set; }
 
-    private void Awake() => Collided = gameObject.OnCollisionEnterAsObservable();
+        private void Awake() => Collided = gameObject.OnCollisionEnterAsObservable();
+    }
 }

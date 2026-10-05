@@ -1,33 +1,37 @@
+using Ovoshnig.UI.Basic;
 using R3;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public sealed class LevelIndexView : UIView
+namespace Ovoshnig.Scene.Switching
 {
-    private TMP_Text _text;
-    private SceneSwitchButtonView _buttonView;
-
-    private void Awake()
+    [RequireComponent(typeof(TMP_Text))]
+    public sealed class LevelIndexView : UIView
     {
-        _text = GetComponent<TMP_Text>();
-        _buttonView = GetComponentInParent<SceneSwitchButtonView>();
-    }
+        private TMP_Text _text;
+        private SceneSwitchButtonView _buttonView;
 
-    private void Start()
-    {
-        _buttonView.IsInteractable
-            .Subscribe(isInteractable => _text.enabled = isInteractable)
-            .AddTo(this);
-    }
+        private void Awake()
+        {
+            _text = GetComponent<TMP_Text>();
+            _buttonView = GetComponentInParent<SceneSwitchButtonView>();
+        }
 
-#if UNITY_EDITOR
-    public void SetIndex(int index)
-    {
-        if (UnityEditor.EditorApplication.isPlaying)
-            return;
+        private void Start()
+        {
+            _buttonView.IsInteractable
+                .Subscribe(isInteractable => _text.enabled = isInteractable)
+                .AddTo(this);
+        }
 
-        GetComponent<TMP_Text>().SetText("{0}", index);
+    #if UNITY_EDITOR
+        public void SetIndex(int index)
+        {
+            if (UnityEditor.EditorApplication.isPlaying)
+                return;
+
+            GetComponent<TMP_Text>().SetText("{0}", index);
+        }
+    #endif
     }
-#endif
 }

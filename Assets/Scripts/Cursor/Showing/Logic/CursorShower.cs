@@ -1,24 +1,28 @@
-﻿using UnityEngine;
+using UnityEngine;
+using UnityCursor = UnityEngine.Cursor;
 
-public class CursorShower
+namespace Ovoshnig.Cursor.Showing
 {
-    public void Show()
+    public class CursorShower
     {
-        Cursor.lockState = CursorLockMode.None;
-        Cursor.visible = true;
-    }
+        public void Show()
+        {
+            UnityCursor.lockState = CursorLockMode.None;
+            UnityCursor.visible = true;
+        }
 
-    public void Hide()
-    {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-    }
+        public void Hide()
+        {
+            UnityCursor.lockState = CursorLockMode.Locked;
+            UnityCursor.visible = false;
+        }
 
-    public void SetShowing(bool isShowing)
-    {
-        if (isShowing)
-            Show();
-        else
-            Hide();
+        public void SetShowing(bool isShowing)
+        {
+            if (isShowing)
+                Show();
+            else
+                Hide();
+        }
     }
 }

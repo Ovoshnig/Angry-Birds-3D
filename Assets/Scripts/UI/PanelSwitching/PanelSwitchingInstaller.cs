@@ -1,14 +1,17 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class PanelSwitchingInstaller : IInstaller
+namespace Ovoshnig.UI.PanelSwitching
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class PanelSwitchingInstaller : IInstaller
     {
-        builder.RegisterInstancesInHierarchy<PanelCloseButtonView>();
-        builder.RegisterEntryPoint<InputProviderCloseButtonViewsMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstancesInHierarchy<PanelCloseButtonView>();
+            builder.RegisterEntryPoint<InputProviderCloseButtonViewsMediator>();
+        }
     }
 }

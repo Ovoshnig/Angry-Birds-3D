@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdQueueInstaller : IInstaller
+namespace AngryBirds3D.Bird.Queue
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<BirdQueue>().AsSelf();
+    [Serializable]
+    public class BirdQueueInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<BirdQueue>().AsSelf();
+    }
 }

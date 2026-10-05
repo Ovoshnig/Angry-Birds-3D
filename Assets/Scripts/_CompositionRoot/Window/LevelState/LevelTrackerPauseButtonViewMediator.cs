@@ -1,16 +1,22 @@
+using AngryBirds3D.LevelState.Tracking;
+using Ovoshnig.UI.Basic;
+using Ovoshnig.Window.Pause;
 using R3;
 
-public class LevelTrackerPauseButtonViewMediator : UIViewMediator<PauseButtonView>
+namespace AngryBirds3D.Composition
 {
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public LevelTrackerPauseButtonViewMediator(LevelStateTracker levelStateTracker, PauseButtonView view)
-        : base(view) => _levelStateTracker = levelStateTracker;
-
-    protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
+    public class LevelTrackerPauseButtonViewMediator : UIViewMediator<PauseButtonView>
     {
-        _levelStateTracker.Completed
-            .Subscribe(_ => view.gameObject.SetActive(false))
-            .AddTo(viewDisposables);
+        private readonly LevelStateTracker _levelStateTracker;
+    
+        public LevelTrackerPauseButtonViewMediator(LevelStateTracker levelStateTracker, PauseButtonView view)
+            : base(view) => _levelStateTracker = levelStateTracker;
+    
+        protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
+        {
+            _levelStateTracker.Completed
+                .Subscribe(_ => view.gameObject.SetActive(false))
+                .AddTo(viewDisposables);
+        }
     }
 }

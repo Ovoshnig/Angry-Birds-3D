@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class BirdPowerView : MonoBehaviour
+namespace AngryBirds3D.Bird.Power
 {
-    [field: SerializeField] public BirdPowerType PowerType { get; private set; }
-    [field: SerializeField] public bool HasPowerParticle { get; private set; } = true;
+    public class BirdPowerView : MonoBehaviour
+    {
+        [field: SerializeField] public BirdPowerType PowerType { get; private set; }
+        [field: SerializeField] public bool HasPowerParticle { get; private set; } = true;
 
-    public bool WasActivated { get; private set; } = false;
+        public bool WasActivated { get; private set; } = false;
 
-    public void SetWasActivated() => WasActivated = true;
+        public void SetWasActivated() => WasActivated = true;
+    }
 }

@@ -1,24 +1,28 @@
+using Ovoshnig.Mediation;
 using R3;
 
-public class MusicPlayerMediator : Mediator
+namespace Ovoshnig.Audio.Music.Playback
 {
-    private readonly MusicPlayer _musicPlayer;
-    private readonly MusicPlayerView _musicPlayerView;
-
-    public MusicPlayerMediator(MusicPlayer musicPlayer, MusicPlayerView musicPlayerView)
+    public class MusicPlayerMediator : Mediator
     {
-        _musicPlayer = musicPlayer;
-        _musicPlayerView = musicPlayerView;
-    }
+        private readonly MusicPlayer _musicPlayer;
+        private readonly MusicPlayerView _musicPlayerView;
 
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _musicPlayer.PlaybackStarted
-            .Subscribe(clip => _musicPlayerView.Play(clip))
-            .AddTo(disposables);
+        public MusicPlayerMediator(MusicPlayer musicPlayer, MusicPlayerView musicPlayerView)
+        {
+            _musicPlayer = musicPlayer;
+            _musicPlayerView = musicPlayerView;
+        }
 
-        _musicPlayer.PlaybackEnded
-            .Subscribe(_ => _musicPlayerView.Stop())
-            .AddTo(disposables);
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _musicPlayer.PlaybackStarted
+                .Subscribe(clip => _musicPlayerView.Play(clip))
+                .AddTo(disposables);
+
+            _musicPlayer.PlaybackEnded
+                .Subscribe(_ => _musicPlayerView.Stop())
+                .AddTo(disposables);
+        }
     }
 }

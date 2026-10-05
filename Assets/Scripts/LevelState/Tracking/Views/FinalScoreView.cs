@@ -1,12 +1,16 @@
+using Ovoshnig.UI.Basic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public class FinalScoreView : UIView
+namespace AngryBirds3D.LevelState.Tracking
 {
-    private TMP_Text _text;
+    [RequireComponent(typeof(TMP_Text))]
+    public class FinalScoreView : UIView
+    {
+        private TMP_Text _text;
 
-    private void Awake() => _text = GetComponent<TMP_Text>();
+        private void Awake() => _text = GetComponent<TMP_Text>();
 
-    public void SetScore(int value) => _text.SetText("Score: {0:0000}", value);
+        public void SetScore(int value) => _text.SetText("Score: {0:0000}", value);
+    }
 }

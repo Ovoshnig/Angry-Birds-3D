@@ -1,30 +1,36 @@
+using AngryBirds3D.Camera.Switching;
+using AngryBirds3D.LevelState.Tracking;
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
 using R3;
 
-public class CameraSwitchViewLevelTrackerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly CameraSwitchView _cameraSwitchView;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
-        LevelStateTracker levelStateTracker)
+    public class CameraSwitchViewLevelTrackerMediator : Mediator
     {
-        _cameraSwitchView = cameraSwitchView;
-        _levelStateTracker = levelStateTracker;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _levelStateTracker.MovedToNext
-            .Subscribe(_ => _cameraSwitchView.SwitchToGeneralAsync().Forget())
-            .AddTo(disposables);
-
-        _levelStateTracker.Completed
-            .Subscribe(_ =>
-            {
-                _cameraSwitchView.SwitchToSlingshotAsync().Forget();
-                _cameraSwitchView.StopSwitching();
-            })
-            .AddTo(disposables);
+        private readonly CameraSwitchView _cameraSwitchView;
+        private readonly LevelStateTracker _levelStateTracker;
+    
+        public CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
+            LevelStateTracker levelStateTracker)
+        {
+            _cameraSwitchView = cameraSwitchView;
+            _levelStateTracker = levelStateTracker;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _levelStateTracker.MovedToNext
+                .Subscribe(_ => _cameraSwitchView.SwitchToGeneralAsync().Forget())
+                .AddTo(disposables);
+    
+            _levelStateTracker.Completed
+                .Subscribe(_ =>
+                {
+                    _cameraSwitchView.SwitchToSlingshotAsync().Forget();
+                    _cameraSwitchView.StopSwitching();
+                })
+                .AddTo(disposables);
+        }
     }
 }

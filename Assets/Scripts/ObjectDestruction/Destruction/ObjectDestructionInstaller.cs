@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class ObjectDestructionInstaller : IInstaller
+namespace Ovoshnig.ObjectDestruction.Destruction
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<ObjectDestroyer>().AsSelf();
+    [Serializable]
+    public class ObjectDestructionInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<ObjectDestroyer>().AsSelf();
+    }
 }

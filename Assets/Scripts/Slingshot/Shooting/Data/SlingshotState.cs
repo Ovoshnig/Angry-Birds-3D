@@ -1,6 +1,9 @@
-public enum SlingshotState
+namespace AngryBirds3D.Slingshot.Shooting
 {
-    Idle,
-    InputWaiting,
-    Dragging
+    public enum SlingshotState
+    {
+        Idle,
+        InputWaiting,
+        Dragging
+    }
 }

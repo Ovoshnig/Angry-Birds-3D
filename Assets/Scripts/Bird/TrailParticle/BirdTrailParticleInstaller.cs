@@ -3,14 +3,17 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdTrailParticleInstaller : IInstaller
+namespace AngryBirds3D.Bird.TrailParticle
 {
-    [SerializeField] private TrailParticleView _trailParticlePrefab;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class BirdTrailParticleInstaller : IInstaller
     {
-        builder.RegisterInstance(_trailParticlePrefab);
-        builder.RegisterEntryPoint<TrailParticlePlayer>(Lifetime.Singleton).AsSelf();
+        [SerializeField] private TrailParticleView _trailParticlePrefab;
+
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_trailParticlePrefab);
+            builder.RegisterEntryPoint<TrailParticlePlayer>(Lifetime.Singleton).AsSelf();
+        }
     }
 }

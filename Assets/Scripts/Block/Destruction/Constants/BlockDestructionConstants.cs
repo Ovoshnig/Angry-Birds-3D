@@ -1,12 +1,15 @@
-﻿using UnityEngine;
+using UnityEngine;
 
-public static class BlockDestructionConstants
+namespace AngryBirds3D.Block.Destruction
 {
-    public static int[] HitProperties { get; } = new[]
+    public static class BlockDestructionConstants
     {
-        Shader.PropertyToID("_Hit0"),
-        Shader.PropertyToID("_Hit1"),
-        Shader.PropertyToID("_Hit2"),
-        Shader.PropertyToID("_Hit3")
-    };
+        public static int[] HitProperties { get; } = new[]
+        {
+            Shader.PropertyToID("_Hit0"),
+            Shader.PropertyToID("_Hit1"),
+            Shader.PropertyToID("_Hit2"),
+            Shader.PropertyToID("_Hit3")
+        };
+    }
 }

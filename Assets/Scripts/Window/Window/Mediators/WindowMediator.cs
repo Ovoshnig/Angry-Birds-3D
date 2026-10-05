@@ -1,24 +1,28 @@
-﻿using R3;
+using Ovoshnig.Mediation;
+using R3;
 
-public class WindowMediator : Mediator
+namespace Ovoshnig.Window.Window
 {
-    private readonly Window _window;
-    private readonly WindowView _windowView;
-
-    public WindowMediator(Window window, WindowView windowView)
+    public class WindowMediator : Mediator
     {
-        _window = window;
-        _windowView = windowView;
-    }
+        private readonly Window _window;
+        private readonly WindowView _windowView;
 
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _window.IsOpen
-            .Subscribe(_windowView.SetActive)
-            .AddTo(disposables);
+        public WindowMediator(Window window, WindowView windowView)
+        {
+            _window = window;
+            _windowView = windowView;
+        }
 
-        _windowView.IsActive
-            .Subscribe(_window.SetWindowActive)
-            .AddTo(disposables);
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _window.IsOpen
+                .Subscribe(_windowView.SetActive)
+                .AddTo(disposables);
+
+            _windowView.IsActive
+                .Subscribe(_window.SetWindowActive)
+                .AddTo(disposables);
+        }
     }
 }

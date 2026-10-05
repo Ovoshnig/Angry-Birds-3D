@@ -3,15 +3,18 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class CursorStateInstaller : IInstaller
+namespace Ovoshnig.Cursor.State
 {
-    [SerializeField] private CursorConfiguration _cursorConfiguration;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class CursorStateInstaller : IInstaller
     {
-        builder.RegisterInstance(_cursorConfiguration);
-        builder.Register<CursorStateModel>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<CursorStateSetter>().AsSelf();
+        [SerializeField] private CursorConfiguration _cursorConfiguration;
+
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_cursorConfiguration);
+            builder.Register<CursorStateModel>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<CursorStateSetter>().AsSelf();
+        }
     }
 }

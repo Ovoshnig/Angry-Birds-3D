@@ -1,20 +1,24 @@
+using Ovoshnig.UI.Basic;
 using R3;
 
-public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
+namespace Ovoshnig.Screen.VSyncAdjustment
 {
-    private readonly VSyncAdjuster _vSyncAdjuster;
-
-    public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
-        : base(view) => _vSyncAdjuster = vSyncAdjuster;
-
-    protected override void OnViewEnabled(VSyncAdjustToggleView view, CompositeDisposable viewDisposables)
+    public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
     {
-        _vSyncAdjuster.IsVSync
-            .Subscribe(view.SetIsOnWithoutNotify)
-            .AddTo(viewDisposables);
+        private readonly VSyncAdjuster _vSyncAdjuster;
 
-        view.ValueChanged
-            .Subscribe(_vSyncAdjuster.SetVSync)
-            .AddTo(viewDisposables);
+        public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
+            : base(view) => _vSyncAdjuster = vSyncAdjuster;
+
+        protected override void OnViewEnabled(VSyncAdjustToggleView view, CompositeDisposable viewDisposables)
+        {
+            _vSyncAdjuster.IsVSync
+                .Subscribe(view.SetIsOnWithoutNotify)
+                .AddTo(viewDisposables);
+
+            view.ValueChanged
+                .Subscribe(_vSyncAdjuster.SetVSync)
+                .AddTo(viewDisposables);
+        }
     }
 }

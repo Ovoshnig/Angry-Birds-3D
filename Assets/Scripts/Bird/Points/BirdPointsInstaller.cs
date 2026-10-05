@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdPointsInstaller : IInstaller
+namespace AngryBirds3D.Bird.Points
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.Register<BirdPointsDisplayer>(Lifetime.Singleton);
+    [Serializable]
+    public class BirdPointsInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.Register<BirdPointsDisplayer>(Lifetime.Singleton);
+    }
 }

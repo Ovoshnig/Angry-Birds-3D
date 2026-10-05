@@ -1,10 +1,13 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class BlockEntityInstaller : IInstaller
+namespace AngryBirds3D.Block.Entity
 {
-    public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BlockEntityView>();
+    [Serializable]
+    public class BlockEntityInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BlockEntityView>();
+    }
 }

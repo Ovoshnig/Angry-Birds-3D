@@ -1,3 +1,7 @@
-﻿using UnityEngine;
+using Ovoshnig.ObjectCollision.Entity;
+using UnityEngine;
 
-public record CollisionData(CollidableEntityView EntityView, CollisionType Type, Vector3 Point, float Force);
+namespace Ovoshnig.ObjectCollision.Collision
+{
+    public record CollisionData(CollidableEntityView EntityView, CollisionType Type, Vector3 Point, float Force);
+}
