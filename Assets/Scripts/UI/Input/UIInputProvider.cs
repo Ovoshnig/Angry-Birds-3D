@@ -7,13 +7,13 @@ namespace Ovoshnig.UI.Input
     {
         public UIInputProvider(InputActions inputActions) : base(inputActions.UI)
         {
+            CancelPressed = ObserveButton(a => a.Cancel);
             ClickPressed = ObserveButton(a => a.Click);
-            CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
             SkipTextPrintingPressed = ObserveButton(a => a.SkipTextPrinting);
         }
 
+        public ReadOnlyReactiveProperty<bool> CancelPressed { get; }
         public ReadOnlyReactiveProperty<bool> ClickPressed { get; }
-        public ReadOnlyReactiveProperty<bool> CloseCurrentPressed { get; }
         public ReadOnlyReactiveProperty<bool> SkipTextPrintingPressed { get; }
 
         protected override void EnableActions() => Actions.Enable();

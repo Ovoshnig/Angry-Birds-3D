@@ -14,7 +14,7 @@ namespace Ovoshnig.UI.PanelSwitching
 
         protected override void OnViewEnabled(PanelCloseButtonView view, CompositeDisposable viewDisposables)
         {
-            _uiInputProvider.CloseCurrentPressed
+            _uiInputProvider.CancelPressed
                 .Pairwise()
                 .Where(pressed => !pressed.Previous && pressed.Current)
                 .Subscribe(_ => view.Switch())
