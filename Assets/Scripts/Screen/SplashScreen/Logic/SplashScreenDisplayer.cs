@@ -1,58 +1,62 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Screen.Input;
 using R3;
 using System;
 using System.Threading;
-using UnityEngine.Rendering;
 using VContainer.Unity;
+using UnitySplashScreen = UnityEngine.Rendering.SplashScreen;
 
-public class SplashScreenDisplayer : IStartable, IDisposable
+namespace Ovoshnig.Screen.SplashScreen
 {
-    private readonly ScreenInputProvider _screenInputProvider;
-    private readonly ReactiveProperty<bool> _isPlaying = new(false);
-    private readonly CancellationTokenSource _cts = new();
-    private readonly CompositeDisposable _disposables = new();
-
-    public SplashScreenDisplayer(ScreenInputProvider screenInputProvider) =>
-        _screenInputProvider = screenInputProvider;
-
-    public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
-
-    public void Start()
+    public class SplashScreenDisplayer : IStartable, IDisposable
     {
-        _screenInputProvider.SkipSplashImagePressed
-            .Where(isPressed => isPressed)
-            .Take(1)
-            .Subscribe(_ => Stop())
-            .AddTo(_disposables);
+        private readonly ScreenInputProvider _screenInputProvider;
+        private readonly ReactiveProperty<bool> _isPlaying = new(false);
+        private readonly CancellationTokenSource _cts = new();
+        private readonly CompositeDisposable _disposables = new();
 
-        DisplayAsync().Forget();
-    }
+        public SplashScreenDisplayer(ScreenInputProvider screenInputProvider) =>
+            _screenInputProvider = screenInputProvider;
 
-    public void Dispose()
-    {
-        Stop();
+        public ReadOnlyReactiveProperty<bool> IsPlaying => _isPlaying;
 
-        _disposables.Dispose();
-        _isPlaying.Dispose();
+        public void Start()
+        {
+            _screenInputProvider.SkipSplashImagePressed
+                .Where(isPressed => isPressed)
+                .Take(1)
+                .Subscribe(_ => Stop())
+                .AddTo(_disposables);
 
-        _cts.Cancel();
-        _cts.Dispose();
-    }
+            DisplayAsync().Forget();
+        }
 
-    private async UniTask DisplayAsync()
-    {
-        SplashScreen.Begin();
-        SplashScreen.Draw();
-        _isPlaying.Value = true;
+        public void Dispose()
+        {
+            Stop();
 
-        await UniTask.WaitUntil(() => SplashScreen.isFinished, cancellationToken: _cts.Token);
+            _disposables.Dispose();
+            _isPlaying.Dispose();
 
-        _isPlaying.Value = false;
-    }
+            _cts.Cancel();
+            _cts.Dispose();
+        }
 
-    private void Stop()
-    {
-        if (!SplashScreen.isFinished)
-            SplashScreen.Stop(SplashScreen.StopBehavior.FadeOut);
+        private async UniTask DisplayAsync()
+        {
+            UnitySplashScreen.Begin();
+            UnitySplashScreen.Draw();
+            _isPlaying.Value = true;
+
+            await UniTask.WaitUntil(() => UnitySplashScreen.isFinished, cancellationToken: _cts.Token);
+
+            _isPlaying.Value = false;
+        }
+
+        private void Stop()
+        {
+            if (!UnitySplashScreen.isFinished)
+                UnitySplashScreen.Stop(UnitySplashScreen.StopBehavior.FadeOut);
+        }
     }
 }

@@ -1,15 +1,18 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
 using VContainer.Unity;
-using VContainer.Extensions;
 
-[Serializable]
-public class GameQuittingInstaller : IInstaller
+namespace Ovoshnig.GameState.Quitting
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class GameQuittingInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<GameQuitButtonView>();
-        builder.Register<GameQuitter>(Lifetime.Singleton);
-        builder.RegisterEntryPoint<GameQuitterButtonViewMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstanceInHierarchy<GameQuitButtonView>();
+            builder.Register<GameQuitter>(Lifetime.Singleton);
+            builder.RegisterEntryPoint<GameQuitterButtonViewMediator>();
+        }
     }
 }

@@ -1,39 +1,45 @@
+using AngryBirds3D.Bird.Entity;
+using AngryBirds3D.Bird.Queue;
+using AngryBirds3D.Camera.Switching;
+using AngryBirds3D.LevelState.Tracking;
+using AngryBirds3D.Slingshot.Placement;
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
 using R3;
 using System.Threading;
 
-public class SlingshotBirdPlacerLevelTrackerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly BirdQueue _birdQueue;
-    private readonly CameraSwitchView _cameraSwitchView;
-
-    public SlingshotBirdPlacerLevelTrackerMediator(SlingshotBirdPlacer slingshotBirdPlacer,
-        LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView)
+    public class SlingshotBirdPlacerLevelTrackerMediator : Mediator
     {
-        _slingshotBirdPlacer = slingshotBirdPlacer;
-        _levelStateTracker = levelStateTracker;
-        _birdQueue = birdQueue;
-        _cameraSwitchView = cameraSwitchView;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _levelStateTracker.MovedToNext
-            .SubscribeAwait(async (_, token) => await OnMovedToNextAsync(token), AwaitOperation.Drop)
-            .AddTo(disposables);
-    }
-
-    private async UniTask OnMovedToNextAsync(CancellationToken token)
-    {
-        await UniTask.Yield(token);
-
-        if (_cameraSwitchView.IsBlending.CurrentValue)
+        private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
+        private readonly LevelStateTracker _levelStateTracker;
+        private readonly BirdQueue _birdQueue;
+        private readonly CameraSwitchView _cameraSwitchView;
+    
+        public SlingshotBirdPlacerLevelTrackerMediator(SlingshotBirdPlacer slingshotBirdPlacer,
+            LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView)
+        {
+            _slingshotBirdPlacer = slingshotBirdPlacer;
+            _levelStateTracker = levelStateTracker;
+            _birdQueue = birdQueue;
+            _cameraSwitchView = cameraSwitchView;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _levelStateTracker.MovedToNext
+                .SubscribeAwait(async (_, token) => await OnMovedToNextAsync(token), AwaitOperation.Drop)
+                .AddTo(disposables);
+        }
+    
+        private async UniTask OnMovedToNextAsync(CancellationToken token)
+        {
             await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
-
-        if (_slingshotBirdPlacer.CanPlace)
-            if (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
-                _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
+    
+            if (_slingshotBirdPlacer.CanPlace)
+                if (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
+                    _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
+        }
     }
 }

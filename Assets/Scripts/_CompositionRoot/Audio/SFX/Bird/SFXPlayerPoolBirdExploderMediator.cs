@@ -1,20 +1,26 @@
+using AngryBirds3D.Bird.Power;
+using Ovoshnig.Audio.SFX.Playing;
+using Ovoshnig.Mediation;
 using R3;
 
-public class SFXPlayerPoolBirdExploderMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly SFXPlayerObjectPool _sFXPlayerObjectPool;
-    private readonly BirdExploder _birdExploder;
-
-    public SFXPlayerPoolBirdExploderMediator(SFXPlayerObjectPool sFXPlayerObjectPool, BirdExploder birdExploder)
+    public class SFXPlayerPoolBirdExploderMediator : Mediator
     {
-        _sFXPlayerObjectPool = sFXPlayerObjectPool;
-        _birdExploder = birdExploder;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _birdExploder.Exploded
-            .Subscribe(data => _sFXPlayerObjectPool.PlaySFX(data.Transform, data.AudioResource))
-            .AddTo(disposables);
+        private readonly SFXPlayerObjectPool _sFXPlayerObjectPool;
+        private readonly BirdExploder _birdExploder;
+    
+        public SFXPlayerPoolBirdExploderMediator(SFXPlayerObjectPool sFXPlayerObjectPool, BirdExploder birdExploder)
+        {
+            _sFXPlayerObjectPool = sFXPlayerObjectPool;
+            _birdExploder = birdExploder;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _birdExploder.Exploded
+                .Subscribe(data => _sFXPlayerObjectPool.PlaySFX(data.Transform, data.AudioResource))
+                .AddTo(disposables);
+        }
     }
 }

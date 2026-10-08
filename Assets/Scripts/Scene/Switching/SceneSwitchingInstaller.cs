@@ -1,19 +1,22 @@
-﻿using System;
+using Ovoshnig.Extensions.VContainer;
+using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class SceneSwitchingInstaller : IInstaller
+namespace Ovoshnig.Scene.Switching
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class SceneSwitchingInstaller : IInstaller
     {
-        builder.RegisterInstancesInHierarchy<SceneSwitchButtonView>();
-
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<SceneSwitchButtonViewsMediator>();
-            entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
-        });
+            builder.RegisterInstancesInHierarchy<SceneSwitchButtonView>();
+
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<SceneSwitchButtonViewsMediator>();
+                entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
+            });
+        }
     }
 }

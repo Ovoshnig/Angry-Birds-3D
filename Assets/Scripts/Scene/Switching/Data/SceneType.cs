@@ -1,6 +1,9 @@
-public enum SceneType
+namespace Ovoshnig.Scene.Switching
 {
-    MainMenu,
-    GameLevel,
-    Credits
+    public enum SceneType
+    {
+        MainMenu,
+        GameLevel,
+        Credits
+    }
 }

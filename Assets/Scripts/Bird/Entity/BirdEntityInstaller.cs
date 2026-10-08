@@ -1,10 +1,13 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdEntityInstaller : IInstaller
+namespace AngryBirds3D.Bird.Entity
 {
-    public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BirdEntityView>();
+    [Serializable]
+    public class BirdEntityInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BirdEntityView>();
+    }
 }

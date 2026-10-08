@@ -1,20 +1,26 @@
+using AngryBirds3D.Camera.Switching;
+using Ovoshnig.Mediation;
+using Ovoshnig.ObjectCollision.Collision;
 using R3;
 
-public class ObjectColliderStartCameraSwitchMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly ObjectCollider _objectCollider;
-    private readonly StartCameraSwitch _startCameraSwitch;
-
-    public ObjectColliderStartCameraSwitchMediator(ObjectCollider objectCollider, StartCameraSwitch startCameraSwitch)
+    public class ObjectColliderStartCameraSwitchMediator : Mediator
     {
-        _objectCollider = objectCollider;
-        _startCameraSwitch = startCameraSwitch;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _startCameraSwitch.Completed
-            .Subscribe(_ => _objectCollider.Subscribe())
-            .AddTo(disposables);
+        private readonly ObjectCollider _objectCollider;
+        private readonly StartCameraSwitch _startCameraSwitch;
+    
+        public ObjectColliderStartCameraSwitchMediator(ObjectCollider objectCollider, StartCameraSwitch startCameraSwitch)
+        {
+            _objectCollider = objectCollider;
+            _startCameraSwitch = startCameraSwitch;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _startCameraSwitch.Completed
+                .Subscribe(_ => _objectCollider.Subscribe())
+                .AddTo(disposables);
+        }
     }
 }

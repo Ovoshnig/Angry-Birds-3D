@@ -1,8 +1,11 @@
-﻿using R3;
+using R3;
 
-public interface IWindow
+namespace Ovoshnig.Window.Window
 {
-    public bool TryOpen();
-    public bool TryClose();
-    public ReadOnlyReactiveProperty<bool> IsOpen { get; }
+    public interface IWindow
+    {
+        public bool TryOpen();
+        public bool TryClose();
+        public ReadOnlyReactiveProperty<bool> IsOpen { get; }
+    }
 }

@@ -1,13 +1,19 @@
+using AngryBirds3D.Block.Destruction;
+using AngryBirds3D.Block.Particle;
+using Ovoshnig.ObjectDestruction.Entity;
 using UnityEngine;
 
-[RequireComponent(typeof(BlockDestroyerView))]
-public class BlockEntityView : DestructibleEntityView
+namespace AngryBirds3D.Block.Entity
 {
-    [field: SerializeField] public BlockParticleProfile ParticleProfile { get; private set; }
-
-    protected override void Awake()
+    [RequireComponent(typeof(BlockDestroyerView))]
+    public class BlockEntityView : DestructibleEntityView
     {
-        base.Awake();
-        DestroyerView = GetComponent<BlockDestroyerView>();
+        [field: SerializeField] public BlockParticleProfile ParticleProfile { get; private set; }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            DestroyerView = GetComponent<BlockDestroyerView>();
+        }
     }
 }

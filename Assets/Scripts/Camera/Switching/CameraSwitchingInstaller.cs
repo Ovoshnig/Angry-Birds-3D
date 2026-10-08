@@ -1,14 +1,17 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class CameraSwitchingInstaller : IInstaller
+namespace AngryBirds3D.Camera.Switching
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class CameraSwitchingInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<CameraSwitchView>();
-        builder.RegisterEntryPoint<StartCameraSwitch>().AsSelf();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstanceInHierarchy<CameraSwitchView>();
+            builder.RegisterEntryPoint<StartCameraSwitch>().AsSelf();
+        }
     }
 }

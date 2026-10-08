@@ -1,6 +1,11 @@
+using Ovoshnig.DataStorage.Storage;
+using Ovoshnig.UI.Basic;
 using UnityEngine;
 
-public class DataResetButtonView : ButtonView
+namespace Ovoshnig.DataStorage.Reset
 {
-    [field: SerializeField] public DataStorageType StorageType { get; private set; }
+    public class DataResetButtonView : ButtonView
+    {
+        [field: SerializeField] public DataStorageType StorageType { get; private set; }
+    }
 }

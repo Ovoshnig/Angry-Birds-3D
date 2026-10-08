@@ -1,20 +1,23 @@
 using VContainer;
 using VContainer.Unity;
 
-public class AudioSFXMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder)
+    public class AudioSFXMediatorsInstaller : IInstaller
     {
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<SFXPlayerPoolLevelTrackerMediator>();
-            entryPoints.Add<SFXPlayerPoolClearingPanelViewMediator>();
-            entryPoints.Add<SFXPlayerPoolSlingshotShooterMediator>();
-            entryPoints.Add<SFXPlayerPoolBirdColliderMediator>();
-            entryPoints.Add<SFXPlayerPoolBirdDestroyerMediator>();
-            entryPoints.Add<SFXPlayerPoolBirdPowerActivatorMediator>();
-            entryPoints.Add<SFXPlayerPoolBirdExploderMediator>();
-            entryPoints.Add<SFXPlayerPoolObjectDestroyerMediator>();
-        });
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<SFXPlayerPoolLevelTrackerMediator>();
+                entryPoints.Add<SFXPlayerPoolClearingPanelViewMediator>();
+                entryPoints.Add<SFXPlayerPoolSlingshotShooterMediator>();
+                entryPoints.Add<SFXPlayerPoolBirdColliderMediator>();
+                entryPoints.Add<SFXPlayerPoolBirdDestroyerMediator>();
+                entryPoints.Add<SFXPlayerPoolBirdPowerActivatorMediator>();
+                entryPoints.Add<SFXPlayerPoolBirdExploderMediator>();
+                entryPoints.Add<SFXPlayerPoolObjectDestroyerMediator>();
+            });
+        }
     }
 }

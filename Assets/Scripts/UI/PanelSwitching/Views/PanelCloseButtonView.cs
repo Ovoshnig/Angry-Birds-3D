@@ -1,3 +1,6 @@
-public sealed class PanelCloseButtonView : PanelSwitchButtonView
+namespace Ovoshnig.UI.PanelSwitching
 {
+    public sealed class PanelCloseButtonView : PanelSwitchButtonView
+    {
+    }
 }

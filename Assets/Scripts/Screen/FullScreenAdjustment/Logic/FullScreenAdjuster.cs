@@ -1,39 +1,43 @@
+using Ovoshnig.Screen.Input;
 using R3;
 using System;
-using UnityEngine;
 using VContainer.Unity;
+using UnityScreen = UnityEngine.Screen;
 
-public class FullScreenAdjuster : IStartable, IDisposable
+namespace Ovoshnig.Screen.FullScreenAdjustment
 {
-    private readonly ScreenInputProvider _screenInputProvider;
-    private readonly ReactiveProperty<bool> _isFullScreen = new();
-    private readonly CompositeDisposable _disposables = new();
-
-    public FullScreenAdjuster(ScreenInputProvider screenInputProvider) => _screenInputProvider = screenInputProvider;
-
-    public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
-
-    public void Start()
+    public class FullScreenAdjuster : IStartable, IDisposable
     {
-        _isFullScreen.Value = Screen.fullScreen;
+        private readonly ScreenInputProvider _screenInputProvider;
+        private readonly ReactiveProperty<bool> _isFullScreen = new();
+        private readonly CompositeDisposable _disposables = new();
 
-        _screenInputProvider.ToggleFullScreenPressed
-            .Where(isPressed => isPressed)
-            .Subscribe(_ => ToggleFullScreen())
-            .AddTo(_disposables);
-    }
+        public FullScreenAdjuster(ScreenInputProvider screenInputProvider) => _screenInputProvider = screenInputProvider;
 
-    public void Dispose()
-    {
-        _disposables.Dispose();
-        _isFullScreen.Dispose();
-    }
+        public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
 
-    public void ToggleFullScreen() => SetFullScreen(!_isFullScreen.Value);
+        public void Start()
+        {
+            _isFullScreen.Value = UnityScreen.fullScreen;
 
-    public void SetFullScreen(bool isFullScreen)
-    {
-        Screen.fullScreen = isFullScreen;
-        _isFullScreen.Value = isFullScreen;
+            _screenInputProvider.ToggleFullScreenPressed
+                .Where(isPressed => isPressed)
+                .Subscribe(_ => ToggleFullScreen())
+                .AddTo(_disposables);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
+            _isFullScreen.Dispose();
+        }
+
+        public void ToggleFullScreen() => SetFullScreen(!_isFullScreen.Value);
+
+        public void SetFullScreen(bool isFullScreen)
+        {
+            UnityScreen.fullScreen = isFullScreen;
+            _isFullScreen.Value = isFullScreen;
+        }
     }
 }

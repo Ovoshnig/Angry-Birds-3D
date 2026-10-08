@@ -1,8 +1,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using VContainer;
 
-namespace VContainer.Extensions
+namespace Ovoshnig.Extensions.VContainer
 {
     public sealed class FindInstancesProvider<T> : IInstanceProvider where T : Component
     {

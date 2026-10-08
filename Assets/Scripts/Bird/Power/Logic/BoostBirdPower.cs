@@ -1,44 +1,50 @@
+using AngryBirds3D.Bird.Entity;
+using AngryBirds3D.Bird.Flight;
 using Cysharp.Threading.Tasks;
 using LitMotion;
+using Ovoshnig.GameSettings.BirdPower;
 using System;
 using System.Threading;
 using UnityEngine;
 
-public class BoostBirdPower : IBirdPower, IDisposable
+namespace AngryBirds3D.Bird.Power
 {
-    private readonly BoostPowerSettings _powerSettings;
-    private readonly CancellationTokenSource _cts = new();
-
-    public BoostBirdPower(BoostPowerSettings powerSettings) => _powerSettings = powerSettings;
-
-    public BirdPowerType Type => BirdPowerType.Boost;
-
-    public void Activate(BirdEntityView birdEntityView)
+    public class BoostBirdPower : IBirdPower, IDisposable
     {
-        BirdFlyerView flyerView = birdEntityView.FlyerView;
-        BoostAsync(flyerView).Forget();
-    }
+        private readonly BoostPowerSettings _powerSettings;
+        private readonly CancellationTokenSource _cts = new();
 
-    public void Dispose()
-    {
-        _cts.Cancel();
-        _cts.Dispose();
-    }
+        public BoostBirdPower(BoostPowerSettings powerSettings) => _powerSettings = powerSettings;
 
-    private async UniTask BoostAsync(BirdFlyerView birdFlyerView)
-    {
-        birdFlyerView.StretchAsync(birdFlyerView.destroyCancellationToken).Forget();
+        public BirdPowerType Type => BirdPowerType.Boost;
 
-        Vector3 linearVelocity = birdFlyerView.Rigidbody.linearVelocity;
-        Vector3 targetVelocity = _powerSettings.BoostVelocity * linearVelocity.normalized;
+        public void Activate(BirdEntityView birdEntityView)
+        {
+            BirdFlyerView flyerView = birdEntityView.FlyerView;
+            BoostAsync(flyerView).Forget();
+        }
 
-        await LMotion.Create(linearVelocity, targetVelocity, _powerSettings.VelocityIncreasingDuration)
-            .WithEase(_powerSettings.VelocityIncreasingEase)
-            .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
-            .ToUniTask(_cts.Token);
+        public void Dispose()
+        {
+            _cts.Cancel();
+            _cts.Dispose();
+        }
 
-        await LMotion.Create(targetVelocity, targetVelocity, _powerSettings.BoostDuration)
-            .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
-            .ToUniTask(_cts.Token);
+        private async UniTask BoostAsync(BirdFlyerView birdFlyerView)
+        {
+            birdFlyerView.StretchAsync(birdFlyerView.destroyCancellationToken).Forget();
+
+            Vector3 linearVelocity = birdFlyerView.Rigidbody.linearVelocity;
+            Vector3 targetVelocity = _powerSettings.BoostVelocity * linearVelocity.normalized;
+
+            await LMotion.Create(linearVelocity, targetVelocity, _powerSettings.VelocityIncreasingDuration)
+                .WithEase(_powerSettings.VelocityIncreasingEase)
+                .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
+                .ToUniTask(_cts.Token);
+
+            await LMotion.Create(targetVelocity, targetVelocity, _powerSettings.BoostDuration)
+                .Bind(velocity => birdFlyerView.Rigidbody.linearVelocity = velocity)
+                .ToUniTask(_cts.Token);
+        }
     }
 }

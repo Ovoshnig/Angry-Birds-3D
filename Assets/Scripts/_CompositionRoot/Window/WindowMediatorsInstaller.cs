@@ -1,11 +1,14 @@
 using VContainer;
 using VContainer.Unity;
 
-public class WindowMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder)
+    public class WindowMediatorsInstaller : IInstaller
     {
-        builder.RegisterEntryPoint<PauseWindowLevelTrackerMediator>();
-        builder.RegisterEntryPoint<LevelTrackerPauseButtonViewMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterEntryPoint<PauseWindowLevelTrackerMediator>();
+            builder.RegisterEntryPoint<LevelTrackerPauseButtonViewMediator>();
+        }
     }
 }

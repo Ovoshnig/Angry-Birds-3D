@@ -3,14 +3,17 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdExplosionParticleInstaller : IInstaller
+namespace AngryBirds3D.Bird.ExplosionParticle
 {
-    [SerializeField] private ExplosionParticleView _explosionParticlePrefab;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class BirdExplosionParticleInstaller : IInstaller
     {
-        builder.RegisterComponentInNewPrefab(_explosionParticlePrefab, Lifetime.Singleton);
-        builder.RegisterEntryPoint<ExplosionParticleViewBirdExploderMediator>();
+        [SerializeField] private ExplosionParticleView _explosionParticlePrefab;
+
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterComponentInNewPrefab(_explosionParticlePrefab, Lifetime.Singleton);
+            builder.RegisterEntryPoint<ExplosionParticleViewBirdExploderMediator>();
+        }
     }
 }

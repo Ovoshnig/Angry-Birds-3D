@@ -1,68 +1,72 @@
 using LitMotion;
+using Ovoshnig.ObjectDestruction.Destruction;
 using UnityEngine;
 
-[RequireComponent(typeof(Renderer))]
-public class BlockDestroyerView : ObjectDestroyerView
+namespace AngryBirds3D.Block.Destruction
 {
-    [SerializeField] private BlockDestructionSettings _destructionSettings;
-
-    private readonly Vector4[] _hitPoints = new Vector4[4];
-    private readonly MotionHandle[] _motionHandles = new MotionHandle[4];
-
-    private Renderer _renderer;
-    private MaterialPropertyBlock _propertyBlock;
-    private int _nextHitIndex = 0;
-
-    private void Awake()
+    [RequireComponent(typeof(Renderer))]
+    public class BlockDestroyerView : ObjectDestroyerView
     {
-        _renderer = GetComponent<Renderer>();
-        _propertyBlock = new MaterialPropertyBlock();
-    }
+        [SerializeField] private BlockDestructionSettings _destructionSettings;
 
-    public override void VisualizeDamage(Vector3 worldPoint, float health, float maxHealth)
-    {
-        if (maxHealth <= 0f)
-            return;
+        private readonly Vector4[] _hitPoints = new Vector4[4];
+        private readonly MotionHandle[] _motionHandles = new MotionHandle[4];
 
-        Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
+        private Renderer _renderer;
+        private MaterialPropertyBlock _propertyBlock;
+        private int _nextHitIndex = 0;
 
-        float damageRatio = 1f - Mathf.Clamp01(health / maxHealth);
-        float maxExpectedRadius = CalculateMaxRadius();
-        float targetRadius = maxExpectedRadius * damageRatio;
+        private void Awake()
+        {
+            _renderer = GetComponent<Renderer>();
+            _propertyBlock = new MaterialPropertyBlock();
+        }
 
-        int index = _nextHitIndex;
-        _nextHitIndex = (_nextHitIndex + 1) % _hitPoints.Length;
+        public override void VisualizeDamage(Vector3 worldPoint, float health, float maxHealth)
+        {
+            if (maxHealth <= 0f)
+                return;
 
-        _motionHandles[index].TryCancel();
+            Vector3 localPoint = transform.InverseTransformPoint(worldPoint);
 
-        _hitPoints[index] = new Vector4(localPoint.x, localPoint.y, localPoint.z, 0f);
+            float damageRatio = 1f - Mathf.Clamp01(health / maxHealth);
+            float maxExpectedRadius = CalculateMaxRadius();
+            float targetRadius = maxExpectedRadius * damageRatio;
 
-        _motionHandles[index] = LMotion.Create(0f, targetRadius, _destructionSettings.Duration)
-            .WithEase(_destructionSettings.Ease)
-            .Bind((Target: this, Index: index), (radius, state) =>
-            {
-                state.Target._hitPoints[state.Index].w = radius;
-                state.Target.ApplyPropertiesToShader();
-            })
-            .AddTo(this);
-    }
+            int index = _nextHitIndex;
+            _nextHitIndex = (_nextHitIndex + 1) % _hitPoints.Length;
 
-    private void ApplyPropertiesToShader()
-    {
-        if (_renderer == null)
-            return;
+            _motionHandles[index].TryCancel();
 
-        _renderer.GetPropertyBlock(_propertyBlock);
+            _hitPoints[index] = new Vector4(localPoint.x, localPoint.y, localPoint.z, 0f);
 
-        for (int i = 0; i < _hitPoints.Length; i++)
-            _propertyBlock.SetVector(BlockDestructionConstants.HitProperties[i], _hitPoints[i]);
+            _motionHandles[index] = LMotion.Create(0f, targetRadius, _destructionSettings.Duration)
+                .WithEase(_destructionSettings.Ease)
+                .Bind((Target: this, Index: index), (radius, state) =>
+                {
+                    state.Target._hitPoints[state.Index].w = radius;
+                    state.Target.ApplyPropertiesToShader();
+                })
+                .AddTo(this);
+        }
 
-        _renderer.SetPropertyBlock(_propertyBlock);
-    }
+        private void ApplyPropertiesToShader()
+        {
+            if (_renderer == null)
+                return;
 
-    private float CalculateMaxRadius()
-    {
-        Bounds bounds = _renderer.bounds;
-        return Vector3.Distance(bounds.min, bounds.max) * 0.5f;
+            _renderer.GetPropertyBlock(_propertyBlock);
+
+            for (int i = 0; i < _hitPoints.Length; i++)
+                _propertyBlock.SetVector(BlockDestructionConstants.HitProperties[i], _hitPoints[i]);
+
+            _renderer.SetPropertyBlock(_propertyBlock);
+        }
+
+        private float CalculateMaxRadius()
+        {
+            Bounds bounds = _renderer.bounds;
+            return Vector3.Distance(bounds.min, bounds.max) * 0.5f;
+        }
     }
 }

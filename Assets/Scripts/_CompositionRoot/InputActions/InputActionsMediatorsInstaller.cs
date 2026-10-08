@@ -1,8 +1,11 @@
 using VContainer;
 using VContainer.Unity;
 
-public class InputActionsMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<InputActionsSceneSwitchMediator>();
+    public class InputActionsMediatorsInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<InputActionsSceneSwitchMediator>();
+    }
 }

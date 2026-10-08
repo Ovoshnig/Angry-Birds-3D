@@ -1,74 +1,78 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
+using Ovoshnig.GameSettings;
 using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
-public class BirdFlyerView : MonoBehaviour
+namespace AngryBirds3D.Bird.Flight
 {
-    [SerializeField] private GameSettings _gameSettings;
-
-    private readonly HashSet<BirdFlyerView> _cloneFlyerViews = new();
-
-    public Rigidbody Rigidbody { get; private set; }
-
-    private void Awake() => Rigidbody = GetComponent<Rigidbody>();
-
-    public void AddClone(BirdFlyerView clone)
+    [RequireComponent(typeof(Rigidbody))]
+    public class BirdFlyerView : MonoBehaviour
     {
-        if (clone != null)
-            _cloneFlyerViews.Add(clone);
-    }
+        [SerializeField] private GameSettings _gameSettings;
 
-    public async UniTask StretchAsync(CancellationToken token)
-    {
-        BirdStretchSettings settings = _gameSettings.BirdStretchSettings;
+        private readonly HashSet<BirdFlyerView> _cloneFlyerViews = new();
 
-        try
+        public Rigidbody Rigidbody { get; private set; }
+
+        private void Awake() => Rigidbody = GetComponent<Rigidbody>();
+
+        public void AddClone(BirdFlyerView clone)
         {
-            await UniTask.WaitForSeconds(settings.StretchDelay, cancellationToken: token);
-
-            float velocityFactor = Mathf.InverseLerp(
-                settings.MinVelocitySquareMagnitude,
-                settings.MaxVelocitySquareMagnitude,
-                Rigidbody.linearVelocity.sqrMagnitude);
-
-            Vector3 stretchScale = Vector3.Lerp(Vector3.one, settings.MaxStretchScale, velocityFactor);
-
-            await LMotion.Create(Vector3.one, stretchScale, settings.StretchDuration)
-                .WithEase(settings.StretchEase)
-                .WithLoops(2, LoopType.Yoyo)
-                .Bind(UpdateLocalScale)
-                .ToUniTask(token);
+            if (clone != null)
+                _cloneFlyerViews.Add(clone);
         }
-        catch (OperationCanceledException)
+
+        public async UniTask StretchAsync(CancellationToken token)
         {
-            if (this == null)
-                return;
+            BirdStretchSettings settings = _gameSettings.BirdStretchSettings;
 
-            await LMotion.Create(transform.localScale, Vector3.one, settings.StretchCancelDuration)
-                .WithEase(Ease.InQuad)
-                .Bind(UpdateLocalScale)
-                .ToUniTask(cancellationToken: destroyCancellationToken);
+            try
+            {
+                await UniTask.WaitForSeconds(settings.StretchDelay, cancellationToken: token);
+
+                float velocityFactor = Mathf.InverseLerp(
+                    settings.MinVelocitySquareMagnitude,
+                    settings.MaxVelocitySquareMagnitude,
+                    Rigidbody.linearVelocity.sqrMagnitude);
+
+                Vector3 stretchScale = Vector3.Lerp(Vector3.one, settings.MaxStretchScale, velocityFactor);
+
+                await LMotion.Create(Vector3.one, stretchScale, settings.StretchDuration)
+                    .WithEase(settings.StretchEase)
+                    .WithLoops(2, LoopType.Yoyo)
+                    .Bind(UpdateLocalScale)
+                    .ToUniTask(token);
+            }
+            catch (OperationCanceledException)
+            {
+                if (this == null)
+                    return;
+
+                await LMotion.Create(transform.localScale, Vector3.one, settings.StretchCancelDuration)
+                    .WithEase(Ease.InQuad)
+                    .Bind(UpdateLocalScale)
+                    .ToUniTask(cancellationToken: destroyCancellationToken);
+            }
         }
-    }
 
-    public void LookAtVelocityDirection()
-    {
-        if (Rigidbody.linearVelocity.sqrMagnitude != 0f)
-            Rigidbody.transform.forward = Rigidbody.linearVelocity.normalized;
+        public void LookAtVelocityDirection()
+        {
+            if (Rigidbody.linearVelocity.sqrMagnitude != 0f)
+                Rigidbody.transform.forward = Rigidbody.linearVelocity.normalized;
 
-        foreach (var clone in _cloneFlyerViews)
-            clone.LookAtVelocityDirection();
-    }
+            foreach (var clone in _cloneFlyerViews)
+                clone.LookAtVelocityDirection();
+        }
 
-    private void UpdateLocalScale(Vector3 scale)
-    {
-        transform.localScale = scale;
+        private void UpdateLocalScale(Vector3 scale)
+        {
+            transform.localScale = scale;
 
-        foreach (var clone in _cloneFlyerViews)
-            clone.transform.localScale = scale;
+            foreach (var clone in _cloneFlyerViews)
+                clone.transform.localScale = scale;
+        }
     }
 }

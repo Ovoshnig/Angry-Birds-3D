@@ -1,14 +1,17 @@
+using Ovoshnig.Extensions.VContainer;
 using System;
 using VContainer;
-using VContainer.Extensions;
 using VContainer.Unity;
 
-[Serializable]
-public class WindowPauseInstaller : IInstaller
+namespace Ovoshnig.Window.Pause
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class WindowPauseInstaller : IInstaller
     {
-        builder.RegisterInstanceInHierarchy<PauseButtonView>();
-        builder.RegisterEntryPoint<PauseMenuWindowButtonViewMediator>();
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstanceInHierarchy<PauseButtonView>();
+            builder.RegisterEntryPoint<PauseMenuWindowButtonViewMediator>();
+        }
     }
 }

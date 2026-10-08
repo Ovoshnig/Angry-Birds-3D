@@ -1,8 +1,11 @@
 using VContainer;
 using VContainer.Unity;
 
-public class GameStateMediatorsInstaller : IInstaller
+namespace AngryBirds3D.Composition
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<GamePauserPauseMenuWindowMediator>();
+    public class GameStateMediatorsInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<GamePauserPauseMenuWindowMediator>();
+    }
 }

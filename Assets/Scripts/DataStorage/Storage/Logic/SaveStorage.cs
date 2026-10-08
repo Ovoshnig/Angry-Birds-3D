@@ -3,50 +3,53 @@ using System.IO;
 using System.Security.Cryptography;
 using UnityEngine;
 
-public class SaveStorage : DataStorage
+namespace Ovoshnig.DataStorage.Storage
 {
-    public override DataStorageType StorageType => DataStorageType.Save;
-
-    protected override string FileName => SaveConstants.FileName;
-
-    private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
-
-    protected override void LoadData()
+    public sealed class SaveStorage : DataStorage
     {
-        base.LoadData();
+        public override DataStorageType StorageType => DataStorageType.Save;
 
-        if (!File.Exists(FilePath) || !File.Exists(HashFilePath))
+        protected override string FileName => SaveConstants.FileName;
+
+        private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
+
+        protected override void LoadData()
         {
-            ResetData();
-            return;
+            base.LoadData();
+
+            if (!File.Exists(FilePath) || !File.Exists(HashFilePath))
+            {
+                ResetData();
+                return;
+            }
+
+            string savedHash = File.ReadAllText(HashFilePath);
+            string currentHash = CalculateHash(FilePath);
+
+            if (savedHash == currentHash)
+                return;
+
+            Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
+
+            if (!Debug.isDebugBuild)
+                ResetData();
         }
 
-        string savedHash = File.ReadAllText(HashFilePath);
-        string currentHash = CalculateHash(FilePath);
+        protected override void SaveData()
+        {
+            base.SaveData();
 
-        if (savedHash == currentHash)
-            return;
+            string fileHash = CalculateHash(FilePath);
+            File.WriteAllText(HashFilePath, fileHash);
+        }
 
-        Debug.LogWarning("File integrity check failed. The save file might have been tampered with.");
+        private string CalculateHash(string filePath)
+        {
+            using SHA256 sha256 = SHA256.Create();
+            byte[] fileBytes = File.ReadAllBytes(filePath);
+            byte[] hashBytes = sha256.ComputeHash(fileBytes);
 
-        if (!Debug.isDebugBuild)
-            ResetData();
-    }
-
-    protected override void SaveData()
-    {
-        base.SaveData();
-
-        string fileHash = CalculateHash(FilePath);
-        File.WriteAllText(HashFilePath, fileHash);
-    }
-
-    private string CalculateHash(string filePath)
-    {
-        using SHA256 sha256 = SHA256.Create();
-        byte[] fileBytes = File.ReadAllBytes(filePath);
-        byte[] hashBytes = sha256.ComputeHash(fileBytes);
-
-        return Convert.ToBase64String(hashBytes);
+            return Convert.ToBase64String(hashBytes);
+        }
     }
 }

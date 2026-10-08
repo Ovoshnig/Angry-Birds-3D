@@ -1,17 +1,21 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.UI.Basic;
 using R3;
 
-public class RecordRatingSaverViewMediator : UIViewMediator<RecordRatingView>
+namespace AngryBirds3D.LevelScore.RecordRating
 {
-    private readonly RecordRatingSaver _recordRatingSaver;
-
-    public RecordRatingSaverViewMediator(RecordRatingSaver recordRatingSaver, RecordRatingView view)
-        : base(view) => _recordRatingSaver = recordRatingSaver;
-
-    protected override void OnViewEnabled(RecordRatingView view, CompositeDisposable viewDisposables)
+    public class RecordRatingSaverViewMediator : UIViewMediator<RecordRatingView>
     {
-        _recordRatingSaver.Record
-            .Subscribe(record => view.SetStarCount(record))
-            .AddTo(viewDisposables);
+        private readonly RecordRatingSaver _recordRatingSaver;
+
+        public RecordRatingSaverViewMediator(RecordRatingSaver recordRatingSaver, RecordRatingView view)
+            : base(view) => _recordRatingSaver = recordRatingSaver;
+
+        protected override void OnViewEnabled(RecordRatingView view, CompositeDisposable viewDisposables)
+        {
+            _recordRatingSaver.Record
+                .Subscribe(record => view.SetStarCount(record))
+                .AddTo(viewDisposables);
+        }
     }
 }

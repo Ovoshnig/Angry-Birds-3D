@@ -1,64 +1,69 @@
-﻿using R3;
+using Ovoshnig.Audio.SFX.Count;
+using R3;
 using System;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Pool;
+using AudioSettings = Ovoshnig.GameSettings.AudioSettings;
 using Object = UnityEngine.Object;
 
-public class SFXPlayerObjectPool : IDisposable
+namespace Ovoshnig.Audio.SFX.Playing
 {
-    private readonly ObjectPool<SFXPlayerView> _sfxPlayerPool;
-    private readonly SFXCounter _sfxCounter;
-    private readonly AudioSettings _audioSettings;
-    private readonly GameObject _poolRoot;
-
-    public SFXPlayerObjectPool(SFXPlayerView playerPrefab, SFXCounter sfxCounter, AudioSettings audioSettings)
+    public class SFXPlayerObjectPool : IDisposable
     {
-        _sfxCounter = sfxCounter;
-        _audioSettings = audioSettings;
+        private readonly ObjectPool<SFXPlayerView> _sfxPlayerPool;
+        private readonly SFXCounter _sfxCounter;
+        private readonly AudioSettings _audioSettings;
+        private readonly GameObject _poolRoot;
 
-        _poolRoot = new GameObject("SFXPlayerPool");
+        public SFXPlayerObjectPool(SFXPlayerView playerPrefab, SFXCounter sfxCounter, AudioSettings audioSettings)
+        {
+            _sfxCounter = sfxCounter;
+            _audioSettings = audioSettings;
 
-        _sfxPlayerPool = new ObjectPool<SFXPlayerView>(
-            createFunc: () => Object.Instantiate(playerPrefab, _poolRoot.transform),
-            actionOnGet: playerView => playerView.gameObject.SetActive(true),
-            actionOnRelease: playerView => playerView.gameObject.SetActive(false),
-            defaultCapacity: audioSettings.PoolDefaultCapacity,
-            maxSize: audioSettings.PoolMaxSize
-        );
-    }
+            _poolRoot = new GameObject("SFXPlayerPool");
 
-    public void Dispose()
-    {
-        _sfxPlayerPool.Dispose();
-        Object.Destroy(_poolRoot);
-    }
+            _sfxPlayerPool = new ObjectPool<SFXPlayerView>(
+                createFunc: () => Object.Instantiate(playerPrefab, _poolRoot.transform),
+                actionOnGet: playerView => playerView.gameObject.SetActive(true),
+                actionOnRelease: playerView => playerView.gameObject.SetActive(false),
+                defaultCapacity: audioSettings.PoolDefaultCapacity,
+                maxSize: audioSettings.PoolMaxSize
+            );
+        }
 
-    public void PlaySFX(AudioResource audioResource) => Play(audioResource);
+        public void Dispose()
+        {
+            _sfxPlayerPool.Dispose();
+            Object.Destroy(_poolRoot);
+        }
 
-    public void PlaySFX(Transform target, AudioResource audioResource) => Play(audioResource, target);
+        public void PlaySFX(AudioResource audioResource) => Play(audioResource);
 
-    private void Play(AudioResource audioResource, Transform target = null)
-    {
-        if (audioResource == null || _sfxCounter.GetCount(audioResource) >= _audioSettings.MaxSameSfxPlaying)
-            return;
+        public void PlaySFX(Transform target, AudioResource audioResource) => Play(audioResource, target);
 
-        SFXPlayerView playerView = _sfxPlayerPool.Get();
+        private void Play(AudioResource audioResource, Transform target = null)
+        {
+            if (audioResource == null || _sfxCounter.GetCount(audioResource) >= _audioSettings.MaxSameSfxPlaying)
+                return;
 
-        if (target == null)
-            playerView.Play2D(audioResource);
-        else
-            playerView.Play3D(target, audioResource);
+            SFXPlayerView playerView = _sfxPlayerPool.Get();
 
-        _sfxCounter.Increment(audioResource);
+            if (target == null)
+                playerView.Play2D(audioResource);
+            else
+                playerView.Play3D(target, audioResource);
 
-        playerView.Stopped
-            .Take(1)
-            .Subscribe(_ =>
-            {
-                _sfxPlayerPool.Release(playerView);
-                _sfxCounter.Decrement(audioResource);
-            })
-            .RegisterTo(playerView.destroyCancellationToken);
+            _sfxCounter.Increment(audioResource);
+
+            playerView.Stopped
+                .Take(1)
+                .Subscribe(_ =>
+                {
+                    _sfxPlayerPool.Release(playerView);
+                    _sfxCounter.Decrement(audioResource);
+                })
+                .RegisterTo(playerView.destroyCancellationToken);
+        }
     }
 }

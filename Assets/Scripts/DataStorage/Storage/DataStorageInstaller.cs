@@ -2,15 +2,18 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class DataStorageInstaller : IInstaller
+namespace Ovoshnig.DataStorage.Storage
 {
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class DataStorageInstaller : IInstaller
     {
-        builder.UseEntryPoints(entryPoints =>
+        public void Install(IContainerBuilder builder)
         {
-            entryPoints.Add<SaveStorage>().As<DataStorage>().AsSelf();
-            entryPoints.Add<SettingsStorage>().As<DataStorage>().AsSelf();
-        });
+            builder.UseEntryPoints(entryPoints =>
+            {
+                entryPoints.Add<SaveStorage>().As<DataStorage>().AsSelf();
+                entryPoints.Add<SettingsStorage>().As<DataStorage>().AsSelf();
+            });
+        }
     }
 }

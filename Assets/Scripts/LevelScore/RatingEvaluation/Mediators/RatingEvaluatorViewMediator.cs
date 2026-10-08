@@ -1,17 +1,21 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.UI.Basic;
 using R3;
 
-public class RatingEvaluatorViewMediator : UIViewMediator<RatingEvaluatorView>
+namespace AngryBirds3D.LevelScore.RatingEvaluation
 {
-    private readonly RatingEvaluator _evaluator;
-
-    public RatingEvaluatorViewMediator(RatingEvaluator evaluator, RatingEvaluatorView view)
-        : base(view) => _evaluator = evaluator;
-
-    protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
+    public class RatingEvaluatorViewMediator : UIViewMediator<RatingEvaluatorView>
     {
-        _evaluator.Rating
-            .Subscribe(rating => view.ShowStarAsync(rating).Forget())
-            .AddTo(viewDisposables);
+        private readonly RatingEvaluator _evaluator;
+
+        public RatingEvaluatorViewMediator(RatingEvaluator evaluator, RatingEvaluatorView view)
+            : base(view) => _evaluator = evaluator;
+
+        protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
+        {
+            _evaluator.Rating
+                .Subscribe(rating => view.ShowStarAsync(rating).Forget())
+                .AddTo(viewDisposables);
+        }
     }
 }

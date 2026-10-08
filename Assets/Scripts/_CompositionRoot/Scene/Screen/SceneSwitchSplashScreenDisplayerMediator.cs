@@ -1,24 +1,30 @@
 using Cysharp.Threading.Tasks;
+using Ovoshnig.Mediation;
+using Ovoshnig.Scene.Switching;
+using Ovoshnig.Screen.SplashScreen;
 using R3;
 
-public class SceneSwitchSplashScreenDisplayerMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly SceneSwitch _sceneSwitch;
-    private readonly SplashScreenDisplayer _splashScreenDisplayer;
-
-    public SceneSwitchSplashScreenDisplayerMediator(SceneSwitch sceneSwitch,
-        SplashScreenDisplayer splashScreenDisplayer)
+    public class SceneSwitchSplashScreenDisplayerMediator : Mediator
     {
-        _sceneSwitch = sceneSwitch;
-        _splashScreenDisplayer = splashScreenDisplayer;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        _splashScreenDisplayer.IsPlaying
-            .Pairwise()
-            .Where(isPlaying => isPlaying.Previous && !isPlaying.Current)
-            .Subscribe(_ => _sceneSwitch.LoadSceneAsync(SceneNavigationType.MainMenu).Forget())
-            .AddTo(disposables);
+        private readonly SceneSwitch _sceneSwitch;
+        private readonly SplashScreenDisplayer _splashScreenDisplayer;
+    
+        public SceneSwitchSplashScreenDisplayerMediator(SceneSwitch sceneSwitch,
+            SplashScreenDisplayer splashScreenDisplayer)
+        {
+            _sceneSwitch = sceneSwitch;
+            _splashScreenDisplayer = splashScreenDisplayer;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            _splashScreenDisplayer.IsPlaying
+                .Pairwise()
+                .Where(isPlaying => isPlaying.Previous && !isPlaying.Current)
+                .Subscribe(_ => _sceneSwitch.LoadSceneAsync(SceneNavigationType.MainMenu).Forget())
+                .AddTo(disposables);
+        }
     }
 }

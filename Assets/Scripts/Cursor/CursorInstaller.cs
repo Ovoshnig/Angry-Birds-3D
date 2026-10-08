@@ -1,17 +1,22 @@
+using Ovoshnig.Cursor.Showing;
+using Ovoshnig.Cursor.State;
 using System;
 using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class CursorInstaller : IInstaller
+namespace Ovoshnig.Cursor
 {
-    [SerializeField] private CursorShowingInstaller _showingInstaller;
-    [SerializeField] private CursorStateInstaller _stateInstaller;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class CursorInstaller : IInstaller
     {
-        _showingInstaller.Install(builder);
-        _stateInstaller.Install(builder);
+        [SerializeField] private CursorShowingInstaller _showingInstaller;
+        [SerializeField] private CursorStateInstaller _stateInstaller;
+
+        public void Install(IContainerBuilder builder)
+        {
+            _showingInstaller.Install(builder);
+            _stateInstaller.Install(builder);
+        }
     }
 }

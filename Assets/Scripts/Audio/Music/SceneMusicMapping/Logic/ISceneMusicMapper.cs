@@ -1,4 +1,9 @@
-﻿public interface ISceneMusicMapper
+using Ovoshnig.Scene.Switching;
+
+namespace Ovoshnig.Audio.Music.SceneMusicMapping
 {
-    public MusicCategory GetMusicCategory(SceneType sceneType);
+    public interface ISceneMusicMapper
+    {
+        public MusicCategory GetMusicCategory(SceneType sceneType);
+    }
 }

@@ -2,23 +2,26 @@ using R3;
 using System;
 using UnityEngine;
 
-public class GamePauser : IDisposable
+namespace Ovoshnig.GameState.Pause
 {
-    private readonly ReactiveProperty<bool> _isPaused = new(false);
-
-    public ReadOnlyReactiveProperty<bool> IsPaused => _isPaused;
-
-    public void Dispose() => _isPaused.Dispose();
-
-    public void TogglePause() => SetPause(!_isPaused.Value);
-
-    public void SetPause(bool isPaused)
+    public class GamePauser : IDisposable
     {
-        _isPaused.Value = isPaused;
+        private readonly ReactiveProperty<bool> _isPaused = new(false);
 
-        if (isPaused)
-            Time.timeScale = 0f;
-        else
-            Time.timeScale = 1f;
+        public ReadOnlyReactiveProperty<bool> IsPaused => _isPaused;
+
+        public void Dispose() => _isPaused.Dispose();
+
+        public void TogglePause() => SetPause(!_isPaused.Value);
+
+        public void SetPause(bool isPaused)
+        {
+            _isPaused.Value = isPaused;
+
+            if (isPaused)
+                Time.timeScale = 0f;
+            else
+                Time.timeScale = 1f;
+        }
     }
 }

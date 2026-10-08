@@ -1,8 +1,11 @@
-﻿using VContainer;
+using VContainer;
 using VContainer.Unity;
 
-public class AddressableLoadingInstaller : IInstaller
+namespace Ovoshnig.AddressableLoading
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.Register<AddressableLoader>(Lifetime.Singleton);
+    public class AddressableLoadingInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.Register<AddressableLoader>(Lifetime.Singleton);
+    }
 }

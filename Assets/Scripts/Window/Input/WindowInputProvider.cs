@@ -1,17 +1,21 @@
+using Ovoshnig.InputProvision.Provision;
 using R3;
 
-public class WindowInputProvider : InputProvider<InputActions.WindowActions>
+namespace Ovoshnig.Window.Input
 {
-    public WindowInputProvider(InputActions inputActions) : base(inputActions.Window)
+    public class WindowInputProvider : InputProvider<InputActions.WindowActions>
     {
-        CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
-        TogglePauseMenuPressed = ObserveButton(a => a.TogglePauseMenu);
+        public WindowInputProvider(InputActions inputActions) : base(inputActions.Window)
+        {
+            CloseCurrentPressed = ObserveButton(a => a.CloseCurrent);
+            TogglePauseMenuPressed = ObserveButton(a => a.TogglePauseMenu);
+        }
+
+        public ReadOnlyReactiveProperty<bool> CloseCurrentPressed { get; }
+        public ReadOnlyReactiveProperty<bool> TogglePauseMenuPressed { get; }
+
+        protected override void EnableActions() => Actions.Enable();
+
+        protected override void DisableActions() => Actions.Disable();
     }
-
-    public ReadOnlyReactiveProperty<bool> CloseCurrentPressed { get; }
-    public ReadOnlyReactiveProperty<bool> TogglePauseMenuPressed { get; }
-
-    protected override void EnableActions() => Actions.Enable();
-
-    protected override void DisableActions() => Actions.Disable();
 }

@@ -1,12 +1,16 @@
+using Ovoshnig.UI.Basic;
 using TMPro;
 using UnityEngine;
 
-[RequireComponent(typeof(TMP_Text))]
-public class LevelIndexView : UIView
+namespace AngryBirds3D.LevelState.Tracking
 {
-    private TMP_Text _text;
+    [RequireComponent(typeof(TMP_Text))]
+    public class LevelIndexView : UIView
+    {
+        private TMP_Text _text;
 
-    private void Awake() => _text = GetComponent<TMP_Text>();
+        private void Awake() => _text = GetComponent<TMP_Text>();
 
-    public void SetIndex(int season, int level) => _text.SetText("{0}-{1}", season, level);
+        public void SetIndex(int season, int level) => _text.SetText($"{season}-{level}");
+    }
 }

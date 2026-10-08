@@ -1,3 +1,8 @@
-public sealed class ClearingPanelView : CompletionPanelView
+
+
+namespace AngryBirds3D.LevelState.Tracking
 {
+    public sealed class ClearingPanelView : CompletionPanelView
+    {
+    }
 }

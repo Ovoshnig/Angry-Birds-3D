@@ -1,51 +1,54 @@
-﻿using Cysharp.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using LitMotion;
 using LitMotion.Extensions;
 using R3;
 using TMPro;
 using UnityEngine;
 
-public class PointsView : MonoBehaviour
+namespace AngryBirds3D.LevelScore.Points
 {
-    private readonly Subject<Unit> _completed = new();
-
-    private TMP_Text _text;
-    private Camera _camera;
-    private MotionHandle _currentHandle;
-
-    public Observable<Unit> Completed => _completed;
-
-    private void Awake()
+    public class PointsView : MonoBehaviour
     {
-        _text = GetComponentInChildren<TMP_Text>();
-        _camera = Camera.main;
-    }
+        private readonly Subject<Unit> _completed = new();
 
-    private void OnDestroy() => _completed.Dispose();
+        private TMP_Text _text;
+        private Camera _camera;
+        private MotionHandle _currentHandle;
 
-    public async UniTask ShowAsync(Vector3 position, PointsSettings pointsSettings)
-    {
-        _currentHandle.TryCancel();
+        public Observable<Unit> Completed => _completed;
 
-        transform.SetPositionAndRotation(position, _camera.transform.rotation);
+        private void Awake()
+        {
+            _text = GetComponentInChildren<TMP_Text>();
+            _camera = Camera.main;
+        }
 
-        _text.SetText("{0}", pointsSettings.Points);
-        _text.color = pointsSettings.Color;
-        _text.fontSize = pointsSettings.FontSize;
+        private void OnDestroy() => _completed.Dispose();
 
-        _currentHandle = LMotion.Create(0f, 1f, pointsSettings.AppearanceDuration)
-            .WithEase(pointsSettings.AppearanceEase)
-            .BindToLocalScaleXYZ(transform);
+        public async UniTask ShowAsync(Vector3 position, PointsSettings pointsSettings)
+        {
+            _currentHandle.TryCancel();
 
-        await _currentHandle.ToUniTask(destroyCancellationToken);
-        await UniTask.WaitForSeconds(pointsSettings.ShowingDuration, cancellationToken: destroyCancellationToken);
+            transform.SetPositionAndRotation(position, _camera.transform.rotation);
 
-        _currentHandle = LMotion.Create(1f, 0f, pointsSettings.DisappearanceDuration)
-            .WithEase(pointsSettings.DisappearanceEase)
-            .BindToLocalScaleXYZ(transform);
+            _text.SetText("{0}", pointsSettings.Points);
+            _text.color = pointsSettings.Color;
+            _text.fontSize = pointsSettings.FontSize;
 
-        await _currentHandle.ToUniTask(destroyCancellationToken);
+            _currentHandle = LMotion.Create(0f, 1f, pointsSettings.AppearanceDuration)
+                .WithEase(pointsSettings.AppearanceEase)
+                .BindToLocalScaleXYZ(transform);
 
-        _completed.OnNext(Unit.Default);
+            await _currentHandle.ToUniTask(destroyCancellationToken);
+            await UniTask.WaitForSeconds(pointsSettings.ShowingDuration, cancellationToken: destroyCancellationToken);
+
+            _currentHandle = LMotion.Create(1f, 0f, pointsSettings.DisappearanceDuration)
+                .WithEase(pointsSettings.DisappearanceEase)
+                .BindToLocalScaleXYZ(transform);
+
+            await _currentHandle.ToUniTask(destroyCancellationToken);
+
+            _completed.OnNext(Unit.Default);
+        }
     }
 }

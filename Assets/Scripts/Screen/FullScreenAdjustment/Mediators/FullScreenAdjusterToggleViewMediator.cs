@@ -1,20 +1,24 @@
+using Ovoshnig.UI.Basic;
 using R3;
 
-public class FullScreenAdjusterToggleViewMediator : UIViewMediator<FullScreenAdjustToggleView>
+namespace Ovoshnig.Screen.FullScreenAdjustment
 {
-    private readonly FullScreenAdjuster _fullScreenAdjuster;
-
-    public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenAdjustToggleView view)
-        : base(view) => _fullScreenAdjuster = fullScreenAdjuster;
-
-    protected override void OnViewEnabled(FullScreenAdjustToggleView view, CompositeDisposable viewDisposables)
+    public class FullScreenAdjusterToggleViewMediator : UIViewMediator<FullScreenAdjustToggleView>
     {
-        _fullScreenAdjuster.IsFullScreen
-            .Subscribe(view.SetIsOnWithoutNotify)
-            .AddTo(viewDisposables);
+        private readonly FullScreenAdjuster _fullScreenAdjuster;
 
-        view.ValueChanged
-            .Subscribe(_fullScreenAdjuster.SetFullScreen)
-            .AddTo(viewDisposables);
+        public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenAdjustToggleView view)
+            : base(view) => _fullScreenAdjuster = fullScreenAdjuster;
+
+        protected override void OnViewEnabled(FullScreenAdjustToggleView view, CompositeDisposable viewDisposables)
+        {
+            _fullScreenAdjuster.IsFullScreen
+                .Subscribe(view.SetIsOnWithoutNotify)
+                .AddTo(viewDisposables);
+
+            view.ValueChanged
+                .Subscribe(_fullScreenAdjuster.SetFullScreen)
+                .AddTo(viewDisposables);
+        }
     }
 }

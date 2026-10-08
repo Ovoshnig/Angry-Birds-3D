@@ -3,14 +3,17 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class SFXPlayingInstaller : IInstaller
+namespace Ovoshnig.Audio.SFX.Playing
 {
-    [SerializeField] private SFXPlayerView _sfxPlayerViewPrefab;
-
-    public void Install(IContainerBuilder builder)
+    [Serializable]
+    public class SFXPlayingInstaller : IInstaller
     {
-        builder.RegisterInstance(_sfxPlayerViewPrefab);
-        builder.Register<SFXPlayerObjectPool>(Lifetime.Singleton);
+        [SerializeField] private SFXPlayerView _sfxPlayerViewPrefab;
+
+        public void Install(IContainerBuilder builder)
+        {
+            builder.RegisterInstance(_sfxPlayerViewPrefab);
+            builder.Register<SFXPlayerObjectPool>(Lifetime.Singleton);
+        }
     }
 }

@@ -1,24 +1,30 @@
+using AngryBirds3D.LevelScore.Score;
+using AngryBirds3D.LevelState.Tracking;
+using Ovoshnig.Mediation;
 using R3;
 
-public class ScoreViewCompletionPanelsMediator : Mediator
+namespace AngryBirds3D.Composition
 {
-    private readonly ScoreView _scoreView;
-    private readonly ClearingPanelView _clearingPanelView;
-    private readonly FailurePanelView _failurePanelView;
-
-    public ScoreViewCompletionPanelsMediator(ScoreView scoreView,
-        ClearingPanelView clearingPanelView,
-        FailurePanelView failurePanelView)
+    public class ScoreViewCompletionPanelsMediator : Mediator
     {
-        _scoreView = scoreView;
-        _clearingPanelView = clearingPanelView;
-        _failurePanelView = failurePanelView;
-    }
-
-    protected override void Bind(CompositeDisposable disposables)
-    {
-        Observable.Merge(_clearingPanelView.Shown, _failurePanelView.Shown)
-            .Subscribe(_ => _scoreView.gameObject.SetActive(false))
-            .AddTo(disposables);
+        private readonly ScoreView _scoreView;
+        private readonly ClearingPanelView _clearingPanelView;
+        private readonly FailurePanelView _failurePanelView;
+    
+        public ScoreViewCompletionPanelsMediator(ScoreView scoreView,
+            ClearingPanelView clearingPanelView,
+            FailurePanelView failurePanelView)
+        {
+            _scoreView = scoreView;
+            _clearingPanelView = clearingPanelView;
+            _failurePanelView = failurePanelView;
+        }
+    
+        protected override void Bind(CompositeDisposable disposables)
+        {
+            Observable.Merge(_clearingPanelView.Shown, _failurePanelView.Shown)
+                .Subscribe(_ => _scoreView.gameObject.SetActive(false))
+                .AddTo(disposables);
+        }
     }
 }

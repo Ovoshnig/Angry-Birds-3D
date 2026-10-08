@@ -1,53 +1,59 @@
-﻿using R3;
+using AngryBirds3D.Bird.Destruction;
+using AngryBirds3D.Bird.Entity;
+using AngryBirds3D.Bird.Flight;
+using R3;
 using System;
 using System.Collections.Generic;
 using VContainer.Unity;
 
-public class BirdTracker : IStartable, IDisposable
+namespace AngryBirds3D.Bird.Tracking
 {
-    private readonly BirdFlyer _birdFlyer;
-    private readonly BirdDestroyer _birdDestroyer;
-    private readonly ReactiveProperty<int> _birdCount = new();
-    private readonly ReactiveProperty<int> _unlaunchedBirdCount = new();
-    private readonly CompositeDisposable _disposables = new();
-
-    public BirdTracker(BirdFlyer birdFlyer,
-        BirdDestroyer birdDestroyer,
-        IReadOnlyList<BirdEntityView> birdEntityViews)
+    public class BirdTracker : IStartable, IDisposable
     {
-        _birdFlyer = birdFlyer;
-        _birdDestroyer = birdDestroyer;
-        _birdCount.Value = birdEntityViews.Count;
-        _unlaunchedBirdCount.Value = birdEntityViews.Count;
+        private readonly BirdFlyer _birdFlyer;
+        private readonly BirdDestroyer _birdDestroyer;
+        private readonly ReactiveProperty<int> _birdCount = new();
+        private readonly ReactiveProperty<int> _unlaunchedBirdCount = new();
+        private readonly CompositeDisposable _disposables = new();
 
-        BirdsLeft = _birdCount
-            .Where(count => count == 0)
-            .Take(1)
-            .AsUnitObservable()
-            .Share();
-    }
+        public BirdTracker(BirdFlyer birdFlyer,
+            BirdDestroyer birdDestroyer,
+            IReadOnlyList<BirdEntityView> birdEntityViews)
+        {
+            _birdFlyer = birdFlyer;
+            _birdDestroyer = birdDestroyer;
+            _birdCount.Value = birdEntityViews.Count;
+            _unlaunchedBirdCount.Value = birdEntityViews.Count;
 
-    public ReadOnlyReactiveProperty<int> BirdCount => _birdCount;
-    public ReadOnlyReactiveProperty<int> UnlaunchedBirdCount => _unlaunchedBirdCount;
-    public Observable<Unit> BirdsLeft { get; }
-    public bool AnyBirds => _birdCount.Value > 0;
-    public bool AnyUnlaunchedBirds => _unlaunchedBirdCount.Value > 0;
+            BirdsLeft = _birdCount
+                .Where(count => count == 0)
+                .Take(1)
+                .AsUnitObservable()
+                .Share();
+        }
 
-    public void Start()
-    {
-        _birdFlyer.FlightStarted
-            .Subscribe(_ => _unlaunchedBirdCount.Value--)
-            .AddTo(_disposables);
+        public ReadOnlyReactiveProperty<int> BirdCount => _birdCount;
+        public ReadOnlyReactiveProperty<int> UnlaunchedBirdCount => _unlaunchedBirdCount;
+        public Observable<Unit> BirdsLeft { get; }
+        public bool AnyBirds => _birdCount.Value > 0;
+        public bool AnyUnlaunchedBirds => _unlaunchedBirdCount.Value > 0;
 
-        _birdDestroyer.Destroyed
-            .Subscribe(_ => _birdCount.Value--)
-            .AddTo(_disposables);
-    }
+        public void Start()
+        {
+            _birdFlyer.FlightStarted
+                .Subscribe(_ => _unlaunchedBirdCount.Value--)
+                .AddTo(_disposables);
 
-    public void Dispose()
-    {
-        _disposables.Dispose();
-        _birdCount.Dispose();
-        _unlaunchedBirdCount.Dispose();
+            _birdDestroyer.Destroyed
+                .Subscribe(_ => _birdCount.Value--)
+                .AddTo(_disposables);
+        }
+
+        public void Dispose()
+        {
+            _disposables.Dispose();
+            _birdCount.Dispose();
+            _unlaunchedBirdCount.Dispose();
+        }
     }
 }

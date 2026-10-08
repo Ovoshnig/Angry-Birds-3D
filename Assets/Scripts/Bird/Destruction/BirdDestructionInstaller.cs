@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdDestructionInstaller : IInstaller
+namespace AngryBirds3D.Bird.Destruction
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<BirdDestroyer>().AsSelf();
+    [Serializable]
+    public class BirdDestructionInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<BirdDestroyer>().AsSelf();
+    }
 }

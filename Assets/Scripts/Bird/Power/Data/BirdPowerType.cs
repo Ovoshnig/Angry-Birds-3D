@@ -1,8 +1,11 @@
-public enum BirdPowerType
+namespace AngryBirds3D.Bird.Power
 {
-    None,
-    SplitInto3,
-    Boost,
-    Explosion,
-    EggDropping
+    public enum BirdPowerType
+    {
+        None,
+        SplitInto3,
+        Boost,
+        Explosion,
+        EggDropping
+    }
 }

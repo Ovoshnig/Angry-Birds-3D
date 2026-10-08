@@ -1,39 +1,42 @@
-﻿using R3;
+using R3;
 using UnityEngine.InputSystem;
 
-public static class InputActionExtensions
+namespace Ovoshnig.Extensions.InputSystem
 {
-    public static ReadOnlyReactiveProperty<bool> ToButtonProperty(this InputAction action)
+    public static class InputActionExtensions
     {
-        return Observable.Create<bool>(observer =>
+        public static ReadOnlyReactiveProperty<bool> ToButtonProperty(this InputAction action)
         {
-            void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValueAsButton());
-
-            action.performed += OnAction;
-            action.canceled += OnAction;
-
-            return Disposable.Create(() =>
+            return Observable.Create<bool>(observer =>
             {
-                action.performed -= OnAction;
-                action.canceled -= OnAction;
-            });
-        }).ToReadOnlyReactiveProperty(action.IsPressed());
-    }
+                void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValueAsButton());
 
-    public static ReadOnlyReactiveProperty<T> ToValueProperty<T>(this InputAction action) where T : struct
-    {
-        return Observable.Create<T>(observer =>
+                action.performed += OnAction;
+                action.canceled += OnAction;
+
+                return Disposable.Create(() =>
+                {
+                    action.performed -= OnAction;
+                    action.canceled -= OnAction;
+                });
+            }).ToReadOnlyReactiveProperty(action.IsPressed());
+        }
+
+        public static ReadOnlyReactiveProperty<T> ToValueProperty<T>(this InputAction action) where T : struct
         {
-            void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValue<T>());
-
-            action.performed += OnAction;
-            action.canceled += OnAction;
-
-            return Disposable.Create(() =>
+            return Observable.Create<T>(observer =>
             {
-                action.performed -= OnAction;
-                action.canceled -= OnAction;
-            });
-        }).ToReadOnlyReactiveProperty(action.ReadValue<T>());
+                void OnAction(InputAction.CallbackContext context) => observer.OnNext(context.ReadValue<T>());
+
+                action.performed += OnAction;
+                action.canceled += OnAction;
+
+                return Disposable.Create(() =>
+                {
+                    action.performed -= OnAction;
+                    action.canceled -= OnAction;
+                });
+            }).ToReadOnlyReactiveProperty(action.ReadValue<T>());
+        }
     }
 }

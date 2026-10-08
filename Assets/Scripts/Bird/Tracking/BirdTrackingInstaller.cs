@@ -2,9 +2,12 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-[Serializable]
-public class BirdTrackingInstaller : IInstaller
+namespace AngryBirds3D.Bird.Tracking
 {
-    public void Install(IContainerBuilder builder) =>
-        builder.RegisterEntryPoint<BirdTracker>().AsSelf();
+    [Serializable]
+    public class BirdTrackingInstaller : IInstaller
+    {
+        public void Install(IContainerBuilder builder) =>
+            builder.RegisterEntryPoint<BirdTracker>().AsSelf();
+    }
 }

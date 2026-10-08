@@ -1,23 +1,26 @@
 using System;
 using UnityEngine;
 
-public class HealthModel
+namespace Ovoshnig.ObjectHealth.Health
 {
-    private float _health;
-
-    public HealthModel(float health) => _health = health;
-
-    public float Health => _health;
-
-    public void ApplyDamage(float amount)
+    public class HealthModel
     {
-        if (amount < 0)
-            throw new ArgumentOutOfRangeException(nameof(amount),
-                "The amount of damage cannot be negative.");
+        private float _health;
 
-        if (amount == 0)
-            return;
+        public HealthModel(float health) => _health = health;
 
-        _health = Mathf.Max(0f, _health - amount);
+        public float Health => _health;
+
+        public void ApplyDamage(float amount)
+        {
+            if (amount < 0)
+                throw new ArgumentOutOfRangeException(nameof(amount),
+                    "The amount of damage cannot be negative.");
+
+            if (amount == 0)
+                return;
+
+            _health = Mathf.Max(0f, _health - amount);
+        }
     }
 }
