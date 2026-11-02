@@ -34,4 +34,10 @@ MonoBehaviour:
         Value: 4000
       - Key: SpriteAtlasEmptySpaceLimit
         Value: 50
+      - Key: VeryLongClipStreamingThresholdBytes
+        Value: 5242880
+      - Key: TextureEmptySpaceLimit
+        Value: 50
+      - Key: TextureTransparentBorderLimit
+        Value: 75
     CurrentParamsIndex: 0
