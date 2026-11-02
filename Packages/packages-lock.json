@@ -106,12 +106,10 @@
       "dependencies": {}
     },
     "com.unity.ide.visualstudio": {
-      "version": "2.0.28",
+      "version": "2.0.29",
       "depth": 0,
       "source": "registry",
-      "dependencies": {
-        "com.unity.test-framework": "1.1.33"
-      },
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.inputsystem": {
@@ -129,7 +127,7 @@
       "dependencies": {}
     },
     "com.unity.probuilder": {
-      "version": "6.1.2",
+      "version": "6.1.4",
       "depth": 0,
       "source": "registry",
       "dependencies": {
