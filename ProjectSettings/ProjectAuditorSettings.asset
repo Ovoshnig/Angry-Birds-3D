@@ -19,5 +19,25 @@ MonoBehaviour:
     paramsStack:
     - PlatformGroup:
         m_String: Unknown
-      m_SerializedParams: []
+      m_SerializedParams:
+      - Key: StreamingClipThresholdBytes
+        Value: 218294
+      - Key: VeryLongClipStreamingThresholdBytes
+        Value: 5242880
+      - Key: LongDecompressedClipThresholdBytes
+        Value: 204800
+      - Key: LongCompressedMobileClipThresholdBytes
+        Value: 204800
+      - Key: LoadInBackGroundClipSizeThresholdBytes
+        Value: 204800
+      - Key: StreamingAssetsFolderSizeLimit
+        Value: 50
+      - Key: TextureStreamingMipmapsSizeLimit
+        Value: 4000
+      - Key: TextureEmptySpaceLimit
+        Value: 50
+      - Key: TextureTransparentBorderLimit
+        Value: 75
+      - Key: SpriteAtlasEmptySpaceLimit
+        Value: 50
     CurrentParamsIndex: 0

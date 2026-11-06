@@ -8,8 +8,6 @@ namespace Ovoshnig.Editor.Installer
     public static class InstallerGenerator
     {
         [MenuItem("Assets/Create/Scripting/Installer", false, priority = 3, secondaryPriority = 10f)]
-        public static void CreateInstaller() => Generate();
-
         private static void Generate()
         {
             string directoryPath = GetSelectedPath();
@@ -26,10 +24,13 @@ namespace Ovoshnig.Editor.Installer
             File.WriteAllText(filePath, code);
             AssetDatabase.Refresh();
 
-            UnityEngine.Object createdAsset = AssetDatabase.LoadAssetAtPath<UnityEngine.Object>(filePath);
+            Object createdAsset = AssetDatabase.LoadAssetAtPath<Object>(filePath);
 
-            if (createdAsset != null)
-                Selection.activeObject = createdAsset;
+            if (createdAsset == null)
+                return;
+
+            Selection.activeObject = createdAsset;
+            AssetDatabase.OpenAsset(createdAsset);
         }
 
         private static string GetInstallerName(string path) =>
@@ -70,11 +71,12 @@ namespace Ovoshnig.Editor.Installer
         }
 
         private static string GetFeatureInstallerTemplate(string className) =>
-    $@"using System;
-    using UnityEngine;
-    using VContainer;
-    using VContainer.Unity;
+$@"using System;
+using VContainer;
+using VContainer.Unity;
 
+namespace 
+{{
     [Serializable]
     public class {className} : IInstaller
     {{
@@ -83,12 +85,15 @@ namespace Ovoshnig.Editor.Installer
             throw new NotImplementedException();
         }}
     }}
-    ";
+}}
+";
 
         private static string GetMediatorsInstallerTemplate(string className) =>
-    $@"using VContainer;
-    using VContainer.Unity;
+$@"using VContainer;
+using VContainer.Unity;
 
+namespace AngryBirds3D.Composition
+{{
     public class {className} : IInstaller
     {{
         public void Install(IContainerBuilder builder)
@@ -96,6 +101,7 @@ namespace Ovoshnig.Editor.Installer
             throw new System.NotImplementedException();
         }}
     }}
-    ";
+}}
+";
     }
 }
