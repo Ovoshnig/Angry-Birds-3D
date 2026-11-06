@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Ovoshnig.Editor.Mediation
 {
@@ -147,13 +148,20 @@ namespace Ovoshnig.Editor.Mediation
             File.WriteAllText(filePath, code);
             AssetDatabase.Refresh();
             Close();
+
+            Object createdAsset = AssetDatabase.LoadAssetAtPath<Object>(filePath);
+
+            if (createdAsset == null)
+                return;
+
+            Selection.activeObject = createdAsset;
         }
 
         private string GetSelectedPath()
         {
             string path = "Assets";
 
-            foreach (UnityEngine.Object assetObject in Selection.GetFiltered(typeof(UnityEngine.Object), SelectionMode.Assets))
+            foreach (Object assetObject in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
             {
                 path = AssetDatabase.GetAssetPath(assetObject);
 
@@ -171,8 +179,12 @@ namespace Ovoshnig.Editor.Mediation
             string fieldA = GetPrivateFieldName(dependencyA);
             string fieldB = GetPrivateFieldName(dependencyB);
 
-            string code = $@"using R3;
+            string code =
+$@"using {typeof(Mediator).Namespace};
+using R3;
 
+namespace 
+{{
     public class {_mediatorName} : {nameof(Mediator)}
     {{
         private readonly {dependencyA} {fieldA};
@@ -189,7 +201,8 @@ namespace Ovoshnig.Editor.Mediation
             throw new System.NotImplementedException();
         }}
     }}
-    ";
+}}
+";
             return code;
         }
 
@@ -197,8 +210,12 @@ namespace Ovoshnig.Editor.Mediation
         {
             string serviceField = GetPrivateFieldName(dependencyA);
 
-            string code = $@"using R3;
+            string code =
+$@"using {typeof(UIViewMediator<>).Namespace};
+using R3;
 
+namespace 
+{{
     public class {_mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
     {{
         private readonly {dependencyA} {serviceField};
@@ -211,7 +228,8 @@ namespace Ovoshnig.Editor.Mediation
             throw new System.NotImplementedException();
         }}
     }}
-    ";
+}}
+";
             return code;
         }
 
@@ -219,9 +237,13 @@ namespace Ovoshnig.Editor.Mediation
         {
             string serviceField = GetPrivateFieldName(dependencyA);
 
-            string code = $@"using R3;
-    using System.Collections.Generic;
+            string code =
+$@"using {typeof(UIViewsMediator<>).Namespace};
+using R3;
+using System.Collections.Generic;
 
+namespace 
+{{
     public class {_mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
     {{
         private readonly {dependencyA} {serviceField};
@@ -234,7 +256,8 @@ namespace Ovoshnig.Editor.Mediation
             throw new System.NotImplementedException();
         }}
     }}
-    ";
+}}
+";
             return code;
         }
 
