@@ -6,7 +6,9 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace AngryBirds3D.Editor.Scene
 {
@@ -15,20 +17,27 @@ namespace AngryBirds3D.Editor.Scene
     {
         private const string UndoGroupName = "Generate Level Buttons";
 
-        public override void OnInspectorGUI()
+        public override VisualElement CreateInspectorGUI()
         {
-            DrawDefaultInspector();
+            VisualElement root = new();
+            InspectorElement.FillDefaultInspector(root, serializedObject, this);
 
-            if (!GUILayout.Button("Generate"))
-                return;
-
-            if (Application.isPlaying)
+            Button generateButton = new(() =>
             {
-                Debug.LogWarning("Generation is disabled during Play Mode.");
-                return;
-            }
+                if (Application.isPlaying)
+                {
+                    Debug.LogWarning("Generation is disabled during Play Mode.");
+                    return;
+                }
 
-            Generate((LevelButtonGeneratorView)target);
+                Generate((LevelButtonGeneratorView)target);
+            })
+            {
+                text = "Generate"
+            };
+
+            root.Add(generateButton);
+            return root;
         }
 
         private static void Generate(LevelButtonGeneratorView generatorView)
