@@ -1,9 +1,8 @@
-using Ovoshnig.Mediation;
-using Ovoshnig.UI.Basic;
-using System;
 using System.IO;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace Ovoshnig.Editor.Mediation
@@ -17,109 +16,206 @@ namespace Ovoshnig.Editor.Mediation
             UIViews
         }
 
-        private MediatorType _selectedType;
-        private MonoScript _scriptA;
-        private MonoScript _scriptB;
-        private string _mediatorName = string.Empty;
-        private bool _isNameManuallyEdited = false;
+        [SerializeField] private MediatorType _selectedType;
+        [SerializeField] private MonoScript _scriptA;
+        [SerializeField] private MonoScript _scriptB;
+        [SerializeField] private string _mediatorName = string.Empty;
+        [SerializeField] private bool _isNameManuallyEdited;
+
+        private SerializedObject _serializedObject;
+        private Label _titleLabel;
+        private ObjectField _scriptAField;
+        private HelpBox _helpBoxA;
+        private ObjectField _scriptBField;
+        private HelpBox _helpBoxB;
+        private TextField _nameField;
+        private Button _resetNameButton;
+        private Button _generateButton;
 
         [MenuItem("Assets/Create/Scripting/Mediator", false, priority = 3, secondaryPriority = 1f)]
-        public static void CreateStandard() => Open(MediatorType.Standard);
+        private static void CreateStandard() => Open(MediatorType.Standard);
 
         [MenuItem("Assets/Create/Scripting/UIView Mediator", false, priority = 3, secondaryPriority = 2f)]
-        public static void CreateUIView() => Open(MediatorType.UIView);
+        private static void CreateUIView() => Open(MediatorType.UIView);
 
         [MenuItem("Assets/Create/Scripting/UIViews Mediator", false, priority = 3, secondaryPriority = 3f)]
-        public static void CreateUIViews() => Open(MediatorType.UIViews);
+        private static void CreateUIViews() => Open(MediatorType.UIViews);
 
         public static void Open(MediatorType mediatorType)
         {
             MediatorGeneratorWindow window = GetWindow<MediatorGeneratorWindow>("Create Mediator");
-
-            window._selectedType = mediatorType;
-            window._scriptA = null;
-            window._scriptB = null;
-            window._isNameManuallyEdited = false;
-
-            window.UpdateDefaultMediatorName();
-            window.minSize = new Vector2(400, 240);
+            window.minSize = new Vector2(400, 280);
+            window.Initialize(mediatorType);
             window.Show();
         }
 
-        private void OnGUI()
+        private void Initialize(MediatorType mediatorType)
         {
-            GUILayout.Label($"Create New {_selectedType} Mediator", EditorStyles.boldLabel);
-            EditorGUILayout.Space();
+            _serializedObject ??= new SerializedObject(this);
+            _serializedObject.Update();
 
-            EditorGUI.BeginChangeCheck();
+            _selectedType = mediatorType;
+            _scriptA = null;
+            _scriptB = null;
 
-            string labelA = _selectedType == MediatorType.Standard ? "Dependency A (Script)" : "Model/Logic (Script)";
-            string labelB = _selectedType == MediatorType.Standard ? "Dependency B (Script)" : "View (Script)";
+            _serializedObject.ApplyModifiedProperties();
 
-            _scriptA = EditorGUILayout.ObjectField(labelA, _scriptA, typeof(MonoScript), false) as MonoScript;
-            EditorGUI.BeginChangeCheck();
-            MonoScript selectedScriptB = EditorGUILayout.ObjectField(labelB, _scriptB, typeof(MonoScript), false) as MonoScript;
-
-            if (EditorGUI.EndChangeCheck())
-            {
-                _scriptB = selectedScriptB;
-
-                if (_selectedType == MediatorType.UIView || _selectedType == MediatorType.UIViews)
-                    ValidateViewScript();
-            }
-
-            if (EditorGUI.EndChangeCheck())
-                if (!_isNameManuallyEdited)
-                    UpdateDefaultMediatorName();
-
-            EditorGUI.BeginChangeCheck();
-            _mediatorName = EditorGUILayout.TextField("Mediator Name", _mediatorName);
-
-            if (EditorGUI.EndChangeCheck())
-                _isNameManuallyEdited = true;
-
-            if (_isNameManuallyEdited)
-            {
-                if (GUILayout.Button("Reset Name to Default Pattern"))
-                {
-                    _isNameManuallyEdited = false;
-                    GUIUtility.keyboardControl = 0;
-                    UpdateDefaultMediatorName();
-                }
-            }
-
-            EditorGUILayout.Space();
-
-            bool isValid = _scriptA != null && _scriptB != null && !string.IsNullOrEmpty(_mediatorName);
-
-            EditorGUI.BeginDisabledGroup(!isValid);
-
-            if (GUILayout.Button("Generate File"))
-                GenerateMediator();
-
-            EditorGUI.EndDisabledGroup();
+            RefreshViewLabels();
+            ResetNameToDefaultPattern();
         }
 
-        private void ValidateViewScript()
+        private void CreateGUI()
         {
-            if (_scriptB == null)
+            _serializedObject = new SerializedObject(this);
+
+            VisualElement root = rootVisualElement;
+            IStyle style = root.style;
+            style.paddingTop = 8;
+            style.paddingBottom = 8;
+            style.paddingLeft = 8;
+            style.paddingRight = 8;
+
+            _titleLabel = new Label()
+            {
+                style = { unityFontStyleAndWeight = FontStyle.Bold, marginBottom = 10 }
+            };
+            root.Add(_titleLabel);
+
+            _scriptAField = new ObjectField()
+            {
+                bindingPath = nameof(_scriptA),
+                objectType = typeof(MonoScript),
+                allowSceneObjects = false
+            };
+            _scriptAField.RegisterValueChangedCallback(_ => ResetNameToDefaultPattern());
+            root.Add(_scriptAField);
+
+            _helpBoxA = new HelpBox(string.Empty, HelpBoxMessageType.Error);
+            _helpBoxA.style.display = DisplayStyle.None;
+            root.Add(_helpBoxA);
+
+            _scriptBField = new ObjectField()
+            {
+                bindingPath = nameof(_scriptB),
+                objectType = typeof(MonoScript),
+                allowSceneObjects = false,
+                style = { marginTop = 4 }
+            };
+            _scriptBField.RegisterValueChangedCallback(_ => ResetNameToDefaultPattern());
+            root.Add(_scriptBField);
+
+            _helpBoxB = new HelpBox(string.Empty, HelpBoxMessageType.Error);
+            _helpBoxB.style.display = DisplayStyle.None;
+            root.Add(_helpBoxB);
+
+            _nameField = new TextField("Mediator Name")
+            {
+                bindingPath = nameof(_mediatorName),
+                style = { marginTop = 6 }
+            };
+            _nameField.RegisterValueChangedCallback(OnNameInputChanged);
+            root.Add(_nameField);
+
+            _resetNameButton = new Button(ResetNameToDefaultPattern)
+            {
+                text = "Reset Name to Default Pattern",
+                style = { marginTop = 4 }
+            };
+            root.Add(_resetNameButton);
+
+            VisualElement spacer = new();
+            spacer.style.flexGrow = 1;
+            root.Add(spacer);
+
+            _generateButton = new Button(GenerateMediator)
+            {
+                text = "Generate File",
+                style = { height = 28 }
+            };
+            root.Add(_generateButton);
+
+            root.Bind(_serializedObject);
+
+            RefreshViewLabels();
+            UpdateControlsState();
+        }
+
+        private void RefreshViewLabels()
+        {
+            if (_titleLabel == null)
                 return;
 
-            Type classType = _scriptB.GetClass();
+            _titleLabel.text = $"Create New {_selectedType} Mediator";
 
-            if (classType == null || !typeof(UIView).IsAssignableFrom(classType))
+            if (_selectedType == MediatorType.Standard)
             {
-                _scriptB = null;
-                EditorUtility.DisplayDialog("Invalid View Type", "The selected script must inherit from UIView.", "OK");
+                _scriptAField.label = "Dependency A (Script)";
+                _scriptBField.label = "Dependency B (Script)";
+            }
+            else
+            {
+                _scriptAField.label = "Model/Logic (Script)";
+                _scriptBField.label = "View (Script)";
             }
         }
 
-        private void UpdateDefaultMediatorName()
+        private void OnNameInputChanged(ChangeEvent<string> evt)
+        {
+            _serializedObject.Update();
+            _mediatorName = evt.newValue;
+            _isNameManuallyEdited = _mediatorName != GetDefaultMediatorName();
+            _serializedObject.ApplyModifiedProperties();
+            UpdateControlsState();
+        }
+
+        private void ResetNameToDefaultPattern()
+        {
+            _serializedObject.Update();
+            _mediatorName = GetDefaultMediatorName();
+            _isNameManuallyEdited = false;
+            _serializedObject.ApplyModifiedProperties();
+            UpdateControlsState();
+        }
+
+        private string GetDefaultMediatorName()
         {
             string nameA = _scriptA != null ? _scriptA.name : "First";
             string nameB = _scriptB != null ? _scriptB.name : "Second";
-            nameB = _selectedType == MediatorType.UIViews ? nameB + "s" : nameB;
-            _mediatorName = $"{nameA}{nameB}Mediator";
+
+            if (_selectedType == MediatorType.UIViews)
+                nameB += "s";
+
+            return $"{nameA}{nameB}Mediator";
+        }
+
+        private void UpdateControlsState()
+        {
+            bool isScriptAValid = MediatorDependencyValidator.TryValidateScriptA(_scriptA, _selectedType,
+                out string errorA);
+            bool isScriptBValid = MediatorDependencyValidator.TryValidateScriptB(_scriptB, _selectedType,
+                out string errorB);
+            bool areDistinct = MediatorDependencyValidator.TryValidateDistinct(_scriptA, _scriptB,
+                out string errorDistinct);
+
+            if (isScriptBValid && !areDistinct)
+            {
+                isScriptBValid = false;
+                errorB = errorDistinct;
+            }
+
+            UpdateHelpBox(_helpBoxA, isScriptAValid, errorA);
+            UpdateHelpBox(_helpBoxB, isScriptBValid, errorB);
+
+            bool canGenerate = _scriptA != null && _scriptB != null && isScriptAValid && isScriptBValid && areDistinct
+                && !string.IsNullOrWhiteSpace(_mediatorName);
+            _generateButton.SetEnabled(canGenerate);
+            _resetNameButton.style.display = _isNameManuallyEdited ? DisplayStyle.Flex : DisplayStyle.None;
+        }
+
+        private void UpdateHelpBox(HelpBox helpBox, bool isValid, string message)
+        {
+            helpBox.text = message;
+            helpBox.style.display = isValid || string.IsNullOrEmpty(message) ? DisplayStyle.None : DisplayStyle.Flex;
         }
 
         private void GenerateMediator()
@@ -137,14 +233,7 @@ namespace Ovoshnig.Editor.Mediation
                 if (!EditorUtility.DisplayDialog("File Already Exists", $"Overwrite {filePath}?", "Yes", "No"))
                     return;
 
-            string code = _selectedType switch
-            {
-                MediatorType.Standard => GenerateStandardMediatorCode(_scriptA.name, _scriptB.name),
-                MediatorType.UIView => GenerateUIViewMediatorCode(_scriptA.name, _scriptB.name),
-                MediatorType.UIViews => GenerateUIViewsMediatorCode(_scriptA.name, _scriptB.name),
-                _ => throw new ArgumentOutOfRangeException()
-            };
-
+            string code = MediatorCodeTemplate.Create(_selectedType, _mediatorName, _scriptA.name, _scriptB.name);
             File.WriteAllText(filePath, code);
             AssetDatabase.Refresh();
             Close();
@@ -172,111 +261,6 @@ namespace Ovoshnig.Editor.Mediation
             }
 
             return path;
-        }
-
-        private string GenerateStandardMediatorCode(string dependencyA, string dependencyB)
-        {
-            string fieldA = GetPrivateFieldName(dependencyA);
-            string fieldB = GetPrivateFieldName(dependencyB);
-
-            string code =
-$@"using {typeof(Mediator).Namespace};
-using R3;
-
-namespace 
-{{
-    public class {_mediatorName} : {nameof(Mediator)}
-    {{
-        private readonly {dependencyA} {fieldA};
-        private readonly {dependencyB} {fieldB};
-
-        public {_mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} {GetParamName(dependencyB)})
-        {{
-            {fieldA} = {GetParamName(dependencyA)};
-            {fieldB} = {GetParamName(dependencyB)};
-        }}
-
-        protected override void Bind(CompositeDisposable disposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
-    }}
-}}
-";
-            return code;
-        }
-
-        private string GenerateUIViewMediatorCode(string dependencyA, string dependencyB)
-        {
-            string serviceField = GetPrivateFieldName(dependencyA);
-
-            string code =
-$@"using {typeof(UIViewMediator<>).Namespace};
-using R3;
-
-namespace 
-{{
-    public class {_mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
-    {{
-        private readonly {dependencyA} {serviceField};
-
-        public {_mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} view)
-            : base(view) => {serviceField} = {GetParamName(dependencyA)};
-
-        protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
-    }}
-}}
-";
-            return code;
-        }
-
-        private string GenerateUIViewsMediatorCode(string dependencyA, string dependencyB)
-        {
-            string serviceField = GetPrivateFieldName(dependencyA);
-
-            string code =
-$@"using {typeof(UIViewsMediator<>).Namespace};
-using R3;
-using System.Collections.Generic;
-
-namespace 
-{{
-    public class {_mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
-    {{
-        private readonly {dependencyA} {serviceField};
-
-        public {_mediatorName}({dependencyA} {GetParamName(dependencyA)}, IReadOnlyList<{dependencyB}> views)
-            : base(views) => {serviceField} = {GetParamName(dependencyA)};
-
-        protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
-    }}
-}}
-";
-            return code;
-        }
-
-        private string GetPrivateFieldName(string typeName)
-        {
-            if (string.IsNullOrEmpty(typeName))
-                return string.Empty;
-
-            string fieldName = "_" + char.ToLowerInvariant(typeName[0]) + typeName[1..];
-            return fieldName;
-        }
-
-        private string GetParamName(string typeName)
-        {
-            if (string.IsNullOrEmpty(typeName))
-                return string.Empty;
-
-            string paramName = char.ToLowerInvariant(typeName[0]) + typeName[1..];
-            return paramName;
         }
     }
 }
