@@ -20,7 +20,6 @@ namespace Ovoshnig.Editor.Mediation
         [SerializeField] private MonoScript _scriptA;
         [SerializeField] private MonoScript _scriptB;
         [SerializeField] private string _mediatorName = string.Empty;
-        [SerializeField] private bool _isNameManuallyEdited;
 
         private SerializedObject _serializedObject;
         private Label _titleLabel;
@@ -31,6 +30,7 @@ namespace Ovoshnig.Editor.Mediation
         private TextField _nameField;
         private Button _resetNameButton;
         private Button _generateButton;
+
 
         [MenuItem("Assets/Create/Scripting/Mediator", false, priority = 3, secondaryPriority = 1f)]
         private static void CreateStandard() => Open(MediatorType.Standard);
@@ -51,14 +51,13 @@ namespace Ovoshnig.Editor.Mediation
 
         private void Initialize(MediatorType mediatorType)
         {
-            _serializedObject ??= new SerializedObject(this);
-            _serializedObject.Update();
-
             _selectedType = mediatorType;
             _scriptA = null;
             _scriptB = null;
+            _mediatorName = GetDefaultMediatorName();
 
-            _serializedObject.ApplyModifiedProperties();
+            _serializedObject?.Update();
+            Undo.ClearUndo(this);
 
             RefreshViewLabels();
             ResetNameToDefaultPattern();
@@ -87,7 +86,7 @@ namespace Ovoshnig.Editor.Mediation
                 objectType = typeof(MonoScript),
                 allowSceneObjects = false
             };
-            _scriptAField.RegisterValueChangedCallback(_ => ResetNameToDefaultPattern());
+            _scriptAField.RegisterValueChangedCallback(OnScriptChanged);
             root.Add(_scriptAField);
 
             _helpBoxA = new HelpBox(string.Empty, HelpBoxMessageType.Error);
@@ -101,7 +100,7 @@ namespace Ovoshnig.Editor.Mediation
                 allowSceneObjects = false,
                 style = { marginTop = 4 }
             };
-            _scriptBField.RegisterValueChangedCallback(_ => ResetNameToDefaultPattern());
+            _scriptBField.RegisterValueChangedCallback(OnScriptChanged);
             root.Add(_scriptBField);
 
             _helpBoxB = new HelpBox(string.Empty, HelpBoxMessageType.Error);
@@ -113,7 +112,7 @@ namespace Ovoshnig.Editor.Mediation
                 bindingPath = nameof(_mediatorName),
                 style = { marginTop = 6 }
             };
-            _nameField.RegisterValueChangedCallback(OnNameInputChanged);
+            _nameField.RegisterValueChangedCallback(_ => UpdateControlsState());
             root.Add(_nameField);
 
             _resetNameButton = new Button(ResetNameToDefaultPattern)
@@ -142,38 +141,34 @@ namespace Ovoshnig.Editor.Mediation
 
         private void RefreshViewLabels()
         {
-            if (_titleLabel == null)
-                return;
-
             _titleLabel.text = $"Create New {_selectedType} Mediator";
 
             if (_selectedType == MediatorType.Standard)
             {
                 _scriptAField.label = "Dependency A (Script)";
                 _scriptBField.label = "Dependency B (Script)";
+                return;
             }
-            else
-            {
-                _scriptAField.label = "Model/Logic (Script)";
-                _scriptBField.label = "View (Script)";
-            }
+
+            _scriptAField.label = "Model/Logic (Script)";
+            _scriptBField.label = "View (Script)";
         }
 
-        private void OnNameInputChanged(ChangeEvent<string> evt)
+        private void OnScriptChanged(ChangeEvent<Object> _)
         {
             _serializedObject.Update();
-            _mediatorName = evt.newValue;
-            _isNameManuallyEdited = _mediatorName != GetDefaultMediatorName();
-            _serializedObject.ApplyModifiedProperties();
+            _serializedObject.FindProperty(nameof(_mediatorName)).stringValue = GetDefaultMediatorName();
+            _serializedObject.ApplyModifiedPropertiesWithoutUndo();
+
             UpdateControlsState();
         }
 
         private void ResetNameToDefaultPattern()
         {
             _serializedObject.Update();
-            _mediatorName = GetDefaultMediatorName();
-            _isNameManuallyEdited = false;
+            _serializedObject.FindProperty(nameof(_mediatorName)).stringValue = GetDefaultMediatorName();
             _serializedObject.ApplyModifiedProperties();
+
             UpdateControlsState();
         }
 
@@ -209,7 +204,9 @@ namespace Ovoshnig.Editor.Mediation
             bool canGenerate = _scriptA != null && _scriptB != null && isScriptAValid && isScriptBValid && areDistinct
                 && !string.IsNullOrWhiteSpace(_mediatorName);
             _generateButton.SetEnabled(canGenerate);
-            _resetNameButton.style.display = _isNameManuallyEdited ? DisplayStyle.Flex : DisplayStyle.None;
+            _resetNameButton.style.display = _mediatorName != GetDefaultMediatorName()
+                ? DisplayStyle.Flex
+                : DisplayStyle.None;
         }
 
         private void UpdateHelpBox(HelpBox helpBox, bool isValid, string message)
@@ -220,10 +217,7 @@ namespace Ovoshnig.Editor.Mediation
 
         private void GenerateMediator()
         {
-            if (_scriptA == null)
-                return;
-
-            if (_scriptB == null)
+            if (_scriptA == null || _scriptB == null)
                 return;
 
             string directoryPath = GetSelectedPath();
