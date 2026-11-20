@@ -1,4 +1,3 @@
-%UNITY 7.0
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
@@ -83,7 +82,7 @@ MonoBehaviour:
       - rid: 1916160886212657160
     m_RuntimeSettings:
       m_List: []
-  m_AssetVersion: 16
+  m_AssetVersion: 17
   m_ObsoleteDefaultVolumeProfile: {fileID: 0}
   m_RenderingLayerNames:
   - Light Layer default
@@ -177,7 +176,7 @@ MonoBehaviour:
       type: {class: RenderingCapabilitiesSettings, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:
         m_Version: 0
-        m_UseGlobalConstantBuffer: 0
+        m_UsePersistentGlobalConstantBuffer: 0
     - rid: 1916160886212657157
       type: {class: URPExposureSettings, ns: UnityEngine.Rendering.Universal, asm: Unity.RenderPipelines.Universal.Runtime}
       data:

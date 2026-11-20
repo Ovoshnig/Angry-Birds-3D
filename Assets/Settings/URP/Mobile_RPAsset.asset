@@ -1,4 +1,3 @@
-%UNITY 7.0
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &11400000
@@ -13,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf2edee5c58d82540a51f03df9d42094, type: 3}
   m_Name: Mobile_RPAsset
   m_EditorClassIdentifier: 
-  k_AssetVersion: 14
-  k_AssetPreviousVersion: 14
+  k_AssetVersion: 16
+  k_AssetPreviousVersion: 15
+  m_ShadowSettingsMigrationPending: 0
   m_RendererType: 1
   m_RendererData: {fileID: 0}
   m_RendererDataList:
@@ -30,6 +30,12 @@ MonoBehaviour:
   m_MSAA: 1
   m_RenderScale: 0.8
   m_UpscalingFilter: 0
+  m_ScalingMode: 1
+  m_SelectedUpscalerName: 
+  m_UpscalerPriority:
+  - upscalerId: unity.auto
+    upscalerName: Auto (Bilinear or Nearest-Neighbor)
+  m_UpscalerOptions: []
   m_FsrOverrideSharpness: 0
   m_FsrSharpness: 0.92
   m_EnableLODCrossFade: 1
@@ -57,12 +63,12 @@ MonoBehaviour:
   m_ReflectionProbeBlending: 1
   m_ReflectionProbeBoxProjection: 1
   m_ReflectionProbeAtlas: 1
-  m_ShadowDistance: 50
-  m_ShadowCascadeCount: 1
-  m_Cascade2Split: 0.25
-  m_Cascade3Split: {x: 0.1, y: 0.3}
-  m_Cascade4Split: {x: 0.067, y: 0.2, z: 0.467}
-  m_CascadeBorder: 0.2
+  m_ObsoleteShadowDistance: 50
+  m_ObsoleteShadowCascadeCount: 1
+  m_ObsoleteCascade2Split: 0.25
+  m_ObsoleteCascade3Split: {x: 0.1, y: 0.3}
+  m_ObsoleteCascade4Split: {x: 0.067, y: 0.2, z: 0.467}
+  m_ObsoleteCascadeBorder: 0.2
   m_ShadowDepthBias: 1
   m_ShadowNormalBias: 1
   m_AnyShadowsSupported: 1
@@ -70,6 +76,8 @@ MonoBehaviour:
   m_ConservativeEnclosingSphere: 1
   m_NumIterationsEnclosingSphere: 64
   m_SoftShadowQuality: 2
+  m_MainLightShadowsPCSS: 0
+  m_AdditionalLightShadowsPCSS: 0
   m_AdditionalLightsCookieResolution: 1024
   m_AdditionalLightsCookieFormat: 1
   m_UseSRPBatcher: 1
@@ -124,6 +132,7 @@ MonoBehaviour:
   m_PrefilterSoftShadowsQualityMedium: 1
   m_PrefilterSoftShadowsQualityHigh: 1
   m_PrefilterSoftShadows: 0
+  m_PrefilterShadowsPCSS: 0
   m_PrefilterScreenCoord: 1
   m_PrefilterScreenSpaceIrradiance: 0
   m_PrefilterNativeRenderPass: 1
@@ -137,6 +146,7 @@ MonoBehaviour:
   m_PrefilterExposure: 0
   m_PrefilterVolumetricFog: 0
   m_PrefilterLightFalloffQuadratic: 1
+  m_PrefilterShadowReceiverNormalBias: 0
   m_Light2DPrefilteringMode: 0
   m_Light2DKeptVariantCombos: []
   m_ShaderVariantLogLevel: 0
