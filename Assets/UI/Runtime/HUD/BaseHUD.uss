@@ -1,0 +1,3 @@
+:root {
+    -unity-font-definition: url("project://database/Assets/TextMesh%20Pro/Fonts/GUERRILLA-NORMAL%20SDF%201.asset?fileID=11400000&guid=ffeb6a843d08f1644a342cc5347745fa&type=2#GUERRILLA-NORMAL SDF 1");
+}

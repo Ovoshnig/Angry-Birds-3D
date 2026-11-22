@@ -1,3 +1,4 @@
+%UNITY 7.0
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &-6876489708867444378
@@ -4189,9 +4190,9 @@ MonoBehaviour:
   m_FontFeatureTable:
     m_MultipleSubstitutionRecords: []
     m_LigatureSubstitutionRecords:
-    - m_ComponentGlyphIDs: 3300000033000000
+    - m_ComponentGlyphIDs: 3300000033000000u
       m_LigatureGlyphID: 245
-    - m_ComponentGlyphIDs: 3300000049010000
+    - m_ComponentGlyphIDs: 3300000049010000u
       m_LigatureGlyphID: 55
     m_GlyphPairAdjustmentRecords:
     - m_FirstAdjustmentRecord:

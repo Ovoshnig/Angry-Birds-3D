@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../UIElementsSchema/UIElements.xsd" editor-extension-mode="False" authoring-id="2115246127">
+    <Style src="project://database/Assets/UI/Runtime/HUD/Score/ScoreHUD.uss?fileID=7433441132597879392&amp;guid=6410c38deb598014e814ca9241a45ce3&amp;type=3#ScoreHUD"/>
+    <ui:VisualElement name="score-container" picking-mode="Ignore" class="score-container">
+        <ui:Label text="SCORE:" name="score-title" picking-mode="Ignore" class="score-title"/>
+        <ui:Label text="12345" name="score-value" authoring-id="2112219532" picking-mode="Ignore" class="score-value"/>
+    </ui:VisualElement>
+</ui:UXML>

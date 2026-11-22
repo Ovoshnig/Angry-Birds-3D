@@ -496,10 +496,10 @@ Mesh:
     m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200080009000a0008000a0004000500060007000400050007000400070008000d000e000b000d000b000c0010000e000f000d000f000e001000110012000e00100012001300140017001400160017001400150016001700180013001800190013001a001b001c001a001c0020001c001d0020001d001e0020001e001f00200021002200230021002300240021002400250021002500270025002600270035003600390036003800390036003700380039003a0035003a003b00350035003b003c0035003c003d00340035003d003d003e0034003e003f0034002d002e002f002d002f002c00300031002f002f002e00300033002f003200310032002f00280029002f00330028002f0029002a002f002a002b002f00400041004200410043004200440045004600450047004600480049004a0049004b004a004c004d004e004d004f004e00500051005200510053005200540055005600550057005600580059005a0059005b005a005c005d005e005d005f005e00600061006200610063006200640065006600650067006600680069006a0069006b006a006c006d006e006d006f006e00700071007200710073007200740075007600750077007600780079007a0079007b007a007c007d007e007d007f007e00800081008200810083008200840085008600850087008600880089008a0089008b008a008c008d008e008d008f008e00900091009200910093009200940095009600950097009600980099009a0099009b009a009c009d009e009d009f009e00a000a100a200a100a300a200a400a500a600a500a700a600a800a900aa00a900ab00aa00ac00ad00ae00ad00af00ae00c700c800c400c500c600c700c500c700c400ca00cc00c900cc00cd00c900ca00cb00cc00cf00d000d100cf00d100ce00d100d200ce00d400d600d300d600d700d300d400d500d600d900db00d800db00dc00d800d900da00db00e000e100dd00de00df00e000de00e000dd00e300e400e500e300e500e200e500e600e200e800ea00e700ea00eb00e700e800e900ea00c200c300c100c300c000c100c300bf00c000c300be00bf00bc00bd00c300c300bd00be00ba00bb00c300bb00bc00c300c300b800b900c300b900ba00b100b200b300b000b100b300b400b500b200b100b400b200b500b600b700b200b500b700ec00ed00ee00ed00ef00ee00f000f100f200f100f300f200f400f500f600f500f700f600f800f900fa00f900fb00fa00fc00fd00fe00fd00ff00fe00000101010201010103010201040105010601050107010601080109010a0109010b010a010c010d010e010d010f010e01100111011201110113011201140115011601150117011601180119011a0119011b011a01
+  m_IndexBuffer: 000001000200010003000200080009000a0008000a0004000500060007000400050007000400070008000d000e000b000d000b000c0010000e000f000d000f000e001000110012000e00100012001300140017001400160017001400150016001700180013001800190013001a001b001c001a001c0020001c001d0020001d001e0020001e001f00200021002200230021002300240021002400250021002500270025002600270035003600390036003800390036003700380039003a0035003a003b00350035003b003c0035003c003d00340035003d003d003e0034003e003f0034002d002e002f002d002f002c00300031002f002f002e00300033002f003200310032002f00280029002f00330028002f0029002a002f002a002b002f00400041004200410043004200440045004600450047004600480049004a0049004b004a004c004d004e004d004f004e00500051005200510053005200540055005600550057005600580059005a0059005b005a005c005d005e005d005f005e00600061006200610063006200640065006600650067006600680069006a0069006b006a006c006d006e006d006f006e00700071007200710073007200740075007600750077007600780079007a0079007b007a007c007d007e007d007f007e00800081008200810083008200840085008600850087008600880089008a0089008b008a008c008d008e008d008f008e00900091009200910093009200940095009600950097009600980099009a0099009b009a009c009d009e009d009f009e00a000a100a200a100a300a200a400a500a600a500a700a600a800a900aa00a900ab00aa00ac00ad00ae00ad00af00ae00c700c800c400c500c600c700c500c700c400ca00cc00c900cc00cd00c900ca00cb00cc00cf00d000d100cf00d100ce00d100d200ce00d400d600d300d600d700d300d400d500d600d900db00d800db00dc00d800d900da00db00e000e100dd00de00df00e000de00e000dd00e300e400e500e300e500e200e500e600e200e800ea00e700ea00eb00e700e800e900ea00c200c300c100c300c000c100c300bf00c000c300be00bf00bc00bd00c300c300bd00be00ba00bb00c300bb00bc00c300c300b800b900c300b900ba00b100b200b300b000b100b300b400b500b200b100b400b200b500b600b700b200b500b700ec00ed00ee00ed00ef00ee00f000f100f200f100f300f200f400f500f600f500f700f600f800f900fa00f900fb00fa00fc00fd00fe00fd00ff00fe00000101010201010103010201040105010601050107010601080109010a0109010b010a010c010d010e010d010f010e01100111011201110113011201140115011601150117011601180119011a0119011b011a01y
   m_VertexData:
     serializedVersion: 3
     m_VertexCount: 284
@@ -617,8 +617,9 @@ Mesh:
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 1.375}
     m_Extent: {x: 0.5, y: 5, z: 9.875}
-  m_MeshUsageFlags: 0
   m_CookingOptions: 30
+  m_PreBakeConvexCollisionMesh: 0
+  m_PreBakeTriangleCollisionMesh: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   'm_MeshMetrics[0]': 1
@@ -674,10 +675,10 @@ Mesh:
     m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f0011001200130014001300150014001600170018001700190018001a001b001c001b001d001c001e001f0020001f0021002000
+  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f0011001200130014001300150014001600170018001700190018001a001b001c001b001d001c001e001f0020001f0021002000y
   m_VertexData:
     serializedVersion: 3
     m_VertexCount: 34
@@ -795,8 +796,9 @@ Mesh:
   m_LocalAABB:
     m_Center: {x: 0, y: -0.00001180172, z: -4.0000134}
     m_Extent: {x: 0.5, y: 2.500012, z: 6.5000134}
-  m_MeshUsageFlags: 0
   m_CookingOptions: 30
+  m_PreBakeConvexCollisionMesh: 0
+  m_PreBakeTriangleCollisionMesh: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   'm_MeshMetrics[0]': 1
@@ -1200,6 +1202,7 @@ MonoBehaviour:
   m_UnmodifiedMeshVersion: 2971
   m_Size: {x: 1, y: 5, z: 5}
   m_LocalCenter: {x: 0, y: 0, z: 0}
+  m_PivotRatio: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
@@ -1220,7 +1223,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
   m_MeshFormatVersion: 2
   m_Faces:
-  - m_Indexes: 000000000100000002000000010000000300000002000000
+  - m_Indexes: 000000000100000002000000010000000300000002000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1237,7 +1240,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 040000000500000006000000050000000700000006000000
+  - m_Indexes: 040000000500000006000000050000000700000006000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1254,7 +1257,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 08000000090000000a000000
+  - m_Indexes: 08000000090000000a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1271,7 +1274,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0d0000000c0000000b000000
+  - m_Indexes: 0d0000000c0000000b000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1288,7 +1291,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000
+  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1305,7 +1308,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 120000001300000014000000130000001500000014000000
+  - m_Indexes: 120000001300000014000000130000001500000014000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1322,7 +1325,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 160000001700000018000000170000001900000018000000
+  - m_Indexes: 160000001700000018000000170000001900000018000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1339,7 +1342,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 1a0000001b0000001c0000001b0000001d0000001c000000
+  - m_Indexes: 1a0000001b0000001c0000001b0000001d0000001c000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1356,7 +1359,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 1e0000001f000000200000001f0000002100000020000000
+  - m_Indexes: 1e0000001f000000200000001f0000002100000020000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1374,16 +1377,16 @@ MonoBehaviour:
     elementGroup: -1
     m_TextureGroup: -1
   m_SharedVertices:
-  - m_Vertices: 040000000c00000010000000
-  - m_Vertices: 050000000a00000011000000
-  - m_Vertices: 000000001400000019000000
-  - m_Vertices: 080000000e0000001200000017000000
-  - m_Vertices: 020000001800000021000000
-  - m_Vertices: 0700000009000000160000001f000000
-  - m_Vertices: 01000000150000001c000000
-  - m_Vertices: 0d0000000f000000130000001a000000
-  - m_Vertices: 030000001d00000020000000
-  - m_Vertices: 060000000b0000001b0000001e000000
+  - m_Vertices: 040000000c00000010000000i
+  - m_Vertices: 050000000a00000011000000i
+  - m_Vertices: 000000001400000019000000i
+  - m_Vertices: 080000000e0000001200000017000000i
+  - m_Vertices: 020000001800000021000000i
+  - m_Vertices: 0700000009000000160000001f000000i
+  - m_Vertices: 01000000150000001c000000i
+  - m_Vertices: 0d0000000f000000130000001a000000i
+  - m_Vertices: 030000001d00000020000000i
+  - m_Vertices: 060000000b0000001b0000001e000000i
   m_SharedTextures: []
   m_Positions:
   - {x: 0.5, y: -2.5000236, z: -10.500025}
@@ -1703,6 +1706,63 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dd033e38f5c6e6f46985c68ecf8000d7, type: 3}
+--- !u!1001 &762354199
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5781034569272959991, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_Name
+      value: HUDRenderer
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6420349851702601264, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6fb2b52b3bc141c4096f714b355a35b1, type: 3}
 --- !u!1001 &818572703
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1898,6 +1958,7 @@ MonoBehaviour:
   m_UnmodifiedMeshVersion: 2971
   m_Size: {x: 1, y: 5, z: 5}
   m_LocalCenter: {x: 0, y: 0, z: 0}
+  m_PivotRatio: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
@@ -1918,7 +1979,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
   m_MeshFormatVersion: 2
   m_Faces:
-  - m_Indexes: 000000000100000002000000010000000300000002000000
+  - m_Indexes: 000000000100000002000000010000000300000002000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1935,7 +1996,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 040000000500000006000000050000000700000006000000
+  - m_Indexes: 040000000500000006000000050000000700000006000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1952,7 +2013,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 08000000090000000a000000
+  - m_Indexes: 08000000090000000a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1969,7 +2030,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0d0000000c0000000b000000
+  - m_Indexes: 0d0000000c0000000b000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -1986,7 +2047,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000
+  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2004,12 +2065,12 @@ MonoBehaviour:
     elementGroup: 0
     m_TextureGroup: -1
   m_SharedVertices:
-  - m_Vertices: 040000000c00000010000000
-  - m_Vertices: 050000000a00000011000000
-  - m_Vertices: 00000000080000000e000000
-  - m_Vertices: 020000000700000009000000
-  - m_Vertices: 010000000d0000000f000000
-  - m_Vertices: 03000000060000000b000000
+  - m_Vertices: 040000000c00000010000000i
+  - m_Vertices: 050000000a00000011000000i
+  - m_Vertices: 00000000080000000e000000i
+  - m_Vertices: 020000000700000009000000i
+  - m_Vertices: 010000000d0000000f000000i
+  - m_Vertices: 03000000060000000b000000i
   m_SharedTextures: []
   m_Positions:
   - {x: 0.5, y: -2.5, z: -2.5}
@@ -2660,6 +2721,7 @@ MonoBehaviour:
   m_UnmodifiedMeshVersion: 1920
   m_Size: {x: 1, y: 10, z: 8}
   m_LocalCenter: {x: 0, y: 0, z: 0}
+  m_PivotRatio: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
@@ -2680,7 +2742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
   m_MeshFormatVersion: 2
   m_Faces:
-  - m_Indexes: 000000000100000002000000010000000300000002000000
+  - m_Indexes: 000000000100000002000000010000000300000002000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2697,7 +2759,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 08000000090000000a000000080000000a00000004000000050000000600000007000000040000000500000007000000040000000700000008000000
+  - m_Indexes: 08000000090000000a000000080000000a00000004000000050000000600000007000000040000000500000007000000040000000700000008000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2714,7 +2776,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 0d0000000e0000000b0000000d0000000b0000000c000000100000000e0000000f0000000d0000000f0000000e0000001000000011000000120000000e0000001000000012000000
+  - m_Indexes: 0d0000000e0000000b0000000d0000000b0000000c000000100000000e0000000f0000000d0000000f0000000e0000001000000011000000120000000e0000001000000012000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2731,7 +2793,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: 1
-  - m_Indexes: 130000001400000017000000140000001600000017000000140000001500000016000000170000001800000013000000180000001900000013000000
+  - m_Indexes: 130000001400000017000000140000001600000017000000140000001500000016000000170000001800000013000000180000001900000013000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2748,7 +2810,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 1a0000001b0000001c0000001a0000001c000000200000001c0000001d000000200000001d0000001e000000200000001e0000001f00000020000000
+  - m_Indexes: 1a0000001b0000001c0000001a0000001c000000200000001c0000001d000000200000001d0000001e000000200000001e0000001f00000020000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2765,7 +2827,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 210000002200000023000000210000002300000024000000210000002400000025000000210000002500000027000000250000002600000027000000
+  - m_Indexes: 210000002200000023000000210000002300000024000000210000002400000025000000210000002500000027000000250000002600000027000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2782,7 +2844,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 350000003600000039000000360000003800000039000000360000003700000038000000390000003a000000350000003a0000003b00000035000000350000003b0000003c000000350000003c0000003d00000034000000350000003d0000003d0000003e000000340000003e0000003f00000034000000
+  - m_Indexes: 350000003600000039000000360000003800000039000000360000003700000038000000390000003a000000350000003a0000003b00000035000000350000003b0000003c000000350000003c0000003d00000034000000350000003d0000003d0000003e000000340000003e0000003f00000034000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2799,7 +2861,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 2d0000002e0000002f0000002d0000002f0000002c00000030000000310000002f0000002f0000002e00000030000000330000002f0000003200000031000000320000002f00000028000000290000002f00000033000000280000002f000000290000002a0000002f0000002a0000002b0000002f000000
+  - m_Indexes: 2d0000002e0000002f0000002d0000002f0000002c00000030000000310000002f0000002f0000002e00000030000000330000002f0000003200000031000000320000002f00000028000000290000002f00000033000000280000002f000000290000002a0000002f0000002a0000002b0000002f000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2816,7 +2878,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: 400000004100000042000000410000004300000042000000
+  - m_Indexes: 400000004100000042000000410000004300000042000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2833,7 +2895,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 440000004500000046000000450000004700000046000000
+  - m_Indexes: 440000004500000046000000450000004700000046000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2850,7 +2912,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 48000000490000004a000000490000004b0000004a000000
+  - m_Indexes: 48000000490000004a000000490000004b0000004a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2867,7 +2929,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 4c0000004d0000004e0000004d0000004f0000004e000000
+  - m_Indexes: 4c0000004d0000004e0000004d0000004f0000004e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2884,7 +2946,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 500000005100000052000000510000005300000052000000
+  - m_Indexes: 500000005100000052000000510000005300000052000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2901,7 +2963,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 540000005500000056000000550000005700000056000000
+  - m_Indexes: 540000005500000056000000550000005700000056000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2918,7 +2980,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 58000000590000005a000000590000005b0000005a000000
+  - m_Indexes: 58000000590000005a000000590000005b0000005a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2935,7 +2997,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 5c0000005d0000005e0000005d0000005f0000005e000000
+  - m_Indexes: 5c0000005d0000005e0000005d0000005f0000005e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2952,7 +3014,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 600000006100000062000000610000006300000062000000
+  - m_Indexes: 600000006100000062000000610000006300000062000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2969,7 +3031,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 640000006500000066000000650000006700000066000000
+  - m_Indexes: 640000006500000066000000650000006700000066000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -2986,7 +3048,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 68000000690000006a000000690000006b0000006a000000
+  - m_Indexes: 68000000690000006a000000690000006b0000006a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3003,7 +3065,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 6c0000006d0000006e0000006d0000006f0000006e000000
+  - m_Indexes: 6c0000006d0000006e0000006d0000006f0000006e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3020,7 +3082,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 700000007100000072000000710000007300000072000000
+  - m_Indexes: 700000007100000072000000710000007300000072000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3037,7 +3099,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 740000007500000076000000750000007700000076000000
+  - m_Indexes: 740000007500000076000000750000007700000076000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3054,7 +3116,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 78000000790000007a000000790000007b0000007a000000
+  - m_Indexes: 78000000790000007a000000790000007b0000007a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3071,7 +3133,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 7c0000007d0000007e0000007d0000007f0000007e000000
+  - m_Indexes: 7c0000007d0000007e0000007d0000007f0000007e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3088,7 +3150,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 800000008100000082000000810000008300000082000000
+  - m_Indexes: 800000008100000082000000810000008300000082000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3105,7 +3167,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 840000008500000086000000850000008700000086000000
+  - m_Indexes: 840000008500000086000000850000008700000086000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3122,7 +3184,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 88000000890000008a000000890000008b0000008a000000
+  - m_Indexes: 88000000890000008a000000890000008b0000008a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3139,7 +3201,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 8c0000008d0000008e0000008d0000008f0000008e000000
+  - m_Indexes: 8c0000008d0000008e0000008d0000008f0000008e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3156,7 +3218,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 900000009100000092000000910000009300000092000000
+  - m_Indexes: 900000009100000092000000910000009300000092000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3173,7 +3235,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 940000009500000096000000950000009700000096000000
+  - m_Indexes: 940000009500000096000000950000009700000096000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3190,7 +3252,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 98000000990000009a000000990000009b0000009a000000
+  - m_Indexes: 98000000990000009a000000990000009b0000009a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3207,7 +3269,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 9c0000009d0000009e0000009d0000009f0000009e000000
+  - m_Indexes: 9c0000009d0000009e0000009d0000009f0000009e000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3224,7 +3286,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: a0000000a1000000a2000000a1000000a3000000a2000000
+  - m_Indexes: a0000000a1000000a2000000a1000000a3000000a2000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3241,7 +3303,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: a4000000a5000000a6000000a5000000a7000000a6000000
+  - m_Indexes: a4000000a5000000a6000000a5000000a7000000a6000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3258,7 +3320,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: a8000000a9000000aa000000a9000000ab000000aa000000
+  - m_Indexes: a8000000a9000000aa000000a9000000ab000000aa000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3275,7 +3337,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: ac000000ad000000ae000000ad000000af000000ae000000
+  - m_Indexes: ac000000ad000000ae000000ad000000af000000ae000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3292,7 +3354,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: c7000000c8000000c4000000c5000000c6000000c7000000c5000000c7000000c4000000
+  - m_Indexes: c7000000c8000000c4000000c5000000c6000000c7000000c5000000c7000000c4000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3309,7 +3371,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: ca000000cc000000c9000000cc000000cd000000c9000000ca000000cb000000cc000000
+  - m_Indexes: ca000000cc000000c9000000cc000000cd000000c9000000ca000000cb000000cc000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3326,7 +3388,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: cf000000d0000000d1000000cf000000d1000000ce000000d1000000d2000000ce000000
+  - m_Indexes: cf000000d0000000d1000000cf000000d1000000ce000000d1000000d2000000ce000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3343,7 +3405,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: d4000000d6000000d3000000d6000000d7000000d3000000d4000000d5000000d6000000
+  - m_Indexes: d4000000d6000000d3000000d6000000d7000000d3000000d4000000d5000000d6000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3360,7 +3422,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: d9000000db000000d8000000db000000dc000000d8000000d9000000da000000db000000
+  - m_Indexes: d9000000db000000d8000000db000000dc000000d8000000d9000000da000000db000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3377,7 +3439,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: e0000000e1000000dd000000de000000df000000e0000000de000000e0000000dd000000
+  - m_Indexes: e0000000e1000000dd000000de000000df000000e0000000de000000e0000000dd000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3394,7 +3456,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: e3000000e4000000e5000000e3000000e5000000e2000000e5000000e6000000e2000000
+  - m_Indexes: e3000000e4000000e5000000e3000000e5000000e2000000e5000000e6000000e2000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3411,7 +3473,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: e8000000ea000000e7000000ea000000eb000000e7000000e8000000e9000000ea000000
+  - m_Indexes: e8000000ea000000e7000000ea000000eb000000e7000000e8000000e9000000ea000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3428,7 +3490,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: c2000000c3000000c1000000c3000000c0000000c1000000c3000000bf000000c0000000c3000000be000000bf000000bc000000bd000000c3000000c3000000bd000000be000000ba000000bb000000c3000000bb000000bc000000c3000000c3000000b8000000b9000000c3000000b9000000ba000000
+  - m_Indexes: c2000000c3000000c1000000c3000000c0000000c1000000c3000000bf000000c0000000c3000000be000000bf000000bc000000bd000000c3000000c3000000bd000000be000000ba000000bb000000c3000000bb000000bc000000c3000000c3000000b8000000b9000000c3000000b9000000ba000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3445,7 +3507,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: -1
-  - m_Indexes: b1000000b2000000b3000000b0000000b1000000b3000000b4000000b5000000b2000000b1000000b4000000b2000000b5000000b6000000b7000000b2000000b5000000b7000000
+  - m_Indexes: b1000000b2000000b3000000b0000000b1000000b3000000b4000000b5000000b2000000b1000000b4000000b2000000b5000000b6000000b7000000b2000000b5000000b7000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3462,7 +3524,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: 0
     m_TextureGroup: 2
-  - m_Indexes: ec000000ed000000ee000000ed000000ef000000ee000000
+  - m_Indexes: ec000000ed000000ee000000ed000000ef000000ee000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3479,7 +3541,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: f0000000f1000000f2000000f1000000f3000000f2000000
+  - m_Indexes: f0000000f1000000f2000000f1000000f3000000f2000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3496,7 +3558,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: f4000000f5000000f6000000f5000000f7000000f6000000
+  - m_Indexes: f4000000f5000000f6000000f5000000f7000000f6000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3513,7 +3575,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: f8000000f9000000fa000000f9000000fb000000fa000000
+  - m_Indexes: f8000000f9000000fa000000f9000000fb000000fa000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3530,7 +3592,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: fc000000fd000000fe000000fd000000ff000000fe000000
+  - m_Indexes: fc000000fd000000fe000000fd000000ff000000fe000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3547,7 +3609,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 000100000101000002010000010100000301000002010000
+  - m_Indexes: 000100000101000002010000010100000301000002010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3564,7 +3626,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 040100000501000006010000050100000701000006010000
+  - m_Indexes: 040100000501000006010000050100000701000006010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3581,7 +3643,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 08010000090100000a010000090100000b0100000a010000
+  - m_Indexes: 08010000090100000a010000090100000b0100000a010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3598,7 +3660,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0c0100000d0100000e0100000d0100000f0100000e010000
+  - m_Indexes: 0c0100000d0100000e0100000d0100000f0100000e010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3615,7 +3677,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 100100001101000012010000110100001301000012010000
+  - m_Indexes: 100100001101000012010000110100001301000012010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3632,7 +3694,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 140100001501000016010000150100001701000016010000
+  - m_Indexes: 140100001501000016010000150100001701000016010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3649,7 +3711,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 18010000190100001a010000190100001b0100001a010000
+  - m_Indexes: 18010000190100001a010000190100001b0100001a010000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -3667,92 +3729,92 @@ MonoBehaviour:
     elementGroup: -1
     m_TextureGroup: -1
   m_SharedVertices:
-  - m_Vertices: 000000001400000027000000
-  - m_Vertices: 01000000130000001a000000
-  - m_Vertices: 020000000700000021000000
-  - m_Vertices: 030000000800000020000000
-  - m_Vertices: 040000000f000000
-  - m_Vertices: 050000000d000000
-  - m_Vertices: 060000000c00000022000000
-  - m_Vertices: 09000000110000001f000000
-  - m_Vertices: 0a00000010000000
-  - m_Vertices: 0b000000230000005c00000069000000
-  - m_Vertices: 0e000000400000005d000000
-  - m_Vertices: 120000001e0000004100000048000000
-  - m_Vertices: 15000000260000004400000065000000
-  - m_Vertices: 160000005500000064000000
-  - m_Vertices: 170000005400000059000000
-  - m_Vertices: 180000005800000061000000
-  - m_Vertices: 190000001b0000005100000060000000
-  - m_Vertices: 1c0000004d00000050000000
-  - m_Vertices: 1d000000490000004c000000
-  - m_Vertices: 24000000680000006d000000
-  - m_Vertices: 25000000450000006c000000
-  - m_Vertices: 28000000a2000000a7000000
-  - m_Vertices: 29000000a3000000aa000000
-  - m_Vertices: 2a000000ab000000ae000000
-  - m_Vertices: 2b00000086000000af000000de000000e2000000
-  - m_Vertices: 2c000000720000007b000000c4000000cf000000
-  - m_Vertices: 2d000000730000008e000000
-  - m_Vertices: 2e0000008f00000096000000
-  - m_Vertices: 2f000000c5000000dd000000
-  - m_Vertices: 300000009200000097000000
-  - m_Vertices: 31000000930000009e000000
-  - m_Vertices: 320000009a0000009f000000
-  - m_Vertices: 330000009b000000a6000000
-  - m_Vertices: 340000005e0000006b000000
-  - m_Vertices: 35000000420000005f000000
-  - m_Vertices: 36000000430000004a000000
-  - m_Vertices: 370000004b0000004e000000a9000000ac000000
-  - m_Vertices: 38000000a1000000a8000000
-  - m_Vertices: 39000000a0000000a5000000
-  - m_Vertices: 3a00000099000000a4000000
-  - m_Vertices: 3b000000980000009d000000
-  - m_Vertices: 3c000000910000009c000000
-  - m_Vertices: 3d0000009000000095000000
-  - m_Vertices: 3e0000008d00000094000000
-  - m_Vertices: 3f0000006a0000006f000000710000008c000000
-  - m_Vertices: 46000000670000007500000078000000
-  - m_Vertices: 470000006e0000007000000079000000
-  - m_Vertices: 4f0000005200000084000000ad000000
-  - m_Vertices: 53000000620000008500000088000000
-  - m_Vertices: 560000005b0000007d00000080000000
-  - m_Vertices: 57000000660000007400000081000000
-  - m_Vertices: 5a000000630000007c00000089000000
-  - m_Vertices: 7600000083000000c9000000d9000000
-  - m_Vertices: 770000007a000000ca000000ce000000
-  - m_Vertices: 7e0000008b000000d3000000e8000000
-  - m_Vertices: 7f00000082000000d4000000d8000000
-  - m_Vertices: 870000008a000000e3000000e7000000
-  - m_Vertices: b0000000c8000000d0000000
-  - m_Vertices: b1000000c7000000
-  - m_Vertices: b2000000ed00000010010000
-  - m_Vertices: c3000000ef00000012010000
-  - m_Vertices: b3000000d1000000ec000000f1000000
-  - m_Vertices: c2000000ee000000f3000000
-  - m_Vertices: b4000000c6000000e1000000
-  - m_Vertices: b5000000e0000000
-  - m_Vertices: b6000000df000000e6000000
-  - m_Vertices: b7000000e50000001101000014010000
-  - m_Vertices: b80000001301000016010000
-  - m_Vertices: b9000000170100001a010000
-  - m_Vertices: e4000000eb0000001501000018010000
-  - m_Vertices: ba0000000a0100001b010000
-  - m_Vertices: ea0000000801000019010000
-  - m_Vertices: bb0000000b0100000e010000
-  - m_Vertices: d7000000e9000000090100000c010000
-  - m_Vertices: bc000000020100000f010000
-  - m_Vertices: d6000000000100000d010000
-  - m_Vertices: bd0000000301000006010000
-  - m_Vertices: d5000000dc0000000101000004010000
-  - m_Vertices: be000000fe00000007010000
-  - m_Vertices: db000000fc00000005010000
-  - m_Vertices: bf000000fa000000ff000000
-  - m_Vertices: cd000000da000000f8000000fd000000
-  - m_Vertices: c0000000f6000000fb000000
-  - m_Vertices: cc000000f4000000f9000000
-  - m_Vertices: c1000000f2000000f7000000
-  - m_Vertices: cb000000d2000000f0000000f5000000
+  - m_Vertices: 000000001400000027000000i
+  - m_Vertices: 01000000130000001a000000i
+  - m_Vertices: 020000000700000021000000i
+  - m_Vertices: 030000000800000020000000i
+  - m_Vertices: 040000000f000000i
+  - m_Vertices: 050000000d000000i
+  - m_Vertices: 060000000c00000022000000i
+  - m_Vertices: 09000000110000001f000000i
+  - m_Vertices: 0a00000010000000i
+  - m_Vertices: 0b000000230000005c00000069000000i
+  - m_Vertices: 0e000000400000005d000000i
+  - m_Vertices: 120000001e0000004100000048000000i
+  - m_Vertices: 15000000260000004400000065000000i
+  - m_Vertices: 160000005500000064000000i
+  - m_Vertices: 170000005400000059000000i
+  - m_Vertices: 180000005800000061000000i
+  - m_Vertices: 190000001b0000005100000060000000i
+  - m_Vertices: 1c0000004d00000050000000i
+  - m_Vertices: 1d000000490000004c000000i
+  - m_Vertices: 24000000680000006d000000i
+  - m_Vertices: 25000000450000006c000000i
+  - m_Vertices: 28000000a2000000a7000000i
+  - m_Vertices: 29000000a3000000aa000000i
+  - m_Vertices: 2a000000ab000000ae000000i
+  - m_Vertices: 2b00000086000000af000000de000000e2000000i
+  - m_Vertices: 2c000000720000007b000000c4000000cf000000i
+  - m_Vertices: 2d000000730000008e000000i
+  - m_Vertices: 2e0000008f00000096000000i
+  - m_Vertices: 2f000000c5000000dd000000i
+  - m_Vertices: 300000009200000097000000i
+  - m_Vertices: 31000000930000009e000000i
+  - m_Vertices: 320000009a0000009f000000i
+  - m_Vertices: 330000009b000000a6000000i
+  - m_Vertices: 340000005e0000006b000000i
+  - m_Vertices: 35000000420000005f000000i
+  - m_Vertices: 36000000430000004a000000i
+  - m_Vertices: 370000004b0000004e000000a9000000ac000000i
+  - m_Vertices: 38000000a1000000a8000000i
+  - m_Vertices: 39000000a0000000a5000000i
+  - m_Vertices: 3a00000099000000a4000000i
+  - m_Vertices: 3b000000980000009d000000i
+  - m_Vertices: 3c000000910000009c000000i
+  - m_Vertices: 3d0000009000000095000000i
+  - m_Vertices: 3e0000008d00000094000000i
+  - m_Vertices: 3f0000006a0000006f000000710000008c000000i
+  - m_Vertices: 46000000670000007500000078000000i
+  - m_Vertices: 470000006e0000007000000079000000i
+  - m_Vertices: 4f0000005200000084000000ad000000i
+  - m_Vertices: 53000000620000008500000088000000i
+  - m_Vertices: 560000005b0000007d00000080000000i
+  - m_Vertices: 57000000660000007400000081000000i
+  - m_Vertices: 5a000000630000007c00000089000000i
+  - m_Vertices: 7600000083000000c9000000d9000000i
+  - m_Vertices: 770000007a000000ca000000ce000000i
+  - m_Vertices: 7e0000008b000000d3000000e8000000i
+  - m_Vertices: 7f00000082000000d4000000d8000000i
+  - m_Vertices: 870000008a000000e3000000e7000000i
+  - m_Vertices: b0000000c8000000d0000000i
+  - m_Vertices: b1000000c7000000i
+  - m_Vertices: b2000000ed00000010010000i
+  - m_Vertices: c3000000ef00000012010000i
+  - m_Vertices: b3000000d1000000ec000000f1000000i
+  - m_Vertices: c2000000ee000000f3000000i
+  - m_Vertices: b4000000c6000000e1000000i
+  - m_Vertices: b5000000e0000000i
+  - m_Vertices: b6000000df000000e6000000i
+  - m_Vertices: b7000000e50000001101000014010000i
+  - m_Vertices: b80000001301000016010000i
+  - m_Vertices: b9000000170100001a010000i
+  - m_Vertices: e4000000eb0000001501000018010000i
+  - m_Vertices: ba0000000a0100001b010000i
+  - m_Vertices: ea0000000801000019010000i
+  - m_Vertices: bb0000000b0100000e010000i
+  - m_Vertices: d7000000e9000000090100000c010000i
+  - m_Vertices: bc000000020100000f010000i
+  - m_Vertices: d6000000000100000d010000i
+  - m_Vertices: bd0000000301000006010000i
+  - m_Vertices: d5000000dc0000000101000004010000i
+  - m_Vertices: be000000fe00000007010000i
+  - m_Vertices: db000000fc00000005010000i
+  - m_Vertices: bf000000fa000000ff000000i
+  - m_Vertices: cd000000da000000f8000000fd000000i
+  - m_Vertices: c0000000f6000000fb000000i
+  - m_Vertices: cc000000f4000000f9000000i
+  - m_Vertices: c1000000f2000000f7000000i
+  - m_Vertices: cb000000d2000000f0000000f5000000i
   m_SharedTextures: []
   m_Positions:
   - {x: -0.5, y: -5, z: 11.25}
@@ -4734,10 +4796,10 @@ Mesh:
     m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f001100
+  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f001100y
   m_VertexData:
     serializedVersion: 3
     m_VertexCount: 18
@@ -4855,8 +4917,9 @@ Mesh:
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 2.5, z: 2.5}
-  m_MeshUsageFlags: 0
   m_CookingOptions: 30
+  m_PreBakeConvexCollisionMesh: 0
+  m_PreBakeTriangleCollisionMesh: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   'm_MeshMetrics[0]': 1
@@ -5571,6 +5634,7 @@ MonoBehaviour:
   m_UnmodifiedMeshVersion: 2971
   m_Size: {x: 1, y: 5, z: 5}
   m_LocalCenter: {x: 0, y: 0, z: 0}
+  m_PivotRatio: {x: 0, y: 0, z: 0}
   references:
     version: 2
     RefIds:
@@ -5591,7 +5655,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Unity.ProBuilder::UnityEngine.ProBuilder.ProBuilderMesh
   m_MeshFormatVersion: 2
   m_Faces:
-  - m_Indexes: 000000000100000002000000010000000300000002000000
+  - m_Indexes: 000000000100000002000000010000000300000002000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -5608,7 +5672,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 040000000500000006000000050000000700000006000000
+  - m_Indexes: 040000000500000006000000050000000700000006000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -5625,7 +5689,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 08000000090000000a000000
+  - m_Indexes: 08000000090000000a000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -5642,7 +5706,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0d0000000c0000000b000000
+  - m_Indexes: 0d0000000c0000000b000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -5659,7 +5723,7 @@ MonoBehaviour:
     m_ManualUV: 0
     elementGroup: -1
     m_TextureGroup: -1
-  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000
+  - m_Indexes: 0f0000000e00000011000000100000000f00000011000000i
     m_SmoothingGroup: 0
     m_Uv:
       m_UseWorldSpace: 0
@@ -5677,12 +5741,12 @@ MonoBehaviour:
     elementGroup: 0
     m_TextureGroup: -1
   m_SharedVertices:
-  - m_Vertices: 040000000c00000010000000
-  - m_Vertices: 050000000a00000011000000
-  - m_Vertices: 00000000080000000e000000
-  - m_Vertices: 020000000700000009000000
-  - m_Vertices: 010000000d0000000f000000
-  - m_Vertices: 03000000060000000b000000
+  - m_Vertices: 040000000c00000010000000i
+  - m_Vertices: 050000000a00000011000000i
+  - m_Vertices: 00000000080000000e000000i
+  - m_Vertices: 020000000700000009000000i
+  - m_Vertices: 010000000d0000000f000000i
+  - m_Vertices: 03000000060000000b000000i
   m_SharedTextures: []
   m_Positions:
   - {x: 0.5, y: -2.5, z: -2.5}
@@ -5825,10 +5889,10 @@ Mesh:
     m_Data: 
   m_MeshCompression: 0
   m_IsReadable: 1
-  m_KeepVertices: 1
-  m_KeepIndices: 1
+  m_KeepVertices: 0
+  m_KeepIndices: 0
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f001100
+  m_IndexBuffer: 000001000200010003000200040005000600050007000600080009000a000d000c000b000f000e00110010000f001100y
   m_VertexData:
     serializedVersion: 3
     m_VertexCount: 18
@@ -5946,8 +6010,9 @@ Mesh:
   m_LocalAABB:
     m_Center: {x: 0, y: 0, z: 0}
     m_Extent: {x: 0.5, y: 2.5, z: 2.5}
-  m_MeshUsageFlags: 0
   m_CookingOptions: 30
+  m_PreBakeConvexCollisionMesh: 0
+  m_PreBakeTriangleCollisionMesh: 0
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   'm_MeshMetrics[0]': 1
@@ -6873,4 +6938,5 @@ SceneRoots:
   - {fileID: 878781363}
   - {fileID: 4109697}
   - {fileID: 2765614911622580661}
+  - {fileID: 762354199}
   - {fileID: 5679047945862628901}

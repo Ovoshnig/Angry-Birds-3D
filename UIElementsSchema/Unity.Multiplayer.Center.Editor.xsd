@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="Unity.Multiplayer.Center.Editor" elementFormDefault="qualified" targetNamespace="Unity.Multiplayer.Center.Editor" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
+  <xs:complexType name="HyperLinkType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="UnityEngine.UIElements" base="q1:LabelType">
+        <xs:choice />
+        <xs:attribute name="u-r-l" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HyperLink" xmlns:q2="UnityEngine.UIElements" substitutionGroup="q2:Label" type="tns:HyperLinkType" />
+  <xs:complexType name="CategoriesContainerType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="UnityEngine.UIElements" base="q3:ScrollViewType">
+        <xs:choice />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="CategoriesContainer" xmlns:q4="UnityEngine.UIElements" substitutionGroup="q4:ScrollView" type="tns:CategoriesContainerType" />
+  <xs:complexType name="ImageWithPlaceholderElementType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q5="UnityEngine.UIElements" base="q5:ImageType">
+        <xs:choice />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ImageWithPlaceholderElement" xmlns:q6="UnityEngine.UIElements" substitutionGroup="q6:Image" type="tns:ImageWithPlaceholderElementType" />
+  <xs:complexType name="DelayedPackageDescriptionBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q7="UnityEngine.UIElements" ref="q7:VisualElement" />
+      <xs:element xmlns:q8="UnityEngine.UIElements" ref="q8:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q9="UnityEngine.UIElements" type="q9:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q10="UnityEngine.UIElements" type="q10:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q11="UnityEngine.UIElements" type="q11:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q12="UnityEngine.UIElements" type="q12:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="DelayedPackageDescriptionBinding" type="tns:DelayedPackageDescriptionBindingType" />
+  <xs:complexType name="DelayedPackageInstalledBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q13="UnityEngine.UIElements" ref="q13:VisualElement" />
+      <xs:element xmlns:q14="UnityEngine.UIElements" ref="q14:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q15="UnityEngine.UIElements" type="q15:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q16="UnityEngine.UIElements" type="q16:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q17="UnityEngine.UIElements" type="q17:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q18="UnityEngine.UIElements" type="q18:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="DelayedPackageInstalledBinding" type="tns:DelayedPackageInstalledBindingType" />
+  <xs:complexType name="PackageItemType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q19="UnityEngine.UIElements" base="q19:VisualElementType">
+        <xs:choice />
+        <xs:attribute name="package-id" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PackageItem" xmlns:q20="UnityEngine.UIElements" substitutionGroup="q20:VisualElement" type="tns:PackageItemType" />
+  <xs:complexType name="DelayedPackageDocumentationBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q21="UnityEngine.UIElements" ref="q21:VisualElement" />
+      <xs:element xmlns:q22="UnityEngine.UIElements" ref="q22:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q23="UnityEngine.UIElements" type="q23:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q24="UnityEngine.UIElements" type="q24:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q25="UnityEngine.UIElements" type="q25:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q26="UnityEngine.UIElements" type="q26:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="DelayedPackageDocumentationBinding" type="tns:DelayedPackageDocumentationBindingType" />
+  <xs:complexType name="ColoredMinMaxSliderType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q27="UnityEngine.UIElements" base="q27:MinMaxSliderType">
+        <xs:choice />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ColoredMinMaxSlider" xmlns:q28="UnityEngine.UIElements" substitutionGroup="q28:MinMaxSlider" type="tns:ColoredMinMaxSliderType" />
+  <xs:complexType name="QuestionModeToggleType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q29="UnityEngine.UIElements" base="q29:VisualElementType">
+        <xs:choice />
+        <xs:attribute default="false" name="question-mode" type="xs:boolean" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="QuestionModeToggle" xmlns:q30="UnityEngine.UIElements" substitutionGroup="q30:VisualElement" type="tns:QuestionModeToggleType" />
+  <xs:complexType name="PackageIconType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q31="UnityEngine.UIElements" base="q31:VisualElementType">
+        <xs:choice />
+        <xs:attribute name="package-id" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="PackageIcon" xmlns:q32="UnityEngine.UIElements" substitutionGroup="q32:VisualElement" type="tns:PackageIconType" />
+  <xs:complexType name="DelayedPackageNameBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q33="UnityEngine.UIElements" ref="q33:VisualElement" />
+      <xs:element xmlns:q34="UnityEngine.UIElements" ref="q34:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q35="UnityEngine.UIElements" type="q35:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q36="UnityEngine.UIElements" type="q36:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q37="UnityEngine.UIElements" type="q37:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q38="UnityEngine.UIElements" type="q38:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="DelayedPackageNameBinding" type="tns:DelayedPackageNameBindingType" />
+  <xs:complexType name="PackageInfoBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q39="UnityEngine.UIElements" ref="q39:VisualElement" />
+      <xs:element xmlns:q40="UnityEngine.UIElements" ref="q40:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q41="UnityEngine.UIElements" type="q41:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q42="UnityEngine.UIElements" type="q42:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q43="UnityEngine.UIElements" type="q43:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q44="UnityEngine.UIElements" type="q44:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="PackageInfoBinding" type="tns:PackageInfoBindingType" />
+  <xs:complexType name="RecommendationsGridType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q45="UnityEngine.UIElements" base="q45:VisualElementType">
+        <xs:choice />
+        <xs:attribute name="item-template" type="xs:string" />
+        <xs:attribute name="recommendations" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="RecommendationsGrid" xmlns:q46="UnityEngine.UIElements" substitutionGroup="q46:VisualElement" type="tns:RecommendationsGridType" />
+  <xs:complexType name="DelayedPackageIdBindingType">
+    <xs:choice minOccurs="0" maxOccurs="unbounded">
+      <xs:element xmlns:q47="UnityEngine.UIElements" ref="q47:VisualElement" />
+      <xs:element xmlns:q48="UnityEngine.UIElements" ref="q48:VisualElementComponent" />
+      <xs:element minOccurs="0" form="unqualified" name="Style" xmlns:q49="UnityEngine.UIElements" type="q49:StyleType" />
+      <xs:element minOccurs="0" form="unqualified" name="Template" xmlns:q50="UnityEngine.UIElements" type="q50:TemplateType" />
+      <xs:element minOccurs="0" form="unqualified" name="AttributeOverrides" xmlns:q51="UnityEngine.UIElements" type="q51:AttributeOverridesType" />
+    </xs:choice>
+    <xs:attribute name="property" type="xs:string" />
+    <xs:attribute default="WhenDirty" name="update-trigger" xmlns:q52="UnityEngine.UIElements" type="q52:BindingUpdateTriggerType" />
+    <xs:anyAttribute namespace="##any" processContents="lax" />
+  </xs:complexType>
+  <xs:element name="DelayedPackageIdBinding" type="tns:DelayedPackageIdBindingType" />
+  <xs:complexType name="HelpIconType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q53="UnityEngine.UIElements" base="q53:VisualElementType">
+        <xs:choice />
+        <xs:attribute name="documentation-url" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="HelpIcon" xmlns:q54="UnityEngine.UIElements" substitutionGroup="q54:VisualElement" type="tns:HelpIconType" />
+</xs:schema>

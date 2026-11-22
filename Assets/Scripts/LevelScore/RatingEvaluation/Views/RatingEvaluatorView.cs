@@ -26,7 +26,7 @@ namespace AngryBirds3D.LevelScore.RatingEvaluation
 
         private void Awake() => _images = GetComponentsInChildren<Image>();
 
-        private void OnDestroy() => _shown.Dispose();
+        protected override void OnDestroy() => _shown.Dispose();
 
         public async UniTask ShowStarAsync(int count)
         {

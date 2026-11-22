@@ -1,0 +1,19 @@
+.score-container {
+    flex-direction: row;
+    font-size: 65px;
+    color: rgb(255, 255, 255);
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 15px;
+}
+
+.score-title {
+    -unity-text-align: middle-left;
+    margin-right: 12px;
+}
+
+.score-value {
+    min-width: 215px;
+    -unity-text-align: middle-right;
+}

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="Unity.Localization.UI" elementFormDefault="qualified" targetNamespace="Unity.Localization.UI" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="UnityEngine.UIElements.xsd" namespace="UnityEngine.UIElements" />
+  <xs:complexType name="LanguageDropdownType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q1="UnityEngine.UIElements" base="q1:BindableElementType">
+        <xs:choice />
+        <xs:attribute name="label" type="xs:string" />
+        <xs:attribute name="value" type="xs:string" />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LanguageDropdown" xmlns:q2="UnityEngine.UIElements" substitutionGroup="q2:BindableElement" type="tns:LanguageDropdownType" />
+  <xs:complexType name="LanguageRadioButtonGroupType">
+    <xs:complexContent mixed="false">
+      <xs:extension xmlns:q3="UnityEngine.UIElements" base="q3:RadioButtonGroupType">
+        <xs:choice />
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="LanguageRadioButtonGroup" xmlns:q4="UnityEngine.UIElements" substitutionGroup="q4:RadioButtonGroup" type="tns:LanguageRadioButtonGroupType" />
+</xs:schema>

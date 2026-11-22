@@ -33,7 +33,7 @@ namespace Ovoshnig.UI.TextPrinting
                 PrintAsync(_tmpText.text).Forget();
         }
 
-        protected virtual void OnDestroy()
+        protected override void OnDestroy()
         {
             _isPrinting.Dispose();
             _completed.Dispose();
