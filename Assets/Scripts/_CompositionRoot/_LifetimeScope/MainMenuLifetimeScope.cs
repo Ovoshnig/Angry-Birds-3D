@@ -14,7 +14,7 @@ namespace AngryBirds3D.Composition
 {
     public class MainMenuLifetimeScope : LifetimeScope
     {
-        [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
+        [SerializeField] private LegacySceneSwitchingInstaller _legacySceneSwitchingInstaller;
         [SerializeField] private RatingShowingInstaller _ratingShowingInstaller;
         [SerializeField] private GameQuittingInstaller _gameQuittingInstaller;
         [SerializeField] private PanelSwitchingInstaller _panelSwitchingInstaller;
@@ -22,10 +22,10 @@ namespace AngryBirds3D.Composition
         [SerializeField] private DataStorageResetInstaller _dataStorageResetInstaller;
         [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
         [SerializeField] private ScreenInstaller _screenInstaller;
-    
+
         protected override void Configure(IContainerBuilder builder)
         {
-            _sceneSwitchingInstaller.Install(builder);
+            _legacySceneSwitchingInstaller.Install(builder);
             _ratingShowingInstaller.Install(builder);
             _gameQuittingInstaller.Install(builder);
             _panelSwitchingInstaller.Install(builder);

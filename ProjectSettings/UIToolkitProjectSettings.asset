@@ -1,4 +1,3 @@
-%UNITY 7.0
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!114 &1
@@ -17,7 +16,7 @@ MonoBehaviour:
   m_DefaultEditorTheme: {fileID: 0}
   m_StyleSheetEditingPreviewDocument: {fileID: 0}
   m_DefaultRuntimeCanvasTheme: 0
-  m_DefaultEditorCanvasTheme: 0
+  m_DefaultEditorCanvasTheme: 1
   m_ConsistentAttributeOrderingWhenExporting: 0
   m_EnableLegacyThemePriority: 0
   m_ThemePriorityNoticeVersion: 1

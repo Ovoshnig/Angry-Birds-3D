@@ -21,7 +21,8 @@ namespace AngryBirds3D.Composition
 {
     public class LevelLifetimeScope : LifetimeScope
     {
-        [SerializeField] private SceneSwitchingInstaller _sceneInstaller;
+        [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
+        [SerializeField] private LegacySceneSwitchingInstaller _legacySceneSwitchingInstaller;
         [SerializeField] private LevelStateInstaller _levelStateInstaller;
         [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
         [SerializeField] private CameraInstaller _cameraInstaller;
@@ -36,16 +37,17 @@ namespace AngryBirds3D.Composition
         [SerializeField] private BirdInstaller _birdInstaller;
         [SerializeField] private PigInstaller _pigInstaller;
         [SerializeField] private BlockInstaller _blockInstaller;
-    
+
         protected override void Configure(IContainerBuilder builder)
         {
             InstallSystems(builder);
             InstallMediators(builder);
         }
-    
+
         private void InstallSystems(IContainerBuilder builder)
         {
-            _sceneInstaller.Install(builder);
+            _sceneSwitchingInstaller.Install(builder);
+            _legacySceneSwitchingInstaller.Install(builder);
             _levelStateInstaller.Install(builder);
             _levelScoreInstaller.Install(builder);
             _cameraInstaller.Install(builder);
@@ -61,7 +63,7 @@ namespace AngryBirds3D.Composition
             _pigInstaller.Install(builder);
             _blockInstaller.Install(builder);
         }
-    
+
         private void InstallMediators(IContainerBuilder builder)
         {
             new ScoreMediatorsInstaller().Install(builder);

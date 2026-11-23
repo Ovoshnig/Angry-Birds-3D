@@ -6,6 +6,7 @@
     <NestedProject ProjectName="Scene.Editor" FolderPath="Editor" />
     <NestedProject ProjectName="Mediator.Editor" FolderPath="Editor" />
     <NestedProject ProjectName="InputSystem.Extensions" FolderPath="Extensions" />
+    <NestedProject ProjectName="UIToolkit.Extensions" FolderPath="Extensions" />
     <NestedProject ProjectName="VContainer.Extensions" FolderPath="Extensions" />
     <NestedProject ProjectName="Tests.EditMode.Audio.Music" FolderPath="Tests" />
     <NestedProject ProjectName="Tests.EditMode.Audio.SFX" FolderPath="Tests" />

@@ -14,6 +14,7 @@ namespace AngryBirds3D.LevelScore.RatingEvaluation
         protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
         {
             _evaluator.Rating
+                .Where(count => count > 0)
                 .Subscribe(rating => view.ShowStarAsync(rating).Forget())
                 .AddTo(viewDisposables);
         }

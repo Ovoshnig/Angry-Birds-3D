@@ -37,6 +37,7 @@ namespace Ovoshnig.UI.TextPrinting
         {
             _isPrinting.Dispose();
             _completed.Dispose();
+            base.OnDestroy();
         }
 
         public async UniTask PrintAsync(string fullText)

@@ -1,16 +1,42 @@
 using Ovoshnig.UI.Basic;
-using TMPro;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace AngryBirds3D.LevelState.Tracking
 {
-    [RequireComponent(typeof(TMP_Text))]
     public class FinalScoreView : UIView
     {
-        private TMP_Text _text;
+        [SerializeField] private VisualElementReference<Label> _labelReference = new();
 
-        private void Awake() => _text = GetComponent<TMP_Text>();
+        private Label _label;
 
-        public void SetScore(int value) => _text.SetText("Score: {0:0000}", value);
+        protected override bool IsVisualReady => _label != null;
+
+        private void Awake()
+        {
+            _labelReference.RegisterReferenceResolvedCallback(OnLabelResolved);
+            _labelReference.RegisterReferenceUnloadedCallback(OnLabelUnloaded);
+        }
+
+        protected override void OnDestroy()
+        {
+            _labelReference.UnregisterReferenceResolvedCallback(OnLabelResolved);
+            _labelReference.UnregisterReferenceUnloadedCallback(OnLabelUnloaded);
+            base.OnDestroy();
+        }
+
+        public void SetScore(int value) => _label.text = $"SCORE: {value:0000}";
+
+        private void OnLabelResolved(Label label)
+        {
+            _label = label;
+            RefreshEnabledState();
+        }
+
+        private void OnLabelUnloaded(Label label)
+        {
+            _label = null;
+            RefreshEnabledState();
+        }
     }
 }

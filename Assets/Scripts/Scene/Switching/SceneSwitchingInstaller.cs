@@ -10,12 +10,12 @@ namespace Ovoshnig.Scene.Switching
     {
         public void Install(IContainerBuilder builder)
         {
-            builder.RegisterInstancesInHierarchy<SceneSwitchButtonView>();
+            builder.RegisterInstanceInHierarchy<SceneSwitchPanelView>();
 
             builder.UseEntryPoints(entryPoints =>
             {
-                entryPoints.Add<SceneSwitchButtonViewsMediator>();
-                entryPoints.Add<SaveStorageSceneButtonViewsMediator>();
+                entryPoints.Add<SceneSwitchPanelMediator>();
+                entryPoints.Add<SaveStorageSceneSwitchPanelMediator>();
             });
         }
     }

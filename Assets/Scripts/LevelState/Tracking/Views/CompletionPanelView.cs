@@ -1,10 +1,8 @@
 using R3;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace AngryBirds3D.LevelState.Tracking
 {
-    [RequireComponent(typeof(Image))]
     public abstract class CompletionPanelView : MonoBehaviour
     {
         private readonly Subject<Unit> _shown = new();

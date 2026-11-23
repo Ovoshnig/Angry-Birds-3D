@@ -27,6 +27,7 @@ namespace AngryBirds3D.LevelScore.RecordRating
         public void Start()
         {
             _ratingEvaluator.Rating
+                .Where(count => count > 0)
                 .Subscribe(OnRatingEvaluated)
                 .AddTo(_disposables);
         }

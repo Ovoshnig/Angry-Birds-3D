@@ -1,15 +1,16 @@
 using Cysharp.Threading.Tasks;
 using LitMotion;
-using LitMotion.Extensions;
 using Ovoshnig.UI.Basic;
 using R3;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 namespace AngryBirds3D.LevelScore.RatingEvaluation
 {
     public class RatingEvaluatorView : UIView
     {
+        [SerializeField] private VisualElementReference<VisualElement> _ratingContainerReference = new();
         [SerializeField] private Sprite _activeStar;
         [SerializeField] private Sprite _unactiveStar;
         [SerializeField] private Ease _jumpEase = Ease.OutQuint;
@@ -20,40 +21,77 @@ namespace AngryBirds3D.LevelScore.RatingEvaluation
 
         private readonly Subject<Unit> _shown = new();
 
-        private Image[] _images;
+        private VisualElement[] _stars;
+        private MotionHandle _handle;
 
-        public Subject<Unit> Shown => _shown;
+        public Observable<Unit> Shown => _shown;
 
-        private void Awake() => _images = GetComponentsInChildren<Image>();
+        protected override bool IsVisualReady => _stars != null;
 
-        protected override void OnDestroy() => _shown.Dispose();
+        private void Awake()
+        {
+            _ratingContainerReference.RegisterReferenceResolvedCallback(OnContainerResolved);
+            _ratingContainerReference.RegisterReferenceUnloadedCallback(OnContainerUnloaded);
+        }
+
+        protected override void OnDisable()
+        {
+            _handle.TryCancel();
+            base.OnDisable();
+        }
+
+        protected override void OnDestroy()
+        {
+            _handle.TryCancel();
+            _ratingContainerReference.UnregisterReferenceResolvedCallback(OnContainerResolved);
+            _ratingContainerReference.UnregisterReferenceUnloadedCallback(OnContainerUnloaded);
+            _shown.Dispose();
+            base.OnDestroy();
+        }
 
         public async UniTask ShowStarAsync(int count)
         {
-            foreach (var image in _images)
-                image.sprite = _unactiveStar;
+            _handle.TryCancel();
 
-            for (int i = 0; i < count; i++)
+            foreach (var star in _stars)
             {
-                Image image = _images[i];
+                star.style.backgroundImage = new StyleBackground(_unactiveStar);
+                star.style.translate = new Translate(0, 0);
+            }
 
-                Vector3 position = image.rectTransform.anchoredPosition;
-                float yPosition = position.y;
+            for (int i = 0; i < count && i < _stars.Length; i++)
+            {
+                VisualElement star = _stars[i];
 
-                await LMotion.Create(yPosition, yPosition + _motionDeltaY, _jumpDuration)
+                _handle = LMotion.Create(0f, -_motionDeltaY, _jumpDuration)
                     .WithEase(_jumpEase)
-                    .BindToAnchoredPositionY(image.rectTransform)
-                    .ToUniTask(destroyCancellationToken);
+                    .Bind(y => star.style.translate = new Translate(0, y));
 
-                image.sprite = _activeStar;
+                await _handle.ToUniTask(destroyCancellationToken);
 
-                await LMotion.Create(yPosition + _motionDeltaY, yPosition, _fallDuration)
+                star.style.backgroundImage = new StyleBackground(_activeStar);
+
+                _handle = LMotion.Create(-_motionDeltaY, 0f, _fallDuration)
                     .WithEase(_fallEase)
-                    .BindToAnchoredPositionY(image.rectTransform)
-                    .ToUniTask(destroyCancellationToken);
+                    .Bind(y => star.style.translate = new Translate(0, y));
+
+                await _handle.ToUniTask(destroyCancellationToken);
             }
 
             _shown.OnNext(Unit.Default);
+        }
+
+        private void OnContainerResolved(VisualElement container)
+        {
+            _stars = container.Children().ToArray();
+            RefreshEnabledState();
+        }
+
+        private void OnContainerUnloaded(VisualElement container)
+        {
+            _handle.TryCancel();
+            _stars = null;
+            RefreshEnabledState();
         }
     }
 }
