@@ -1,0 +1,51 @@
+.audio-slider-block {
+    align-items: center;
+    margin: 0 40px;
+}
+
+.audio-slider-title {
+    font-size: 36px;
+    color: rgb(228, 37, 85);
+    margin-bottom: 16px;
+}
+
+.audio-slider-row {
+    flex-direction: row;
+    align-items: center;
+}
+
+.audio-slider-indicator {
+    width: 64px;
+    height: 64px;
+    margin-right: 18px;
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/SoundOn/Default@3x.png?fileID=2800000&guid=88f24819c818c87408a3a1e7e70d9ab3&type=3#Default@3x");
+}
+
+.audio-slider {
+    width: 320px;
+    height: 50px;
+    margin: 0;
+}
+
+.audio-slider .unity-base-slider__label {
+    display: none;
+}
+
+.audio-slider .unity-base-slider__tracker {
+    height: 14px;
+    margin-top: -7px;
+    background-color: rgb(215, 215, 215);
+    border-radius: 7px;
+    border-width: 0;
+}
+
+.audio-slider .unity-base-slider__dragger {
+    width: 30px;
+    height: 40px;
+    margin-top: -20px;
+    background-color: rgb(205, 205, 205);
+    border-radius: 10px;
+    border-width: 2px;
+    border-color: rgb(110, 110, 110);
+}

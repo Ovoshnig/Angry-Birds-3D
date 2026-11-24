@@ -2,6 +2,7 @@
     "name": "Audio.Tuning",
     "rootNamespace": "",
     "references": [
+        "GUID:b723e754e9ad0af4a95e8d9bcade68c6",
         "GUID:b0214a6008ed146ff8f122a6a9c2f6cc",
         "GUID:a7a1d9ba4bf7f694686934493b9b136e",
         "GUID:ab08fc9bd98edb1478037f640a1bd4f2",

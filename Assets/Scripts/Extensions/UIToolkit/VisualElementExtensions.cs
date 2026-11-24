@@ -9,5 +9,11 @@ namespace Ovoshnig.Extensions.UIToolkit
             Observable.FromEvent(
                 handler => button.clicked += handler,
                 handler => button.clicked -= handler);
+
+        public static Observable<T> ValueChangedAsObservable<T>(this INotifyValueChanged<T> control) =>
+            Observable.FromEvent<EventCallback<ChangeEvent<T>>, T>(
+                handler => evt => handler(evt.newValue),
+                handler => control.RegisterValueChangedCallback(handler),
+                handler => control.UnregisterValueChangedCallback(handler));
     }
 }

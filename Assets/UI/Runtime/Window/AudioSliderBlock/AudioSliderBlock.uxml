@@ -1,0 +1,10 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="-910761054">
+    <Style src="project://database/Assets/UI/Runtime/Window/AudioSliderBlock/AudioSliderBlock.uss?fileID=7433441132597879392&amp;guid=6c3777cedc133f343b0b16dce44d4523&amp;type=3#AudioSliderBlock"/>
+    <ui:VisualElement class="audio-slider-block">
+        <ui:Label name="title-label" text="Audio Volume" class="audio-slider-title"/>
+        <ui:VisualElement name="slider-row" class="audio-slider-row">
+            <Ovoshnig.UI.SliderIndication.SliderIndicator name="slider-indicator" class="audio-slider-indicator"/>
+            <Ovoshnig.Audio.Tuning.AudioSlider low-value="0" high-value="1" name="slider" class="audio-slider"/>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>

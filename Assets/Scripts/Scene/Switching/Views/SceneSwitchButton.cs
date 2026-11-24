@@ -6,9 +6,9 @@ namespace Ovoshnig.Scene.Switching
     public partial class SceneSwitchButton : Button
     {
         [UxmlAttribute]
-        public SceneNavigationType NavigationType { get; set; }
+        public SceneNavigationType NavigationType { get; private set; }
 
         [UxmlAttribute]
-        public int SpecificIndex { get; set; }
+        public int SpecificIndex { get; private set; }
     }
 }

@@ -1,0 +1,163 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1489425664539425906
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4794345535893751971}
+  - component: {fileID: 1594396338179451070}
+  - component: {fileID: 3312236693306185166}
+  - component: {fileID: 8779447700210349804}
+  - component: {fileID: 3911459450835310244}
+  - component: {fileID: 2972386814903397739}
+  m_Layer: 0
+  m_Name: PauseMenuPanel
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4794345535893751971
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1931382934 &1594396338179451070
+PanelRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RayTracingAccelStructBuildFlagsOverride: 0
+  m_RayTracingAccelStructBuildFlags: 1
+  m_SmallMeshCulling: 1
+  m_ForceMeshLod: -1
+  m_MeshLodSelectionBias: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_GlobalIlluminationMeshLod: 0
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 10
+  m_MaskInteraction: 0
+  serializedVersion: 1
+  m_PanelSettings: {fileID: 11400000, guid: 222f2cb27fa055e48ad34f51cffac46b, type: 2}
+  sourceAsset: {fileID: 9197481963319205126, guid: 7a070c4fc3a90b0479fe56223b428dcb, type: 3}
+  m_ParentUI: {fileID: 0}
+  m_WorldSpaceSizeMode: 1
+  m_WorldSpaceWidth: 1920
+  m_WorldSpaceHeight: 1080
+  m_PivotReferenceSize: 0
+  m_Pivot: 0
+  m_Position: 0
+  m_GenerateAccessibilityHierarchy: 1
+  m_TrackScreenSpacePosition: 0
+  m_ScreenSpaceOffsetX: 0
+  m_ScreenSpaceOffsetY: 0
+--- !u!114 &3312236693306185166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cab305fbf5a1f5f419c8a946ac6d2962, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Window::Ovoshnig.Window.Window.WindowView
+--- !u!114 &8779447700210349804
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a2e983062b0e73d46ace3467e63fa799, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Audio.Tuning::Ovoshnig.Audio.Tuning.AudioSliderPanelView
+  _slidersContainerReference:
+    m_PanelRenderer: {fileID: 1594396338179451070}
+    m_AuthoringPath:
+      m_PathIds: 499b4320i
+  _fillingSprites:
+  - {fileID: 21300000, guid: f9e63abb1cc68fa439dccce5a47ae60d, type: 3}
+  - {fileID: 21300000, guid: 88f24819c818c87408a3a1e7e70d9ab3, type: 3}
+--- !u!114 &3911459450835310244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 57659e1aa8627204ab19a15e192563ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Scene::Ovoshnig.Scene.Switching.SceneSwitchPanelView
+  _buttonsContainerReference:
+    m_PanelRenderer: {fileID: 1594396338179451070}
+    m_AuthoringPath:
+      m_PathIds: 689b4320i
+--- !u!114 &2972386814903397739
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1489425664539425906}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad0c549c9e2fac4e86d8b3248369cdb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Window::Ovoshnig.Window.Resumption.ResumeButtonView
+  _buttonReference:
+    m_PanelRenderer: {fileID: 1594396338179451070}
+    m_AuthoringPath:
+      m_PathIds: 97c9689di

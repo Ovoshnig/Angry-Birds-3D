@@ -1,0 +1,19 @@
+.pause-panel {
+    height: 740px;
+}
+
+.pause-header-label {
+    align-self: center;
+}
+
+.pause-body {
+    flex-grow: 1;
+    padding-bottom: 40px;
+}
+
+.audio-sliders-container {
+    flex-direction: row;
+    justify-content: center;
+    flex-grow: 1;
+    align-items: center;
+}

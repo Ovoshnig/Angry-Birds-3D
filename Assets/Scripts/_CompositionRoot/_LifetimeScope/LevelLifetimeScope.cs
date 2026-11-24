@@ -29,6 +29,7 @@ namespace AngryBirds3D.Composition
         [SerializeField] private WindowInstaller _windowInstaller;
         [SerializeField] private GamePauseInstaller _gamePauseInstaller;
         [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
+        [SerializeField] private AudioTuningPanelInstaller _audioTuningPanelInstaller;
         [SerializeField] private AudioSFXInstaller _sfxInstaller;
         [SerializeField] private SkyboxInstaller _skyboxInstaller;
         [SerializeField] private SlingshotInstaller _slingshotInstaller;
@@ -54,6 +55,7 @@ namespace AngryBirds3D.Composition
             _windowInstaller.Install(builder);
             _gamePauseInstaller.Install(builder);
             _audioTuningInstaller.Install(builder);
+            _audioTuningPanelInstaller.Install(builder);
             _sfxInstaller.Install(builder);
             _skyboxInstaller.Install(builder);
             _slingshotInstaller.Install(builder);

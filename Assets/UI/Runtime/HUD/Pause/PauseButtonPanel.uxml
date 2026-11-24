@@ -1,0 +1,5 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="1817163689">
+    <Style src="project://database/Assets/UI/Runtime/Window/WindowPanel.uss?fileID=7433441132597879392&amp;guid=76db545b18f25e3498be9687b86c6f26&amp;type=3#WindowPanel"/>
+    <Style src="project://database/Assets/UI/Runtime/HUD/Pause/PauseButtonPanel.uss?fileID=7433441132597879392&amp;guid=6b23cfcf182aebc44973e13870dcce5f&amp;type=3#PauseButtonPanel"/>
+    <ui:Button text="" name="pause-button" authoring-id="1387575672" class="nav-button pause-button"/>
+</ui:UXML>

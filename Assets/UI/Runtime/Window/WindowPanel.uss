@@ -22,11 +22,13 @@
 
 .window-body {
     padding: 36px 48px 44px 48px;
+    padding-right: 48px;
+    padding-top: 36px;
 }
 
 .nav-buttons-container {
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-evenly;
     align-items: center;
 }
 

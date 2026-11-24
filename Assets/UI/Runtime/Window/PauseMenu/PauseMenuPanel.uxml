@@ -1,0 +1,30 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="769611784">
+    <ui:Template name="AudioSliderBlock" src="project://database/Assets/UI/Runtime/Window/AudioSliderBlock/AudioSliderBlock.uxml?fileID=9197481963319205126&amp;guid=09c8039e118eebe4fbb55db42e2c0466&amp;type=3#AudioSliderBlock"/>
+    <Style src="project://database/Assets/UI/Runtime/Window/WindowPanel.uss?fileID=7433441132597879392&amp;guid=76db545b18f25e3498be9687b86c6f26&amp;type=3#WindowPanel"/>
+    <Style src="project://database/Assets/UI/Runtime/Window/PauseMenu/PauseMenuPanel.uss?fileID=7433441132597879392&amp;guid=1a340940a2a105545b37ab5a75d2540c&amp;type=3#PauseMenuPanel"/>
+    <ui:VisualElement name="pause-overlay" class="window-overlay">
+        <ui:VisualElement name="pause-panel" class="window-panel pause-panel">
+            <ui:VisualElement class="window-header">
+                <ui:Label text="Pause menu" class="pause-header-label"/>
+            </ui:VisualElement>
+            <ui:VisualElement class="window-body pause-body">
+                <ui:VisualElement name="audio-sliders-container" authoring-id="541301577" class="audio-sliders-container">
+                    <ui:Instance template="AudioSliderBlock" name="music-slider-block">
+                        <AttributeOverrides element-name="title-label" text="Music volume"/>
+                    </ui:Instance>
+                    <ui:Instance template="AudioSliderBlock" name="sfx-slider-block">
+                        <AttributeOverrides element-name="title-label" text="SFX volume"/>
+                        <AttributeOverrides element-name="slider" channel="SFX"/>
+                    </ui:Instance>
+                </ui:VisualElement>
+                <ui:VisualElement name="buttons-container" authoring-id="541301608" class="nav-buttons-container">
+                    <Ovoshnig.Scene.Switching.SceneSwitchButton navigation-type="PreviousLevel" name="previous-button" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/ArrowLeft/Default@3x.png?fileID=2800000&amp;guid=e339af2419c8d48468b235d0bc3be357&amp;type=3#Default@3x&quot;);"/>
+                    <Ovoshnig.Scene.Switching.SceneSwitchButton navigation-type="MainMenu" name="levels-button" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Home/Hover@3x.png?fileID=2800000&amp;guid=c399d48aa70b9764ebd747c017436ee9&amp;type=3#Hover@3x&quot;);"/>
+                    <ui:Button name="resume-button" authoring-id="-1654077033" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Play/Default@3x.png?fileID=2800000&amp;guid=f239f111b1cfb8d48a8a00edad45560b&amp;type=3#Default@3x&quot;);"/>
+                    <Ovoshnig.Scene.Switching.SceneSwitchButton navigation-type="CurrentLevel" name="restart-button" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Repeat/Default@3x.png?fileID=2800000&amp;guid=5345b4d167c7fd846a8036f31f910f49&amp;type=3#Default@3x&quot;);"/>
+                    <Ovoshnig.Scene.Switching.SceneSwitchButton navigation-type="NextLevel" name="next-button" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/ArrowRight/Default@3x.png?fileID=2800000&amp;guid=f6d1eb873885c664a961842627876d91&amp;type=3#Default@3x&quot;);"/>
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:VisualElement>
+    </ui:VisualElement>
+</ui:UXML>
