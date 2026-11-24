@@ -1,15 +1,16 @@
 using Cysharp.Threading.Tasks;
 using Ovoshnig.UI.Basic;
 using R3;
+using System.Collections.Generic;
 
 namespace Ovoshnig.Scene.Switching
 {
-    public class SceneSwitchPanelMediator : UIViewMediator<SceneSwitchPanelView>
+    public class SceneSwitchPanelsMediator : UIViewsMediator<SceneSwitchPanelView>
     {
         private readonly SceneSwitch _sceneSwitch;
 
-        public SceneSwitchPanelMediator(SceneSwitch sceneSwitch, SceneSwitchPanelView view) : base(view) =>
-            _sceneSwitch = sceneSwitch;
+        public SceneSwitchPanelsMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneSwitchPanelView> views)
+            : base(views) => _sceneSwitch = sceneSwitch;
 
         protected override void OnViewEnabled(SceneSwitchPanelView view, CompositeDisposable viewDisposables)
         {

@@ -1,0 +1,48 @@
+.level-index-label {
+    font-size: 92px;
+    -unity-text-align: middle-left;
+}
+
+.level-cleared-label {
+    font-size: 74px;
+    -unity-text-align: middle-left;
+    margin-bottom: 34px;
+}
+
+.stats-row {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 44px;
+}
+
+.stats-column {
+    align-items: flex-start;
+}
+
+.stats-title-label {
+    font-size: 60px;
+    -unity-text-align: middle-left;
+    margin-bottom: 24px;
+}
+
+.record-title-label {
+}
+
+.rating-container {
+    width: 340px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.record-rating-container {
+    opacity: 0;
+}
+
+.star {
+    width: 92px;
+    height: 92px;
+    -unity-background-scale-mode: scale-to-fit;
+    background-image: url("project://database/Assets/Art/Sprites/UI/png@3x/Star/Large/Active@3x.png?fileID=2800000&guid=b41b032ec6818e24a924373460726382&type=3#Active@3x");
+}

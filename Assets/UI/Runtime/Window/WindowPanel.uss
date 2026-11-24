@@ -1,0 +1,56 @@
+.window-overlay {
+    width: 100%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
+.window-panel {
+    width: 1140px;
+    background-color: rgba(21, 26, 35, 0.94);
+    border-radius: 28px;
+    font-size: 65px;
+    color: rgb(255, 255, 255);
+}
+
+.window-header {
+    background-color: rgba(11, 14, 20, 0.96);
+    border-top-left-radius: 28px;
+    border-top-right-radius: 28px;
+    padding: 16px 48px;
+}
+
+.window-body {
+    padding: 36px 48px 44px 48px;
+}
+
+.nav-buttons-container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.nav-button {
+    width: 175px;
+    height: 175px;
+    margin: 0 38px;
+    padding: 0;
+    border-width: 0;
+    background-color: transparent;
+    -unity-background-scale-mode: scale-to-fit;
+    transition-property: scale;
+    transition-duration: 0.1s;
+}
+
+.nav-button:enabled:hover {
+    scale: 1.06;
+}
+
+.nav-button:enabled:active {
+    scale: 0.95;
+    -unity-background-image-tint-color: rgb(200, 200, 200);
+}
+
+.nav-button:disabled {
+    opacity: 0.4;
+}

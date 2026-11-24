@@ -1,11 +1,13 @@
 <ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="1817163689">
-    <Style src="project://database/Assets/UI/Runtime/HUD/LevelClearing/LevelClearingHUD.uss?fileID=7433441132597879392&amp;guid=8723c5999c7d137439d9282abfc557a0&amp;type=3#LevelClearingHUD"/>
-    <ui:VisualElement name="clearing-overlay" class="clearing-overlay">
-        <ui:VisualElement name="clearing-panel" class="clearing-panel">
-            <ui:VisualElement name="clearing-header" class="clearing-header">
+    <ui:Template name="SceneButtons" src="project://database/Assets/UI/Runtime/Window/LevelCompletion/SceneButtons.uxml?fileID=9197481963319205126&amp;guid=6c72c604ccda23a4a92c0ae9212f3827&amp;type=3#SceneButtons"/>
+    <Style src="project://database/Assets/UI/Runtime/Window/WindowPanel.uss?fileID=7433441132597879392&amp;guid=76db545b18f25e3498be9687b86c6f26&amp;type=3#WindowPanel"/>
+    <Style src="project://database/Assets/UI/Runtime/Window/LevelCompletion/LevelClearingPanel.uss?fileID=7433441132597879392&amp;guid=8723c5999c7d137439d9282abfc557a0&amp;type=3#LevelClearingPanel"/>
+    <ui:VisualElement name="window-overlay" class="window-overlay">
+        <ui:VisualElement name="window-panel" class="window-panel">
+            <ui:VisualElement name="window-header" class="window-header">
                 <ui:Label text="1-1" name="level-index-label" authoring-id="1005501063" class="level-index-label"/>
             </ui:VisualElement>
-            <ui:VisualElement name="clearing-body" class="clearing-body">
+            <ui:VisualElement name="window-body" class="window-body">
                 <ui:Label text="LEVEL CLEARED!" name="level-cleared-label" class="level-cleared-label"/>
                 <ui:VisualElement name="stats-row" class="stats-row">
                     <ui:VisualElement name="score-column" class="stats-column">
@@ -25,11 +27,7 @@
                         </ui:VisualElement>
                     </ui:VisualElement>
                 </ui:VisualElement>
-                <ui:VisualElement name="buttons-container" authoring-id="-695955032" class="buttons-container">
-                    <Ovoshnig.Scene.Switching.SceneSwitchButton name="levels-button" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Levels/Default@3x.png?fileID=2800000&amp;guid=0346b8645a584d343ae3d6ca75225e14&amp;type=3#Default@3x&quot;);"/>
-                    <Ovoshnig.Scene.Switching.SceneSwitchButton name="repeat-button" navigation-type="CurrentLevel" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Repeat/Default@3x.png?fileID=2800000&amp;guid=5345b4d167c7fd846a8036f31f910f49&amp;type=3#Default@3x&quot;);"/>
-                    <Ovoshnig.Scene.Switching.SceneSwitchButton name="next-button" navigation-type="NextLevel" class="nav-button" style="background-image: url(&quot;project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Play/Default@3x.png?fileID=2800000&amp;guid=f239f111b1cfb8d48a8a00edad45560b&amp;type=3#Default@3x&quot;);"/>
-                </ui:VisualElement>
+                <ui:Instance template="SceneButtons" authoring-id="2077141045"/>
             </ui:VisualElement>
         </ui:VisualElement>
     </ui:VisualElement>

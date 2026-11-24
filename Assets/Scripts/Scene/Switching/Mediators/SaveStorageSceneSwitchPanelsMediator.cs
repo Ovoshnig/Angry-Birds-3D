@@ -2,11 +2,12 @@ using Ovoshnig.DataStorage.Storage;
 using Ovoshnig.GameSettings;
 using Ovoshnig.UI.Basic;
 using R3;
+using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 
 namespace Ovoshnig.Scene.Switching
 {
-    public class SaveStorageSceneSwitchPanelMediator : UIViewMediator<SceneSwitchPanelView>
+    public class SaveStorageSceneSwitchPanelsMediator : UIViewsMediator<SceneSwitchPanelView>
     {
         private readonly SaveStorage _saveStorage;
         private readonly SceneSettings _sceneSettings;
@@ -14,9 +15,9 @@ namespace Ovoshnig.Scene.Switching
         private int _firstLevel;
         private int _currentScene;
 
-        public SaveStorageSceneSwitchPanelMediator(SaveStorage saveStorage,
-            SceneSwitchPanelView view,
-            SceneSettings sceneSettings) : base(view)
+        public SaveStorageSceneSwitchPanelsMediator(SaveStorage saveStorage,
+            IReadOnlyList<SceneSwitchPanelView> views,
+            SceneSettings sceneSettings) : base(views)
         {
             _saveStorage = saveStorage;
             _sceneSettings = sceneSettings;

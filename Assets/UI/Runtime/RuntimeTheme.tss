@@ -1,6 +1,8 @@
 @import url("project://database/Assets/UI/Runtime/UnityDefaultRuntimeTheme.tss?fileID=-4733365628477956816&guid=e0eac1bafe9d15948836d10f35c7b0d9&type=3#UnityDefaultRuntimeTheme");
 
-@import url("project://database/Assets/UI/Runtime/HUD/BaseHUD.uss?fileID=7433441132597879392&guid=40c79fb8eb450a64cb22849779d5af3d&type=3#BaseHUD");
+@import url("project://database/Assets/UI/Runtime/BaseRuntime.uss?fileID=7433441132597879392&guid=40c79fb8eb450a64cb22849779d5af3d&type=3#BaseRuntime");
+
+
 
 
 

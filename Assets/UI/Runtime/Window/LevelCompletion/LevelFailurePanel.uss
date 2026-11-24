@@ -1,0 +1,10 @@
+.failure-header-label {
+    -unity-text-align: middle-center;
+}
+
+.laughing-pig {
+    background-image: url("project://database/Assets/Art/Sprites/UI/CompletionPanels/Laughing%20pig.png?fileID=2800000&guid=e1d72b90e92a27944a9946bf5dca18d6&type=3#Laughing pig");
+    width: 500px;
+    height: 500px;
+    align-self: center;
+}
