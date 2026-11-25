@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameSettings::PointsSettings
   <Points>k__BackingField: 10000
   <Color>k__BackingField: {r: 0, g: 0, b: 0, a: 1}
-  <FontSize>k__BackingField: 2
+  <FontSize>k__BackingField: 150
   <AppearanceDuration>k__BackingField: 0.35
   <ShowingDuration>k__BackingField: 0.65
   <DisappearanceDuration>k__BackingField: 0.35

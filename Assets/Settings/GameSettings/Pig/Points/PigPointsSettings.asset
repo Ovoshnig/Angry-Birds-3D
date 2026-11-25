@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: GameSettings::DestructionPointsSettings
   <Points>k__BackingField: 5000
   <Color>k__BackingField: {r: 0, g: 1, b: 0.010662079, a: 1}
-  <FontSize>k__BackingField: 1.5
+  <FontSize>k__BackingField: 125
   <AppearanceDuration>k__BackingField: 0.5
   <ShowingDuration>k__BackingField: 1
   <DisappearanceDuration>k__BackingField: 0.5

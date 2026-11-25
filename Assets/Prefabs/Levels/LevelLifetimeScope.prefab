@@ -52,7 +52,7 @@ MonoBehaviour:
     _sfxProfile: {fileID: 11400000, guid: 0e554c29318d5c34795e74aa4e9ea9fe, type: 2}
   _levelScoreInstaller:
     _pointsInstaller:
-      _pointsViewPrefab: {fileID: 1524996048913141429, guid: 2ada23ebe700fb947a836da38b64e5d9, type: 3}
+      _pointsViewPrefab: {fileID: 2386253101361034597, guid: d7b1a49f64582f446ac98b52b9635899, type: 3}
     _ratingEvaluationInstaller:
       _ratingSettings: {fileID: 11400000, guid: 0776e72ed67cd2a47a889c1fb4c72a4f, type: 2}
   _cameraInstaller: {}

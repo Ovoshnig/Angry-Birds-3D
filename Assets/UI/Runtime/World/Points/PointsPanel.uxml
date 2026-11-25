@@ -1,0 +1,4 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="1817163689">
+    <Style src="project://database/Assets/UI/Runtime/World/Points/PointsPanel.uss?fileID=7433441132597879392&amp;guid=66e8788053dc5ce46a1fe91da757a0dd&amp;type=3#PointsPanel"/>
+    <ui:Label text="10000" name="points-value" authoring-id="892993738" picking-mode="Ignore" class="points-value"/>
+</ui:UXML>
