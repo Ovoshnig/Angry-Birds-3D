@@ -1,4 +1,3 @@
-%UNITY 7.0
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!1 &6894214934469638947
@@ -52,7 +51,7 @@ MonoBehaviour:
   _gameSettingsInstaller:
     _gameSettings: {fileID: 11400000, guid: 0988861611452554ba55170e30c85ebb, type: 2}
   _sceneLoadingScreenInstaller:
-    _loadingScreenView: {fileID: 3323423462091642806, guid: 95c90c7e43682a442a4f05875ebe9b31, type: 3}
+    _loadingScreenView: {fileID: 7781130101937348245, guid: fdee32d8d22d10a408efe8c27c6fd5c6, type: 3}
   _cursorInstaller:
     _stateInstaller:
       _cursorConfiguration: {fileID: 11400000, guid: 217f10e4ec2f34542b0a4e7f5451131b, type: 2}

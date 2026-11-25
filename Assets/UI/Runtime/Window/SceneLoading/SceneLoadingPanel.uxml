@@ -1,0 +1,7 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="1817163689">
+    <Style src="project://database/Assets/UI/Runtime/Window/SceneLoading/SceneLoadingPanel.uss?fileID=7433441132597879392&amp;guid=5b59c71cb82a61e48a6799d73bd0eb7b&amp;type=3#SceneLoadingPanel"/>
+    <ui:VisualElement name="screen-overlay" class="screen-overlay">
+        <ui:Label text="Loading..." name="loading-label"/>
+        <ui:ProgressBar value="50" name="loading-progress-bar" authoring-id="123841636" class="loading-progress-bar"/>
+    </ui:VisualElement>
+</ui:UXML>

@@ -1,23 +1,25 @@
-using Ovoshnig.Mediation;
 using Ovoshnig.Scene.Switching;
+using Ovoshnig.UI.Basic;
 using R3;
 
 namespace Ovoshnig.Scene.LoadingScreen
 {
-    public class SceneSwitchLoadingScreenViewMediator : Mediator
+    public class SceneSwitchLoadingScreenViewMediator : UIViewMediator<LoadingScreenView>
     {
         private readonly SceneSwitch _sceneSwitch;
         private readonly LoadingScreenView _loadingScreenView;
 
-        public SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch,
-            LoadingScreenView loadingScreenView)
+        public SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch, LoadingScreenView view)
+            : base(view)
         {
             _sceneSwitch = sceneSwitch;
-            _loadingScreenView = loadingScreenView;
+            _loadingScreenView = view;
         }
 
         protected override void Bind(CompositeDisposable disposables)
         {
+            base.Bind(disposables);
+
             _sceneSwitch.IsSceneLoading
                 .Subscribe(isLoading =>
                 {
@@ -27,10 +29,13 @@ namespace Ovoshnig.Scene.LoadingScreen
                         _loadingScreenView.Hide();
                 })
                 .AddTo(disposables);
+        }
 
+        protected override void OnViewEnabled(LoadingScreenView view, CompositeDisposable viewDisposables)
+        {
             _sceneSwitch.LoadingProgress
-                .Subscribe(_loadingScreenView.SetProgress)
-                .AddTo(disposables);
+                .Subscribe(view.SetProgress)
+                .AddTo(viewDisposables);
         }
     }
 }
