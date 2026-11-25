@@ -1,0 +1,38 @@
+.panel-overlay {
+    width: 100%;
+    height: 100%;
+    background-image: url("project://database/Assets/Art/Sprites/UI/ComingSoon/ComingSoon.png?fileID=2800000&guid=83b449c5a94f14d44b7439a00b1d6f5a&type=3#ComingSoon");
+}
+
+.coming-soon-label {
+    align-self: center;
+    font-size: 90px;
+    color: rgb(255, 36, 0);
+    -unity-text-align: upper-center;
+}
+
+.testers-container {
+    align-items: center;
+    position: absolute;
+    top: 73px;
+    left: 196px;
+    font-size: 28px;
+    justify-content: space-evenly;
+    row-gap: 2px;
+}
+
+.tester-label {
+    margin-top: 1px;
+    margin-bottom: 1px;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.main-menu-button {
+    background-image: url("project://database/Assets/Art/Sprites/UI/png@3x/Buttons/Square-Medium/Home/Default@3x.png?fileID=2800000&guid=ef6a3eec03be9e94bad486fc5f1b30ee&type=3#Default@3x");
+    width: 110px;
+    height: 110px;
+    position: absolute;
+    left: -8px;
+    bottom: 22px;
+}

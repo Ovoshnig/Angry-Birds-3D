@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../../UIElementsSchema/UIElements.xsd" authoring-id="1817163689">
+    <Style src="project://database/Assets/UI/Runtime/Window/WindowPanel.uss?fileID=7433441132597879392&amp;guid=76db545b18f25e3498be9687b86c6f26&amp;type=3#WindowPanel"/>
+    <Style src="project://database/Assets/UI/Runtime/Panel/ComingSoon/ComingSoonPanel.uss?fileID=7433441132597879392&amp;guid=4aa7ed150804a7147ab4083654530f7e&amp;type=3#ComingSoonPanel"/>
+    <ui:VisualElement name="panel-overlay" class="panel-overlay">
+        <ui:Label text="More content&#10;coming soon" name="coming-soon-label" class="coming-soon-label"/>
+        <ui:VisualElement name="testers-container" class="testers-container">
+            <ui:Label text="Thanks to the testers:" class="tester-label"/>
+            <ui:Label text="MaxOceanNQ" class="tester-label" style="color: rgb(255, 0, 143);"/>
+            <ui:Label text="SaladGamer_" class="tester-label" style="color: rgb(21, 254, 137);"/>
+            <ui:Label text="cew44_" class="tester-label" style="color: rgb(46, 139, 87);"/>
+            <ui:Label text="yeful3" class="tester-label" style="color: rgb(218, 165, 32);"/>
+            <ui:Label text="the_asdfg6" class="tester-label" style="color: rgb(255, 0, 0);"/>
+            <ui:Label text="ktobma" class="tester-label" style="color: rgb(218, 165, 32);"/>
+        </ui:VisualElement>
+        <Ovoshnig.Scene.Switching.SceneSwitchButton name="main-menu-button" authoring-id="1223533651" class="nav-button main-menu-button"/>
+    </ui:VisualElement>
+</ui:UXML>
