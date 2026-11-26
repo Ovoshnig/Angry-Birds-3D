@@ -9,9 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 21038, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
-  m_EditorClassIdentifier: UnityEditor.ProjectAuditorModule:Unity.ProjectAuditor.Editor:ProjectAuditorSettings
+  m_EditorClassIdentifier: UnityEditor.ProjectAuditorModule.dll::Unity.ProjectAuditor.Editor.ProjectAuditorSettings
   Rules:
     rules: []
   DiagnosticParams:
@@ -21,6 +21,14 @@ MonoBehaviour:
       m_SerializedParams:
       - Key: TextureStreamingMipmapsSizeLimit
         Value: 4000
+      - Key: StreamingAssetsFolderSizeLimit
+        Value: 50
+      - Key: TextureEmptySpaceLimit
+        Value: 50
+      - Key: TextureTransparentBorderLimit
+        Value: 75
+      - Key: SpriteAtlasEmptySpaceLimit
+        Value: 50
       - Key: StreamingClipThresholdBytes
         Value: 218294
       - Key: VeryLongClipStreamingThresholdBytes
@@ -31,13 +39,5 @@ MonoBehaviour:
         Value: 204800
       - Key: LoadInBackGroundClipSizeThresholdBytes
         Value: 204800
-      - Key: TextureEmptySpaceLimit
-        Value: 50
-      - Key: TextureTransparentBorderLimit
-        Value: 75
-      - Key: SpriteAtlasEmptySpaceLimit
-        Value: 50
-      - Key: StreamingAssetsFolderSizeLimit
-        Value: 50
     CurrentParamsIndex: 0
   SuppressedDiagnostics: 

@@ -21,13 +21,12 @@
       "hash": "2053ef5c23f2ae755dd85d5865b698c542c351b6"
     },
     "com.cysharp.r3": {
-      "version": "https://github.com/Cysharp/R3.git?path=src/R3.Unity/Assets/R3.Unity",
+      "version": "file:com.cysharp.r3",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.modules.imgui": "1.0.0"
-      },
-      "hash": "a8d5fb3c2d0afd124223084e94c9e0ee73497510"
+      }
     },
     "com.cysharp.slnmerge": {
       "version": "https://github.com/Cysharp/SlnMerge.git?path=src",
@@ -268,8 +267,7 @@
       "depth": 0,
       "source": "builtin",
       "dependencies": {
-        "com.unity.modules.ui": "1.0.0",
-        "com.unity.modules.imgui": "1.0.0"
+        "com.unity.modules.ui": "1.0.0"
       }
     },
     "jp.hadashikick.vcontainer": {
