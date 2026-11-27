@@ -14,11 +14,11 @@ public class PigTracker : IStartable, IDisposable
     private readonly List<PigEntityView> _pigEntityViews;
     private readonly ObjectDestroyer _objectDestroyer;
     private readonly ReactiveProperty<int> _pigCount = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public PigTracker(IReadOnlyList<PigEntityView> pigEntityViews, ObjectDestroyer objectDestroyer)
     {
-        _pigEntityViews = pigEntityViews.ToList();
+        _pigEntityViews = [.. pigEntityViews];
         _objectDestroyer = objectDestroyer;
 
         _pigCount.Value = pigEntityViews.Count;

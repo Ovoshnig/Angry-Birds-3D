@@ -5,7 +5,7 @@ namespace Ovoshnig.Audio.SFX.Count;
 
 public class SFXCounter
 {
-    private readonly Dictionary<AudioResource, int> _countByResource = new();
+    private readonly Dictionary<AudioResource, int> _countByResource = [];
 
     public int GetCount(AudioResource resource) => _countByResource.GetValueOrDefault(resource, 0);
 

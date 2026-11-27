@@ -19,10 +19,9 @@ public class ResolutionAdjuster : IStartable, IDisposable
     {
         ResolutionData currentResolution = GetCurrentResolutionData();
 
-        Resolutions = UnityScreen.resolutions
+        Resolutions = [.. UnityScreen.resolutions
             .Select(r => new ResolutionData(r.width, r.height, r.refreshRateRatio))
-            .Distinct()
-            .ToList();
+            .Distinct()];
 
         if (!Resolutions.Contains(currentResolution))
             Resolutions.Add(currentResolution);

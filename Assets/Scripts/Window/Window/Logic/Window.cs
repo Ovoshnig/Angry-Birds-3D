@@ -10,7 +10,7 @@ public abstract class Window : IWindow, IStartable, IDisposable
     private readonly WindowInputProvider _inputProvider;
     private readonly WindowTracker _windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     private bool _isWindowActive = false;
 

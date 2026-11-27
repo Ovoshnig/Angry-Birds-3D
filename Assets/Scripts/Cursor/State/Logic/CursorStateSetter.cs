@@ -12,7 +12,7 @@ public sealed class CursorStateSetter : IStartable, IDisposable
     private readonly CursorStateModel _model;
     private readonly CursorConfiguration _configuration;
     private readonly UIInputProvider _uiInputProvider;
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public CursorStateSetter(CursorStateModel model,
         CursorConfiguration configuration,

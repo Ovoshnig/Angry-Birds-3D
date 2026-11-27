@@ -16,7 +16,7 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private readonly SlingshotSettings _settings;
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Rigidbody> _shot = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     private Rigidbody _currentBird = null;
     private Vector3 _centerAnchorPosition;

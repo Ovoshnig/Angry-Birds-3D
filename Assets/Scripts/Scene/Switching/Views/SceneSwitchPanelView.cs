@@ -12,7 +12,7 @@ public class SceneSwitchPanelView : UIView
     [SerializeField] private VisualElementReference<VisualElement> _buttonsContainerReference = new();
 
     private readonly Subject<(SceneNavigationType Type, int Index)> _navigationRequested = new();
-    private readonly CompositeDisposable _buttonDisposables = new();
+    private readonly CompositeDisposable _buttonDisposables = [];
 
     private List<SceneSwitchButton> _buttons;
 

@@ -14,7 +14,7 @@ public class EggDroppingBirdPower : IBirdPower, IDisposable
     private readonly EggDroppingPowerSettings _powerSettings;
     private readonly Collider[] _colliders;
     private readonly Subject<EggEntityView> _eggDropped = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
     {

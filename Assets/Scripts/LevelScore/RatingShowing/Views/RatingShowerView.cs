@@ -11,9 +11,7 @@ public class RatingShowerView : UIView
 
     [field: SerializeField] public int LevelIndex { get; private set; }
 
-    private void Awake() => _images = GetComponentsInChildren<Image>()
-        .Where(i => i.transform != transform)
-        .ToArray();
+    private void Awake() => _images = [.. GetComponentsInChildren<Image>().Where(i => i.transform != transform)];
 
     public void SetStarCount(int count)
     {

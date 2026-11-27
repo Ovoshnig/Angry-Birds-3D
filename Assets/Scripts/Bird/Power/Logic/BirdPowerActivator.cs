@@ -13,8 +13,8 @@ public class BirdPowerActivator : IStartable, IDisposable
     private readonly BirdInputProvider _inputProvider;
     private readonly BirdPowerRegistry _powerRegistry;
     private readonly Subject<BirdEntityView> _activated = new();
-    private readonly CompositeDisposable _flightDisposables = new();
-    private readonly CompositeDisposable _inputDisposables = new();
+    private readonly CompositeDisposable _flightDisposables = [];
+    private readonly CompositeDisposable _inputDisposables = [];
 
     public BirdPowerActivator(BirdFlyer birdFlyer,
         BirdInputProvider inputProvider,

@@ -7,7 +7,7 @@ namespace Ovoshnig.UI.Basic;
 public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
 {
     private readonly IReadOnlyList<TView> _views;
-    private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = new();
+    private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = [];
 
     public UIViewsMediator(IReadOnlyList<TView> views) => _views = views;
 
@@ -15,7 +15,7 @@ public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
     {
         foreach (var view in _views)
         {
-            CompositeDisposable viewDisposables = new();
+            CompositeDisposable viewDisposables = [];
             _viewToDisposables[view] = viewDisposables;
 
             view.IsEnabled

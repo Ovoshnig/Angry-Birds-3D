@@ -52,7 +52,7 @@ public static class InstallerGenerator
     private static bool IsFolderIgnored(string folderName) => _ignoredFolders.Contains(folderName);
 
     private static string[] GetFolders(string path) =>
-        path.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
+        path.Split(['/', '\\'], StringSplitOptions.RemoveEmptyEntries);
 
     private static string GetSelectedPath()
     {

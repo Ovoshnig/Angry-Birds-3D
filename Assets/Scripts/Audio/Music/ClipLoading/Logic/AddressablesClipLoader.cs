@@ -17,13 +17,13 @@ public class AddressablesClipLoader : IClipLoader
 
     public async UniTask<Dictionary<MusicCategory, IEnumerable<object>>> LoadClipKeysAsync(CancellationToken token)
     {
-        Dictionary<MusicCategory, IEnumerable<object>> musicClipKeys = new();
+        Dictionary<MusicCategory, IEnumerable<object>> musicClipKeys = [];
 
         foreach (MusicCategory category in Enum.GetValues(typeof(MusicCategory)))
         {
             string categoryName = category.ToString();
             categoryName = Regex.Replace(categoryName, "(?<!^)([A-Z])", " $1").ToLower();
-            List<string> labels = new() { "audio", "music", categoryName };
+            List<string> labels = ["audio", "music", categoryName];
 
             AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(
                 labels,

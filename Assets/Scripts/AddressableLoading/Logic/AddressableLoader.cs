@@ -13,7 +13,7 @@ public class AddressableLoader : IDisposable
 {
     private record AddressableData(AsyncOperationHandle Handle, object Assets);
 
-    private readonly Dictionary<string, AddressableData> _assetsByLabels = new();
+    private readonly Dictionary<string, AddressableData> _assetsByLabels = [];
 
     public async UniTask<IList<T>> LoadAssets<T>(IEnumerable<string> labels, CancellationToken token)
         where T : Object
@@ -38,7 +38,7 @@ public class AddressableLoader : IDisposable
 
         Debug.LogWarning($"Failed to load assets for labels: {key}");
         handle.Release();
-        return new List<T>();
+        return [];
     }
 
     public void ReleaseAssets(IEnumerable<string> labels)
@@ -54,7 +54,7 @@ public class AddressableLoader : IDisposable
 
     private string GetKeyFromLabels(IEnumerable<string> labels)
     {
-        SortedSet<string> sortedSet = new(labels);
+        SortedSet<string> sortedSet = [.. labels];
         return string.Join(",", sortedSet);
     }
 

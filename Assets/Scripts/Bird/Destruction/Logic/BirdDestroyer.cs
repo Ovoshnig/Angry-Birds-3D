@@ -13,7 +13,7 @@ public class BirdDestroyer : IStartable, IDisposable
     private readonly BirdSettings _birdSettings;
     private readonly Subject<BirdEntityView> _destructionStarted = new();
     private readonly Subject<BirdEntityView> _destroyed = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings)
     {

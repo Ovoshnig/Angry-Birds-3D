@@ -54,7 +54,7 @@ public class BirdPointsDisplayerLevelTrackerMediator : Mediator
 
         await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
-        List<BirdEntityView> entityViews = new();
+        List<BirdEntityView> entityViews = [];
 
         while (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
             entityViews.Add(entityView);

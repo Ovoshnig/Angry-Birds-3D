@@ -11,11 +11,11 @@ namespace Ovoshnig.DataStorage.Storage;
 public abstract class DataStorage : IInitializable, IDisposable
 {
     private readonly JsonSerializerOptions _jsonOptions = new() { WriteIndented = true };
-    private readonly Dictionary<string, object> _defaultDataStore = new();
-    private readonly Dictionary<string, object> _runtimeCache = new();
+    private readonly Dictionary<string, object> _defaultDataStore = [];
+    private readonly Dictionary<string, object> _runtimeCache = [];
     private readonly Subject<Unit> _resetHappened = new();
 
-    private Dictionary<string, JsonElement> _rawData = new();
+    private Dictionary<string, JsonElement> _rawData = [];
 
     public abstract DataStorageType StorageType { get; }
 
@@ -77,7 +77,7 @@ public abstract class DataStorage : IInitializable, IDisposable
             return;
 
         string json = File.ReadAllText(FilePath);
-        _rawData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, _jsonOptions) ?? new();
+        _rawData = JsonSerializer.Deserialize<Dictionary<string, JsonElement>>(json, _jsonOptions) ?? [];
     }
 
     protected virtual void SaveData()

@@ -14,7 +14,7 @@ public class RecordRatingSaver : IStartable, IDisposable
     private readonly SaveStorage _saveStorage;
     private readonly RatingEvaluator _ratingEvaluator;
     private readonly ReactiveProperty<int> _record = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
     {

@@ -14,7 +14,7 @@ public class BirdTracker : IStartable, IDisposable
     private readonly BirdDestroyer _birdDestroyer;
     private readonly ReactiveProperty<int> _birdCount = new();
     private readonly ReactiveProperty<int> _unlaunchedBirdCount = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public BirdTracker(BirdFlyer birdFlyer,
         BirdDestroyer birdDestroyer,

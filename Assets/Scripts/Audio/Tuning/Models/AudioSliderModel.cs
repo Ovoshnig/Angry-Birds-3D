@@ -10,7 +10,7 @@ public abstract class AudioSliderModel : SliderModel, IStartable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly AudioSettings _audioSettings;
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     protected AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
     {

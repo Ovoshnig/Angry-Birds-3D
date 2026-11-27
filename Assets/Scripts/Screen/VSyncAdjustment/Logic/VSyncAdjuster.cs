@@ -10,7 +10,7 @@ public class VSyncAdjuster : IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage;
     private readonly ReactiveProperty<bool> _isVSync = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
 

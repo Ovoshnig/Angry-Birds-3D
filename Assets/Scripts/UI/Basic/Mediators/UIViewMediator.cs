@@ -6,7 +6,7 @@ namespace Ovoshnig.UI.Basic;
 public abstract class UIViewMediator<TView> : Mediator where TView : UIView
 {
     private readonly TView _view;
-    private readonly CompositeDisposable _viewDisposables = new();
+    private readonly CompositeDisposable _viewDisposables = [];
 
     public UIViewMediator(TView view) => _view = view;
 

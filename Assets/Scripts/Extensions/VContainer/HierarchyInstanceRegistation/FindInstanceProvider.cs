@@ -16,7 +16,7 @@ public sealed class FindInstanceProvider<T> : IInstanceProvider where T : Compon
         if (!_scene.IsValid())
             throw new VContainerException(typeof(T), $"Invalid find target scene for instance of type {typeof(T).Name}");
 
-        List<GameObject> rootGameObjects = new();
+        List<GameObject> rootGameObjects = [];
         _scene.GetRootGameObjects(rootGameObjects);
 
         foreach (GameObject root in rootGameObjects)

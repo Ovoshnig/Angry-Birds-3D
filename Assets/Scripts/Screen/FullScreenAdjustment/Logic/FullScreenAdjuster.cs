@@ -10,7 +10,7 @@ public class FullScreenAdjuster : IStartable, IDisposable
 {
     private readonly ScreenInputProvider _screenInputProvider;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public FullScreenAdjuster(ScreenInputProvider screenInputProvider) => _screenInputProvider = screenInputProvider;
 

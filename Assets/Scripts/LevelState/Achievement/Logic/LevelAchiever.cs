@@ -13,7 +13,7 @@ public class LevelAchiever : IStartable, IDisposable
     private readonly LevelStateTracker _levelTracker;
     private readonly SaveStorage _saveStorage;
     private readonly SceneSettings _sceneSettings;
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public LevelAchiever(LevelStateTracker levelTracker,
         SaveStorage saveStorage,

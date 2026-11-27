@@ -14,8 +14,8 @@ public class AudioSliderPanelView : UIView
     [SerializeField] private Sprite[] _fillingSprites;
 
     private readonly Subject<(AudioChannel Channel, float Value)> _valueChanged = new();
-    private readonly CompositeDisposable _sliderDisposables = new();
-    private readonly Dictionary<AudioChannel, (AudioSlider Slider, SliderIndicator Indicator)> _blocks = new();
+    private readonly CompositeDisposable _sliderDisposables = [];
+    private readonly Dictionary<AudioChannel, (AudioSlider Slider, SliderIndicator Indicator)> _blocks = [];
 
     private bool _isContainerResolved;
 

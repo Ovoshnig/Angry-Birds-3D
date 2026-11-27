@@ -6,7 +6,7 @@ namespace Ovoshnig.Mediation;
 
 public abstract class Mediator : IStartable, IDisposable
 {
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public virtual void Start() => Bind(_disposables);
 

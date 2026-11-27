@@ -74,7 +74,7 @@ public class RecordRatingView : UIView
     {
         _ratingContainer = container;
         _ratingContainer.style.opacity = 0f;
-        _stars = container.Children().ToArray();
+        _stars = [.. container.Children()];
         RefreshEnabledState();
     }
 

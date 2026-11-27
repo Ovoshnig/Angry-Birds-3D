@@ -8,7 +8,7 @@ namespace Ovoshnig.InputProvision.Provision;
 
 public abstract class InputProvider<TActions> : IStartable, IDisposable
 {
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     protected InputProvider(TActions actions) => Actions = actions;
 

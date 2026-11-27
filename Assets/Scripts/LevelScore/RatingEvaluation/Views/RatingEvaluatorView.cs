@@ -83,7 +83,7 @@ public class RatingEvaluatorView : UIView
 
     private void OnContainerResolved(VisualElement container)
     {
-        _stars = container.Children().ToArray();
+        _stars = [.. container.Children()];
         RefreshEnabledState();
     }
 

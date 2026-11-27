@@ -13,7 +13,7 @@ public class ActivityTracker : IStartable, IDisposable
     private readonly ObjectCollider _objectCollider;
     private readonly LevelStateTrackingSettings _stateTrackingSettings;
     private readonly ReactiveProperty<bool> _isActive = new(false);
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public ActivityTracker(BirdFlyer birdFlyer, ObjectCollider objectCollider,
         LevelStateTrackingSettings stateTrackingSettings)

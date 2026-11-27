@@ -28,7 +28,7 @@ public sealed class MusicQueueTests
     [Test]
     public void SetClipKeys_EmptySequence_MakesQueueEmpty()
     {
-        _queue.SetClipKeys(Array.Empty<object>());
+        _queue.SetClipKeys([]);
 
         Assert.False(_queue.TryGetNextClipKey(out _));
     }
@@ -49,7 +49,7 @@ public sealed class MusicQueueTests
         object b = new();
         object c = new();
 
-        _queue.SetClipKeys(new object[] { a, b, c });
+        _queue.SetClipKeys([a, b, c]);
 
         Assert.True(_queue.TryGetNextClipKey(out object k1));
         Assert.AreSame(a, k1);
@@ -63,7 +63,7 @@ public sealed class MusicQueueTests
     [Test]
     public void Clear_AfterSetClipKeys_EmptiesQueue()
     {
-        _queue.SetClipKeys(new object[] { new(), new() });
+        _queue.SetClipKeys([new(), new()]);
 
         _queue.Clear();
 
@@ -81,7 +81,7 @@ public sealed class MusicQueueTests
     public void ShuffleClipKeys_WhenSingleElement_PreservesThatElement()
     {
         object only = new();
-        _queue.SetClipKeys(new object[] { only });
+        _queue.SetClipKeys([only]);
 
         _queue.ShuffleClipKeys();
 
@@ -93,12 +93,12 @@ public sealed class MusicQueueTests
     [Test]
     public void ShuffleClipKeys_PreservesAllElements_AndCount_ForUniqueElements()
     {
-        object[] items = Enumerable.Range(0, 50).Select(_ => new object()).ToArray();
+        object[] items = [.. Enumerable.Range(0, 50).Select(_ => new object())];
         _queue.SetClipKeys(items);
 
         _queue.ShuffleClipKeys();
 
-        object[] dequeued = DequeueAll(_queue).ToArray();
+        object[] dequeued = [.. DequeueAll(_queue)];
 
         Assert.That(dequeued.Length, Is.EqualTo(items.Length));
         CollectionAssert.AreEquivalent(items, dequeued);
@@ -108,12 +108,12 @@ public sealed class MusicQueueTests
     public void ShuffleClipKeys_PreservesDuplicates_MultisetEquality()
     {
         object shared = new();
-        object[] items = new object[] { shared, new(), shared, shared, new(), shared };
+        object[] items = [shared, new(), shared, shared, new(), shared];
         _queue.SetClipKeys(items);
 
         _queue.ShuffleClipKeys();
 
-        object[] dequeued = DequeueAll(_queue).ToArray();
+        object[] dequeued = [.. DequeueAll(_queue)];
 
         Assert.That(dequeued.Length, Is.EqualTo(items.Length));
         AssertMultisetEqualByReference(items, dequeued);
@@ -122,13 +122,13 @@ public sealed class MusicQueueTests
     [Test]
     public void ShuffleClipKeys_DoesNotLoseElements_AfterMultipleShuffles()
     {
-        object[] items = Enumerable.Range(0, 30).Select(_ => new object()).ToArray();
+        object[] items = [.. Enumerable.Range(0, 30).Select(_ => new object())];
         _queue.SetClipKeys(items);
 
         for (int i = 0; i < 10; i++)
             _queue.ShuffleClipKeys();
 
-        object[] dequeued = DequeueAll(_queue).ToArray();
+        object[] dequeued = [.. DequeueAll(_queue)];
         Assert.That(dequeued.Length, Is.EqualTo(items.Length));
         CollectionAssert.AreEquivalent(items, dequeued);
     }

@@ -12,7 +12,7 @@ public class ObjectDestroyer : IStartable, IDisposable
     private readonly ObjectCollider _objectCollider;
     private readonly Subject<DamageData> _damaged = new();
     private readonly Subject<DestructionData> _destroyed = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public ObjectDestroyer(ObjectCollider objectCollider) =>
         _objectCollider = objectCollider;

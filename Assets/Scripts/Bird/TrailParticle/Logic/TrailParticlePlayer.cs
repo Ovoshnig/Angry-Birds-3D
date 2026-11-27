@@ -19,9 +19,9 @@ public class TrailParticlePlayer : IStartable, IDisposable
     private readonly SplitInto3BirdPower _splitInto3Power;
     private readonly GameObject _poolRoot;
     private readonly ObjectPool<TrailParticleView> _trailParticlePool;
-    private readonly List<TrailParticleView> _currentParticles = new();
-    private readonly List<TrailParticleView> _previousParticles = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly List<TrailParticleView> _currentParticles = [];
+    private readonly List<TrailParticleView> _previousParticles = [];
+    private readonly CompositeDisposable _disposables = [];
 
     public TrailParticlePlayer(BirdFlyer birdFlyer,
         BirdPowerActivator birdPowerActivator,
@@ -102,7 +102,7 @@ public class TrailParticlePlayer : IStartable, IDisposable
         foreach (TrailParticleView particle in _currentParticles)
             particle.StopEmitting();
 
-        List<TrailParticleView> particlesToRelease = new(_previousParticles);
+        List<TrailParticleView> particlesToRelease = [.. _previousParticles];
         _previousParticles.Clear();
 
         ReleaseParticlesAsync(particlesToRelease).Forget();
@@ -119,7 +119,7 @@ public class TrailParticlePlayer : IStartable, IDisposable
 
     private async UniTaskVoid ReleaseParticlesAsync(List<TrailParticleView> particles)
     {
-        List<UniTask> tasks = new();
+        List<UniTask> tasks = [];
 
         foreach (TrailParticleView particle in particles)
             tasks.Add(particle.StopAsync());

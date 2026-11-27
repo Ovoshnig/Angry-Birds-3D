@@ -13,7 +13,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
     private readonly ScreenInputProvider _screenInputProvider;
     private readonly ReactiveProperty<bool> _isPlaying = new(false);
     private readonly CancellationTokenSource _cts = new();
-    private readonly CompositeDisposable _disposables = new();
+    private readonly CompositeDisposable _disposables = [];
 
     public SplashScreenDisplayer(ScreenInputProvider screenInputProvider) =>
         _screenInputProvider = screenInputProvider;

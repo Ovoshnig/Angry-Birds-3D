@@ -6,9 +6,9 @@ namespace Ovoshnig.Cursor.State;
 [CreateAssetMenu(fileName = "CursorConfiguration", menuName = "Scriptable Objects/Cursor Configuration")]
 public sealed class CursorConfiguration : ScriptableObject, ISerializationCallbackReceiver
 {
-    [field: SerializeField] public List<CursorData> CursorPresets { get; private set; } = new();
+    [field: SerializeField] public List<CursorData> CursorPresets { get; private set; } = [];
 
-    private readonly Dictionary<CursorState, CursorData> _cursorMap = new();
+    private readonly Dictionary<CursorState, CursorData> _cursorMap = [];
 
     public void OnBeforeSerialize()
     {

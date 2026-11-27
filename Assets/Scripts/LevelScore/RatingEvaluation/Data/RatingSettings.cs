@@ -6,7 +6,8 @@ namespace AngryBirds3D.LevelScore.RatingEvaluation;
 [CreateAssetMenu(fileName = "LevelRatingSettings", menuName = "Scriptable Objects/Level Rating Settings")]
 public class RatingSettings : ScriptableObject
 {
-    [SerializeField] private Dictionary<int, int> _levelMaxScores = new();
+    [SerializeField, DictionaryDisplay(keyLabel = "Level", valueLabel = "Max Score")]
+    private Dictionary<int, int> _levelMaxScores = [];
 
     [field: SerializeField, Min(0)] public int MinStarCount { get; private set; } = 1;
     [field: SerializeField, Min(0)] public int MaxStarCount { get; private set; } = 3;

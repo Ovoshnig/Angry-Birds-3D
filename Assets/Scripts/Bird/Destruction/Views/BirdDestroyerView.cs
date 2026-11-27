@@ -5,7 +5,7 @@ namespace AngryBirds3D.Bird.Destruction;
 
 public class BirdDestroyerView : MonoBehaviour
 {
-    private readonly HashSet<BirdDestroyerView> _cloneDestroyerViews = new();
+    private readonly HashSet<BirdDestroyerView> _cloneDestroyerViews = [];
 
     public bool IsDestroying { get; private set; } = false;
 

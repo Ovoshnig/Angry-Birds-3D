@@ -18,7 +18,7 @@ public class MusicQueue
 
     public void ShuffleClipKeys()
     {
-        List<object> clips = new(_clipKeysQueue);
+        List<object> clips = [.. _clipKeysQueue];
         _clipKeysQueue.Clear();
 
         while (clips.Any())

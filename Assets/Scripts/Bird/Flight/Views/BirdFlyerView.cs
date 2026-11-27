@@ -13,7 +13,7 @@ public class BirdFlyerView : MonoBehaviour
 {
     [SerializeField] private GameSettings _gameSettings;
 
-    private readonly HashSet<BirdFlyerView> _cloneFlyerViews = new();
+    private readonly HashSet<BirdFlyerView> _cloneFlyerViews = [];
 
     public Rigidbody Rigidbody { get; private set; }
 
