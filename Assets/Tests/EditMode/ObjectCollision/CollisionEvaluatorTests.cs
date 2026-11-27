@@ -26,7 +26,7 @@ public class CollisionEvaluatorTests
     {
         CollisionRawData rawData = CreateCollisionRawData(contactCount: 0, impulseMagnitude: 50f);
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out float impactForce);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out float impactForce);
 
         Assert.IsFalse(result);
         Assert.AreEqual(CollisionType.Collision, type);
@@ -38,7 +38,7 @@ public class CollisionEvaluatorTests
     {
         CollisionRawData rawData = CreateCollisionRawData(impulseMagnitude: ImpulseForImpactForce(DamageThreshold));
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out float impactForce);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out float impactForce);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Damage, type);
@@ -50,7 +50,7 @@ public class CollisionEvaluatorTests
     {
         CollisionRawData rawData = CreateCollisionRawData(impulseMagnitude: ImpulseForImpactForce(DamageThreshold + 50f));
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out _);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out _);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Damage, type);
@@ -62,7 +62,7 @@ public class CollisionEvaluatorTests
         float impactForce = (CollisionThreshold + DamageThreshold) * 0.5f;
         CollisionRawData rawData = CreateCollisionRawData(impulseMagnitude: ImpulseForImpactForce(impactForce));
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out float actualImpactForce);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out float actualImpactForce);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Collision, type);
@@ -74,7 +74,7 @@ public class CollisionEvaluatorTests
     {
         CollisionRawData rawData = CreateCollisionRawData(impulseMagnitude: ImpulseForImpactForce(CollisionThreshold));
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out _);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out _);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Collision, type);
@@ -88,7 +88,7 @@ public class CollisionEvaluatorTests
             contactNormal: Vector3.up,
             relativeVelocity: Vector3.right);
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out _);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out _);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Gliding, type);
@@ -102,7 +102,7 @@ public class CollisionEvaluatorTests
             contactNormal: Vector3.up,
             relativeVelocity: Vector3.up);
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out float actualImpactForce);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out float actualImpactForce);
 
         Assert.IsFalse(result);
         Assert.AreEqual(CollisionType.Collision, type);
@@ -116,7 +116,7 @@ public class CollisionEvaluatorTests
             contactNormal: Vector3.up,
             relativeVelocity: Vector3.right);
 
-        bool result = _evaluator.TryEvaluate(rawData, out CollisionType type, out _);
+        bool result = _evaluator.TryEvaluate(in rawData, out CollisionType type, out _);
 
         Assert.IsTrue(result);
         Assert.AreEqual(CollisionType.Damage, type);

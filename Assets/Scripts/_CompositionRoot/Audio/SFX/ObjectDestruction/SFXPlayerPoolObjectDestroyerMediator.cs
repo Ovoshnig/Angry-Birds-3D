@@ -48,9 +48,8 @@ public class SFXPlayerPoolObjectDestroyerMediator : Mediator
         _playerObjectPool.PlaySFX(target, audioResource);
     }
 
-    private void OnDestroyed(DestructionData data)
+    private void OnDestroyed(DestructibleEntityView entityView)
     {
-        DestructibleEntityView entityView = data.EntityView;
         Transform target = entityView.transform;
         AudioResource audioResource = entityView.DestructionProfile.SfxProfile.DestructionResource;
         _playerObjectPool.PlaySFX(target, audioResource);

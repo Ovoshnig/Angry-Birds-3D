@@ -11,14 +11,14 @@ public class ObjectDestroyer : IStartable, IDisposable
 {
     private readonly ObjectCollider _objectCollider;
     private readonly Subject<DamageData> _damaged = new();
-    private readonly Subject<DestructionData> _destroyed = new();
+    private readonly Subject<DestructibleEntityView> _destroyed = new();
     private readonly CompositeDisposable _disposables = [];
 
     public ObjectDestroyer(ObjectCollider objectCollider) =>
         _objectCollider = objectCollider;
 
     public Observable<DamageData> Damaged => _damaged;
-    public Observable<DestructionData> Destroyed => _destroyed;
+    public Observable<DestructibleEntityView> Destroyed => _destroyed;
 
     public void Start()
     {
@@ -49,7 +49,7 @@ public class ObjectDestroyer : IStartable, IDisposable
         if (healthModel.Health <= 0)
         {
             destroyerView.Destroy();
-            _destroyed.OnNext(new DestructionData(entityView));
+            _destroyed.OnNext(entityView);
         }
         else
         {

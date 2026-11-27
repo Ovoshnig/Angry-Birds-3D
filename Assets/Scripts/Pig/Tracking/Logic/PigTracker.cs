@@ -1,5 +1,6 @@
 using AngryBirds3D.Pig.Entity;
 using Ovoshnig.ObjectDestruction.Destruction;
+using Ovoshnig.ObjectDestruction.Entity;
 using R3;
 using System;
 using System.Collections.Generic;
@@ -46,9 +47,9 @@ public class PigTracker : IStartable, IDisposable
         _pigCount.Dispose();
     }
 
-    private void OnDestroyed(DestructionData data)
+    private void OnDestroyed(DestructibleEntityView entityView)
     {
-        if (data.EntityView is not PigEntityView pigEntityView)
+        if (entityView is not PigEntityView pigEntityView)
             return;
 
         if (_pigEntityViews.Contains(pigEntityView))

@@ -26,9 +26,8 @@ public class PointsPoolObjectDestroyerMediator : Mediator
             .AddTo(disposables);
     }
 
-    private void OnDestroyed(DestructionData data)
+    private void OnDestroyed(DestructibleEntityView entityView)
     {
-        DestructibleEntityView entityView = data.EntityView;
         Vector3 position = entityView.transform.position;
         PointsSettings pointsSettings = entityView.DestructionProfile.PointsSettings;
         _pointsObjectPool.ShowPoints(position, pointsSettings);

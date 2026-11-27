@@ -9,7 +9,7 @@ public class CollisionEvaluator
 
     public CollisionEvaluator(CollisionSettings settings) => _settings = settings;
 
-    public bool TryEvaluate(CollisionRawData rawData, out CollisionType type, out float impactForce)
+    public bool TryEvaluate(in CollisionRawData rawData, out CollisionType type, out float impactForce)
     {
         type = CollisionType.Collision;
         impactForce = 0f;

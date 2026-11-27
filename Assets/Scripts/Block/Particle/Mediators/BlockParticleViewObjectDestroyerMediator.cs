@@ -1,6 +1,7 @@
 using AngryBirds3D.Block.Entity;
 using Ovoshnig.Mediation;
 using Ovoshnig.ObjectDestruction.Destruction;
+using Ovoshnig.ObjectDestruction.Entity;
 using R3;
 using UnityEngine;
 
@@ -31,23 +32,23 @@ public class BlockParticleViewObjectDestroyerMediator : Mediator
 
     private void OnDamaged(DamageData data)
     {
-        if (data.EntityView is not BlockEntityView entityView)
+        if (data.EntityView is not BlockEntityView blockEntityView)
             return;
 
-        Vector3 position = entityView.transform.position;
+        Vector3 position = blockEntityView.transform.position;
         float force = data.DamageAmount;
-        BlockParticleProfile particleProfile = entityView.ParticleProfile;
+        BlockParticleProfile particleProfile = blockEntityView.ParticleProfile;
 
         _blockParticleView.Emit(position, force, particleProfile);
     }
 
-    private void OnDestroyed(DestructionData data)
+    private void OnDestroyed(DestructibleEntityView entityView)
     {
-        if (data.EntityView is not BlockEntityView entityView)
+        if (entityView is not BlockEntityView blockEntityView)
             return;
 
-        Vector3 position = entityView.transform.position;
-        BlockParticleProfile particleProfile = entityView.ParticleProfile;
+        Vector3 position = blockEntityView.transform.position;
+        BlockParticleProfile particleProfile = blockEntityView.ParticleProfile;
         int count = particleProfile.MaxParticles;
 
         _blockParticleView.Emit(position, count, particleProfile);
