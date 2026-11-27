@@ -1,8 +1,9 @@
-using Ovoshnig.Editor.Mediation;
 using Ovoshnig.Mediation;
 using Ovoshnig.UI.Basic;
 using System;
 using UnityEditor;
+
+namespace Ovoshnig.Editor.Mediation;
 
 public static class MediatorDependencyValidator
 {

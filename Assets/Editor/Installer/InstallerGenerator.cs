@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Frozen;
 using System.IO;
+using Unity.Scripting.LifecycleManagement;
 using UnityEditor;
 using Object = UnityEngine.Object;
 
@@ -7,6 +9,11 @@ namespace Ovoshnig.Editor.Installer;
 
 public static class InstallerGenerator
 {
+    [NoAutoStaticsCleanup]
+    private static readonly FrozenSet<string> _ignoredFolders =
+        new[] { "Scripts", "Assets", "Runtime", "Project", "Source" }
+            .ToFrozenSet(StringComparer.OrdinalIgnoreCase);
+
     [MenuItem("Assets/Create/Scripting/Installer", false, priority = 3, secondaryPriority = 10f)]
     private static void Generate()
     {
@@ -30,7 +37,6 @@ public static class InstallerGenerator
             return;
 
         Selection.activeObject = createdAsset;
-        AssetDatabase.OpenAsset(createdAsset);
     }
 
     private static string GetInstallerName(string path) =>
@@ -43,12 +49,7 @@ public static class InstallerGenerator
             ? $"{folders[^1]}Installer"
             : $"{folders[^2]}{folders[^1]}Installer";
 
-    private static bool IsFolderIgnored(string folderName) =>
-        folderName.Equals("Scripts", StringComparison.OrdinalIgnoreCase) ||
-        folderName.Equals("Assets", StringComparison.OrdinalIgnoreCase) ||
-        folderName.Equals("Runtime", StringComparison.OrdinalIgnoreCase) ||
-        folderName.Equals("Project", StringComparison.OrdinalIgnoreCase) ||
-        folderName.Equals("Source", StringComparison.OrdinalIgnoreCase);
+    private static bool IsFolderIgnored(string folderName) => _ignoredFolders.Contains(folderName);
 
     private static string[] GetFolders(string path) =>
         path.Split(new[] { '/', '\\' }, StringSplitOptions.RemoveEmptyEntries);
@@ -71,34 +72,38 @@ public static class InstallerGenerator
     }
 
     private static string GetFeatureInstallerTemplate(string className) =>
-$@"using System;
-using VContainer;
-using VContainer.Unity;
+        $$"""
+        using System;
+        using VContainer;
+        using VContainer.Unity;
 
-namespace ;
+        namespace ;
 
-[Serializable]
-public class {className} : IInstaller
-{{
-    public void Install(IContainerBuilder builder)
-    {{
-        throw new NotImplementedException();
-    }}
-}}
-";
+        [Serializable]
+        public class {{className}} : IInstaller
+        {
+            public void Install(IContainerBuilder builder)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        """;
 
     private static string GetMediatorsInstallerTemplate(string className) =>
-$@"using VContainer;
-using VContainer.Unity;
+        $$"""
+        using VContainer;
+        using VContainer.Unity;
 
-namespace AngryBirds3D.Composition;
+        namespace AngryBirds3D.Composition;
 
-public class {className} : IInstaller
-{{
-    public void Install(IContainerBuilder builder)
-    {{
-        throw new System.NotImplementedException();
-    }}
-}}
-";
+        public class {{className}} : IInstaller
+        {
+            public void Install(IContainerBuilder builder)
+            {
+                throw new System.NotImplementedException();
+            }
+        }
+
+        """;
 }

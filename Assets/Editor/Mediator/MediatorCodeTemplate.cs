@@ -1,7 +1,8 @@
-using Ovoshnig.Editor.Mediation;
 using Ovoshnig.Mediation;
 using Ovoshnig.UI.Basic;
 using System;
+
+namespace Ovoshnig.Editor.Mediation;
 
 public static class MediatorCodeTemplate
 {
@@ -23,28 +24,30 @@ public static class MediatorCodeTemplate
         string fieldB = GetPrivateFieldName(dependencyB);
 
         return
-$@"using {typeof(Mediator).Namespace};
-using R3;
+            $$"""
+            using {{typeof(Mediator).Namespace}};
+            using R3;
 
-namespace ;
+            namespace ;
 
-public class {mediatorName} : {nameof(Mediator)}
-{{
-    private readonly {dependencyA} {fieldA};
-    private readonly {dependencyB} {fieldB};
+            public class {{mediatorName}} : {{nameof(Mediator)}}
+            {
+                private readonly {{dependencyA}} {{fieldA}};
+                private readonly {{dependencyB}} {{fieldB}};
 
-    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} {GetParamName(dependencyB)})
-    {{
-        {fieldA} = {GetParamName(dependencyA)};
-        {fieldB} = {GetParamName(dependencyB)};
-    }}
+                public {{mediatorName}}({{dependencyA}} {{GetParamName(dependencyA)}}, {{dependencyB}} {{GetParamName(dependencyB)}})
+                {
+                    {{fieldA}} = {{GetParamName(dependencyA)}};
+                    {{fieldB}} = {{GetParamName(dependencyB)}};
+                }
 
-    protected override void Bind(CompositeDisposable disposables)
-    {{
-        throw new System.NotImplementedException();
-    }}
-}}
-";
+                protected override void Bind(CompositeDisposable disposables)
+                {
+                    throw new System.NotImplementedException();
+                }
+            }
+
+            """;
     }
 
     private static string GenerateUIView(string mediatorName, string dependencyA, string dependencyB)
@@ -52,24 +55,26 @@ public class {mediatorName} : {nameof(Mediator)}
         string serviceField = GetPrivateFieldName(dependencyA);
 
         return
-$@"using {typeof(UIViewMediator<>).Namespace};
-using R3;
+            $$"""
+            using {{typeof(UIViewMediator<>).Namespace}};
+            using R3;
 
-namespace ;
+            namespace ;
 
-public class {mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
-{{
-    private readonly {dependencyA} {serviceField};
+            public class {{mediatorName}} : {{nameof(UIViewMediator<UIView>)}}<{{dependencyB}}>
+            {
+                private readonly {{dependencyA}} {{serviceField}};
 
-    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} view)
-        : base(view) => {serviceField} = {GetParamName(dependencyA)};
+                public {{mediatorName}}({{dependencyA}} {{GetParamName(dependencyA)}}, {{dependencyB}} view)
+                    : base(view) => {{serviceField}} = {{GetParamName(dependencyA)}};
 
-    protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-    {{
-        throw new System.NotImplementedException();
-    }}
-}}
-";
+                protected override void OnViewEnabled({{dependencyB}} view, CompositeDisposable viewDisposables)
+                {
+                    throw new System.NotImplementedException();
+                }
+            }
+
+            """;
     }
 
     private static string GenerateUIViews(string mediatorName, string dependencyA, string dependencyB)
@@ -77,40 +82,35 @@ public class {mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
         string serviceField = GetPrivateFieldName(dependencyA);
 
         return
-$@"using {typeof(UIViewsMediator<>).Namespace};
-using R3;
-using System.Collections.Generic;
+            $$"""
+            using {{typeof(UIViewsMediator<>).Namespace}};
+            using R3;
+            using System.Collections.Generic;
 
-namespace ;
+            namespace ;
 
-public class {mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
-{{
-    private readonly {dependencyA} {serviceField};
+            public class {{mediatorName}} : {{nameof(UIViewsMediator<UIView>)}}<{{dependencyB}}>
+            {
+                private readonly {{dependencyA}} {{serviceField}};
 
-    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, IReadOnlyList<{dependencyB}> views)
-        : base(views) => {serviceField} = {GetParamName(dependencyA)};
+                public {{mediatorName}}({{dependencyA}} {{GetParamName(dependencyA)}}, IReadOnlyList<{{dependencyB}}> views)
+                    : base(views) => {{serviceField}} = {{GetParamName(dependencyA)}};
 
-    protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-    {{
-        throw new System.NotImplementedException();
-    }}
-}}
-";
+                protected override void OnViewEnabled({{dependencyB}} view, CompositeDisposable viewDisposables)
+                {
+                    throw new System.NotImplementedException();
+                }
+            }
+
+            """;
     }
 
-    private static string GetPrivateFieldName(string typeName)
-    {
-        if (string.IsNullOrEmpty(typeName))
-            return string.Empty;
+    private static string GetPrivateFieldName(string typeName) => ToCamelCase(typeName, "_");
 
-        return "_" + char.ToLowerInvariant(typeName[0]) + typeName[1..];
-    }
+    private static string GetParamName(string typeName) => ToCamelCase(typeName);
 
-    private static string GetParamName(string typeName)
-    {
-        if (string.IsNullOrEmpty(typeName))
-            return string.Empty;
-
-        return char.ToLowerInvariant(typeName[0]) + typeName[1..];
-    }
+    private static string ToCamelCase(string typeName, string prefix = "") =>
+        string.IsNullOrEmpty(typeName)
+            ? string.Empty
+            : prefix + char.ToLowerInvariant(typeName[0]) + typeName[1..];
 }
