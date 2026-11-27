@@ -98,6 +98,7 @@ public class AudioSliderPanelView : UIView
             return;
 
         float range = slider.highValue - slider.lowValue;
+
         if (range <= 0f)
             return;
 

@@ -3,6 +3,7 @@ using Ovoshnig.Audio.Music.Queue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Scripting.LifecycleManagement;
 
 namespace Ovoshnig.Tests.EditMode.Audio.Music;
 
@@ -166,6 +167,7 @@ public sealed class MusicQueueTests
         }
     }
 
+    [NoAutoStaticsCleanup]
     private sealed class ReferenceEqualityComparer : IEqualityComparer<object>
     {
         public static readonly ReferenceEqualityComparer Instance = new();

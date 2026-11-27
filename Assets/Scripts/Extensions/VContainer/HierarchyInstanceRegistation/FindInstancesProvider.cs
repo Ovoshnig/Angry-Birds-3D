@@ -17,14 +17,14 @@ public sealed class FindInstancesProvider<T> : IInstanceProvider where T : Compo
             throw new VContainerException(typeof(T), $"Invalid find target scene for instances of type {typeof(T).Name}");
 
         List<T> components = new();
+        List<T> buffer = new();
         List<GameObject> rootGameObjects = new();
         _scene.GetRootGameObjects(rootGameObjects);
 
         foreach (GameObject root in rootGameObjects)
         {
-            T[] found = root.GetComponentsInChildren<T>(true);
-            if (found != null && found.Length > 0)
-                components.AddRange(found);
+            root.GetComponentsInChildren(true, buffer);
+            components.AddRange(buffer);
         }
 
         return components;
