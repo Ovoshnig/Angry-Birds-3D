@@ -11,7 +11,8 @@ public sealed class SaveStorage : DataStorage
 
     protected override string FileName => SaveConstants.FileName;
 
-    private string HashFilePath => Path.Combine(Application.persistentDataPath, SaveConstants.HashFileName);
+    private static string HashFilePath => Path.Combine(Application.persistentDataPath,
+        SaveConstants.HashFileName);
 
     protected override void LoadData()
     {
@@ -43,7 +44,7 @@ public sealed class SaveStorage : DataStorage
         File.WriteAllText(HashFilePath, fileHash);
     }
 
-    private string CalculateHash(string filePath)
+    private static string CalculateHash(string filePath)
     {
         using SHA256 sha256 = SHA256.Create();
         byte[] fileBytes = File.ReadAllBytes(filePath);

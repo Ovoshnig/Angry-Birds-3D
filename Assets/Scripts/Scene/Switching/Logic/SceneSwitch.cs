@@ -78,7 +78,7 @@ public class SceneSwitch : IStartable, IDisposable
         _isSceneLoading.Value = false;
     }
 
-    private bool IsValidIndex(int index)
+    private static bool IsValidIndex(int index)
     {
         if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
             return true;

@@ -45,7 +45,7 @@ public class ResolutionAdjuster : IStartable, IDisposable
         _currentResolutionIndex.Value = index;
     }
 
-    private ResolutionData GetCurrentResolutionData()
+    private static ResolutionData GetCurrentResolutionData()
     {
         int width = UnityScreen.fullScreen ? UnityScreen.currentResolution.width : UnityScreen.width;
         int height = UnityScreen.fullScreen ? UnityScreen.currentResolution.height : UnityScreen.height;

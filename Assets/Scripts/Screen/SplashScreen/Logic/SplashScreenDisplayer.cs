@@ -53,7 +53,7 @@ public class SplashScreenDisplayer : IStartable, IDisposable
         _isPlaying.Value = false;
     }
 
-    private void Stop()
+    private static void Stop()
     {
         if (!UnitySplashScreen.isFinished)
             UnitySplashScreen.Stop(UnitySplashScreen.StopBehavior.FadeOut);

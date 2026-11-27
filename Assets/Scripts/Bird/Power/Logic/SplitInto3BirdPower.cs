@@ -45,11 +45,8 @@ public class SplitInto3BirdPower : IBirdPower, IDisposable
 
     public void Dispose() => _cloneCreated.Dispose();
 
-    private BirdEntityView CreateClone(BirdEntityView original,
-        Vector3 basePosition,
-        Vector3 baseRotation,
-        float velocityMagnitude,
-        float angleOffset)
+    private static BirdEntityView CreateClone(BirdEntityView original, Vector3 basePosition,
+        Vector3 baseRotation, float velocityMagnitude, float angleOffset)
     {
         Vector3 cloneRotation = baseRotation;
         cloneRotation.x += angleOffset;

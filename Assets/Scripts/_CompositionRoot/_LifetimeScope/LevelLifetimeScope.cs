@@ -66,7 +66,7 @@ public class LevelLifetimeScope : LifetimeScope
         _blockInstaller.Install(builder);
     }
 
-    private void InstallMediators(IContainerBuilder builder)
+    private static void InstallMediators(IContainerBuilder builder)
     {
         new ScoreMediatorsInstaller().Install(builder);
         new CameraMediatorsInstaller().Install(builder);
