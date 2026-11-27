@@ -1,37 +1,36 @@
 using UnityEngine;
 
-namespace AngryBirds3D.Block.Particle
+namespace AngryBirds3D.Block.Particle;
+
+[RequireComponent(typeof(ParticleSystem))]
+[RequireComponent(typeof(ParticleSystemRenderer))]
+public class BlockParticleView : MonoBehaviour
 {
-    [RequireComponent(typeof(ParticleSystem))]
-    [RequireComponent(typeof(ParticleSystemRenderer))]
-    public class BlockParticleView : MonoBehaviour
+    private ParticleSystem _particleSystem;
+    private ParticleSystemRenderer _particleSystemRenderer;
+
+    private void Awake()
     {
-        private ParticleSystem _particleSystem;
-        private ParticleSystemRenderer _particleSystemRenderer;
+        _particleSystem = GetComponent<ParticleSystem>();
+        _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
+    }
 
-        private void Awake()
-        {
-            _particleSystem = GetComponent<ParticleSystem>();
-            _particleSystemRenderer = GetComponent<ParticleSystemRenderer>();
-        }
+    public void Emit(Vector3 position, int count, BlockParticleProfile particleProfile)
+    {
+        _particleSystemRenderer.renderMode = ParticleSystemRenderMode.Mesh;
+        _particleSystemRenderer.SetMeshes(particleProfile.Meshes);
+        _particleSystemRenderer.material = particleProfile.Material;
 
-        public void Emit(Vector3 position, int count, BlockParticleProfile particleProfile)
-        {
-            _particleSystemRenderer.renderMode = ParticleSystemRenderMode.Mesh;
-            _particleSystemRenderer.SetMeshes(particleProfile.Meshes);
-            _particleSystemRenderer.material = particleProfile.Material;
+        ParticleSystem.EmitParams emitParams = new() { position = position, applyShapeToPosition = true };
+        _particleSystem.Emit(emitParams, count);
+    }
 
-            ParticleSystem.EmitParams emitParams = new() { position = position, applyShapeToPosition = true };
-            _particleSystem.Emit(emitParams, count);
-        }
+    public void Emit(Vector3 position, float force, BlockParticleProfile particleProfile)
+    {
+        int count = Mathf.Clamp(Mathf.RoundToInt(force * particleProfile.ForceMultiplier),
+            particleProfile.MinParticles,
+            particleProfile.MaxParticles);
 
-        public void Emit(Vector3 position, float force, BlockParticleProfile particleProfile)
-        {
-            int count = Mathf.Clamp(Mathf.RoundToInt(force * particleProfile.ForceMultiplier),
-                particleProfile.MinParticles,
-                particleProfile.MaxParticles);
-
-            Emit(position, count, particleProfile);
-        }
+        Emit(position, count, particleProfile);
     }
 }

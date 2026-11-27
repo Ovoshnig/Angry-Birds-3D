@@ -3,24 +3,23 @@ using Ovoshnig.Mediation;
 using Ovoshnig.Window.Window;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class GamePauserPauseMenuWindowMediator : Mediator
 {
-    public class GamePauserPauseMenuWindowMediator : Mediator
+    private readonly GamePauser _gamePauser;
+    private readonly PauseMenuWindow _pauseMenuWindow;
+
+    public GamePauserPauseMenuWindowMediator(GamePauser gamePauser, PauseMenuWindow pauseMenuWindow)
     {
-        private readonly GamePauser _gamePauser;
-        private readonly PauseMenuWindow _pauseMenuWindow;
-    
-        public GamePauserPauseMenuWindowMediator(GamePauser gamePauser, PauseMenuWindow pauseMenuWindow)
-        {
-            _gamePauser = gamePauser;
-            _pauseMenuWindow = pauseMenuWindow;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _pauseMenuWindow.IsOpen
-                .Subscribe(_gamePauser.SetPause)
-                .AddTo(disposables);
-        }
+        _gamePauser = gamePauser;
+        _pauseMenuWindow = pauseMenuWindow;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _pauseMenuWindow.IsOpen
+            .Subscribe(_gamePauser.SetPause)
+            .AddTo(disposables);
     }
 }

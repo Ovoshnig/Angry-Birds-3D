@@ -7,59 +7,58 @@ using System.Linq;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Pig.Tracking
+namespace AngryBirds3D.Pig.Tracking;
+
+public class PigTracker : IStartable, IDisposable
 {
-    public class PigTracker : IStartable, IDisposable
+    private readonly List<PigEntityView> _pigEntityViews;
+    private readonly ObjectDestroyer _objectDestroyer;
+    private readonly ReactiveProperty<int> _pigCount = new();
+    private readonly CompositeDisposable _disposables = new();
+
+    public PigTracker(IReadOnlyList<PigEntityView> pigEntityViews, ObjectDestroyer objectDestroyer)
     {
-        private readonly List<PigEntityView> _pigEntityViews;
-        private readonly ObjectDestroyer _objectDestroyer;
-        private readonly ReactiveProperty<int> _pigCount = new();
-        private readonly CompositeDisposable _disposables = new();
+        _pigEntityViews = pigEntityViews.ToList();
+        _objectDestroyer = objectDestroyer;
 
-        public PigTracker(IReadOnlyList<PigEntityView> pigEntityViews, ObjectDestroyer objectDestroyer)
+        _pigCount.Value = pigEntityViews.Count;
+
+        PigsLeft = _pigCount
+            .Where(count => count == 0)
+            .AsUnitObservable()
+            .Share();
+    }
+
+    public ReadOnlyReactiveProperty<int> PigCount => _pigCount;
+    public Observable<Unit> PigsLeft { get; }
+    public bool AnyPigs => _pigCount.Value > 0;
+
+    public void Start()
+    {
+        _objectDestroyer.Destroyed
+            .Subscribe(OnDestroyed)
+            .AddTo(_disposables);
+    }
+
+    public void Dispose()
+    {
+        _disposables.Dispose();
+        _pigCount.Dispose();
+    }
+
+    private void OnDestroyed(DestructionData data)
+    {
+        if (data.EntityView is not PigEntityView pigEntityView)
+            return;
+
+        if (_pigEntityViews.Contains(pigEntityView))
         {
-            _pigEntityViews = pigEntityViews.ToList();
-            _objectDestroyer = objectDestroyer;
-
-            _pigCount.Value = pigEntityViews.Count;
-
-            PigsLeft = _pigCount
-                .Where(count => count == 0)
-                .AsUnitObservable()
-                .Share();
+            _pigEntityViews.Remove(pigEntityView);
+            _pigCount.Value--;
         }
-
-        public ReadOnlyReactiveProperty<int> PigCount => _pigCount;
-        public Observable<Unit> PigsLeft { get; }
-        public bool AnyPigs => _pigCount.Value > 0;
-
-        public void Start()
+        else
         {
-            _objectDestroyer.Destroyed
-                .Subscribe(OnDestroyed)
-                .AddTo(_disposables);
-        }
-
-        public void Dispose()
-        {
-            _disposables.Dispose();
-            _pigCount.Dispose();
-        }
-
-        private void OnDestroyed(DestructionData data)
-        {
-            if (data.EntityView is not PigEntityView pigEntityView)
-                return;
-
-            if (_pigEntityViews.Contains(pigEntityView))
-            {
-                _pigEntityViews.Remove(pigEntityView);
-                _pigCount.Value--;
-            }
-            else
-            {
-                Debug.LogWarning("Destroyed pig not contains in the list");
-            }
+            Debug.LogWarning("Destroyed pig not contains in the list");
         }
     }
 }

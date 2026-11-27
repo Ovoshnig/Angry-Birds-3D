@@ -1,18 +1,17 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class CameraMediatorsInstaller : IInstaller
 {
-    public class CameraMediatorsInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
+        builder.UseEntryPoints(entryPoints =>
         {
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<CameraSwitchViewBirdFlyerMediator>();
-                entryPoints.Add<CameraSwitchViewEggDroppingBirdPowerMediator>();
-                entryPoints.Add<CameraSwitchViewLevelTrackerMediator>();
-            });
-        }
+            entryPoints.Add<CameraSwitchViewBirdFlyerMediator>();
+            entryPoints.Add<CameraSwitchViewEggDroppingBirdPowerMediator>();
+            entryPoints.Add<CameraSwitchViewLevelTrackerMediator>();
+        });
     }
 }

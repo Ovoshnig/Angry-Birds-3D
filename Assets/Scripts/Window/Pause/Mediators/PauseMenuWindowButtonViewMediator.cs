@@ -2,24 +2,23 @@ using Ovoshnig.UI.Basic;
 using Ovoshnig.Window.Window;
 using R3;
 
-namespace Ovoshnig.Window.Pause
+namespace Ovoshnig.Window.Pause;
+
+public class PauseMenuWindowButtonViewMediator : UIViewMediator<PauseButtonView>
 {
-    public class PauseMenuWindowButtonViewMediator : UIViewMediator<PauseButtonView>
+    private readonly PauseMenuWindow _pauseMenuWindow;
+
+    public PauseMenuWindowButtonViewMediator(PauseMenuWindow pauseMenuWindow, PauseButtonView view)
+        : base(view) => _pauseMenuWindow = pauseMenuWindow;
+
+    protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
     {
-        private readonly PauseMenuWindow _pauseMenuWindow;
+        _pauseMenuWindow.IsOpen
+            .Subscribe(isOpen => view.SetInteractable(!isOpen))
+            .AddTo(viewDisposables);
 
-        public PauseMenuWindowButtonViewMediator(PauseMenuWindow pauseMenuWindow, PauseButtonView view)
-            : base(view) => _pauseMenuWindow = pauseMenuWindow;
-
-        protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
-        {
-            _pauseMenuWindow.IsOpen
-                .Subscribe(isOpen => view.SetInteractable(!isOpen))
-                .AddTo(viewDisposables);
-
-            view.Clicked
-                .Subscribe(_ => _pauseMenuWindow.TryOpen())
-                .AddTo(viewDisposables);
-        }
+        view.Clicked
+            .Subscribe(_ => _pauseMenuWindow.TryOpen())
+            .AddTo(viewDisposables);
     }
 }

@@ -3,31 +3,30 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 
-namespace Ovoshnig.Extensions.VContainer
+namespace Ovoshnig.Extensions.VContainer;
+
+public sealed class FindInstancesProvider<T> : IInstanceProvider where T : Component
 {
-    public sealed class FindInstancesProvider<T> : IInstanceProvider where T : Component
+    private readonly Scene _scene;
+
+    public FindInstancesProvider(Scene scene) => _scene = scene;
+
+    public object SpawnInstance(IObjectResolver resolver)
     {
-        private readonly Scene _scene;
+        if (!_scene.IsValid())
+            throw new VContainerException(typeof(T), $"Invalid find target scene for instances of type {typeof(T).Name}");
 
-        public FindInstancesProvider(Scene scene) => _scene = scene;
+        List<T> components = new();
+        List<GameObject> rootGameObjects = new();
+        _scene.GetRootGameObjects(rootGameObjects);
 
-        public object SpawnInstance(IObjectResolver resolver)
+        foreach (GameObject root in rootGameObjects)
         {
-            if (!_scene.IsValid())
-                throw new VContainerException(typeof(T), $"Invalid find target scene for instances of type {typeof(T).Name}");
-
-            List<T> components = new();
-            List<GameObject> rootGameObjects = new();
-            _scene.GetRootGameObjects(rootGameObjects);
-
-            foreach (GameObject root in rootGameObjects)
-            {
-                T[] found = root.GetComponentsInChildren<T>(true);
-                if (found != null && found.Length > 0)
-                    components.AddRange(found);
-            }
-
-            return components;
+            T[] found = root.GetComponentsInChildren<T>(true);
+            if (found != null && found.Length > 0)
+                components.AddRange(found);
         }
+
+        return components;
     }
 }

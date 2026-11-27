@@ -1,32 +1,31 @@
 using R3;
 using UnityEngine;
 
-namespace Ovoshnig.Window.Window
+namespace Ovoshnig.Window.Window;
+
+public class WindowView : MonoBehaviour
 {
-    public class WindowView : MonoBehaviour
+    private ReactiveProperty<bool> _isActive = null;
+
+    public ReadOnlyReactiveProperty<bool> IsActive
     {
-        private ReactiveProperty<bool> _isActive = null;
-
-        public ReadOnlyReactiveProperty<bool> IsActive
+        get
         {
-            get
+            if (_isActive == null)
             {
-                if (_isActive == null)
-                {
-                    _isActive = new ReactiveProperty<bool>();
+                _isActive = new ReactiveProperty<bool>();
 
-                    Observable
-                        .EveryValueChanged(gameObject, g => g != null && g.activeSelf)
-                        .Subscribe(activeSelf => _isActive.Value = activeSelf)
-                        .RegisterTo(destroyCancellationToken);
-                }
-
-                return _isActive;
+                Observable
+                    .EveryValueChanged(gameObject, g => g != null && g.activeSelf)
+                    .Subscribe(activeSelf => _isActive.Value = activeSelf)
+                    .RegisterTo(destroyCancellationToken);
             }
+
+            return _isActive;
         }
-
-        private void OnDestroy() => _isActive.Dispose();
-
-        public void SetActive(bool isActive) => gameObject.SetActive(isActive);
     }
+
+    private void OnDestroy() => _isActive.Dispose();
+
+    public void SetActive(bool isActive) => gameObject.SetActive(isActive);
 }

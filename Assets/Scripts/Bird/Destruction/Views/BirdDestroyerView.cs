@@ -1,30 +1,29 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AngryBirds3D.Bird.Destruction
+namespace AngryBirds3D.Bird.Destruction;
+
+public class BirdDestroyerView : MonoBehaviour
 {
-    public class BirdDestroyerView : MonoBehaviour
+    private readonly HashSet<BirdDestroyerView> _cloneDestroyerViews = new();
+
+    public bool IsDestroying { get; private set; } = false;
+
+    public void StartDestroying() => IsDestroying = true;
+
+    public void Destroy()
     {
-        private readonly HashSet<BirdDestroyerView> _cloneDestroyerViews = new();
+        Destroy(gameObject);
 
-        public bool IsDestroying { get; private set; } = false;
+        foreach (var cloneDestroyerView in _cloneDestroyerViews)
+            cloneDestroyerView.Destroy();
 
-        public void StartDestroying() => IsDestroying = true;
+        _cloneDestroyerViews.Clear();
+    }
 
-        public void Destroy()
-        {
-            Destroy(gameObject);
-
-            foreach (var cloneDestroyerView in _cloneDestroyerViews)
-                cloneDestroyerView.Destroy();
-
-            _cloneDestroyerViews.Clear();
-        }
-
-        public void AddClone(BirdDestroyerView clone)
-        {
-            if (clone != null)
-                _cloneDestroyerViews.Add(clone);
-        }
+    public void AddClone(BirdDestroyerView clone)
+    {
+        if (clone != null)
+            _cloneDestroyerViews.Add(clone);
     }
 }

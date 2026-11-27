@@ -1,8 +1,7 @@
 using Ovoshnig.UI.Basic;
 
-namespace Ovoshnig.Window.Pause
+namespace Ovoshnig.Window.Pause;
+
+public class PauseButtonView : PanelButtonView
 {
-    public class PauseButtonView : PanelButtonView
-    {
-    }
 }

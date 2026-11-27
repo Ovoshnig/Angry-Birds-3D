@@ -1,10 +1,9 @@
-namespace Ovoshnig.DataStorage.Storage
+namespace Ovoshnig.DataStorage.Storage;
+
+public static class SettingsConstants
 {
-    public static class SettingsConstants
-    {
-        public const string FileName = "settings.json";
-        public const string VSyncKey = "VSync";
-        public const string SFXVolumeKey = "SFXVolume";
-        public const string MusicVolumeKey = "MusicVolume";
-    }
+    public const string FileName = "settings.json";
+    public const string VSyncKey = "VSync";
+    public const string SFXVolumeKey = "SFXVolume";
+    public const string MusicVolumeKey = "MusicVolume";
 }

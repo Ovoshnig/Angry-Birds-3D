@@ -1,6 +1,5 @@
-namespace AngryBirds3D.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking;
+
+public sealed class FailurePanelView : CompletionPanelView
 {
-    public sealed class FailurePanelView : CompletionPanelView
-    {
-    }
 }

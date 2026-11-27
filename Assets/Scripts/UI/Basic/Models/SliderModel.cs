@@ -1,26 +1,25 @@
 using R3;
 using System;
 
-namespace Ovoshnig.UI.Basic
+namespace Ovoshnig.UI.Basic;
+
+public abstract class SliderModel : IDisposable
 {
-    public abstract class SliderModel : IDisposable
+    private readonly ReactiveProperty<float> _value = new();
+
+    public ReadOnlyReactiveProperty<float> Value => _value;
+    public abstract float MinValue { get; }
+    public abstract float MaxValue { get; }
+
+    protected abstract float DefaultValue { get; }
+
+    public virtual void Dispose() => _value.Dispose();
+
+    public void SetClampedValue(float value)
     {
-        private readonly ReactiveProperty<float> _value = new();
-
-        public ReadOnlyReactiveProperty<float> Value => _value;
-        public abstract float MinValue { get; }
-        public abstract float MaxValue { get; }
-
-        protected abstract float DefaultValue { get; }
-
-        public virtual void Dispose() => _value.Dispose();
-
-        public void SetClampedValue(float value)
-        {
-            float clampedValue = Math.Clamp(value, MinValue, MaxValue);
-            _value.Value = clampedValue;
-        }
-
-        protected void ResetValue() => _value.Value = DefaultValue;
+        float clampedValue = Math.Clamp(value, MinValue, MaxValue);
+        _value.Value = clampedValue;
     }
+
+    protected void ResetValue() => _value.Value = DefaultValue;
 }

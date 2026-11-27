@@ -1,20 +1,19 @@
 using LitMotion;
 using UnityEngine;
 
-namespace AngryBirds3D.LevelScore.Points
-{
-    [CreateAssetMenu(fileName = "PointsSettings", menuName = "Scriptable Objects/Points Settings")]
-    public class PointsSettings : ScriptableObject
-    {
-        [field: SerializeField, Min(0)] public int Points { get; private set; } = 500;
-        [field: SerializeField] public Color Color { get; private set; } = Color.white;
-        [field: SerializeField, Min(0f)] public float FontSize { get; private set; } = 1f;
-        [field: SerializeField, Min(0f)] public float AppearanceDuration { get; private set; } = 0.5f;
-        [field: SerializeField, Min(0f)] public float ShowingDuration { get; private set; } = 1f;
-        [field: SerializeField, Min(0f)] public float DisappearanceDuration { get; private set; } = 0.5f;
-        [field: SerializeField] public Ease AppearanceEase { get; private set; } = Ease.OutQuint;
-        [field: SerializeField] public Ease DisappearanceEase { get; private set; } = Ease.InSine;
+namespace AngryBirds3D.LevelScore.Points;
 
-        public float TotalDuration => AppearanceDuration + ShowingDuration + DisappearanceDuration;
-    }
+[CreateAssetMenu(fileName = "PointsSettings", menuName = "Scriptable Objects/Points Settings")]
+public class PointsSettings : ScriptableObject
+{
+    [field: SerializeField, Min(0)] public int Points { get; private set; } = 500;
+    [field: SerializeField] public Color Color { get; private set; } = Color.white;
+    [field: SerializeField, Min(0f)] public float FontSize { get; private set; } = 1f;
+    [field: SerializeField, Min(0f)] public float AppearanceDuration { get; private set; } = 0.5f;
+    [field: SerializeField, Min(0f)] public float ShowingDuration { get; private set; } = 1f;
+    [field: SerializeField, Min(0f)] public float DisappearanceDuration { get; private set; } = 0.5f;
+    [field: SerializeField] public Ease AppearanceEase { get; private set; } = Ease.OutQuint;
+    [field: SerializeField] public Ease DisappearanceEase { get; private set; } = Ease.InSine;
+
+    public float TotalDuration => AppearanceDuration + ShowingDuration + DisappearanceDuration;
 }

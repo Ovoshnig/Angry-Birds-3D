@@ -3,21 +3,20 @@ using Ovoshnig.UI.Input;
 using R3;
 using System.Collections.Generic;
 
-namespace Ovoshnig.UI.TextPrinting
+namespace Ovoshnig.UI.TextPrinting;
+
+public class InputProviderTextPrinterViewsMediator : UIViewsMediator<TextPrinterView>
 {
-    public class InputProviderTextPrinterViewsMediator : UIViewsMediator<TextPrinterView>
+    private readonly UIInputProvider _uiInputProvider;
+
+    public InputProviderTextPrinterViewsMediator(UIInputProvider uiInputProvider, IReadOnlyList<TextPrinterView> views)
+        : base(views) => _uiInputProvider = uiInputProvider;
+
+    protected override void OnViewEnabled(TextPrinterView view, CompositeDisposable viewDisposables)
     {
-        private readonly UIInputProvider _uiInputProvider;
-
-        public InputProviderTextPrinterViewsMediator(UIInputProvider uiInputProvider, IReadOnlyList<TextPrinterView> views)
-            : base(views) => _uiInputProvider = uiInputProvider;
-
-        protected override void OnViewEnabled(TextPrinterView view, CompositeDisposable viewDisposables)
-        {
-            _uiInputProvider.SkipTextPrintingPressed
-                .Where(isPressed => isPressed && view.IsPrinting.CurrentValue)
-                .Subscribe(_ => view.TryCompletePrinting())
-                .AddTo(viewDisposables);
-        }
+        _uiInputProvider.SkipTextPrintingPressed
+            .Where(isPressed => isPressed && view.IsPrinting.CurrentValue)
+            .Subscribe(_ => view.TryCompletePrinting())
+            .AddTo(viewDisposables);
     }
 }

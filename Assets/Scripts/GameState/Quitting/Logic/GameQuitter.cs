@@ -1,16 +1,15 @@
 using UnityEngine;
 
-namespace Ovoshnig.GameState.Quitting
+namespace Ovoshnig.GameState.Quitting;
+
+public class GameQuitter
 {
-    public class GameQuitter
+    public void Quit(int exitCode = 0)
     {
-        public void Quit(int exitCode = 0)
-        {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
+        UnityEditor.EditorApplication.isPlaying = false;
 #else
-            Application.Quit(exitCode);
+        Application.Quit(exitCode);
 #endif
-        }
     }
 }

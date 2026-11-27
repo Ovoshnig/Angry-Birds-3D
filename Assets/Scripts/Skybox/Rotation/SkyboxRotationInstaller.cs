@@ -2,11 +2,10 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.Skybox.Rotation
+namespace Ovoshnig.Skybox.Rotation;
+
+[Serializable]
+public class SkyboxRotationInstaller : IInstaller
 {
-    [Serializable]
-    public class SkyboxRotationInstaller : IInstaller
-    {
-        public void Install(IContainerBuilder builder) => builder.RegisterEntryPoint<SkyboxRotator>().AsSelf();
-    }
+    public void Install(IContainerBuilder builder) => builder.RegisterEntryPoint<SkyboxRotator>().AsSelf();
 }

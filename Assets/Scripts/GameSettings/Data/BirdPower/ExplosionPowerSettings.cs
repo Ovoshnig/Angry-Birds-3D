@@ -1,15 +1,14 @@
 using System;
 using UnityEngine;
 
-namespace Ovoshnig.GameSettings.BirdPower
+namespace Ovoshnig.GameSettings.BirdPower;
+
+[Serializable]
+public class ExplosionPowerSettings
 {
-    [Serializable]
-    public class ExplosionPowerSettings
-    {
-        [field: SerializeField, Min(0f)] public float ExplosionDelay { get; private set; } = 1.5f;
-        [field: SerializeField, Min(0f)] public float ExplosionForce { get; private set; } = 700f;
-        [field: SerializeField, Min(0f)] public float ExplosionRadius { get; private set; } = 6f;
-        [field: SerializeField, Min(0f)] public float UpwardsModifier { get; private set; } = 2f;
-        [field: SerializeField, Min(0)] public int MaxExplosiveCount { get; private set; } = 30;
-    }
+    [field: SerializeField, Min(0f)] public float ExplosionDelay { get; private set; } = 1.5f;
+    [field: SerializeField, Min(0f)] public float ExplosionForce { get; private set; } = 700f;
+    [field: SerializeField, Min(0f)] public float ExplosionRadius { get; private set; } = 6f;
+    [field: SerializeField, Min(0f)] public float UpwardsModifier { get; private set; } = 2f;
+    [field: SerializeField, Min(0)] public int MaxExplosiveCount { get; private set; } = 30;
 }

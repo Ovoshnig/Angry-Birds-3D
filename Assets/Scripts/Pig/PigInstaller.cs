@@ -5,18 +5,17 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Pig
-{
-    [Serializable]
-    public class PigInstaller : IInstaller
-    {
-        [SerializeField] private PigEntityInstaller _entityInstaller;
-        [SerializeField] private PigTrackingInstaller _trackingInstaller;
+namespace AngryBirds3D.Pig;
 
-        public void Install(IContainerBuilder builder)
-        {
-            _entityInstaller.Install(builder);
-            _trackingInstaller.Install(builder);
-        }
+[Serializable]
+public class PigInstaller : IInstaller
+{
+    [SerializeField] private PigEntityInstaller _entityInstaller;
+    [SerializeField] private PigTrackingInstaller _trackingInstaller;
+
+    public void Install(IContainerBuilder builder)
+    {
+        _entityInstaller.Install(builder);
+        _trackingInstaller.Install(builder);
     }
 }

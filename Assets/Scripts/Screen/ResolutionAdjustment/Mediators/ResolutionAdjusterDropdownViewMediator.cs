@@ -1,26 +1,25 @@
 using Ovoshnig.UI.Basic;
 using R3;
 
-namespace Ovoshnig.Screen.ResolutionAdjustment
+namespace Ovoshnig.Screen.ResolutionAdjustment;
+
+public class ResolutionAdjusterDropdownViewMediator : UIViewMediator<ResolutionAdjustDropdownView>
 {
-    public class ResolutionAdjusterDropdownViewMediator : UIViewMediator<ResolutionAdjustDropdownView>
+    private readonly ResolutionAdjuster _resolutionAdjuster;
+
+    public ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
+        ResolutionAdjustDropdownView view) : base(view) => _resolutionAdjuster = resolutionAdjuster;
+
+    protected override void OnViewEnabled(ResolutionAdjustDropdownView view, CompositeDisposable viewDisposables)
     {
-        private readonly ResolutionAdjuster _resolutionAdjuster;
+        view.SetOptions(_resolutionAdjuster.Resolutions);
 
-        public ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
-            ResolutionAdjustDropdownView view) : base(view) => _resolutionAdjuster = resolutionAdjuster;
+        _resolutionAdjuster.CurrentResolutionIndex
+            .Subscribe(view.SetValueWithoutNotify)
+            .AddTo(viewDisposables);
 
-        protected override void OnViewEnabled(ResolutionAdjustDropdownView view, CompositeDisposable viewDisposables)
-        {
-            view.SetOptions(_resolutionAdjuster.Resolutions);
-
-            _resolutionAdjuster.CurrentResolutionIndex
-                .Subscribe(view.SetValueWithoutNotify)
-                .AddTo(viewDisposables);
-
-            view.ValueChanged
-                .Subscribe(_resolutionAdjuster.SetResolution)
-                .AddTo(viewDisposables);
-        }
+        view.ValueChanged
+            .Subscribe(_resolutionAdjuster.SetResolution)
+            .AddTo(viewDisposables);
     }
 }

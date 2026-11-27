@@ -7,85 +7,84 @@ using System;
 using System.Threading;
 using UnityEngine;
 
-namespace AngryBirds3D.Bird.Flight
+namespace AngryBirds3D.Bird.Flight;
+
+public class BirdFlyer : IDisposable
 {
-    public class BirdFlyer : IDisposable
+    private readonly BirdDestroyer _birdDestroyer;
+    private readonly Subject<BirdEntityView> _flightStarted = new();
+    private readonly Subject<BirdEntityView> _birdCollided = new();
+    private readonly Subject<BirdEntityView> _birdFellOut = new();
+    private readonly CancellationTokenSource _cts = new();
+    private readonly float _minYPosition;
+
+    public BirdFlyer(BirdDestroyer birdDestroyer, Terrain levelTerrain, BirdSettings birdSettings)
     {
-        private readonly BirdDestroyer _birdDestroyer;
-        private readonly Subject<BirdEntityView> _flightStarted = new();
-        private readonly Subject<BirdEntityView> _birdCollided = new();
-        private readonly Subject<BirdEntityView> _birdFellOut = new();
-        private readonly CancellationTokenSource _cts = new();
-        private readonly float _minYPosition;
+        _birdDestroyer = birdDestroyer;
+        _minYPosition = levelTerrain.transform.position.y - birdSettings.FallOutDepth;
 
-        public BirdFlyer(BirdDestroyer birdDestroyer, Terrain levelTerrain, BirdSettings birdSettings)
-        {
-            _birdDestroyer = birdDestroyer;
-            _minYPosition = levelTerrain.transform.position.y - birdSettings.FallOutDepth;
+        FlightInterrupted = Observable.Merge(_birdCollided, _birdFellOut);
+    }
 
-            FlightInterrupted = Observable.Merge(_birdCollided, _birdFellOut);
-        }
+    public Observable<BirdEntityView> FlightStarted => _flightStarted;
+    public Observable<BirdEntityView> BirdCollided => _birdCollided;
+    public Observable<BirdEntityView> BirdFellOut => _birdFellOut;
+    public Observable<BirdEntityView> FlightInterrupted { get; }
 
-        public Observable<BirdEntityView> FlightStarted => _flightStarted;
-        public Observable<BirdEntityView> BirdCollided => _birdCollided;
-        public Observable<BirdEntityView> BirdFellOut => _birdFellOut;
-        public Observable<BirdEntityView> FlightInterrupted { get; }
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
 
-        public void Dispose()
-        {
-            _cts.Cancel();
-            _cts.Dispose();
+        _flightStarted.Dispose();
+        _birdCollided.Dispose();
+        _birdFellOut.Dispose();
+    }
 
-            _flightStarted.Dispose();
-            _birdCollided.Dispose();
-            _birdFellOut.Dispose();
-        }
+    public void StartFlight(BirdEntityView birdEntityView)
+    {
+        if (birdEntityView == null)
+            return;
 
-        public void StartFlight(BirdEntityView birdEntityView)
-        {
-            if (birdEntityView == null)
-                return;
+        _flightStarted.OnNext(birdEntityView);
+        FlyAsync(birdEntityView).Forget();
+    }
 
-            _flightStarted.OnNext(birdEntityView);
-            FlyAsync(birdEntityView).Forget();
-        }
+    private async UniTask FlyAsync(BirdEntityView birdEntityView)
+    {
+        using CancellationTokenSource flightCts = CancellationTokenSource
+            .CreateLinkedTokenSource(_cts.Token, birdEntityView.destroyCancellationToken);
 
-        private async UniTask FlyAsync(BirdEntityView birdEntityView)
-        {
-            using CancellationTokenSource flightCts = CancellationTokenSource
-                .CreateLinkedTokenSource(_cts.Token, birdEntityView.destroyCancellationToken);
+        BirdFlyerView flyerView = birdEntityView.FlyerView;
+        flyerView.StretchAsync(flightCts.Token).Forget();
 
-            BirdFlyerView flyerView = birdEntityView.FlyerView;
-            flyerView.StretchAsync(flightCts.Token).Forget();
+        using CompositeDisposable flightDisposables = new();
 
-            using CompositeDisposable flightDisposables = new();
-
-            birdEntityView.ColliderView.Collided
-                .Take(1)
-                .Subscribe(_ =>
-                {
-                    _birdCollided.OnNext(birdEntityView);
-                    flightCts.Cancel();
-                })
-                .AddTo(flightDisposables);
-
-            Transform birdTransform = birdEntityView.transform;
-
-            while (!flightCts.IsCancellationRequested)
+        birdEntityView.ColliderView.Collided
+            .Take(1)
+            .Subscribe(_ =>
             {
-                flyerView.LookAtVelocityDirection();
+                _birdCollided.OnNext(birdEntityView);
+                flightCts.Cancel();
+            })
+            .AddTo(flightDisposables);
 
-                if (birdTransform.position.y < _minYPosition)
-                {
-                    _birdFellOut.OnNext(birdEntityView);
-                    _birdDestroyer.DestroyImmediate(birdEntityView);
-                    flightCts.Cancel();
+        Transform birdTransform = birdEntityView.transform;
 
-                    break;
-                }
+        while (!flightCts.IsCancellationRequested)
+        {
+            flyerView.LookAtVelocityDirection();
 
-                await UniTask.Yield(flightCts.Token);
+            if (birdTransform.position.y < _minYPosition)
+            {
+                _birdFellOut.OnNext(birdEntityView);
+                _birdDestroyer.DestroyImmediate(birdEntityView);
+                flightCts.Cancel();
+
+                break;
             }
+
+            await UniTask.Yield(flightCts.Token);
         }
     }
 }

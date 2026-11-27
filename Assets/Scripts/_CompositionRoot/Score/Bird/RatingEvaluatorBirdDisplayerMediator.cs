@@ -3,25 +3,24 @@ using AngryBirds3D.LevelScore.RatingEvaluation;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class RatingEvaluatorBirdDisplayerMediator : Mediator
 {
-    public class RatingEvaluatorBirdDisplayerMediator : Mediator
+    private readonly RatingEvaluator _ratingEvaluator;
+    private readonly BirdPointsDisplayer _birdPointsDisplayer;
+
+    public RatingEvaluatorBirdDisplayerMediator(RatingEvaluator ratingEvaluator,
+        BirdPointsDisplayer birdPointsDisplayer)
     {
-        private readonly RatingEvaluator _ratingEvaluator;
-        private readonly BirdPointsDisplayer _birdPointsDisplayer;
-    
-        public RatingEvaluatorBirdDisplayerMediator(RatingEvaluator ratingEvaluator,
-            BirdPointsDisplayer birdPointsDisplayer)
-        {
-            _ratingEvaluator = ratingEvaluator;
-            _birdPointsDisplayer = birdPointsDisplayer;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _birdPointsDisplayer.SequenceDisplayCompleted
-                .Subscribe(_ => _ratingEvaluator.Evaluate())
-                .AddTo(disposables);
-        }
+        _ratingEvaluator = ratingEvaluator;
+        _birdPointsDisplayer = birdPointsDisplayer;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _birdPointsDisplayer.SequenceDisplayCompleted
+            .Subscribe(_ => _ratingEvaluator.Evaluate())
+            .AddTo(disposables);
     }
 }

@@ -3,24 +3,23 @@ using Ovoshnig.GameState.Pause;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class AudioMixerTunerGamePauserMediator : Mediator
 {
-    public class AudioMixerTunerGamePauserMediator : Mediator
+    private readonly AudioMixerTuner _audioMixerTuner;
+    private readonly GamePauser _gamePauser;
+
+    public AudioMixerTunerGamePauserMediator(AudioMixerTuner audioMixerTuner, GamePauser gamePauser)
     {
-        private readonly AudioMixerTuner _audioMixerTuner;
-        private readonly GamePauser _gamePauser;
-    
-        public AudioMixerTunerGamePauserMediator(AudioMixerTuner audioMixerTuner, GamePauser gamePauser)
-        {
-            _audioMixerTuner = audioMixerTuner;
-            _gamePauser = gamePauser;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _gamePauser.IsPaused
-                .Subscribe(_audioMixerTuner.SetPause)
-                .AddTo(disposables);
-        }
+        _audioMixerTuner = audioMixerTuner;
+        _gamePauser = gamePauser;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _gamePauser.IsPaused
+            .Subscribe(_audioMixerTuner.SetPause)
+            .AddTo(disposables);
     }
 }

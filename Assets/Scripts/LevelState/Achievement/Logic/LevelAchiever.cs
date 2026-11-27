@@ -6,44 +6,43 @@ using System;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelState.Achievement
+namespace AngryBirds3D.LevelState.Achievement;
+
+public class LevelAchiever : IStartable, IDisposable
 {
-    public class LevelAchiever : IStartable, IDisposable
+    private readonly LevelStateTracker _levelTracker;
+    private readonly SaveStorage _saveStorage;
+    private readonly SceneSettings _sceneSettings;
+    private readonly CompositeDisposable _disposables = new();
+
+    public LevelAchiever(LevelStateTracker levelTracker,
+        SaveStorage saveStorage,
+        SceneSettings sceneSettings)
     {
-        private readonly LevelStateTracker _levelTracker;
-        private readonly SaveStorage _saveStorage;
-        private readonly SceneSettings _sceneSettings;
-        private readonly CompositeDisposable _disposables = new();
+        _levelTracker = levelTracker;
+        _saveStorage = saveStorage;
+        _sceneSettings = sceneSettings;
+    }
 
-        public LevelAchiever(LevelStateTracker levelTracker,
-            SaveStorage saveStorage,
-            SceneSettings sceneSettings)
-        {
-            _levelTracker = levelTracker;
-            _saveStorage = saveStorage;
-            _sceneSettings = sceneSettings;
-        }
+    public void Start()
+    {
+        _levelTracker.Cleared
+            .Subscribe(_ => OnLevelCleared())
+            .AddTo(_disposables);
+    }
 
-        public void Start()
-        {
-            _levelTracker.Cleared
-                .Subscribe(_ => OnLevelCleared())
-                .AddTo(_disposables);
-        }
+    public void Dispose() => _disposables.Dispose();
 
-        public void Dispose() => _disposables.Dispose();
+    private void OnLevelCleared()
+    {
+        int sceneCount = SceneManager.sceneCountInBuildSettings;
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        int nextLevel = currentLevel + 1;
+        int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
 
-        private void OnLevelCleared()
-        {
-            int sceneCount = SceneManager.sceneCountInBuildSettings;
-            int currentLevel = SceneManager.GetActiveScene().buildIndex;
-            int nextLevel = currentLevel + 1;
-            int achievedLevel = _saveStorage.Get(SaveConstants.AchievedLevelKey, _sceneSettings.FirstLevelIndex);
-
-            if (currentLevel < _sceneSettings.ComingSoonSceneIndex
-                && nextLevel > achievedLevel
-                && nextLevel < sceneCount)
-                _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);
-        }
+        if (currentLevel < _sceneSettings.ComingSoonSceneIndex
+            && nextLevel > achievedLevel
+            && nextLevel < sceneCount)
+            _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);
     }
 }

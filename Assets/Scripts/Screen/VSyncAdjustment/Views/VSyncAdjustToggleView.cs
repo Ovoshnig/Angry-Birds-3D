@@ -1,8 +1,7 @@
 using Ovoshnig.UI.Basic;
 
-namespace Ovoshnig.Screen.VSyncAdjustment
+namespace Ovoshnig.Screen.VSyncAdjustment;
+
+public class VSyncAdjustToggleView : ToggleView
 {
-    public class VSyncAdjustToggleView : ToggleView
-    {
-    }
 }

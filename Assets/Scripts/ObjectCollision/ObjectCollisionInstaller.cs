@@ -5,17 +5,16 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.ObjectCollision
+namespace Ovoshnig.ObjectCollision;
+
+[Serializable]
+public class ObjectCollisionInstaller : IInstaller
 {
-    [Serializable]
-    public class ObjectCollisionInstaller : IInstaller
+    [SerializeField] private ObjectCollisionCollisionInstaller _collisionInstaller;
+    [SerializeField] private ObjectCollisionEntityInstaller _entityInstaller;
+    public void Install(IContainerBuilder builder)
     {
-        [SerializeField] private ObjectCollisionCollisionInstaller _collisionInstaller;
-        [SerializeField] private ObjectCollisionEntityInstaller _entityInstaller;
-        public void Install(IContainerBuilder builder)
-        {
-            _collisionInstaller.Install(builder);
-            _entityInstaller.Install(builder);
-        }
+        _collisionInstaller.Install(builder);
+        _entityInstaller.Install(builder);
     }
 }

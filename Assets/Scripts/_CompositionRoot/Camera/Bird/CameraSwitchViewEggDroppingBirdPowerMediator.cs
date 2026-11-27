@@ -4,25 +4,24 @@ using Cysharp.Threading.Tasks;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class CameraSwitchViewEggDroppingBirdPowerMediator : Mediator
 {
-    public class CameraSwitchViewEggDroppingBirdPowerMediator : Mediator
+    private readonly CameraSwitchView _cameraSwitchView;
+    private readonly EggDroppingBirdPower _eggDroppingBirdPower;
+
+    public CameraSwitchViewEggDroppingBirdPowerMediator(CameraSwitchView cameraSwitchView,
+        EggDroppingBirdPower eggDroppingBirdPower)
     {
-        private readonly CameraSwitchView _cameraSwitchView;
-        private readonly EggDroppingBirdPower _eggDroppingBirdPower;
-    
-        public CameraSwitchViewEggDroppingBirdPowerMediator(CameraSwitchView cameraSwitchView,
-            EggDroppingBirdPower eggDroppingBirdPower)
-        {
-            _cameraSwitchView = cameraSwitchView;
-            _eggDroppingBirdPower = eggDroppingBirdPower;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _eggDroppingBirdPower.EggDropped
-                .Subscribe(_ => _cameraSwitchView.SwitchToStructureAsync().Forget())
-                .AddTo(disposables);
-        }
+        _cameraSwitchView = cameraSwitchView;
+        _eggDroppingBirdPower = eggDroppingBirdPower;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _eggDroppingBirdPower.EggDropped
+            .Subscribe(_ => _cameraSwitchView.SwitchToStructureAsync().Forget())
+            .AddTo(disposables);
     }
 }

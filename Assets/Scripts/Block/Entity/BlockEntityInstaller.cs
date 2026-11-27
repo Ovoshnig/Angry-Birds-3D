@@ -3,11 +3,10 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Block.Entity
+namespace AngryBirds3D.Block.Entity;
+
+[Serializable]
+public class BlockEntityInstaller : IInstaller
 {
-    [Serializable]
-    public class BlockEntityInstaller : IInstaller
-    {
-        public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BlockEntityView>();
-    }
+    public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<BlockEntityView>();
 }

@@ -3,15 +3,14 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.UI.PanelSwitching
+namespace Ovoshnig.UI.PanelSwitching;
+
+[Serializable]
+public class PanelSwitchingInstaller : IInstaller
 {
-    [Serializable]
-    public class PanelSwitchingInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstancesInHierarchy<PanelCloseButtonView>();
-            builder.RegisterEntryPoint<InputProviderCloseButtonViewsMediator>();
-        }
+        builder.RegisterInstancesInHierarchy<PanelCloseButtonView>();
+        builder.RegisterEntryPoint<InputProviderCloseButtonViewsMediator>();
     }
 }

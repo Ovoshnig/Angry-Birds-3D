@@ -1,8 +1,7 @@
 using Ovoshnig.UI.Basic;
 
-namespace Ovoshnig.Window.Resumption
+namespace Ovoshnig.Window.Resumption;
+
+public class ResumeButtonView : PanelButtonView
 {
-    public class ResumeButtonView : PanelButtonView
-    {
-    }
 }

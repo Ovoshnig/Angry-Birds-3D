@@ -2,16 +2,15 @@ using Ovoshnig.Screen.SplashScreen;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class SplashScreenLifetimeScope : LifetimeScope
 {
-    public class SplashScreenLifetimeScope : LifetimeScope
+    protected override void Configure(IContainerBuilder builder)
     {
-        protected override void Configure(IContainerBuilder builder)
-        {
-            builder.RegisterEntryPoint<SplashScreenDisplayer>().AsSelf();
-            builder.RegisterEntryPoint<CursorShowerSplashScreenDisplayerMediator>().AsSelf();
-    
-            new SceneMediatorsInstaller().Install(builder);
-        }
+        builder.RegisterEntryPoint<SplashScreenDisplayer>().AsSelf();
+        builder.RegisterEntryPoint<CursorShowerSplashScreenDisplayerMediator>().AsSelf();
+
+        new SceneMediatorsInstaller().Install(builder);
     }
 }

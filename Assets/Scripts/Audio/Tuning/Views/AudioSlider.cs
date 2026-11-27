@@ -1,11 +1,10 @@
 using UnityEngine.UIElements;
 
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+[UxmlElement]
+public partial class AudioSlider : Slider
 {
-    [UxmlElement]
-    public partial class AudioSlider : Slider
-    {
-        [UxmlAttribute]
-        public AudioChannel Channel { get; private set; }
-    }
+    [UxmlAttribute]
+    public AudioChannel Channel { get; private set; }
 }

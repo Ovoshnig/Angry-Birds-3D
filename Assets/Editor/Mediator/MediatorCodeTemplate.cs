@@ -26,23 +26,22 @@ public static class MediatorCodeTemplate
 $@"using {typeof(Mediator).Namespace};
 using R3;
 
-namespace 
+namespace ;
+
+public class {mediatorName} : {nameof(Mediator)}
 {{
-    public class {mediatorName} : {nameof(Mediator)}
+    private readonly {dependencyA} {fieldA};
+    private readonly {dependencyB} {fieldB};
+
+    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} {GetParamName(dependencyB)})
     {{
-        private readonly {dependencyA} {fieldA};
-        private readonly {dependencyB} {fieldB};
+        {fieldA} = {GetParamName(dependencyA)};
+        {fieldB} = {GetParamName(dependencyB)};
+    }}
 
-        public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} {GetParamName(dependencyB)})
-        {{
-            {fieldA} = {GetParamName(dependencyA)};
-            {fieldB} = {GetParamName(dependencyB)};
-        }}
-
-        protected override void Bind(CompositeDisposable disposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
+    protected override void Bind(CompositeDisposable disposables)
+    {{
+        throw new System.NotImplementedException();
     }}
 }}
 ";
@@ -56,19 +55,18 @@ namespace
 $@"using {typeof(UIViewMediator<>).Namespace};
 using R3;
 
-namespace 
+namespace ;
+
+public class {mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
 {{
-    public class {mediatorName} : {nameof(UIViewMediator<UIView>)}<{dependencyB}>
+    private readonly {dependencyA} {serviceField};
+
+    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} view)
+        : base(view) => {serviceField} = {GetParamName(dependencyA)};
+
+    protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
     {{
-        private readonly {dependencyA} {serviceField};
-
-        public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, {dependencyB} view)
-            : base(view) => {serviceField} = {GetParamName(dependencyA)};
-
-        protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
+        throw new System.NotImplementedException();
     }}
 }}
 ";
@@ -83,19 +81,18 @@ $@"using {typeof(UIViewsMediator<>).Namespace};
 using R3;
 using System.Collections.Generic;
 
-namespace 
+namespace ;
+
+public class {mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
 {{
-    public class {mediatorName} : {nameof(UIViewsMediator<UIView>)}<{dependencyB}>
+    private readonly {dependencyA} {serviceField};
+
+    public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, IReadOnlyList<{dependencyB}> views)
+        : base(views) => {serviceField} = {GetParamName(dependencyA)};
+
+    protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
     {{
-        private readonly {dependencyA} {serviceField};
-
-        public {mediatorName}({dependencyA} {GetParamName(dependencyA)}, IReadOnlyList<{dependencyB}> views)
-            : base(views) => {serviceField} = {GetParamName(dependencyA)};
-
-        protected override void OnViewEnabled({dependencyB} view, CompositeDisposable viewDisposables)
-        {{
-            throw new System.NotImplementedException();
-        }}
+        throw new System.NotImplementedException();
     }}
 }}
 ";

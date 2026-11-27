@@ -3,15 +3,14 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.Screen.FullScreenAdjustment
+namespace Ovoshnig.Screen.FullScreenAdjustment;
+
+[Serializable]
+public class FullScreenAdjustmentInstaller : IInstaller
 {
-    [Serializable]
-    public class FullScreenAdjustmentInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstanceInHierarchy<FullScreenAdjustToggleView>();
-            builder.RegisterEntryPoint<FullScreenAdjusterToggleViewMediator>();
-        }
+        builder.RegisterInstanceInHierarchy<FullScreenAdjustToggleView>();
+        builder.RegisterEntryPoint<FullScreenAdjusterToggleViewMediator>();
     }
 }

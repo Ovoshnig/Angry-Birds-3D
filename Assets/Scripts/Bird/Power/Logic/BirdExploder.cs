@@ -2,32 +2,31 @@ using R3;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace AngryBirds3D.Bird.Power
+namespace AngryBirds3D.Bird.Power;
+
+public class BirdExploder
 {
-    public class BirdExploder
+    private readonly Subject<BirdExplosionData> _exploded = new();
+
+    public Observable<BirdExplosionData> Exploded => _exploded;
+
+    public void Explode(GameObject explodingObject, Collider[] colliders, float force, float radius,
+        float upwardsModifier, AudioResource explosionResource)
     {
-        private readonly Subject<BirdExplosionData> _exploded = new();
+        Vector3 explodingObjectPosition = explodingObject.transform.position;
+        Physics.OverlapSphereNonAlloc(explodingObjectPosition, radius, colliders);
 
-        public Observable<BirdExplosionData> Exploded => _exploded;
-
-        public void Explode(GameObject explodingObject, Collider[] colliders, float force, float radius,
-            float upwardsModifier, AudioResource explosionResource)
+        foreach (Collider collider in colliders)
         {
-            Vector3 explodingObjectPosition = explodingObject.transform.position;
-            Physics.OverlapSphereNonAlloc(explodingObjectPosition, radius, colliders);
+            if (collider == null || collider.gameObject == explodingObject)
+                continue;
 
-            foreach (Collider collider in colliders)
-            {
-                if (collider == null || collider.gameObject == explodingObject)
-                    continue;
+            Rigidbody rigidbody = collider.attachedRigidbody;
 
-                Rigidbody rigidbody = collider.attachedRigidbody;
-
-                if (rigidbody != null)
-                    rigidbody.AddExplosionForce(force, explodingObjectPosition, radius, upwardsModifier);
-            }
-
-            _exploded.OnNext(new BirdExplosionData(explodingObject.transform, force, radius, explosionResource));
+            if (rigidbody != null)
+                rigidbody.AddExplosionForce(force, explodingObjectPosition, radius, upwardsModifier);
         }
+
+        _exploded.OnNext(new BirdExplosionData(explodingObject.transform, force, radius, explosionResource));
     }
 }

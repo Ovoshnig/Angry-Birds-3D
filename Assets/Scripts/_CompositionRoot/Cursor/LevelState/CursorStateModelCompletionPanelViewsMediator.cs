@@ -4,28 +4,27 @@ using Ovoshnig.Mediation;
 using R3;
 using System.Collections.Generic;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class CursorStateModelCompletionPanelViewsMediator : Mediator
 {
-    public class CursorStateModelCompletionPanelViewsMediator : Mediator
+    private readonly CursorStateModel _cursorStateModel;
+    private readonly IReadOnlyList<CompletionPanelView> _completionPanelViews;
+
+    public CursorStateModelCompletionPanelViewsMediator(CursorStateModel cursorStateModel,
+        IReadOnlyList<CompletionPanelView> completionPanelViews)
     {
-        private readonly CursorStateModel _cursorStateModel;
-        private readonly IReadOnlyList<CompletionPanelView> _completionPanelViews;
-    
-        public CursorStateModelCompletionPanelViewsMediator(CursorStateModel cursorStateModel,
-            IReadOnlyList<CompletionPanelView> completionPanelViews)
+        _cursorStateModel = cursorStateModel;
+        _completionPanelViews = completionPanelViews;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        foreach (var panelView in _completionPanelViews)
         {
-            _cursorStateModel = cursorStateModel;
-            _completionPanelViews = completionPanelViews;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            foreach (var panelView in _completionPanelViews)
-            {
-                panelView.Shown
-                    .Subscribe(_ => _cursorStateModel.SetState(CursorState.UIHover))
-                    .AddTo(disposables);
-            }
+            panelView.Shown
+                .Subscribe(_ => _cursorStateModel.SetState(CursorState.UIHover))
+                .AddTo(disposables);
         }
     }
 }

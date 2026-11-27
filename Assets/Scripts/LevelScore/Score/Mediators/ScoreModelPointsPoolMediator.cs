@@ -2,24 +2,23 @@ using AngryBirds3D.LevelScore.Points;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace AngryBirds3D.LevelScore.Score
+namespace AngryBirds3D.LevelScore.Score;
+
+public class ScoreModelPointsPoolMediator : Mediator
 {
-    public class ScoreModelPointsPoolMediator : Mediator
+    private readonly ScoreModel _scoreModel;
+    private readonly PointsObjectPool _pointsPool;
+
+    public ScoreModelPointsPoolMediator(ScoreModel scoreModel, PointsObjectPool pointsPool)
     {
-        private readonly ScoreModel _scoreModel;
-        private readonly PointsObjectPool _pointsPool;
+        _scoreModel = scoreModel;
+        _pointsPool = pointsPool;
+    }
 
-        public ScoreModelPointsPoolMediator(ScoreModel scoreModel, PointsObjectPool pointsPool)
-        {
-            _scoreModel = scoreModel;
-            _pointsPool = pointsPool;
-        }
-
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _pointsPool.PointsAdded
-                .Subscribe(_scoreModel.Increase)
-                .AddTo(disposables);
-        }
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _pointsPool.PointsAdded
+            .Subscribe(_scoreModel.Increase)
+            .AddTo(disposables);
     }
 }

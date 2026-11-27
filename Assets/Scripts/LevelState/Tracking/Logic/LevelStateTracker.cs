@@ -5,56 +5,55 @@ using R3;
 using System;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking;
+
+public class LevelStateTracker : IPostStartable, IDisposable
 {
-    public class LevelStateTracker : IPostStartable, IDisposable
+    private readonly Subject<Unit> _started = new();
+
+    public LevelStateTracker(StartCameraSwitch startCameraSwitch, ActivityTracker activityTracker,
+        BirdTracker birdTracker, PigTracker pigTracker)
     {
-        private readonly Subject<Unit> _started = new();
+        Observable<Unit> clearedSource = Observable.Merge(
+            activityTracker.CalmedDown
+                .Where(_ => !pigTracker.AnyPigs),
+            pigTracker.PigsLeft
+                .Where(_ => !activityTracker.IsActive.CurrentValue));
 
-        public LevelStateTracker(StartCameraSwitch startCameraSwitch, ActivityTracker activityTracker,
-            BirdTracker birdTracker, PigTracker pigTracker)
-        {
-            Observable<Unit> clearedSource = Observable.Merge(
-                activityTracker.CalmedDown
-                    .Where(_ => !pigTracker.AnyPigs),
-                pigTracker.PigsLeft
-                    .Where(_ => !activityTracker.IsActive.CurrentValue));
+        Observable<Unit> failedSource = birdTracker.BirdsLeft
+            .Where(_ => pigTracker.AnyPigs);
 
-            Observable<Unit> failedSource = birdTracker.BirdsLeft
-                .Where(_ => pigTracker.AnyPigs);
+        Observable<bool> result = Observable.Merge(
+                clearedSource.Select(_ => true),
+                failedSource.Select(_ => false))
+            .Take(1)
+            .Share();
 
-            Observable<bool> result = Observable.Merge(
-                    clearedSource.Select(_ => true),
-                    failedSource.Select(_ => false))
-                .Take(1)
-                .Share();
+        MovedToNext = Observable.Merge(
+            startCameraSwitch.Completed,
+            activityTracker.CalmedDown
+                .Where(_ => pigTracker.AnyPigs && birdTracker.AnyUnlaunchedBirds))
+            .TakeUntil(result)
+            .Share();
 
-            MovedToNext = Observable.Merge(
-                startCameraSwitch.Completed,
-                activityTracker.CalmedDown
-                    .Where(_ => pigTracker.AnyPigs && birdTracker.AnyUnlaunchedBirds))
-                .TakeUntil(result)
-                .Share();
+        Cleared = result
+            .Where(isCleared => isCleared)
+            .AsUnitObservable();
 
-            Cleared = result
-                .Where(isCleared => isCleared)
-                .AsUnitObservable();
+        Failed = result
+            .Where(isCleared => !isCleared)
+            .AsUnitObservable();
 
-            Failed = result
-                .Where(isCleared => !isCleared)
-                .AsUnitObservable();
-
-            Completed = result.AsUnitObservable();
-        }
-
-        public Observable<Unit> Started => _started;
-        public Observable<Unit> MovedToNext { get; }
-        public Observable<Unit> Cleared { get; }
-        public Observable<Unit> Failed { get; }
-        public Observable<Unit> Completed { get; }
-
-        public void PostStart() => _started.OnNext(Unit.Default);
-
-        public void Dispose() => _started.Dispose();
+        Completed = result.AsUnitObservable();
     }
+
+    public Observable<Unit> Started => _started;
+    public Observable<Unit> MovedToNext { get; }
+    public Observable<Unit> Cleared { get; }
+    public Observable<Unit> Failed { get; }
+    public Observable<Unit> Completed { get; }
+
+    public void PostStart() => _started.OnNext(Unit.Default);
+
+    public void Dispose() => _started.Dispose();
 }

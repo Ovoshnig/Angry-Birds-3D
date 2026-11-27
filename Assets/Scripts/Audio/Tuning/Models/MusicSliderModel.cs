@@ -1,18 +1,17 @@
 using Ovoshnig.DataStorage.Storage;
 using Ovoshnig.GameSettings;
 
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+public sealed class MusicSliderModel : AudioSliderModel
 {
-    public sealed class MusicSliderModel : AudioSliderModel
+    public MusicSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
+        : base(settingsStorage, audioSettings)
     {
-        public MusicSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
-            : base(settingsStorage, audioSettings)
-        {
-        }
-
-        public override AudioChannel Channel => AudioChannel.Music;
-        public override string MixerParameterName => AudioMixerConstants.MusicVolumeParameter;
-
-        protected override string DataKey => SettingsConstants.MusicVolumeKey;
     }
+
+    public override AudioChannel Channel => AudioChannel.Music;
+    public override string MixerParameterName => AudioMixerConstants.MusicVolumeParameter;
+
+    protected override string DataKey => SettingsConstants.MusicVolumeKey;
 }

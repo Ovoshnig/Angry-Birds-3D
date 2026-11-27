@@ -1,10 +1,9 @@
-namespace Ovoshnig.DataStorage.Storage
+namespace Ovoshnig.DataStorage.Storage;
+
+public static class SaveConstants
 {
-    public static class SaveConstants
-    {
-        public const string FileName = "save.json";
-        public const string HashFileName = ".hash";
-        public const string AchievedLevelKey = "AchievedLevel";
-        public const string StarRecordByLevelIndex = "StarRecordByLevelIndex";
-    }
+    public const string FileName = "save.json";
+    public const string HashFileName = ".hash";
+    public const string AchievedLevelKey = "AchievedLevel";
+    public const string StarRecordByLevelIndex = "StarRecordByLevelIndex";
 }

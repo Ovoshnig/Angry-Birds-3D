@@ -5,44 +5,43 @@ using System;
 using System.Threading;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Camera.Switching
+namespace AngryBirds3D.Camera.Switching;
+
+public class StartCameraSwitch : IPostStartable, IDisposable
 {
-    public class StartCameraSwitch : IPostStartable, IDisposable
+    private readonly CameraSwitchView _switchView;
+    private readonly CameraSettings _settings;
+    private readonly Subject<Unit> _completed = new();
+    private readonly CancellationTokenSource _cts = new();
+
+    public StartCameraSwitch(CameraSwitchView switchView,
+        CameraSettings settings)
     {
-        private readonly CameraSwitchView _switchView;
-        private readonly CameraSettings _settings;
-        private readonly Subject<Unit> _completed = new();
-        private readonly CancellationTokenSource _cts = new();
+        _switchView = switchView;
+        _settings = settings;
+    }
 
-        public StartCameraSwitch(CameraSwitchView switchView,
-            CameraSettings settings)
-        {
-            _switchView = switchView;
-            _settings = settings;
-        }
+    public Observable<Unit> Completed => _completed;
 
-        public Observable<Unit> Completed => _completed;
+    public void PostStart() => SwitchAsync().Forget();
 
-        public void PostStart() => SwitchAsync().Forget();
+    public void Dispose()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
 
-        public void Dispose()
-        {
-            _cts.Cancel();
-            _cts.Dispose();
+        _completed.Dispose();
+    }
 
-            _completed.Dispose();
-        }
+    private async UniTask SwitchAsync()
+    {
+        await UniTask.WaitForSeconds(_settings.StructureShowingDuration, cancellationToken: _cts.Token);
 
-        private async UniTask SwitchAsync()
-        {
-            await UniTask.WaitForSeconds(_settings.StructureShowingDuration, cancellationToken: _cts.Token);
+        await _switchView.SwitchToSlingshotAsync();
+        await UniTask.WaitForSeconds(_settings.SlingshotShowingDuration, cancellationToken: _cts.Token);
 
-            await _switchView.SwitchToSlingshotAsync();
-            await UniTask.WaitForSeconds(_settings.SlingshotShowingDuration, cancellationToken: _cts.Token);
+        await _switchView.SwitchToGeneralAsync();
 
-            await _switchView.SwitchToGeneralAsync();
-
-            _completed.OnNext(Unit.Default);
-        }
+        _completed.OnNext(Unit.Default);
     }
 }

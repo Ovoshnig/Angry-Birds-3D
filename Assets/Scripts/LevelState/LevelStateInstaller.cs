@@ -5,21 +5,20 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelState
+namespace AngryBirds3D.LevelState;
+
+[Serializable]
+public class LevelStateInstaller : IInstaller
 {
-    [Serializable]
-    public class LevelStateInstaller : IInstaller
+    [SerializeField] private LevelStateTrackingInstaller _stateTrackingInstaller;
+    [SerializeField] private LevelStateAchievementInstaller _levelAchievementInstaller;
+    [SerializeField] private LevelSfxProfile _sfxProfile;
+
+    public void Install(IContainerBuilder builder)
     {
-        [SerializeField] private LevelStateTrackingInstaller _stateTrackingInstaller;
-        [SerializeField] private LevelStateAchievementInstaller _levelAchievementInstaller;
-        [SerializeField] private LevelSfxProfile _sfxProfile;
+        _stateTrackingInstaller.Install(builder);
+        _levelAchievementInstaller.Install(builder);
 
-        public void Install(IContainerBuilder builder)
-        {
-            _stateTrackingInstaller.Install(builder);
-            _levelAchievementInstaller.Install(builder);
-
-            builder.RegisterInstance(_sfxProfile);
-        }
+        builder.RegisterInstance(_sfxProfile);
     }
 }

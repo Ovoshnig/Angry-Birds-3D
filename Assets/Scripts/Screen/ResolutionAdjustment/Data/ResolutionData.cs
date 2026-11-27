@@ -1,25 +1,24 @@
 using System;
 using UnityEngine;
 
-namespace Ovoshnig.Screen.ResolutionAdjustment
+namespace Ovoshnig.Screen.ResolutionAdjustment;
+
+public record ResolutionData(int Width, int Height, RefreshRate RefreshRate) : IComparable<ResolutionData>
 {
-    public record ResolutionData(int Width, int Height, RefreshRate RefreshRate) : IComparable<ResolutionData>
+    public int CompareTo(ResolutionData other)
     {
-        public int CompareTo(ResolutionData other)
-        {
-            int widthComparison = Width.CompareTo(other.Width);
+        int widthComparison = Width.CompareTo(other.Width);
 
-            if (widthComparison != 0)
-                return widthComparison;
+        if (widthComparison != 0)
+            return widthComparison;
 
-            int heightComparison = Height.CompareTo(other.Height);
+        int heightComparison = Height.CompareTo(other.Height);
 
-            if (heightComparison != 0)
-                return heightComparison;
+        if (heightComparison != 0)
+            return heightComparison;
 
-            return RefreshRate.value.CompareTo(other.RefreshRate.value);
-        }
-
-        public override string ToString() => $"{Width}x{Height}@{RefreshRate.value:F2}";
+        return RefreshRate.value.CompareTo(other.RefreshRate.value);
     }
+
+    public override string ToString() => $"{Width}x{Height}@{RefreshRate.value:F2}";
 }

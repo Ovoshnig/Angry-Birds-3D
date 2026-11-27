@@ -6,41 +6,40 @@ using Ovoshnig.Mediation;
 using R3;
 using System.Threading;
 
-namespace AngryBirds3D.Bird.Power
+namespace AngryBirds3D.Bird.Power;
+
+public class BirdPowerActivatorBirdFlyerMediator : Mediator
 {
-    public class BirdPowerActivatorBirdFlyerMediator : Mediator
+    private readonly BirdPowerActivator _birdPowerActivator;
+    private readonly BirdFlyer _birdFlyer;
+    private readonly ExplosionPowerSettings _explosionPowerSettings;
+
+    public BirdPowerActivatorBirdFlyerMediator(BirdPowerActivator birdPowerActivator,
+        BirdFlyer birdFlyer,
+        ExplosionPowerSettings explosionPowerSettings)
     {
-        private readonly BirdPowerActivator _birdPowerActivator;
-        private readonly BirdFlyer _birdFlyer;
-        private readonly ExplosionPowerSettings _explosionPowerSettings;
+        _birdPowerActivator = birdPowerActivator;
+        _birdFlyer = birdFlyer;
+        _explosionPowerSettings = explosionPowerSettings;
+    }
 
-        public BirdPowerActivatorBirdFlyerMediator(BirdPowerActivator birdPowerActivator,
-            BirdFlyer birdFlyer,
-            ExplosionPowerSettings explosionPowerSettings)
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _birdFlyer.FlightInterrupted
+            .SubscribeAwait(async (birdEntityView, token) =>
+                await OnFlightInterruptedAsync(birdEntityView, token), AwaitOperation.Drop)
+            .AddTo(disposables);
+    }
+
+    private async UniTask OnFlightInterruptedAsync(BirdEntityView entityView, CancellationToken token)
+    {
+        BirdPowerView powerView = entityView.PowerView;
+
+        if (powerView.PowerType == BirdPowerType.Explosion && !powerView.WasActivated)
         {
-            _birdPowerActivator = birdPowerActivator;
-            _birdFlyer = birdFlyer;
-            _explosionPowerSettings = explosionPowerSettings;
-        }
+            await UniTask.WaitForSeconds(_explosionPowerSettings.ExplosionDelay, cancellationToken: token);
 
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _birdFlyer.FlightInterrupted
-                .SubscribeAwait(async (birdEntityView, token) =>
-                    await OnFlightInterruptedAsync(birdEntityView, token), AwaitOperation.Drop)
-                .AddTo(disposables);
-        }
-
-        private async UniTask OnFlightInterruptedAsync(BirdEntityView entityView, CancellationToken token)
-        {
-            BirdPowerView powerView = entityView.PowerView;
-
-            if (powerView.PowerType == BirdPowerType.Explosion && !powerView.WasActivated)
-            {
-                await UniTask.WaitForSeconds(_explosionPowerSettings.ExplosionDelay, cancellationToken: token);
-
-                _birdPowerActivator.ActivatePower(entityView);
-            }
+            _birdPowerActivator.ActivatePower(entityView);
         }
     }
 }

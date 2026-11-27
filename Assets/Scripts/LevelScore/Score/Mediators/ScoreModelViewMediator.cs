@@ -1,20 +1,19 @@
 using Ovoshnig.UI.Basic;
 using R3;
 
-namespace AngryBirds3D.LevelScore.Score
+namespace AngryBirds3D.LevelScore.Score;
+
+public class ScoreModelViewMediator : UIViewMediator<ScoreView>
 {
-    public class ScoreModelViewMediator : UIViewMediator<ScoreView>
+    private readonly ScoreModel _scoreModel;
+
+    public ScoreModelViewMediator(ScoreModel scoreModel, ScoreView view) : base(view) =>
+        _scoreModel = scoreModel;
+
+    protected override void OnViewEnabled(ScoreView view, CompositeDisposable viewDisposables)
     {
-        private readonly ScoreModel _scoreModel;
-
-        public ScoreModelViewMediator(ScoreModel scoreModel, ScoreView view) : base(view) =>
-            _scoreModel = scoreModel;
-
-        protected override void OnViewEnabled(ScoreView view, CompositeDisposable viewDisposables)
-        {
-            _scoreModel.Score
-                .Subscribe(view.SetScoreSmoothly)
-                .AddTo(viewDisposables);
-        }
+        _scoreModel.Score
+            .Subscribe(view.SetScoreSmoothly)
+            .AddTo(viewDisposables);
     }
 }

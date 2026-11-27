@@ -1,6 +1,5 @@
-namespace Ovoshnig.UI.TextPrinting
+namespace Ovoshnig.UI.TextPrinting;
+
+public class ScoreTablePrinterView : TextPrinterView
 {
-    public class ScoreTablePrinterView : TextPrinterView
-    {
-    }
 }

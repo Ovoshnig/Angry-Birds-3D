@@ -5,51 +5,50 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.TestTools;
 
-namespace AngryBirds3D.Tests.PlayMode.LevelScore
+namespace AngryBirds3D.Tests.PlayMode.LevelScore;
+
+public class ScoreViewTests
 {
-    public class ScoreViewTests
+    private readonly WaitForSeconds _waitForOneSecond = new(1f);
+
+    private ScoreView _scoreView;
+    private TMP_Text _textComponent;
+
+    [SetUp]
+    public void Setup()
     {
-        private readonly WaitForSeconds _waitForOneSecond = new(1f);
+        var scoreViewObject = new GameObject("TestScoreView");
+        _textComponent = scoreViewObject.AddComponent<TextMeshProUGUI>();
+        _scoreView = scoreViewObject.AddComponent<ScoreView>();
 
-        private ScoreView _scoreView;
-        private TMP_Text _textComponent;
+        scoreViewObject.SendMessage("Awake");
+        scoreViewObject.SendMessage("Start");
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            var scoreViewObject = new GameObject("TestScoreView");
-            _textComponent = scoreViewObject.AddComponent<TextMeshProUGUI>();
-            _scoreView = scoreViewObject.AddComponent<ScoreView>();
+    [TearDown]
+    public void Teardown()
+    {
+        if (_scoreView != null)
+            Object.Destroy(_scoreView.gameObject);
+    }
 
-            scoreViewObject.SendMessage("Awake");
-            scoreViewObject.SendMessage("Start");
-        }
+    [UnityTest]
+    public IEnumerator SetScoreSmoothly_UpdatesTextAfterDuration()
+    {
+        _scoreView.SetScoreSmoothly(150);
 
-        [TearDown]
-        public void Teardown()
-        {
-            if (_scoreView != null)
-                Object.Destroy(_scoreView.gameObject);
-        }
+        yield return _waitForOneSecond;
 
-        [UnityTest]
-        public IEnumerator SetScoreSmoothly_UpdatesTextAfterDuration()
-        {
-            _scoreView.SetScoreSmoothly(150);
+        Assert.AreEqual("Score: 00150", _textComponent.text);
+    }
 
-            yield return _waitForOneSecond;
+    [UnityTest]
+    public IEnumerator SetScoreSmoothly_NegativeTarget_HandledByView()
+    {
+        _scoreView.SetScoreSmoothly(-10);
 
-            Assert.AreEqual("Score: 00150", _textComponent.text);
-        }
+        yield return _waitForOneSecond;
 
-        [UnityTest]
-        public IEnumerator SetScoreSmoothly_NegativeTarget_HandledByView()
-        {
-            _scoreView.SetScoreSmoothly(-10);
-
-            yield return _waitForOneSecond;
-
-            Assert.AreEqual("Score: -00010", _textComponent.text);
-        }
+        Assert.AreEqual("Score: -00010", _textComponent.text);
     }
 }

@@ -2,30 +2,29 @@ using Ovoshnig.Mediation;
 using Ovoshnig.Scene.Switching;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class InputActionsSceneSwitchMediator : Mediator
 {
-    public class InputActionsSceneSwitchMediator : Mediator
+    private readonly InputActions _inputActions;
+    private readonly SceneSwitch _sceneSwitch;
+
+    public InputActionsSceneSwitchMediator(InputActions inputActions, SceneSwitch sceneSwitch)
     {
-        private readonly InputActions _inputActions;
-        private readonly SceneSwitch _sceneSwitch;
-    
-        public InputActionsSceneSwitchMediator(InputActions inputActions, SceneSwitch sceneSwitch)
-        {
-            _inputActions = inputActions;
-            _sceneSwitch = sceneSwitch;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _sceneSwitch.IsSceneLoading
-                .Subscribe(isLoading =>
-                {
-                    if (isLoading)
-                        _inputActions.Disable();
-                    else
-                        _inputActions.Enable();
-                })
-                .AddTo(disposables);
-        }
+        _inputActions = inputActions;
+        _sceneSwitch = sceneSwitch;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _sceneSwitch.IsSceneLoading
+            .Subscribe(isLoading =>
+            {
+                if (isLoading)
+                    _inputActions.Disable();
+                else
+                    _inputActions.Enable();
+            })
+            .AddTo(disposables);
     }
 }

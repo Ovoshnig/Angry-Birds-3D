@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace Ovoshnig.GameSettings
+namespace Ovoshnig.GameSettings;
+
+[Serializable]
+public class CameraSettings
 {
-    [Serializable]
-    public class CameraSettings
-    {
-        [field: SerializeField, Min(0f)] public float StructureShowingDuration { get; private set; } = 2f;
-        [field: SerializeField, Min(0f)] public float SlingshotShowingDuration { get; private set; } = 1.5f;
-    }
+    [field: SerializeField, Min(0f)] public float StructureShowingDuration { get; private set; } = 2f;
+    [field: SerializeField, Min(0f)] public float SlingshotShowingDuration { get; private set; } = 1.5f;
 }

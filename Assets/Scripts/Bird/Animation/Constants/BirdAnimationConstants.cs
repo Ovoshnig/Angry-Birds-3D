@@ -1,9 +1,8 @@
 using UnityEngine;
 
-namespace AngryBirds3D.Bird.Animation
+namespace AngryBirds3D.Bird.Animation;
+
+public static class BirdAnimationConstants
 {
-    public static class BirdAnimationConstants
-    {
-        public static int EggDroppedTriggerId { get; } = Animator.StringToHash("eggDropped");
-    }
+    public static int EggDroppedTriggerId { get; } = Animator.StringToHash("eggDropped");
 }

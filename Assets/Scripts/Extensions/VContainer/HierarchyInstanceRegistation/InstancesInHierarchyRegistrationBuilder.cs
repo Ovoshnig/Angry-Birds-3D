@@ -3,21 +3,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer;
 
-namespace Ovoshnig.Extensions.VContainer
+namespace Ovoshnig.Extensions.VContainer;
+
+public sealed class InstancesInHierarchyRegistrationBuilder<T> : RegistrationBuilder where T : Component
 {
-    public sealed class InstancesInHierarchyRegistrationBuilder<T> : RegistrationBuilder where T : Component
+    private readonly Scene _scene;
+
+    public InstancesInHierarchyRegistrationBuilder(Scene scene)
+        : base(typeof(IReadOnlyList<T>), Lifetime.Singleton)
     {
-        private readonly Scene _scene;
-
-        public InstancesInHierarchyRegistrationBuilder(Scene scene)
-            : base(typeof(IReadOnlyList<T>), Lifetime.Singleton)
-        {
-            _scene = scene;
-            As(typeof(IReadOnlyList<T>));
-            As(typeof(IEnumerable<T>));
-        }
-
-        public override Registration Build() =>
-            new(typeof(IReadOnlyList<T>), Lifetime.Singleton, InterfaceTypes, new FindInstancesProvider<T>(_scene), Key);
+        _scene = scene;
+        As(typeof(IReadOnlyList<T>));
+        As(typeof(IEnumerable<T>));
     }
+
+    public override Registration Build() =>
+        new(typeof(IReadOnlyList<T>), Lifetime.Singleton, InterfaceTypes, new FindInstancesProvider<T>(_scene), Key);
 }

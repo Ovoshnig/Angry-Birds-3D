@@ -1,22 +1,21 @@
 using Ovoshnig.UI.Basic;
 using UnityEngine;
 
-namespace Ovoshnig.Scene.Switching
+namespace Ovoshnig.Scene.Switching;
+
+public class SceneSwitchButtonView : ButtonView
 {
-    public class SceneSwitchButtonView : ButtonView
+    [field: SerializeField] public SceneNavigationType NavigationType { get; private set; }
+    [field: SerializeField] public int SpecificIndex { get; private set; }
+
+#if UNITY_EDITOR
+    public void SetSpecificIndex(int index)
     {
-        [field: SerializeField] public SceneNavigationType NavigationType { get; private set; }
-        [field: SerializeField] public int SpecificIndex { get; private set; }
+        if (UnityEditor.EditorApplication.isPlaying)
+            return;
 
-    #if UNITY_EDITOR
-        public void SetSpecificIndex(int index)
-        {
-            if (UnityEditor.EditorApplication.isPlaying)
-                return;
-
-            NavigationType = SceneNavigationType.SpecificIndex;
-            SpecificIndex = index;
-        }
-    #endif
+        NavigationType = SceneNavigationType.SpecificIndex;
+        SpecificIndex = index;
     }
+#endif
 }

@@ -1,8 +1,7 @@
-namespace Ovoshnig.DataStorage.Storage
+namespace Ovoshnig.DataStorage.Storage;
+
+public enum DataStorageType
 {
-    public enum DataStorageType
-    {
-        Save,
-        Settings
-    }
+    Save,
+    Settings
 }

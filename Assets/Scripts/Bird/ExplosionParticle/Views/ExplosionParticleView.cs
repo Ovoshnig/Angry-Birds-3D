@@ -1,19 +1,18 @@
 using UnityEngine;
 
-namespace AngryBirds3D.Bird.ExplosionParticle
+namespace AngryBirds3D.Bird.ExplosionParticle;
+
+public class ExplosionParticleView : MonoBehaviour
 {
-    public class ExplosionParticleView : MonoBehaviour
+    [SerializeField] private ParticleSystem _fireSmokeSystem;
+    [SerializeField] private ParticleSystem _shockwaveSystem;
+
+    public void Play(Vector3 position, float radius)
     {
-        [SerializeField] private ParticleSystem _fireSmokeSystem;
-        [SerializeField] private ParticleSystem _shockwaveSystem;
+        transform.position = position;
+        _shockwaveSystem.transform.localScale = radius * Vector3.one;
 
-        public void Play(Vector3 position, float radius)
-        {
-            transform.position = position;
-            _shockwaveSystem.transform.localScale = radius * Vector3.one;
-
-            _fireSmokeSystem.Play();
-            _shockwaveSystem.Play();
-        }
+        _fireSmokeSystem.Play();
+        _shockwaveSystem.Play();
     }
 }

@@ -3,16 +3,15 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.GameState.Quitting
+namespace Ovoshnig.GameState.Quitting;
+
+[Serializable]
+public class GameQuittingInstaller : IInstaller
 {
-    [Serializable]
-    public class GameQuittingInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstanceInHierarchy<GameQuitButtonView>();
-            builder.Register<GameQuitter>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<GameQuitterButtonViewMediator>();
-        }
+        builder.RegisterInstanceInHierarchy<GameQuitButtonView>();
+        builder.Register<GameQuitter>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<GameQuitterButtonViewMediator>();
     }
 }

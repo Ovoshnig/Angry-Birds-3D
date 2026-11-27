@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 
-namespace Ovoshnig.GameSettings
+namespace Ovoshnig.GameSettings;
+
+[Serializable]
+public class LevelStateTrackingSettings
 {
-    [Serializable]
-    public class LevelStateTrackingSettings
-    {
-        [field: SerializeField, Min(0f)] public float ActivityTimeout { get; private set; } = 2.5f;
-    }
+    [field: SerializeField, Min(0f)] public float ActivityTimeout { get; private set; } = 2.5f;
 }

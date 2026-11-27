@@ -3,17 +3,16 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelScore.Points
-{
-    [Serializable]
-    public class PointsInstaller : IInstaller
-    {
-        [SerializeField] private PointsView _pointsViewPrefab;
+namespace AngryBirds3D.LevelScore.Points;
 
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(_pointsViewPrefab);
-            builder.Register<PointsObjectPool>(Lifetime.Singleton);
-        }
+[Serializable]
+public class PointsInstaller : IInstaller
+{
+    [SerializeField] private PointsView _pointsViewPrefab;
+
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterInstance(_pointsViewPrefab);
+        builder.Register<PointsObjectPool>(Lifetime.Singleton);
     }
 }

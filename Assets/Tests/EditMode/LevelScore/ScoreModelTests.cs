@@ -2,49 +2,48 @@ using AngryBirds3D.LevelScore.Score;
 using NUnit.Framework;
 using System;
 
-namespace AngryBirds3D.Tests.EditMode.LevelScore
+namespace AngryBirds3D.Tests.EditMode.LevelScore;
+
+[TestFixture]
+public class ScoreModelTests
 {
-    [TestFixture]
-    public class ScoreModelTests
+    private ScoreModel _scoreModel;
+
+    [SetUp]
+    public void SetUp() => _scoreModel = new ScoreModel();
+
+    [TearDown]
+    public void TearDown() => _scoreModel.Dispose();
+
+    [Test]
+    public void InitialScore_WhenCreated_IsZero() => Assert.AreEqual(0, _scoreModel.Score.CurrentValue);
+
+    [TestCase(1)]
+    [TestCase(15)]
+    [TestCase(100)]
+    [TestCase(9999)]
+    public void Increase_PositiveValue_AddsToScore(int positiveValue)
     {
-        private ScoreModel _scoreModel;
+        int initialScore = _scoreModel.Score.CurrentValue;
 
-        [SetUp]
-        public void SetUp() => _scoreModel = new ScoreModel();
+        _scoreModel.Increase(positiveValue);
 
-        [TearDown]
-        public void TearDown() => _scoreModel.Dispose();
+        Assert.AreEqual(initialScore + positiveValue, _scoreModel.Score.CurrentValue);
+    }
 
-        [Test]
-        public void InitialScore_WhenCreated_IsZero() => Assert.AreEqual(0, _scoreModel.Score.CurrentValue);
+    [TestCase(-1)]
+    [TestCase(-100)]
+    [TestCase(-9999)]
+    public void Increase_NegativeValue_ThrowsArgumentException(int negativeValue) =>
+        Assert.Throws<ArgumentException>(() => _scoreModel.Increase(negativeValue));
 
-        [TestCase(1)]
-        [TestCase(15)]
-        [TestCase(100)]
-        [TestCase(9999)]
-        public void Increase_PositiveValue_AddsToScore(int positiveValue)
-        {
-            int initialScore = _scoreModel.Score.CurrentValue;
+    [Test]
+    public void Reset_AfterScoreIncreased_SetsScoreBackToZero()
+    {
+        _scoreModel.Increase(100);
 
-            _scoreModel.Increase(positiveValue);
+        _scoreModel.Reset();
 
-            Assert.AreEqual(initialScore + positiveValue, _scoreModel.Score.CurrentValue);
-        }
-
-        [TestCase(-1)]
-        [TestCase(-100)]
-        [TestCase(-9999)]
-        public void Increase_NegativeValue_ThrowsArgumentException(int negativeValue) =>
-            Assert.Throws<ArgumentException>(() => _scoreModel.Increase(negativeValue));
-
-        [Test]
-        public void Reset_AfterScoreIncreased_SetsScoreBackToZero()
-        {
-            _scoreModel.Increase(100);
-
-            _scoreModel.Reset();
-
-            Assert.AreEqual(0, _scoreModel.Score.CurrentValue);
-        }
+        Assert.AreEqual(0, _scoreModel.Score.CurrentValue);
     }
 }

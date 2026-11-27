@@ -2,47 +2,46 @@ using Ovoshnig.UI.Basic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace Ovoshnig.Scene.LoadingScreen
+namespace Ovoshnig.Scene.LoadingScreen;
+
+public class LoadingScreenView : UIView
 {
-    public class LoadingScreenView : UIView
+    [SerializeField] private VisualElementReference<ProgressBar> _progressBarReference;
+
+    private const float PercentMultiplier = 100f;
+
+    private ProgressBar _progressBar = null;
+
+    protected override bool IsVisualReady => _progressBar != null;
+
+    protected virtual void Awake()
     {
-        [SerializeField] private VisualElementReference<ProgressBar> _progressBarReference;
+        _progressBarReference.RegisterReferenceResolvedCallback(OnProgressBarResolved);
+        _progressBarReference.RegisterReferenceUnloadedCallback(OnProgressBarUnloaded);
+    }
 
-        private const float PercentMultiplier = 100f;
+    protected override void OnDestroy()
+    {
+        _progressBarReference.UnregisterReferenceResolvedCallback(OnProgressBarResolved);
+        _progressBarReference.UnregisterReferenceUnloadedCallback(OnProgressBarUnloaded);
+        base.OnDestroy();
+    }
 
-        private ProgressBar _progressBar = null;
+    public void Show() => gameObject.SetActive(true);
 
-        protected override bool IsVisualReady => _progressBar != null;
+    public void Hide() => gameObject.SetActive(false);
 
-        protected virtual void Awake()
-        {
-            _progressBarReference.RegisterReferenceResolvedCallback(OnProgressBarResolved);
-            _progressBarReference.RegisterReferenceUnloadedCallback(OnProgressBarUnloaded);
-        }
+    public void SetProgress(float progress) => _progressBar.value = PercentMultiplier * progress;
 
-        protected override void OnDestroy()
-        {
-            _progressBarReference.UnregisterReferenceResolvedCallback(OnProgressBarResolved);
-            _progressBarReference.UnregisterReferenceUnloadedCallback(OnProgressBarUnloaded);
-            base.OnDestroy();
-        }
+    private void OnProgressBarResolved(ProgressBar bar)
+    {
+        _progressBar = bar;
+        RefreshEnabledState();
+    }
 
-        public void Show() => gameObject.SetActive(true);
-
-        public void Hide() => gameObject.SetActive(false);
-
-        public void SetProgress(float progress) => _progressBar.value = PercentMultiplier * progress;
-
-        private void OnProgressBarResolved(ProgressBar bar)
-        {
-            _progressBar = bar;
-            RefreshEnabledState();
-        }
-
-        private void OnProgressBarUnloaded(ProgressBar bar)
-        {
-            _progressBar = null;
-            RefreshEnabledState();
-        }
+    private void OnProgressBarUnloaded(ProgressBar bar)
+    {
+        _progressBar = null;
+        RefreshEnabledState();
     }
 }

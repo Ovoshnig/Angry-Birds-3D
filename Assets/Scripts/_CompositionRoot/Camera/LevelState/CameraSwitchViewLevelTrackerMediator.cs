@@ -4,33 +4,32 @@ using Cysharp.Threading.Tasks;
 using Ovoshnig.Mediation;
 using R3;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class CameraSwitchViewLevelTrackerMediator : Mediator
 {
-    public class CameraSwitchViewLevelTrackerMediator : Mediator
+    private readonly CameraSwitchView _cameraSwitchView;
+    private readonly LevelStateTracker _levelStateTracker;
+
+    public CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
+        LevelStateTracker levelStateTracker)
     {
-        private readonly CameraSwitchView _cameraSwitchView;
-        private readonly LevelStateTracker _levelStateTracker;
-    
-        public CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
-            LevelStateTracker levelStateTracker)
-        {
-            _cameraSwitchView = cameraSwitchView;
-            _levelStateTracker = levelStateTracker;
-        }
-    
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            _levelStateTracker.MovedToNext
-                .Subscribe(_ => _cameraSwitchView.SwitchToGeneralAsync().Forget())
-                .AddTo(disposables);
-    
-            _levelStateTracker.Completed
-                .Subscribe(_ =>
-                {
-                    _cameraSwitchView.SwitchToSlingshotAsync().Forget();
-                    _cameraSwitchView.StopSwitching();
-                })
-                .AddTo(disposables);
-        }
+        _cameraSwitchView = cameraSwitchView;
+        _levelStateTracker = levelStateTracker;
+    }
+
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        _levelStateTracker.MovedToNext
+            .Subscribe(_ => _cameraSwitchView.SwitchToGeneralAsync().Forget())
+            .AddTo(disposables);
+
+        _levelStateTracker.Completed
+            .Subscribe(_ =>
+            {
+                _cameraSwitchView.SwitchToSlingshotAsync().Forget();
+                _cameraSwitchView.StopSwitching();
+            })
+            .AddTo(disposables);
     }
 }

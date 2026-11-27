@@ -1,13 +1,12 @@
 using AngryBirds3D.LevelScore.Points;
 using UnityEngine;
 
-namespace Ovoshnig.ObjectDestruction.Entity
+namespace Ovoshnig.ObjectDestruction.Entity;
+
+[CreateAssetMenu(fileName = "DestructionProfile", menuName = "Scriptable Objects/Destruction/Profile")]
+public class DestructionProfile : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "DestructionProfile", menuName = "Scriptable Objects/Destruction/Profile")]
-    public class DestructionProfile : ScriptableObject
-    {
-        [field: SerializeField, Min(0f)] public float MaxHealth { get; private set; } = 15f;
-        [field: SerializeField] public PointsSettings PointsSettings { get; private set; }
-        [field: SerializeField] public DestructionSfxProfile SfxProfile { get; private set; }
-    }
+    [field: SerializeField, Min(0f)] public float MaxHealth { get; private set; } = 15f;
+    [field: SerializeField] public PointsSettings PointsSettings { get; private set; }
+    [field: SerializeField] public DestructionSfxProfile SfxProfile { get; private set; }
 }

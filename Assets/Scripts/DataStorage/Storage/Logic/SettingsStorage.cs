@@ -1,9 +1,8 @@
-namespace Ovoshnig.DataStorage.Storage
-{
-    public sealed class SettingsStorage : DataStorage
-    {
-        public override DataStorageType StorageType => DataStorageType.Settings;
+namespace Ovoshnig.DataStorage.Storage;
 
-        protected override string FileName => SettingsConstants.FileName;
-    }
+public sealed class SettingsStorage : DataStorage
+{
+    public override DataStorageType StorageType => DataStorageType.Settings;
+
+    protected override string FileName => SettingsConstants.FileName;
 }

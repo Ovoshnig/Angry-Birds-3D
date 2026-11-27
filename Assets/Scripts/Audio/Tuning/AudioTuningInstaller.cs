@@ -5,27 +5,26 @@ using UnityEngine.Audio;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+[Serializable]
+public class AudioTuningInstaller : IInstaller
 {
-    [Serializable]
-    public class AudioTuningInstaller : IInstaller
+    [SerializeField] private AudioMixer _audioMixer;
+
+    public void Install(IContainerBuilder builder)
     {
-        [SerializeField] private AudioMixer _audioMixer;
+        builder.RegisterInstance(_audioMixer);
+        builder.RegisterInstancesInHierarchy<AudioSliderView>();
 
-        public void Install(IContainerBuilder builder)
+        builder.Register<AudioMixerTuner>(Lifetime.Singleton);
+
+        builder.UseEntryPoints(entryPoints =>
         {
-            builder.RegisterInstance(_audioMixer);
-            builder.RegisterInstancesInHierarchy<AudioSliderView>();
-
-            builder.Register<AudioMixerTuner>(Lifetime.Singleton);
-
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<MusicSliderModel>().As<AudioSliderModel>().AsSelf();
-                entryPoints.Add<SFXSliderModel>().As<AudioSliderModel>().AsSelf();
-                entryPoints.Add<AudioSliderModelsSliderViewsMediator>();
-                entryPoints.Add<AudioMixerTunerSliderModelsMediator>();
-            });
-        }
+            entryPoints.Add<MusicSliderModel>().As<AudioSliderModel>().AsSelf();
+            entryPoints.Add<SFXSliderModel>().As<AudioSliderModel>().AsSelf();
+            entryPoints.Add<AudioSliderModelsSliderViewsMediator>();
+            entryPoints.Add<AudioMixerTunerSliderModelsMediator>();
+        });
     }
 }

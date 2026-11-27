@@ -1,24 +1,23 @@
 using UnityEngine;
 
-namespace Ovoshnig.Audio.Music.Playback
+namespace Ovoshnig.Audio.Music.Playback;
+
+[RequireComponent(typeof(AudioSource))]
+public class MusicPlayerView : MonoBehaviour
 {
-    [RequireComponent(typeof(AudioSource))]
-    public class MusicPlayerView : MonoBehaviour
+    private AudioSource _audioSource;
+
+    private void Awake() => _audioSource = GetComponent<AudioSource>();
+
+    public void Play(AudioClip clip)
     {
-        private AudioSource _audioSource;
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
 
-        private void Awake() => _audioSource = GetComponent<AudioSource>();
-
-        public void Play(AudioClip clip)
-        {
-            _audioSource.clip = clip;
-            _audioSource.Play();
-        }
-
-        public void Stop()
-        {
-            _audioSource.clip = null;
-            _audioSource.Stop();
-        }
+    public void Stop()
+    {
+        _audioSource.clip = null;
+        _audioSource.Stop();
     }
 }

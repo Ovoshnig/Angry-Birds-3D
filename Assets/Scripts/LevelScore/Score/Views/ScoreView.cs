@@ -3,85 +3,84 @@ using Ovoshnig.UI.Basic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace AngryBirds3D.LevelScore.Score
+namespace AngryBirds3D.LevelScore.Score;
+
+public class ScoreView : UIView
 {
-    public class ScoreView : UIView
+    [SerializeField] private VisualElementReference<Label> _scoreLabelReference = new();
+    [SerializeField, Min(0f)] private float _updateDuration = 0.5f;
+    [SerializeField] private Ease _ease = Ease.OutQuad;
+
+    private Label _scoreLabel;
+    private MotionHandle _handle;
+    private int _currentDisplayedScore;
+
+    protected override bool IsVisualReady => _scoreLabel != null;
+
+    private void Awake()
     {
-        [SerializeField] private VisualElementReference<Label> _scoreLabelReference = new();
-        [SerializeField, Min(0f)] private float _updateDuration = 0.5f;
-        [SerializeField] private Ease _ease = Ease.OutQuad;
+        _scoreLabelReference.RegisterReferenceResolvedCallback(OnScoreLabelResolved);
+        _scoreLabelReference.RegisterReferenceUnloadedCallback(OnScoreLabelUnloaded);
+    }
 
-        private Label _scoreLabel;
-        private MotionHandle _handle;
-        private int _currentDisplayedScore;
+    protected override void OnDisable()
+    {
+        _handle.TryCancel();
+        base.OnDisable();
+    }
 
-        protected override bool IsVisualReady => _scoreLabel != null;
+    protected override void OnDestroy()
+    {
+        _handle.TryCancel();
+        _scoreLabelReference.UnregisterReferenceResolvedCallback(OnScoreLabelResolved);
+        _scoreLabelReference.UnregisterReferenceUnloadedCallback(OnScoreLabelUnloaded);
+        base.OnDestroy();
+    }
 
-        private void Awake()
-        {
-            _scoreLabelReference.RegisterReferenceResolvedCallback(OnScoreLabelResolved);
-            _scoreLabelReference.RegisterReferenceUnloadedCallback(OnScoreLabelUnloaded);
-        }
+    public void SetScoreInstant(int value)
+    {
+        _handle.TryCancel();
+        ApplyScoreText(value);
+    }
 
-        protected override void OnDisable()
-        {
-            _handle.TryCancel();
-            base.OnDisable();
-        }
+    public void SetScoreSmoothly(int targetValue)
+    {
+        _handle.TryCancel();
 
-        protected override void OnDestroy()
-        {
-            _handle.TryCancel();
-            _scoreLabelReference.UnregisterReferenceResolvedCallback(OnScoreLabelResolved);
-            _scoreLabelReference.UnregisterReferenceUnloadedCallback(OnScoreLabelUnloaded);
-            base.OnDestroy();
-        }
+        if (_currentDisplayedScore == targetValue)
+            return;
 
-        public void SetScoreInstant(int value)
-        {
-            _handle.TryCancel();
-            ApplyScoreText(value);
-        }
+        _handle = LMotion.Create(_currentDisplayedScore, targetValue, _updateDuration)
+            .WithEase(_ease)
+            .Bind(UpdateScoreOnMotion)
+            .AddTo(gameObject);
+    }
 
-        public void SetScoreSmoothly(int targetValue)
-        {
-            _handle.TryCancel();
+    private void OnScoreLabelResolved(Label label)
+    {
+        _scoreLabel = label;
+        ApplyScoreText(_currentDisplayedScore);
+        RefreshEnabledState();
+    }
 
-            if (_currentDisplayedScore == targetValue)
-                return;
+    private void OnScoreLabelUnloaded(Label label)
+    {
+        _handle.TryCancel();
+        _scoreLabel = null;
+        RefreshEnabledState();
+    }
 
-            _handle = LMotion.Create(_currentDisplayedScore, targetValue, _updateDuration)
-                .WithEase(_ease)
-                .Bind(UpdateScoreOnMotion)
-                .AddTo(gameObject);
-        }
+    private void UpdateScoreOnMotion(int score)
+    {
+        if (_currentDisplayedScore == score)
+            return;
 
-        private void OnScoreLabelResolved(Label label)
-        {
-            _scoreLabel = label;
-            ApplyScoreText(_currentDisplayedScore);
-            RefreshEnabledState();
-        }
+        ApplyScoreText(score);
+    }
 
-        private void OnScoreLabelUnloaded(Label label)
-        {
-            _handle.TryCancel();
-            _scoreLabel = null;
-            RefreshEnabledState();
-        }
-
-        private void UpdateScoreOnMotion(int score)
-        {
-            if (_currentDisplayedScore == score)
-                return;
-
-            ApplyScoreText(score);
-        }
-
-        private void ApplyScoreText(int score)
-        {
-            _currentDisplayedScore = score;
-            _scoreLabel.text = $"{score:00000}";
-        }
+    private void ApplyScoreText(int score)
+    {
+        _currentDisplayedScore = score;
+        _scoreLabel.text = $"{score:00000}";
     }
 }

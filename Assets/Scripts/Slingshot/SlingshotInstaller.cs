@@ -7,22 +7,21 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Slingshot
+namespace AngryBirds3D.Slingshot;
+
+[Serializable]
+public class SlingshotInstaller : IInstaller
 {
-    [Serializable]
-    public class SlingshotInstaller : IInstaller
+    [SerializeField] private PointerPositionInstaller _pointerPositionInstaller;
+    [SerializeField] private SlingshotShootingInstaller _slingshotShootingInstaller;
+    [SerializeField] private SlingshotPlacementInstaller _slingshotPlacementInstaller;
+
+    public void Install(IContainerBuilder builder)
     {
-        [SerializeField] private PointerPositionInstaller _pointerPositionInstaller;
-        [SerializeField] private SlingshotShootingInstaller _slingshotShootingInstaller;
-        [SerializeField] private SlingshotPlacementInstaller _slingshotPlacementInstaller;
+        builder.RegisterEntryPoint<SlingshotInputProvider>().AsSelf();
 
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterEntryPoint<SlingshotInputProvider>().AsSelf();
-
-            _pointerPositionInstaller.Install(builder);
-            _slingshotShootingInstaller.Install(builder);
-            _slingshotPlacementInstaller.Install(builder);
-        }
+        _pointerPositionInstaller.Install(builder);
+        _slingshotShootingInstaller.Install(builder);
+        _slingshotPlacementInstaller.Install(builder);
     }
 }

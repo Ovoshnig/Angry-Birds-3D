@@ -3,15 +3,14 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace Ovoshnig.Window.Resumption
+namespace Ovoshnig.Window.Resumption;
+
+[Serializable]
+public class WindowResumptionInstaller : IInstaller
 {
-    [Serializable]
-    public class WindowResumptionInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstanceInHierarchy<ResumeButtonView>();
-            builder.RegisterEntryPoint<WindowResumeButtonViewMediator>();
-        }
+        builder.RegisterInstanceInHierarchy<ResumeButtonView>();
+        builder.RegisterEntryPoint<WindowResumeButtonViewMediator>();
     }
 }

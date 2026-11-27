@@ -1,8 +1,7 @@
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+public enum AudioChannel
 {
-    public enum AudioChannel
-    {
-        Music,
-        SFX
-    }
+    Music,
+    SFX
 }

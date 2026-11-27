@@ -1,22 +1,21 @@
 using R3;
 using UnityEngine;
 
-namespace AngryBirds3D.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking;
+
+public abstract class CompletionPanelView : MonoBehaviour
 {
-    public abstract class CompletionPanelView : MonoBehaviour
+    private readonly Subject<Unit> _shown = new();
+
+    public Observable<Unit> Shown => _shown;
+
+    private void OnDestroy() => _shown.Dispose();
+
+    public void Show()
     {
-        private readonly Subject<Unit> _shown = new();
-
-        public Observable<Unit> Shown => _shown;
-
-        private void OnDestroy() => _shown.Dispose();
-
-        public void Show()
-        {
-            gameObject.SetActive(true);
-            _shown.OnNext(Unit.Default);
-        }
-
-        public void Hide() => gameObject.SetActive(false);
+        gameObject.SetActive(true);
+        _shown.OnNext(Unit.Default);
     }
+
+    public void Hide() => gameObject.SetActive(false);
 }

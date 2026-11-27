@@ -2,40 +2,39 @@ using Ovoshnig.Scene.Switching;
 using Ovoshnig.UI.Basic;
 using R3;
 
-namespace Ovoshnig.Scene.LoadingScreen
+namespace Ovoshnig.Scene.LoadingScreen;
+
+public class SceneSwitchLoadingScreenViewMediator : UIViewMediator<LoadingScreenView>
 {
-    public class SceneSwitchLoadingScreenViewMediator : UIViewMediator<LoadingScreenView>
+    private readonly SceneSwitch _sceneSwitch;
+    private readonly LoadingScreenView _loadingScreenView;
+
+    public SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch, LoadingScreenView view)
+        : base(view)
     {
-        private readonly SceneSwitch _sceneSwitch;
-        private readonly LoadingScreenView _loadingScreenView;
+        _sceneSwitch = sceneSwitch;
+        _loadingScreenView = view;
+    }
 
-        public SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch, LoadingScreenView view)
-            : base(view)
-        {
-            _sceneSwitch = sceneSwitch;
-            _loadingScreenView = view;
-        }
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        base.Bind(disposables);
 
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            base.Bind(disposables);
+        _sceneSwitch.IsSceneLoading
+            .Subscribe(isLoading =>
+            {
+                if (isLoading)
+                    _loadingScreenView.Show();
+                else
+                    _loadingScreenView.Hide();
+            })
+            .AddTo(disposables);
+    }
 
-            _sceneSwitch.IsSceneLoading
-                .Subscribe(isLoading =>
-                {
-                    if (isLoading)
-                        _loadingScreenView.Show();
-                    else
-                        _loadingScreenView.Hide();
-                })
-                .AddTo(disposables);
-        }
-
-        protected override void OnViewEnabled(LoadingScreenView view, CompositeDisposable viewDisposables)
-        {
-            _sceneSwitch.LoadingProgress
-                .Subscribe(view.SetProgress)
-                .AddTo(viewDisposables);
-        }
+    protected override void OnViewEnabled(LoadingScreenView view, CompositeDisposable viewDisposables)
+    {
+        _sceneSwitch.LoadingProgress
+            .Subscribe(view.SetProgress)
+            .AddTo(viewDisposables);
     }
 }

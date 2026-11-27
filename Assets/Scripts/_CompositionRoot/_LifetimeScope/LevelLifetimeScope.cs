@@ -17,67 +17,66 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class LevelLifetimeScope : LifetimeScope
 {
-    public class LevelLifetimeScope : LifetimeScope
+    [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
+    [SerializeField] private LegacySceneSwitchingInstaller _legacySceneSwitchingInstaller;
+    [SerializeField] private LevelStateInstaller _levelStateInstaller;
+    [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
+    [SerializeField] private CameraInstaller _cameraInstaller;
+    [SerializeField] private WindowInstaller _windowInstaller;
+    [SerializeField] private GamePauseInstaller _gamePauseInstaller;
+    [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
+    [SerializeField] private AudioTuningPanelInstaller _audioTuningPanelInstaller;
+    [SerializeField] private AudioSFXInstaller _sfxInstaller;
+    [SerializeField] private SkyboxInstaller _skyboxInstaller;
+    [SerializeField] private SlingshotInstaller _slingshotInstaller;
+    [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
+    [SerializeField] private ObjectDestructionInstaller _objectDestructionInstaller;
+    [SerializeField] private BirdInstaller _birdInstaller;
+    [SerializeField] private PigInstaller _pigInstaller;
+    [SerializeField] private BlockInstaller _blockInstaller;
+
+    protected override void Configure(IContainerBuilder builder)
     {
-        [SerializeField] private SceneSwitchingInstaller _sceneSwitchingInstaller;
-        [SerializeField] private LegacySceneSwitchingInstaller _legacySceneSwitchingInstaller;
-        [SerializeField] private LevelStateInstaller _levelStateInstaller;
-        [SerializeField] private LevelScoreInstaller _levelScoreInstaller;
-        [SerializeField] private CameraInstaller _cameraInstaller;
-        [SerializeField] private WindowInstaller _windowInstaller;
-        [SerializeField] private GamePauseInstaller _gamePauseInstaller;
-        [SerializeField] private AudioTuningInstaller _audioTuningInstaller;
-        [SerializeField] private AudioTuningPanelInstaller _audioTuningPanelInstaller;
-        [SerializeField] private AudioSFXInstaller _sfxInstaller;
-        [SerializeField] private SkyboxInstaller _skyboxInstaller;
-        [SerializeField] private SlingshotInstaller _slingshotInstaller;
-        [SerializeField] private ObjectCollisionInstaller _objectCollisionInstaller;
-        [SerializeField] private ObjectDestructionInstaller _objectDestructionInstaller;
-        [SerializeField] private BirdInstaller _birdInstaller;
-        [SerializeField] private PigInstaller _pigInstaller;
-        [SerializeField] private BlockInstaller _blockInstaller;
+        InstallSystems(builder);
+        InstallMediators(builder);
+    }
 
-        protected override void Configure(IContainerBuilder builder)
-        {
-            InstallSystems(builder);
-            InstallMediators(builder);
-        }
+    private void InstallSystems(IContainerBuilder builder)
+    {
+        _sceneSwitchingInstaller.Install(builder);
+        _legacySceneSwitchingInstaller.Install(builder);
+        _levelStateInstaller.Install(builder);
+        _levelScoreInstaller.Install(builder);
+        _cameraInstaller.Install(builder);
+        _windowInstaller.Install(builder);
+        _gamePauseInstaller.Install(builder);
+        _audioTuningInstaller.Install(builder);
+        _audioTuningPanelInstaller.Install(builder);
+        _sfxInstaller.Install(builder);
+        _skyboxInstaller.Install(builder);
+        _slingshotInstaller.Install(builder);
+        _objectCollisionInstaller.Install(builder);
+        _objectDestructionInstaller.Install(builder);
+        _birdInstaller.Install(builder);
+        _pigInstaller.Install(builder);
+        _blockInstaller.Install(builder);
+    }
 
-        private void InstallSystems(IContainerBuilder builder)
-        {
-            _sceneSwitchingInstaller.Install(builder);
-            _legacySceneSwitchingInstaller.Install(builder);
-            _levelStateInstaller.Install(builder);
-            _levelScoreInstaller.Install(builder);
-            _cameraInstaller.Install(builder);
-            _windowInstaller.Install(builder);
-            _gamePauseInstaller.Install(builder);
-            _audioTuningInstaller.Install(builder);
-            _audioTuningPanelInstaller.Install(builder);
-            _sfxInstaller.Install(builder);
-            _skyboxInstaller.Install(builder);
-            _slingshotInstaller.Install(builder);
-            _objectCollisionInstaller.Install(builder);
-            _objectDestructionInstaller.Install(builder);
-            _birdInstaller.Install(builder);
-            _pigInstaller.Install(builder);
-            _blockInstaller.Install(builder);
-        }
-
-        private void InstallMediators(IContainerBuilder builder)
-        {
-            new ScoreMediatorsInstaller().Install(builder);
-            new CameraMediatorsInstaller().Install(builder);
-            new WindowMediatorsInstaller().Install(builder);
-            new GameStateMediatorsInstaller().Install(builder);
-            new CursorMediatorsInstaller().Install(builder);
-            new AudioTuningMediatorsInstaller().Install(builder);
-            new AudioSFXMediatorsInstaller().Install(builder);
-            new ObjectCollisionMediatorsInstaller().Install(builder);
-            new BirdMediatorsInstaller().Install(builder);
-            new SlingshotMediatorsInstaller().Install(builder);
-        }
+    private void InstallMediators(IContainerBuilder builder)
+    {
+        new ScoreMediatorsInstaller().Install(builder);
+        new CameraMediatorsInstaller().Install(builder);
+        new WindowMediatorsInstaller().Install(builder);
+        new GameStateMediatorsInstaller().Install(builder);
+        new CursorMediatorsInstaller().Install(builder);
+        new AudioTuningMediatorsInstaller().Install(builder);
+        new AudioSFXMediatorsInstaller().Install(builder);
+        new ObjectCollisionMediatorsInstaller().Install(builder);
+        new BirdMediatorsInstaller().Install(builder);
+        new SlingshotMediatorsInstaller().Install(builder);
     }
 }

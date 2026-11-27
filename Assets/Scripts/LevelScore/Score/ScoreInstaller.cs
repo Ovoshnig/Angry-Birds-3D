@@ -3,21 +3,20 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelScore.Score
-{
-    [Serializable]
-    public class ScoreInstaller : IInstaller
-    {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstanceInHierarchy<ScoreView>();
-            builder.Register<ScoreModel>(Lifetime.Singleton);
+namespace AngryBirds3D.LevelScore.Score;
 
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<ScoreModelViewMediator>();
-                entryPoints.Add<ScoreModelPointsPoolMediator>();
-            });
-        }
+[Serializable]
+public class ScoreInstaller : IInstaller
+{
+    public void Install(IContainerBuilder builder)
+    {
+        builder.RegisterInstanceInHierarchy<ScoreView>();
+        builder.Register<ScoreModel>(Lifetime.Singleton);
+
+        builder.UseEntryPoints(entryPoints =>
+        {
+            entryPoints.Add<ScoreModelViewMediator>();
+            entryPoints.Add<ScoreModelPointsPoolMediator>();
+        });
     }
 }

@@ -1,18 +1,17 @@
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Composition
+namespace AngryBirds3D.Composition;
+
+public class SlingshotMediatorsInstaller : IInstaller
 {
-    public class SlingshotMediatorsInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
+        builder.UseEntryPoints(entryPoints =>
         {
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<SlingshotShooterGamePauserMediator>();
-                entryPoints.Add<SlingshotShooterLevelTrackerMediator>();
-                entryPoints.Add<SlingshotBirdPlacerLevelTrackerMediator>();
-            });
-        }
+            entryPoints.Add<SlingshotShooterGamePauserMediator>();
+            entryPoints.Add<SlingshotShooterLevelTrackerMediator>();
+            entryPoints.Add<SlingshotBirdPlacerLevelTrackerMediator>();
+        });
     }
 }

@@ -1,39 +1,38 @@
 using R3;
 using System;
 
-namespace Ovoshnig.Window.Window
+namespace Ovoshnig.Window.Window;
+
+public class WindowTracker : IDisposable
 {
-    public class WindowTracker : IDisposable
+    private readonly ReactiveProperty<bool> _isOpen = new(false);
+    private readonly ReactiveProperty<Window> _currentWindow = new(null);
+
+    public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
+
+    public void Dispose()
     {
-        private readonly ReactiveProperty<bool> _isOpen = new(false);
-        private readonly ReactiveProperty<Window> _currentWindow = new(null);
+        _isOpen.Dispose();
+        _currentWindow.Dispose();
+    }
 
-        public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
+    public bool TryOpenWindow(Window window)
+    {
+        if (_isOpen.Value)
+            return false;
 
-        public void Dispose()
-        {
-            _isOpen.Dispose();
-            _currentWindow.Dispose();
-        }
+        _currentWindow.Value = window;
+        _isOpen.Value = true;
+        return true;
+    }
 
-        public bool TryOpenWindow(Window window)
-        {
-            if (_isOpen.Value)
-                return false;
+    public bool TryCloseWindow()
+    {
+        if (!_isOpen.Value)
+            return false;
 
-            _currentWindow.Value = window;
-            _isOpen.Value = true;
-            return true;
-        }
-
-        public bool TryCloseWindow()
-        {
-            if (!_isOpen.Value)
-                return false;
-
-            _currentWindow.Value = null;
-            _isOpen.Value = false;
-            return true;
-        }
+        _currentWindow.Value = null;
+        _isOpen.Value = false;
+        return true;
     }
 }

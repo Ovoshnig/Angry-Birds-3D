@@ -2,19 +2,18 @@ using R3;
 using TMPro;
 using UnityEngine;
 
-namespace Ovoshnig.UI.Basic
+namespace Ovoshnig.UI.Basic;
+
+[RequireComponent(typeof(TMP_InputField))]
+public abstract class InputFieldView : UIView
 {
-    [RequireComponent(typeof(TMP_InputField))]
-    public abstract class InputFieldView : UIView
+    private TMP_InputField _inputField;
+
+    public Observable<string> ValueChanged { get; private set; }
+
+    protected virtual void Awake()
     {
-        private TMP_InputField _inputField;
-
-        public Observable<string> ValueChanged { get; private set; }
-
-        protected virtual void Awake()
-        {
-            _inputField = GetComponent<TMP_InputField>();
-            ValueChanged = _inputField.onValueChanged.AsObservable(destroyCancellationToken);
-        }
+        _inputField = GetComponent<TMP_InputField>();
+        ValueChanged = _inputField.onValueChanged.AsObservable(destroyCancellationToken);
     }
 }

@@ -4,15 +4,14 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Bird.Flight
+namespace AngryBirds3D.Bird.Flight;
+
+[Serializable]
+public class BirdFlightInstaller : IInstaller
 {
-    [Serializable]
-    public class BirdFlightInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstanceInHierarchy<Terrain>();
-            builder.Register<BirdFlyer>(Lifetime.Singleton);
-        }
+        builder.RegisterInstanceInHierarchy<Terrain>();
+        builder.Register<BirdFlyer>(Lifetime.Singleton);
     }
 }

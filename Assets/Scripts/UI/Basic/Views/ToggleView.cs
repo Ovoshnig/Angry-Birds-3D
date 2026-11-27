@@ -2,23 +2,22 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ovoshnig.UI.Basic
+namespace Ovoshnig.UI.Basic;
+
+[RequireComponent(typeof(Toggle))]
+public abstract class ToggleView : UIView
 {
-    [RequireComponent(typeof(Toggle))]
-    public abstract class ToggleView : UIView
+    private Toggle _toggle;
+
+    public Observable<bool> ValueChanged { get; private set; }
+
+    protected virtual void Awake()
     {
-        private Toggle _toggle;
-
-        public Observable<bool> ValueChanged { get; private set; }
-
-        protected virtual void Awake()
-        {
-            _toggle = GetComponent<Toggle>();
-            ValueChanged = _toggle.OnValueChangedAsObservable();
-        }
-
-        public void SetIsOn(bool value) => _toggle.isOn = value;
-
-        public void SetIsOnWithoutNotify(bool value) => _toggle.SetIsOnWithoutNotify(value);
+        _toggle = GetComponent<Toggle>();
+        ValueChanged = _toggle.OnValueChangedAsObservable();
     }
+
+    public void SetIsOn(bool value) => _toggle.isOn = value;
+
+    public void SetIsOnWithoutNotify(bool value) => _toggle.SetIsOnWithoutNotify(value);
 }

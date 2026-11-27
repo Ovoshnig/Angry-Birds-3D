@@ -4,41 +4,40 @@ using System;
 using UnityEngine;
 using VContainer.Unity;
 
-namespace Ovoshnig.Screen.VSyncAdjustment
+namespace Ovoshnig.Screen.VSyncAdjustment;
+
+public class VSyncAdjuster : IStartable, IDisposable
 {
-    public class VSyncAdjuster : IStartable, IDisposable
+    private readonly SettingsStorage _settingsStorage;
+    private readonly ReactiveProperty<bool> _isVSync = new();
+    private readonly CompositeDisposable _disposables = new();
+
+    public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
+
+    public ReadOnlyReactiveProperty<bool> IsVSync => _isVSync;
+
+    public void Start()
     {
-        private readonly SettingsStorage _settingsStorage;
-        private readonly ReactiveProperty<bool> _isVSync = new();
-        private readonly CompositeDisposable _disposables = new();
+        SetVSync(_settingsStorage.Get(SettingsConstants.VSyncKey, false));
+        Application.targetFrameRate = 180;
 
-        public VSyncAdjuster(SettingsStorage settingsStorage) => _settingsStorage = settingsStorage;
+        _settingsStorage.ResetHappened
+            .Subscribe(_ => SetVSync(false))
+            .AddTo(_disposables);
+    }
 
-        public ReadOnlyReactiveProperty<bool> IsVSync => _isVSync;
+    public void Dispose()
+    {
+        _disposables.Dispose();
+        _isVSync.Dispose();
+    }
 
-        public void Start()
-        {
-            SetVSync(_settingsStorage.Get(SettingsConstants.VSyncKey, false));
-            Application.targetFrameRate = 180;
+    public void ToggleVSync() => SetVSync(!_isVSync.Value);
 
-            _settingsStorage.ResetHappened
-                .Subscribe(_ => SetVSync(false))
-                .AddTo(_disposables);
-        }
-
-        public void Dispose()
-        {
-            _disposables.Dispose();
-            _isVSync.Dispose();
-        }
-
-        public void ToggleVSync() => SetVSync(!_isVSync.Value);
-
-        public void SetVSync(bool isVSync)
-        {
-            QualitySettings.vSyncCount = isVSync ? 1 : 0;
-            _isVSync.Value = isVSync;
-            _settingsStorage.Set(SettingsConstants.VSyncKey, isVSync);
-        }
+    public void SetVSync(bool isVSync)
+    {
+        QualitySettings.vSyncCount = isVSync ? 1 : 0;
+        _isVSync.Value = isVSync;
+        _settingsStorage.Set(SettingsConstants.VSyncKey, isVSync);
     }
 }

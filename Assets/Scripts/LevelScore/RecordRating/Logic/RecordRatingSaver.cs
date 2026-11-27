@@ -7,53 +7,52 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelScore.RecordRating
+namespace AngryBirds3D.LevelScore.RecordRating;
+
+public class RecordRatingSaver : IStartable, IDisposable
 {
-    public class RecordRatingSaver : IStartable, IDisposable
+    private readonly SaveStorage _saveStorage;
+    private readonly RatingEvaluator _ratingEvaluator;
+    private readonly ReactiveProperty<int> _record = new();
+    private readonly CompositeDisposable _disposables = new();
+
+    public RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
     {
-        private readonly SaveStorage _saveStorage;
-        private readonly RatingEvaluator _ratingEvaluator;
-        private readonly ReactiveProperty<int> _record = new();
-        private readonly CompositeDisposable _disposables = new();
+        _saveStorage = saveStorage;
+        _ratingEvaluator = ratingEvaluator;
+    }
 
-        public RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
-        {
-            _saveStorage = saveStorage;
-            _ratingEvaluator = ratingEvaluator;
-        }
+    public ReadOnlyReactiveProperty<int> Record => _record;
 
-        public ReadOnlyReactiveProperty<int> Record => _record;
+    public void Start()
+    {
+        _ratingEvaluator.Rating
+            .Where(count => count > 0)
+            .Subscribe(OnRatingEvaluated)
+            .AddTo(_disposables);
+    }
 
-        public void Start()
-        {
-            _ratingEvaluator.Rating
-                .Where(count => count > 0)
-                .Subscribe(OnRatingEvaluated)
-                .AddTo(_disposables);
-        }
+    public void Dispose()
+    {
+        _disposables.Dispose();
+        _record.Dispose();
+    }
 
-        public void Dispose()
-        {
-            _disposables.Dispose();
-            _record.Dispose();
-        }
+    private void OnRatingEvaluated(int starCount)
+    {
+        Dictionary<int, int> starRecordByLevelIndex = _saveStorage
+            .Get(SaveConstants.StarRecordByLevelIndex, new Dictionary<int, int>());
 
-        private void OnRatingEvaluated(int starCount)
-        {
-            Dictionary<int, int> starRecordByLevelIndex = _saveStorage
-                .Get(SaveConstants.StarRecordByLevelIndex, new Dictionary<int, int>());
+        int currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-            int currentLevel = SceneManager.GetActiveScene().buildIndex;
+        if (starRecordByLevelIndex.TryGetValue(currentLevel, out int starRecord))
+            starRecord = Mathf.Max(starCount, starRecord);
+        else
+            starRecord = starCount;
 
-            if (starRecordByLevelIndex.TryGetValue(currentLevel, out int starRecord))
-                starRecord = Mathf.Max(starCount, starRecord);
-            else
-                starRecord = starCount;
+        starRecordByLevelIndex[currentLevel] = starRecord;
+        _saveStorage.Set(SaveConstants.StarRecordByLevelIndex, starRecordByLevelIndex);
 
-            starRecordByLevelIndex[currentLevel] = starRecord;
-            _saveStorage.Set(SaveConstants.StarRecordByLevelIndex, starRecordByLevelIndex);
-
-            _record.Value = starRecord;
-        }
+        _record.Value = starRecord;
     }
 }

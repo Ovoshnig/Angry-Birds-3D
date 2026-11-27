@@ -2,20 +2,19 @@ using Cysharp.Threading.Tasks;
 using R3;
 using UnityEngine;
 
-namespace Ovoshnig.UI.TextPrinting
+namespace Ovoshnig.UI.TextPrinting;
+
+public class PlayButtonPrinterView : TextPrinterView
 {
-    public class PlayButtonPrinterView : TextPrinterView
+    [SerializeField] private ScoreTablePrinterView _scoreTablePrinterView;
+
+    protected override void Start()
     {
-        [SerializeField] private ScoreTablePrinterView _scoreTablePrinterView;
+        TmpText.maxVisibleCharacters = 0;
+        string initialText = TmpText.text;
 
-        protected override void Start()
-        {
-            TmpText.maxVisibleCharacters = 0;
-            string initialText = TmpText.text;
-
-            _scoreTablePrinterView.Completed
-                .Subscribe(_ => PrintAsync(initialText).Forget())
-                .RegisterTo(destroyCancellationToken);
-        }
+        _scoreTablePrinterView.Completed
+            .Subscribe(_ => PrintAsync(initialText).Forget())
+            .RegisterTo(destroyCancellationToken);
     }
 }

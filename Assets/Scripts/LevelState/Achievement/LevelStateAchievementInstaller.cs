@@ -2,12 +2,11 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelState.Achievement
+namespace AngryBirds3D.LevelState.Achievement;
+
+[Serializable]
+public class LevelStateAchievementInstaller : IInstaller
 {
-    [Serializable]
-    public class LevelStateAchievementInstaller : IInstaller
-    {
-        public void Install(IContainerBuilder builder) =>
-            builder.RegisterEntryPoint<LevelAchiever>().AsSelf();
-    }
+    public void Install(IContainerBuilder builder) =>
+        builder.RegisterEntryPoint<LevelAchiever>().AsSelf();
 }

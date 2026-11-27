@@ -1,15 +1,14 @@
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace AngryBirds3D.LevelState.Tracking
+namespace AngryBirds3D.LevelState.Tracking;
+
+[CreateAssetMenu(fileName = "LevelSfxProfile", menuName = "Scriptable Objects/Level Sfx Profile")]
+public class LevelSfxProfile : ScriptableObject
 {
-    [CreateAssetMenu(fileName = "LevelSfxProfile", menuName = "Scriptable Objects/Level Sfx Profile")]
-    public class LevelSfxProfile : ScriptableObject
-    {
-        [field: SerializeField] public AudioResource StartResource { get; private set; }
-        [field: SerializeField] public AudioResource NextResource { get; private set; }
-        [field: SerializeField] public AudioResource ClearingResource { get; private set; }
-        [field: SerializeField] public AudioResource ClearingPanelResource { get; private set; }
-        [field: SerializeField] public AudioResource FailureResource { get; private set; }
-    }
+    [field: SerializeField] public AudioResource StartResource { get; private set; }
+    [field: SerializeField] public AudioResource NextResource { get; private set; }
+    [field: SerializeField] public AudioResource ClearingResource { get; private set; }
+    [field: SerializeField] public AudioResource ClearingPanelResource { get; private set; }
+    [field: SerializeField] public AudioResource FailureResource { get; private set; }
 }

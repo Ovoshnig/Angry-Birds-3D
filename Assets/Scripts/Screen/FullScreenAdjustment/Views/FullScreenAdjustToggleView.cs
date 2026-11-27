@@ -1,8 +1,7 @@
 using Ovoshnig.UI.Basic;
 
-namespace Ovoshnig.Screen.FullScreenAdjustment
+namespace Ovoshnig.Screen.FullScreenAdjustment;
+
+public class FullScreenAdjustToggleView : ToggleView
 {
-    public class FullScreenAdjustToggleView : ToggleView
-    {
-    }
 }

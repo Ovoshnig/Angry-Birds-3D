@@ -2,29 +2,28 @@ using R3;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Ovoshnig.UI.Basic
+namespace Ovoshnig.UI.Basic;
+
+[RequireComponent(typeof(Slider))]
+public abstract class SliderView : UIView
 {
-    [RequireComponent(typeof(Slider))]
-    public abstract class SliderView : UIView
+    private Slider _slider;
+
+    public Observable<float> ValueChanged { get; private set; }
+    public float MinValue => _slider.minValue;
+    public float MaxValue => _slider.maxValue;
+
+    protected virtual void Awake()
     {
-        private Slider _slider;
-
-        public Observable<float> ValueChanged { get; private set; }
-        public float MinValue => _slider.minValue;
-        public float MaxValue => _slider.maxValue;
-
-        protected virtual void Awake()
-        {
-            _slider = GetComponent<Slider>();
-            ValueChanged = _slider.OnValueChangedAsObservable();
-        }
-
-        public void SetValue(float value) => _slider.value = value;
-
-        public void SetValueWithoutNotify(float value) => _slider.SetValueWithoutNotify(value);
-
-        public void SetMinValue(float value) => _slider.minValue = value;
-
-        public void SetMaxValue(float value) => _slider.maxValue = value;
+        _slider = GetComponent<Slider>();
+        ValueChanged = _slider.OnValueChangedAsObservable();
     }
+
+    public void SetValue(float value) => _slider.value = value;
+
+    public void SetValueWithoutNotify(float value) => _slider.SetValueWithoutNotify(value);
+
+    public void SetMinValue(float value) => _slider.minValue = value;
+
+    public void SetMaxValue(float value) => _slider.maxValue = value;
 }

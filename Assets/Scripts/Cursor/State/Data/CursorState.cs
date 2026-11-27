@@ -1,10 +1,9 @@
-namespace Ovoshnig.Cursor.State
+namespace Ovoshnig.Cursor.State;
+
+public enum CursorState
 {
-    public enum CursorState
-    {
-        UIHover,
-        UIClick,
-        GameplayHover,
-        GameplayGrab
-    }
+    UIHover,
+    UIClick,
+    GameplayHover,
+    GameplayGrab
 }

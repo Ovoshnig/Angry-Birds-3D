@@ -5,66 +5,65 @@ using R3;
 using System;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Bird.Destruction
+namespace AngryBirds3D.Bird.Destruction;
+
+public class BirdDestroyer : IStartable, IDisposable
 {
-    public class BirdDestroyer : IStartable, IDisposable
+    private readonly ObjectCollider _objectCollider;
+    private readonly BirdSettings _birdSettings;
+    private readonly Subject<BirdEntityView> _destructionStarted = new();
+    private readonly Subject<BirdEntityView> _destroyed = new();
+    private readonly CompositeDisposable _disposables = new();
+
+    public BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings)
     {
-        private readonly ObjectCollider _objectCollider;
-        private readonly BirdSettings _birdSettings;
-        private readonly Subject<BirdEntityView> _destructionStarted = new();
-        private readonly Subject<BirdEntityView> _destroyed = new();
-        private readonly CompositeDisposable _disposables = new();
+        _objectCollider = objectCollider;
+        _birdSettings = birdSettings;
+    }
 
-        public BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings)
-        {
-            _objectCollider = objectCollider;
-            _birdSettings = birdSettings;
-        }
+    public Observable<BirdEntityView> DestructionStarted => _destructionStarted;
+    public Observable<BirdEntityView> Destroyed => _destroyed;
 
-        public Observable<BirdEntityView> DestructionStarted => _destructionStarted;
-        public Observable<BirdEntityView> Destroyed => _destroyed;
-
-        public void Start()
-        {
-            _objectCollider.Collided
-                .Where(data => data.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
-                .Select(data => data.EntityView as BirdEntityView)
-                .Do(entityView =>
+    public void Start()
+    {
+        _objectCollider.Collided
+            .Where(data => data.EntityView is BirdEntityView entityView && !entityView.DestroyerView.IsDestroying)
+            .Select(data => data.EntityView as BirdEntityView)
+            .Do(entityView =>
+            {
+                entityView.DestroyerView.StartDestroying();
+                _destructionStarted.OnNext(entityView);
+            })
+            .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
+            .Subscribe(entityView =>
+            {
+                if (entityView != null)
                 {
-                    entityView.DestroyerView.StartDestroying();
-                    _destructionStarted.OnNext(entityView);
-                })
-                .Delay(TimeSpan.FromSeconds(_birdSettings.DestructionDelay), UnityTimeProvider.Update)
-                .Subscribe(entityView =>
-                {
-                    if (entityView != null)
-                    {
-                        entityView.DestroyerView.Destroy();
-                        _destroyed.OnNext(entityView);
-                    }
-                })
-                .AddTo(_disposables);
-        }
+                    entityView.DestroyerView.Destroy();
+                    _destroyed.OnNext(entityView);
+                }
+            })
+            .AddTo(_disposables);
+    }
 
-        public void Dispose()
-        {
-            _disposables.Dispose();
+    public void Dispose()
+    {
+        _disposables.Dispose();
 
-            _destructionStarted.Dispose();
-            _destroyed.Dispose();
-        }
+        _destructionStarted.Dispose();
+        _destroyed.Dispose();
+    }
 
-        public void DestroyImmediate(BirdEntityView birdEntityView)
-        {
-            if (birdEntityView == null)
-                return;
+    public void DestroyImmediate(BirdEntityView birdEntityView)
+    {
+        if (birdEntityView == null)
+            return;
 
-            BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
-            destroyerView.StartDestroying();
-            _destructionStarted.OnNext(birdEntityView);
+        BirdDestroyerView destroyerView = birdEntityView.DestroyerView;
+        destroyerView.StartDestroying();
+        _destructionStarted.OnNext(birdEntityView);
 
-            destroyerView.Destroy();
-            _destroyed.OnNext(birdEntityView);
-        }
+        destroyerView.Destroy();
+        _destroyed.OnNext(birdEntityView);
     }
 }

@@ -2,27 +2,26 @@ using Ovoshnig.Mediation;
 using R3;
 using System.Collections.Generic;
 
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+public class AudioMixerTunerSliderModelsMediator : Mediator
 {
-    public class AudioMixerTunerSliderModelsMediator : Mediator
+    private readonly AudioMixerTuner _audioMixerTuner;
+    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
+
+    public AudioMixerTunerSliderModelsMediator(AudioMixerTuner audioMixerTuner, IReadOnlyList<AudioSliderModel> sliderModels)
     {
-        private readonly AudioMixerTuner _audioMixerTuner;
-        private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
+        _audioMixerTuner = audioMixerTuner;
+        _sliderModels = sliderModels;
+    }
 
-        public AudioMixerTunerSliderModelsMediator(AudioMixerTuner audioMixerTuner, IReadOnlyList<AudioSliderModel> sliderModels)
+    protected override void Bind(CompositeDisposable disposables)
+    {
+        foreach (var model in _sliderModels)
         {
-            _audioMixerTuner = audioMixerTuner;
-            _sliderModels = sliderModels;
-        }
-
-        protected override void Bind(CompositeDisposable disposables)
-        {
-            foreach (var model in _sliderModels)
-            {
-                model.Value
-                    .Subscribe(value => _audioMixerTuner.SetVolume(model.MixerParameterName, value))
-                    .AddTo(disposables);
-            }
+            model.Value
+                .Subscribe(value => _audioMixerTuner.SetVolume(model.MixerParameterName, value))
+                .AddTo(disposables);
         }
     }
 }

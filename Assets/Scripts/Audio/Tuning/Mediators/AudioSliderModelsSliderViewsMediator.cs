@@ -3,32 +3,31 @@ using R3;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Ovoshnig.Audio.Tuning
+namespace Ovoshnig.Audio.Tuning;
+
+public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
 {
-    public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
+    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
+
+    public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
+        IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
+
+    protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
     {
-        private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
+        AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
 
-        public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
-            IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
+        if (model == null)
+            return;
 
-        protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
-        {
-            AudioSliderModel model = _sliderModels.FirstOrDefault(m => m.Channel == view.Channel);
+        view.SetMinValue(model.MinValue);
+        view.SetMaxValue(model.MaxValue);
 
-            if (model == null)
-                return;
+        model.Value
+            .Subscribe(view.SetValueWithoutNotify)
+            .AddTo(viewDisposables);
 
-            view.SetMinValue(model.MinValue);
-            view.SetMaxValue(model.MaxValue);
-
-            model.Value
-                .Subscribe(view.SetValueWithoutNotify)
-                .AddTo(viewDisposables);
-
-            view.ValueChanged
-                .Subscribe(model.SetClampedValue)
-                .AddTo(viewDisposables);
-        }
+        view.ValueChanged
+            .Subscribe(model.SetClampedValue)
+            .AddTo(viewDisposables);
     }
 }

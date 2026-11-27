@@ -1,12 +1,11 @@
-namespace Ovoshnig.Scene.Switching
+namespace Ovoshnig.Scene.Switching;
+
+public enum SceneNavigationType
 {
-    public enum SceneNavigationType
-    {
-        MainMenu,
-        FirstLevel,
-        PreviousLevel,
-        CurrentLevel,
-        NextLevel,
-        SpecificIndex
-    }
+    MainMenu,
+    FirstLevel,
+    PreviousLevel,
+    CurrentLevel,
+    NextLevel,
+    SpecificIndex
 }

@@ -1,24 +1,23 @@
 using Ovoshnig.UI.Basic;
 using R3;
 
-namespace Ovoshnig.Screen.VSyncAdjustment
+namespace Ovoshnig.Screen.VSyncAdjustment;
+
+public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
 {
-    public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
+    private readonly VSyncAdjuster _vSyncAdjuster;
+
+    public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
+        : base(view) => _vSyncAdjuster = vSyncAdjuster;
+
+    protected override void OnViewEnabled(VSyncAdjustToggleView view, CompositeDisposable viewDisposables)
     {
-        private readonly VSyncAdjuster _vSyncAdjuster;
+        _vSyncAdjuster.IsVSync
+            .Subscribe(view.SetIsOnWithoutNotify)
+            .AddTo(viewDisposables);
 
-        public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
-            : base(view) => _vSyncAdjuster = vSyncAdjuster;
-
-        protected override void OnViewEnabled(VSyncAdjustToggleView view, CompositeDisposable viewDisposables)
-        {
-            _vSyncAdjuster.IsVSync
-                .Subscribe(view.SetIsOnWithoutNotify)
-                .AddTo(viewDisposables);
-
-            view.ValueChanged
-                .Subscribe(_vSyncAdjuster.SetVSync)
-                .AddTo(viewDisposables);
-        }
+        view.ValueChanged
+            .Subscribe(_vSyncAdjuster.SetVSync)
+            .AddTo(viewDisposables);
     }
 }

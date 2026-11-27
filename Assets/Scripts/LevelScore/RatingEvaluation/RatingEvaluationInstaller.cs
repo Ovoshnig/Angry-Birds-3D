@@ -4,20 +4,19 @@ using UnityEngine;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.LevelScore.RatingEvaluation
+namespace AngryBirds3D.LevelScore.RatingEvaluation;
+
+[Serializable]
+public class RatingEvaluationInstaller : IInstaller
 {
-    [Serializable]
-    public class RatingEvaluationInstaller : IInstaller
+    [SerializeField] private RatingSettings _ratingSettings;
+
+    public void Install(IContainerBuilder builder)
     {
-        [SerializeField] private RatingSettings _ratingSettings;
+        builder.RegisterInstance(_ratingSettings);
+        builder.RegisterInstanceInHierarchy<RatingEvaluatorView>();
 
-        public void Install(IContainerBuilder builder)
-        {
-            builder.RegisterInstance(_ratingSettings);
-            builder.RegisterInstanceInHierarchy<RatingEvaluatorView>();
-
-            builder.Register<RatingEvaluator>(Lifetime.Singleton);
-            builder.RegisterEntryPoint<RatingEvaluatorViewMediator>();
-        }
+        builder.Register<RatingEvaluator>(Lifetime.Singleton);
+        builder.RegisterEntryPoint<RatingEvaluatorViewMediator>();
     }
 }

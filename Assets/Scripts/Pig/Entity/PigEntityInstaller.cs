@@ -3,11 +3,10 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Pig.Entity
+namespace AngryBirds3D.Pig.Entity;
+
+[Serializable]
+public class PigEntityInstaller : IInstaller
 {
-    [Serializable]
-    public class PigEntityInstaller : IInstaller
-    {
-        public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<PigEntityView>();
-    }
+    public void Install(IContainerBuilder builder) => builder.RegisterInstancesInHierarchy<PigEntityView>();
 }

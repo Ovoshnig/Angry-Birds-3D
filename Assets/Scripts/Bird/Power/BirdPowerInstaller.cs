@@ -2,26 +2,25 @@ using System;
 using VContainer;
 using VContainer.Unity;
 
-namespace AngryBirds3D.Bird.Power
+namespace AngryBirds3D.Bird.Power;
+
+[Serializable]
+public class BirdPowerInstaller : IInstaller
 {
-    [Serializable]
-    public class BirdPowerInstaller : IInstaller
+    public void Install(IContainerBuilder builder)
     {
-        public void Install(IContainerBuilder builder)
+        builder.Register<SplitInto3BirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
+        builder.Register<BoostBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
+        builder.Register<ExplosionBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
+        builder.Register<EggDroppingBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
+
+        builder.Register<BirdPowerRegistry>(Lifetime.Singleton);
+        builder.Register<BirdExploder>(Lifetime.Singleton);
+
+        builder.UseEntryPoints(entryPoints =>
         {
-            builder.Register<SplitInto3BirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
-            builder.Register<BoostBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
-            builder.Register<ExplosionBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
-            builder.Register<EggDroppingBirdPower>(Lifetime.Singleton).As<IBirdPower>().AsSelf();
-
-            builder.Register<BirdPowerRegistry>(Lifetime.Singleton);
-            builder.Register<BirdExploder>(Lifetime.Singleton);
-
-            builder.UseEntryPoints(entryPoints =>
-            {
-                entryPoints.Add<BirdPowerActivator>().AsSelf();
-                entryPoints.Add<BirdPowerActivatorBirdFlyerMediator>().AsSelf();
-            });
-        }
+            entryPoints.Add<BirdPowerActivator>().AsSelf();
+            entryPoints.Add<BirdPowerActivatorBirdFlyerMediator>().AsSelf();
+        });
     }
 }

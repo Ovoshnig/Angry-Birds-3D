@@ -1,12 +1,11 @@
 using System;
 using UnityEngine;
 
-namespace Ovoshnig.GameSettings
+namespace Ovoshnig.GameSettings;
+
+[Serializable]
+public class ScoreSettings
 {
-    [Serializable]
-    public class ScoreSettings
-    {
-        [field: SerializeField] public int PoolDefaultCapacity { get; private set; } = 5;
-        [field: SerializeField] public int PoolMaxSize { get; private set; } = 10;
-    }
+    [field: SerializeField] public int PoolDefaultCapacity { get; private set; } = 5;
+    [field: SerializeField] public int PoolMaxSize { get; private set; } = 10;
 }
