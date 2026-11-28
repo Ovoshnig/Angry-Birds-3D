@@ -1,4 +1,6 @@
-﻿[*.cs]
+﻿root = true
 
+[*.cs]
 # IDE0130: Пространство имен (namespace) не соответствует структуре папок.
 dotnet_diagnostic.IDE0130.severity = none
+dotnet_diagnostic.CA1016.severity = none
