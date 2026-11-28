@@ -3,16 +3,17 @@ using Ovoshnig.Audio.Music.Queue;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using Unity.Scripting.LifecycleManagement;
 
 namespace Ovoshnig.Tests.EditMode.Audio.Music;
 
 public sealed class MusicQueueTests
 {
-    private MusicQueue _queue = null;
+    private MusicQueue<object> _queue = null;
 
     [SetUp]
-    public void SetUp() => _queue = new MusicQueue();
+    public void SetUp() => _queue = new MusicQueue<object>();
 
     [Test]
     public void Clear_OnNewQueue_DoesNotThrow_AndQueueRemainsEmpty()
@@ -133,36 +134,37 @@ public sealed class MusicQueueTests
         CollectionAssert.AreEquivalent(items, dequeued);
     }
 
-    private static IEnumerable<object> DequeueAll(MusicQueue queue)
+    private static IEnumerable<object> DequeueAll(MusicQueue<object> queue)
     {
         while (queue.TryGetNextClipKey(out object key))
             yield return key;
     }
 
-    private static void AssertMultisetEqualByReference(IReadOnlyList<object> expected, IReadOnlyList<object> actual)
+    private static void AssertMultisetEqualByReference(IReadOnlyList<object> expected,
+        IReadOnlyList<object> actual)
     {
-        static Dictionary<object, int> CountByRef(IEnumerable<object> seq)
+        static Dictionary<object, int> CountByRef(IEnumerable<object> sequence)
         {
-            Dictionary<object, int> dict = new(ReferenceEqualityComparer.Instance);
-            foreach (object obj in seq)
+            Dictionary<object, int> dictionary = new(ReferenceEqualityComparer.Instance);
+            foreach (object obj in sequence)
             {
-                dict.TryGetValue(obj, out int count);
-                dict[obj] = count + 1;
+                dictionary.TryGetValue(obj, out int count);
+                dictionary[obj] = count + 1;
             }
 
-            return dict;
+            return dictionary;
         }
 
-        Dictionary<object, int> e = CountByRef(expected);
-        Dictionary<object, int> a = CountByRef(actual);
+        Dictionary<object, int> expectedDictionary = CountByRef(expected);
+        Dictionary<object, int> actualDictionary = CountByRef(actual);
 
-        Assert.That(a.Count, Is.EqualTo(e.Count));
+        Assert.That(actualDictionary.Count, Is.EqualTo(expectedDictionary.Count));
 
-        foreach (KeyValuePair<object, int> kv in e)
+        foreach (KeyValuePair<object, int> kvp in expectedDictionary)
         {
-            object key = kv.Key;
-            int expectedCount = kv.Value;
-            Assert.True(a.TryGetValue(key, out int actualCount));
+            object key = kvp.Key;
+            int expectedCount = kvp.Value;
+            Assert.True(actualDictionary.TryGetValue(key, out int actualCount));
             Assert.That(actualCount, Is.EqualTo(expectedCount));
         }
     }
@@ -174,6 +176,6 @@ public sealed class MusicQueueTests
 
         public new bool Equals(object x, object y) => ReferenceEquals(x, y);
 
-        public int GetHashCode(object obj) => System.Runtime.CompilerServices.RuntimeHelpers.GetHashCode(obj);
+        public int GetHashCode(object @object) => RuntimeHelpers.GetHashCode(@object);
     }
 }

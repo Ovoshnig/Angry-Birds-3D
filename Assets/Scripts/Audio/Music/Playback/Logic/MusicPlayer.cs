@@ -11,10 +11,10 @@ using UnityEngine;
 
 namespace Ovoshnig.Audio.Music.Playback;
 
-public class MusicPlayer(MusicQueue musicQueue, IClipLoader clipLoader, ISceneMusicMapper sceneMusicMapper)
-    : IDisposable
+public class MusicPlayer(MusicQueue<object> musicQueue, IClipLoader clipLoader,
+    ISceneMusicMapper sceneMusicMapper) : IDisposable
 {
-    private readonly MusicQueue _musicQueue = musicQueue;
+    private readonly MusicQueue<object> _musicQueue = musicQueue;
     private readonly IClipLoader _clipLoader = clipLoader;
     private readonly ISceneMusicMapper _sceneMusicMapper = sceneMusicMapper;
     private readonly Subject<AudioClip> _playbackStarted = new();

@@ -1,6 +1,5 @@
 using AngryBirds3D.Bird.Entity;
 using System.Collections.Generic;
-using System.Linq;
 using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Queue;
@@ -9,7 +8,7 @@ public class BirdQueue(IReadOnlyList<BirdEntityView> entityViews) : IStartable
 {
     private readonly Queue<BirdEntityView> _queue = new(entityViews);
 
-    public bool Any => _queue.Any();
+    public bool Any => _queue.Count != 0;
 
     public void Start()
     {
