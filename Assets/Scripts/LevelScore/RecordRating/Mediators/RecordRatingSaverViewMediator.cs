@@ -4,17 +4,15 @@ using R3;
 
 namespace AngryBirds3D.LevelScore.RecordRating;
 
-public class RecordRatingSaverViewMediator : UIViewMediator<RecordRatingView>
+public class RecordRatingSaverViewMediator(RecordRatingSaver recordRatingSaver, RecordRatingView view)
+    : UIViewMediator<RecordRatingView>(view)
 {
-    private readonly RecordRatingSaver _recordRatingSaver;
-
-    public RecordRatingSaverViewMediator(RecordRatingSaver recordRatingSaver, RecordRatingView view)
-        : base(view) => _recordRatingSaver = recordRatingSaver;
+    private readonly RecordRatingSaver _recordRatingSaver = recordRatingSaver;
 
     protected override void OnViewEnabled(RecordRatingView view, CompositeDisposable viewDisposables)
     {
         _recordRatingSaver.Record
-            .Subscribe(record => view.SetStarCount(record))
+            .Subscribe(view.SetStarCount)
             .AddTo(viewDisposables);
     }
 }

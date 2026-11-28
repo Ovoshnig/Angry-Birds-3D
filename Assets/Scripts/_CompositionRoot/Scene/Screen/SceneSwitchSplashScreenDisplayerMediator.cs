@@ -6,17 +6,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class SceneSwitchSplashScreenDisplayerMediator : Mediator
+public class SceneSwitchSplashScreenDisplayerMediator(SceneSwitch sceneSwitch,
+    SplashScreenDisplayer splashScreenDisplayer) : Mediator
 {
-    private readonly SceneSwitch _sceneSwitch;
-    private readonly SplashScreenDisplayer _splashScreenDisplayer;
-
-    public SceneSwitchSplashScreenDisplayerMediator(SceneSwitch sceneSwitch,
-        SplashScreenDisplayer splashScreenDisplayer)
-    {
-        _sceneSwitch = sceneSwitch;
-        _splashScreenDisplayer = splashScreenDisplayer;
-    }
+    private readonly SceneSwitch _sceneSwitch = sceneSwitch;
+    private readonly SplashScreenDisplayer _splashScreenDisplayer = splashScreenDisplayer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

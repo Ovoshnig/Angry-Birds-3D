@@ -5,20 +5,12 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class SFXPlayerPoolLevelTrackerMediator : Mediator
+public class SFXPlayerPoolLevelTrackerMediator(SFXPlayerObjectPool sfxPlayer,
+    LevelStateTracker levelStateTracker, LevelSfxProfile levelSfxProfile) : Mediator
 {
-    private readonly SFXPlayerObjectPool _sfxPlayer;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly LevelSfxProfile _levelSfxProfile;
-
-    public SFXPlayerPoolLevelTrackerMediator(SFXPlayerObjectPool sfxPlayer,
-        LevelStateTracker levelStateTracker,
-        LevelSfxProfile levelSfxProfile)
-    {
-        _sfxPlayer = sfxPlayer;
-        _levelStateTracker = levelStateTracker;
-        _levelSfxProfile = levelSfxProfile;
-    }
+    private readonly SFXPlayerObjectPool _sfxPlayer = sfxPlayer;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
+    private readonly LevelSfxProfile _levelSfxProfile = levelSfxProfile;
 
     protected override void Bind(CompositeDisposable disposables)
     {

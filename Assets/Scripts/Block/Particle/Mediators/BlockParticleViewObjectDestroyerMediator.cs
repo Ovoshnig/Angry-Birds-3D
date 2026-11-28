@@ -7,17 +7,11 @@ using UnityEngine;
 
 namespace AngryBirds3D.Block.Particle;
 
-public class BlockParticleViewObjectDestroyerMediator : Mediator
+public class BlockParticleViewObjectDestroyerMediator(BlockParticleView blockParticleView,
+    ObjectDestroyer objectDestroyer) : Mediator
 {
-    private readonly BlockParticleView _blockParticleView;
-    private readonly ObjectDestroyer _objectDestroyer;
-
-    public BlockParticleViewObjectDestroyerMediator(BlockParticleView blockParticleView,
-        ObjectDestroyer objectDestroyer)
-    {
-        _blockParticleView = blockParticleView;
-        _objectDestroyer = objectDestroyer;
-    }
+    private readonly BlockParticleView _blockParticleView = blockParticleView;
+    private readonly ObjectDestroyer _objectDestroyer = objectDestroyer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

@@ -5,12 +5,10 @@ using System.Linq;
 
 namespace Ovoshnig.Audio.Tuning;
 
-public class AudioSliderModelsSliderViewsMediator : UIViewsMediator<AudioSliderView>
+public class AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
+    IReadOnlyList<AudioSliderView> views) : UIViewsMediator<AudioSliderView>(views)
 {
-    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
-
-    public AudioSliderModelsSliderViewsMediator(IReadOnlyList<AudioSliderModel> sliderModels,
-        IReadOnlyList<AudioSliderView> views) : base(views) => _sliderModels = sliderModels;
+    private readonly IReadOnlyList<AudioSliderModel> _sliderModels = sliderModels;
 
     protected override void OnViewEnabled(AudioSliderView view, CompositeDisposable viewDisposables)
     {

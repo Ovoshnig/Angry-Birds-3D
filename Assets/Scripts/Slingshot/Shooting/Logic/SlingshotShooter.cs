@@ -17,8 +17,6 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     private readonly ReactiveProperty<SlingshotState> _currentState = new(SlingshotState.Idle);
     private readonly Subject<Rigidbody> _shot = new();
     private readonly CompositeDisposable _disposables = [];
-
-    private Rigidbody _currentBird = null;
     private Vector3 _centerAnchorPosition;
     private float _birdRadius;
     private bool _isDragInput;
@@ -35,15 +33,15 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             .Pairwise()
             .Where(pair => pair.Previous != SlingshotState.Dragging
                 && pair.Current == SlingshotState.Dragging)
-            .Select(_ => _currentBird)
+            .Select(_ => CurrentBird)
             .Share();
     }
 
-    public Rigidbody CurrentBird => _currentBird;
+    public Rigidbody CurrentBird { get; private set; } = null;
     public ReadOnlyReactiveProperty<SlingshotState> CurrentState => _currentState;
     public Observable<Rigidbody> DraggingStarted { get; }
     public Observable<Rigidbody> Shot => _shot;
-    public bool ContainsBird => _currentBird != null;
+    public bool ContainsBird => CurrentBird != null;
 
     public void Start()
     {
@@ -65,18 +63,18 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             return;
 
         UpdateBirdPosition();
-        _view.UpdateRubbers(_currentBird.transform.position);
+        _view.UpdateRubbers(CurrentBird.transform.position);
     }
 
     public void SetBird(Rigidbody birdRigidbody)
     {
-        if (_currentBird != null)
+        if (CurrentBird != null)
         {
-            Debug.LogError("The bird is already placed in the slingshot", _currentBird);
+            Debug.LogError("The bird is already placed in the slingshot", CurrentBird);
             return;
         }
 
-        _currentBird = birdRigidbody;
+        CurrentBird = birdRigidbody;
         _birdRadius = birdRigidbody.GetComponent<SphereCollider>().radius;
         _view.SetBirdRadius(_birdRadius);
 
@@ -122,7 +120,9 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
     {
         if (_currentState.Value != SlingshotState.InputWaiting
             || !_pointerMeter.IsPointerNear(_centerAnchorPosition, _settings.InputInteractionRadius))
+        {
             return;
+        }
 
         _currentState.Value = SlingshotState.Dragging;
         _isDragInput = false;
@@ -136,14 +136,14 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
         _currentState.Value = SlingshotState.Idle;
         _view.SetLinesVisibility(false);
 
-        _currentBird.isKinematic = false;
-        _currentBird.detectCollisions = true;
+        CurrentBird.isKinematic = false;
+        CurrentBird.detectCollisions = true;
 
-        Vector3 force = _centerAnchorPosition - _currentBird.transform.position;
-        _currentBird.AddForce(force * _settings.LaunchForce, ForceMode.Impulse);
+        Vector3 force = _centerAnchorPosition - CurrentBird.transform.position;
+        CurrentBird.AddForce(force * _settings.LaunchForce, ForceMode.Impulse);
 
-        _shot.OnNext(_currentBird);
-        _currentBird = null;
+        _shot.OnNext(CurrentBird);
+        CurrentBird = null;
     }
 
     private void UpdateBirdPosition()
@@ -163,17 +163,17 @@ public class SlingshotShooter : IStartable, IDisposable, ITickable
             pullVector = pullVector.normalized * safeDistance;
         }
 
-        _currentBird.transform.position = _centerAnchorPosition + pullVector;
-        _currentBird.transform.forward = -pullVector.normalized;
+        CurrentBird.transform.position = _centerAnchorPosition + pullVector;
+        CurrentBird.transform.forward = -pullVector.normalized;
     }
 
     private void ResetBird()
     {
-        if (_currentBird == null)
+        if (CurrentBird == null)
             return;
 
         _currentState.Value = SlingshotState.InputWaiting;
-        _currentBird.isKinematic = true;
-        _currentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
+        CurrentBird.isKinematic = true;
+        CurrentBird.transform.SetPositionAndRotation(_centerAnchorPosition, Quaternion.identity);
     }
 }

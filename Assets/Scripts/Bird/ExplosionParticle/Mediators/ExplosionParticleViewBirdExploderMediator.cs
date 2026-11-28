@@ -4,17 +4,11 @@ using R3;
 
 namespace AngryBirds3D.Bird.ExplosionParticle;
 
-public class ExplosionParticleViewBirdExploderMediator : Mediator
+public class ExplosionParticleViewBirdExploderMediator(ExplosionParticleView explosionParticleView,
+    BirdExploder birdExploder) : Mediator
 {
-    private readonly ExplosionParticleView _explosionParticleView;
-    private readonly BirdExploder _birdExploder;
-
-    public ExplosionParticleViewBirdExploderMediator(ExplosionParticleView explosionParticleView,
-        BirdExploder birdExploder)
-    {
-        _explosionParticleView = explosionParticleView;
-        _birdExploder = birdExploder;
-    }
+    private readonly ExplosionParticleView _explosionParticleView = explosionParticleView;
+    private readonly BirdExploder _birdExploder = birdExploder;
 
     protected override void Bind(CompositeDisposable disposables)
     {

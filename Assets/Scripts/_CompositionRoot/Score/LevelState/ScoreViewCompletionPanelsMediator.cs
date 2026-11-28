@@ -5,20 +5,12 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class ScoreViewCompletionPanelsMediator : Mediator
+public class ScoreViewCompletionPanelsMediator(ScoreView scoreView, ClearingPanelView clearingPanelView,
+    FailurePanelView failurePanelView) : Mediator
 {
-    private readonly ScoreView _scoreView;
-    private readonly ClearingPanelView _clearingPanelView;
-    private readonly FailurePanelView _failurePanelView;
-
-    public ScoreViewCompletionPanelsMediator(ScoreView scoreView,
-        ClearingPanelView clearingPanelView,
-        FailurePanelView failurePanelView)
-    {
-        _scoreView = scoreView;
-        _clearingPanelView = clearingPanelView;
-        _failurePanelView = failurePanelView;
-    }
+    private readonly ScoreView _scoreView = scoreView;
+    private readonly ClearingPanelView _clearingPanelView = clearingPanelView;
+    private readonly FailurePanelView _failurePanelView = failurePanelView;
 
     protected override void Bind(CompositeDisposable disposables)
     {

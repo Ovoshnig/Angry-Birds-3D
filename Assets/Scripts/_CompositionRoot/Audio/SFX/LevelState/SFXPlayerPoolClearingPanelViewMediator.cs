@@ -5,20 +5,12 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class SFXPlayerPoolClearingPanelViewMediator : Mediator
+public class SFXPlayerPoolClearingPanelViewMediator(SFXPlayerObjectPool sfxPlayer,
+    ClearingPanelView clearingPanelView, LevelSfxProfile levelSfxProfile) : Mediator
 {
-    private readonly SFXPlayerObjectPool _sfxPlayer;
-    private readonly ClearingPanelView _clearingPanelView;
-    private readonly LevelSfxProfile _levelSfxProfile;
-
-    public SFXPlayerPoolClearingPanelViewMediator(SFXPlayerObjectPool sfxPlayer,
-        ClearingPanelView clearingPanelView,
-        LevelSfxProfile levelSfxProfile)
-    {
-        _sfxPlayer = sfxPlayer;
-        _clearingPanelView = clearingPanelView;
-        _levelSfxProfile = levelSfxProfile;
-    }
+    private readonly SFXPlayerObjectPool _sfxPlayer = sfxPlayer;
+    private readonly ClearingPanelView _clearingPanelView = clearingPanelView;
+    private readonly LevelSfxProfile _levelSfxProfile = levelSfxProfile;
 
     protected override void Bind(CompositeDisposable disposables)
     {

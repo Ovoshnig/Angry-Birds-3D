@@ -6,17 +6,11 @@ using System.Collections.Generic;
 
 namespace AngryBirds3D.Composition;
 
-public class CursorStateModelCompletionPanelViewsMediator : Mediator
+public class CursorStateModelCompletionPanelViewsMediator(CursorStateModel cursorStateModel,
+    IReadOnlyList<CompletionPanelView> completionPanelViews) : Mediator
 {
-    private readonly CursorStateModel _cursorStateModel;
-    private readonly IReadOnlyList<CompletionPanelView> _completionPanelViews;
-
-    public CursorStateModelCompletionPanelViewsMediator(CursorStateModel cursorStateModel,
-        IReadOnlyList<CompletionPanelView> completionPanelViews)
-    {
-        _cursorStateModel = cursorStateModel;
-        _completionPanelViews = completionPanelViews;
-    }
+    private readonly CursorStateModel _cursorStateModel = cursorStateModel;
+    private readonly IReadOnlyList<CompletionPanelView> _completionPanelViews = completionPanelViews;
 
     protected override void Bind(CompositeDisposable disposables)
     {

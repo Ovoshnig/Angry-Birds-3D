@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.Scene.Switching;
 
-public class SceneSwitchButtonViewsMediator : UIViewsMediator<SceneSwitchButtonView>
+public class SceneSwitchButtonViewsMediator(SceneSwitch sceneSwitch,
+    IReadOnlyList<SceneSwitchButtonView> views) : UIViewsMediator<SceneSwitchButtonView>(views)
 {
-    private readonly SceneSwitch _sceneSwitch;
-
-    public SceneSwitchButtonViewsMediator(SceneSwitch sceneSwitch, IReadOnlyList<SceneSwitchButtonView> views)
-        : base(views) => _sceneSwitch = sceneSwitch;
+    private readonly SceneSwitch _sceneSwitch = sceneSwitch;
 
     protected override void OnViewEnabled(SceneSwitchButtonView view, CompositeDisposable viewDisposables)
     {

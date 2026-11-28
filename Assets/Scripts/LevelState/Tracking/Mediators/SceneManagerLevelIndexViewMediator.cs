@@ -5,12 +5,10 @@ using UnityEngine.SceneManagement;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class SceneManagerLevelIndexViewMediator : UIViewMediator<LevelIndexView>
+public class SceneManagerLevelIndexViewMediator(SceneSettings sceneSettings, LevelIndexView view)
+    : UIViewMediator<LevelIndexView>(view)
 {
-    private readonly SceneSettings _sceneSettings;
-
-    public SceneManagerLevelIndexViewMediator(SceneSettings sceneSettings, LevelIndexView view)
-        : base(view) => _sceneSettings = sceneSettings;
+    private readonly SceneSettings _sceneSettings = sceneSettings;
 
     protected override void OnViewEnabled(LevelIndexView view, CompositeDisposable viewDisposables)
     {

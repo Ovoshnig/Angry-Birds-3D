@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class GamePauserPauseMenuWindowMediator : Mediator
+public class GamePauserPauseMenuWindowMediator(GamePauser gamePauser, PauseMenuWindow pauseMenuWindow)
+    : Mediator
 {
-    private readonly GamePauser _gamePauser;
-    private readonly PauseMenuWindow _pauseMenuWindow;
-
-    public GamePauserPauseMenuWindowMediator(GamePauser gamePauser, PauseMenuWindow pauseMenuWindow)
-    {
-        _gamePauser = gamePauser;
-        _pauseMenuWindow = pauseMenuWindow;
-    }
+    private readonly GamePauser _gamePauser = gamePauser;
+    private readonly PauseMenuWindow _pauseMenuWindow = pauseMenuWindow;
 
     protected override void Bind(CompositeDisposable disposables)
     {

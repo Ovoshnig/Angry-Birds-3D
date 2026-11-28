@@ -8,21 +8,13 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelState.Achievement;
 
-public class LevelAchiever : IStartable, IDisposable
+public class LevelAchiever(LevelStateTracker levelTracker, SaveStorage saveStorage,
+    SceneSettings sceneSettings) : IStartable, IDisposable
 {
-    private readonly LevelStateTracker _levelTracker;
-    private readonly SaveStorage _saveStorage;
-    private readonly SceneSettings _sceneSettings;
+    private readonly LevelStateTracker _levelTracker = levelTracker;
+    private readonly SaveStorage _saveStorage = saveStorage;
+    private readonly SceneSettings _sceneSettings = sceneSettings;
     private readonly CompositeDisposable _disposables = [];
-
-    public LevelAchiever(LevelStateTracker levelTracker,
-        SaveStorage saveStorage,
-        SceneSettings sceneSettings)
-    {
-        _levelTracker = levelTracker;
-        _saveStorage = saveStorage;
-        _sceneSettings = sceneSettings;
-    }
 
     public void Start()
     {
@@ -43,6 +35,8 @@ public class LevelAchiever : IStartable, IDisposable
         if (currentLevel < _sceneSettings.ComingSoonSceneIndex
             && nextLevel > achievedLevel
             && nextLevel < sceneCount)
+        {
             _saveStorage.Set(SaveConstants.AchievedLevelKey, nextLevel);
+        }
     }
 }

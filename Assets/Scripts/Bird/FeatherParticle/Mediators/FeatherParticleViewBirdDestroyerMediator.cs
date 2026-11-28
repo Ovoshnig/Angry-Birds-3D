@@ -5,17 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Bird.FeatherParticle;
 
-public class FeatherParticleViewBirdDestroyerMediator : Mediator
+public class FeatherParticleViewBirdDestroyerMediator(FeatherParticleView featherParticleView,
+    BirdDestroyer birdDestroyer) : Mediator
 {
-    private readonly FeatherParticleView _featherParticleView;
-    private readonly BirdDestroyer _birdDestroyer;
-
-    public FeatherParticleViewBirdDestroyerMediator(FeatherParticleView featherParticleView,
-        BirdDestroyer birdDestroyer)
-    {
-        _featherParticleView = featherParticleView;
-        _birdDestroyer = birdDestroyer;
-    }
+    private readonly FeatherParticleView _featherParticleView = featherParticleView;
+    private readonly BirdDestroyer _birdDestroyer = birdDestroyer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

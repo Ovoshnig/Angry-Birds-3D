@@ -6,13 +6,11 @@ using UnityScreen = UnityEngine.Screen;
 
 namespace Ovoshnig.Screen.FullScreenAdjustment;
 
-public class FullScreenAdjuster : IStartable, IDisposable
+public class FullScreenAdjuster(ScreenInputProvider screenInputProvider) : IStartable, IDisposable
 {
-    private readonly ScreenInputProvider _screenInputProvider;
+    private readonly ScreenInputProvider _screenInputProvider = screenInputProvider;
     private readonly ReactiveProperty<bool> _isFullScreen = new();
     private readonly CompositeDisposable _disposables = [];
-
-    public FullScreenAdjuster(ScreenInputProvider screenInputProvider) => _screenInputProvider = screenInputProvider;
 
     public ReadOnlyReactiveProperty<bool> IsFullScreen => _isFullScreen;
 

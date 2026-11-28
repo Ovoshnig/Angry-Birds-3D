@@ -6,17 +6,12 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Audio.Tuning;
 
-public abstract class AudioSliderModel : SliderModel, IStartable
+public abstract class AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
+    : SliderModel, IStartable
 {
-    private readonly SettingsStorage _settingsStorage;
-    private readonly AudioSettings _audioSettings;
+    private readonly SettingsStorage _settingsStorage = settingsStorage;
+    private readonly AudioSettings _audioSettings = audioSettings;
     private readonly CompositeDisposable _disposables = [];
-
-    protected AudioSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
-    {
-        _settingsStorage = settingsStorage;
-        _audioSettings = audioSettings;
-    }
 
     public abstract AudioChannel Channel { get; }
     public abstract string MixerParameterName { get; }

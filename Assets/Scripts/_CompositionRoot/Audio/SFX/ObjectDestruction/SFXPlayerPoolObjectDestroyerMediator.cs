@@ -9,17 +9,11 @@ using UnityEngine.Audio;
 
 namespace AngryBirds3D.Composition;
 
-public class SFXPlayerPoolObjectDestroyerMediator : Mediator
+public class SFXPlayerPoolObjectDestroyerMediator(SFXPlayerObjectPool playerObjectPool,
+    ObjectDestroyer destroyer) : Mediator
 {
-    private readonly SFXPlayerObjectPool _playerObjectPool;
-    private readonly ObjectDestroyer _destroyer;
-
-    public SFXPlayerPoolObjectDestroyerMediator(SFXPlayerObjectPool playerObjectPool,
-        ObjectDestroyer destroyer)
-    {
-        _playerObjectPool = playerObjectPool;
-        _destroyer = destroyer;
-    }
+    private readonly SFXPlayerObjectPool _playerObjectPool = playerObjectPool;
+    private readonly ObjectDestroyer _destroyer = destroyer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

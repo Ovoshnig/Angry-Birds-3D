@@ -5,12 +5,9 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Queue;
 
-public class BirdQueue : IStartable
+public class BirdQueue(IReadOnlyList<BirdEntityView> entityViews) : IStartable
 {
-    private readonly Queue<BirdEntityView> _queue;
-
-    public BirdQueue(IReadOnlyList<BirdEntityView> entityViews) =>
-        _queue = new Queue<BirdEntityView>(entityViews);
+    private readonly Queue<BirdEntityView> _queue = new(entityViews);
 
     public bool Any => _queue.Any();
 

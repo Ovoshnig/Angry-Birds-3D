@@ -5,12 +5,10 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class LevelTrackerPauseButtonViewMediator : UIViewMediator<PauseButtonView>
+public class LevelTrackerPauseButtonViewMediator(LevelStateTracker levelStateTracker, PauseButtonView view)
+    : UIViewMediator<PauseButtonView>(view)
 {
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public LevelTrackerPauseButtonViewMediator(LevelStateTracker levelStateTracker, PauseButtonView view)
-        : base(view) => _levelStateTracker = levelStateTracker;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
 
     protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
     {

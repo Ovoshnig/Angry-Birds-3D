@@ -5,12 +5,10 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class CursorShowerSplashScreenDisplayerMediator : Mediator
+public class CursorShowerSplashScreenDisplayerMediator(SplashScreenDisplayer splashScreenDisplayer)
+    : Mediator
 {
-    private readonly SplashScreenDisplayer _splashScreenDisplayer;
-
-    public CursorShowerSplashScreenDisplayerMediator(SplashScreenDisplayer splashScreenDisplayer) =>
-        _splashScreenDisplayer = splashScreenDisplayer;
+    private readonly SplashScreenDisplayer _splashScreenDisplayer = splashScreenDisplayer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

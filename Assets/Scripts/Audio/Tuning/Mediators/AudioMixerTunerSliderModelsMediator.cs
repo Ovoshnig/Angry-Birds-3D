@@ -4,16 +4,11 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.Audio.Tuning;
 
-public class AudioMixerTunerSliderModelsMediator : Mediator
+public class AudioMixerTunerSliderModelsMediator(AudioMixerTuner audioMixerTuner,
+    IReadOnlyList<AudioSliderModel> sliderModels) : Mediator
 {
-    private readonly AudioMixerTuner _audioMixerTuner;
-    private readonly IReadOnlyList<AudioSliderModel> _sliderModels;
-
-    public AudioMixerTunerSliderModelsMediator(AudioMixerTuner audioMixerTuner, IReadOnlyList<AudioSliderModel> sliderModels)
-    {
-        _audioMixerTuner = audioMixerTuner;
-        _sliderModels = sliderModels;
-    }
+    private readonly AudioMixerTuner _audioMixerTuner = audioMixerTuner;
+    private readonly IReadOnlyList<AudioSliderModel> _sliderModels = sliderModels;
 
     protected override void Bind(CompositeDisposable disposables)
     {

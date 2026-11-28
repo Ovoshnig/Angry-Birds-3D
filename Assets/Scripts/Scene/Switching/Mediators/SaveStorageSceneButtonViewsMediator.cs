@@ -7,20 +7,14 @@ using UnityEngine.SceneManagement;
 
 namespace Ovoshnig.Scene.Switching;
 
-public class SaveStorageSceneButtonViewsMediator : UIViewsMediator<SceneSwitchButtonView>
+public class SaveStorageSceneButtonViewsMediator(SaveStorage saveStorage,
+    IReadOnlyList<SceneSwitchButtonView> views, SceneSettings sceneSettings)
+    : UIViewsMediator<SceneSwitchButtonView>(views)
 {
-    private readonly SaveStorage _saveStorage;
-    private readonly SceneSettings _sceneSettings;
+    private readonly SaveStorage _saveStorage = saveStorage;
+    private readonly SceneSettings _sceneSettings = sceneSettings;
 
     private int _currentScene;
-
-    public SaveStorageSceneButtonViewsMediator(SaveStorage saveStorage,
-        IReadOnlyList<SceneSwitchButtonView> views,
-        SceneSettings sceneSettings) : base(views)
-    {
-        _saveStorage = saveStorage;
-        _sceneSettings = sceneSettings;
-    }
 
     public override void Start()
     {

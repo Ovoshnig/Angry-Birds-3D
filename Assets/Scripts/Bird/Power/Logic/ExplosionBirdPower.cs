@@ -4,19 +4,11 @@ using UnityEngine;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class ExplosionBirdPower : IBirdPower
+public class ExplosionBirdPower(BirdExploder birdExploder, ExplosionPowerSettings powerSettings) : IBirdPower
 {
-    private readonly BirdExploder _birdExploder;
-    private readonly ExplosionPowerSettings _powerSettings;
-    private readonly Collider[] _colliders;
-
-    public ExplosionBirdPower(BirdExploder birdExploder, ExplosionPowerSettings powerSettings)
-    {
-        _birdExploder = birdExploder;
-        _powerSettings = powerSettings;
-
-        _colliders = new Collider[powerSettings.MaxExplosiveCount];
-    }
+    private readonly BirdExploder _birdExploder = birdExploder;
+    private readonly ExplosionPowerSettings _powerSettings = powerSettings;
+    private readonly Collider[] _colliders = new Collider[powerSettings.MaxExplosiveCount];
 
     public BirdPowerType Type => BirdPowerType.Explosion;
 

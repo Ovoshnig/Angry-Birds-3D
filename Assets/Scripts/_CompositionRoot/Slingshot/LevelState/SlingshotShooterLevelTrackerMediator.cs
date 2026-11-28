@@ -6,17 +6,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class SlingshotShooterLevelTrackerMediator : Mediator
+public class SlingshotShooterLevelTrackerMediator(SlingshotShooter slingshotShooter,
+    LevelStateTracker levelStateTracker) : Mediator
 {
-    private readonly SlingshotShooter _slingshotShooter;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public SlingshotShooterLevelTrackerMediator(SlingshotShooter slingshotShooter,
-        LevelStateTracker levelStateTracker)
-    {
-        _slingshotShooter = slingshotShooter;
-        _levelStateTracker = levelStateTracker;
-    }
+    private readonly SlingshotShooter _slingshotShooter = slingshotShooter;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
 
     protected override void Bind(CompositeDisposable disposables)
     {

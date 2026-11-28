@@ -7,21 +7,13 @@ using UnityEngine.SceneManagement;
 
 namespace AngryBirds3D.LevelScore.RatingEvaluation;
 
-public class RatingEvaluator : IDisposable
+public class RatingEvaluator(ScoreModel scoreModel, RatingSettings ratingSettings,
+    SceneSettings sceneSettings) : IDisposable
 {
-    private readonly ScoreModel _scoreModel;
-    private readonly RatingSettings _ratingSettings;
-    private readonly SceneSettings _sceneSettings;
+    private readonly ScoreModel _scoreModel = scoreModel;
+    private readonly RatingSettings _ratingSettings = ratingSettings;
+    private readonly SceneSettings _sceneSettings = sceneSettings;
     private readonly ReactiveProperty<int> _rating = new();
-
-    public RatingEvaluator(ScoreModel scoreModel,
-        RatingSettings ratingSettings,
-        SceneSettings sceneSettings)
-    {
-        _scoreModel = scoreModel;
-        _ratingSettings = ratingSettings;
-        _sceneSettings = sceneSettings;
-    }
 
     public ReadOnlyReactiveProperty<int> Rating => _rating;
 

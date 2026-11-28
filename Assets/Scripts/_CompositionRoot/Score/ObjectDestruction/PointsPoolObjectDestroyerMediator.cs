@@ -7,17 +7,11 @@ using UnityEngine;
 
 namespace AngryBirds3D.Composition;
 
-public class PointsPoolObjectDestroyerMediator : Mediator
+public class PointsPoolObjectDestroyerMediator(PointsObjectPool pointsObjectPool,
+    ObjectDestroyer destroyer) : Mediator
 {
-    private readonly PointsObjectPool _pointsObjectPool;
-    private readonly ObjectDestroyer _destroyer;
-
-    public PointsPoolObjectDestroyerMediator(PointsObjectPool pointsObjectPool,
-        ObjectDestroyer destroyer)
-    {
-        _pointsObjectPool = pointsObjectPool;
-        _destroyer = destroyer;
-    }
+    private readonly PointsObjectPool _pointsObjectPool = pointsObjectPool;
+    private readonly ObjectDestroyer _destroyer = destroyer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

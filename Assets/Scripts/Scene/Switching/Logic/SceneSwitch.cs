@@ -9,16 +9,14 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Scene.Switching;
 
-public class SceneSwitch : IStartable, IDisposable
+public class SceneSwitch(SceneSettings sceneSettings) : IStartable, IDisposable
 {
-    private readonly SceneSettings _sceneSettings;
+    private readonly SceneSettings _sceneSettings = sceneSettings;
     private readonly ReactiveProperty<bool> _isSceneLoading = new(false);
     private readonly ReactiveProperty<float> _loadingProgress = new(1f);
     private readonly CancellationTokenSource _cts = new();
 
     private int _currentSceneIndex;
-
-    public SceneSwitch(SceneSettings sceneSettings) => _sceneSettings = sceneSettings;
 
     public ReadOnlyReactiveProperty<bool> IsSceneLoading => _isSceneLoading;
     public ReadOnlyReactiveProperty<float> LoadingProgress => _loadingProgress;

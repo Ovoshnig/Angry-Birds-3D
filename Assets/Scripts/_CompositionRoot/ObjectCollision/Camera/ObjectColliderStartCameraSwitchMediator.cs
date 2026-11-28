@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class ObjectColliderStartCameraSwitchMediator : Mediator
+public class ObjectColliderStartCameraSwitchMediator(ObjectCollider objectCollider,
+    StartCameraSwitch startCameraSwitch) : Mediator
 {
-    private readonly ObjectCollider _objectCollider;
-    private readonly StartCameraSwitch _startCameraSwitch;
-
-    public ObjectColliderStartCameraSwitchMediator(ObjectCollider objectCollider, StartCameraSwitch startCameraSwitch)
-    {
-        _objectCollider = objectCollider;
-        _startCameraSwitch = startCameraSwitch;
-    }
+    private readonly ObjectCollider _objectCollider = objectCollider;
+    private readonly StartCameraSwitch _startCameraSwitch = startCameraSwitch;
 
     protected override void Bind(CompositeDisposable disposables)
     {

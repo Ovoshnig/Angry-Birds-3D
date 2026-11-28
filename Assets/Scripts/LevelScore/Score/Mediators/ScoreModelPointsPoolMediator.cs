@@ -4,16 +4,10 @@ using R3;
 
 namespace AngryBirds3D.LevelScore.Score;
 
-public class ScoreModelPointsPoolMediator : Mediator
+public class ScoreModelPointsPoolMediator(ScoreModel scoreModel, PointsObjectPool pointsPool) : Mediator
 {
-    private readonly ScoreModel _scoreModel;
-    private readonly PointsObjectPool _pointsPool;
-
-    public ScoreModelPointsPoolMediator(ScoreModel scoreModel, PointsObjectPool pointsPool)
-    {
-        _scoreModel = scoreModel;
-        _pointsPool = pointsPool;
-    }
+    private readonly ScoreModel _scoreModel = scoreModel;
+    private readonly PointsObjectPool _pointsPool = pointsPool;
 
     protected override void Bind(CompositeDisposable disposables)
     {

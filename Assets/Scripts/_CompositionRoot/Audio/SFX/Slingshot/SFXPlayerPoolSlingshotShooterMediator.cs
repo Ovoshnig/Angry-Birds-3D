@@ -7,20 +7,12 @@ using UnityEngine;
 
 namespace AngryBirds3D.Composition;
 
-public class SFXPlayerPoolSlingshotShooterMediator : Mediator
+public class SFXPlayerPoolSlingshotShooterMediator(SFXPlayerObjectPool playerObjectPool,
+    SlingshotShooter slingshotShooter, SlingshotShooterView slingshotShooterView) : Mediator
 {
-    private readonly SFXPlayerObjectPool _playerObjectPool;
-    private readonly SlingshotShooter _shooter;
-    private readonly SlingshotShooterView _shooterView;
-
-    public SFXPlayerPoolSlingshotShooterMediator(SFXPlayerObjectPool playerObjectPool,
-        SlingshotShooter slingshotShooter,
-        SlingshotShooterView slingshotShooterView)
-    {
-        _playerObjectPool = playerObjectPool;
-        _shooter = slingshotShooter;
-        _shooterView = slingshotShooterView;
-    }
+    private readonly SFXPlayerObjectPool _playerObjectPool = playerObjectPool;
+    private readonly SlingshotShooter _shooter = slingshotShooter;
+    private readonly SlingshotShooterView _shooterView = slingshotShooterView;
 
     protected override void Bind(CompositeDisposable disposables)
     {

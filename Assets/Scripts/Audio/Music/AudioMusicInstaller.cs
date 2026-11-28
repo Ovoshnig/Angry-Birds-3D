@@ -7,12 +7,9 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Audio.Music;
 
-public class AudioMusicInstaller : IInstaller
+public class AudioMusicInstaller(MusicPlayerView musicPlayerView) : IInstaller
 {
-    private readonly MusicPlayerView _musicPlayerView;
-
-    public AudioMusicInstaller(MusicPlayerView musicPlayerView) =>
-        _musicPlayerView = musicPlayerView;
+    private readonly MusicPlayerView _musicPlayerView = musicPlayerView;
 
     public void Install(IContainerBuilder builder)
     {

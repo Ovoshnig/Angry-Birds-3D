@@ -3,12 +3,10 @@ using System.Linq;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class BirdPowerRegistry
+public class BirdPowerRegistry(IReadOnlyList<IBirdPower> powers)
 {
-    private readonly IReadOnlyDictionary<BirdPowerType, IBirdPower> _powers;
-
-    public BirdPowerRegistry(IReadOnlyList<IBirdPower> powers) =>
-        _powers = powers.ToDictionary(p => p.Type);
+    private readonly IReadOnlyDictionary<BirdPowerType, IBirdPower> _powers = powers
+        .ToDictionary(p => p.Type);
 
     public bool TryGet(BirdPowerType type, out IBirdPower power) =>
         _powers.TryGetValue(type, out power);

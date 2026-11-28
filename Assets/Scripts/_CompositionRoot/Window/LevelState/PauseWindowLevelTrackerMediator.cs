@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class PauseWindowLevelTrackerMediator : Mediator
+public class PauseWindowLevelTrackerMediator(PauseMenuWindow pauseMenuWindow,
+    LevelStateTracker levelStateTracker) : Mediator
 {
-    private readonly PauseMenuWindow _pauseMenuWindow;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public PauseWindowLevelTrackerMediator(PauseMenuWindow pauseMenuWindow, LevelStateTracker levelStateTracker)
-    {
-        _pauseMenuWindow = pauseMenuWindow;
-        _levelStateTracker = levelStateTracker;
-    }
+    private readonly PauseMenuWindow _pauseMenuWindow = pauseMenuWindow;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
 
     protected override void Bind(CompositeDisposable disposables)
     {

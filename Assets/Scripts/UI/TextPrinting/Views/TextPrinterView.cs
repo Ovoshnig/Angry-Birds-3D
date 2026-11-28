@@ -16,21 +16,19 @@ public class TextPrinterView : UIView
 
     private readonly ReactiveProperty<bool> _isPrinting = new(false);
     private readonly Subject<Unit> _completed = new();
-
-    private TMP_Text _tmpText;
     private MotionHandle _handle;
 
     public ReadOnlyReactiveProperty<bool> IsPrinting => _isPrinting;
     public Observable<Unit> Completed => _completed;
 
-    protected TMP_Text TmpText => _tmpText;
+    protected TMP_Text TmpText { get; private set; }
 
-    protected virtual void Awake() => _tmpText = GetComponent<TMP_Text>();
+    protected virtual void Awake() => TmpText = GetComponent<TMP_Text>();
 
     protected virtual void Start()
     {
         if (_autoPlay)
-            PrintAsync(_tmpText.text).Forget();
+            PrintAsync(TmpText.text).Forget();
     }
 
     protected override void OnDestroy()
@@ -46,16 +44,15 @@ public class TextPrinterView : UIView
 
         _isPrinting.Value = true;
 
-        _tmpText.text = fullText;
-        _tmpText.ForceMeshUpdate();
+        TmpText.text = fullText;
+        TmpText.ForceMeshUpdate();
 
-        int totalVisibleCharacters = _tmpText.textInfo.characterCount;
+        int totalVisibleCharacters = TmpText.textInfo.characterCount;
         float duration = totalVisibleCharacters / _speed;
 
         try
         {
-            _handle = LMotion.Create(0, totalVisibleCharacters, duration)
-                .BindToMaxVisibleCharacters(_tmpText);
+            _handle = LMotion.Create(0, totalVisibleCharacters, duration).BindToMaxVisibleCharacters(TmpText);
 
             await _handle.ToUniTask(destroyCancellationToken);
             _completed.OnNext(Unit.Default);

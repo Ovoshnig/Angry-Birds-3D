@@ -11,25 +11,18 @@ using UnityEngine;
 
 namespace Ovoshnig.Audio.Music.Playback;
 
-public class MusicPlayer : IDisposable
+public class MusicPlayer(MusicQueue musicQueue, IClipLoader clipLoader, ISceneMusicMapper sceneMusicMapper)
+    : IDisposable
 {
-    private readonly MusicQueue _musicQueue;
-    private readonly IClipLoader _clipLoader;
-    private readonly ISceneMusicMapper _sceneMusicMapper;
+    private readonly MusicQueue _musicQueue = musicQueue;
+    private readonly IClipLoader _clipLoader = clipLoader;
+    private readonly ISceneMusicMapper _sceneMusicMapper = sceneMusicMapper;
     private readonly Subject<AudioClip> _playbackStarted = new();
     private readonly Subject<Unit> _playbackEnded = new();
 
     private Dictionary<MusicCategory, IEnumerable<object>> _musicClipKeys = null;
     private AudioClip _pastClip = null;
     private CancellationTokenSource _cts = new();
-
-    public MusicPlayer(IClipLoader clipLoader, MusicQueue musicQueue,
-        ISceneMusicMapper sceneMusicMapper)
-    {
-        _clipLoader = clipLoader;
-        _musicQueue = musicQueue;
-        _sceneMusicMapper = sceneMusicMapper;
-    }
 
     public Observable<AudioClip> PlaybackStarted => _playbackStarted;
     public Observable<Unit> PlaybackEnded => _playbackEnded;

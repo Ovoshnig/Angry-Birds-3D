@@ -7,21 +7,13 @@ using UnityCursor = UnityEngine.Cursor;
 
 namespace Ovoshnig.Cursor.State;
 
-public sealed class CursorStateSetter : IStartable, IDisposable
+public sealed class CursorStateSetter(CursorStateModel model, CursorConfiguration configuration,
+    UIInputProvider uiInputProvider) : IStartable, IDisposable
 {
-    private readonly CursorStateModel _model;
-    private readonly CursorConfiguration _configuration;
-    private readonly UIInputProvider _uiInputProvider;
+    private readonly CursorStateModel _model = model;
+    private readonly CursorConfiguration _configuration = configuration;
+    private readonly UIInputProvider _uiInputProvider = uiInputProvider;
     private readonly CompositeDisposable _disposables = [];
-
-    public CursorStateSetter(CursorStateModel model,
-        CursorConfiguration configuration,
-        UIInputProvider uiInputProvider)
-    {
-        _model = model;
-        _configuration = configuration;
-        _uiInputProvider = uiInputProvider;
-    }
 
     public void Start()
     {

@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class CursorStateModelWindowTrackerMediator : Mediator
+public class CursorStateModelWindowTrackerMediator(CursorStateModel cursorStateModel,
+    WindowTracker windowTracker) : Mediator
 {
-    private readonly CursorStateModel _cursorStateModel;
-    private readonly WindowTracker _windowTracker;
-
-    public CursorStateModelWindowTrackerMediator(CursorStateModel cursorStateModel, WindowTracker windowTracker)
-    {
-        _cursorStateModel = cursorStateModel;
-        _windowTracker = windowTracker;
-    }
+    private readonly CursorStateModel _cursorStateModel = cursorStateModel;
+    private readonly WindowTracker _windowTracker = windowTracker;
 
     protected override void Bind(CompositeDisposable disposables)
     {

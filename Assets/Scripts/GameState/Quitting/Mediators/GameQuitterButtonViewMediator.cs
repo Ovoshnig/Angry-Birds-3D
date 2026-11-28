@@ -3,11 +3,8 @@ using R3;
 
 namespace Ovoshnig.GameState.Quitting;
 
-public class GameQuitterButtonViewMediator : UIViewMediator<GameQuitButtonView>
+public class GameQuitterButtonViewMediator(GameQuitButtonView view) : UIViewMediator<GameQuitButtonView>(view)
 {
-    public GameQuitterButtonViewMediator(GameQuitButtonView view)
-        : base(view) { }
-
     protected override void OnViewEnabled(GameQuitButtonView view, CompositeDisposable viewDisposables)
     {
         view.Clicked

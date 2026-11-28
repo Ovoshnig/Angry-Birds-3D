@@ -239,9 +239,11 @@ public class MediatorGeneratorWindow : EditorWindow
         string directoryPath = GetSelectedPath();
         string filePath = Path.Combine(directoryPath, $"{_mediatorName}.cs");
 
-        if (File.Exists(filePath))
-            if (!EditorUtility.DisplayDialog("File Already Exists", $"Overwrite {filePath}?", "Yes", "No"))
-                return;
+        if (File.Exists(filePath)
+            && !EditorUtility.DisplayDialog("File Already Exists", $"Overwrite {filePath}?", "Yes", "No"))
+        {
+            return;
+        }
 
         string code = MediatorCodeTemplate.Create(_selectedType, _mediatorName, _scriptA.name, _scriptB.name);
         File.WriteAllText(filePath, code);

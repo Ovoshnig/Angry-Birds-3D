@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace Ovoshnig.GameState.SocialLink;
 
-public class SocialLinkOpenerButtonViewsMediator : UIViewsMediator<SocialLinkButtonView>
+public class SocialLinkOpenerButtonViewsMediator(IReadOnlyList<SocialLinkButtonView> views)
+    : UIViewsMediator<SocialLinkButtonView>(views)
 {
-    public SocialLinkOpenerButtonViewsMediator(IReadOnlyList<SocialLinkButtonView> views)
-        : base(views) { }
-
     protected override void OnViewEnabled(SocialLinkButtonView view, CompositeDisposable viewDisposables)
     {
         view.Clicked

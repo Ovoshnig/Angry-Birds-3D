@@ -3,21 +3,15 @@ using R3;
 
 namespace Ovoshnig.Audio.Music.Playback;
 
-public class MusicPlayerMediator : Mediator
+public class MusicPlayerMediator(MusicPlayer musicPlayer, MusicPlayerView musicPlayerView) : Mediator
 {
-    private readonly MusicPlayer _musicPlayer;
-    private readonly MusicPlayerView _musicPlayerView;
-
-    public MusicPlayerMediator(MusicPlayer musicPlayer, MusicPlayerView musicPlayerView)
-    {
-        _musicPlayer = musicPlayer;
-        _musicPlayerView = musicPlayerView;
-    }
+    private readonly MusicPlayer _musicPlayer = musicPlayer;
+    private readonly MusicPlayerView _musicPlayerView = musicPlayerView;
 
     protected override void Bind(CompositeDisposable disposables)
     {
         _musicPlayer.PlaybackStarted
-            .Subscribe(clip => _musicPlayerView.Play(clip))
+            .Subscribe(_musicPlayerView.Play)
             .AddTo(disposables);
 
         _musicPlayer.PlaybackEnded

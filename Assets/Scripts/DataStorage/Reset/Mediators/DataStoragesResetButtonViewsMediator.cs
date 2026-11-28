@@ -6,13 +6,10 @@ using DataStorageService = Ovoshnig.DataStorage.Storage.DataStorage;
 
 namespace Ovoshnig.DataStorage.Reset;
 
-public class DataStoragesResetButtonViewsMediator : UIViewsMediator<DataResetButtonView>
+public class DataStoragesResetButtonViewsMediator(IReadOnlyList<DataStorageService> dataStorages,
+    IReadOnlyList<DataResetButtonView> views) : UIViewsMediator<DataResetButtonView>(views)
 {
-    private readonly IReadOnlyList<DataStorageService> _dataStorages;
-
-    public DataStoragesResetButtonViewsMediator(IReadOnlyList<DataStorageService> dataStorages,
-        IReadOnlyList<DataResetButtonView> views) : base(views) =>
-        _dataStorages = dataStorages;
+    private readonly IReadOnlyList<DataStorageService> _dataStorages = dataStorages;
 
     protected override void OnViewEnabled(DataResetButtonView view, CompositeDisposable viewDisposables)
     {

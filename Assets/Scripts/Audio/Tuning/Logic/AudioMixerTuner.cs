@@ -2,11 +2,9 @@ using UnityEngine.Audio;
 
 namespace Ovoshnig.Audio.Tuning;
 
-public class AudioMixerTuner
+public class AudioMixerTuner(AudioMixer audioMixer)
 {
-    private readonly AudioMixer _audioMixer;
-
-    public AudioMixerTuner(AudioMixer audioMixer) => _audioMixer = audioMixer;
+    private readonly AudioMixer _audioMixer = audioMixer;
 
     public bool SetVolume(string parameterName, float value) => _audioMixer.SetFloat(parameterName, value);
 

@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace AngryBirds3D.LevelScore.RatingShowing;
 
-public class RatingShowerViewsMediator : UIViewsMediator<RatingShowerView>
+public class RatingShowerViewsMediator(RatingShower ratingShower, IReadOnlyList<RatingShowerView> views)
+    : UIViewsMediator<RatingShowerView>(views)
 {
-    private readonly RatingShower _ratingShower;
-
-    public RatingShowerViewsMediator(RatingShower ratingShower, IReadOnlyList<RatingShowerView> views)
-        : base(views) => _ratingShower = ratingShower;
+    private readonly RatingShower _ratingShower = ratingShower;
 
     protected override void OnViewEnabled(RatingShowerView view, CompositeDisposable viewDisposables)
     {

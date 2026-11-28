@@ -12,24 +12,15 @@ using System.Threading;
 
 namespace AngryBirds3D.Composition;
 
-public class BirdPointsDisplayerLevelTrackerMediator : Mediator
+public class BirdPointsDisplayerLevelTrackerMediator(BirdPointsDisplayer birdPointsDisplayer,
+    LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView,
+    SlingshotBirdPlacer slingshotBirdPlacer) : Mediator
 {
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly BirdQueue _birdQueue;
-    private readonly CameraSwitchView _cameraSwitchView;
-    private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
-
-    public BirdPointsDisplayerLevelTrackerMediator(BirdPointsDisplayer birdPointsDisplayer,
-        LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView,
-        SlingshotBirdPlacer slingshotBirdPlacer)
-    {
-        _birdPointsDisplayer = birdPointsDisplayer;
-        _levelStateTracker = levelStateTracker;
-        _birdQueue = birdQueue;
-        _cameraSwitchView = cameraSwitchView;
-        _slingshotBirdPlacer = slingshotBirdPlacer;
-    }
+    private readonly BirdPointsDisplayer _birdPointsDisplayer = birdPointsDisplayer;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
+    private readonly BirdQueue _birdQueue = birdQueue;
+    private readonly CameraSwitchView _cameraSwitchView = cameraSwitchView;
+    private readonly SlingshotBirdPlacer _slingshotBirdPlacer = slingshotBirdPlacer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

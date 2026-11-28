@@ -3,12 +3,10 @@ using R3;
 
 namespace Ovoshnig.UI.Basic;
 
-public abstract class UIViewMediator<TView> : Mediator where TView : UIView
+public abstract class UIViewMediator<TView>(TView view) : Mediator where TView : UIView
 {
-    private readonly TView _view;
+    private readonly TView _view = view;
     private readonly CompositeDisposable _viewDisposables = [];
-
-    public UIViewMediator(TView view) => _view = view;
 
     protected override void Bind(CompositeDisposable disposables)
     {

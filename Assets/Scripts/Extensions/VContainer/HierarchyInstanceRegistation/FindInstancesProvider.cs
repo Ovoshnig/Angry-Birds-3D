@@ -5,16 +5,17 @@ using VContainer;
 
 namespace Ovoshnig.Extensions.VContainer;
 
-public sealed class FindInstancesProvider<T> : IInstanceProvider where T : Component
+public sealed class FindInstancesProvider<T>(Scene scene) : IInstanceProvider where T : Component
 {
-    private readonly Scene _scene;
-
-    public FindInstancesProvider(Scene scene) => _scene = scene;
+    private readonly Scene _scene = scene;
 
     public object SpawnInstance(IObjectResolver resolver)
     {
         if (!_scene.IsValid())
-            throw new VContainerException(typeof(T), $"Invalid find target scene for instances of type {typeof(T).Name}");
+        {
+            throw new VContainerException(typeof(T),
+                $"Invalid find target scene for instances of type {typeof(T).Name}");
+        }
 
         List<T> components = [];
         List<T> buffer = [];

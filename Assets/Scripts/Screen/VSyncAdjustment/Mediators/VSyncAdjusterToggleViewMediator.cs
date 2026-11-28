@@ -3,12 +3,10 @@ using R3;
 
 namespace Ovoshnig.Screen.VSyncAdjustment;
 
-public class VSyncAdjusterToggleViewMediator : UIViewMediator<VSyncAdjustToggleView>
+public class VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
+    : UIViewMediator<VSyncAdjustToggleView>(view)
 {
-    private readonly VSyncAdjuster _vSyncAdjuster;
-
-    public VSyncAdjusterToggleViewMediator(VSyncAdjuster vSyncAdjuster, VSyncAdjustToggleView view)
-        : base(view) => _vSyncAdjuster = vSyncAdjuster;
+    private readonly VSyncAdjuster _vSyncAdjuster = vSyncAdjuster;
 
     protected override void OnViewEnabled(VSyncAdjustToggleView view, CompositeDisposable viewDisposables)
     {

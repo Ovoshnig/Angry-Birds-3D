@@ -3,11 +3,9 @@ using UnityEngine;
 
 namespace Ovoshnig.ObjectCollision.Collision;
 
-public class CollisionEvaluator
+public class CollisionEvaluator(CollisionSettings settings)
 {
-    private readonly CollisionSettings _settings;
-
-    public CollisionEvaluator(CollisionSettings settings) => _settings = settings;
+    private readonly CollisionSettings _settings = settings;
 
     public bool TryEvaluate(in CollisionRawData rawData, out CollisionType type, out float impactForce)
     {

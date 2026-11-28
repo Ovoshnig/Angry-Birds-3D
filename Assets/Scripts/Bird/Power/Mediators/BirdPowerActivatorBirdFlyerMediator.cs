@@ -8,20 +8,12 @@ using System.Threading;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class BirdPowerActivatorBirdFlyerMediator : Mediator
+public class BirdPowerActivatorBirdFlyerMediator(BirdPowerActivator birdPowerActivator, BirdFlyer birdFlyer,
+    ExplosionPowerSettings explosionPowerSettings) : Mediator
 {
-    private readonly BirdPowerActivator _birdPowerActivator;
-    private readonly BirdFlyer _birdFlyer;
-    private readonly ExplosionPowerSettings _explosionPowerSettings;
-
-    public BirdPowerActivatorBirdFlyerMediator(BirdPowerActivator birdPowerActivator,
-        BirdFlyer birdFlyer,
-        ExplosionPowerSettings explosionPowerSettings)
-    {
-        _birdPowerActivator = birdPowerActivator;
-        _birdFlyer = birdFlyer;
-        _explosionPowerSettings = explosionPowerSettings;
-    }
+    private readonly BirdPowerActivator _birdPowerActivator = birdPowerActivator;
+    private readonly BirdFlyer _birdFlyer = birdFlyer;
+    private readonly ExplosionPowerSettings _explosionPowerSettings = explosionPowerSettings;
 
     protected override void Bind(CompositeDisposable disposables)
     {

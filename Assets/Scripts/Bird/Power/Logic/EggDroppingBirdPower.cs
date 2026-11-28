@@ -8,21 +8,14 @@ using Object = UnityEngine.Object;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class EggDroppingBirdPower : IBirdPower, IDisposable
+public class EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
+    : IBirdPower, IDisposable
 {
-    private readonly BirdExploder _birdExploder;
-    private readonly EggDroppingPowerSettings _powerSettings;
-    private readonly Collider[] _colliders;
+    private readonly BirdExploder _birdExploder = birdExploder;
+    private readonly EggDroppingPowerSettings _powerSettings = powerSettings;
+    private readonly Collider[] _colliders = new Collider[powerSettings.MaxExplosiveCount];
     private readonly Subject<EggEntityView> _eggDropped = new();
     private readonly CompositeDisposable _disposables = [];
-
-    public EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
-    {
-        _birdExploder = birdExploder;
-        _powerSettings = powerSettings;
-
-        _colliders = new Collider[powerSettings.MaxExplosiveCount];
-    }
 
     public BirdPowerType Type => BirdPowerType.EggDropping;
     public Observable<EggEntityView> EggDropped => _eggDropped;

@@ -4,16 +4,10 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class InputActionsSceneSwitchMediator : Mediator
+public class InputActionsSceneSwitchMediator(InputActions inputActions, SceneSwitch sceneSwitch) : Mediator
 {
-    private readonly InputActions _inputActions;
-    private readonly SceneSwitch _sceneSwitch;
-
-    public InputActionsSceneSwitchMediator(InputActions inputActions, SceneSwitch sceneSwitch)
-    {
-        _inputActions = inputActions;
-        _sceneSwitch = sceneSwitch;
-    }
+    private readonly InputActions _inputActions = inputActions;
+    private readonly SceneSwitch _sceneSwitch = sceneSwitch;
 
     protected override void Bind(CompositeDisposable disposables)
     {

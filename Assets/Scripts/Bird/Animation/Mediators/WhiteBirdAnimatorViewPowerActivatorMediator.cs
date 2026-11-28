@@ -4,12 +4,9 @@ using R3;
 
 namespace AngryBirds3D.Bird.Animation;
 
-public class WhiteBirdAnimatorViewPowerActivatorMediator : Mediator
+public class WhiteBirdAnimatorViewPowerActivatorMediator(BirdPowerActivator birdPowerActivator) : Mediator
 {
-    private readonly BirdPowerActivator _birdPowerActivator;
-
-    public WhiteBirdAnimatorViewPowerActivatorMediator(BirdPowerActivator birdPowerActivator) =>
-        _birdPowerActivator = birdPowerActivator;
+    private readonly BirdPowerActivator _birdPowerActivator = birdPowerActivator;
 
     protected override void Bind(CompositeDisposable disposables)
     {

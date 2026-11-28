@@ -4,12 +4,10 @@ using R3;
 
 namespace Ovoshnig.Window.Pause;
 
-public class PauseMenuWindowButtonViewMediator : UIViewMediator<PauseButtonView>
+public class PauseMenuWindowButtonViewMediator(PauseMenuWindow pauseMenuWindow, PauseButtonView view)
+    : UIViewMediator<PauseButtonView>(view)
 {
-    private readonly PauseMenuWindow _pauseMenuWindow;
-
-    public PauseMenuWindowButtonViewMediator(PauseMenuWindow pauseMenuWindow, PauseButtonView view)
-        : base(view) => _pauseMenuWindow = pauseMenuWindow;
+    private readonly PauseMenuWindow _pauseMenuWindow = pauseMenuWindow;
 
     protected override void OnViewEnabled(PauseButtonView view, CompositeDisposable viewDisposables)
     {

@@ -3,14 +3,13 @@ using R3;
 
 namespace Ovoshnig.Screen.FullScreenAdjustment;
 
-public class FullScreenAdjusterToggleViewMediator : UIViewMediator<FullScreenAdjustToggleView>
+public class FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster,
+    FullScreenAdjustToggleView view) : UIViewMediator<FullScreenAdjustToggleView>(view)
 {
-    private readonly FullScreenAdjuster _fullScreenAdjuster;
+    private readonly FullScreenAdjuster _fullScreenAdjuster = fullScreenAdjuster;
 
-    public FullScreenAdjusterToggleViewMediator(FullScreenAdjuster fullScreenAdjuster, FullScreenAdjustToggleView view)
-        : base(view) => _fullScreenAdjuster = fullScreenAdjuster;
-
-    protected override void OnViewEnabled(FullScreenAdjustToggleView view, CompositeDisposable viewDisposables)
+    protected override void OnViewEnabled(FullScreenAdjustToggleView view,
+        CompositeDisposable viewDisposables)
     {
         _fullScreenAdjuster.IsFullScreen
             .Subscribe(view.SetIsOnWithoutNotify)

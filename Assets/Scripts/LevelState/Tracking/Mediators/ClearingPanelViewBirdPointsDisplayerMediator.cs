@@ -4,17 +4,11 @@ using R3;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class ClearingPanelViewBirdPointsDisplayerMediator : Mediator
+public class ClearingPanelViewBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
+    BirdPointsDisplayer birdPointsDisplayer) : Mediator
 {
-    private readonly ClearingPanelView _clearingPanelView;
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
-
-    public ClearingPanelViewBirdPointsDisplayerMediator(ClearingPanelView clearingPanelView,
-        BirdPointsDisplayer birdPointsDisplayer)
-    {
-        _clearingPanelView = clearingPanelView;
-        _birdPointsDisplayer = birdPointsDisplayer;
-    }
+    private readonly ClearingPanelView _clearingPanelView = clearingPanelView;
+    private readonly BirdPointsDisplayer _birdPointsDisplayer = birdPointsDisplayer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

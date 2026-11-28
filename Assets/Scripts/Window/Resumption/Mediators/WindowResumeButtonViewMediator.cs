@@ -4,12 +4,10 @@ using WindowBase = Ovoshnig.Window.Window.Window;
 
 namespace Ovoshnig.Window.Resumption;
 
-public class WindowResumeButtonViewMediator : UIViewMediator<ResumeButtonView>
+public class WindowResumeButtonViewMediator(WindowBase window, ResumeButtonView view)
+    : UIViewMediator<ResumeButtonView>(view)
 {
-    private readonly WindowBase _window;
-
-    public WindowResumeButtonViewMediator(WindowBase window, ResumeButtonView view)
-        : base(view) => _window = window;
+    private readonly WindowBase _window = window;
 
     protected override void OnViewEnabled(ResumeButtonView view, CompositeDisposable viewDisposables)
     {

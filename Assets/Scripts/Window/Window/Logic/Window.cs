@@ -5,20 +5,15 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Window.Window;
 
-public abstract class Window : IWindow, IStartable, IDisposable
+public abstract class Window(WindowInputProvider inputProvider, WindowTracker windowTracker) : IWindow,
+    IStartable, IDisposable
 {
-    private readonly WindowInputProvider _inputProvider;
-    private readonly WindowTracker _windowTracker;
+    private readonly WindowInputProvider _inputProvider = inputProvider;
+    private readonly WindowTracker _windowTracker = windowTracker;
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly CompositeDisposable _disposables = [];
 
     private bool _isWindowActive = false;
-
-    public Window(WindowInputProvider windowInputProvider, WindowTracker windowTracker)
-    {
-        _inputProvider = windowInputProvider;
-        _windowTracker = windowTracker;
-    }
 
     public ReadOnlyReactiveProperty<bool> IsOpen => _isOpen;
 
@@ -76,5 +71,6 @@ public abstract class Window : IWindow, IStartable, IDisposable
         TryClose();
     }
 
-    protected abstract ReadOnlyReactiveProperty<bool> GetToggleWindowPressedProperty(WindowInputProvider inputProvider);
+    protected abstract ReadOnlyReactiveProperty<bool> GetToggleWindowPressedProperty(
+        WindowInputProvider inputProvider);
 }

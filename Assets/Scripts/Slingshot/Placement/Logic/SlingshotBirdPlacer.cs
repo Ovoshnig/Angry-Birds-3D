@@ -8,24 +8,14 @@ using UnityEngine;
 
 namespace AngryBirds3D.Slingshot.Placement;
 
-public class SlingshotBirdPlacer : IDisposable
+public class SlingshotBirdPlacer(SlingshotShooter shooter, SlingshotShooterView shooterView,
+    SlingshotPlacingSettings placingSettings) : IDisposable
 {
-    private readonly SlingshotShooter _shooter;
-    private readonly SlingshotShooterView _shooterView;
-    private readonly SlingshotPlacingSettings _placingSettings;
+    private readonly SlingshotShooter _shooter = shooter;
+    private readonly SlingshotShooterView _shooterView = shooterView;
+    private readonly SlingshotPlacingSettings _placingSettings = placingSettings;
     private readonly CancellationTokenSource _cts = new();
-
-    private Rigidbody _currentBird = null;
     private bool _isPlacing = false;
-
-    public SlingshotBirdPlacer(SlingshotShooter shooter,
-        SlingshotShooterView shooterView,
-        SlingshotPlacingSettings placingSettings)
-    {
-        _shooter = shooter;
-        _shooterView = shooterView;
-        _placingSettings = placingSettings;
-    }
 
     public Rigidbody SlingshotBird
     {
@@ -35,11 +25,13 @@ public class SlingshotBirdPlacer : IDisposable
                 return _shooter.CurrentBird;
 
             if (_isPlacing)
-                return _currentBird;
+                return field;
 
             return null;
         }
-    }
+
+        private set;
+    } = null;
 
     public bool CanPlace => !_shooter.ContainsBird && !_isPlacing;
 
@@ -57,7 +49,7 @@ public class SlingshotBirdPlacer : IDisposable
             return;
         }
 
-        _currentBird = bird;
+        SlingshotBird = bird;
         _isPlacing = true;
 
         Transform birdTransform = bird.transform;
@@ -66,7 +58,7 @@ public class SlingshotBirdPlacer : IDisposable
         await PlayJumpAndScaleAsync(birdTransform, _cts.Token);
 
         _shooter.SetBird(bird);
-        _currentBird = null;
+        SlingshotBird = null;
         _isPlacing = false;
     }
 

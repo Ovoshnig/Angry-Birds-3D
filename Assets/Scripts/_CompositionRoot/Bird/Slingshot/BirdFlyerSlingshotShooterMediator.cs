@@ -6,17 +6,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class BirdFlyerSlingshotShooterMediator : Mediator
+public class BirdFlyerSlingshotShooterMediator(BirdFlyer birdFlyer, SlingshotShooter slingshotShooter)
+    : Mediator
 {
-    private readonly BirdFlyer _birdFlyer;
-    private readonly SlingshotShooter _slingshotShooter;
-
-    public BirdFlyerSlingshotShooterMediator(BirdFlyer birdFlyer,
-        SlingshotShooter slingshotShooter)
-    {
-        _birdFlyer = birdFlyer;
-        _slingshotShooter = slingshotShooter;
-    }
+    private readonly BirdFlyer _birdFlyer = birdFlyer;
+    private readonly SlingshotShooter _slingshotShooter = slingshotShooter;
 
     protected override void Bind(CompositeDisposable disposables)
     {

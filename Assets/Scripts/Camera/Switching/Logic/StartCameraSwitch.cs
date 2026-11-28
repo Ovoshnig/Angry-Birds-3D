@@ -7,19 +7,13 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Camera.Switching;
 
-public class StartCameraSwitch : IPostStartable, IDisposable
+public class StartCameraSwitch(CameraSwitchView switchView, CameraSettings settings) : IPostStartable,
+    IDisposable
 {
-    private readonly CameraSwitchView _switchView;
-    private readonly CameraSettings _settings;
+    private readonly CameraSwitchView _switchView = switchView;
+    private readonly CameraSettings _settings = settings;
     private readonly Subject<Unit> _completed = new();
     private readonly CancellationTokenSource _cts = new();
-
-    public StartCameraSwitch(CameraSwitchView switchView,
-        CameraSettings settings)
-    {
-        _switchView = switchView;
-        _settings = settings;
-    }
 
     public Observable<Unit> Completed => _completed;
 

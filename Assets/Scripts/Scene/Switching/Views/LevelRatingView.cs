@@ -10,7 +10,7 @@ public class LevelRatingView : MonoBehaviour
     private void Start()
     {
         _levelButtonView.IsInteractable
-            .Subscribe(isInteractable => gameObject.SetActive(isInteractable))
+            .Subscribe(gameObject.SetActive)
             .AddTo(this);
     }
 }

@@ -7,19 +7,13 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Destruction;
 
-public class BirdDestroyer : IStartable, IDisposable
+public class BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings) : IStartable, IDisposable
 {
-    private readonly ObjectCollider _objectCollider;
-    private readonly BirdSettings _birdSettings;
+    private readonly ObjectCollider _objectCollider = objectCollider;
+    private readonly BirdSettings _birdSettings = birdSettings;
     private readonly Subject<BirdEntityView> _destructionStarted = new();
     private readonly Subject<BirdEntityView> _destroyed = new();
     private readonly CompositeDisposable _disposables = [];
-
-    public BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings)
-    {
-        _objectCollider = objectCollider;
-        _birdSettings = birdSettings;
-    }
 
     public Observable<BirdEntityView> DestructionStarted => _destructionStarted;
     public Observable<BirdEntityView> Destroyed => _destroyed;

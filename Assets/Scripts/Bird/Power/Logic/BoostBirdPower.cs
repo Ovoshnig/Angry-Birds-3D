@@ -9,12 +9,10 @@ using UnityEngine;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class BoostBirdPower : IBirdPower, IDisposable
+public class BoostBirdPower(BoostPowerSettings powerSettings) : IBirdPower, IDisposable
 {
-    private readonly BoostPowerSettings _powerSettings;
+    private readonly BoostPowerSettings _powerSettings = powerSettings;
     private readonly CancellationTokenSource _cts = new();
-
-    public BoostBirdPower(BoostPowerSettings powerSettings) => _powerSettings = powerSettings;
 
     public BirdPowerType Type => BirdPowerType.Boost;
 

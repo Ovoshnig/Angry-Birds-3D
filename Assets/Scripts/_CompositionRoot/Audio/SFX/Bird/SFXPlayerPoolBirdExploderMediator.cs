@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class SFXPlayerPoolBirdExploderMediator : Mediator
+public class SFXPlayerPoolBirdExploderMediator(SFXPlayerObjectPool sFXPlayerObjectPool,
+    BirdExploder birdExploder) : Mediator
 {
-    private readonly SFXPlayerObjectPool _sFXPlayerObjectPool;
-    private readonly BirdExploder _birdExploder;
-
-    public SFXPlayerPoolBirdExploderMediator(SFXPlayerObjectPool sFXPlayerObjectPool, BirdExploder birdExploder)
-    {
-        _sFXPlayerObjectPool = sFXPlayerObjectPool;
-        _birdExploder = birdExploder;
-    }
+    private readonly SFXPlayerObjectPool _sFXPlayerObjectPool = sFXPlayerObjectPool;
+    private readonly BirdExploder _birdExploder = birdExploder;
 
     protected override void Bind(CompositeDisposable disposables)
     {

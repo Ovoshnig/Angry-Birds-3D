@@ -44,8 +44,10 @@ public class PointsView : UIView
         _handle.TryCancel();
 
         if (_label == null || _label.panel == null)
+        {
             await UniTask.WaitUntil(() => _label != null && _label.panel != null,
                 cancellationToken: destroyCancellationToken);
+        }
 
         transform.SetPositionAndRotation(position, _camera.transform.rotation);
 

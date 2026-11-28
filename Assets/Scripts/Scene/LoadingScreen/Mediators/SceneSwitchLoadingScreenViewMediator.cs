@@ -4,17 +4,11 @@ using R3;
 
 namespace Ovoshnig.Scene.LoadingScreen;
 
-public class SceneSwitchLoadingScreenViewMediator : UIViewMediator<LoadingScreenView>
+public class SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch, LoadingScreenView view)
+    : UIViewMediator<LoadingScreenView>(view)
 {
-    private readonly SceneSwitch _sceneSwitch;
-    private readonly LoadingScreenView _loadingScreenView;
-
-    public SceneSwitchLoadingScreenViewMediator(SceneSwitch sceneSwitch, LoadingScreenView view)
-        : base(view)
-    {
-        _sceneSwitch = sceneSwitch;
-        _loadingScreenView = view;
-    }
+    private readonly SceneSwitch _sceneSwitch = sceneSwitch;
+    private readonly LoadingScreenView _loadingScreenView = view;
 
     protected override void Bind(CompositeDisposable disposables)
     {

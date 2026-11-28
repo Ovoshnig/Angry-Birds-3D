@@ -4,12 +4,10 @@ using R3;
 
 namespace AngryBirds3D.LevelScore.RatingEvaluation;
 
-public class RatingEvaluatorViewMediator : UIViewMediator<RatingEvaluatorView>
+public class RatingEvaluatorViewMediator(RatingEvaluator evaluator, RatingEvaluatorView view)
+    : UIViewMediator<RatingEvaluatorView>(view)
 {
-    private readonly RatingEvaluator _evaluator;
-
-    public RatingEvaluatorViewMediator(RatingEvaluator evaluator, RatingEvaluatorView view)
-        : base(view) => _evaluator = evaluator;
+    private readonly RatingEvaluator _evaluator = evaluator;
 
     protected override void OnViewEnabled(RatingEvaluatorView view, CompositeDisposable viewDisposables)
     {

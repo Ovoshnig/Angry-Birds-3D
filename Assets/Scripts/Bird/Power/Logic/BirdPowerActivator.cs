@@ -7,23 +7,15 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class BirdPowerActivator : IStartable, IDisposable
+public class BirdPowerActivator(BirdFlyer birdFlyer, BirdInputProvider inputProvider,
+    BirdPowerRegistry powerRegistry) : IStartable, IDisposable
 {
-    private readonly BirdFlyer _birdFlyer;
-    private readonly BirdInputProvider _inputProvider;
-    private readonly BirdPowerRegistry _powerRegistry;
+    private readonly BirdFlyer _birdFlyer = birdFlyer;
+    private readonly BirdInputProvider _inputProvider = inputProvider;
+    private readonly BirdPowerRegistry _powerRegistry = powerRegistry;
     private readonly Subject<BirdEntityView> _activated = new();
     private readonly CompositeDisposable _flightDisposables = [];
     private readonly CompositeDisposable _inputDisposables = [];
-
-    public BirdPowerActivator(BirdFlyer birdFlyer,
-        BirdInputProvider inputProvider,
-        BirdPowerRegistry powerRegistry)
-    {
-        _birdFlyer = birdFlyer;
-        _inputProvider = inputProvider;
-        _powerRegistry = powerRegistry;
-    }
 
     public Observable<BirdEntityView> Activated => _activated;
 

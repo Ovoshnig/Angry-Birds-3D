@@ -7,15 +7,12 @@ using VContainer.Unity;
 
 namespace Ovoshnig.ObjectDestruction.Destruction;
 
-public class ObjectDestroyer : IStartable, IDisposable
+public class ObjectDestroyer(ObjectCollider objectCollider) : IStartable, IDisposable
 {
-    private readonly ObjectCollider _objectCollider;
+    private readonly ObjectCollider _objectCollider = objectCollider;
     private readonly Subject<DamageData> _damaged = new();
     private readonly Subject<DestructibleEntityView> _destroyed = new();
     private readonly CompositeDisposable _disposables = [];
-
-    public ObjectDestroyer(ObjectCollider objectCollider) =>
-        _objectCollider = objectCollider;
 
     public Observable<DamageData> Damaged => _damaged;
     public Observable<DestructibleEntityView> Destroyed => _destroyed;

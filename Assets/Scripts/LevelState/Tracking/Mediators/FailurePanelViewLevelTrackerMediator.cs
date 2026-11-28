@@ -6,20 +6,12 @@ using System.Threading;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class FailurePanelViewLevelTrackerMediator : Mediator
+public class FailurePanelViewLevelTrackerMediator(FailurePanelView failurePanelView,
+    LevelStateTracker levelStateTracker, CameraSwitchView cameraSwitchView) : Mediator
 {
-    private readonly FailurePanelView _failurePanelView;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly CameraSwitchView _cameraSwitchView;
-
-    public FailurePanelViewLevelTrackerMediator(FailurePanelView failurePanelView,
-        LevelStateTracker levelStateTracker,
-        CameraSwitchView cameraSwitchView)
-    {
-        _failurePanelView = failurePanelView;
-        _levelStateTracker = levelStateTracker;
-        _cameraSwitchView = cameraSwitchView;
-    }
+    private readonly FailurePanelView _failurePanelView = failurePanelView;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
+    private readonly CameraSwitchView _cameraSwitchView = cameraSwitchView;
 
     protected override void Bind(CompositeDisposable disposables)
     {
@@ -33,7 +25,6 @@ public class FailurePanelViewLevelTrackerMediator : Mediator
     private async UniTask OnLevelFailedAsync(CancellationToken token)
     {
         await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
-
         _failurePanelView.Show();
     }
 }

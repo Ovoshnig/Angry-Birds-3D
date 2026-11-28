@@ -16,7 +16,6 @@ public class CameraSwitchView : MonoBehaviour
     private readonly ReactiveProperty<bool> _isBlending = new(false);
 
     private CinemachineBrain _brain;
-    private CinemachineCamera _activeCamera = null;
     private CancellationTokenSource _cts = null;
     private bool _wasStopped = false;
 
@@ -26,14 +25,14 @@ public class CameraSwitchView : MonoBehaviour
     {
         get
         {
-            if (_activeCamera == null)
-                _activeCamera = _brain.ActiveVirtualCamera as CinemachineCamera;
+            if (field == null)
+                field = _brain.ActiveVirtualCamera as CinemachineCamera;
 
-            return _activeCamera;
+            return field;
         }
 
-        set => _activeCamera = value;
-    }
+        set;
+    } = null;
 
     private void Awake() => _brain = GetComponent<CinemachineBrain>();
 

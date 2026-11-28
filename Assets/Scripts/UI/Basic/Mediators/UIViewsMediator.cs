@@ -4,12 +4,10 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.UI.Basic;
 
-public abstract class UIViewsMediator<TView> : Mediator where TView : UIView
+public abstract class UIViewsMediator<TView>(IReadOnlyList<TView> views) : Mediator where TView : UIView
 {
-    private readonly IReadOnlyList<TView> _views;
+    private readonly IReadOnlyList<TView> _views = views;
     private readonly Dictionary<TView, CompositeDisposable> _viewToDisposables = [];
-
-    public UIViewsMediator(IReadOnlyList<TView> views) => _views = views;
 
     protected override void Bind(CompositeDisposable disposables)
     {

@@ -5,16 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class AudioMixerTunerGamePauserMediator : Mediator
+public class AudioMixerTunerGamePauserMediator(AudioMixerTuner audioMixerTuner, GamePauser gamePauser)
+    : Mediator
 {
-    private readonly AudioMixerTuner _audioMixerTuner;
-    private readonly GamePauser _gamePauser;
-
-    public AudioMixerTunerGamePauserMediator(AudioMixerTuner audioMixerTuner, GamePauser gamePauser)
-    {
-        _audioMixerTuner = audioMixerTuner;
-        _gamePauser = gamePauser;
-    }
+    private readonly AudioMixerTuner _audioMixerTuner = audioMixerTuner;
+    private readonly GamePauser _gamePauser = gamePauser;
 
     protected override void Bind(CompositeDisposable disposables)
     {

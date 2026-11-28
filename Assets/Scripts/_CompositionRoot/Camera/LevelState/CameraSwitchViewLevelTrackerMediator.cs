@@ -6,17 +6,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class CameraSwitchViewLevelTrackerMediator : Mediator
+public class CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
+    LevelStateTracker levelStateTracker) : Mediator
 {
-    private readonly CameraSwitchView _cameraSwitchView;
-    private readonly LevelStateTracker _levelStateTracker;
-
-    public CameraSwitchViewLevelTrackerMediator(CameraSwitchView cameraSwitchView,
-        LevelStateTracker levelStateTracker)
-    {
-        _cameraSwitchView = cameraSwitchView;
-        _levelStateTracker = levelStateTracker;
-    }
+    private readonly CameraSwitchView _cameraSwitchView = cameraSwitchView;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
 
     protected override void Bind(CompositeDisposable disposables)
     {

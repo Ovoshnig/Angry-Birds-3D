@@ -3,14 +3,13 @@ using R3;
 
 namespace Ovoshnig.Screen.ResolutionAdjustment;
 
-public class ResolutionAdjusterDropdownViewMediator : UIViewMediator<ResolutionAdjustDropdownView>
+public class ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
+    ResolutionAdjustDropdownView view) : UIViewMediator<ResolutionAdjustDropdownView>(view)
 {
-    private readonly ResolutionAdjuster _resolutionAdjuster;
+    private readonly ResolutionAdjuster _resolutionAdjuster = resolutionAdjuster;
 
-    public ResolutionAdjusterDropdownViewMediator(ResolutionAdjuster resolutionAdjuster,
-        ResolutionAdjustDropdownView view) : base(view) => _resolutionAdjuster = resolutionAdjuster;
-
-    protected override void OnViewEnabled(ResolutionAdjustDropdownView view, CompositeDisposable viewDisposables)
+    protected override void OnViewEnabled(ResolutionAdjustDropdownView view,
+        CompositeDisposable viewDisposables)
     {
         view.SetOptions(_resolutionAdjuster.Resolutions);
 

@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.UI.PanelSwitching;
 
-public class InputProviderCloseButtonViewsMediator : UIViewsMediator<PanelCloseButtonView>
+public class InputProviderCloseButtonViewsMediator(UIInputProvider uIInputProvider,
+    IReadOnlyList<PanelCloseButtonView> views) : UIViewsMediator<PanelCloseButtonView>(views)
 {
-    private readonly UIInputProvider _uiInputProvider;
-
-    public InputProviderCloseButtonViewsMediator(UIInputProvider uIInputProvider, IReadOnlyList<PanelCloseButtonView> views)
-        : base(views) => _uiInputProvider = uIInputProvider;
+    private readonly UIInputProvider _uiInputProvider = uIInputProvider;
 
     protected override void OnViewEnabled(PanelCloseButtonView view, CompositeDisposable viewDisposables)
     {

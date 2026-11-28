@@ -5,17 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class CursorStateModelSlingshotShooterMediator : Mediator
+public class CursorStateModelSlingshotShooterMediator(CursorStateModel cursorStateModel,
+    SlingshotShooter slingshotShooter) : Mediator
 {
-    private readonly CursorStateModel _cursorStateModel;
-    private readonly SlingshotShooter _slingshotShooter;
-
-    public CursorStateModelSlingshotShooterMediator(CursorStateModel cursorStateModel,
-        SlingshotShooter slingshotShooter)
-    {
-        _cursorStateModel = cursorStateModel;
-        _slingshotShooter = slingshotShooter;
-    }
+    private readonly CursorStateModel _cursorStateModel = cursorStateModel;
+    private readonly SlingshotShooter _slingshotShooter = slingshotShooter;
 
     protected override void Bind(CompositeDisposable disposables)
     {

@@ -9,18 +9,13 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelScore.RecordRating;
 
-public class RecordRatingSaver : IStartable, IDisposable
+public class RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator) : IStartable,
+    IDisposable
 {
-    private readonly SaveStorage _saveStorage;
-    private readonly RatingEvaluator _ratingEvaluator;
+    private readonly SaveStorage _saveStorage = saveStorage;
+    private readonly RatingEvaluator _ratingEvaluator = ratingEvaluator;
     private readonly ReactiveProperty<int> _record = new();
     private readonly CompositeDisposable _disposables = [];
-
-    public RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator)
-    {
-        _saveStorage = saveStorage;
-        _ratingEvaluator = ratingEvaluator;
-    }
 
     public ReadOnlyReactiveProperty<int> Record => _record;
 

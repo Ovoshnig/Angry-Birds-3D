@@ -6,17 +6,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class CameraSwitchViewEggDroppingBirdPowerMediator : Mediator
+public class CameraSwitchViewEggDroppingBirdPowerMediator(CameraSwitchView cameraSwitchView,
+    EggDroppingBirdPower eggDroppingBirdPower) : Mediator
 {
-    private readonly CameraSwitchView _cameraSwitchView;
-    private readonly EggDroppingBirdPower _eggDroppingBirdPower;
-
-    public CameraSwitchViewEggDroppingBirdPowerMediator(CameraSwitchView cameraSwitchView,
-        EggDroppingBirdPower eggDroppingBirdPower)
-    {
-        _cameraSwitchView = cameraSwitchView;
-        _eggDroppingBirdPower = eggDroppingBirdPower;
-    }
+    private readonly CameraSwitchView _cameraSwitchView = cameraSwitchView;
+    private readonly EggDroppingBirdPower _eggDroppingBirdPower = eggDroppingBirdPower;
 
     protected override void Bind(CompositeDisposable disposables)
     {

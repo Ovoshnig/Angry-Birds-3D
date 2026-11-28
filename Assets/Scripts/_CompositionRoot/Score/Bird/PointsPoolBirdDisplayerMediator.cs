@@ -5,17 +5,11 @@ using R3;
 
 namespace AngryBirds3D.Composition;
 
-public class PointsPoolBirdDisplayerMediator : Mediator
+public class PointsPoolBirdDisplayerMediator(PointsObjectPool pointsObjectPool,
+    BirdPointsDisplayer birdPointsDisplayer) : Mediator
 {
-    private readonly PointsObjectPool _pointsObjectPool;
-    private readonly BirdPointsDisplayer _birdPointsDisplayer;
-
-    public PointsPoolBirdDisplayerMediator(PointsObjectPool pointsObjectPool,
-        BirdPointsDisplayer birdPointsDisplayer)
-    {
-        _pointsObjectPool = pointsObjectPool;
-        _birdPointsDisplayer = birdPointsDisplayer;
-    }
+    private readonly PointsObjectPool _pointsObjectPool = pointsObjectPool;
+    private readonly BirdPointsDisplayer _birdPointsDisplayer = birdPointsDisplayer;
 
     protected override void Bind(CompositeDisposable disposables)
     {

@@ -10,21 +10,13 @@ using System.Threading;
 
 namespace AngryBirds3D.Composition;
 
-public class SlingshotBirdPlacerLevelTrackerMediator : Mediator
+public class SlingshotBirdPlacerLevelTrackerMediator(SlingshotBirdPlacer slingshotBirdPlacer,
+    LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView) : Mediator
 {
-    private readonly SlingshotBirdPlacer _slingshotBirdPlacer;
-    private readonly LevelStateTracker _levelStateTracker;
-    private readonly BirdQueue _birdQueue;
-    private readonly CameraSwitchView _cameraSwitchView;
-
-    public SlingshotBirdPlacerLevelTrackerMediator(SlingshotBirdPlacer slingshotBirdPlacer,
-        LevelStateTracker levelStateTracker, BirdQueue birdQueue, CameraSwitchView cameraSwitchView)
-    {
-        _slingshotBirdPlacer = slingshotBirdPlacer;
-        _levelStateTracker = levelStateTracker;
-        _birdQueue = birdQueue;
-        _cameraSwitchView = cameraSwitchView;
-    }
+    private readonly SlingshotBirdPlacer _slingshotBirdPlacer = slingshotBirdPlacer;
+    private readonly LevelStateTracker _levelStateTracker = levelStateTracker;
+    private readonly BirdQueue _birdQueue = birdQueue;
+    private readonly CameraSwitchView _cameraSwitchView = cameraSwitchView;
 
     protected override void Bind(CompositeDisposable disposables)
     {
@@ -37,8 +29,7 @@ public class SlingshotBirdPlacerLevelTrackerMediator : Mediator
     {
         await UniTask.WaitWhile(() => _cameraSwitchView.IsBlending.CurrentValue, cancellationToken: token);
 
-        if (_slingshotBirdPlacer.CanPlace)
-            if (_birdQueue.TryDequeueBird(out BirdEntityView entityView))
-                _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
+        if (_slingshotBirdPlacer.CanPlace && _birdQueue.TryDequeueBird(out BirdEntityView entityView))
+            _slingshotBirdPlacer.PlaceBirdAsync(entityView.FlyerView.Rigidbody).Forget();
     }
 }

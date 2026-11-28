@@ -3,13 +3,9 @@ using Ovoshnig.GameSettings;
 
 namespace Ovoshnig.Audio.Tuning;
 
-public sealed class SFXSliderModel : AudioSliderModel
+public sealed class SFXSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
+    : AudioSliderModel(settingsStorage, audioSettings)
 {
-    public SFXSliderModel(SettingsStorage settingsStorage, AudioSettings audioSettings)
-        : base(settingsStorage, audioSettings)
-    {
-    }
-
     public override AudioChannel Channel => AudioChannel.SFX;
     public override string MixerParameterName => AudioMixerConstants.SFXVolumeParameter;
 

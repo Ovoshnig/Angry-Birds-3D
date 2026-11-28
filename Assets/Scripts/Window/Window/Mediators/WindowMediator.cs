@@ -3,16 +3,10 @@ using R3;
 
 namespace Ovoshnig.Window.Window;
 
-public class WindowMediator : Mediator
+public class WindowMediator(Window window, WindowView windowView) : Mediator
 {
-    private readonly Window _window;
-    private readonly WindowView _windowView;
-
-    public WindowMediator(Window window, WindowView windowView)
-    {
-        _window = window;
-        _windowView = windowView;
-    }
+    private readonly Window _window = window;
+    private readonly WindowView _windowView = windowView;
 
     protected override void Bind(CompositeDisposable disposables)
     {

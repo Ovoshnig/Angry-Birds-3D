@@ -4,12 +4,10 @@ using R3;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class ScoreModelFinalScoreViewMediator : UIViewMediator<FinalScoreView>
+public class ScoreModelFinalScoreViewMediator(ScoreModel scoreModel, FinalScoreView view) :
+    UIViewMediator<FinalScoreView>(view)
 {
-    private readonly ScoreModel _scoreModel;
-
-    public ScoreModelFinalScoreViewMediator(ScoreModel scoreModel, FinalScoreView view)
-        : base(view) => _scoreModel = scoreModel;
+    private readonly ScoreModel _scoreModel = scoreModel;
 
     protected override void OnViewEnabled(FinalScoreView view, CompositeDisposable viewDisposables) =>
         view.SetScore(_scoreModel.Score.CurrentValue);

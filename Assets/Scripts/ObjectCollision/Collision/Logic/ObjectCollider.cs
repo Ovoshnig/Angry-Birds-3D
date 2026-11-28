@@ -5,18 +5,12 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.ObjectCollision.Collision;
 
-public class ObjectCollider : IDisposable
+public class ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews, CollisionEvaluator evaluator)
+    : IDisposable
 {
-    private readonly IReadOnlyList<CollidableEntityView> _entityViews;
-    private readonly CollisionEvaluator _evaluator;
+    private readonly IReadOnlyList<CollidableEntityView> _entityViews = entityViews;
+    private readonly CollisionEvaluator _evaluator = evaluator;
     private readonly Subject<CollisionData> _collided = new();
-
-    public ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews,
-        CollisionEvaluator evaluator)
-    {
-        _entityViews = entityViews;
-        _evaluator = evaluator;
-    }
 
     public Observable<CollisionData> Collided => _collided;
 

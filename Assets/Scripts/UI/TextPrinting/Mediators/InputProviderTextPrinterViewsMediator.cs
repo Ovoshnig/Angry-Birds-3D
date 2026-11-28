@@ -5,12 +5,10 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.UI.TextPrinting;
 
-public class InputProviderTextPrinterViewsMediator : UIViewsMediator<TextPrinterView>
+public class InputProviderTextPrinterViewsMediator(UIInputProvider uiInputProvider,
+    IReadOnlyList<TextPrinterView> views) : UIViewsMediator<TextPrinterView>(views)
 {
-    private readonly UIInputProvider _uiInputProvider;
-
-    public InputProviderTextPrinterViewsMediator(UIInputProvider uiInputProvider, IReadOnlyList<TextPrinterView> views)
-        : base(views) => _uiInputProvider = uiInputProvider;
+    private readonly UIInputProvider _uiInputProvider = uiInputProvider;
 
     protected override void OnViewEnabled(TextPrinterView view, CompositeDisposable viewDisposables)
     {
