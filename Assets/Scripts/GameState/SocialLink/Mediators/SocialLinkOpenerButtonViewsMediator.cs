@@ -1,20 +1,19 @@
 using Ovoshnig.UI.Basic;
 using R3;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Ovoshnig.GameState.SocialLink;
 
 public class SocialLinkOpenerButtonViewsMediator : UIViewsMediator<SocialLinkButtonView>
 {
-    private readonly SocialLinkOpener _socialLinkOpener;
-
-    public SocialLinkOpenerButtonViewsMediator(SocialLinkOpener socialLinkOpener,
-        IReadOnlyList<SocialLinkButtonView> views) : base(views) => _socialLinkOpener = socialLinkOpener;
+    public SocialLinkOpenerButtonViewsMediator(IReadOnlyList<SocialLinkButtonView> views)
+        : base(views) { }
 
     protected override void OnViewEnabled(SocialLinkButtonView view, CompositeDisposable viewDisposables)
     {
         view.Clicked
-            .Subscribe(_ => _socialLinkOpener.Open(view.Url))
+            .Subscribe(_ => Application.OpenURL(view.Url))
             .AddTo(viewDisposables);
     }
 }

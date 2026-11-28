@@ -42,6 +42,12 @@ public class SplashScreenDisplayer : IStartable, IDisposable
         _cts.Dispose();
     }
 
+    private static void Stop()
+    {
+        if (!UnitySplashScreen.isFinished)
+            UnitySplashScreen.Stop(UnitySplashScreen.StopBehavior.FadeOut);
+    }
+
     private async UniTask DisplayAsync()
     {
         UnitySplashScreen.Begin();
@@ -51,11 +57,5 @@ public class SplashScreenDisplayer : IStartable, IDisposable
         await UniTask.WaitUntil(() => UnitySplashScreen.isFinished, cancellationToken: _cts.Token);
 
         _isPlaying.Value = false;
-    }
-
-    private static void Stop()
-    {
-        if (!UnitySplashScreen.isFinished)
-            UnitySplashScreen.Stop(UnitySplashScreen.StopBehavior.FadeOut);
     }
 }

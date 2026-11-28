@@ -11,7 +11,6 @@ public class SocialLinkInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstancesInHierarchy<SocialLinkButtonView>();
-        builder.Register<SocialLinkOpener>(Lifetime.Singleton);
         builder.RegisterEntryPoint<SocialLinkOpenerButtonViewsMediator>();
     }
 }

@@ -31,6 +31,13 @@ public class MediatorGeneratorWindow : EditorWindow
     private Button _resetNameButton;
     private Button _generateButton;
 
+    public static void Open(MediatorType mediatorType)
+    {
+        MediatorGeneratorWindow window = GetWindow<MediatorGeneratorWindow>("Create Mediator");
+        window.minSize = new Vector2(400, 280);
+        window.Initialize(mediatorType);
+        window.Show();
+    }
 
     [MenuItem("Assets/Create/Scripting/Mediator", false, priority = 3, secondaryPriority = 1f)]
     private static void CreateStandard() => Open(MediatorType.Standard);
@@ -41,12 +48,27 @@ public class MediatorGeneratorWindow : EditorWindow
     [MenuItem("Assets/Create/Scripting/UIViews Mediator", false, priority = 3, secondaryPriority = 3f)]
     private static void CreateUIViews() => Open(MediatorType.UIViews);
 
-    public static void Open(MediatorType mediatorType)
+    private static void UpdateHelpBox(HelpBox helpBox, bool isValid, string message)
     {
-        MediatorGeneratorWindow window = GetWindow<MediatorGeneratorWindow>("Create Mediator");
-        window.minSize = new Vector2(400, 280);
-        window.Initialize(mediatorType);
-        window.Show();
+        helpBox.text = message;
+        helpBox.style.display = isValid || string.IsNullOrEmpty(message) ? DisplayStyle.None : DisplayStyle.Flex;
+    }
+
+    private static string GetSelectedPath()
+    {
+        string path = "Assets";
+
+        foreach (Object assetObject in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
+        {
+            path = AssetDatabase.GetAssetPath(assetObject);
+
+            if (File.Exists(path))
+                path = Path.GetDirectoryName(path);
+
+            break;
+        }
+
+        return path;
     }
 
     private void Initialize(MediatorType mediatorType)
@@ -209,12 +231,6 @@ public class MediatorGeneratorWindow : EditorWindow
             : DisplayStyle.None;
     }
 
-    private void UpdateHelpBox(HelpBox helpBox, bool isValid, string message)
-    {
-        helpBox.text = message;
-        helpBox.style.display = isValid || string.IsNullOrEmpty(message) ? DisplayStyle.None : DisplayStyle.Flex;
-    }
-
     private void GenerateMediator()
     {
         if (_scriptA == null || _scriptB == null)
@@ -238,22 +254,5 @@ public class MediatorGeneratorWindow : EditorWindow
             return;
 
         Selection.activeObject = createdAsset;
-    }
-
-    private string GetSelectedPath()
-    {
-        string path = "Assets";
-
-        foreach (Object assetObject in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
-        {
-            path = AssetDatabase.GetAssetPath(assetObject);
-
-            if (File.Exists(path))
-                path = Path.GetDirectoryName(path);
-
-            break;
-        }
-
-        return path;
     }
 }

@@ -45,6 +45,20 @@ public class LevelLifetimeScope : LifetimeScope
         InstallMediators(builder);
     }
 
+    private static void InstallMediators(IContainerBuilder builder)
+    {
+        new ScoreMediatorsInstaller().Install(builder);
+        new CameraMediatorsInstaller().Install(builder);
+        new WindowMediatorsInstaller().Install(builder);
+        new GameStateMediatorsInstaller().Install(builder);
+        new CursorMediatorsInstaller().Install(builder);
+        new AudioTuningMediatorsInstaller().Install(builder);
+        new AudioSFXMediatorsInstaller().Install(builder);
+        new ObjectCollisionMediatorsInstaller().Install(builder);
+        new BirdMediatorsInstaller().Install(builder);
+        new SlingshotMediatorsInstaller().Install(builder);
+    }
+
     private void InstallSystems(IContainerBuilder builder)
     {
         _sceneSwitchingInstaller.Install(builder);
@@ -64,19 +78,5 @@ public class LevelLifetimeScope : LifetimeScope
         _birdInstaller.Install(builder);
         _pigInstaller.Install(builder);
         _blockInstaller.Install(builder);
-    }
-
-    private static void InstallMediators(IContainerBuilder builder)
-    {
-        new ScoreMediatorsInstaller().Install(builder);
-        new CameraMediatorsInstaller().Install(builder);
-        new WindowMediatorsInstaller().Install(builder);
-        new GameStateMediatorsInstaller().Install(builder);
-        new CursorMediatorsInstaller().Install(builder);
-        new AudioTuningMediatorsInstaller().Install(builder);
-        new AudioSFXMediatorsInstaller().Install(builder);
-        new ObjectCollisionMediatorsInstaller().Install(builder);
-        new BirdMediatorsInstaller().Install(builder);
-        new SlingshotMediatorsInstaller().Install(builder);
     }
 }

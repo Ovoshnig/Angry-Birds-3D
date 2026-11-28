@@ -46,9 +46,8 @@ public sealed class SaveStorage : DataStorage
 
     private static string CalculateHash(string filePath)
     {
-        using SHA256 sha256 = SHA256.Create();
         byte[] fileBytes = File.ReadAllBytes(filePath);
-        byte[] hashBytes = sha256.ComputeHash(fileBytes);
+        byte[] hashBytes = SHA256.HashData(fileBytes);
 
         return Convert.ToBase64String(hashBytes);
     }

@@ -15,6 +15,14 @@ public class AddressableLoader : IDisposable
 
     private readonly Dictionary<string, AddressableData> _assetsByLabels = [];
 
+    public void Dispose()
+    {
+        foreach (var data in _assetsByLabels.Values)
+            data.Handle.Release();
+
+        _assetsByLabels.Clear();
+    }
+
     public async UniTask<IList<T>> LoadAssets<T>(IEnumerable<string> labels, CancellationToken token)
         where T : Object
     {
@@ -52,17 +60,9 @@ public class AddressableLoader : IDisposable
         }
     }
 
-    private string GetKeyFromLabels(IEnumerable<string> labels)
+    private static string GetKeyFromLabels(IEnumerable<string> labels)
     {
         SortedSet<string> sortedSet = [.. labels];
         return string.Join(",", sortedSet);
-    }
-
-    public void Dispose()
-    {
-        foreach (var data in _assetsByLabels.Values)
-            data.Handle.Release();
-
-        _assetsByLabels.Clear();
     }
 }
