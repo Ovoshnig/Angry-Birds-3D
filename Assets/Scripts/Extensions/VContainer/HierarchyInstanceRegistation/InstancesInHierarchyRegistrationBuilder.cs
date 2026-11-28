@@ -13,8 +13,8 @@ public sealed class InstancesInHierarchyRegistrationBuilder<T> : RegistrationBui
         : base(typeof(IReadOnlyList<T>), Lifetime.Singleton)
     {
         _scene = scene;
-        As(typeof(IReadOnlyList<T>));
-        As(typeof(IEnumerable<T>));
+        As<IReadOnlyList<T>>();
+        As<IEnumerable<T>>();
     }
 
     public override Registration Build() =>

@@ -8,11 +8,10 @@ public sealed class InstanceInHierarchyRegistrationBuilder<T> : RegistrationBuil
 {
     private readonly Scene _scene;
 
-    public InstanceInHierarchyRegistrationBuilder(Scene scene)
-        : base(typeof(T), Lifetime.Singleton)
+    public InstanceInHierarchyRegistrationBuilder(Scene scene) : base(typeof(T), Lifetime.Singleton)
     {
         _scene = scene;
-        As(typeof(T));
+        As<T>();
     }
 
     public override Registration Build() =>

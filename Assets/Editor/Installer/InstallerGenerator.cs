@@ -58,7 +58,7 @@ public static class InstallerGenerator
     {
         string selectedPath = "Assets";
 
-        foreach (Object assetObject in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
+        foreach (Object assetObject in Selection.GetFiltered<Object>(SelectionMode.Assets))
         {
             selectedPath = AssetDatabase.GetAssetPath(assetObject);
 

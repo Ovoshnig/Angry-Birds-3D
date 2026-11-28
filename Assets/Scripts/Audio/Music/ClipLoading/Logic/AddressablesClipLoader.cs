@@ -19,7 +19,7 @@ public class AddressablesClipLoader : IClipLoader
     {
         Dictionary<MusicCategory, IEnumerable<object>> musicClipKeys = [];
 
-        foreach (MusicCategory category in Enum.GetValues(typeof(MusicCategory)))
+        foreach (MusicCategory category in Enum.GetValues<MusicCategory>())
         {
             string categoryName = category.ToString();
             categoryName = Regex.Replace(categoryName, "(?<!^)([A-Z])", " $1").ToLower();
