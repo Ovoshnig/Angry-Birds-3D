@@ -7,29 +7,27 @@ namespace Ovoshnig.Extensions.VContainer;
 
 public static class VContainerInstanceInHierarchyExtensions
 {
-    public static InstanceInHierarchyRegistrationBuilder<T> RegisterInstanceInHierarchy<T>(this IContainerBuilder builder) where T : Component
+    extension(IContainerBuilder builder)
     {
-        LifetimeScope lifetimeScope = (LifetimeScope)builder.ApplicationOrigin;
-        InstanceInHierarchyRegistrationBuilder<T> registrationBuilder = new(lifetimeScope.gameObject.scene);
-
-        builder.RegisterBuildCallback(container =>
+        public InstanceInHierarchyRegistrationBuilder<T> RegisterInstanceInHierarchy<T>() where T : Component
         {
-            container.Resolve<T>();
-        });
+            LifetimeScope lifetimeScope = (LifetimeScope)builder.ApplicationOrigin;
+            InstanceInHierarchyRegistrationBuilder<T> registrationBuilder = new(
+                lifetimeScope.gameObject.scene);
 
-        return builder.Register(registrationBuilder);
-    }
+            builder.RegisterBuildCallback(container => container.Resolve<T>());
+            return builder.Register(registrationBuilder);
+        }
 
-    public static InstancesInHierarchyRegistrationBuilder<T> RegisterInstancesInHierarchy<T>(this IContainerBuilder builder) where T : Component
-    {
-        LifetimeScope lifetimeScope = (LifetimeScope)builder.ApplicationOrigin;
-        InstancesInHierarchyRegistrationBuilder<T> registrationBuilder = new(lifetimeScope.gameObject.scene);
-
-        builder.RegisterBuildCallback(container =>
+        public InstancesInHierarchyRegistrationBuilder<T> RegisterInstancesInHierarchy<T>()
+            where T : Component
         {
-            container.Resolve<IReadOnlyList<T>>();
-        });
+            LifetimeScope lifetimeScope = (LifetimeScope)builder.ApplicationOrigin;
+            InstancesInHierarchyRegistrationBuilder<T> registrationBuilder = new(
+                lifetimeScope.gameObject.scene);
 
-        return builder.Register(registrationBuilder);
+            builder.RegisterBuildCallback(container => container.Resolve<IReadOnlyList<T>>());
+            return builder.Register(registrationBuilder);
+        }
     }
 }

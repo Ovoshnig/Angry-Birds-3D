@@ -5,23 +5,26 @@ namespace Ovoshnig.Extensions.InputSystem;
 
 public static class InputControlExtensions
 {
-    public static string ToCaseIndependentString(this InputControl inputControl)
+    extension(InputControl inputControl)
     {
-        if (inputControl is KeyControl keyControl)
+        public string ToCaseIndependentString()
         {
-            Key key = keyControl.keyCode;
+            if (inputControl is KeyControl keyControl)
+            {
+                Key key = keyControl.keyCode;
 
-            if (key is >= Key.Backquote and <= Key.Z)
-            {
-                InputAction tempAction = new(binding: $"<Keyboard>/{key}");
-                return tempAction.bindings[0].ToDisplayString();
+                if (key is >= Key.Backquote and <= Key.Z)
+                {
+                    InputAction tempAction = new(binding: $"<Keyboard>/{key}");
+                    return tempAction.bindings[0].ToDisplayString();
+                }
+                else
+                {
+                    return inputControl.displayName;
+                }
             }
-            else
-            {
-                return inputControl.displayName;
-            }
+
+            return inputControl.displayName;
         }
-
-        return inputControl.displayName;
     }
 }

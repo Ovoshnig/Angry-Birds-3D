@@ -17,6 +17,6 @@ public sealed class InstancesInHierarchyRegistrationBuilder<T> : RegistrationBui
         As<IEnumerable<T>>();
     }
 
-    public override Registration Build() =>
-        new(typeof(IReadOnlyList<T>), Lifetime.Singleton, InterfaceTypes, new FindInstancesProvider<T>(_scene), Key);
+    public override Registration Build() => new(typeof(IReadOnlyList<T>), Lifetime.Singleton, InterfaceTypes,
+        new FindInstancesProvider<T>(_scene), Key);
 }
