@@ -61,7 +61,7 @@ public static class MediatorCodeTemplate
 
             namespace ;
 
-            public class {{mediatorName}} : {{nameof(UIViewMediator<UIView>)}}<{{dependencyB}}>
+            public class {{mediatorName}} : {{nameof(UIViewMediator<>)}}<{{dependencyB}}>
             {
                 private readonly {{dependencyA}} {{serviceField}};
 
@@ -89,7 +89,7 @@ public static class MediatorCodeTemplate
 
             namespace ;
 
-            public class {{mediatorName}} : {{nameof(UIViewsMediator<UIView>)}}<{{dependencyB}}>
+            public class {{mediatorName}} : {{nameof(UIViewsMediator<>)}}<{{dependencyB}}>
             {
                 private readonly {{dependencyA}} {{serviceField}};
 

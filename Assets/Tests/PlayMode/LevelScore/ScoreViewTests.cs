@@ -12,7 +12,7 @@ public class ScoreViewTests
     private readonly WaitForSeconds _waitForOneSecond = new(1f);
 
     private ScoreView _scoreView;
-    private TMP_Text _textComponent;
+    private TextMeshProUGUI _textComponent;
 
     [SetUp]
     public void Setup()
