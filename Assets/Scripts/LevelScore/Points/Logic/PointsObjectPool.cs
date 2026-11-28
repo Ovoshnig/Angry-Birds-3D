@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace AngryBirds3D.LevelScore.Points;
 
-public class PointsObjectPool : IDisposable
+public sealed class PointsObjectPool : IDisposable
 {
     private readonly ObjectPool<PointsView> _pointsPool;
     private readonly GameObject _poolRoot;

@@ -7,7 +7,8 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Destruction;
 
-public class BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings) : IStartable, IDisposable
+public sealed class BirdDestroyer(ObjectCollider objectCollider, BirdSettings birdSettings) : IStartable,
+    IDisposable
 {
     private readonly ObjectCollider _objectCollider = objectCollider;
     private readonly BirdSettings _birdSettings = birdSettings;

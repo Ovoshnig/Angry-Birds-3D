@@ -10,7 +10,11 @@ public abstract class Mediator : IStartable, IDisposable
 
     public virtual void Start() => Bind(_disposables);
 
-    public virtual void Dispose() => Unbind();
+    public virtual void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        Unbind();
+    }
 
     protected abstract void Bind(CompositeDisposable disposables);
 

@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Slingshot.Shooting;
 
-public class SlingshotShooter : IStartable, IDisposable, ITickable
+public sealed class SlingshotShooter : IStartable, IDisposable, ITickable
 {
     private readonly SlingshotInputProvider _inputProvider;
     private readonly SlingshotShooterView _view;

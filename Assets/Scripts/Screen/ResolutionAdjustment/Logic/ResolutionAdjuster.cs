@@ -8,7 +8,7 @@ using UnityScreen = UnityEngine.Screen;
 
 namespace Ovoshnig.Screen.ResolutionAdjustment;
 
-public class ResolutionAdjuster : IStartable, IDisposable
+public sealed class ResolutionAdjuster : IStartable, IDisposable
 {
     private readonly ReactiveProperty<int> _currentResolutionIndex = new(0);
 

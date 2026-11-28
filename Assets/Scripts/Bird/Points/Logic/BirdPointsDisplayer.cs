@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace AngryBirds3D.Bird.Points;
 
-public class BirdPointsDisplayer : IDisposable
+public sealed class BirdPointsDisplayer : IDisposable
 {
     private readonly Subject<BirdPointsDisplayData> _pointsDisplayStarted = new();
     private readonly Subject<Unit> _sequenceDisplayCompleted = new();

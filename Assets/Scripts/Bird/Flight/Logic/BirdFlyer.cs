@@ -9,7 +9,7 @@ using UnityEngine;
 
 namespace AngryBirds3D.Bird.Flight;
 
-public class BirdFlyer : IDisposable
+public sealed class BirdFlyer : IDisposable
 {
     private readonly BirdDestroyer _birdDestroyer;
     private readonly Subject<BirdEntityView> _flightStarted = new();

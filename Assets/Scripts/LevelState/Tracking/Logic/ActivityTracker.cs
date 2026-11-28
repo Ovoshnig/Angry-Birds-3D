@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class ActivityTracker : IStartable, IDisposable
+public sealed class ActivityTracker : IStartable, IDisposable
 {
     private readonly BirdFlyer _birdFlyer;
     private readonly ObjectCollider _objectCollider;

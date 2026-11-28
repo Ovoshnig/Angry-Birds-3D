@@ -13,7 +13,11 @@ public abstract class SliderModel : IDisposable
 
     protected abstract float DefaultValue { get; }
 
-    public virtual void Dispose() => _value.Dispose();
+    public virtual void Dispose()
+    {
+        GC.SuppressFinalize(this);
+        _value.Dispose();
+    }
 
     public void SetClampedValue(float value)
     {

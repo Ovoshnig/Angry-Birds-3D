@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Scene.Switching;
 
-public class SceneSwitch(SceneSettings sceneSettings) : IStartable, IDisposable
+public sealed class SceneSwitch(SceneSettings sceneSettings) : IStartable, IDisposable
 {
     private readonly SceneSettings _sceneSettings = sceneSettings;
     private readonly ReactiveProperty<bool> _isSceneLoading = new(false);

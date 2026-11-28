@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace Ovoshnig.ObjectDestruction.Destruction;
 
-public class ObjectDestroyer(ObjectCollider objectCollider) : IStartable, IDisposable
+public sealed class ObjectDestroyer(ObjectCollider objectCollider) : IStartable, IDisposable
 {
     private readonly ObjectCollider _objectCollider = objectCollider;
     private readonly Subject<DamageData> _damaged = new();

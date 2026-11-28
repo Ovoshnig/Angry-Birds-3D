@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Tracking;
 
-public class BirdTracker : IStartable, IDisposable
+public sealed class BirdTracker : IStartable, IDisposable
 {
     private readonly BirdFlyer _birdFlyer;
     private readonly BirdDestroyer _birdDestroyer;

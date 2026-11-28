@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class SplitInto3BirdPower(SplitInto3PowerSettings powerSettings) : IBirdPower, IDisposable
+public sealed class SplitInto3BirdPower(SplitInto3PowerSettings powerSettings) : IBirdPower, IDisposable
 {
     private readonly SplitInto3PowerSettings _powerSettings = powerSettings;
     private readonly Subject<BirdEntityView> _cloneCreated = new();

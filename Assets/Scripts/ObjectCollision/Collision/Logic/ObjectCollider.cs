@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Ovoshnig.ObjectCollision.Collision;
 
-public class ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews, CollisionEvaluator evaluator)
-    : IDisposable
+public sealed class ObjectCollider(IReadOnlyList<CollidableEntityView> entityViews,
+    CollisionEvaluator evaluator) : IDisposable
 {
     private readonly IReadOnlyList<CollidableEntityView> _entityViews = entityViews;
     private readonly CollisionEvaluator _evaluator = evaluator;

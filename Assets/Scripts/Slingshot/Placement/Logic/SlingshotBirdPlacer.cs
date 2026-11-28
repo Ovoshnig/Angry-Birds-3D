@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace AngryBirds3D.Slingshot.Placement;
 
-public class SlingshotBirdPlacer(SlingshotShooter shooter, SlingshotShooterView shooterView,
+public sealed class SlingshotBirdPlacer(SlingshotShooter shooter, SlingshotShooterView shooterView,
     SlingshotPlacingSettings placingSettings) : IDisposable
 {
     private readonly SlingshotShooter _shooter = shooter;

@@ -2,6 +2,7 @@ using Ovoshnig.DataStorage.Storage;
 using Ovoshnig.GameSettings;
 using Ovoshnig.UI.Basic;
 using R3;
+using System;
 using VContainer.Unity;
 
 namespace Ovoshnig.Audio.Tuning;
@@ -39,6 +40,7 @@ public abstract class AudioSliderModel(SettingsStorage settingsStorage, AudioSet
 
     public override void Dispose()
     {
+        GC.SuppressFinalize(this);
         _disposables.Dispose();
         base.Dispose();
     }

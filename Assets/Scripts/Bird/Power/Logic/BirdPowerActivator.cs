@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class BirdPowerActivator(BirdFlyer birdFlyer, BirdInputProvider inputProvider,
+public sealed class BirdPowerActivator(BirdFlyer birdFlyer, BirdInputProvider inputProvider,
     BirdPowerRegistry powerRegistry) : IStartable, IDisposable
 {
     private readonly BirdFlyer _birdFlyer = birdFlyer;

@@ -10,7 +10,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Pig.Tracking;
 
-public class PigTracker : IStartable, IDisposable
+public sealed class PigTracker : IStartable, IDisposable
 {
     private readonly List<PigEntityView> _pigEntityViews;
     private readonly ObjectDestroyer _objectDestroyer;

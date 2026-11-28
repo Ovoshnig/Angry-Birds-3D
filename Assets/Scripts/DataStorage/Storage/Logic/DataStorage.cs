@@ -29,6 +29,7 @@ public abstract class DataStorage : IInitializable, IDisposable
 
     public void Dispose()
     {
+        GC.SuppressFinalize(this);
         SaveData();
         _resetHappened.Dispose();
     }

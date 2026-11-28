@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 
 namespace AngryBirds3D.Bird.Power;
 
-public class EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
+public sealed class EggDroppingBirdPower(BirdExploder birdExploder, EggDroppingPowerSettings powerSettings)
     : IBirdPower, IDisposable
 {
     private readonly BirdExploder _birdExploder = birdExploder;

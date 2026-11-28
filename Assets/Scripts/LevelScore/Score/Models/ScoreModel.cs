@@ -3,7 +3,7 @@ using System;
 
 namespace AngryBirds3D.LevelScore.Score;
 
-public class ScoreModel : IDisposable
+public sealed class ScoreModel : IDisposable
 {
     private readonly ReactiveProperty<int> _score = new(0);
 

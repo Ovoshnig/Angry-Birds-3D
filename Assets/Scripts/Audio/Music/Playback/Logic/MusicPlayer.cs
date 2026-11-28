@@ -11,7 +11,7 @@ using UnityEngine;
 
 namespace Ovoshnig.Audio.Music.Playback;
 
-public class MusicPlayer(MusicQueue<object> musicQueue, IClipLoader clipLoader,
+public sealed class MusicPlayer(MusicQueue<object> musicQueue, IClipLoader clipLoader,
     ISceneMusicMapper sceneMusicMapper) : IDisposable
 {
     private readonly MusicQueue<object> _musicQueue = musicQueue;

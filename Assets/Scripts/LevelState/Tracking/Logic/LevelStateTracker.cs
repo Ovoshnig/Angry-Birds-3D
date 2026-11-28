@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelState.Tracking;
 
-public class LevelStateTracker : IPostStartable, IDisposable
+public sealed class LevelStateTracker : IPostStartable, IDisposable
 {
     private readonly Subject<Unit> _started = new();
 

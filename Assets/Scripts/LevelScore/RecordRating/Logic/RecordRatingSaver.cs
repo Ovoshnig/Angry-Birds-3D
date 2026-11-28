@@ -9,7 +9,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelScore.RecordRating;
 
-public class RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator) : IStartable,
+public sealed class RecordRatingSaver(SaveStorage saveStorage, RatingEvaluator ratingEvaluator) : IStartable,
     IDisposable
 {
     private readonly SaveStorage _saveStorage = saveStorage;

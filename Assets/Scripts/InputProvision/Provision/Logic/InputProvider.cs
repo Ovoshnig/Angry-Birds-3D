@@ -16,6 +16,7 @@ public abstract class InputProvider<TActions>(TActions actions) : IStartable, ID
 
     public virtual void Dispose()
     {
+        GC.SuppressFinalize(this);
         _disposables.Dispose();
         DisableActions();
     }

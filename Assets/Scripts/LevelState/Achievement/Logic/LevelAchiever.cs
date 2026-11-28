@@ -8,7 +8,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.LevelState.Achievement;
 
-public class LevelAchiever(LevelStateTracker levelTracker, SaveStorage saveStorage,
+public sealed class LevelAchiever(LevelStateTracker levelTracker, SaveStorage saveStorage,
     SceneSettings sceneSettings) : IStartable, IDisposable
 {
     private readonly LevelStateTracker _levelTracker = levelTracker;

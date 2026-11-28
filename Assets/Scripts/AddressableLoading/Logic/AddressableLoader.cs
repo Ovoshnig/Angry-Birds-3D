@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Ovoshnig.AddressableLoading;
 
-public class AddressableLoader : IDisposable
+public sealed class AddressableLoader : IDisposable
 {
     private record AddressableData(AsyncOperationHandle Handle, object Assets);
 

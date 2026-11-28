@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace Ovoshnig.GameState.Pause;
 
-public class GamePauser : IDisposable
+public sealed class GamePauser : IDisposable
 {
     private readonly ReactiveProperty<bool> _isPaused = new(false);
 

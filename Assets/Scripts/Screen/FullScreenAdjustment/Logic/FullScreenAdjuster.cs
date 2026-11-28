@@ -6,7 +6,7 @@ using UnityScreen = UnityEngine.Screen;
 
 namespace Ovoshnig.Screen.FullScreenAdjustment;
 
-public class FullScreenAdjuster(ScreenInputProvider screenInputProvider) : IStartable, IDisposable
+public sealed class FullScreenAdjuster(ScreenInputProvider screenInputProvider) : IStartable, IDisposable
 {
     private readonly ScreenInputProvider _screenInputProvider = screenInputProvider;
     private readonly ReactiveProperty<bool> _isFullScreen = new();

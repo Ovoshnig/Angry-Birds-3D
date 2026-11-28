@@ -3,7 +3,7 @@ using System;
 
 namespace Ovoshnig.Window.Window;
 
-public class WindowTracker : IDisposable
+public sealed class WindowTracker : IDisposable
 {
     private readonly ReactiveProperty<bool> _isOpen = new(false);
     private readonly ReactiveProperty<Window> _currentWindow = new(null);

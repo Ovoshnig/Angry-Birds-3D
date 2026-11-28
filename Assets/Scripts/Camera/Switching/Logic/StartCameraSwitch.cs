@@ -7,7 +7,7 @@ using VContainer.Unity;
 
 namespace AngryBirds3D.Camera.Switching;
 
-public class StartCameraSwitch(CameraSwitchView switchView, CameraSettings settings) : IPostStartable,
+public sealed class StartCameraSwitch(CameraSwitchView switchView, CameraSettings settings) : IPostStartable,
     IDisposable
 {
     private readonly CameraSwitchView _switchView = switchView;

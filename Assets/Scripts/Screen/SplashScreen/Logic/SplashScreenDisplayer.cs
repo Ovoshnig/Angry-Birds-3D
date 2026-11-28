@@ -8,7 +8,7 @@ using UnitySplashScreen = UnityEngine.Rendering.SplashScreen;
 
 namespace Ovoshnig.Screen.SplashScreen;
 
-public class SplashScreenDisplayer(ScreenInputProvider screenInputProvider) : IStartable, IDisposable
+public sealed class SplashScreenDisplayer(ScreenInputProvider screenInputProvider) : IStartable, IDisposable
 {
     private readonly ScreenInputProvider _screenInputProvider = screenInputProvider;
     private readonly ReactiveProperty<bool> _isPlaying = new(false);

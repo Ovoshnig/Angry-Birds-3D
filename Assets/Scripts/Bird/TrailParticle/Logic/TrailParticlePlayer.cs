@@ -12,7 +12,7 @@ using Object = UnityEngine.Object;
 
 namespace AngryBirds3D.Bird.TrailParticle;
 
-public class TrailParticlePlayer : IStartable, IDisposable
+public sealed class TrailParticlePlayer : IStartable, IDisposable
 {
     private readonly BirdFlyer _birdFlyer;
     private readonly BirdPowerActivator _birdPowerActivator;

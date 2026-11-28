@@ -32,8 +32,8 @@ public abstract class Window(WindowInputProvider inputProvider, WindowTracker wi
 
     public virtual void Dispose()
     {
+        GC.SuppressFinalize(this);
         _disposables.Dispose();
-
         _isOpen.Dispose();
     }
 

@@ -9,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace Ovoshnig.Audio.SFX.Playing;
 
-public class SFXPlayerObjectPool : IDisposable
+public sealed class SFXPlayerObjectPool : IDisposable
 {
     private readonly ObjectPool<SFXPlayerView> _sfxPlayerPool;
     private readonly SFXCounter _sfxCounter;

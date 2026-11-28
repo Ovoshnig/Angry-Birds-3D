@@ -6,7 +6,7 @@ using VContainer.Unity;
 
 namespace Ovoshnig.Screen.VSyncAdjustment;
 
-public class VSyncAdjuster(SettingsStorage settingsStorage) : IStartable, IDisposable
+public sealed class VSyncAdjuster(SettingsStorage settingsStorage) : IStartable, IDisposable
 {
     private readonly SettingsStorage _settingsStorage = settingsStorage;
     private readonly ReactiveProperty<bool> _isVSync = new();
