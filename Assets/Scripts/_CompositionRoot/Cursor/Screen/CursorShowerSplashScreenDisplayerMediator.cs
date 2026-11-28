@@ -7,20 +7,15 @@ namespace AngryBirds3D.Composition;
 
 public class CursorShowerSplashScreenDisplayerMediator : Mediator
 {
-    private readonly CursorShower _cursorShower;
     private readonly SplashScreenDisplayer _splashScreenDisplayer;
 
-    public CursorShowerSplashScreenDisplayerMediator(CursorShower cursorShower,
-        SplashScreenDisplayer splashScreenDisplayer)
-    {
-        _cursorShower = cursorShower;
+    public CursorShowerSplashScreenDisplayerMediator(SplashScreenDisplayer splashScreenDisplayer) =>
         _splashScreenDisplayer = splashScreenDisplayer;
-    }
 
     protected override void Bind(CompositeDisposable disposables)
     {
         _splashScreenDisplayer.IsPlaying
-            .Subscribe(isPlaying => _cursorShower.SetShowing(!isPlaying))
+            .Subscribe(isPlaying => CursorShower.SetShowing(!isPlaying))
             .AddTo(disposables);
     }
 }

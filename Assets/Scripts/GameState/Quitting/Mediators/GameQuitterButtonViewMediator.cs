@@ -5,15 +5,13 @@ namespace Ovoshnig.GameState.Quitting;
 
 public class GameQuitterButtonViewMediator : UIViewMediator<GameQuitButtonView>
 {
-    private readonly GameQuitter _gameQuitter;
-
-    public GameQuitterButtonViewMediator(GameQuitter gameQuitter, GameQuitButtonView view)
-        : base(view) => _gameQuitter = gameQuitter;
+    public GameQuitterButtonViewMediator(GameQuitButtonView view)
+        : base(view) { }
 
     protected override void OnViewEnabled(GameQuitButtonView view, CompositeDisposable viewDisposables)
     {
         view.Clicked
-            .Subscribe(_ => _gameQuitter.Quit())
+            .Subscribe(_ => GameQuitter.Quit())
             .AddTo(viewDisposables);
     }
 }

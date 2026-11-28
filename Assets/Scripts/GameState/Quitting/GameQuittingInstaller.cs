@@ -11,7 +11,6 @@ public class GameQuittingInstaller : IInstaller
     public void Install(IContainerBuilder builder)
     {
         builder.RegisterInstanceInHierarchy<GameQuitButtonView>();
-        builder.Register<GameQuitter>(Lifetime.Singleton);
         builder.RegisterEntryPoint<GameQuitterButtonViewMediator>();
     }
 }
