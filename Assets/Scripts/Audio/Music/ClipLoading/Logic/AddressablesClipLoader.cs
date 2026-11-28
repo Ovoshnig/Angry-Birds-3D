@@ -2,7 +2,6 @@ using Cysharp.Threading.Tasks;
 using Ovoshnig.Audio.Music.SceneMusicMapping;
 using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using System.Threading;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -21,8 +20,14 @@ public class AddressablesClipLoader : IClipLoader
 
         foreach (MusicCategory category in Enum.GetValues<MusicCategory>())
         {
-            string categoryName = category.ToString();
-            categoryName = Regex.Replace(categoryName, "(?<!^)([A-Z])", " $1").ToLower();
+            string categoryName = category switch
+            {
+                MusicCategory.MainMenu => "main menu",
+                MusicCategory.GameLevel => "game level",
+                MusicCategory.Credits => "credits",
+                _ => throw new InvalidOperationException($"Unsupported music category: {category}")
+            };
+
             List<string> labels = ["audio", "music", categoryName];
 
             AsyncOperationHandle<IList<IResourceLocation>> locationsHandle = Addressables.LoadResourceLocationsAsync(

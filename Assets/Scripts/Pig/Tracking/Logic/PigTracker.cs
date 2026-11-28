@@ -52,14 +52,9 @@ public class PigTracker : IStartable, IDisposable
         if (entityView is not PigEntityView pigEntityView)
             return;
 
-        if (_pigEntityViews.Contains(pigEntityView))
-        {
-            _pigEntityViews.Remove(pigEntityView);
+        if (_pigEntityViews.Remove(pigEntityView))
             _pigCount.Value--;
-        }
         else
-        {
             Debug.LogWarning("Destroyed pig not contains in the list");
-        }
     }
 }

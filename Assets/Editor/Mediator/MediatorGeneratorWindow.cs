@@ -58,7 +58,7 @@ public class MediatorGeneratorWindow : EditorWindow
     {
         string path = "Assets";
 
-        foreach (Object assetObject in Selection.GetFiltered(typeof(Object), SelectionMode.Assets))
+        foreach (Object assetObject in Selection.GetFiltered<Object>(SelectionMode.Assets))
         {
             path = AssetDatabase.GetAssetPath(assetObject);
 
